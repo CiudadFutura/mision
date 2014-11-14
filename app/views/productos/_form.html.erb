@@ -1,0 +1,59 @@
+<%= form_for @producto, :html => { :class => "form-horizontal producto" } do |f| %>
+
+    <% if @producto.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@producto.errors.count, "error") %> prohibited this producto from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @producto.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="control-group">
+    <%= f.label :precio, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :precio, :class => 'form-control' %>
+    </div>
+    <%= error_span(@producto[:precio]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :nombre, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :nombre, :class => 'form-control' %>
+    </div>
+    <%= error_span(@producto[:nombre]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :descripcion, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :descripcion, :class => 'form-control' %>
+    </div>
+    <%= error_span(@producto[:descripcion]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :ahorro, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :ahorro, :class => 'form-control' %>
+    </div>
+    <%= error_span(@producto[:ahorro]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :cantidad_permitida, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :cantidad_permitida, :class => 'form-control' %>
+    </div>
+    <%= error_span(@producto[:cantidad_permitida]) %>
+  </div>
+
+
+  <%= f.submit nil, :class => 'btn btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+            productos_path, :class => 'btn btn-default' %>
+
+<% end %>
