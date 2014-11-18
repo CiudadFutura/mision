@@ -7,6 +7,11 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<%= link_to cart_path do%>
+  <i class="fi-shopping-cart"></i>
+  Carrito
+  (<span class="cart-count"><%=session[:product_ids].count%></span>)
+<%end%>
 
 <%= yield %>
 

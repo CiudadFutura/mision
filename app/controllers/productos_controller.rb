@@ -10,6 +10,7 @@ class ProductosController < ApplicationController
   # GET /productos/1
   # GET /productos/1.json
   def show
+    @cart_action = @producto.cart_action(session)
   end
 
   # GET /productos/new
@@ -27,6 +28,7 @@ class ProductosController < ApplicationController
     @producto = Producto.new(producto_params)
 
     respond_to do |format|
+      @producto.imagen = params[:imagen]
       if @producto.save
         format.html { redirect_to @producto, notice: 'Producto was successfully created.' }
         format.json { render :show, status: :created, location: @producto }
@@ -40,6 +42,7 @@ class ProductosController < ApplicationController
   # PATCH/PUT /productos/1
   # PATCH/PUT /productos/1.json
   def update
+    @producto.imagen = params[:imagen]
     respond_to do |format|
       if @producto.update(producto_params)
         format.html { redirect_to @producto, notice: 'Producto was successfully updated.' }
@@ -69,6 +72,6 @@ class ProductosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def producto_params
-      params.require(:producto).permit(:precio, :nombre, :descripcion, :ahorro, :cantidad_permitida)
+      params.require(:producto).permit(:precio, :nombre, :descripcion, :ahorro, :cantidad_permitida, :imagen)
     end
 end

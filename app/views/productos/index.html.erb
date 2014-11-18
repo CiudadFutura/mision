@@ -6,12 +6,12 @@
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:imagen) %></th>
       <th><%= model_class.human_attribute_name(:precio) %></th>
       <th><%= model_class.human_attribute_name(:nombre) %></th>
       <th><%= model_class.human_attribute_name(:descripcion) %></th>
       <th><%= model_class.human_attribute_name(:ahorro) %></th>
       <th><%= model_class.human_attribute_name(:cantidad_permitida) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -19,12 +19,12 @@
     <% @productos.each do |producto| %>
       <tr>
         <td><%= link_to producto.id, producto_path(producto) %></td>
+        <td><%= image_tag(producto.imagen, size: "50") %></td>
         <td><%= producto.precio %></td>
         <td><%= producto.nombre %></td>
         <td><%= producto.descripcion %></td>
-        <td><%= producto.ahorro %></td>
+        <td><%= producto.ahorro %> %</td>
         <td><%= producto.cantidad_permitida %></td>
-        <td><%=l producto.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_producto_path(producto), :class => 'btn btn-default btn-xs' %>
