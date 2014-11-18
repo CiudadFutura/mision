@@ -58,6 +58,14 @@
     <%= error_span(@producto[:cantidad_permitida]) %>
   </div>
 
+  <div class="control-group">
+    <%= f.label :categoria_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.checkbox :categoria_id, :class => 'form-control' %>
+    </div>
+    <%= error_span(@producto[:cantidad_permitida]) %>
+  </div>
+
 
   <%= f.submit nil, :class => 'btn btn-primary' %>
   <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
