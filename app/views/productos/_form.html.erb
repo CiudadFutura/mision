@@ -59,11 +59,15 @@
   </div>
 
   <div class="control-group">
-    <%= f.label :categoria_id, :class => 'control-label' %>
+    
+    
+    <% Categoria.all.each do |c| %>
     <div class="controls">
-      <%= f.checkbox :categoria_id, :class => 'form-control' %>
-    </div>
-    <%= error_span(@producto[:cantidad_permitida]) %>
+      <label><%= c.nombre -%>
+        <%= check_box('categorias', c.id) %>
+      </label></div>
+    <% end %>
+      
   </div>
 
 

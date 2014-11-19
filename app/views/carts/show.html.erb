@@ -1,13 +1,13 @@
 <div id="mycart" class="">
   <div class="">
     <h4>Carrito</h4>
-    <p class=""> Total: <span class=""><%=session[:product_ids].count%></span> productos!</p>
+    <p class=""> Total: <span class=""></span> productos!</p>
   </div>
 
   <% unless @carrito.nil? || @carrito.empty? %>
     <table class="table">
     <% @carrito.each do |producto| %>
-      <tr>
+      <tr class="cart-item">
         <td><%= link_to producto do %>
               <%=image_tag producto.imagen, size: "70" %>
             <%end%>
@@ -20,7 +20,7 @@
           <%=link_to "" , data: {
             target: @cart_action,
             targetUrl: remove_from_cart_path(producto),
-            removeUrl: remove_from_cart_path(producto)} do%>
+            removeUrl: remove_from_cart_path(producto)} do %>
             <i class="">[borrar]</i>
           <%end%>
         </td>
@@ -28,6 +28,6 @@
     <%end%>
     </table>
   <% else %>
-    <p>Carrito vacio.</p>>
+    <p>Carrito vacio.</p>
   <% end %>
 </div>

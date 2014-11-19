@@ -29,6 +29,7 @@ class ProductosController < ApplicationController
 
     respond_to do |format|
       @producto.imagen = params[:imagen]
+      @producto.categorias = Categoria.find(params[:categorias].select {|k,v| v == "1"}.keys)
       if @producto.save
         format.html { redirect_to @producto, notice: 'Producto was successfully created.' }
         format.json { render :show, status: :created, location: @producto }
@@ -72,6 +73,7 @@ class ProductosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def producto_params
-      params.require(:producto).permit(:precio, :nombre, :descripcion, :ahorro, :cantidad_permitida, :imagen)
+      params.require(:producto).permit(:precio, :nombre, :descripcion, :ahorro,
+                                       :cantidad_permitida, :imagen, :categorias)
     end
 end

@@ -13,9 +13,30 @@
 //= require jquery
 //= require jquery_ujs
 //= require twitter/bootstrap
-//= require turbolinks
+// require turbolinks
 //= require_tree .
 
-$(function(){
-  /* Your JavaScript goes here... */
+$(document).ready(function() {
+
+  $('a[data-target]').click(function (event) {    
+    event.preventDefault();
+    $this = $(this);
+    if ($this.data('target') === 'Add to') {
+      url = $this.data('addurl');
+      new_target = "Remove from";
+    } else {
+      url = $this.data('removeurl');
+      new_target = "Add to";
+      $this.parents("tr.cart-item").remove();
+    }
+    console.log(url);
+    $.ajax({
+      url: url, 
+      type: 'put'}).done(function(data) {
+        $('.cart-count').html(data);
+        $this.find('span').html(new_target);
+        $this.data('target', new_target);
+    });
+  });
+
 });
