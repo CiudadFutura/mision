@@ -1,16 +1,26 @@
 <div class="navbar navbar-default navbar-static-top">
   <div class="container">
-    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-    </button>
-    <a class="navbar-brand" href="#">Mision</a>
-    <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <div class="row">
       <ul class="nav navbar-nav">
-        <li><%= link_to "Productos", productos_path  %></li>
-        <li><%= link_to "Categorias", categorias_path  %></li>
-        <li><%= link_to "Link3", "/path3"  %></li>
+        <li><%= link_to "INICIO", root_path  %></li>
+        <li><%= link_to "ADMINISTRAR CIRCULO", "/path2"  %></li>
+        <li><%= link_to "TIENDA", "/path3"  %></li>
+        <li><%= link_to "PAGO DE COMPRA", "/path3"  %></li>
+        <li><%= link_to "CERRAR SESION", "/path3"  %></li>
+      </ul>
+    </div>
+    <div class="row">
+      <p class="navbar-text">Datos de tu compra</p>
+      <p class="navbar-text">Ahorro: 43 %</p>
+      <p class="navbar-text">$ 1258,30</p>
+      <p class="navbar-text"><span class="cart-count"><%=session[:product_ids].count%></span> productos</p>
+      <p class="navbar-text"><%= link_to "COMPLETA TU COMPRA", cart_path, class: 'navbar-link'  %></p>
+    </div>
+    <div class="row">
+      <ul class="nav navbar-nav">
+        <% Categoria.all.each do |c| -%>
+          <li><%= link_to c.nombre, "/path1", class: 'navbar-link' %></li>
+        <% end -%>
       </ul>
     </div>
   </div>

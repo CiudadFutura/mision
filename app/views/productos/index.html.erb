@@ -26,6 +26,9 @@
         <td><%= producto.ahorro %> %</td>
         <td><%= producto.cantidad_permitida %></td>
         <td>
+          <%= link_to "Agregar al carro", '#', class: "btn btn-default btn-xs", data: {
+              target: 'Add to', 
+              addUrl: add_to_cart_path(producto) } %>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_producto_path(producto), :class => 'btn btn-default btn-xs' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),

@@ -42,13 +42,6 @@
 
     <div class="container">
       <div class="row">
-        <%= link_to cart_path do%>
-          <i class="fi-shopping-cart"></i>
-          Carrito
-          (<span class="cart-count"><%=session[:product_ids].count%></span>)
-        <%end%>
-      </div>
-      <div class="row">
         <div class="col-lg-9">
           <%= bootstrap_flash %>
           <%= yield %>
