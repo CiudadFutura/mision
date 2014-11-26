@@ -2,24 +2,45 @@ class CartsController < ApplicationController
   # Habilitar cuando se instale devise
   # before_action :authenticate_user!
 
+  # before_action :set_carrito, only: [:show, :add, :remove]
+
   def show
-    @carrito = Producto.find(session[:product_ids])
   end
 
   def add
-    session[:product_ids] << params[:producto_id]
-    render json: session[:product_ids].count, status: 200
+    @carrito.add(params[:producto_id], params[:cantidad])
+    render json: @carrito.to_json, status: 200
   end
 
   def remove
-    session[:product_ids].delete(params[:producto_id])
-    render json: session[:product_ids].count, status: 200
+    @carrito.remove(params[:producto_id])
+    render json: @carrito.to_json, status: 200
+  end
+
+  def create_pedido
+    pedido = Pedido.new
+    pedido.items = @carrito.productos.map(&:to_json).to_s
+    pedido.usuario_id = current_usuario.id
+    pedido.circulo_id = current_usuario.circulo_id
+    respond_to do |format|
+      if pedido.save!
+        @carrito.empty!
+        format.html { redirect_to root_path, notice: 'Pedido enviado a al coordinador' }
+      else
+        format.html { render :show }
+      end
+    end
   end
 
   private
 
+  # # Use callbacks to share common setup or constraints between actions.
+  # def set_carrito
+  #   @carrito = Cart.new(session)
+  # end
+
   # Never trust parameters from the scary internet, only allow the white list through.
   def cart_params
-    params.permit(:producto_id)
+    params.permit(:producto_id, :cantidad)
   end
 end

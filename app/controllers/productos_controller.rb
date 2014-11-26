@@ -4,7 +4,11 @@ class ProductosController < ApplicationController
   # GET /productos
   # GET /productos.json
   def index
-    @productos = Producto.all
+    if params[:categoria_id].present?
+      @productos = Categoria.find_by_id(params[:categoria_id]).productos
+    else
+      @productos = Producto.all
+    end
   end
 
   # GET /productos/1
@@ -73,7 +77,7 @@ class ProductosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def producto_params
-      params.require(:producto).permit(:precio, :nombre, :descripcion, :ahorro,
+      params.require(:producto).permit(:precio, :nombre, :descripcion, :precio_super,
                                        :cantidad_permitida, :imagen, :categorias)
     end
 end

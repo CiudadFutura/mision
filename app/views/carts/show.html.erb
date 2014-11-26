@@ -1,21 +1,18 @@
 <div id="mycart" class="">
-  <div class="">
-    <h4>Carrito</h4>
-    <p class=""> Total: <span class=""></span> productos!</p>
-  </div>
 
-  <% unless @carrito.nil? || @carrito.empty? %>
+  <h4>Carrito</h4>
+
+  <% unless @carrito.empty? %>
     <table class="table">
-    <% @carrito.each do |producto| %>
+    <% @carrito.productos.each do |producto| %>
       <tr class="cart-item">
         <td><%= link_to producto do %>
               <%=image_tag producto.imagen, size: "70" %>
             <%end%>
         </td>
         <td><%= producto.nombre %></td>
-        <td>
-          <%= producto.precio %>
-        </td>
+        <td>$. <%= producto.precio %></td>
+        <td><%= producto.ahorro %> %</td>
         <td>
           <%=link_to "" , data: {
             target: @cart_action,
@@ -27,6 +24,7 @@
     </tr>
     <%end%>
     </table>
+    <%= link_to('Finalizar Compra', create_pedido_cart_path, method: :put, class: 'btn btn-default') %>
   <% else %>
     <p>Carrito vacio.</p>
   <% end %>

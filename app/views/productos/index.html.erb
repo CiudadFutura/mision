@@ -7,10 +7,11 @@
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:imagen) %></th>
-      <th><%= model_class.human_attribute_name(:precio) %></th>
+      <th><%= "Categoria" %></th>
       <th><%= model_class.human_attribute_name(:nombre) %></th>
       <th><%= model_class.human_attribute_name(:descripcion) %></th>
-      <th><%= model_class.human_attribute_name(:ahorro) %></th>
+      <th><%= model_class.human_attribute_name(:precio) %></th>
+      <th><%= model_class.human_attribute_name(:precio_super) %></th>
       <th><%= model_class.human_attribute_name(:cantidad_permitida) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
@@ -20,15 +21,24 @@
       <tr>
         <td><%= link_to producto.id, producto_path(producto) %></td>
         <td><%= image_tag(producto.imagen, size: "50") %></td>
-        <td><%= producto.precio %></td>
+        <td><%= producto.categorias.map(&:nombre).join(',') %></td>
         <td><%= producto.nombre %></td>
         <td><%= producto.descripcion %></td>
-        <td><%= producto.ahorro %> %</td>
+        <td><%= producto.precio %></td>
+        <td><%= producto.precio_super %> %</td>
         <td><%= producto.cantidad_permitida %></td>
         <td>
+          <select class="cantidad">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+          </select>
           <%= link_to "Agregar al carro", '#', class: "btn btn-default btn-xs", data: {
               target: 'Add to', 
               addUrl: add_to_cart_path(producto) } %>
+        </td>
+        <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_producto_path(producto), :class => 'btn btn-default btn-xs' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),

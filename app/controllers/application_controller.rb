@@ -5,9 +5,15 @@ class ApplicationController < ActionController::Base
 
   before_filter :init_carrito
 
-  layout "layout"
+  layout 'layout'
 
   def init_carrito
-    session[:product_ids] = [] if session[:product_ids].nil?
+    @carrito = Cart.new(session)
+  end
+
+  private
+  # Overwriting the sign_out redirect path method
+  def after_sign_out_path_for(resource_or_scope)
+    root_path
   end
 end
