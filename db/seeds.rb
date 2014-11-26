@@ -13,24 +13,24 @@ categorias.each do |c|
 end
 
 productos = [
-  { categoria_id: 1, nombre: 'Canasta Frutas y Verduras Chica', descripcion: 'Tomate 1 kg; Zanahoria 1/2 kg; Papa 1 kg; Cebolla 1 kg; Pimiento 1/2 kg; Banana 1 kg; Calabaza 1; Lechuga Paquete; Acelga  Bandeja 1kg; Naranja  1 kg; Huevo Media docena.',  precio: '70', ahorro: '47' },
-  { categoria_id: 1, nombre: 'Canasta frutas y verduras Grande', descripcion: '  Tomate 1 kg; Zanahoria 1/2 kg; Papa 1 kg; Batata 1 kg; Cebolla 1 kg; Pimiento 1/2 kg; Mandarina 1kg; Limon 1/2 kg; Ajo 1; Manzana 1 kg; Banana 1 kg; Calabaza 1; Lechuga Paquete; Cebolla de verdeo Paquete; Puerro Paquete; Rucula Paquete; Repollo Paquete; Brocoli Bandeja; Coliflor Bandeja; Espinaca Paquete; Radicheta Paquete; Remolacha Paquete; Acelga  Bandeja 1kg; Naranja  1 kg; Huevo Media docena.',  precio: 150, ahorro: 45 },
-  { categoria_id: 4, nombre: 'Ensaladas Mixta (Radicheta y zanahoria)', descripcion: 'Naturalísima Bandeja 300 g',  precio: 8.4, ahorro: 44 }, 
-  { categoria_id: 4, nombre: 'Bandeja espinaca  Naturalísima', descripcion: 'Bandeja 500 g.', precio: 6.3, ahorro: 75 },
-  { categoria_id: 4, nombre: 'Verduras para sopa SOPITAS  Naturalísima', descripcion: ' Bandeja 500 g.', precio: 15,    ahorro: 0 },
-  { categoria_id: 4, nombre: 'Rúcula hojas  Naturalísima', descripcion: ' Bandeja 200 g.', precio: 6.3, ahorro: 58 },
-  { categoria_id: 4, nombre: 'Zanahoria rallada Naturalísima', descripcion: ' Bandeja 350grs 14.7',    precio: 0, ahorro: 2 },
-  { categoria_id: 4, nombre: 'Ensaladas de Zanahoria, lechuga, cherri Naturalísima', descripcion: ' Bandeja 350grs', precio: 14.7, ahorro: 0 },
-  { categoria_id: 2, nombre: 'Huevos 100% Orgánicos', descripcion: ' Gallinas libres 1/2 docena', precio: 10,    ahorro: 0 },
-  { categoria_id: 3, nombre: 'Canasta Frescos',  descripcion: '2 Paquetes Tapas de empanada Mil hojas  x 12, 2 Paquetes Tapas de tarta Mil hojas ; Ravioles Mil hojas 1 kg; Fideos Frescos 1/2 kg ; Muzzarela La Resistencia 500g; Manteca 200gr La Cabaña/Inty ; Crema 360gr La Cabaña/Inty .', precio: 133, ahorro: 33 },
-  { categoria_id: 3, nombre: 'Reggianito', descripcion: '  La Resistencia 250g.', precio: 25, ahorro: 51 },
-  { categoria_id: 3, nombre: 'Quesos Saborizados La Resistencia', descripcion: ' Pimienta ahumada 350gr', precio: 35.7, ahorro: 0 }, 
-  { categoria_id: 5, nombre: 'Shampoo Prunelle 930 cc', descripcion: '', precio: 10.2, ahorro: 26 },
-  { categoria_id: 5, nombre: 'Acondicionador  Prunelle 930 cc', descripcion: '', precio: 10.2, ahorro: 26 },
-  { categoria_id: 5, nombre: 'Shampoo Tresemmé 400 ml', descripcion: '', precio: 29.7, ahorro: 4 },
-  { categoria_id: 6, nombre: 'Jabón líquido Ariel 800 cc', descripcion: '', precio: 25.2, ahorro: 24 },
-  { categoria_id: 6, nombre: 'Jabón líquido Libertador 700 cc', descripcion: '', precio: 15.3, ahorro: 27 },
-  { categoria_id: 6, nombre: 'Jabón en polvo  Drive 800gr', descripcion: '', precio: 13.2, ahorro: 6 }
+  { categoria_id: 1, nombre: 'Canasta Frutas y Verduras Chica', descripcion: 'Tomate 1 kg; Zanahoria 1/2 kg; Papa 1 kg; Cebolla 1 kg; Pimiento 1/2 kg; Banana 1 kg; Calabaza 1; Lechuga Paquete; Acelga  Bandeja 1kg; Naranja  1 kg; Huevo Media docena.',  precio: '70', precio_super: '47' },
+  { categoria_id: 1, nombre: 'Canasta frutas y verduras Grande', descripcion: '  Tomate 1 kg; Zanahoria 1/2 kg; Papa 1 kg; Batata 1 kg; Cebolla 1 kg; Pimiento 1/2 kg; Mandarina 1kg; Limon 1/2 kg; Ajo 1; Manzana 1 kg; Banana 1 kg; Calabaza 1; Lechuga Paquete; Cebolla de verdeo Paquete; Puerro Paquete; Rucula Paquete; Repollo Paquete; Brocoli Bandeja; Coliflor Bandeja; Espinaca Paquete; Radicheta Paquete; Remolacha Paquete; Acelga  Bandeja 1kg; Naranja  1 kg; Huevo Media docena.',  precio: 150, precio_super: 140 },
+  { categoria_id: 4, nombre: 'Ensaladas Mixta (Radicheta y zanahoria)', descripcion: 'Naturalísima Bandeja 300 g',  precio: 8.4, precio_super: 7 }, 
+  { categoria_id: 4, nombre: 'Bandeja espinaca  Naturalísima', descripcion: 'Bandeja 500 g.', precio: 6.3, precio_super: 5 },
+  { categoria_id: 4, nombre: 'Verduras para sopa SOPITAS  Naturalísima', descripcion: ' Bandeja 500 g.', precio: 15,    precio_super: 14 },
+  { categoria_id: 4, nombre: 'Rúcula hojas  Naturalísima', descripcion: ' Bandeja 200 g.', precio: 6.3, precio_super: 5 },
+  { categoria_id: 4, nombre: 'Zanahoria rallada Naturalísima', descripcion: ' Bandeja 350grs 14.7',    precio: 0, precio_super: 0 },
+  { categoria_id: 4, nombre: 'Ensaladas de Zanahoria, lechuga, cherri Naturalísima', descripcion: ' Bandeja 350grs', precio: 14.7, precio_super: 13 },
+  { categoria_id: 2, nombre: 'Huevos 100% Orgánicos', descripcion: ' Gallinas libres 1/2 docena', precio: 10,    precio_super: 8 },
+  { categoria_id: 3, nombre: 'Canasta Frescos',  descripcion: '2 Paquetes Tapas de empanada Mil hojas  x 12, 2 Paquetes Tapas de tarta Mil hojas ; Ravioles Mil hojas 1 kg; Fideos Frescos 1/2 kg ; Muzzarela La Resistencia 500g; Manteca 200gr La Cabaña/Inty ; Crema 360gr La Cabaña/Inty .', precio: 133, precio_super: 100 },
+  { categoria_id: 3, nombre: 'Reggianito', descripcion: '  La Resistencia 250g.', precio: 25, precio_super: 20 },
+  { categoria_id: 3, nombre: 'Quesos Saborizados La Resistencia', descripcion: ' Pimienta ahumada 350gr', precio: 35.7, precio_super: 30 }, 
+  { categoria_id: 5, nombre: 'Shampoo Prunelle 930 cc', descripcion: '', precio: 10.2, precio_super: 8 },
+  { categoria_id: 5, nombre: 'Acondicionador  Prunelle 930 cc', descripcion: '', precio: 10.2, precio_super: 7 },
+  { categoria_id: 5, nombre: 'Shampoo Tresemmé 400 ml', descripcion: '', precio: 29.7, precio_super: 25 },
+  { categoria_id: 6, nombre: 'Jabón líquido Ariel 800 cc', descripcion: '', precio: 25.2, precio_super: 20 },
+  { categoria_id: 6, nombre: 'Jabón líquido Libertador 700 cc', descripcion: '', precio: 15.3, precio_super: 10 },
+  { categoria_id: 6, nombre: 'Jabón en polvo  Drive 800gr', descripcion: '', precio: 13.2, precio_super: 6 }
 ]
 
 productos.each do |p|
