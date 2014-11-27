@@ -1,0 +1,2 @@
+class Coordinador < Usuario
+end

@@ -1,0 +1,40 @@
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar container">
+    <div class="row usuario">
+      <ul class="nav navbar-nav navbar-left">
+        <li><%= link_to "INICIO", root_path  %></li>
+        <li><%= link_to "ADMINISTRAR CIRCULO", circulos_path  %></li>
+        <li><%= link_to "PEDIDOS", pedidos_path  %></li>
+        <li><%= link_to "TIENDA", "/path3"  %></li>
+        <li><%= link_to "PAGO DE COMPRA", "/path3"  %></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <% if usuario_signed_in? %>
+          <li><p class="navbar-text"><%= current_usuario.email %></p></li>
+          <li class="divider"></li>
+          <li><%= link_to('Cerrar Sesion', 
+                destroy_usuario_session_path, 
+                method: 'delete') %></li>
+        <% else %>
+          <li><%= link_to('Registrate', new_usuario_registration_path)%></li>
+          <li class="divider"></li>
+          <li><%= link_to('Inicia Sesion', new_usuario_session_path)%></li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="row carrito">
+      <p class="navbar-text">Datos de tu compra</p>
+      <p class="navbar-text">Ahorro: <span class="cart-ahorro"><%= @carrito.ahorro %></span> %</p>
+      <p class="navbar-text">$ <span class="cart-total"><%= @carrito.total %></span></p>
+      <p class="navbar-text"><span class="cart-cantidad"><%= @carrito.cantidad %></span> productos</p>
+      <p class="navbar-text"><%= link_to "COMPLETA TU COMPRA", cart_path, class: 'navbar-link'  %></p>
+    </div>
+    <div class="row categorias">
+      <ul class="nav navbar-nav">
+        <% Categoria.all.each do |c| -%>
+          <li><%= link_to c.nombre, productos_path(categoria_id: c.id), class: 'navbar-link' %></li>
+        <% end -%>
+      </ul>
+    </div>
+  </div>
+</div>

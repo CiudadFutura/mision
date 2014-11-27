@@ -1,0 +1,20 @@
+<%- model_class = Pedido -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
+
+<table class='table'>
+<% @pedidos.each do |p| %>
+  <tr>
+    <td><%= p.id %></td>
+    <td><%= p.created_at %></td>
+    <td><%= p.circulo.coordinador.nombre %></td>
+    <td>
+      <ul>
+      <% JSON.parse(p.items).each do |i| %>
+        <li><%= JSON.parse(i)['nombre'] %></li>
+      <% end %>
+      </ul>
+    </td>  
+  </tr>
+<% end %>

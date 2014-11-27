@@ -1,33 +1,42 @@
 <div id="mycart" class="">
-  <div class="">
-    <h4>Carrito</h4>
-    <p class=""> Total: <span class=""><%=session[:product_ids].count%></span> productos!</p>
-  </div>
 
-  <% unless @carrito.nil? || @carrito.empty? %>
+  <h4>Carrito</h4>
+
+  <% unless @carrito.empty? %>
     <table class="table">
-    <% @carrito.each do |producto| %>
       <tr>
-        <td><%= link_to producto do %>
-              <%=image_tag producto.imagen, size: "70" %>
+        <th>Imagen</th>
+        <th>Nombre</th>
+        <th>Precio</th>
+        <th>Cantidad</th>
+        <th>Total</th>
+        <th>Ahorro</th>
+        <th>Accion</th>
+      </tr>
+    <% @carrito.items.each do |_producto_id, item| %>
+      <tr class="cart-item">
+        <td><%= link_to item.producto do %>
+              <%=image_tag item.producto.imagen, size: "70" %>
             <%end%>
         </td>
-        <td><%= producto.nombre %></td>
-        <td>
-          <%= producto.precio %>
-        </td>
+        <td><%= item.producto.nombre %></td>
+        <td>$. <%= item.producto.precio %></td>
+        <td><%= item.cantidad %></td>
+        <td>$. <%= item.total %></td>
+        <td>$. <%= item.ahorro %> %</td>
         <td>
           <%=link_to "" , data: {
             target: @cart_action,
-            targetUrl: remove_from_cart_path(producto),
-            removeUrl: remove_from_cart_path(producto)} do%>
+            targetUrl: remove_from_cart_path(item.producto),
+            removeUrl: remove_from_cart_path(item.producto)} do %>
             <i class="">[borrar]</i>
           <%end%>
         </td>
     </tr>
     <%end%>
     </table>
+    <%= link_to('Finalizar Compra', create_pedido_cart_path, method: :put, class: 'btn btn-default') %>
   <% else %>
-    <p>Carrito vacio.</p>>
+    <p>Carrito vacio.</p>
   <% end %>
 </div>
