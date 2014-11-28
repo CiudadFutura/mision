@@ -3,7 +3,7 @@
   <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
 </div>
 
-<table class='table'>
+<table class='table table-striped'>
 <% @pedidos.each do |p| %>
   <tr>
     <td><%= p.id %></td>
