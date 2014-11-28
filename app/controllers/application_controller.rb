@@ -7,6 +7,10 @@ class ApplicationController < ActionController::Base
 
   layout 'layout'
 
+  def current_ability
+    @current_ability ||= Ability.new(current_usuario)
+  end
+
   def init_carrito
     @carrito = Cart.new(session)
   end

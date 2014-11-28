@@ -5,4 +5,8 @@ class Usuario < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   belongs_to :circulo
   has_many :pedidos
+
+  ADMIN = 'Admin'
+  COORDINADOR = 'Coordinador'
+  USUARIO = 'Usuario'
 end
