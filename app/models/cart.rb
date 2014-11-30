@@ -48,7 +48,7 @@ class Cart
       Rails.logger.debug(v)
       total += v.cantidad || 0
     end
-    total
+    total.to_i
   end
 
   def ahorro
@@ -56,7 +56,7 @@ class Cart
     @items.each do |_k, v|
       total += v.ahorro || 0
     end
-    total
+    total.to_f
   end
 
   def total
@@ -64,7 +64,7 @@ class Cart
     @items.each do |_k, v|
       total += v.total || 0
     end
-    total
+    total.to_f
   end
 
   def to_json
