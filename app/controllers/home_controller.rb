@@ -1,8 +1,9 @@
-class HomeController < ActionController::Base
+class HomeController < ApplicationController
   #home.html.erb exists
+  layout "home"
 
   def index
-    render "layouts/home"
+
   end
 
 end
