@@ -1,20 +1,28 @@
 Rails.application.routes.draw do
+  resources :circulos
+
+  devise_for :usuarios
+  resources :usuarios
+  resources :admins, controller: :usuarios
+
   get 'carts/show'
 
   resources :productos
   resources :categorias
+  resources :pedidos, only: [:index]
   resources :home
 
   resource :cart, only: [:show] do
     put 'add/:producto_id', to: 'carts#add', as: :add_to
     put 'remove/:producto_id', to: 'carts#remove', as: :remove_from
+    put 'create_pedido', to: 'carts#create_pedido', as: :create_pedido
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'productos#index'
+  root to: 'home#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

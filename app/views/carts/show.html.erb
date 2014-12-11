@@ -1,32 +1,60 @@
-<div id="mycart" class="">
-  <div class="">
-    <h4>Carrito</h4>
-    <p class=""> Total: <span class=""></span> productos!</p>
-  </div>
+<% content_for :cart_menu do %>
+  <%= render 'carts/menu' %>
+<% end %>
 
-  <% unless @carrito.nil? || @carrito.empty? %>
+<div id="mycart" class="row cart">
+  
+  <h1 class="titulo">Revisa tu pedido y confirmalo.</h1>
+
+  <p class="explicacion">A continuación, un listado con tu pedido. Revisalo, y si está todo bien,<br />
+  confirmalo haciendo click en el boton "Finalizar compra".</p>
+
+  <% unless @carrito.empty? %>
     <table class="table">
-    <% @carrito.each do |producto| %>
-      <tr class="cart-item">
-        <td><%= link_to producto do %>
-              <%=image_tag producto.imagen, size: "70" %>
+      <thead>
+        <tr>
+          <th>&nbsp;</th>
+          <th>Producto</th>
+          <th>Código</th>
+          <th>Precio Unit.</th>
+          <th>Precio Total</th>
+          <th>Ahorro Total</th>
+          <th>Accion</th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @carrito.items.each do |_producto_id, item| %>
+        <tr class="cart-item">
+          <td><%= item.cantidad.to_i %> x</td>
+          <td><%= item.producto.nombre %></td>
+          <td>&nbsp;<%# = item.producto.codigo %></td>
+          <td>$<%= item.producto.precio %></td>
+          <td>$<%= item.total %></td>
+          <td><%= item.ahorro %> %</td>
+          <td>
+            <%=link_to "" , data: {
+              target: @cart_action,
+              targetUrl: remove_from_cart_path(item.producto),
+              removeUrl: remove_from_cart_path(item.producto)} do %>
+              <i class="">[borrar]</i>
             <%end%>
-        </td>
-        <td><%= producto.nombre %></td>
-        <td>
-          <%= producto.precio %>
-        </td>
-        <td>
-          <%=link_to "" , data: {
-            target: @cart_action,
-            targetUrl: remove_from_cart_path(producto),
-            removeUrl: remove_from_cart_path(producto)} do %>
-            <i class="">[borrar]</i>
-          <%end%>
-        </td>
-    </tr>
-    <%end%>
+          </td>
+        </tr>
+      <%end%>
+        <tr class="checkout-totales">
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>TOTAL:</td>
+          <td>$<%= @carrito.total %></td>
+          <td><%= @carrito.ahorro %> %</td>
+          <td>&nbsp;</td>
+        </tr>
+      </tbody>
     </table>
+    <div class="row">
+      <%= link_to('Finalizar Compra', create_pedido_cart_path, method: :put, class: 'btn btn-default checkout') %>
+    </div>
   <% else %>
     <p>Carrito vacio.</p>
   <% end %>

@@ -30,10 +30,16 @@ $(document).ready(function() {
       $this.parents("tr.cart-item").remove();
     }
     console.log(url);
+    console.log($this.prev('select.cantidad').val());
     $.ajax({
-      url: url, 
+      url: url,
+      data: { cantidad: $this.prev('select.cantidad').val() },
       type: 'put'}).done(function(data) {
-        $('.cart-count').html(data);
+        
+        $('.cart-cantidad').html(data.cantidad);
+        $('.cart-ahorro').html(data.ahorro);
+        $('.cart-total').html(data.total);
+
         $this.find('span').html(new_target);
         $this.data('target', new_target);
     });

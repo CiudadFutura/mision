@@ -1,0 +1,20 @@
+<div class="row carrito">
+  <p class="navbar-text">Datos de tu compra</p>
+  <p class="navbar-text">Ahorro: <span class="cart-ahorro"><%= @carrito.ahorro %></span> %</p>
+  <p class="navbar-text">$ <span class="cart-total"><%= @carrito.total %></span></p>
+  <p class="navbar-text"><span class="cart-cantidad"><%= @carrito.cantidad %></span> productos</p>
+  <p class="navbar-text">    
+    <%=
+       link_to_if(controller.controller_name != "carts", "COMPLETA TU COMPRA", cart_path, class: 'navbar-link') do
+         link_to "VOLVER A LA TIENDA", productos_path, class: 'navbar-link'
+       end
+    %>
+  </p>
+</div>
+<div class="row categorias">
+  <ul class="nav navbar-nav">
+    <% Categoria.all.each do |c| -%>
+      <li><%= link_to c.nombre, productos_path(categoria_id: c.id), class: 'navbar-link' %></li>
+    <% end -%>
+  </ul>
+</div>

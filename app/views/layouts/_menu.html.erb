@@ -1,27 +1,28 @@
-<div class="navbar navbar-default navbar-static-top">
-  <div class="container">
-    <div class="row">
-      <ul class="nav navbar-nav">
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar container">
+    <div class="row usuario">
+      <ul class="nav navbar-nav navbar-left">
         <li><%= link_to "INICIO", root_path  %></li>
-        <li><%= link_to "ADMINISTRAR CIRCULO", "/path2"  %></li>
-        <li><%= link_to "TIENDA", "/path3"  %></li>
+        <li><%= link_to "ADMINISTRAR CIRCULO", circulos_path if can? :manage, Circulo  %></li>
+        <li><%= link_to "PEDIDOS", pedidos_path if can? :index, Pedido %></li>
+        <li><%= link_to "TIENDA", productos_path  %></li>
+        <li><%= link_to "CATEGORIAS", categorias_path if can? :manage, Categoria %></li>
         <li><%= link_to "PAGO DE COMPRA", "/path3"  %></li>
-        <li><%= link_to "CERRAR SESION", "/path3"  %></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <% if usuario_signed_in? %>
+          <li><p class="navbar-text"><%= current_usuario.email %></p></li>
+          <li class="divider"></li>
+          <li><%= link_to('Cerrar Sesion', 
+                destroy_usuario_session_path, 
+                method: 'delete') %></li>
+        <% else %>
+          <li><%= link_to('Registrate', new_usuario_registration_path)%></li>
+          <li class="divider"></li>
+          <li><%= link_to('Inicia Sesion', new_usuario_session_path)%></li>
+        <% end %>
       </ul>
     </div>
-    <div class="row">
-      <p class="navbar-text">Datos de tu compra</p>
-      <p class="navbar-text">Ahorro: 43 %</p>
-      <p class="navbar-text">$ 1258,30</p>
-      <p class="navbar-text"><span class="cart-count"><%=session[:product_ids].count%></span> productos</p>
-      <p class="navbar-text"><%= link_to "COMPLETA TU COMPRA", cart_path, class: 'navbar-link'  %></p>
-    </div>
-    <div class="row">
-      <ul class="nav navbar-nav">
-        <% Categoria.all.each do |c| -%>
-          <li><%= link_to c.nombre, "/path1", class: 'navbar-link' %></li>
-        <% end -%>
-      </ul>
-    </div>
+    <%= yield(:cart_menu) %>
   </div>
 </div>
