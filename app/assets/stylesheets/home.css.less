@@ -1,7 +1,98 @@
+
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,400italic,500,500italic,700,700italic,300italic,300|Roboto+Slab:400,300,700);
+
+@font-face {
+  font-family: 'liberation_sansitalic';
+  src: asset-url("liberationsans-italic-webfont.eot");
+  src: asset-url("liberationsans-italic-webfont.eot?#iefix") format("embedded-opentype"),
+  asset-url("liberationsans-italic-webfont.woff") format("woff"),
+  asset-url("liberationsans-italic-webfont.ttf") format("truetype"),
+  asset-url("liberationsans-italic-webfont.svg#liberation_sansitalic") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'liberation_sansregular';
+  src: asset-url("liberationsans-regular-webfont.eot");
+  src: asset-url("liberationsans-regular-webfont.eot?#iefix") format("embedded-opentype"),
+  asset-url("liberationsans-regular-webfont.woff") format("woff"),
+  asset-url("liberationsans-regular-webfont.ttf") format("truetype"),
+  asset-url("liberationsans-regular-webfont.svg#liberation_sansregular") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'liberation_sansbold_italic';
+  src: asset-url("liberationsans-bolditalic-webfont.eot");
+  src: asset-url("liberationsans-bolditalic-webfont.eot?#iefix") format("embedded-opentype"),
+  asset-url("liberationsans-bolditalic-webfont.woff") format("woff"),
+  asset-url("liberationsans-bolditalic-webfont.ttf") format("truetype"),
+  asset-url("liberationsans-bolditalic-webfont.svg#liberation_sansbold_italic") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'liberation_sansbold';
+  src: asset-url("liberationsans-bold-webfont.eot");
+  src: asset-url("liberationsans-bold-webfont.eot?#iefix") format("embedded-opentype"),
+  asset-url("liberationsans-bold-webfont.woff") format("woff"),
+  asset-url("liberationsans-bold-webfont.ttf") format("truetype"),
+  asset-url("liberationsans-bold-webfont.svg#liberation_sansbold") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'mision-icons';
+  src: asset-url("mision-icons.eot?-ptbqre");
+  src: asset-url("mision-icons.eot?#iefix-ptbqre") format("embedded-opentype"),
+  asset-url("mision-icons.woff?-ptbqre") format("woff"),
+  asset-url("mision-icons.ttf?-ptbqre") format("truetype"),
+  asset-url("mision-icons.svg?-ptbqre#mision-icons") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  font-family: 'mision-icons';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.icon-key:before {
+  content: "\f049";
+}
+.icon-lock:before {
+  content: "\f06a";
+}
+
+.icon-facebook:before {
+	content: "\e61e";
+}
+.icon-facebook2:before {
+	content: "\e61f";
+}
+.icon-twitter:before {
+	content: "\e620";
+}
+.icon-twitter2:before {
+	content: "\e621";
+}
+.icon-twitter3:before {
+  content: "\e622";
+}
+
 body{
   background: url("bg.png") repeat;
 }
-a{
+a, a:hover{
   text-decoration: none;
 }
 .col-lg-12{
@@ -16,7 +107,11 @@ a{
     top: 150px;
     bottom: inherit;
   }
+  .carousel-indicators{
+    bottom:75px;
+  }
 }
+
 .header{
   position: relative;
   text-align: center;
@@ -51,9 +146,23 @@ a{
       }
     }
   }
+  .lm-home-social{
+    width: 100%;
+    text-align: center;
+    bottom: 40px;
+    position:absolute;
+    .lm-social-icons{
+      color: #fff;
+      font-size: 28px;
+      display: inline-block;
+      :first-child {
+        margin-right: 10px;
+      }
+    }
+  }
   .iniciar-session{
     position:absolute;
-    bottom: 90px;
+    bottom: 140px;
     margin: 0 auto;
     width: 100%;
     a{
