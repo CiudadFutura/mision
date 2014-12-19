@@ -1,4 +1,6 @@
 class Producto < ActiveRecord::Base
+  has_and_belongs_to_many :categorias
+
   mount_uploader :imagen, ImagenUploader
 
   def cart_action(session)
