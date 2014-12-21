@@ -1,5 +1,23 @@
-
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,400italic,500,500italic,700,700italic,300italic,300|Roboto+Slab:400,300,700);
+
+
+@facebook: #3b5998;
+@rojo:#BD3B2F;
+@texto-home: #A38C78;
+@bg-error: #E5630D;
+@icons-reg: #464f58;
+
+
+
+// Fonts AND Colors
+///////////////////////////////////
+
+@font-bold: 'liberation_sansbold';
+@font-reg: 'liberation_sansregular';
+@font-titles: 'liberation_sansregular';
+@font-others: 'Kreon', 'serif';
+@lila: #9B6185;
+
 
 @font-face {
   font-family: 'liberation_sansitalic';
@@ -56,7 +74,7 @@
 
 [class^="icon-"], [class*=" icon-"] {
   font-family: 'mision-icons';
-  speak: none;
+  /*speak: none;*/
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
@@ -88,6 +106,46 @@
 .icon-twitter3:before {
   content: "\e622";
 }
+.icon-envelope:before {
+  content: "\f0e0";
+}
+.icon-radio-checked:before {
+  content: "\e641";
+}
+.icon-radio-unchecked:before {
+  content: "\e642";
+}
+
+.bt-1(@font-size:14px, @color: #FFF, @hover: @rojo, @radius:3px) {
+  font-size: @font-size;
+  text-transform: uppercase;
+  color: @color;
+  border-radius: @radius;
+  border: 1px solid @color;
+  padding: 10px 15px 10px 15px;
+  background: transparent;
+  //display: block;
+  &:hover {
+    color: @color;
+    background-color: @hover;
+    border:1px solid @rojo;
+    text-shadow: 0 0 0;
+  }
+}
+.bt-2 (@font-size:14px, @color: #FFF, @hover:red, @radius:4px) {
+  font-size: @font-size;
+  text-transform: uppercase;
+  color: @color;
+  border-radius: @radius;
+  border:2px solid @color;
+  padding: 10px;
+  background:transparent;
+  display: inline-block;
+  &:hover {
+    color: @hover;
+    border: 2px solid @hover;
+  }
+}
 
 body{
   background: url("bg.png") repeat;
@@ -102,129 +160,321 @@ a, a:hover{
   width: 33.3333%;
   float: left;
 }
-#myCarousel{
-  .carousel-caption{
-    top: 150px;
-    bottom: inherit;
-  }
-  .carousel-indicators{
-    bottom:75px;
-  }
-}
-
-.header{
+#wrapper {
   position: relative;
-  text-align: center;
-  min-height: 462px;
-  width: 100%;
-  .header-bar{
+  z-index: 8888;
+  #header {
     position: absolute;
-    height: 77px;
-    width: 100%;
+    z-index: 8888;
     text-align: center;
-    padding-top: 20px;
-    margin: 0px;
-    z-index: 888;
-    .container{
-      max-width: 960px;
-      margin: 0 auto;
-      .logo{
-         width: 201px;
-         height: 76px;
-         background-size: cover;
-         display:none;
+    min-height: 462px;
+    top: 0px;
+    width: 100%;
+    .header-bar {
+      height: 77px;
+      position: absolute;
+      width: 100%;
+      text-align: center;
+      padding-top: 20px;
+      a.logo {
+        width: 201px;
+        height: 76px;
+        background:url(logo-mia.jpg) no-repeat;
+        background-size:cover;
+        display:none;
+        span {
+          display: none;
+        }
       }
-      .logo-monteverde{
-        width:259px;
-        height:76px;
-        background: url("logo.png") no-repeat;
-        background-size: cover;
-        display:inline-block;
-        span{
+      a.logo-monteverde {
+        width: 259px;
+        height: 76px;
+        background:url(logo.png) no-repeat;
+        background-size:cover;
+        display: inline-block;
+        span {
           display: none;
         }
       }
     }
-  }
-  .lm-home-social{
-    width: 100%;
-    text-align: center;
-    bottom: 40px;
-    position:absolute;
-    .lm-social-icons{
-      color: #fff;
-      font-size: 28px;
-      display: inline-block;
-      :first-child {
-        margin-right: 10px;
-      }
-    }
-  }
-  .iniciar-session{
-    position:absolute;
-    bottom: 140px;
-    margin: 0 auto;
-    width: 100%;
-    a{
-      border-radius: 3px;
-      font-size: 14px;
-      text-transform: uppercase;
-      color: white;
-      border: 1px solid white;
-      padding: 10px 15px;
-      background: transparent;
+    a.join {
+      position: relative;
+      top: 310px;
+      .bt-1();
       text-shadow: 0px 0px 2px #000, 0px 0px 6px #000, 0px 0px 6px #000;
     }
-    a:hover{
-      color: white;
-      background-color: #bd3b2f;
-      border:#bd3b2f;
-      text-shadow: 0 0 0;
+    a.login {
+      .bt-1();
+      top:290px;
+      position: absolute;
+      left:42%;
+    }
+    #lm-home-social {
+      position: absolute;
+      bottom: 40px;
+      width: 100%;
+      .lm-facebook {
+        &:hover {
+          color: @facebook;
+          background-color: transparent;
+        }
+      }
+      .lm-twitter{
+        &:hover {
+          color: #ccc;
+          background-color: transparent;
+        }
+      }
+      .lm-social-icons {
+        color: #fff;
+        font-size: 28px;
+        display: inline-block;
+        &:first-child {
+          margin-right: 10px;
+        }
+        &:hover {
+          text-shadow: 0 0 1px #ddd;
+          background-color: transparent;
+        }
+      }
+
     }
   }
 }
-.lee{
+
+.lee {
   margin-top: 30px;
   margin-bottom: 40px;
   text-align: center;
   padding: 10px;
-  height: 250px;
-  color: #a38c78;
-  a{
-    font-size: 17px;
-    text-transform: uppercase;
-    color: #bd3b2f;
-    border-radius: 4px;
-    border: 2px solid #bd3b2f;
-    padding: 10px;
-    background: transparent;
-    display: inline-block;
-    font-family: 'liberation_sansbold';
-    margin-bottom: 20px;
-    :hover{
-      color: #333333;
-      border: 2px solid #333333;
-    }
-  }
-  h2{
-    font-size: 18px;
+  height: 210px;
+  color: @texto-home;
+  h2 {
+    font-size:18px;
     line-height: 22px;
-    color: #bd3b2f;
-    margin-bottom: 5px;
+    color: @rojo;
+    margin-bottom:5px;
   }
-  h3{
+  h3 {
     font-size: 14px;
-    line-height: 18px;
+    line-height:18px;
     color: #666;
     margin-bottom: 20px;
   }
+
+  a {
+    .bt-2(@font-size: 17px, @color: @rojo, @hover: #333, @radius: 4px);
+    font-family: 'liberation_sansbold';
+    margin-bottom: 20px;
+    &:hover{
+      background-color: transparent;
+    }
+  }
 }
-#lm-dossier{
-  background: url("icono_lee_el_dossier.png") center bottom no-repeat;
+
+#lm-dossier {
+  background:url(icono_lee_el_dossier.png) center bottom no-repeat;
 }
-#lm-conoce{
-  background: url("icono_conoce_mas.png") center bottom no-repeat;
+#lm-conoce {
+  background:url(icono_conoce_mas.png) center bottom no-repeat;
 }
-#lm-activar{
-  background: url("icono_activa_tu_circulo.png") center bottom no-repeat;
+
+#lm-activar {
+  background:url(icono_activa_tu_circulo.png) center bottom no-repeat;
 }
+#tigre {
+  min-height: 280px;
+  background:url(tigre.png) center 20px no-repeat;
+  background-size: contain;
+}
+
+#lm-login {
+  text-align: center;
+  h3 {
+    background: #333;
+    color: #fff !important;
+    display: block;
+    font-size: 20px;
+    line-height: 22px;
+    margin-bottom: 30px;
+    padding: 12px 14px;
+    //@include border-radius(4px 4px 0 0);
+    //@include skew( -10deg, 0deg );
+    //@include box-shadow(#333 5px  5px  0px  0px);
+  }
+  ul li {
+    text-align: left;
+    margin-bottom: 26px;
+
+    label {
+      font-weight: bold;
+      margin-bottom: 8px;
+      color: #222;
+      display: block;
+
+      span {
+        float: right;
+        color: @rojo;
+        font-size: 12px;
+      }
+    }
+    label.lm-error {
+      display: inline-block;
+      font-weight: normal;
+      width: 100%;
+      background: @bg-error;
+      color: #fff;
+      font-size: 12px;
+      padding: 7px;
+      text-align: right;
+
+    }
+    span.lm-example {
+      display: inline-block;
+      width: 100%;
+
+      color: #555;
+      font-size: 12px;
+      padding: 7px;
+      text-align: right;
+    }
+    input[type="text"], input[type="password"] {
+      height: 40px;
+    }
+
+    input[type="submit"] {
+      .bt-2(@font-size: 16px, @color:#fff, @hover: #333, @radius: 4px);
+      font-weight: normal;
+      margin-right: 0;
+      width: 50%;
+      background: @rojo;
+      border: 0px;
+      &:hover {
+        border: 0px;
+        color: #fff;
+        background: #333;
+      }
+    }
+  }
+
+  p#login-msg {
+    background: @bg-error;
+    color: #fff;
+    font-size: 14px;
+    line-height: 46px;
+    margin-bottom: 20px;
+    margin-top: -30px;
+    padding: 0 10px;
+    position: relative;
+    text-align: center;
+
+    span {
+      font-size: 24px;
+      left: 10px;
+      position: absolute;
+      top: 10px;
+    }
+  }
+
+  #login-loader {
+    align-self: center;
+  }
+}
+
+#footer-content {
+  width: 100%;
+  position: absolute;
+  bottom: 0px;
+  margin-bottom: -330px;
+}
+
+#footer {
+  padding: 30px 0;
+  @include box-shadow( 0px 4px 8px 0 #444 inset);
+  width: 110%;
+  margin-left: -5%;
+}
+
+#footer-bar {
+  padding: 0 20px;
+  background: #444;
+  .footer-bar-left {
+    text-align: left;
+    float: left;
+    a {
+      color: #fff;
+      display: inline-block;
+      font-family: @font-reg;
+      font-size: 12px;
+      line-height: 24px;
+      padding: 10px 15px 9px 39px;
+      position: relative;
+      text-transform: uppercase;
+      span {
+        font-size: 20px;
+        left: 13px;
+        position: absolute;
+
+      }
+      &:hover {
+        background: @rojo;
+      }
+    }
+  }
+  .footer-bar-right {
+    text-align: right;
+    a {
+      background: #565656;
+      color: #fff;
+      display: inline-block;
+      font-family: @font-reg;
+      font-size: 12px;
+      line-height: 24px;
+      padding: 10px 15px 9px 39px;
+      position: relative;
+      text-transform: uppercase;
+      span {
+        font-size: 20px;
+        left: 13px;
+        position: absolute;
+
+      }
+
+    }
+
+    .lm-facebook:hover {
+      background: @facebook;
+    }
+    .lm-twitter:hover {
+      background: #777;
+    }
+  }
+}
+
+#footer-info {
+  background: #222;
+  height: 100px;
+}
+#footer-info-home {
+  background: url(taco_logo_foot.png)  center top no-repeat;
+@include background-size(cover);
+  height: 280px;
+}
+
+#toTop {
+  background: none repeat scroll 0 0 rgba(189, 59, 47, 0.8);
+  bottom: 30px;
+  color: #fff;
+  cursor: pointer;
+  display: none;
+  font-family: Roboto;
+  padding: 14px;
+  position: fixed;
+  right: 0;
+  text-transform: uppercase;
+  z-index: 55;
+}
+
+
+
+
