@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :productos
   resources :categorias
   resources :pedidos, only: [:index]
+  resources :home
 
   resource :cart, only: [:show] do
     put 'add/:producto_id', to: 'carts#add', as: :add_to
