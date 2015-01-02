@@ -20,12 +20,12 @@
   </ul>
   </div>
 </div>
-<div class="row categorias">
-    <div class="col-center-block">
-        <ul class="nav navbar-nav">
+<div class="categorias">
+
+        <ul class="container">
             <% Categoria.all.each do |c| -%>
                 <li><%= link_to c.nombre, productos_path(categoria_id: c.id), class: 'navbar-link' %></li>
             <% end -%>
         </ul>
-    </div>
+
 </div>

@@ -1,4 +1,6 @@
 @import "twitter/bootstrap/bootstrap";
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,400italic,500,500italic,700,700italic,300italic,300|Roboto+Slab:400,300,700);
+
 
 // Set the correct sprite paths
 @iconSpritePath: image-url("twitter/bootstrap/glyphicons-halflings.png");
@@ -13,6 +15,48 @@
 
 // Font Awesome
 @import "fontawesome/font-awesome";
+
+@font-face {
+  font-family: 'liberation_sansitalic';
+  src: asset-url("liberationsans-italic-webfont.eot");
+  src: asset-url("liberationsans-italic-webfont.eot?#iefix") format("embedded-opentype"),
+  asset-url("liberationsans-italic-webfont.woff") format("woff"),
+  asset-url("liberationsans-italic-webfont.ttf") format("truetype"),
+  asset-url("liberationsans-italic-webfont.svg#liberation_sansitalic") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'liberation_sansregular';
+  src: asset-url("liberationsans-regular-webfont.eot");
+  src: asset-url("liberationsans-regular-webfont.eot?#iefix") format("embedded-opentype"),
+  asset-url("liberationsans-regular-webfont.woff") format("woff"),
+  asset-url("liberationsans-regular-webfont.ttf") format("truetype"),
+  asset-url("liberationsans-regular-webfont.svg#liberation_sansregular") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'liberation_sansbold_italic';
+  src: asset-url("liberationsans-bolditalic-webfont.eot");
+  src: asset-url("liberationsans-bolditalic-webfont.eot?#iefix") format("embedded-opentype"),
+  asset-url("liberationsans-bolditalic-webfont.woff") format("woff"),
+  asset-url("liberationsans-bolditalic-webfont.ttf") format("truetype"),
+  asset-url("liberationsans-bolditalic-webfont.svg#liberation_sansbold_italic") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'liberation_sansbold';
+  src: asset-url("liberationsans-bold-webfont.eot");
+  src: asset-url("liberationsans-bold-webfont.eot?#iefix") format("embedded-opentype"),
+  asset-url("liberationsans-bold-webfont.woff") format("woff"),
+  asset-url("liberationsans-bold-webfont.ttf") format("truetype"),
+  asset-url("liberationsans-bold-webfont.svg#liberation_sansbold") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
 
 @font-face {
   font-family: 'mision-icons';
@@ -64,6 +108,11 @@
 // Example:
 // @link-color: #ff0000;
 @rojo:#BD3B2F;
+@font-bold: 'liberation_sansbold';
+@font-reg: 'liberation_sansregular';
+@font-titles: 'liberation_sansregular';
+@font-others: 'Kreon', 'serif';
+@lila: #9B6185;
 
 
 
@@ -100,12 +149,14 @@ body {
     }
   }
   .carrito {
+    font-family: @font-reg;
     overflow: hidden;
     background:#5E5E5E;
     -webkit-box-shadow: 1px 1px 2px #5E5E5E; // multiple: comma-delimited
     ul{
       li{
         list-style-type: none;
+        border-left: 2px solid #fff;
         a{
           height: 70px;
           display: block;
@@ -116,12 +167,15 @@ body {
         }
         &:nth-child(1){
           background: url(datos-compras.png) no-repeat left center;
+          &:first-child {
+            border-left: none;
+          }
           a {
             padding-top:30px;
           }
         }
         &:nth-child(2) {
-          background: url(ahorro.png) left center no-repeat;
+          background: url(ahorro.png) 5% center no-repeat;
           a {
             padding-top:30px;
             &:hover {
@@ -134,7 +188,7 @@ body {
           }
         }
         &:nth-child(3) {
-          background: url(gastos.png) left center no-repeat;
+          background: url(gastos.png) 5% center no-repeat;
           p {
             //
             span {
@@ -143,8 +197,8 @@ body {
           }
         }
         &:nth-child(4) {
-          background: url(completa.png) left center no-repeat;
-          width: 192px;
+          background: url(completa.png) center center no-repeat;
+          width: 210px;
           a {
             cursor: pointer;
             span {
@@ -161,6 +215,7 @@ body {
     overflow: hidden;
     background: #BD3B2F;
     ul {
+      list-style-type: none;
       li {
         float: left;
         border-left: 2px solid #fff;
@@ -168,8 +223,8 @@ body {
           border-left: none;
         }
         a {
-          font-family: 'liberationsans-regular';
-          font-size:24px;
+          font-family: @font-reg;
+          font-size:16px;
           line-height: 40px;
           color: #fff;
           display: block;
