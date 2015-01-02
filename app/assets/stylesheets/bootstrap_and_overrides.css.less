@@ -14,6 +14,42 @@
 // Font Awesome
 @import "fontawesome/font-awesome";
 
+@font-face {
+  font-family: 'mision-icons';
+  src: asset-url("mision-icons.eot?-ptbqre");
+  src: asset-url("mision-icons.eot?#iefix-ptbqre") format("embedded-opentype"),
+  asset-url("mision-icons.woff?-ptbqre") format("woff"),
+  asset-url("mision-icons.ttf?-ptbqre") format("truetype"),
+  asset-url("mision-icons.svg?-ptbqre#mision-icons") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  font-family: 'mision-icons';
+  /*speak: none;*/
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.icon-key:before {
+  content: "\f049";
+}
+.icon-lock:before {
+  content: "\f06a";
+}
+.icon-home:before{
+  content: "\e606";
+}
+.icon-lmcart:before{
+  content: "\e64b";
+}
+
 // Glyphicons
 //@import "twitter/bootstrap/glyphicons.less";
 
@@ -27,6 +63,9 @@
 //
 // Example:
 // @link-color: #ff0000;
+@rojo:#BD3B2F;
+
+
 
 body {
   background-image: image-url('bg.png')
@@ -37,47 +76,111 @@ body {
 }
 
 .navbar {
-  .navbar-text,
-  .navbar-link,
-  ul.navbar-nav li a { color: #fff; }
-
   div.usuario {
-    background-color: #322e2e;
-    .col-center-block {
-      float: none;
-      display: block;
-      margin:0 auto;
-      max-width: 1000px;
+    background: #333;
+    color:#fff;
+    ul{
+      li{
+        display: inline-block;
+        a{
+          color: #fff;
+          font-size: 13px;
+          padding: 15px;
+          display: inline-block;
+          text-transform: uppercase;
+          span{
+            padding-right: 8px;
+            font-size: 18px;
+          }
+          &:hover{
+            background: @rojo;
+          }
+        }
+      }
     }
   }
+  .carrito {
+    overflow: hidden;
+    background:#5E5E5E;
+    -webkit-box-shadow: 1px 1px 2px #5E5E5E; // multiple: comma-delimited
+    ul{
+      li{
+        list-style-type: none;
+        a{
+          height: 70px;
+          display: block;
+          color: #FFF;
+          font-size: 22px;
+          padding: 10px 10px 10px 60px;
+          cursor: default;
+        }
+        &:nth-child(1){
+          background: url(datos-compras.png) no-repeat left center;
+          a {
+            padding-top:30px;
+          }
+        }
+        &:nth-child(2) {
+          background: url(ahorro.png) left center no-repeat;
+          a {
+            padding-top:30px;
+            &:hover {
+              background: @rojo;
+              .animation(Tada 5s linear 0s infinite alternate);
+            }
+            span{
 
-  div.carrito {
-    background-color: #5E5E5E;
-    .col-center-block {
-      float: none;
-      display: block;
-      margin:0 auto;
-      max-width: 1000px;
-      .navbar-text{
-        padding-left: 45px;
-        padding-top: 10px;
-        height: 32px;
-      }
-      .datos-compras{
-        background: url(datos-compras.png) no-repeat left center;
-      }
-      .ahorro{
-        background: url(ahorro.png) no-repeat left center;
-      }
-      .total{
-        padding-top: 3px;
-        background: url(total.png) no-repeat left center;
+            }
+          }
+        }
+        &:nth-child(3) {
+          background: url(gastos.png) left center no-repeat;
+          p {
+            //
+            span {
+              color: #fff;
+            }
+          }
+        }
+        &:nth-child(4) {
+          background: url(completa.png) left center no-repeat;
+          width: 192px;
+          a {
+            cursor: pointer;
+            span {
+              display: none;
+            }
+          }
+
+        }
       }
     }
   }
   
   div.categorias {
-    background-color: #C84D47;
+    overflow: hidden;
+    background: #BD3B2F;
+    ul {
+      li {
+        float: left;
+        border-left: 2px solid #fff;
+        &:first-child {
+          border-left: none;
+        }
+        a {
+          font-family: 'liberationsans-regular';
+          font-size:24px;
+          line-height: 40px;
+          color: #fff;
+          display: block;
+          padding: 0px 25px 0px 25px;
+          height: 40px;
+          &:hover {
+            background:#5E5E5E;
+          }
+        }
+      }
+    }
   }
 }
 
