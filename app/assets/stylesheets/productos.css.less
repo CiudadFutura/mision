@@ -16,12 +16,10 @@
 #productos{
   .item{
     .thumbnail{
-      margin-bottom: 20px;
       padding:0px 0px 10px 0px;
       -webkit-border-radius: 0px;
       -moz-border-radius: 0px;
       border-radius: 0px;
-      margin-bottom: 20px;
       text-transform: uppercase;
       .list-group-image{
         width: 100%;
@@ -29,6 +27,7 @@
         background: #999999;
       }
       .caption, .precio-super{
+        @include box-shadow( 0px 4px 8px 0 #444 inset);
         background-color: @rojo;
         padding: 3px 5px ;
         height: 28px;
