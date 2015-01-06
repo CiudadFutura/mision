@@ -32,12 +32,12 @@
           <td>$<%= item.total.round(2) %></td>
           <td><%= item.ahorro.round(2) %> %</td>
           <td>
-            <%=link_to "" , data: {
-              target: @cart_action,
-              targetUrl: remove_from_cart_path(item.producto),
-              removeUrl: remove_from_cart_path(item.producto)} do %>
-              <i class="">[borrar]</i>
-            <%end%>
+            <%= button_tag(type: 'button', class: 'btn btn btn-danger btn-xs', data: {
+                                               target: 'Remove from',
+                                               removeUrl: remove_from_cart_path(item.producto)
+                                       }) do %>
+              <i class="">Borrar</i>
+            <% end %>
           </td>
         </tr>
       <%end%>
