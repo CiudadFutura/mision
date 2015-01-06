@@ -14,7 +14,8 @@ class ProductosController < ApplicationController
   # GET /productos/1
   # GET /productos/1.json
   def show
-    @cart_action = @producto.cart_action(session)
+    # todo: Se sigue usando???
+    # @cart_action = @producto.cart_action(session)
   end
 
   # GET /productos/new
