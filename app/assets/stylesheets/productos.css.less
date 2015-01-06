@@ -1,3 +1,69 @@
 // Place all the styles related to the productos controller here.
 // They will automatically be included in application.css.
 // You can use Less here: http://lesscss.org/
+
+@rojo: #bd4640;
+@font-bold: 'liberation_sansbold';
+@font-reg: 'liberation_sansregular';
+@font-titles: 'liberation_sansregular';
+@font-others: 'Kreon', 'serif';
+@marron: #b9a981;
+@lila: #9B6185;
+.icon-cart{
+  margin-right: 5px;
+}
+.v-center{
+  vertical-align: middle;
+}
+#productos{
+  .item{
+    .thumbnail{
+      padding:0px 0px 10px 0px;
+      -webkit-border-radius: 0px;
+      -moz-border-radius: 0px;
+      border-radius: 0px;
+      text-transform: uppercase;
+      .list-group-image{
+        width: 100%;
+        height: 200px;
+        background: #999999;
+      }
+      .red{
+        background: @rojo;
+        border-bottom: 1px solid #FFFFFF;
+        //box-shadow: 0 4px 8px 0 #444;
+        box-shadow: 0px 4px 8px 0 #444 inset;
+        height: 28px;
+        max-height: 32px;
+        margin-bottom: 0px;
+        font-size: 14px;
+        color: #fff;
+      }
+      .brown{
+        background: @marron;
+        border-bottom: 1px solid #FFFFFF;
+        height: 28px;
+        max-height: 32px;
+        margin-bottom: 0px;
+        font-size: 14px;
+        color: #fff;
+      }
+      .caption{
+        padding: 3px 5px ;
+        h4{
+          color: #fff;
+          font-family: @font-reg;
+          font-size: 12px;
+        }
+      }
+      .ahorro{
+        margin-bottom: 15px;
+      }
+      .precio-super{
+        font-size: 12px;
+      }
+
+    }
+
+  }
+}

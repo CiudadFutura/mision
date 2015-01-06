@@ -93,6 +93,22 @@
 .icon-lmcart:before{
   content: "\e64b";
 }
+.icon-cart:before{
+  content: "\e609";
+}
+.icon-key2:before{
+  content: "\e665";
+}
+.icon-cogs:before{
+  content: "\e613";
+}
+.icon-stats:before{
+  content: "\e616";
+}
+.icon-flag:before{
+  content: "\e61a";
+}
+
 
 // Glyphicons
 //@import "twitter/bootstrap/glyphicons.less";
@@ -107,6 +123,7 @@
 //
 // Example:
 // @link-color: #ff0000;
+
 @rojo:#BD3B2F;
 @font-bold: 'liberation_sansbold';
 @font-reg: 'liberation_sansregular';
@@ -118,10 +135,6 @@
 
 body {
   background-image: image-url('bg.png')
-}
-
-.main.container {
-  margin-top: 170px;
 }
 
 .navbar {
@@ -189,11 +202,9 @@ body {
         }
         &:nth-child(3) {
           background: url(gastos.png) 5% center no-repeat;
-          p {
-            //
-            span {
-              color: #fff;
-            }
+          span.cart-cantidad {
+            color: #fff;
+            font-size: 12px;
           }
         }
         &:nth-child(4) {

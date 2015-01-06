@@ -7,16 +7,40 @@
                 <span class="icon-home"></span>INICIO
               <% end %>
             </li>
-            <li><%= link_to "ADMINISTRAR CIRCULO", circulos_path if can? :manage, Circulo  %></li>
-            <li><%= link_to "PEDIDOS", pedidos_path if can? :index, Pedido %></li>
+            <% if can? [:manage], circulos_path %>
+                <li>
+                  <%= link_to(circulos_path, Circulo) do %>
+                      <span class="icon-cogs"></span>Circulo
+                  <% end %>
+                </li>
+            <% end %>
+            <% if can? [:index], pedidos_path %>
+            <li>
+              <%= link_to(pedidos_path, Pedido) do %>
+                  <span class="icon-stats"></span>Pedidos
+              <% end %>
+            </li>
+            <% end %>
             <li>
               <%= link_to(productos_path) do %>
                   <span class="icon-lmcart"></span>Tienda
               <% end %>
             </li>
-            <li><%= link_to "TIENDA", productos_path  %></li>
-            <li><%= link_to "CATEGORIAS", categorias_path if can? :manage, Categoria %></li>
-            <li><%= link_to "PAGO DE COMPRA", "/path3"  %></li>
+            <% if can? [:manage], categorias_path %>
+                <li>
+                  <%= link_to(categoria_path, Categoria) do %>
+                    <span class="icon-key2"></span>Categorías
+                    <% end %>
+                </li>
+            <% end %>
+
+
+
+            <li>
+              <%= link_to("/path3") do %>
+                  <span class="icon-flag"></span>Pago de compra
+              <% end %>
+            </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <% if usuario_signed_in? %>
