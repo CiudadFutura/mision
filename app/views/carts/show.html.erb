@@ -28,9 +28,9 @@
           <td><%= item.cantidad.to_i %> x</td>
           <td><%= item.producto.nombre %></td>
           <td>&nbsp;<%# = item.producto.codigo %></td>
-          <td>$<%= item.producto.precio.round(2) %></td>
-          <td>$<%= item.total.round(2) %></td>
-          <td><%= item.ahorro.round(2) %> %</td>
+          <td><%= number_to_currency(item.producto.precio) %></td>
+          <td><%= number_to_currency(item.total) %></td>
+          <td><%= number_to_percentage(item.ahorro) %></td>
           <td>
             <%= button_tag(type: 'button', class: 'btn btn btn-danger btn-xs', data: {
                                                target: 'Remove from',
@@ -46,8 +46,8 @@
           <td>&nbsp;</td>
           <td>&nbsp;</td>
           <td>TOTAL:</td>
-          <td>$<%= @carrito.total.round(2) %></td>
-          <td><%= @carrito.ahorro.round(2) %> %</td>
+          <td><%= number_to_currency(@carrito.total) %></td>
+          <td><%= number_to_percentage(@carrito.ahorro) %></td>
           <td>&nbsp;</td>
         </tr>
       </tbody>
