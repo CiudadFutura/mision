@@ -28,9 +28,9 @@
           <td><%= item.cantidad.to_i %> x</td>
           <td><%= item.producto.nombre %></td>
           <td>&nbsp;<%# = item.producto.codigo %></td>
-          <td>$<%= item.producto.precio %></td>
-          <td>$<%= item.total %></td>
-          <td><%= item.ahorro %> %</td>
+          <td>$<%= item.producto.precio.round(2) %></td>
+          <td>$<%= item.total.round(2) %></td>
+          <td><%= item.ahorro.round(2) %> %</td>
           <td>
             <%=link_to "" , data: {
               target: @cart_action,
@@ -46,8 +46,8 @@
           <td>&nbsp;</td>
           <td>&nbsp;</td>
           <td>TOTAL:</td>
-          <td>$<%= @carrito.total %></td>
-          <td><%= @carrito.ahorro %> %</td>
+          <td>$<%= @carrito.total.round(2) %></td>
+          <td><%= @carrito.ahorro.round(2) %> %</td>
           <td>&nbsp;</td>
         </tr>
       </tbody>

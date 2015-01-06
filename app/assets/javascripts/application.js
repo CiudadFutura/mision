@@ -18,7 +18,7 @@
 
 $(document).ready(function() {
 
-  $('a[data-target]').click(function (event) {    
+  $('button[data-target]').click(function (event) {    
     event.preventDefault();
     $this = $(this);
     if ($this.data('target') === 'Add to') {
