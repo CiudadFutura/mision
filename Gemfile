@@ -2,8 +2,8 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.6'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+# Use mysql as the database for Active Record in production
+gem 'mysql2'
 
 gem 'therubyracer',  platforms: :ruby
 # Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
@@ -52,6 +52,7 @@ gem 'capistrano-rails', '~> 1.1.1'
 gem 'capistrano-rvm', github: "capistrano/rvm"
 
 group :development, :test do
+  gem 'sqlite3'
   gem 'pry'
   gem 'pry-remote'
   gem 'pry-rails'
