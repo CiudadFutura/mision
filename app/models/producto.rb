@@ -12,7 +12,7 @@ class Producto < ActiveRecord::Base
   end
 
   def self.calculo_ahorro(pm,ps)
-    return  ((pm - ps) / pm * 100).abs
+    return  ((pm.to_f - ps.to_f) / pm * 100).abs
   end
 
 end
