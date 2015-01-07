@@ -5,7 +5,7 @@
       <li class="col-3">Ahorro: <%= number_to_percentage(@carrito.ahorro) %></li>
       <li class="col-3">
         <span class="cart-total"><%= number_to_currency(@carrito.total) %></span><br>
-        <span class="cart-cantidad"><%= number_to_human(@carrito.cantidad, units: {unit: " producto", thousand: " productos"}) %></span>
+        <span class="cart-cantidad"><%= pluralize(@carrito.cantidad, ' producto', ' productos') %></span>
       </li>
       <li class="col-3">
         <%=
