@@ -1,22 +1,19 @@
 <div class="carrito">
   <div class="container">
   <ul class="navbar-nav">
-      <li class="col-3"><a href="#">Datos de tu compra</a></li>
-      <li class="col-3"><a href="#">Ahorro: %<%= @carrito.ahorro %></a></li>
+      <li class="col-3">Datos de tu compra</li>
+      <li class="col-3">Ahorro: <%= number_to_percentage(@carrito.ahorro) %></li>
       <li class="col-3">
-        <a href="#">
-            <span class="cart-total"><%= @carrito.total %></span><br>
-            <span class="cart-cantidad"><%= @carrito.cantidad %> productos</span>
-        </a>
+        <span class="cart-total"><%= number_to_currency(@carrito.total) %></span><br>
+        <span class="cart-cantidad"><%= number_to_human(@carrito.cantidad, units: {unit: " producto", thousand: " productos"}) %></span>
       </li>
-      <!--<li class="col-3">
+      <li class="col-3">
         <%=
-           link_to_if(controller.controller_name != "carts", "", cart_path) do
-             link_to "VOLVER A LA TIENDA", productos_path
+           link_to_if(controller.controller_name != "carts", "", cart_path, class: '') do
+             link_to "", productos_path, class: ''
            end
         %>
-      </li>-->
-      <li class="col-3"><a href="#"><span>Completa tu compra</span></a></li>
+      </li>
   </ul>
   </div>
 </div>

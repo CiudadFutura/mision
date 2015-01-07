@@ -11,8 +11,9 @@ class Producto < ActiveRecord::Base
     end
   end
 
-  def self.calculo_ahorro(pm,ps)
-    return  ((pm - ps) / pm * 100).abs
+  def ahorro
+    return 0 if precio_super.nil? || precio_super == 0
+    (precio_super - precio) / precio
   end
 
 end

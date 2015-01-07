@@ -170,51 +170,51 @@ body {
       li{
         list-style-type: none;
         border-left: 2px solid #fff;
-        a{
-          height: 70px;
-          display: block;
-          color: #FFF;
-          font-size: 22px;
-          padding: 10px 10px 10px 60px;
-          cursor: default;
-        }
-        &:nth-child(1){
-          background: url(datos-compras.png) no-repeat left center;
+        
+        height: 70px;
+        display: block;
+        color: #FFF;
+        font-size: 22px;
+        padding: 10px 10px 10px 60px;
+        cursor: default;
+        
+        &:nth-child(1) {
+          background: image-url('datos-compras.png') no-repeat left center;
           &:first-child {
             border-left: none;
           }
-          a {
-            padding-top:30px;
-          }
+          padding-top:30px;
         }
-        &:nth-child(2) {
-          background: url(ahorro.png) 5% center no-repeat;
-          a {
-            padding-top:30px;
-            &:hover {
-              background: @rojo;
-              .animation(Tada 5s linear 0s infinite alternate);
-            }
-            span{
 
-            }
-          }
+        &:nth-child(2) {
+          background: image-url('ahorro.png') 5% center no-repeat;
+          padding-top:30px;
         }
         &:nth-child(3) {
-          background: url(gastos.png) 5% center no-repeat;
+          // background: url(/assets/gastos.png) 5% center no-repeat;
           span.cart-cantidad {
             color: #fff;
             font-size: 12px;
           }
         }
         &:nth-child(4) {
-          background: url(completa.png) center center no-repeat;
+          background: image-url('completa.png') center center no-repeat;
           width: 210px;
           a {
+            height: 70px;
+            display: block;
+            // color: none;
+            font-size: 22px;
+            padding: 10px 10px 10px 60px;
+            cursor: default;
             cursor: pointer;
             span {
               display: none;
             }
+          }
+          a:hover {
+            color: transparent;
+            background-color: transparent;
           }
 
         }
