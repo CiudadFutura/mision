@@ -28,16 +28,16 @@
           <td><%= item.cantidad.to_i %> x</td>
           <td><%= item.producto.nombre %></td>
           <td>&nbsp;<%# = item.producto.codigo %></td>
-          <td>$<%= item.producto.precio %></td>
-          <td>$<%= item.total %></td>
-          <td><%= item.ahorro %> %</td>
+          <td><%= number_to_currency(item.producto.precio) %></td>
+          <td><%= number_to_currency(item.total) %></td>
+          <td><%= number_to_percentage(item.ahorro) %></td>
           <td>
-            <%=link_to "" , data: {
-              target: @cart_action,
-              targetUrl: remove_from_cart_path(item.producto),
-              removeUrl: remove_from_cart_path(item.producto)} do %>
-              <i class="">[borrar]</i>
-            <%end%>
+            <%= button_tag(type: 'button', class: 'btn btn btn-danger btn-xs', data: {
+                                               target: 'Remove from',
+                                               removeUrl: remove_from_cart_path(item.producto)
+                                       }) do %>
+              <i class="">Borrar</i>
+            <% end %>
           </td>
         </tr>
       <%end%>
@@ -46,8 +46,8 @@
           <td>&nbsp;</td>
           <td>&nbsp;</td>
           <td>TOTAL:</td>
-          <td>$<%= @carrito.total %></td>
-          <td><%= @carrito.ahorro %> %</td>
+          <td><%= number_to_currency(@carrito.total) %></td>
+          <td><%= number_to_percentage(@carrito.ahorro) %></td>
           <td>&nbsp;</td>
         </tr>
       </tbody>

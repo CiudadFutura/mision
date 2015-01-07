@@ -15,40 +15,35 @@
           <h4 class="group inner list-group-item-heading"><%= producto.nombre %></h4>
         </div>
         <div class="col-lg-12">
-          <p class="precio brown text-center">precio misión $<%= producto.precio %></p>
+          <p class="precio brown text-center">precio misión <%= number_to_currency(producto.precio) %></p>
         </div>
         <div class="col-lg-12 v-center">
-          <p class="precio-super red text-center">Precio hiper $<%= producto.precio_super %></p>
+          <p class="precio-super red text-center">Precio hiper <%= number_to_currency(producto.precio_super) %></p>
         </div>
         <div class="col-lg-12">
-          <p class="ahorro brown text-center">ahorro %<%= Producto.calculo_ahorro(producto.precio,producto.precio_super).round(2) %></p>
+          <p class="ahorro brown text-center">ahorro <%= number_to_percentage(producto.ahorro) %></p>
         </div>
         <div class="col-lg-12 text-center">
-          <div class="btn-group" role="group" aria-label="...">
-            <div class="btn-group" role="group">
-              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                1
-                <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu" role="menu">
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-              </ul>
-            </div>
-            <%= button_tag(type: 'button', class: 'btn btn btn-default', data: {
-                                                 target: 'Add to',
-                                                 addUrl: add_to_cart_path(producto)
-                                         }) do %>
-                <span class="icon-cart glyphicon-align-left"></span> Agregar al carro
-            <% end %>
-          </div>
+          <select class="cantidad">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+          </select>
+          <%= button_tag(type: 'button', class: 'btn btn btn-default', data: {
+                                               target: 'Add to',
+                                               addUrl: add_to_cart_path(producto)
+                                       }) do %>
+              <span class="icon-cart glyphicon-align-left"></span> Agregar al carro
+          <% end %>
         </div>
         <% if can? [:update, :detele], producto %>
             <div class="col-lg-12">
               <div class="btn-group" role="group" aria-label="...">
                   <%= button_to t('.edit', :default => t("helpers.links.edit")),
-                              edit_producto_path(producto), :class => 'btn btn-default btn-xs'  %>
+                              edit_producto_path(producto),
+                              :method => :get,
+                              :class => 'btn btn-default btn-xs'  %>
                   <%= button_to t('.destroy', :default => t("helpers.links.destroy")),
                               producto_path(producto),
                               :method => :delete,

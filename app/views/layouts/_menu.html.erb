@@ -9,14 +9,14 @@
             </li>
             <% if can? [:manage], circulos_path %>
                 <li>
-                  <%= link_to(circulos_path, Circulo) do %>
+                  <%= link_to(circulos_path) do %>
                       <span class="icon-cogs"></span>Circulo
                   <% end %>
                 </li>
             <% end %>
             <% if can? [:index], pedidos_path %>
             <li>
-              <%= link_to(pedidos_path, Pedido) do %>
+              <%= link_to(pedidos_path) do %>
                   <span class="icon-stats"></span>Pedidos
               <% end %>
             </li>
@@ -28,7 +28,7 @@
             </li>
             <% if can? [:manage], categorias_path %>
                 <li>
-                  <%= link_to(categoria_path, Categoria) do %>
+                  <%= link_to(categorias_path) do %>
                     <span class="icon-key2"></span>Categorías
                     <% end %>
                 </li>
