@@ -16,4 +16,9 @@ class Producto < ActiveRecord::Base
     (precio_super - precio) / precio
   end
 
+  def populate!(params)
+    imagen = params[:imagen]
+    categorias = Categoria.find(params[:categorias].select {|k,v| v == "1"}.keys)
+  end
+
 end
