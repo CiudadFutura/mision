@@ -15,7 +15,7 @@ end
 productos = [
   { categoria_id: 1, nombre: 'Canasta Frutas y Verduras Chica', descripcion: 'Tomate 1 kg; Zanahoria 1/2 kg; Papa 1 kg; Cebolla 1 kg; Pimiento 1/2 kg; Banana 1 kg; Calabaza 1; Lechuga Paquete; Acelga  Bandeja 1kg; Naranja  1 kg; Huevo Media docena.',  precio: '70', precio_super: '74' },
   { categoria_id: 1, nombre: 'Canasta frutas y verduras Grande', descripcion: '  Tomate 1 kg; Zanahoria 1/2 kg; Papa 1 kg; Batata 1 kg; Cebolla 1 kg; Pimiento 1/2 kg; Mandarina 1kg; Limon 1/2 kg; Ajo 1; Manzana 1 kg; Banana 1 kg; Calabaza 1; Lechuga Paquete; Cebolla de verdeo Paquete; Puerro Paquete; Rucula Paquete; Repollo Paquete; Brocoli Bandeja; Coliflor Bandeja; Espinaca Paquete; Radicheta Paquete; Remolacha Paquete; Acelga  Bandeja 1kg; Naranja  1 kg; Huevo Media docena.',  precio: 150, precio_super: 150 },
-  { categoria_id: 4, nombre: 'Ensaladas Mixta (Radicheta y zanahoria)', descripcion: 'Naturalísima Bandeja 300 g',  precio: 8.4, precio_super: 9 }, 
+  { categoria_id: 4, nombre: 'Ensaladas Mixta (Radicheta y zanahoria)', descripcion: 'Naturalísima Bandeja 300 g',  precio: 8.4, precio_super: 9 },
   { categoria_id: 4, nombre: 'Bandeja espinaca  Naturalísima', descripcion: 'Bandeja 500 g.', precio: 6.3, precio_super: 7 },
   { categoria_id: 4, nombre: 'Verduras para sopa SOPITAS  Naturalísima', descripcion: ' Bandeja 500 g.', precio: 15,    precio_super: 17 },
   { categoria_id: 4, nombre: 'Rúcula hojas  Naturalísima', descripcion: ' Bandeja 200 g.', precio: 6.3, precio_super: 7 },
@@ -24,7 +24,7 @@ productos = [
   { categoria_id: 2, nombre: 'Huevos 100% Orgánicos', descripcion: ' Gallinas libres 1/2 docena', precio: 10,    precio_super: 18 },
   { categoria_id: 3, nombre: 'Canasta Frescos',  descripcion: '2 Paquetes Tapas de empanada Mil hojas  x 12, 2 Paquetes Tapas de tarta Mil hojas ; Ravioles Mil hojas 1 kg; Fideos Frescos 1/2 kg ; Muzzarela La Resistencia 500g; Manteca 200gr La Cabaña/Inty ; Crema 360gr La Cabaña/Inty .', precio: 133, precio_super: 150 },
   { categoria_id: 3, nombre: 'Reggianito', descripcion: '  La Resistencia 250g.', precio: 25, precio_super: 29 },
-  { categoria_id: 3, nombre: 'Quesos Saborizados La Resistencia', descripcion: ' Pimienta ahumada 350gr', precio: 35.7, precio_super: 34 }, 
+  { categoria_id: 3, nombre: 'Quesos Saborizados La Resistencia', descripcion: ' Pimienta ahumada 350gr', precio: 35.7, precio_super: 34 },
   { categoria_id: 5, nombre: 'Shampoo Prunelle 930 cc', descripcion: '', precio: 10.2, precio_super: 18 },
   { categoria_id: 5, nombre: 'Acondicionador  Prunelle 930 cc', descripcion: '', precio: 10.2, precio_super: 17 },
   { categoria_id: 5, nombre: 'Shampoo Tresemmé 400 ml', descripcion: '', precio: 29.7, precio_super: 35 },
