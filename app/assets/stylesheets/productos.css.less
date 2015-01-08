@@ -2,6 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Less here: http://lesscss.org/
 
+
 @rojo: #bd4640;
 @font-bold: 'liberation_sansbold';
 @font-reg: 'liberation_sansregular';
@@ -15,6 +16,7 @@
 
 #productos{
   .item{
+    font-family: "Fjalla One";
     .thumbnail{
       padding:0px 0px 10px 0px;
       -webkit-border-radius: 0px;
@@ -22,14 +24,16 @@
       border-radius: 0px;
       text-transform: uppercase;
       .list-group-image{
-        width: 100%;
-        height: 200px;
         background: #999999;
+      }
+      .btn{
+        background: @rojo !important;
+        color: #FFFFFF;
       }
       .red{
         background: @rojo;
         border-bottom: 1px solid #FFFFFF;
-        //box-shadow: 0 4px 8px 0 #444;
+        font-family: "Fjalla One";
         box-shadow: 0px 4px 8px 0 #444 inset;
         height: 28px;
         max-height: 32px;
@@ -38,6 +42,7 @@
         color: #fff;
       }
       .brown{
+        font-family: "Fjalla One";
         background: @marron;
         border-bottom: 1px solid #FFFFFF;
         height: 28px;
@@ -50,15 +55,21 @@
         padding: 3px 5px ;
         h4{
           color: #fff;
-          font-family: @font-reg;
           font-size: 12px;
         }
       }
+      .precio{
+        padding-top: 5px;
+        font-size: 18px;
+      }
       .ahorro{
         margin-bottom: 15px;
+        padding-top: 5px;
+        font-size: 16px;
       }
       .precio-super{
-        font-size: 12px;
+        padding-top: 5px;
+        font-size: 14px;
       }
 
     }
