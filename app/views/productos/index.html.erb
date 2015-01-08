@@ -10,7 +10,7 @@
 <% @productos.each do |producto|%>
     <div class="item col-xs-4 col-lg-4">
       <div class="thumbnail">
-          <%= image_tag(producto.imagen, size: "180", class: "group list-group-image") %>
+          <%= image_tag(producto.imagen, size: "180", class: "group list-group-image img-polaroid") %>
         <div class="caption red text-center left">
           <h4 class="group inner list-group-item-heading"><%= producto.nombre %></h4>
         </div>
