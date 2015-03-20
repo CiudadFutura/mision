@@ -41,9 +41,9 @@ productos.each do |p|
 end
 
 usuarios = [
-  { nombre: 'admin', password: '!QAZzaq1', email: 'email-admin@bla.com', type: 'Admin' },
-  { nombre: 'coordinador', password: '!QAZzaq1', email: 'email-coord@bla.com', type: 'Coordinador' },
-  { nombre: 'usuario', password: '!QAZzaq1', email: 'email-usuruario@bla.com', type: 'Usuario' }
+  { nombre: 'admin', password: '!QAZzaq1', email: 'admin@example.com', type: 'Admin' },
+  { nombre: 'coordinador', password: '!QAZzaq1', email: 'coordinador@example.com', type: 'Coordinador' },
+  { nombre: 'usuario', password: '!QAZzaq1', email: 'usuario@example.com', type: 'Usuario' }
 ]
 
 usuarios.each do |u|

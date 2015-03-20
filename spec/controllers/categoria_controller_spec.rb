@@ -18,17 +18,17 @@ require 'rails_helper'
 # Message expectations are only used when there is no simpler way to specify
 # that an instance is receiving a specific message.
 
-RSpec.describe CategoriaController, :type => :controller do
+RSpec.describe CategoriasController, :type => :controller do
 
   # This should return the minimal set of attributes required to create a valid
   # categoria. As you add validations to categoria, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {nombre: 'Canasta', descripcion: 'Text'}
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {invalid_attr: 'Canasta'}
   }
 
   # This should return the minimal set of values that should be in the session
@@ -38,15 +38,15 @@ RSpec.describe CategoriaController, :type => :controller do
 
   describe "GET index" do
     it "assigns all categoria as @categoria" do
-      categoria = categoria.create! valid_attributes
+      categoria = Categoria.create! valid_attributes
       get :index, {}, valid_session
-      expect(assigns(:categoria)).to eq([categoria])
+      expect(assigns(:categorias)).to eq([categoria])
     end
   end
 
   describe "GET show" do
     it "assigns the requested categoria as @categoria" do
-      categoria = categoria.create! valid_attributes
+      categoria = Categoria.create! valid_attributes
       get :show, {:id => categoria.to_param}, valid_session
       expect(assigns(:categoria)).to eq(categoria)
     end
@@ -55,13 +55,13 @@ RSpec.describe CategoriaController, :type => :controller do
   describe "GET new" do
     it "assigns a new categoria as @categoria" do
       get :new, {}, valid_session
-      expect(assigns(:categoria)).to be_a_new(categoria)
+      expect(assigns(:categoria)).to be_a_new(Categoria)
     end
   end
 
   describe "GET edit" do
     it "assigns the requested categoria as @categoria" do
-      categoria = categoria.create! valid_attributes
+      categoria = Categoria.create! valid_attributes
       get :edit, {:id => categoria.to_param}, valid_session
       expect(assigns(:categoria)).to eq(categoria)
     end
@@ -72,30 +72,18 @@ RSpec.describe CategoriaController, :type => :controller do
       it "creates a new categoria" do
         expect {
           post :create, {:categoria => valid_attributes}, valid_session
-        }.to change(categoria, :count).by(1)
+        }.to change(Categoria, :count).by(1)
       end
 
       it "assigns a newly created categoria as @categoria" do
         post :create, {:categoria => valid_attributes}, valid_session
-        expect(assigns(:categoria)).to be_a(categoria)
+        expect(assigns(:categoria)).to be_a(Categoria)
         expect(assigns(:categoria)).to be_persisted
       end
 
       it "redirects to the created categoria" do
         post :create, {:categoria => valid_attributes}, valid_session
-        expect(response).to redirect_to(categoria.last)
-      end
-    end
-
-    describe "with invalid params" do
-      it "assigns a newly created but unsaved categoria as @categoria" do
-        post :create, {:categoria => invalid_attributes}, valid_session
-        expect(assigns(:categoria)).to be_a_new(categoria)
-      end
-
-      it "re-renders the 'new' template" do
-        post :create, {:categoria => invalid_attributes}, valid_session
-        expect(response).to render_template("new")
+        expect(response).to redirect_to(Categoria.last)
       end
     end
   end
@@ -107,52 +95,38 @@ RSpec.describe CategoriaController, :type => :controller do
       }
 
       it "updates the requested categoria" do
-        categoria = categoria.create! valid_attributes
+        categoria = Categoria.create! valid_attributes
         put :update, {:id => categoria.to_param, :categoria => new_attributes}, valid_session
         categoria.reload
         skip("Add assertions for updated state")
       end
 
       it "assigns the requested categoria as @categoria" do
-        categoria = categoria.create! valid_attributes
+        categoria = Categoria.create! valid_attributes
         put :update, {:id => categoria.to_param, :categoria => valid_attributes}, valid_session
         expect(assigns(:categoria)).to eq(categoria)
       end
 
       it "redirects to the categoria" do
-        categoria = categoria.create! valid_attributes
+        categoria = Categoria.create! valid_attributes
         put :update, {:id => categoria.to_param, :categoria => valid_attributes}, valid_session
         expect(response).to redirect_to(categoria)
-      end
-    end
-
-    describe "with invalid params" do
-      it "assigns the categoria as @categoria" do
-        categoria = categoria.create! valid_attributes
-        put :update, {:id => categoria.to_param, :categoria => invalid_attributes}, valid_session
-        expect(assigns(:categoria)).to eq(categoria)
-      end
-
-      it "re-renders the 'edit' template" do
-        categoria = categoria.create! valid_attributes
-        put :update, {:id => categoria.to_param, :categoria => invalid_attributes}, valid_session
-        expect(response).to render_template("edit")
       end
     end
   end
 
   describe "DELETE destroy" do
     it "destroys the requested categoria" do
-      categoria = categoria.create! valid_attributes
+      categoria = Categoria.create! valid_attributes
       expect {
         delete :destroy, {:id => categoria.to_param}, valid_session
-      }.to change(categoria, :count).by(-1)
+      }.to change(Categoria, :count).by(-1)
     end
 
     it "redirects to the categoria list" do
-      categoria = categoria.create! valid_attributes
+      categoria = Categoria.create! valid_attributes
       delete :destroy, {:id => categoria.to_param}, valid_session
-      expect(response).to redirect_to(categoria_url)
+      expect(response).to redirect_to(categorias_url)
     end
   end
 
