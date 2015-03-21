@@ -36,7 +36,7 @@
                                                target: 'Add to',
                                                addUrl: add_to_cart_path(producto)
                                        }) do %>
-              <span class="icon-cart glyphicon-align-left"></span> Agregar al carro
+              <span class="icon-cart glyphicon-align-left"></span> <span class="cart-action">Agregar al</span> carro
           <% end %>
         </div>
         <% if can? [:update, :detele], producto %>

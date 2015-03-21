@@ -23,10 +23,10 @@ $(document).ready(function() {
     $this = $(this);
     if ($this.data('target') === 'Add to') {
       url = $this.data('addurl');
-      new_target = "Remove from";
+      new_target = "Eliminar del ";
     } else {
       url = $this.data('removeurl');
-      new_target = "Add to";
+      new_target = "Agregar al ";
       $this.parents("tr.cart-item").remove();
     }
     console.log(url);
@@ -40,7 +40,7 @@ $(document).ready(function() {
         $('.cart-ahorro').html(data.ahorro);
         $('.cart-total').html(data.total);
 
-        $this.find('span').html(new_target);
+        $this.find('span.cart-action').html(new_target);
         $this.data('target', new_target);
     });
   });
