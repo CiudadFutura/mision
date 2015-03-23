@@ -2,11 +2,15 @@
 <% content_for :cart_menu do %>
   <%= render 'carts/menu' %>
 <% end %>
-<div class="navbar navs-fixed">
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_producto_path,
-            :class => 'btn btn-primary' if can? :manage, Producto %>
-</div>
+
+<% if can? [:manage], Producto %>
+    <div class="navbar navs-fixed">
+        <%= link_to t('.new', :default => t("helpers.links.new")),
+                    new_producto_path,
+                    :class => 'btn btn-primary' if can? :manage, Producto %>
+    </div>
+<% end %>
+
 <div id="productos" class="row list-group">
 <% @productos.each do |producto|%>
     <div class="item col-xs-4 col-lg-4">
