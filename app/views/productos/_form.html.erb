@@ -59,17 +59,15 @@
   </div>
 
   <div class="control-group">
-    
-    
+
     <% Categoria.all.each do |c| %>
     <div class="controls">
       <label><%= c.nombre -%>
         <%= check_box('categorias', c.id) %>
       </label></div>
     <% end %>
-      
-  </div>
 
+  </div>
 
   <%= f.submit nil, :class => 'btn btn-primary' %>
   <%= link_to t('.cancel', :default => t("helpers.links.cancel")),

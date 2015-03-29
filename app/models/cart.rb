@@ -1,3 +1,6 @@
+include ActionView::Helpers::NumberHelper
+include ActionView::Helpers::TextHelper
+
 class Cart
   attr_reader :items
 
@@ -67,9 +70,17 @@ class Cart
     total.to_f
   end
 
+  def formated_total
+    ActionView::Helpers::NumberHelper.number_to_currency(total)
+  end
+
+  def formated_cantidad
+    pluralize(cantidad, ' producto', ' productos')
+  end
+
   def to_json
-    { cantidad: cantidad,
+    { cantidad: formated_cantidad,
       ahorro: ahorro,
-      total: total }.to_json
+      total: formated_total }.to_json
   end
 end

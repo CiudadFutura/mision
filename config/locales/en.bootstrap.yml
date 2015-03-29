@@ -4,20 +4,20 @@
 en:
   breadcrumbs:
     application:
-      root: "Index"
+      root: "Inicio"
     pages:
-      pages: "Pages"
+      pages: "Páginas"
   helpers:
-    actions: "Actions"
+    actions: "Actiones"
     links:
-      back: "Back"
-      cancel: "Cancel"
-      confirm: "Are you sure?"
-      destroy: "Delete"
-      new: "New"
-      edit: "Edit"
+      back: "Volver"
+      cancel: "Cancelar"
+      confirm: "Está seguro?"
+      destroy: "Borrar"
+      new: "Nuevo"
+      edit: "Editar"
     titles:
-      edit: "Edit %{model}"
-      save: "Save %{model}"
-      new: "New %{model}"
-      delete: "Delete %{model}"
+      edit: "Editar %{model}"
+      save: "Guardar %{model}"
+      new: "Nuevo %{model}"
+      delete: "Borrar %{model}"

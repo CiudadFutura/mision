@@ -16,8 +16,8 @@
   <dd><%= @producto.cantidad_permitida %></dd>
 </dl>
 <%=link_to "", class: "btn btn-default", data: {
-    target: @cart_action, 
-    addUrl: add_to_cart_path(@producto), 
+    target: @cart_action,
+    addUrl: add_to_cart_path(@producto),
     removeUrl: remove_from_cart_path(@producto)} do %>
     <span><%=@cart_action%></span> Cart
 <%end%>

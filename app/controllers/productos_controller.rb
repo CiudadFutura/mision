@@ -31,10 +31,8 @@ class ProductosController < ApplicationController
   # POST /productos.json
   def create
     @producto = Producto.new(producto_params)
-
+    @producto.populate!(params)
     respond_to do |format|
-      @producto.imagen = params[:imagen]
-      @producto.categorias = Categoria.find(params[:categorias].select {|k,v| v == "1"}.keys)
       if @producto.save
         format.html { redirect_to @producto, notice: 'Producto was successfully created.' }
         format.json { render :show, status: :created, location: @producto }

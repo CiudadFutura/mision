@@ -37,6 +37,7 @@ group :development do
   gem 'spring'
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem "rails_best_practices"
 end
 
 # Use ActiveModel has_secure_password

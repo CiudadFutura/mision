@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe "Categoria", :type => :request do
-  describe "GET /categoria" do
+RSpec.describe "Categorias", :type => :request do
+  describe "GET /categorias" do
     it "works! (now write some real specs)" do
-      get categoria_path
+      get categorias_path
       expect(response.status).to be(200)
     end
   end
