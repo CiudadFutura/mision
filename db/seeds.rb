@@ -51,6 +51,17 @@ usuarios.each do |u|
   user.save!(validate: false)
 end
 
+compras = [
+    { nombre: 'Abril', descripcion: '!QAZzaq1', fecha_inicio_compras: DateTime.new(2015,04,01), fecha_fin_compras: DateTime.new(2015,04,01), fecha_fin_pagos: DateTime.new(2015,04,01), fecha_entrega_compras:DateTime.new(2015,04,01) },
+    { nombre: 'Mayo', descripcion: '!QAZzaq1', fecha_inicio_compras: DateTime.new(2015,05,01), fecha_fin_compras: DateTime.new(2015,05,01), fecha_fin_pagos: DateTime.new(2015,05,01), fecha_entrega_compras: DateTime.new(2015,05,01) },
+    { nombre: 'Junio', descripcion: '!QAZzaq1', fecha_inicio_compras: DateTime.new(2015,06,01), fecha_fin_compras: DateTime.new(2015,06,01), fecha_fin_pagos: DateTime.new(2015,06,01), fecha_entrega_compras:DateTime.new(2015,06,01) }
+]
+
+compras.each do |c|
+  compra = Compras.new(c)
+  compra.save!(validate: false)
+end
+
 circulo = Circulo.create!(coordinador_id: Usuario.find_by_nombre('coordinador').id)
 usuario = Usuario.find_by_nombre('usuario')
 usuario.circulo = circulo
