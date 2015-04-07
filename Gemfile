@@ -59,5 +59,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'pry-stack_explorer'
   gem 'pry-byebug'
+  gem 'simplecov'
   gem 'rspec-rails', '~> 3.0.0'
+  gem 'shoulda-matchers'
 end

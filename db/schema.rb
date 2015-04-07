@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141215142735) do
+ActiveRecord::Schema.define(version: 20150322010110) do
 
   create_table "categorias", force: true do |t|
     t.string   "nombre"
@@ -48,6 +48,17 @@ ActiveRecord::Schema.define(version: 20141215142735) do
     t.datetime "updated_at"
     t.string   "imagen"
     t.float    "precio_super"
+    t.integer  "supplier_id"
+  end
+
+  add_index "productos", ["supplier_id"], name: "index_productos_on_supplier_id"
+
+  create_table "suppliers", force: true do |t|
+    t.string   "name"
+    t.string   "address"
+    t.integer  "nature",     default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "usuarios", force: true do |t|
