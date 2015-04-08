@@ -58,7 +58,7 @@ compras = [
 ]
 
 compras.each do |c|
-  compra = Compras.new(c)
+  compra = Compra.new(c)
   compra.save!(validate: false)
 end
 

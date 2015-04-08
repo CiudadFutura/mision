@@ -24,8 +24,8 @@ class ComprasController < ApplicationController
   # POST /compras
   # POST /compras.json
   def create
+    
     @compra = Compra.new(compra_params)
-
     respond_to do |format|
       if @compra.save
         format.html { redirect_to @compra, notice: 'Compra was successfully created.' }
@@ -40,6 +40,7 @@ class ComprasController < ApplicationController
   # PATCH/PUT /compras/1
   # PATCH/PUT /compras/1.json
   def update
+
     respond_to do |format|
       if @compra.update(compra_params)
         format.html { redirect_to @compra, notice: 'Compra was successfully updated.' }
@@ -69,6 +70,36 @@ class ComprasController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def compra_params
-      params[:compra]
+      filtered_params = params.require(:compra).permit(:nombre, :descripcion, 
+        :fecha_inicio_compras => [:year, :month, :day, :hour, :minute],
+        :fecha_fin_compras => [:year, :month, :day, :hour, :minute],
+        :fecha_fin_pagos => [:year, :month, :day, :hour, :minute],
+        :fecha_entrega_compras => [:year, :month, :day, :hour, :minute])
+      { nombre: filtered_params[:nombre],
+        descripcion: filtered_params[:descripcion],
+        fecha_inicio_compras: Time.utc(
+          filtered_params[:fecha_inicio_compras][:year],
+          filtered_params[:fecha_inicio_compras][:month],
+          filtered_params[:fecha_inicio_compras][:day],
+          filtered_params[:fecha_inicio_compras][:hour],
+          filtered_params[:fecha_inicio_compras][:min]),
+        fecha_fin_compras: Time.utc(
+          filtered_params[:fecha_fin_compras][:year],
+          filtered_params[:fecha_fin_compras][:month],
+          filtered_params[:fecha_fin_compras][:day],
+          filtered_params[:fecha_fin_compras][:hour],
+          filtered_params[:fecha_fin_compras][:min]),
+        fecha_fin_pagos: Time.utc(
+          filtered_params[:fecha_fin_pagos][:year],
+          filtered_params[:fecha_fin_pagos][:month],
+          filtered_params[:fecha_fin_pagos][:day],
+          filtered_params[:fecha_fin_pagos][:hour],
+          filtered_params[:fecha_fin_pagos][:min]),
+        fecha_entrega_compras: Time.utc(
+          filtered_params[:fecha_entrega_compras][:year],
+          filtered_params[:fecha_entrega_compras][:month],
+          filtered_params[:fecha_entrega_compras][:day],
+          filtered_params[:fecha_entrega_compras][:hour],
+          filtered_params[:fecha_entrega_compras][:min])}
     end
 end

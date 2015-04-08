@@ -4,7 +4,7 @@
   <div class="navbar navs-fixed">
     <%= link_to t('.new', :default => t("helpers.links.new")),
                 new_compra_path,
-                :class => 'btn btn-primary' if can? :manage, Compra %>
+                :class => 'btn btn-primary' if can? [:manage], Compra %>
   </div>
   <table class="table table-striped">
     <thead>
