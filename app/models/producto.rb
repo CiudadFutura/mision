@@ -1,5 +1,6 @@
 class Producto < ActiveRecord::Base
   has_and_belongs_to_many :categorias
+  validate :codigo, uniqueness: true
 
   mount_uploader :imagen, ImagenUploader
 

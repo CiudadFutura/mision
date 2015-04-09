@@ -37,6 +37,13 @@
     <%= error_span(@producto[:nombre]) %>
   </div>
   <div class="control-group">
+    <%= f.label :codigo, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :codigo, :class => 'form-control' %>
+    </div>
+    <%= error_span(@producto[:codigo]) %>
+  </div>
+  <div class="control-group">
     <%= f.label :descripcion, :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :descripcion, :class => 'form-control' %>

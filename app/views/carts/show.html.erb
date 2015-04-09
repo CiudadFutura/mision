@@ -27,7 +27,7 @@
         <tr class="cart-item">
           <td><%= item.cantidad.to_i %> x</td>
           <td><%= item.producto.nombre %></td>
-          <td>&nbsp;<%# = item.producto.codigo %></td>
+          <td><%= item.producto.codigo %></td>
           <td><%= number_to_currency(item.producto.precio) %></td>
           <td><%= number_to_currency(item.total) %></td>
           <td><%= number_to_percentage(item.ahorro) %></td>
