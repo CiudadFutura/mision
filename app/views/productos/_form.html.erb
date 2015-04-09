@@ -60,10 +60,10 @@
 
   <div class="control-group">
 
-    <% Categoria.all.each do |c| %>
+    <% Categoria.all.each do |categoria| %>
     <div class="controls">
-      <label><%= c.nombre -%>
-        <%= check_box('categorias', c.id) %>
+      <label><%= categoria.nombre -%>
+      <%= check_box_tag "producto[categoria_ids][]", categoria.id, @producto.categorias.include?(categoria) %>
       </label></div>
     <% end %>
 
