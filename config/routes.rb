@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :suppliers
+
   resources :circulos
 
   devise_for :usuarios
