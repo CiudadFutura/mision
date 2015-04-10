@@ -9,4 +9,8 @@ class Usuario < ActiveRecord::Base
   ADMIN = 'Admin'
   COORDINADOR = 'Coordinador'
   USUARIO = 'Usuario'
+
+  def admin?
+    type == ADMIN
+  end
 end

@@ -4,6 +4,8 @@ class Producto < ActiveRecord::Base
 
   mount_uploader :imagen, ImagenUploader
 
+  scope :disponibles, -> { where(oculto: false) }
+
   def cart_action(session)
     if session[:product_ids ].include?(self.id)
       'Remove from'

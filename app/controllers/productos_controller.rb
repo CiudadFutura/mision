@@ -9,6 +9,7 @@ class ProductosController < ApplicationController
     else
       @productos = Producto.all
     end
+    @productos = @productos.disponibles if !current_usuario.admin?
   end
 
   # GET /productos/1
@@ -76,7 +77,8 @@ class ProductosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def producto_params
-      params.require(:producto).permit(:precio, :nombre, :codigo, :descripcion, :precio_super,
+      params.require(:producto).permit(:precio, :nombre, :codigo, :descripcion, 
+                                       :precio_super, :oculto,
                                        :cantidad_permitida, :imagen, categoria_ids: [] )
     end
 end
