@@ -8,6 +8,12 @@ class Producto < ActiveRecord::Base
 
   scope :disponibles, -> { where(oculto: false) }
 
+  after_initialize :default_cantidad_permitida
+
+  def default_cantidad_permitida
+    self.cantidad_permitida ||= 10
+  end
+
   def cart_action(session)
     if session[:product_ids ].include?(self.id)
       'Remove from'

@@ -27,10 +27,9 @@
         </div>
         <div class="col-lg-12 text-center">
           <select class="cantidad">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
+            <% for i in 1..producto.cantidad_permitida %>
+              <option value="<%= i %>"><%= i %></option>
+            <% end %>
           </select>
           <%= button_tag(type: 'button', class: 'btn btn btn-default', data: {
                                                target: 'Add to',
