@@ -2,7 +2,7 @@
   <div class="container">
   <ul class="navbar-nav">
       <li class="col-3">Datos de tu compra</li>
-      <li class="col-3">Ahorro: <%= number_to_percentage(@carrito.ahorro) %></li>
+      <li class="col-3">Ahorro: <span class="cart-ahorro"><%= number_to_percentage(@carrito.ahorro) %></span></li>
       <li class="col-3">
         <span class="cart-total"><%= number_to_currency(@carrito.total) %></span><br>
         <span class="cart-cantidad"><%= pluralize(@carrito.cantidad, ' producto', ' productos') %></span>

@@ -18,7 +18,7 @@ class Producto < ActiveRecord::Base
 
   def ahorro
     return 0 if precio_super.nil? || precio_super == 0
-    (precio_super - precio) / precio
+    100 * (precio_super - precio) / precio_super
   end
 
   def populate!(params)

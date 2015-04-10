@@ -37,7 +37,7 @@ $(document).ready(function() {
       type: 'put'}).done(function(data) {
         
         $('.cart-cantidad').html(data.cantidad);
-        $('.cart-ahorro').html(data.ahorro);
+        $('.cart-ahorro').html(data.ahorro.toFixed(2)+"%");
         $('.cart-total').html(data.total);
 
         $this.find('span.cart-action').html(new_target);

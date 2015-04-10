@@ -9,7 +9,7 @@ class Item
 
   def ahorro
     return 0 if @producto.precio_super.nil? || @producto.precio_super == 0
-    @cantidad * ((@producto.precio_super - @producto.precio) / @producto.precio)
+    @cantidad * 100 * ((@producto.precio_super - @producto.precio) / @producto.precio_super)
   end
 
   def total
