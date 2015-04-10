@@ -12,7 +12,6 @@ class Cart
 
   def load!
     @items = {}
-    Rails.logger.debug ">>>>>>>>>>>> #{@session[:items]}"
     @session[:items].each do |producto_id, cantidad|
       Rails.logger.debug "#{producto_id}, #{cantidad}"
       @items[producto_id] = Item.new(
@@ -20,9 +19,6 @@ class Cart
                   cantidad
                 )
     end
-    Rails.logger.debug ">>>>>>>>>>>>"
-    Rails.logger.debug ">>>>>>>>>>>> #{@items}"
-    Rails.logger.debug ">>>>>>>>>>>>"
   end
 
   def empty!
@@ -35,16 +31,12 @@ class Cart
   end
 
   def add(producto_id, cantidad)
-    Rails.logger.debug ">>>>>>>>>>>> #{cantidad}!!!"
     @session[:items][producto_id] = cantidad
     load!
   end
 
   def remove(producto_id)
-    Rails.logger.debug ">>>>>>>>>>>> producto_id=#{producto_id}"
     @session[:items].delete(producto_id)
-    Rails.logger.debug ">>>>>>>>>>>> @session[:items]=#{@session[:items]}"
-
     load!
   end
 
