@@ -9,7 +9,7 @@ class ProductosController < ApplicationController
     else
       @productos = Producto.all
     end
-    @productos = @productos.disponibles if !current_usuario.admin?
+    @productos = @productos.disponibles if current_usuario.nil? || !current_usuario.admin?
   end
 
   # GET /productos/1
