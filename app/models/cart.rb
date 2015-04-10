@@ -41,7 +41,10 @@ class Cart
   end
 
   def remove(producto_id)
+    Rails.logger.debug ">>>>>>>>>>>> producto_id=#{producto_id}"
     @session[:items].delete(producto_id)
+    Rails.logger.debug ">>>>>>>>>>>> @session[:items]=#{@session[:items]}"
+
     load!
   end
 

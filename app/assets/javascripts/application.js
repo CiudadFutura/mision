@@ -18,7 +18,7 @@
 
 $(document).ready(function() {
 
-  $('button[data-target]').click(function (event) {    
+  $('button[data-target]').click(function (event) {
     event.preventDefault();
     $this = $(this);
     if ($this.data('target') === 'Add to') {
@@ -29,8 +29,8 @@ $(document).ready(function() {
       new_target = "Agregar al ";
       $this.parents("tr.cart-item").remove();
     }
-    console.log(url);
-    console.log($this.prev('select.cantidad').val());
+    //console.log(url);
+    //console.log($this.prev('select.cantidad').val());
     $.ajax({
       url: url,
       data: { cantidad: $this.prev('select.cantidad').val() },
