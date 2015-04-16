@@ -39,6 +39,8 @@
             <% if usuario_signed_in? %>
               <li><p class="navbar-text"><%= current_usuario.email %></p></li>
               <li class="divider"></li>
+              <li><%= link_to('Mis Datos', edit_usuario_path(current_usuario))%></li>
+              <li class="divider"></li>
               <li><%= link_to('Cerrar Sesion',
                     destroy_usuario_session_path,
                     method: 'delete') %></li>
