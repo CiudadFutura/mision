@@ -4,11 +4,11 @@
 en:
   breadcrumbs:
     application:
-      root: "Index"
+      root: "Inicio"
     pages:
       pages: "Paginas"
   helpers:
-    actions: "Actions"
+    actions: "Actiones"
     links:
       back: "Atras"
       cancel: "Cancelar"

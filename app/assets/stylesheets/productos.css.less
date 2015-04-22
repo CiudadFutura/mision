@@ -10,6 +10,9 @@
 @font-others: 'Kreon', 'serif';
 @marron: #b9a981;
 @lila: #9B6185;
+@celeste:#428bca;
+@bordeCeleste: #357ebd;
+@blanco: #fff;
 
 .icon-cart{
   margin-right: 5px;
@@ -31,13 +34,18 @@
           border: none;
         }
       }
+
+      .btn-group .admin{
+        background-color: @celeste;
+        border-color: @bordeCeleste;
+      }
       .btn{
-        background: @rojo !important;
-        color: #FFFFFF;
+        background: @rojo;
+        color: @blanco;
       }
       .red{
         background: @rojo;
-        border-bottom: 1px solid #FFFFFF;
+        border-bottom: 1px solid @blanco;
         font-family: "Fjalla One";
         box-shadow: 0px 4px 8px 0 #444 inset;
         height: 28px;
@@ -49,7 +57,7 @@
       .brown{
         font-family: "Fjalla One";
         background: @marron;
-        border-bottom: 1px solid #FFFFFF;
+        border-bottom: 1px solid @blanco;
         height: 28px;
         max-height: 32px;
         margin-bottom: 0px;
