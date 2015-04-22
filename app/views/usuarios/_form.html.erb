@@ -53,7 +53,7 @@
   </div>
   <div class="field">
     <%= f.label :type %><br>
-    <%= f.text_field :type %>
+    <%= select(:usuario, :type, Usuario.types.collect {|p| [ p, p ] }) %>
   </div>
   <div class="actions">
     <%= f.submit %>

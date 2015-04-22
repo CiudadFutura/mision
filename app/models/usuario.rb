@@ -13,4 +13,8 @@ class Usuario < ActiveRecord::Base
   def admin?
     type == ADMIN
   end
+
+  def self.types
+    [ADMIN, COORDINADOR, USUARIO]
+  end
 end
