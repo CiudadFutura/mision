@@ -31,7 +31,7 @@
           <td><%= usuario.cel1 %></td>
           <td><%= usuario.type %></td>
           <td><%= link_to 'Ver', usuario, class: 'btn btn-info btn-mini' %></td>
-          <td><%= link_to 'Editar', edit_usuario_path(usuario), class: 'btn btn-warning btn-mini' %></td>
+          <td><%= link_to 'Modificar', edit_usuario_path(usuario), class: 'btn btn-warning btn-mini' %></td>
           <td><%= link_to 'Eliminar', usuario, method: :delete, data: { confirm: 'Esta seguro?' }, class: 'btn btn-danger btn-mini' %></td>
         </tr>
       <% end %>
