@@ -21,3 +21,6 @@ en:
       save: "Guardar %{model}"
       new: "Crear %{model}"
       delete: "Eliminar %{model}"
+    submit:
+      create: "Crear un %{model}"
+      update: "Guardar cambios al %{model} creado"
