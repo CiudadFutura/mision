@@ -1,0 +1,2 @@
+module ComprasHelper
+end

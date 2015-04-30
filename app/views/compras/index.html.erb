@@ -1,0 +1,36 @@
+<h1>Listado de Círculos de  compras</h1>
+<br>
+<div class="compras">
+  <div class="navbar navs-fixed">
+    <%= link_to t('.new', :default => t("helpers.links.new")),
+                new_compra_path,
+                :class => 'btn btn-primary' if can? [:manage], Compra %>
+  </div>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Fecha inicio pedidos</th>
+      <th>Fecha fin pedidos</th>
+      <th>Fecha fin pagos</th>
+      <th>Fecha entrega</th>
+      <th colspan="2"></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @compras.each do |compra| %>
+        <tr>
+          <td><%= compra.nombre %></td>
+          <td><%= compra.fecha_inicio_compras %></td>
+          <td><%= compra.fecha_fin_compras %></td>
+          <td><%= compra.fecha_fin_pagos %></td>
+          <td><%= compra.fecha_entrega_compras %></td>
+          <td><%= link_to 'Edit', edit_compra_path(compra), class: "btn btn-default btn-xs" %></td>
+          <td><%= link_to 'Destroy', compra, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-xs" %></td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+</div>
