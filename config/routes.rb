@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   devise_for :usuarios
   resources :usuarios
   resources :admins, controller: :usuarios
+  resources :coordinador, controller: :usuarios
+
 
   get 'carts/show'
 
