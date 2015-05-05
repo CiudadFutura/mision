@@ -1,0 +1,41 @@
+<%= form_for(@compra) do |f| %>
+  <% if @compra.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@compra.errors.count, "error") %> prohibited this compra from being saved:</h2>
+
+      <ul>
+      <% @compra.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+    <div class="field">
+      <%= f.label :nombre %><br>
+      <%= f.text_field :nombre %>
+    </div>
+    <div class="field">
+      <%= f.label :descripcion %><br>
+      <%= f.text_area :descripcion %>
+    </div>
+    <div class="field">
+      <%= f.label :fecha_inicio_compras %><br>
+      <%= select_datetime @compra.fecha_inicio_compras, prefix: 'compra[fecha_inicio_compras]' %>
+    </div>
+    <div class="field">
+      <%= f.label :fecha_fin_compras %><br>
+      <%= select_datetime Time.current, prefix: 'compra[fecha_fin_compras]' %>
+    </div>
+    <div class="field">
+      <%= f.label :fecha_fin_pagos %><br>
+      <%= select_datetime Time.current, prefix: 'compra[fecha_fin_pagos]' %>
+    </div>
+    <div class="field">
+      <%= f.label :fecha_entrega_compras %><br>
+      <%= select_datetime Time.current, prefix: 'compra[fecha_entrega_compras]' %>
+    </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -31,6 +31,15 @@ ActiveRecord::Schema.define(version: 20150409234343) do
     t.datetime "updated_at"
   end
 
+  create_table "compras", force: true do |t|
+    t.string   "nombre"
+    t.text     "descripcion"
+    t.datetime "fecha_inicio_compras"
+    t.datetime "fecha_fin_compras"
+    t.datetime "fecha_fin_pagos"
+    t.datetime "fecha_entrega_compras"
+  end
+
   create_table "pedidos", force: true do |t|
     t.text     "items"
     t.integer  "usuario_id"
