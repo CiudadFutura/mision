@@ -5,6 +5,7 @@ class CartsController < ApplicationController
   # before_action :set_carrito, only: [:show, :add, :remove]
 
   def show
+    @ciclo_actual = Compra::ciclo_actual
   end
 
   def add

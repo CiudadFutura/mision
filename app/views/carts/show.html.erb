@@ -4,10 +4,17 @@
 
 <div id="mycart" class="row cart">
 
-  <h1 class="titulo">Revisa tu pedido y confirmalo.</h1>
+  <% if @ciclo_actual %>
+    <h1 class="titulo">Revisa tu pedido y confirmalo.</h1>
 
-  <p class="explicacion">A continuación, un listado con tu pedido. Revisalo, y si está todo bien,<br />
-  confirmalo haciendo click en el boton "Finalizar compra".</p>
+    <p class="explicacion">
+      <b>Ciclo Actual: Desde <%= @ciclo_actual.fecha_inicio_compras %> hasta <%= @ciclo_actual.fecha_fin_compras %></b><br/>
+      <b>Ultimo dia para pago:</b> <%= @ciclo_actual.fecha_fin_pagos %><br/><br/>
+      A continuación, un listado con tu pedido. Revisalo, y si está todo bien,<br />
+      confirmalo haciendo click en el boton "Finalizar compra".</p>
+  <% else %>
+    <p class="explicacion"><span class="label label-warning">No existe ciclo de compra activo.</span></p>
+  <% end %>
 
   <% unless @carrito.empty? %>
     <table class="table">
@@ -52,9 +59,11 @@
         </tr>
       </tbody>
     </table>
-    <div class="row">
-      <%= link_to('Finalizar Compra', create_pedido_cart_path, method: :put, class: 'btn btn-default checkout') %>
-    </div>
+    <% if @ciclo_actual %>
+      <div class="row">
+        <%= link_to('Finalizar Compra', create_pedido_cart_path, method: :put, class: 'btn btn-default checkout') %>
+      </div>
+    <% end %>
   <% else %>
     <p>Carrito vacio.</p>
   <% end %>

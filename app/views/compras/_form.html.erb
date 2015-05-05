@@ -24,15 +24,15 @@
     </div>
     <div class="field">
       <%= f.label :fecha_fin_compras %><br>
-      <%= select_datetime Time.current, prefix: 'compra[fecha_fin_compras]' %>
+      <%= select_datetime @compra.fecha_fin_compras, prefix: 'compra[fecha_fin_compras]' %>
     </div>
     <div class="field">
       <%= f.label :fecha_fin_pagos %><br>
-      <%= select_datetime Time.current, prefix: 'compra[fecha_fin_pagos]' %>
+      <%= select_datetime @compra.fecha_fin_pagos, prefix: 'compra[fecha_fin_pagos]' %>
     </div>
     <div class="field">
       <%= f.label :fecha_entrega_compras %><br>
-      <%= select_datetime Time.current, prefix: 'compra[fecha_entrega_compras]' %>
+      <%= select_datetime @compra.fecha_entrega_compras, prefix: 'compra[fecha_entrega_compras]' %>
     </div>
 
   <div class="actions">
