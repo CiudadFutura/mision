@@ -1,19 +1,27 @@
-<p id="notice"><%= notice %></p>
+<p>
+  <strong>Nro de Circulo:</strong>
+  <%= @circulo.id %>
+</p>
 
 <p>
-  <strong>coordinador:</strong>
-  <%= @circulo.coordinador_id %>
+  <strong>Coordinador:</strong>
+  <%= @circulo.coordinador.nombre %>
 </p>
 
 <h3>Usuarios</h3>
+<ul>
 <% @circulo.usuarios.each do |u| %>
-  <p><%= u.nombre %></p>
+  <li><%= u.nombre %></li>
 <% end %>
+</ul>
+
 
 <h3>Pedidos</h3>
+<ul>
 <% @circulo.pedidos.each do |p| %>
-  <p><%= p.usuario.nombre %></p>
+  <li><%= p.usuario.nombre %></li>
 <% end %>
+</ul>
 
-<%= link_to 'Edit', edit_circulo_path(@circulo) %> |
-<%= link_to 'Back', circulos_path %>
+<%= link_to 'Editar', edit_circulo_path(@circulo) %> |
+<%= link_to 'Atrás', circulos_path %>

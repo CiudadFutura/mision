@@ -71,6 +71,13 @@
     </div>
     <%= error_span(@producto[:cantidad_permitida]) %>
   </div>
+  <div class="control-group">
+    <%= f.label :supplier_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.select(:supplier_id, options_for_select(Supplier.all.map{|s| [s.name,s.id]}), :class => 'form-control') %>
+    </div>
+    <%= error_span(@producto[:supplier]) %>
+  </div>
 
   <div class="control-group">
 

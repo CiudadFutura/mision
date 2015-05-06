@@ -21,7 +21,7 @@
   </div>
   <div class="field">
     <%= f.label :nature %><br>
-    <%= f.text_field :nature %>
+    <%= f.select(:nature, options_for_select(Supplier.natures.map{|x,y| [x,x]})) %>
   </div>
   <div class="actions">
     <%= f.submit %>

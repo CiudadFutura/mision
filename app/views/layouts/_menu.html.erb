@@ -32,6 +32,13 @@
                       <% end %>
                   </li>
                 <% end %>
+                <% if can? [:manage], suppliers_path %>
+                  <li>
+                    <%= link_to(suppliers_path) do %>
+                      <span class="icon-key2"></span>Proveedores
+                      <% end %>
+                  </li>
+                <% end %>
               </ul>
             </li>
             <% end %>
