@@ -39,6 +39,13 @@
                       <% end %>
                   </li>
                 <% end %>
+                <% if can? [:manage], usuarios_path %>
+                  <li>
+                    <%= link_to(usuarios_path) do %>
+                      <span class="icon-key2"></span>Usuarios
+                      <% end %>
+                  </li>
+                <% end %>
               </ul>
             </li>
             <% end %>

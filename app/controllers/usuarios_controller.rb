@@ -1,10 +1,12 @@
 class UsuariosController < ApplicationController
   before_action :set_usuario, only: [:show, :edit, :update, :destroy]
+  authorize_resource
 
   # GET /usuarios
   # GET /usuarios.json
   def index
     @usuarios = Usuario.all
+    authorize! :index, @usuarios
   end
 
   # GET /usuarios/1

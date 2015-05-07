@@ -5,11 +5,14 @@ class Ability
     # Define abilities for the passed in user here. For example:
     #
     user ||= Usuario.new # guest user (not logged in)
-    if user.type == Usuario::ADMIN
+    if user.admin?
       can :manage, :all
     end
     if user.type == Usuario::COORDINADOR
       can :manage, Circulo
+    end
+    if user.type == Usuario::USUARIO
+        can [:read, :create, :update], Usuario, { :id => user.id }
     end
     # elsif user.coordinador?
     #   can :read, :all
