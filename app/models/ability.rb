@@ -10,6 +10,7 @@ class Ability
     end
     if user.type == Usuario::COORDINADOR
       can :manage, Circulo
+      can [:read, :create, :update], Usuario, { :id => user.id }
     end
     if user.type == Usuario::USUARIO
         can [:read, :create, :update], Usuario, { :id => user.id }
