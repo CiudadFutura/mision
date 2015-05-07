@@ -3,7 +3,10 @@ Rails.application.routes.draw do
 
   resources :compras
 
-  resources :circulos
+  resources :circulos do
+    post 'add_usuario', to: 'circulos#add_usuario', as: :add_usuario
+    post 'abandonar', to: 'circulos#abandonar', as: :abandonar
+  end
 
   devise_for :usuarios
   resources :usuarios

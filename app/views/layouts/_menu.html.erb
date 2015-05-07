@@ -49,13 +49,12 @@
               </ul>
             </li>
             <% end %>
-            
             <% if can? [:index], pedidos_path %>
-            <li>
-              <%= link_to(pedidos_path) do %>
-                  <span class="icon-stats"></span>Pedidos
-              <% end %>
-            </li>
+              <li>
+                <%= link_to(pedidos_path) do %>
+                    <span class="icon-stats"></span>Pedidos
+                <% end %>
+              </li>
             <% end %>
             <li>
               <%= link_to(productos_path) do %>

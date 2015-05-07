@@ -1,58 +1,89 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col-md-6">
+    <h3>Tus datos:</h3>
 
-<p>
-  <strong>Nombre:</strong>
-  <%= @usuario.nombre %>
-</p>
+    <p>
+      <strong>Nombre:</strong>
+      <%= @usuario.nombre %>
+    </p>
 
-<p>
-  <strong>Apellido:</strong>
-  <%= @usuario.apellido %>
-</p>
+    <p>
+      <strong>Apellido:</strong>
+      <%= @usuario.apellido %>
+    </p>
 
-<p>
-  <strong>Fecha de nacimiento:</strong>
-  <%= @usuario.fecha_de_nacimiento %>
-</p>
+    <p>
+      <strong>Fecha de nacimiento:</strong>
+      <%= @usuario.fecha_de_nacimiento %>
+    </p>
 
-<p>
-  <strong>Email:</strong>
-  <%= @usuario.email %>
-</p>
+    <p>
+      <strong>Email:</strong>
+      <%= @usuario.email %>
+    </p>
 
-<p>
-  <strong>Calle:</strong>
-  <%= @usuario.calle %>
-</p>
+    <p>
+      <strong>Calle:</strong>
+      <%= @usuario.calle %>
+    </p>
 
-<p>
-  <strong>Codigo postal:</strong>
-  <%= @usuario.codigo_postal %>
-</p>
+    <p>
+      <strong>Codigo postal:</strong>
+      <%= @usuario.codigo_postal %>
+    </p>
 
-<p>
-  <strong>Ciudad:</strong>
-  <%= @usuario.ciudad %>
-</p>
+    <p>
+      <strong>Ciudad:</strong>
+      <%= @usuario.ciudad %>
+    </p>
 
-<p>
-  <strong>Pais:</strong>
-  <%= @usuario.pais %>
-</p>
+    <p>
+      <strong>Pais:</strong>
+      <%= @usuario.pais %>
+    </p>
 
-<p>
-  <strong>Tel1:</strong>
-  <%= @usuario.tel1 %>
-</p>
+    <p>
+      <strong>Tel1:</strong>
+      <%= @usuario.tel1 %>
+    </p>
 
-<p>
-  <strong>Cel1:</strong>
-  <%= @usuario.cel1 %>
-</p>
+    <p>
+      <strong>Cel1:</strong>
+      <%= @usuario.cel1 %>
+    </p>
 
-<p>
-  <strong>Type:</strong>
-  <%= @usuario.type %>
-</p>
+    <p>
+      <strong>Tipo:</strong>
+      <%= @usuario.type %>
+    </p>
+  </div>
+  <div class="col-md-6">
+    <% if @usuario.circulo.nil? %>
+      <h3>No perteneces a ningun circulo.</h3>
+      <p>Comunicate con un coordinador de circulo para que te agregue. Recuerda que tu codigo de 
+      usurio es el: <b><%= @usuario.id%></b> </p>
+    <% else %>
+
+      <h3>Usuarios en tu circulo:</h3>
+      <ol>
+      <% @usuario.circulo.usuarios.each do |u| %>
+        <li><%= (u.coordinador? ? '<span><b>Coordinador:</b></span> '.html_safe : '') %><%= u.nombre %>(<%= u.id %>)</li>
+      <% end %>
+      </ol>
+
+      <%= link_to 'Abandonar circulo', circulo_abandonar_path(@usuario.circulo), method: :post, data: { confirm: 'Seguro de abandonar el circulo?' }, class: "btn btn-danger btn-xs" %>
+
+      <% if can? :manage , @usuario.circulo %>
+        <%= form_tag(circulo_add_usuario_path(@usuario.circulo), method: "post") do %>
+          Agregar usuario nro: <input type="string" value="" name="usuario_id" />
+          <button type="submit">Agregar</button>
+        <% end %>
+      <% end %>
+
+    <% end %>
+  </div>
+</div>
+
+
 
 <%= link_to 'Modificar', edit_usuario_path(@usuario), class: 'btn btn-warning' %>

@@ -1,5 +1,7 @@
 class CirculosController < ApplicationController
   before_action :set_circulo, only: [:show, :edit, :update, :destroy]
+  authorize_resource
+
 
   # GET /circulos
   # GET /circulos.json
@@ -59,6 +61,28 @@ class CirculosController < ApplicationController
       format.html { redirect_to circulos_url, notice: 'Circulo was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def add_usuario
+    circulo = Circulo.find(params[:circulo_id])
+    authorize! :add_usuario, circulo
+    usuario = Usuario.find(params[:usuario_id])
+    if usuario.circulo.nil?
+      usuario.circulo = circulo
+      usuario.save!
+      message = { notice: "El usuario a sido agregado a tu circulo" }
+    else
+      message = { alert: "Error: El usuario ya pertenece a un circulo" }
+    end
+    redirect_to usuario_path(current_usuario), message
+
+  end
+
+  def abandonar
+    current_usuario.circulo = nil
+    usuario.save!
+    message = { notice: "Haz abandonado el circulo. Recuerda ingresar en uno antes de hacer tu proximo pedido" }
+    redirect_to usuario_path(current_usuario), message
   end
 
   private

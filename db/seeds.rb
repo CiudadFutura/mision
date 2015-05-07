@@ -43,7 +43,11 @@ end
 usuarios = [
   { nombre: 'admin', password: '!QAZzaq1', email: 'admin@example.com', type: 'Admin' },
   { nombre: 'coordinador', password: '!QAZzaq1', email: 'coordinador@example.com', type: 'Coordinador' },
-  { nombre: 'usuario', password: '!QAZzaq1', email: 'usuario@example.com', type: 'Usuario' }
+  { nombre: 'usuario', password: '!QAZzaq1', email: 'usuario@example.com', type: 'Usuario' },
+  { nombre: 'nicolas', password: '!QAZzaq1', email: 'nicolas@example.com', type: 'Usuario' },
+  { nombre: 'daniel', password: '!QAZzaq1', email: 'daniel@example.com', type: 'Usuario' },
+  { nombre: 'andres', password: '!QAZzaq1', email: 'andres@example.com', type: 'Usuario' },
+  { nombre: 'diego', password: '!QAZzaq1', email: 'diego@example.com', type: 'Usuario' },
 ]
 
 usuarios.each do |u|
@@ -64,5 +68,9 @@ end
 
 circulo = Circulo.create!(coordinador_id: Usuario.find_by_nombre('coordinador').id)
 usuario = Usuario.find_by_nombre('usuario')
+usuario.circulo = circulo
+usuario.save!
+
+usuario = Usuario.find_by_nombre('coordinador')
 usuario.circulo = circulo
 usuario.save!

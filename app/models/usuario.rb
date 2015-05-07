@@ -14,6 +14,14 @@ class Usuario < ActiveRecord::Base
     type == ADMIN
   end
 
+  def coordinador?
+    type == COORDINADOR
+  end
+
+  def usuario?
+    type == USUARIO
+  end
+
   def self.types
     [ADMIN, COORDINADOR, USUARIO]
   end
