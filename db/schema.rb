@@ -40,8 +40,16 @@ ActiveRecord::Schema.define(version: 20150505224740) do
     t.datetime "fecha_entrega_compras"
   end
 
-# Could not dump table "pedidos" because of following NoMethodError
-#   undefined method `[]' for nil:NilClass
+  create_table "pedidos", force: true do |t|
+    t.text     "items"
+    t.integer  "usuario_id"
+    t.integer  "circulo_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "compra_id"
+  end
+
+  add_index "pedidos", ["compra_id"], name: "index_pedidos_on_compra_id"
 
   create_table "productos", force: true do |t|
     t.float    "precio"

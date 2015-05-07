@@ -1,5 +1,5 @@
 class AddCicloIdToPedido < ActiveRecord::Migration
   def change
-    add_column :pedidos, :ciclo_id, :reference, index: true
+    add_reference :pedidos, :compra, index: true
   end
 end

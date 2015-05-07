@@ -24,7 +24,7 @@ class CartsController < ApplicationController
     pedido.items = @carrito.items.map(&:to_json).to_s
     pedido.usuario_id = current_usuario.id
     pedido.circulo_id = current_usuario.circulo_id
-    pedido.ciclo_id = ciclo_id
+    pedido.compra_id = ciclo_id
     respond_to do |format|
       if pedido.save!
         @carrito.empty!
