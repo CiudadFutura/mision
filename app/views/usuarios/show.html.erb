@@ -73,11 +73,15 @@
 
       <%= link_to 'Abandonar circulo', circulo_abandonar_path(@usuario.circulo), method: :post, data: { confirm: 'Seguro de abandonar el circulo?' }, class: "btn btn-danger btn-xs" %>
 
-      <% if can? :manage , @usuario.circulo %>
+      <% if can?(:manage , @usuario.circulo) && !@usuario.circulo.completo? %>
         <%= form_tag(circulo_add_usuario_path(@usuario.circulo), method: "post") do %>
           Agregar usuario nro: <input type="string" value="" name="usuario_id" />
           <button type="submit">Agregar</button>
         <% end %>
+      <% end %>
+      
+      <% if @usuario.circulo.completo? %>
+        <h4>Su circulo esta completo.</h4>
       <% end %>
 
     <% end %>
