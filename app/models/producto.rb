@@ -2,7 +2,8 @@ class Producto < ActiveRecord::Base
   has_and_belongs_to_many :categorias
   belongs_to :supplier
 
-  validate :codigo, uniqueness: true
+  validates :codigo, uniqueness: true
+  validates :supplier, presence: true
 
   mount_uploader :imagen, ImagenUploader
 
