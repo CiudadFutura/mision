@@ -65,21 +65,34 @@
     <% else %>
 
       <h3>Usuarios en tu circulo:</h3>
-      <ol>
-      <% @usuario.circulo.usuarios.each do |u| %>
-        <li>
-          <%= (u.coordinador? ? '<span><b>Coordinador:</b></span> '.html_safe : '') %>
-          <%= u.nombre %>(<%= u.id %>)
-          <%= link_to 'Eliminar', circulo_remove_usuario_path(circulo_id: @usuario.circulo.id, usuario_id: u.id), method: :delete, data: { confirm: 'Esta seguro?' }, class: 'btn btn-danger btn-mini' %>
-        </li>
-      <% end %>
-      </ol>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Tipo</th>
+            <th>Nombre</th>
+            <th>Nro ident.</th>
+            <th>Pedido</th>
+            <th>Eliminar del circulo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @usuario.circulo.usuarios.each do |u| %>
+            <tr>
+              <td><%= (u.coordinador? ? '<b>Coordinador</b>'.html_safe : 'Usuario') %></td>
+              <td><%= u.nombre %></td>
+              <td><%= u.id %></td>
+              <td><%= u.pedido?(Compra::ciclo_actual) ? '<i class="fa fa-check-circle-o" title="Realizado"></i>'.html_safe : '<i class="fa fa-circle-o" title="Pendiente"></i>'.html_safe %></td>
+              <td><%= link_to 'Eliminar', circulo_remove_usuario_path(circulo_id: @usuario.circulo.id, usuario_id: u.id), method: :delete, data: { confirm: 'Esta seguro?' }, class: 'btn btn-danger btn-xs' %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
 
       <%= link_to 'Abandonar circulo', circulo_abandonar_path(@usuario.circulo), method: :post, data: { confirm: 'Seguro de abandonar el circulo?' }, class: "btn btn-danger btn-xs" %>
 
       <% if can?(:manage , @usuario.circulo) && !@usuario.circulo.completo? %>
         <%= form_tag(circulo_add_usuario_path(@usuario.circulo), method: "post") do %>
-          Agregar usuario nro: <input type="string" value="" name="usuario_id" />
+          Agregar usuario nro: <input type="text" value="" name="usuario_id" />
           <button type="submit">Agregar</button>
         <% end %>
       <% end %>

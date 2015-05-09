@@ -10,6 +10,10 @@ class Usuario < ActiveRecord::Base
   COORDINADOR = 'Coordinador'
   USUARIO = 'Usuario'
 
+  def self.types
+    [ADMIN, COORDINADOR, USUARIO]
+  end
+
   def admin?
     type == ADMIN
   end
@@ -22,7 +26,9 @@ class Usuario < ActiveRecord::Base
     type == USUARIO
   end
 
-  def self.types
-    [ADMIN, COORDINADOR, USUARIO]
+  def pedido?(ciclo_de_compra)
+    # raise "andres" if self.nombre == 'andres'
+    ciclo_de_compra && self.pedidos.try(:last).try(:ciclo) == ciclo_de_compra
   end
+
 end
