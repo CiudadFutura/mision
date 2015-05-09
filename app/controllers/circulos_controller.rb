@@ -64,20 +64,32 @@ class CirculosController < ApplicationController
   end
 
   def add_usuario
-    circulo = Circulo.find(params[:circulo_id])
-    authorize! :add_usuario, circulo
-    usuario = Usuario.find(params[:usuario_id])
-    if usuario.circulo.nil? && !circulo.completo?
-      usuario.circulo = circulo
-      usuario.save!
-      message = { notice: "El usuario a sido agregado a tu circulo" }
-    elsif !usuario.circulo.nil?
-      message = { alert: "Error: El usuario ya pertenece a un circulo" }
-    elsif circulo.completo?
-      message = { alert: "Error: El circulo esta completo" }
+    unless(params[:usuario_id].empty?)
+      circulo = Circulo.find(params[:circulo_id])
+      authorize! :add_usuario, circulo
+      usuario = Usuario.find(params[:usuario_id])
+      if usuario.circulo.nil? && !circulo.completo?
+        usuario.circulo = circulo
+        usuario.save!
+        message = { notice: "El usuario a sido agregado a tu circulo" }
+      elsif !usuario.circulo.nil?
+        message = { alert: "Error: El usuario ya pertenece a un circulo" }
+      elsif circulo.completo?
+        message = { alert: "Error: El circulo esta completo" }
+      end
+    else
+        message = { alert: "Error: Debe ingresar el numero de usuario." }
     end
     redirect_to usuario_path(current_usuario), message
+  end
 
+  def remove_usuario
+    circulo = Circulo.find(params[:circulo_id])
+    authorize! :remove_usuario, circulo
+    usuario = Usuario.find(params[:usuario_id])
+    usuario.circulo = nil
+    usuario.save!
+    redirect_to usuario_path(current_usuario), notice: "El usuario a sido agregado a tu circulo"
   end
 
   def abandonar

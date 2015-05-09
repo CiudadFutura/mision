@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   resources :circulos do
     post 'add_usuario', to: 'circulos#add_usuario', as: :add_usuario
+    delete 'remove_usuario/:usuario_id', to: 'circulos#remove_usuario', as: :remove_usuario
     post 'abandonar', to: 'circulos#abandonar', as: :abandonar
   end
 

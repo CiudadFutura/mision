@@ -9,7 +9,7 @@ class Ability
     if user.admin?
       can :manage, :all
     elsif user.coordinador?
-      can [:manage, :add_usuario], Circulo
+      can [:manage, :add_usuario, :remove_usuario], Circulo
       can [:read, :create, :update], Usuario
     elsif user.usuario?
       can [:read, :create, :update], Usuario, { :id => user.id }
