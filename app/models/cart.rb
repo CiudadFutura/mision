@@ -13,7 +13,7 @@ class Cart
   def load!
     @items = {}
     @session[:items].each do |producto_id, cantidad|
-      Rails.logger.debug "#{producto_id}, #{cantidad}"
+      # Rails.logger.debug "#{producto_id}, #{cantidad}"
       @items[producto_id] = Item.new(
                   Producto.find_by_id(producto_id),
                   cantidad
@@ -38,6 +38,11 @@ class Cart
   def remove(producto_id)
     @session[:items].delete(producto_id)
     load!
+  end
+
+  def producto?(producto_id)
+    puts @items
+    @items.key?(producto_id.to_s)
   end
 
   def cantidad

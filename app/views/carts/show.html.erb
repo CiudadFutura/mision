@@ -4,7 +4,7 @@
 
 <div id="mycart" class="row cart">
 
-  <% if @ciclo_actual && current_usuario.circulo %>
+  <% if @ciclo_actual && current_usuario.circulo && !current_usuario.pedido?(Compra::ciclo_actual) %>
     <h1 class="titulo">Revisa tu pedido y confirmalo.</h1>
 
     <p class="explicacion">
@@ -16,6 +16,8 @@
     <p class="explicacion"><span class="label label-warning">No existe ciclo de compra activo.</span></p>
   <% elsif !current_usuario.circulo %>
     <p class="explicacion"><span class="label label-warning">No perteneces a ningun circulo. Comunicate con un coordinador. Recuerda que tu numero de usuario es <b><%= current_usuario.id %></b></span></p>
+  <% elsif current_usuario.pedido?(Compra::ciclo_actual) %>
+    <p class="explicacion"><span class="label label-warning">Discula. Ya haz realizado tu pedido. Por el momento la misión solo admite un pedido por usuario por ciclo. %></b></span></p>
   <% end %>
 
   <% unless @carrito.empty? %>
@@ -42,8 +44,8 @@
           <td><%= number_to_percentage(item.ahorro) %></td>
           <td>
             <%= button_tag(type: 'button', class: 'btn btn btn-danger btn-xs', data: {
-                                               target: 'Remove from',
-                                               removeUrl: remove_from_cart_path(item.producto)
+                                               action: 'remove',
+                                               productId: item.producto.id
                                        }) do %>
               <i class="">Borrar</i>
             <% end %>
@@ -61,7 +63,7 @@
         </tr>
       </tbody>
     </table>
-    <% if @ciclo_actual %>
+    <% if @ciclo_actual && current_usuario.circulo && !current_usuario.pedido?(Compra::ciclo_actual) %>
       <div class="row">
         <%= link_to('Finalizar Compra', create_pedido_cart_path, method: :put, class: 'btn btn-default checkout') %>
       </div>

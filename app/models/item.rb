@@ -17,6 +17,8 @@ class Item
   end
 
   def to_json
-    { producto_id: @producto.id, cantidad: @cantidad }
+    { producto_id: @producto.id, 
+      cantidad: @cantidad, 
+      removeUrl: remove_from_cart_path(@producto.id) }
   end
 end

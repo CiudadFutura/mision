@@ -13,35 +13,43 @@
 //= require jquery
 //= require jquery_ujs
 //= require twitter/bootstrap
-// require turbolinks
 //= require_tree .
 
-$(document).ready(function() {
+$(document).ready(function () {
 
-  $('button[data-target]').click(function (event) {
+  $('button[data-action]').click(function (event) {
     event.preventDefault();
-    $this = $(this);
-    if ($this.data('target') === 'Add to') {
-      url = $this.data('addurl');
-      new_target = "Eliminar del ";
-    } else {
-      url = $this.data('removeurl');
-      new_target = "Agregar al ";
-      $this.parents("tr.cart-item").remove();
+
+    var that = $(this);
+
+    var new_title, new_action;
+    var action = that.data('action');
+    var productId = that.data('productid');
+    var url = 'cart/' + action + '/' + productId;
+
+    if (action === 'add') {
+      //Add a new item to cart
+      new_action = 'remove';
+      new_title = "Eliminar del ";
+    } else if (action === 'remove') {
+      //Remove item from cart
+      new_action = 'add';
+      new_title = "Agregar al ";
+      that.parents("tr.cart-item").remove();
     }
-    //console.log(url);
-    //console.log($this.prev('select.cantidad').val());
+
     $.ajax({
       url: url,
-      data: { cantidad: $this.prev('select.cantidad').val() },
-      type: 'put'}).done(function(data) {
-        
-        $('.cart-cantidad').html(data.cantidad);
-        $('.cart-ahorro').html(data.ahorro.toFixed(2)+"%");
-        $('.cart-total').html(data.total);
+      data: { cantidad: that.prev('select.cantidad').val() },
+      type: 'put'
+    }).done(function (data) {
+      //Update menu
+      $('.cart-cantidad').html(data.cantidad);
+      $('.cart-ahorro').html(data.ahorro.toFixed(2) + "%");
+      $('.cart-total').html(data.total);
 
-        $this.find('span.cart-action').html(new_target);
-        $this.data('target', new_target);
+      that.find('span.cart-action').html(new_title);
+      that.data('action', new_action);
     });
   });
 

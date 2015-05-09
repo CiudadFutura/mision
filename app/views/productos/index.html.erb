@@ -36,11 +36,24 @@
               <option value="<%= i %>"><%= i %></option>
             <% end %>
           </select>
-          <%= button_tag(type: 'button', class: 'btn btn btn-default', data: {
-                                               target: 'Add to',
-                                               addUrl: add_to_cart_path(producto)
-                                       }) do %>
-              <span class="icon-cart glyphicon-align-left"></span> <span class="cart-action">Agregar al</span> carro
+          <% if @carrito.producto?(producto.id) %>
+            <%= button_tag(type: 'button', 
+                           class: 'btn btn btn-default', 
+                           data: {
+                             action: 'remove',
+                             productId: producto.id
+                           }) do %>
+                <span class="icon-cart glyphicon-align-left"></span> <span class="cart-action">Eliminar del</span> carro
+            <% end %>
+          <% else %>
+            <%= button_tag(type: 'button', 
+                           class: 'btn btn btn-default', 
+                           data: {
+                            productId: producto.id,
+                            action: 'add'
+                           }) do %>
+                <span class="icon-cart glyphicon-align-left"></span> <span class="cart-action">Agregar al</span> carro
+            <% end %>
           <% end %>
         </div>
         <% if can? [:update, :detele], producto %>
