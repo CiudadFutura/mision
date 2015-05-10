@@ -23,7 +23,7 @@
     </p>
 
     <p>
-      <strong>Calle:</strong>
+      <strong>Dirección:</strong>
       <%= @usuario.calle %>
     </p>
 
@@ -65,30 +65,45 @@
     <% else %>
 
       <h3>Usuarios en tu circulo:</h3>
-      <table class="table">
+      <table class="table table-bordered">
         <thead>
           <tr>
             <th>Tipo</th>
             <th>Nombre</th>
             <th>Nro ident.</th>
             <th>Pedido</th>
-            <th>Eliminar del circulo</th>
+            <% if can?(:remove_usuario , @usuario.circulo) %><th>Eliminar del circulo</th><% end %>
           </tr>
         </thead>
         <tbody>
           <% @usuario.circulo.usuarios.each do |u| %>
-            <tr>
-              <td><%= (u.coordinador? ? '<b>Coordinador</b>'.html_safe : 'Usuario') %></td>
+            <tr <%= (u == current_usuario) ? 'class=strong' : '' %> >
+              <td><%= u.type %></td>
               <td><%= u.nombre %></td>
               <td><%= u.id %></td>
               <td><%= u.pedido?(Compra::ciclo_actual) ? '<i class="fa fa-check-circle-o" title="Realizado"></i>'.html_safe : '<i class="fa fa-circle-o" title="Pendiente"></i>'.html_safe %></td>
-              <td><%= link_to 'Eliminar', circulo_remove_usuario_path(circulo_id: @usuario.circulo.id, usuario_id: u.id), method: :delete, data: { confirm: 'Esta seguro?' }, class: 'btn btn-danger btn-xs' %></td>
+              <td>
+              <% if can?(:remove_usuario , @usuario.circulo) && !u.coordinador?%>
+                <%= link_to 'Eliminar', circulo_remove_usuario_path(circulo_id: @usuario.circulo.id, usuario_id: u.id), method: :delete, data: { confirm: 'Esta seguro?' }, class: 'btn btn-danger btn-xs' + (u.pedido?(Compra::ciclo_actual) ? ' disabled' : '') %>
+              <% end %>
+              </td>
             </tr>
           <% end %>
         </tbody>
       </table>
+      <% if can?(:remove_usuario , @usuario.circulo) %>
+        <i>* Solo podras eliminar usuarios sin pedidos realizados.</i><br/>
+        <i>** Para abandonar el circulo, comunicate con la mision.</i>
+      <% end %>
+      
+      <br/><br/>
+      
+      <% if !current_usuario.coordinador? %>
+        <%= link_to 'Abandonar circulo', circulo_abandonar_path(@usuario.circulo), method: :post, data: { confirm: 'Seguro de abandonar el circulo?' }, class: "btn btn-danger btn-xs" %>
+        <br/><br/>
+      <% end %>
 
-      <%= link_to 'Abandonar circulo', circulo_abandonar_path(@usuario.circulo), method: :post, data: { confirm: 'Seguro de abandonar el circulo?' }, class: "btn btn-danger btn-xs" %>
+      
 
       <% if can?(:manage , @usuario.circulo) && !@usuario.circulo.completo? %>
         <%= form_tag(circulo_add_usuario_path(@usuario.circulo), method: "post") do %>

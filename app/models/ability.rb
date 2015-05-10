@@ -13,6 +13,7 @@ class Ability
       can [:read, :create, :update], Usuario
     elsif user.usuario?
       can [:read, :create, :update], Usuario, { :id => user.id }
+      can [:abandonar_circulo], Usuario
     end
     # elsif user.coordinador?
     #   can :read, :all

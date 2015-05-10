@@ -1,7 +1,6 @@
 class CirculosController < ApplicationController
   before_action :set_circulo, only: [:show, :edit, :update, :destroy]
-  authorize_resource
-
+  authorize_resource except: [:abandonar]
 
   # GET /circulos
   # GET /circulos.json
@@ -71,11 +70,11 @@ class CirculosController < ApplicationController
       if usuario.circulo.nil? && !circulo.completo?
         usuario.circulo = circulo
         usuario.save!
-        message = { notice: "El usuario a sido agregado a tu circulo" }
+        message = { notice: "El usuario a sido agregado a tu circulo." }
       elsif !usuario.circulo.nil?
-        message = { alert: "Error: El usuario ya pertenece a un circulo" }
+        message = { alert: "Error: El usuario ya pertenece a un circulo." }
       elsif circulo.completo?
-        message = { alert: "Error: El circulo esta completo" }
+        message = { alert: "Error: El circulo esta completo." }
       end
     else
         message = { alert: "Error: Debe ingresar el numero de usuario." }
@@ -89,12 +88,13 @@ class CirculosController < ApplicationController
     usuario = Usuario.find(params[:usuario_id])
     usuario.circulo = nil
     usuario.save!
-    redirect_to usuario_path(current_usuario), notice: "El usuario a sido agregado a tu circulo"
+    redirect_to usuario_path(current_usuario), notice: "El usuario a sido eliminado del circulo."
   end
 
   def abandonar
+    authorize! :abandonar_circulo, current_usuario
     current_usuario.circulo = nil
-    usuario.save!
+    current_usuario.save!
     message = { notice: "Haz abandonado el circulo. Recuerda ingresar en uno antes de hacer tu proximo pedido" }
     redirect_to usuario_path(current_usuario), message
   end
