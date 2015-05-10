@@ -1,6 +1,9 @@
 <h1>Modificar proveedor</h1>
+<div class="suppliers">
+  <div class="breadcrumb">
+    <%= link_to 'Atras', suppliers_path %>
+  </div>
+  <%= render 'form' %>
 
-<%= render 'form' %>
+</div>
 
-<%= link_to 'Mostrar', @supplier %> |
-<%= link_to 'Atras', suppliers_path %>

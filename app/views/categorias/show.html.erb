@@ -1,14 +1,13 @@
-<p id="notice"><%= notice %></p>
+<h1>Categoría <%= @categoria.nombre %></h1>
+<div class="categorias">
+  <div class="breadcrumb">
+    <%= link_to 'Editar', edit_categoria_path(@categoria) %> |
+    <%= link_to 'Atras', categorias_path %>
+  </div>
+  <p id="notice"><%= notice %></p>
+  <p>
+    <strong>Descripcion:</strong>
+    <%= @categoria.descripcion %>
+  </p>
 
-<p>
-  <strong>Nombre:</strong>
-  <%= @categoria.nombre %>
-</p>
-
-<p>
-  <strong>Descripcion:</strong>
-  <%= @categoria.descripcion %>
-</p>
-
-<%= link_to 'Edit', edit_categoria_path(@categoria) %> |
-<%= link_to 'Back', categorias_path %>
+</div>

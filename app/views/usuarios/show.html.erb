@@ -1,125 +1,131 @@
 <div class="row">
-  <div class="col-md-6">
-    <h3>Tus datos:</h3>
+  <h1>Usuario <%= @usuario.nombre %></h1>
+  <div class="usuarios">
+    <div class="breadcrumb">
+      <%= link_to 'Modificar', edit_usuario_path(@usuario) %>
+    </div>
+      <div class="col-md-6">
+        <h3>Tus datos:</h3>
 
-    <p>
-      <strong>Nombre:</strong>
-      <%= @usuario.nombre %>
-    </p>
+        <p>
+          <strong>Nombre:</strong>
+          <%= @usuario.nombre %>
+        </p>
 
-    <p>
-      <strong>Apellido:</strong>
-      <%= @usuario.apellido %>
-    </p>
+        <p>
+          <strong>Apellido:</strong>
+          <%= @usuario.apellido %>
+        </p>
 
-    <p>
-      <strong>Fecha de nacimiento:</strong>
-      <%= @usuario.fecha_de_nacimiento %>
-    </p>
+        <p>
+          <strong>Fecha de nacimiento:</strong>
+          <%= @usuario.fecha_de_nacimiento %>
+        </p>
 
-    <p>
-      <strong>Email:</strong>
-      <%= @usuario.email %>
-    </p>
+        <p>
+          <strong>Email:</strong>
+          <%= @usuario.email %>
+        </p>
 
-    <p>
-      <strong>Dirección:</strong>
-      <%= @usuario.calle %>
-    </p>
+        <p>
+          <strong>Dirección:</strong>
+          <%= @usuario.calle %>
+        </p>
 
-    <p>
-      <strong>Codigo postal:</strong>
-      <%= @usuario.codigo_postal %>
-    </p>
+        <p>
+          <strong>Codigo postal:</strong>
+          <%= @usuario.codigo_postal %>
+        </p>
 
-    <p>
-      <strong>Ciudad:</strong>
-      <%= @usuario.ciudad %>
-    </p>
+        <p>
+          <strong>Ciudad:</strong>
+          <%= @usuario.ciudad %>
+        </p>
 
-    <p>
-      <strong>Pais:</strong>
-      <%= @usuario.pais %>
-    </p>
+        <p>
+          <strong>Pais:</strong>
+          <%= @usuario.pais %>
+        </p>
 
-    <p>
-      <strong>Tel1:</strong>
-      <%= @usuario.tel1 %>
-    </p>
+        <p>
+          <strong>Tel1:</strong>
+          <%= @usuario.tel1 %>
+        </p>
 
-    <p>
-      <strong>Cel1:</strong>
-      <%= @usuario.cel1 %>
-    </p>
+        <p>
+          <strong>Cel1:</strong>
+          <%= @usuario.cel1 %>
+        </p>
 
-    <p>
-      <strong>Tipo:</strong>
-      <%= @usuario.type %>
-    </p>
-  </div>
-  <div class="col-md-6">
-    <% if @usuario.circulo.nil? %>
-      <h3>No perteneces a ningun circulo.</h3>
-      <p>Comunicate con un coordinador de circulo para que te agregue. Recuerda que tu codigo de 
-      usurio es el: <b><%= @usuario.id%></b> </p>
-    <% else %>
+        <p>
+          <strong>Tipo:</strong>
+          <%= @usuario.type %>
+        </p>
+      </div>
+      <div class="col-md-6">
+        <% if @usuario.circulo.nil? %>
+          <h3>No perteneces a ningun circulo.</h3>
+          <p>Comunicate con un coordinador de circulo para que te agregue. Recuerda que tu codigo de
+          usurio es el: <b><%= @usuario.id%></b> </p>
+        <% else %>
 
-      <h3>Usuarios en tu circulo:</h3>
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th>Tipo</th>
-            <th>Nombre</th>
-            <th>Nro ident.</th>
-            <th>Pedido</th>
-            <% if can?(:remove_usuario , @usuario.circulo) %><th>Eliminar del circulo</th><% end %>
-          </tr>
-        </thead>
-        <tbody>
-          <% @usuario.circulo.usuarios.each do |u| %>
-            <tr <%= (u == current_usuario) ? 'class=strong' : '' %> >
-              <td><%= u.type %></td>
-              <td><%= u.nombre %></td>
-              <td><%= u.id %></td>
-              <td><%= u.pedido?(Compra::ciclo_actual) ? '<i class="fa fa-check-circle-o" title="Realizado"></i>'.html_safe : '<i class="fa fa-circle-o" title="Pendiente"></i>'.html_safe %></td>
-              <td>
-              <% if can?(:remove_usuario , @usuario.circulo) && !u.coordinador?%>
-                <%= link_to 'Eliminar', circulo_remove_usuario_path(circulo_id: @usuario.circulo.id, usuario_id: u.id), method: :delete, data: { confirm: 'Esta seguro?' }, class: 'btn btn-danger btn-xs' + (u.pedido?(Compra::ciclo_actual) ? ' disabled' : '') %>
+          <h3>Usuarios en tu circulo:</h3>
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Tipo</th>
+                <th>Nombre</th>
+                <th>Nro ident.</th>
+                <th>Pedido</th>
+                <% if can?(:remove_usuario , @usuario.circulo) %><th>Eliminar del circulo</th><% end %>
+              </tr>
+            </thead>
+            <tbody>
+              <% @usuario.circulo.usuarios.each do |u| %>
+                <tr <%= (u == current_usuario) ? 'class=strong' : '' %> >
+                  <td><%= u.type %></td>
+                  <td><%= u.nombre %></td>
+                  <td><%= u.id %></td>
+                  <td><%= u.pedido?(Compra::ciclo_actual) ? '<i class="fa fa-check-circle-o" title="Realizado"></i>'.html_safe : '<i class="fa fa-circle-o" title="Pendiente"></i>'.html_safe %></td>
+                  <td>
+                  <% if can?(:remove_usuario , @usuario.circulo) && !u.coordinador?%>
+                    <%= link_to 'Eliminar', circulo_remove_usuario_path(circulo_id: @usuario.circulo.id, usuario_id: u.id), method: :delete, data: { confirm: 'Esta seguro?' }, class: 'btn btn-danger btn-xs' + (u.pedido?(Compra::ciclo_actual) ? ' disabled' : '') %>
+                  <% end %>
+                  </td>
+                </tr>
               <% end %>
-              </td>
-            </tr>
+            </tbody>
+          </table>
+          <% if can?(:remove_usuario , @usuario.circulo) %>
+            <i>* Solo podras eliminar usuarios sin pedidos realizados.</i><br/>
+            <i>** Para abandonar el circulo, comunicate con la mision.</i>
           <% end %>
-        </tbody>
-      </table>
-      <% if can?(:remove_usuario , @usuario.circulo) %>
-        <i>* Solo podras eliminar usuarios sin pedidos realizados.</i><br/>
-        <i>** Para abandonar el circulo, comunicate con la mision.</i>
-      <% end %>
-      
-      <br/><br/>
-      
-      <% if !current_usuario.coordinador? %>
-        <%= link_to 'Abandonar circulo', circulo_abandonar_path(@usuario.circulo), method: :post, data: { confirm: 'Seguro de abandonar el circulo?' }, class: "btn btn-danger btn-xs" %>
-        <br/><br/>
-      <% end %>
 
-      
+          <br/><br/>
 
-      <% if can?(:manage , @usuario.circulo) && !@usuario.circulo.completo? %>
-        <%= form_tag(circulo_add_usuario_path(@usuario.circulo), method: "post") do %>
-          Agregar usuario nro: <input type="text" value="" name="usuario_id" />
-          <button type="submit">Agregar</button>
+          <% if !current_usuario.coordinador? %>
+            <%= link_to 'Abandonar circulo', circulo_abandonar_path(@usuario.circulo), method: :post, data: { confirm: 'Seguro de abandonar el circulo?' }, class: "btn btn-danger btn-xs" %>
+            <br/><br/>
+          <% end %>
+
+
+
+          <% if can?(:manage , @usuario.circulo) && !@usuario.circulo.completo? %>
+            <%= form_tag(circulo_add_usuario_path(@usuario.circulo), method: "post") do %>
+              Agregar usuario nro: <input type="text" value="" name="usuario_id" />
+              <button type="submit">Agregar</button>
+            <% end %>
+          <% end %>
+
+          <% if @usuario.circulo.completo? %>
+            <h4>Su circulo esta completo.</h4>
+          <% end %>
+
         <% end %>
-      <% end %>
-      
-      <% if @usuario.circulo.completo? %>
-        <h4>Su circulo esta completo.</h4>
-      <% end %>
-
-    <% end %>
+      </div>
   </div>
 </div>
 
 
 
-<%= link_to 'Modificar', edit_usuario_path(@usuario), class: 'btn btn-warning' %>
+

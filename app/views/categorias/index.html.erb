@@ -1,26 +1,32 @@
-<h1>Listado de Categorias</h1>
+<h1>Listado de Categorías</h1>
+<div class="categorias">
+  <div class="navbar navs-fixed">
+    <%= link_to t('.new', :default => t("helpers.links.new")),
+                new_categoria_path,
+              :class => 'btn btn-primary' if can? [:manage], Categoria %>
+  </div>
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Nombre</th>
-      <th>Descripcion</th>
-      <th colspan="2"></th>
-    </tr>
-  </thead>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Descripcion</th>
+          <th colspan="2"></th>
+        </tr>
+      </thead>
 
-  <tbody>
-    <% @categorias.each do |categoria| %>
-      <tr>
-        <td><%= categoria.nombre %></td>
-        <td><%= categoria.descripcion %></td>
-        <td><%= link_to 'Edit', edit_categoria_path(categoria), class: "btn btn-default btn-xs" %></td>
-        <td><%= link_to 'Destroy', categoria, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-xs" %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      <tbody>
+        <% @categorias.each do |categoria| %>
+          <tr>
+            <td><%= categoria.nombre %></td>
+            <td><%= categoria.descripcion %></td>
+            <td><%= link_to 'Editar', edit_categoria_path(categoria), class: "btn btn-default btn-xs" %></td>
+            <td><%= link_to 'Borrar', categoria, method: :delete, data: { confirm: 'Está seguro que quiere eliminar la categoría?' }, class: "btn btn-danger btn-xs" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
 
 <br>
 
-<%= link_to 'New categoria', new_categoria_path %>
+</div>

@@ -1,6 +1,7 @@
 <h1>Editar Ciclo de Compra</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Mostrar', @compra %> |
-<%= link_to 'Atras', compras_path %>
+<div class="compras">
+  <div class="breadcrumb">
+    <%= link_to 'Atras', compras_path %>
+  </div>
+    <%= render 'form' %>
+</div>

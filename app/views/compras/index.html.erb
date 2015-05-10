@@ -27,7 +27,7 @@
           <td><%= compra.fecha_fin_pagos %></td>
           <td><%= compra.fecha_entrega_compras %></td>
           <td><%= link_to 'Edit', edit_compra_path(compra), class: "btn btn-default btn-xs" %></td>
-          <td><%= link_to 'Destroy', compra, method: :delete, data: { confirm: 'Esta seguro?' }, class: "btn btn-danger btn-xs" %></td>
+          <td><%= link_to 'Borrar', compra, method: :delete, data: { confirm: 'Esta seguro?' }, class: "btn btn-danger btn-xs" %></td>
         </tr>
     <% end %>
     </tbody>
