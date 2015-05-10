@@ -28,7 +28,7 @@ class ComprasController < ApplicationController
     @compra = Compra.new(compra_params)
     respond_to do |format|
       if @compra.save
-        format.html { redirect_to @compra, notice: 'Compra was successfully created.' }
+        format.html { redirect_to @compra, notice: 'Ciclo creado exitosamente.' }
         format.json { render :show, status: :created, location: @compra }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class ComprasController < ApplicationController
 
     respond_to do |format|
       if @compra.update(compra_params)
-        format.html { redirect_to @compra, notice: 'Compra was successfully updated.' }
+        format.html { redirect_to @compra, notice: 'Ciclo modificado exitosamente..' }
         format.json { render :show, status: :ok, location: @compra }
       else
         format.html { render :edit }
@@ -57,7 +57,7 @@ class ComprasController < ApplicationController
   def destroy
     @compra.destroy
     respond_to do |format|
-      format.html { redirect_to compras_url, notice: 'Compra was successfully destroyed.' }
+      format.html { redirect_to compras_url, notice: 'Ciclo eliminado exitosamente.' }
       format.json { head :no_content }
     end
   end
