@@ -14,7 +14,7 @@
       <th>Fecha fin pedidos</th>
       <th>Fecha fin pagos</th>
       <th>Fecha entrega</th>
-      <th colspan="2"></th>
+      <th>&nbsp;</th>
     </tr>
     </thead>
 
@@ -22,12 +22,11 @@
     <% @compras.each do |compra| %>
         <tr>
           <td><%= compra.nombre %></td>
-          <td><%= compra.fecha_inicio_compras %></td>
-          <td><%= compra.fecha_fin_compras %></td>
-          <td><%= compra.fecha_fin_pagos %></td>
-          <td><%= compra.fecha_entrega_compras %></td>
-          <td><%= link_to 'Edit', edit_compra_path(compra), class: "btn btn-default btn-xs" %></td>
-          <td><%= link_to 'Destroy', compra, method: :delete, data: { confirm: 'Esta seguro?' }, class: "btn btn-danger btn-xs" %></td>
+          <td><%= l compra.fecha_inicio_compras %></td>
+          <td><%= l compra.fecha_fin_compras %></td>
+          <td><%= l compra.fecha_fin_pagos %></td>
+          <td><%= l compra.fecha_entrega_compras %></td>
+          <td><%= link_to 'Modificar', edit_compra_path(compra), class: "btn btn-default btn-xs" %></td>
         </tr>
     <% end %>
     </tbody>

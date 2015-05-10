@@ -7,9 +7,9 @@ class ProductosController < ApplicationController
     if params[:categoria_id].present?
       @productos = Categoria.find_by_id(params[:categoria_id]).productos
     else
-      @productos = Producto.all
+      @productos = Producto.all.order(:nombre)
     end
-    @productos = @productos.disponibles if current_usuario.nil? || !current_usuario.admin?
+    @productos = @productos.disponibles.order(:nombre) if current_usuario.nil? || !current_usuario.admin?
   end
 
   # GET /productos/1

@@ -1,8 +1,16 @@
 en:
+  wholesaler: Mayorista
+  retailer: Productor
   activerecord:
+    models:
+      supplier: Proveedor
     attributes:
       usuario:
-        calle: "Dirección"
+        calle: Dirección
+      supplier:
+        name: Nombre
+        address: Dirección
+        nature: Tipo
   date:
     formats:
       # Use the strftime parameters for formats.

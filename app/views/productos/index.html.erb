@@ -16,7 +16,9 @@
     <div class="item col-xs-4 col-lg-4">
       <div class="thumbnail">
         <div class="list-group-image text-center">
-          <%= image_tag(producto.imagen, size: "180", class: "group") %>
+          <a href="" onclick="return false;" data-toggle="popover" data-container="body" data-content="<%= producto.descripcion %>" >
+          <%= image_tag(producto.imagen, style: "min-height:180px;", size: "180", class: 'group') %>
+          </a>
         </div>
         <div class="caption red text-center left">
           <h4 class="group inner list-group-item-heading"><%= producto.nombre %></h4>
@@ -65,13 +67,6 @@
                                   :method => :get,
                                   :class => 'btn btn-default admin'  %>
                 </div>
-                <div class="btn-group" role="group">
-                  <%= button_to t('.destroy', :default => t("helpers.links.destroy")),
-                              producto_path(producto),
-                              :method => :delete,
-                              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                              :class => 'btn btn-default admin' %>
-                </div>
               </div>
             </div>
         <% end %>
@@ -86,3 +81,8 @@
 <%= link_to t('.new', :default => t("helpers.links.new")),
             new_producto_path,
             :class => 'btn btn-primary' if can? :manage, Producto %>
+<script type="text/javascript">
+  $(function () {
+  $('[data-toggle="popover"]').popover()
+})
+</script>

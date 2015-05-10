@@ -17,10 +17,10 @@
       <tr>
         <td><%= supplier.name %></td>
         <td><%= supplier.address %></td>
-        <td><%= supplier.nature %></td>
-        <td><%= link_to 'Show', supplier, class: 'btn btn-default btn-xs' %></td>
-        <td><%= link_to 'Edit', edit_supplier_path(supplier), class: 'btn btn-default btn-xs' %></td>
-        <td><%= link_to 'Destroy', supplier, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-xs' %></td>
+        <td><%= t supplier.nature %></td>
+        <td><%= link_to 'Mostrar', supplier, class: 'btn btn-default btn-xs' %></td>
+        <td><%= link_to 'Modificar', edit_supplier_path(supplier), class: 'btn btn-default btn-xs' %></td>
+        <td><%= link_to 'Eliminar', supplier, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-xs' %></td>
       </tr>
     <% end %>
   </tbody>

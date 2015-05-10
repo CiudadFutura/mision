@@ -1,5 +1,7 @@
 <h1>Listado de Categorias</h1>
 
+<%= link_to 'Agregar categoria', new_categoria_path, class: "btn btn-primary btn-xs" %>
+
 <table class="table table-striped">
   <thead>
     <tr>
@@ -14,8 +16,8 @@
       <tr>
         <td><%= categoria.nombre %></td>
         <td><%= categoria.descripcion %></td>
-        <td><%= link_to 'Edit', edit_categoria_path(categoria), class: "btn btn-default btn-xs" %></td>
-        <td><%= link_to 'Destroy', categoria, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-xs" %></td>
+        <td><%= link_to 'Modificar', edit_categoria_path(categoria), class: "btn btn-default btn-xs" %></td>
+        <td><%= link_to 'Eliminar', categoria, method: :delete, data: { confirm: 'Esta seguro?' }, class: "btn btn-danger btn-xs" %></td>
       </tr>
     <% end %>
   </tbody>
@@ -23,4 +25,4 @@
 
 <br>
 
-<%= link_to 'New categoria', new_categoria_path %>
+<%= link_to 'Agregar categoria', new_categoria_path, class: "btn btn-primary btn-xs" %>
