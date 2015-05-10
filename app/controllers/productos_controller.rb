@@ -7,9 +7,9 @@ class ProductosController < ApplicationController
     if params[:categoria_id].present?
       @productos = Categoria.find_by_id(params[:categoria_id]).productos
     else
-      @productos = Producto.all
+      @productos = Producto.all.order(:nombre)
     end
-    @productos = @productos.disponibles if current_usuario.nil? || !current_usuario.admin?
+    @productos = @productos.disponibles.order(:nombre) if current_usuario.nil? || !current_usuario.admin?
   end
 
   # GET /productos/1
@@ -34,7 +34,7 @@ class ProductosController < ApplicationController
     @producto = Producto.new(producto_params)
     respond_to do |format|
       if @producto.save
-        format.html { redirect_to @producto, notice: 'El prducto fue creado exitosamente.' }
+        format.html { redirect_to @producto, notice: 'Producto creado exitosamente.' }
         format.json { render :show, status: :created, location: @producto }
       else
         format.html { render :new }
@@ -48,7 +48,7 @@ class ProductosController < ApplicationController
   def update
     respond_to do |format|
       if @producto.update(producto_params)
-        format.html { redirect_to @producto, notice: 'El producto fue editado correctamente.' }
+        format.html { redirect_to @producto, notice: 'Producto modificado exitosamente..' }
         format.json { render :show, status: :ok, location: @producto }
       else
         format.html { render :edit }
@@ -62,7 +62,7 @@ class ProductosController < ApplicationController
   def destroy
     @producto.destroy
     respond_to do |format|
-      format.html { redirect_to productos_url, notice: 'El producto fue borrado.' }
+      format.html { redirect_to productos_url, notice: 'Producto eliminado exitosamente.' }
       format.json { head :no_content }
     end
   end

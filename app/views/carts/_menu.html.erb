@@ -21,11 +21,10 @@
   </div>
 </div>
 <div class="categorias">
-
-        <ul class="container">
-            <% Categoria.all.each do |c| -%>
-                <li><%= link_to c.nombre, productos_path(categoria_id: c.id), class: 'navbar-link' %></li>
-            <% end -%>
-        </ul>
-
+    <ul class="container">
+        <li><%= link_to 'Todas', productos_path, class: 'navbar-link' %></li>
+        <% Categoria.all.each do |c| -%>
+            <li><%= link_to c.nombre, productos_path(categoria_id: c.id), class: 'navbar-link' %></li>
+        <% end -%>
+    </ul>
 </div>

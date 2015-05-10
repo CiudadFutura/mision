@@ -6,26 +6,28 @@
               :class => 'btn btn-primary' if can? [:manage], Categoria %>
   </div>
 
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Nombre</th>
-          <th>Descripcion</th>
-          <th colspan="2"></th>
-        </tr>
-      </thead>
+<%= link_to 'Agregar categoria', new_categoria_path, class: "btn btn-primary btn-xs" %>
 
-      <tbody>
-        <% @categorias.each do |categoria| %>
-          <tr>
-            <td><%= categoria.nombre %></td>
-            <td><%= categoria.descripcion %></td>
-            <td><%= link_to 'Editar', edit_categoria_path(categoria), class: "btn btn-default btn-xs" %></td>
-            <td><%= link_to 'Borrar', categoria, method: :delete, data: { confirm: 'Está seguro que quiere eliminar la categoría?' }, class: "btn btn-danger btn-xs" %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Descripcion</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @categorias.each do |categoria| %>
+      <tr>
+        <td><%= categoria.nombre %></td>
+        <td><%= categoria.descripcion %></td>
+        <td><%= link_to 'Modificar', edit_categoria_path(categoria), class: "btn btn-default btn-xs" %></td>
+        <td><%= link_to 'Eliminar', categoria, method: :delete, data: { confirm: 'Esta seguro?' }, class: "btn btn-danger btn-xs" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
 <br>
 

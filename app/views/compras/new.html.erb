@@ -1,8 +1,7 @@
 <h1>Nuevo Ciclo</h1>
 <div class="compras">
   <div class="breadcrumb">
-    <%= link_to t('.back', :default => t("helpers.links.back")),
-                compras_path if can? [:manage], Compra %>
+    <%= link_to 'Volver', compras_path %>
   </div>
     <%= render 'form' %>
 

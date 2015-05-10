@@ -21,7 +21,7 @@
   </div>
   <div class="field">
     <%= f.label :nature %><br>
-    <%= f.select(:nature, options_for_select(Supplier.natures.map{|x,y| [x,x]})) %>
+    <%= f.select(:nature, options_for_select(Supplier.natures.map{|x,y| [t(x), x]})) %>
   </div>
   <div class="actions">
     <%= f.submit class: 'btn btn-success' %>

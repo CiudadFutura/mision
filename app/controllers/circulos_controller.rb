@@ -29,7 +29,7 @@ class CirculosController < ApplicationController
 
     respond_to do |format|
       if @circulo.save
-        format.html { redirect_to @circulo, notice: 'Circulo was successfully created.' }
+        format.html { redirect_to @circulo, notice: 'Circulo creado exitosamente.' }
         format.json { render :show, status: :created, location: @circulo }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class CirculosController < ApplicationController
   def update
     respond_to do |format|
       if @circulo.update(circulo_params)
-        format.html { redirect_to @circulo, notice: 'Circulo was successfully updated.' }
+        format.html { redirect_to @circulo, notice: 'Circulo modificado exitosamente..' }
         format.json { render :show, status: :ok, location: @circulo }
       else
         format.html { render :edit }
@@ -57,7 +57,7 @@ class CirculosController < ApplicationController
   def destroy
     @circulo.destroy
     respond_to do |format|
-      format.html { redirect_to circulos_url, notice: 'Circulo was successfully destroyed.' }
+      format.html { redirect_to circulos_url, notice: 'Circulo eliminado exitosamente.' }
       format.json { head :no_content }
     end
   end
