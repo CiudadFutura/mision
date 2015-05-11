@@ -1,6 +1,9 @@
 <h1>Modificar usuario</h1>
+<div class="usuarios">
+  <div class="breadcrumb">
+    <%= link_to 'Mostrar', @usuario %> |
+    <%= link_to 'Volver', usuario_path(current_usuario) %>
+  </div>
+  <%= render 'form' %>
 
-<%= render 'form' %>
-
-<%= link_to 'Mostrar', @usuario, class: 'btn btn-info btn-mini' %> |
-<%= link_to 'Volver', usuario_path(current_usuario), class: 'btn btn-warning btn-mini' %>
+</div>

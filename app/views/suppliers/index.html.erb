@@ -1,6 +1,12 @@
 <h1>Lista de Proveedores</h1>
+<div class="suppliers">
+  <div class="navbar navs-fixed">
+    <%= link_to t('Crear Proveedor', :default => t("helpers.links.new")),
+                new_supplier_path,
+                :class => 'btn btn-primary' if can? [:manage], Supplier
+    %>
+  </div>
 
-<%= link_to 'Crear Proveedor', new_supplier_path, class: 'btn btn-primary' %>
 
 <table class="table table-striped">
   <thead>
@@ -28,4 +34,4 @@
 
 <br>
 
-<%= link_to 'Crear Proveedor', new_supplier_path, class: 'btn btn-primary' %>
+</div>

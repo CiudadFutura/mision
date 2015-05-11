@@ -1,6 +1,10 @@
 <h1>Modificar proveedor</h1>
+<div class="suppliers">
+  <div class="breadcrumb">
+    <%= link_to 'Atras', suppliers_path %>
+    <%= link_to 'Mostrar', @supplier%>
+  </div>
+  <%= render 'form' %>
 
-<%= render 'form' %>
+</div>
 
-<%= link_to 'Mostrar', @supplier, class: 'btn btn-info btn-mini' %> |
-<%= link_to 'Atrás', suppliers_path, class: 'btn btn-warning btn-mini' %>

@@ -1,6 +1,9 @@
 <h1>Modificar Categoria</h1>
+<div class="categorias">
+  <div class="breadcrumb">
+    <%= link_to 'Mostrar', @categoria%> |
+    <%= link_to 'Atrás', categorias_path %>
+  </div>
+    <%= render 'form' %>
 
-<%= render 'form' %>
-
-<%= link_to 'Mostrar', @categoria, class: 'btn btn-info btn-mini' %> |
-<%= link_to 'Atrás', categorias_path, class: 'btn btn-warning btn-mini' %>
+</div>

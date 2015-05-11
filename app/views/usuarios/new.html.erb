@@ -1,5 +1,7 @@
 <h1>Crear usuario</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Atrás', usuarios_path, class: 'btn btn-warning btn-mini' %>
+<div class="usuarios">
+  <div class="breadcrumb">
+    <%= link_to 'Atrás', usuarios_path%>
+  </div>
+  <%= render 'form' %>
+</div>

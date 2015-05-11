@@ -1,6 +1,8 @@
 <h1>Editar Ciclo de Compra</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Mostrar', @compra, class: 'btn btn-info btn-mini' %> |
-<%= link_to 'Atras', compras_path, class: 'btn btn-warning btn-mini' %>
+<div class="compras">
+  <div class="breadcrumb">
+    <%= link_to 'Mostrar', @compra %>
+    <%= link_to 'Atras', compras_path %>
+  </div>
+    <%= render 'form' %>
+</div>

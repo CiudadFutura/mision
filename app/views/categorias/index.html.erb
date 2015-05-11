@@ -1,4 +1,10 @@
-<h1>Listado de Categorias</h1>
+<h1>Listado de Categorías</h1>
+<div class="categorias">
+  <div class="navbar navs-fixed">
+    <%= link_to t('.new', :default => t("helpers.links.new")),
+                new_categoria_path,
+              :class => 'btn btn-primary' if can? [:manage], Categoria %>
+  </div>
 
 <%= link_to 'Agregar categoria', new_categoria_path, class: "btn btn-primary btn-xs" %>
 
@@ -25,4 +31,4 @@
 
 <br>
 
-<%= link_to 'Agregar categoria', new_categoria_path, class: "btn btn-primary btn-xs" %>
+</div>
