@@ -6,12 +6,23 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+
 categorias = ['Canasta', 'Almacen', 'Frescos', 'Verduras', 'Higiene Personal', 'Limpieza']
 
 categorias.each do |c|
   Categoria.create!(nombre: c)
 end
 
+JSON.parse(open("db/products.json").read).each do |p|
+  JSON.parse(open("db/products_description.json").read).each do |pd|
+    if p.products_id == pd.products_id
+      productos =[
+          { categoria_id: 1, nombre:pd.products_name , descripcion: pd.products_description,  precio: p.products_price, precio_super:0}
+      ]
+    end
+  end
+end
+=begin
 productos = [
   { categoria_id: 1, nombre: 'Canasta Frutas y Verduras Chica', descripcion: 'Tomate 1 kg; Zanahoria 1/2 kg; Papa 1 kg; Cebolla 1 kg; Pimiento 1/2 kg; Banana 1 kg; Calabaza 1; Lechuga Paquete; Acelga  Bandeja 1kg; Naranja  1 kg; Huevo Media docena.',  precio: '70', precio_super: '74' },
   { categoria_id: 1, nombre: 'Canasta frutas y verduras Grande', descripcion: '  Tomate 1 kg; Zanahoria 1/2 kg; Papa 1 kg; Batata 1 kg; Cebolla 1 kg; Pimiento 1/2 kg; Mandarina 1kg; Limon 1/2 kg; Ajo 1; Manzana 1 kg; Banana 1 kg; Calabaza 1; Lechuga Paquete; Cebolla de verdeo Paquete; Puerro Paquete; Rucula Paquete; Repollo Paquete; Brocoli Bandeja; Coliflor Bandeja; Espinaca Paquete; Radicheta Paquete; Remolacha Paquete; Acelga  Bandeja 1kg; Naranja  1 kg; Huevo Media docena.',  precio: 150, precio_super: 150 },
@@ -32,6 +43,7 @@ productos = [
   { categoria_id: 6, nombre: 'Jabón líquido Libertador 700 cc', descripcion: '', precio: 15.3, precio_super: 17 },
   { categoria_id: 6, nombre: 'Jabón en polvo  Drive 800gr', descripcion: '', precio: 13.2, precio_super: 16 }
 ]
+=end
 
 productos.each do |p|
   categoria_id = p[:categoria_id]
