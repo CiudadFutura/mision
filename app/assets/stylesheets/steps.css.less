@@ -1,0 +1,107 @@
+#steps{
+  padding-top: 30px;
+  width: 100%;
+  max-height: 460px;
+  height: 400px;
+  text-align: center;
+  position: relative;
+  .carousel-inner{
+    width: 960px;
+    margin: 0 auto 0 auto;
+    .carousel-caption {
+      position: absolute;
+      bottom:150px;
+      z-index: 600;
+      font-family: liberation_sansregular;
+      font-weight: 300;
+      font-size: 20px;
+      text-align: center;
+      line-height: 32px;
+      color: white;
+      width: 100%;
+      left: 0;
+      span.title {
+        display: inline;
+        font-size:32px;
+        line-height: 38px;
+        text-shadow: 0px 0px 3px #000, 0px 0px 8px #000, 0px 0px 8px #000;
+        //background: rgba(192, 41, 66, 0.6);
+        padding:4px 15px 4px 10px;
+      }
+      span.desc {
+        display: inline;
+        margin-top: 10px;
+        font-size:19px;
+        text-shadow: 0px 0px 2px #000, 0px 0px 6px #000, 0px 0px 6px #000;
+      }
+    }
+    .item{
+      span{
+        font-size: 98px;
+      }
+      img {
+        position: absolute; top: 0; left: 0;
+        width: 100%;
+        padding: 0; display: block;
+        min-height: 100%;
+        &:first-child {
+          position: static;
+          z-index: 100;
+        }
+      }
+    }
+  }
+  .carousel-indicators {
+    text-align: center;
+    width: 100%;
+    height: 90px;
+    position: absolute;
+    left: 0px;
+    margin-left: 0px;
+    color: #000000;
+    background:url("pager-shadow.png") no-repeat center bottom;
+    li {
+      border-color: darken(#000000, 70%);
+      .active{
+        border-color:darken(#bd3b2f, 80%);
+      }
+    }
+    > * {
+      cursor: pointer;
+    }
+  }
+  .carousel-control{
+    position: absolute;
+    font-size: 30px;
+    top: 0;
+    width: 10%;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    z-index: 800;
+    height: 100%;
+    cursor: pointer;
+    :hover{
+      opacity: .7; filter: alpha(opacity=70)
+    }
+    .disabled{
+      opacity: .5; filter:alpha(opacity=50);
+    }
+  }
+}
+
+
+.cycle-caption { position: absolute; color: white; bottom: 15px; right: 15px; z-index: 700; }
+
+
+/*.cycle-prev { left: 0px;  background: url(left.png) 50% 50% no-repeat;}
+.cycle-next { right: 0; background: url(right.png) 50% 50% no-repeat;}*/
+
+
+.cycle-paused:after {
+  content: 'Pausado'; color: white; background: black; padding: 10px;
+  z-index: 500; position: absolute; top: 10px; right: 10px;
+  border-radius: 10px;
+  opacity: .5; filter: alpha(opacity=50);
+}
+
+#progress { position: absolute; bottom: 0; height: 6px; width: 0px; background: #c00; z-index: 9999; }
