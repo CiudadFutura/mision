@@ -21,8 +21,8 @@ img_dir = '/home/deploy/mision/shared/tmp/imagenes/'
 
 JSON.parse(open("db/products.json").read).each do |prod|
   JSON.parse(open("db/products_description.json").read).each do |prod_d|
-    if prod['products_id'] == prod_d['products_id']
-      
+    if prod['products_id'] == prod_d['products_id'] && Producto.where(codigo: prod['products_id']).empty?
+
       product = Producto.new(
         { codigo: prod['products_id'],
           nombre: prod_d['products_name'],
