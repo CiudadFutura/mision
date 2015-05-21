@@ -17,30 +17,34 @@ proveedor = Supplier.create!(name: 'Generico', nature: :wholesaler)
 categoria_id = 1
 categoria = Categoria.find_by_id(categoria_id)
 productos = []
+img_dir = '/home/deploy/mision/shared/tmp/imagenes/'
 
-JSON.parse(open("db/products.json").read).each do |p|
-  JSON.parse(open("db/products_description.json").read).each do |pd|
-    if p['products_id'] == pd['products_id']
+JSON.parse(open("db/products.json").read).each do |prod|
+  JSON.parse(open("db/products_description.json").read).each do |prod_d|
+    if prod['products_id'] == prod_d['products_id']
       
-      p = { codigo: p['products_id'],
-            nombre: pd['products_name'],
-            descripcion: pd['products_description'],
-            precio: p['products_price'], 
-            precio_super: 0,
-          }
-          
-      if Rails.env.production?
-        img_dir = '/home/deploy/mision/shared/tmp/imagenes/'
+      product = Producto.new(
+        { codigo: prod['products_id'],
+          nombre: prod_d['products_name'],
+          descripcion: prod_d['products_description'],
+          precio: prod['products_price'], 
+          precio_super: 0 
+        }
+      )
+
+      if Rails.env.production? && !prod['products_image'].nil? && !prod['products_image'].empty?
         image = File.open("#{img_dir}img_no_disponible.png")
-        image_path = "#{img_dir}#{p['products_image']}"
-        image = File.open(image_path) if File.owned?(image_path)
-        p[:imagen] = image
+        
+        image_path = "#{img_dir}#{prod['products_image']}"
+        if File.owned?(image_path)
+          image = File.open(image_path) 
+        end
+        product.imagen = image
       end
 
-      prod = Producto.new(p)
-      prod.categorias << categoria
-      prod.supplier = proveedor
-      prod.save!
+      product.categorias << categoria
+      product.supplier = proveedor
+      product.save!
     end
   end
 end
