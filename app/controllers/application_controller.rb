@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_filter :init_carrito
+  before_filter :categorias_menu
 
   layout 'layout'
 
@@ -13,6 +14,12 @@ class ApplicationController < ActionController::Base
 
   def init_carrito
     @carrito = Cart.new(session)
+  end
+
+  def categorias_menu
+    @categorias_menu = Rails.cache.fetch("categorias_menu") do 
+      Categoria.where(parent_id: 'NULL')
+    end
   end
 
   private

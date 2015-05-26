@@ -13,6 +13,7 @@
     <tr>
       <th>Nombre</th>
       <th>Descripcion</th>
+      <th>Padre</th>
       <th colspan="2"></th>
     </tr>
   </thead>
@@ -22,6 +23,7 @@
       <tr>
         <td><%= categoria.nombre %></td>
         <td><%= categoria.descripcion %></td>
+        <td><%= categoria.parent.try(:nombre) %></td>
         <td><%= link_to 'Modificar', edit_categoria_path(categoria), class: "btn btn-default btn-xs" %></td>
         <td><%= link_to 'Eliminar', categoria, method: :delete, data: { confirm: 'Esta seguro?' }, class: "btn btn-danger btn-xs" %></td>
       </tr>

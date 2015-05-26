@@ -11,14 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150505224740) do
+ActiveRecord::Schema.define(version: 20150521201945) do
 
   create_table "categorias", force: true do |t|
     t.string   "nombre"
     t.text     "descripcion"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "parent_id"
   end
+
+  add_index "categorias", ["parent_id"], name: "index_categorias_on_parent_id"
 
   create_table "categorias_productos", force: true do |t|
     t.integer "categoria_id"

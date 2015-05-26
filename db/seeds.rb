@@ -6,31 +6,52 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+categorias = {}
+JSON.parse(open("db/json/categories.json").read).each do |cat|
+  p cat
+  if !cat['parent_id'].nil?
+    categorias[cat['categories_id']] = { parent_id: cat['parent_id'] }
+  end
+end
 
-categorias = ['Canasta', 'Almacen', 'Frescos', 'Verduras', 'Higiene Personal', 'Limpieza']
+JSON.parse(open("db/json/categories_description.json").read).each do |cat|
+  p cat
+  if !cat['categories_name'].nil? && !cat['categories_name'].empty?
+    categorias[cat['categories_id']][:nombre] = cat['categories_name']
+  end
+end
 
-categorias.each do |c|
-  Categoria.create!(nombre: c)
+categorias_productos = {}
+JSON.parse(open("db/json/products_to_categories.json").read).each do |cat_prod|
+  if !cat_prod['products_id'].nil? && !cat_prod['categories_id'].nil?
+    categorias_productos[cat_prod['products_id']] ||= []
+    categorias_productos[cat_prod['products_id']] << cat_prod['categories_id'] if categorias.key?(cat_prod['categories_id'])
+  end
+end
+
+categorias.each do |id, ca|
+  cat = Categoria.new
+  cat.id = id
+  cat.nombre = ca[:nombre]
+  cat.parent_id = ca[:parent_id]
+  cat.save!
 end
 
 proveedor = Supplier.create!(name: 'Generico', nature: :wholesaler)
-categoria_id = 1
-categoria = Categoria.find_by_id(categoria_id)
 productos = []
 img_dir = '/home/deploy/mision/shared/tmp/imagenes/'
 
-JSON.parse(open("db/products.json").read).each do |prod|
-  JSON.parse(open("db/products_description.json").read).each do |prod_d|
-    if prod['products_id'] == prod_d['products_id'] && Producto.where(codigo: prod['products_id']).empty?
+JSON.parse(open("db/json/products.json").read).each do |prod|
+  JSON.parse(open("db/json/products_description.json").read).each do |prod_d|
+    if prod['products_id'] == prod_d['products_id'] && Producto.where(codigo: prod['products_model']).empty?
 
-      product = Producto.new(
-        { codigo: prod['products_id'],
-          nombre: prod_d['products_name'],
-          descripcion: prod_d['products_description'],
-          precio: prod['products_price'], 
-          precio_super: 0 
-        }
-      )
+      product = Producto.new
+      product.id = prod['products_id']
+      product.codigo = prod['products_model']
+      product.nombre = prod_d['products_name']
+      product.descripcion = prod_d['products_description']
+      product.precio = prod['products_price']
+      product.precio_super = 0
 
       if Rails.env.production? && !prod['products_image'].nil? && !prod['products_image'].empty?
         image = File.open("#{img_dir}img_no_disponible.png")
@@ -42,7 +63,7 @@ JSON.parse(open("db/products.json").read).each do |prod|
         product.imagen = image
       end
 
-      product.categorias << categoria
+      product.categorias << Categoria.find(categorias_productos[prod['products_id']])
       product.supplier = proveedor
       product.save!
     end

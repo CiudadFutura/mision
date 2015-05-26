@@ -23,7 +23,7 @@
 <div class="menu-categorias">
     <ul class="container">
         <li><%= link_to 'Todas', productos_path, class: 'navbar-link' %></li>
-        <% Categoria.all.each do |c| -%>
+        <% @categorias_menu.each do |c| -%>
             <li><%= link_to c.nombre, productos_path(categoria_id: c.id), class: 'navbar-link' %></li>
         <% end -%>
     </ul>

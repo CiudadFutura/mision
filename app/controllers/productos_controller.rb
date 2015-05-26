@@ -5,7 +5,8 @@ class ProductosController < ApplicationController
   # GET /productos.json
   def index
     if params[:categoria_id].present?
-      @productos = Categoria.find_by_id(params[:categoria_id]).productos
+      @productos = Producto.joins(:categorias)
+                           .where("categorias.id = :id OR categorias.parent_id = :id", id: params[:categoria_id])
     else
       @productos = Producto.all.order(:nombre)
     end
