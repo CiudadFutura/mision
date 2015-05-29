@@ -24,7 +24,7 @@
     <ul class="container">
         <li><%= link_to 'Todas', productos_path, class: 'navbar-link' %></li>
         <% @categorias_menu.each do |c| -%>
-            <li><%= link_to c.nombre, productos_path(categoria_id: c.id), class: 'navbar-link' %></li>
+            <li><%= link_to c[:nombre], productos_path(categoria_id: c[:id]), class: 'navbar-link' %></li>
         <% end -%>
     </ul>
 </div>

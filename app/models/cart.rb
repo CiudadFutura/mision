@@ -41,7 +41,6 @@ class Cart
   end
 
   def producto?(producto_id)
-    puts @items
     @items.key?(producto_id.to_s)
   end
 
