@@ -24,7 +24,18 @@
     <ul class="container">
         <li><%= link_to 'Todas', productos_path, class: 'navbar-link' %></li>
         <% @categorias_menu.each do |c| -%>
-            <li><%= link_to c[:nombre], productos_path(categoria_id: c[:id]), class: 'navbar-link' %></li>
+            <% if c[:subcategorias] != nil %>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><%= c[:nombre] %> <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                  <% c[:subcategorias].each do |sm| %>
+                    <li><%= link_to sm[:nombre], productos_path(categoria_id: sm[:id])%></li>
+                  <% end %>
+                </ul>
+              </li>
+            <%else %>
+              <li><%= link_to c[:nombre], productos_path(categoria_id: c[:id]), class: 'navbar-link' %></li>
+            <% end %>
         <% end -%>
     </ul>
 </div>
