@@ -69,6 +69,12 @@
                 </div>
               </div>
             </div>
+            <% if producto.oculto? %>
+              <div class="oculto">
+                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                <span class="glyphicon-class">Oculto</span>
+              </div>
+            <% end   %>
         <% end %>
         <div class="row">
 
