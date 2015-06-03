@@ -5,8 +5,13 @@ class ProductosController < ApplicationController
   # GET /productos.json
   def index
     if params[:categoria_id].present?
-      @productos = Producto.joins(:categorias)
-                           .where("categorias.id = :id OR categorias.parent_id = :id", id: params[:categoria_id])
+      if params[:subcategoria_id].present?
+        @productos = Producto.joins(:categorias)
+                         .where("categorias_productos.categoria_id = :sub_id AND categorias.parent_id = :id", id: params[:categoria_id], sub_id: params[:subcategoria_id])
+      else
+        @productos = Producto.joins(:categorias)
+                         .where("categorias.id = :id OR categorias.parent_id = :id", id: params[:categoria_id])
+      end
     else
       @productos = Producto.all.order(:nombre)
     end
