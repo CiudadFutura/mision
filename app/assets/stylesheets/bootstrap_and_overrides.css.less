@@ -251,28 +251,24 @@ body {
       }
     }
   }
-  
-  div.menu-categorias {
-    overflow: hidden;
+  .menu-categorias {
     background: #BD3B2F;
-    ul {
-      list-style-type: none;
-      li {
-        float: left;
-        border-left: 2px solid #fff;
-        &:first-child {
-          border-left: none;
-        }
-        a {
-          font-family: @font-reg;
-          font-size:16px;
-          line-height: 40px;
-          color: #fff;
-          display: block;
-          padding: 0px 25px 0px 25px;
-          height: 40px;
-          &:hover {
-            background:#5E5E5E;
+    border:0px;
+    .submenu{
+      width: 900px;
+      ul {
+        li {
+          border-left: 2px solid #fff;
+          &:first-child {
+            border-left: none;
+          }
+          a {
+            font-family: @font-reg;
+            font-size:16px;
+            color: #fff;
+            &:hover {
+              background:#5E5E5E;
+            }
           }
         }
       }
