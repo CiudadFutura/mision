@@ -21,7 +21,7 @@ class CartsController < ApplicationController
   def create_pedido
     pedido = Pedido.new
     ciclo_id = Compra.ciclo_actual.id
-    pedido.items = @carrito.items.map(&:to_json).to_s
+    pedido.items = @carrito.items.map { |_k,item| item.purchase_data }.to_json
     pedido.usuario_id = current_usuario.id
     pedido.circulo_id = current_usuario.circulo_id
     pedido.compra_id = ciclo_id

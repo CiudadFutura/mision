@@ -13,7 +13,6 @@ class Cart
   def load!
     @items = {}
     @session[:items].each do |producto_id, cantidad|
-      # Rails.logger.debug "#{producto_id}, #{cantidad}"
       @items[producto_id] = Item.new(
                   Producto.find_by_id(producto_id),
                   cantidad

@@ -27,8 +27,14 @@ class Usuario < ActiveRecord::Base
   end
 
   def pedido?(ciclo_de_compra)
-    # raise "andres" if self.nombre == 'andres'
     ciclo_de_compra && self.pedidos.try(:last).try(:ciclo) == ciclo_de_compra
+  end
+
+  def pedido_del_ciclo(ciclo_de_compra)
+    return nil if ciclo_de_compra.nil?
+    pedido = self.pedidos.where(compra_id: ciclo_de_compra.id).first
+    return pedido if pedido
+    nil
   end
 
 end
