@@ -52,13 +52,15 @@
               </ul>
             </li>
             <% end %>
-            <% if can? [:index], pedidos_path %>
+            
+            <% if usuario_signed_in? %>
               <li>
                 <%= link_to(pedidos_path) do %>
-                    <span class="icon-stats"></span>Pedidos
+                    <span class="icon-stats"></span>Mis Pedidos
                 <% end %>
               </li>
             <% end %>
+
             <li>
               <%= link_to(productos_path) do %>
                   <span class="icon-lmcart"></span>Tienda

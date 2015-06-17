@@ -23,7 +23,7 @@
         <td>
           <ul>
           <% JSON.parse(p.items).each do |i| %>
-            <li><%= JSON.parse(i)[1]['producto']['nombre'] %></li>
+            <li><%= Producto.find(i['producto_id']).nombre %></li>
           <% end %>
           </ul>
         </td>
