@@ -1,0 +1,25 @@
+<div class="row">
+  <h2>Detalle de Pedido</h2>
+  
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              pedidos_path, :class => 'btn btn-default btn-xs'  %>
+
+  <table class='table table-striped'>
+    <thead>
+      <tr>
+        <th>Producto</th>
+        <th>Cantidad</th>
+        <th>Importe Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% JSON.parse(@pedido.items).each do |i| %>
+        <tr>
+          <td><%= Producto.find(i['producto_id']).nombre %></td>
+          <td><%= i['cantidad'].to_i %></td>
+          <td><%= number_to_currency(i['total']) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

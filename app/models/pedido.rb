@@ -10,4 +10,11 @@ class Pedido < ActiveRecord::Base
     JSON.parse(items).each { |item| total += item['total'] || 0 }
     total.to_f
   end
+
+  def save_in_session(session)
+    carrito = Cart.new(session)
+    JSON.parse(items, symbolize_names: true).each do |item| 
+      carrito.add(item[:producto_id], item[:cantidad])
+    end
+  end
 end

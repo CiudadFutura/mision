@@ -10,22 +10,24 @@
         <td>Fecha</td>
         <td>Ciclo</td>
         <td>Coordinador</td>
-        <td>Productos</td>
+        <td>Acciones</td>
       </tr>
     </thead>
     <tbody>
     <% @pedidos.each do |p| %>
       <tr>
         <td><%= p.id %></td>
-        <td><%= p.created_at %></td>
+        <td><%= l p.created_at %></td>
         <td><%= p.ciclo.nombre %></td>
         <td><%= p.circulo.coordinador.nombre %></td>
         <td>
-          <ul>
-          <% JSON.parse(p.items).each do |i| %>
-            <li><%= Producto.find(i['producto_id']).nombre %></li>
+          <%= link_to('Mostrar', pedido_path(p), class: 'btn btn-default btn-xs') %>
+          <% if(p.ciclo.id && Compra::ciclo_actual.try(:id) == p.ciclo.id)%>
+            <%= link_to('Modificar', 
+                  edit_pedido_path(p), 
+                  data: { confirm: 'Luego de modificar el pedido recuerda volver a enviarlo.' }, 
+                  class: 'btn btn-default btn-xs') %>
           <% end %>
-          </ul>
         </td>
       </tr>
     <% end %>

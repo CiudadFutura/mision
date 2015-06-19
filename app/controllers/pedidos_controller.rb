@@ -1,4 +1,6 @@
 class PedidosController < ApplicationController
+  before_action :set_pedido, only: [:show, :edit]
+
   def index
     if current_usuario.admin?
       @pedidos = Pedido.all
@@ -6,4 +8,19 @@ class PedidosController < ApplicationController
       @pedidos = Pedido.where(usuario_id: current_usuario.id)
     end
   end
+
+  def show
+  end
+
+  def edit
+    @pedido.save_in_session(session)
+    @pedido.delete
+    redirect_to productos_path
+  end
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_pedido
+      @pedido = Pedido.find(params[:id])
+    end
 end

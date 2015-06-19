@@ -19,7 +19,7 @@ Rails.application.routes.draw do
 
   resources :productos
   resources :categorias
-  resources :pedidos, only: [:index]
+  resources :pedidos, only: [:index, :show, :edit]
   resources :home
   resources :steps
 
