@@ -1,4 +1,4 @@
-require 'CSV'
+require 'csv'
 
 class AddProveedores < SeedMigration::Migration
   def up
