@@ -41,6 +41,7 @@ proveedor = Supplier.create!(name: 'Generico', nature: :wholesaler)
 productos = []
 img_dir = '/home/deploy/mision/shared/tmp/imagenes/'
 
+
 JSON.parse(open("db/json/products.json").read).each do |prod|
   JSON.parse(open("db/json/products_description.json").read).each do |prod_d|
     if prod['products_id'] == prod_d['products_id'] && Producto.where(codigo: prod['products_model']).empty?
@@ -55,10 +56,10 @@ JSON.parse(open("db/json/products.json").read).each do |prod|
 
       if Rails.env.production? && !prod['products_image'].nil? && !prod['products_image'].empty?
         image = File.open("#{img_dir}img_no_disponible.png")
-        
+
         image_path = "#{img_dir}#{prod['products_image']}"
         if File.owned?(image_path)
-          image = File.open(image_path) 
+          image = File.open(image_path)
         end
         product.imagen = image
       end
@@ -69,6 +70,17 @@ JSON.parse(open("db/json/products.json").read).each do |prod|
     end
   end
 end
+
+productoSocial = Producto.new
+productoSocial.descripcion = 'Cada círculo (sin importar si está compuesto por 3, 4 o 5 hogares), para obtener los beneficios de la Gran Misión y poder realizar sus compras a través de este mecanismo, debe abonar una cuota mensual de $150,00 (ciento cincuenta pesos argentinos). La misma se utilizará para el crecimiento y potencialización de la iniciativa, a través de la compra de equipamiento para el Centro de Distribución (cámaras de frío, estanterías, balanzas), como así también para financiar a los pequeños productores o productores familiares que necesiten mejorar su emprendimiento, a través de compra de equipamiento e insumos. Todas estas inversiones serán consultadas y comunicadas a los círculos de consumidores colaborativos, para que puedan ser parte del crecimiento y fortalecimiento de la iniciativa.'
+productoSocial.codigo = 'CSocial'
+productoSocial.nombre = 'Cuota Social Misión'
+productoSocial.precio = '150'
+productoSocial.oculto = true
+productoSocial.categorias << Categoria.find_by_nombre('Almacen')
+productoSocial.supplier = proveedor
+productoSocial.save!
+
 
 usuarios = [
   { nombre: 'admin', password: '!QAZzaq1', email: 'admin@example.com', type: 'Admin' },

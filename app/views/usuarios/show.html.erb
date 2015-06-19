@@ -66,9 +66,9 @@
         <% if @usuario.circulo.nil? %>
           <h3>No perteneces a ningun circulo.</h3>
           <p>Comunicate con un coordinador de circulo para que te agregue. Recuerda que tu codigo de
-          usurio es el: <b><%= @usuario.id%></b> </p>
+          usuario es el: <b><%= @usuario.id%></b> </p>
         <% else %>
-
+          <h2 class="text-right">Cuota Social: $<%=Producto.find_by_codigo('CSocial').precio %></h2>
           <h3>Usuarios en tu circulo:</h3>
           <table class="table table-bordered">
             <thead>
