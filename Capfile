@@ -19,6 +19,7 @@ require 'capistrano/rvm'
 # require 'capistrano/chruby'
 # require 'capistrano/bundler'
 require 'capistrano/rails'
+require 'capistrano/seed_migration_tasks'
 
 set :rvm_type, :user
 set :rvm_ruby_version, '2.0.0-p451'
