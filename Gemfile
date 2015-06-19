@@ -29,6 +29,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise'
 # Authorization: https://github.com/ryanb/cancan/wiki
 gem 'cancan'
+# Seed Migration: https://github.com/harrystech/seed_migration
+gem 'seed_migration'
 
 group :development do
   # Spring speeds up development by keeping your application running in the

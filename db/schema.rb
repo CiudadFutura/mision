@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150505224740) do
+ActiveRecord::Schema.define(version: 20150619153434) do
 
   create_table "categorias", force: true do |t|
     t.string   "nombre"
@@ -32,7 +32,6 @@ ActiveRecord::Schema.define(version: 20150505224740) do
     t.integer  "coordinador_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "numero"
   end
 
   create_table "compras", force: true do |t|
@@ -70,6 +69,12 @@ ActiveRecord::Schema.define(version: 20150505224740) do
   end
 
   add_index "productos", ["supplier_id"], name: "index_productos_on_supplier_id"
+
+  create_table "seed_migration_data_migrations", force: true do |t|
+    t.string   "version"
+    t.integer  "runtime"
+    t.datetime "migrated_on"
+  end
 
   create_table "suppliers", force: true do |t|
     t.string   "name"
