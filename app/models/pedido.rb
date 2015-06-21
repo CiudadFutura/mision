@@ -17,4 +17,5 @@ class Pedido < ActiveRecord::Base
       carrito.add(item[:producto_id], item[:cantidad])
     end
   end
+
 end
