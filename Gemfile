@@ -31,6 +31,8 @@ gem 'devise'
 gem 'cancan'
 # Seed Migration: https://github.com/harrystech/seed_migration
 gem 'seed_migration'
+# Creates Excel files
+gem 'writeexcel'
 
 group :development do
   # Spring speeds up development by keeping your application running in the
