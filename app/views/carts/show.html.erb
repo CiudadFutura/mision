@@ -17,7 +17,7 @@
   <% elsif !current_usuario.circulo %>
     <p class="explicacion"><span class="label label-warning">No perteneces a ningun circulo. Comunicate con un coordinador. Recuerda que tu numero de usuario es <b><%= current_usuario.id %></b></span></p>
   <% elsif current_usuario.pedido?(Compra::ciclo_actual) %>
-    <p class="explicacion"><span class="label label-warning">Discula. Ya haz realizado tu pedido. Por el momento la misión solo admite un pedido por usuario por ciclo.</b></span></p>
+    <p class="explicacion"><span class="label label-warning">Disculpa. Ya haz realizado tu pedido. Por el momento la misión solo admite un pedido por usuario por ciclo.</span></p>
   <% end %>
 
   <% unless @carrito.empty? %>
