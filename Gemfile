@@ -31,7 +31,7 @@ gem 'devise'
 gem 'cancan'
 # Seed Migration: https://github.com/harrystech/seed_migration
 gem 'seed_migration'
-# Creates Excel files
+# Creates Excel files: https://github.com/cxn03651/writeexcel/
 gem 'writeexcel'
 
 group :development do
