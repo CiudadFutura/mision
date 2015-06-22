@@ -7,6 +7,8 @@ class Producto < ActiveRecord::Base
 
   mount_uploader :imagen, ImagenUploader
 
+  has_paper_trail
+  
   scope :disponibles, -> { where(oculto: false) }
 
   after_initialize :default_cantidad_permitida

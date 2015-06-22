@@ -31,6 +31,8 @@ gem 'devise'
 gem 'cancan'
 # Seed Migration: https://github.com/harrystech/seed_migration
 gem 'seed_migration'
+# Versioning models: https://github.com/airblade/paper_trail
+gem 'paper_trail', '~> 4.0.0.rc'
 
 group :development do
   # Spring speeds up development by keeping your application running in the

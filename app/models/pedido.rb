@@ -5,6 +5,8 @@ class Pedido < ActiveRecord::Base
 
   validate :circulo, presence: true
 
+  has_paper_trail
+
   def total
     total = 0.0
     JSON.parse(items).each { |item| total += item['total'] || 0 }

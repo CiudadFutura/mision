@@ -12,6 +12,10 @@ class ApplicationController < ActionController::Base
     @current_ability ||= Ability.new(current_usuario)
   end
 
+  def user_for_paper_trail
+    current_usuario ? current_usuario.id : 'Public user'
+  end
+
   def init_carrito
     @carrito = Cart.new(session)
   end

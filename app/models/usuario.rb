@@ -6,6 +6,8 @@ class Usuario < ActiveRecord::Base
   belongs_to :circulo
   has_many :pedidos
 
+  has_paper_trail
+
   ADMIN = 'Admin'
   COORDINADOR = 'Coordinador'
   USUARIO = 'Usuario'
