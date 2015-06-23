@@ -10,6 +10,14 @@ class Usuario < ActiveRecord::Base
   COORDINADOR = 'Coordinador'
   USUARIO = 'Usuario'
 
+  def nombre
+    super.nil? ? '' : super
+  end
+
+  def apellido
+    super.nil? ? '' : super
+  end
+
   def self.types
     [ADMIN, COORDINADOR, USUARIO]
   end

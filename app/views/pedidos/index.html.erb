@@ -2,6 +2,9 @@
 <div class="row">
   <div class="pedidos">
       <h1>Pedidos realizados</h1>
+      
+      <%= link_to "Exportar CSV", pedidos_path(format: "csv"), class: "btn btn-success btn-xs" %>
+
       <table class='table table-striped' data-search="true">
         <thead>
           <tr>
@@ -19,7 +22,7 @@
             <td><%= p.id %></td>
             <td><%= l p.created_at %></td>
             <td><%= p.ciclo.nombre %></td>
-            <td><%= p.circulo.coordinador.nombre  + ' ' + p.circulo.coordinador.apellido%></td>
+            <td><%= p.circulo.coordinador.nombre + ' ' + p.circulo.coordinador.apellido%></td>
             <td><%= p.circulo.id%></td>
             <td>
               <%= link_to('Ver', pedido_path(p), class: 'btn btn-info btn-mini') %>

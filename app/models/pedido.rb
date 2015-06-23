@@ -18,4 +18,22 @@ class Pedido < ActiveRecord::Base
     end
   end
 
+  def self.to_csv
+    CSV.generate do |csv|
+      csv << ['ID Pedido', 'ID Ciclo', 'Usuario', 'ID Circulo', 'Producto', 'Cantidad']
+      all.each do |pedido|
+        JSON.parse(pedido.items, symbolize_names: true).each do |item| 
+          csv << [
+            pedido.id,
+            pedido.ciclo.id,
+            "#{pedido.usuario.apellido}, #{pedido.usuario.nombre}",
+            pedido.circulo.id,
+            Producto.find(item[:producto_id]).nombre,
+            item[:cantidad]
+          ]
+        end
+      end
+    end
+  end
+
 end

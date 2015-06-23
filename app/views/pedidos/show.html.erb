@@ -15,7 +15,7 @@
       <% if can? [:manage], pedidos_path %>
           <span> | </span>
           <li>
-            <%= link_to(pedidos_path(format:'xls')) do %>
+            <%= link_to(pedido_path(@pedido, format:'xls')) do %>
                 Exportar a Excel
             <% end %>
           </li>
