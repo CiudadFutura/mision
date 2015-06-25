@@ -7,11 +7,14 @@ gem 'mysql2'
 
 gem 'therubyracer',  platforms: :ruby
 # Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
+gem 'sprockets', '2.11.0'
 gem 'less-rails'
 # https://github.com/seyhunak/twitter-bootstrap-rails
 gem 'twitter-bootstrap-rails'
 # https://github.com/carrierwaveuploader/carrierwave
 gem 'carrierwave'
+
+gem 'tilt'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -45,12 +48,6 @@ group :development do
   gem 'binding_of_caller'
   gem "rails_best_practices"
 end
-
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
-
-# Use unicorn as the app server
-# gem 'unicorn'
 
 # Use Capistrano for deployment
 gem 'capistrano', '~> 3.1.0'
