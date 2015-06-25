@@ -4,12 +4,25 @@ class PedidosController < ApplicationController
   def index
     if current_usuario.admin?
       @pedidos = Pedido.all
+      respond_to do |format|
+        format.html
+        format.csv { render csv: @pedidos.to_csv, filename: "export" }
+      end
     elsif current_usuario.coordinador? || current_usuario.usuario?
       @pedidos = Pedido.where(usuario_id: current_usuario.id)
     end
   end
 
   def show
+    if current_usuario.admin?
+      @pedidos = Pedido.all
+      respond_to do |format|
+        format.html
+        format.xls
+      end
+    elsif current_usuario.coordinador? || current_usuario.usuario?
+      @pedidos = Pedido.where(usuario_id: current_usuario.id)
+    end
   end
 
   def edit

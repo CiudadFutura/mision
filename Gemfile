@@ -33,6 +33,8 @@ gem 'cancan'
 gem 'seed_migration'
 # Versioning models: https://github.com/airblade/paper_trail
 gem 'paper_trail', '~> 4.0.0.rc'
+# Creates Excel files: https://github.com/cxn03651/writeexcel/
+gem 'writeexcel'
 
 group :development do
   # Spring speeds up development by keeping your application running in the

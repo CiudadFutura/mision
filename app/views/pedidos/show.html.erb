@@ -1,25 +1,56 @@
 <div class="row">
-  <h2>Detalle de Pedido</h2>
-  
-  <%= link_to t('.back', :default => t("helpers.links.back")),
-              pedidos_path, :class => 'btn btn-default btn-xs'  %>
+  <div class="pedidos">
+    <div class="col-md-8">
+      <h2>Detalle de Pedido</h2>
+      <h4><%= @pedido.usuario.nombre %> <%= @pedido.usuario.apellido %></h4>
+        <p>Círculo N°: <%= @pedido.circulo.id%></p>
+    </div>
+    <div class="col-md-4">
+      <h3 class="text-right"><%= (@pedido.created_at).strftime('%d/%m/%Y')%></h3>
+    </div>
 
-  <table class='table table-striped'>
-    <thead>
-      <tr>
-        <th>Producto</th>
-        <th>Cantidad</th>
-        <th>Importe Total</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% JSON.parse(@pedido.items).each do |i| %>
-        <tr>
-          <td><%= Producto.find(i['producto_id']).nombre %></td>
-          <td><%= i['cantidad'].to_i %></td>
-          <td><%= number_to_currency(i['total']) %></td>
-        </tr>
+    <div class="breadcrumb col-md-12">
+       <%= link_to t('.back', :default => t("helpers.links.back")),
+                   pedidos_path %>
+      <% if can? [:manage], pedidos_path %>
+          <span> | </span>
+          <li>
+            <%= link_to(pedido_path(@pedido, format:'xls')) do %>
+                Exportar a Excel
+            <% end %>
+          </li>
       <% end %>
-    </tbody>
-  </table>
+    </div>
+
+      <table class='table table-striped'>
+        <thead>
+          <tr>
+            <th class="span8">Producto</th>
+            <th class="span2 text-right">Cantidad</th>
+            <th class="span2 text-right">Importe Total</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% total = 0
+           qty = 0
+        %>
+          <% JSON.parse(@pedido.items).each do |i| %>
+            <tr>
+              <td class="span8"><%= Producto.find(i['producto_id']).nombre %></td>
+              <td class="span2 text-right"><%= i['cantidad'].to_i %></td>
+              <td class="span2 text-right"><%= number_to_currency(i['total']) %></td>
+            </tr>
+            <% total = total+i['total']
+            qty = qty +i['cantidad'].to_i %>
+          <% end %>
+        </tbody>
+        <tfoot>
+            <tr class="info">
+              <td class="span8 text-right">Total</td>
+              <td class="span2 text-right"><%= qty %></td>
+              <td class="span2 text-right"><%= number_to_currency(total) %></td>
+            </tr>
+        </tfoot>
+      </table>
+  </div>
 </div>

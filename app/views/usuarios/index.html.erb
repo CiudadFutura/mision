@@ -17,18 +17,18 @@
           </tr>
         </thead>
 
-    <tbody>
-      <% @usuarios.each do |usuario| %>
-        <tr>
-          <td><%= usuario.id %></td>
-          <td><%= usuario.nombre %></td>
-          <td><%= usuario.apellido %></td>
-          <td><%= usuario.type %></td>
-          <td><%= link_to 'Ver', usuario, class: 'btn btn-info btn-mini' %></td>
-          <td><%= link_to 'Modificar', edit_usuario_path(usuario), class: 'btn btn-warning btn-mini' %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-    
+      <tbody>
+        <% @usuarios.each do |usuario| %>
+            <tr>
+              <td><%= usuario.id %></td>
+              <td><%= usuario.nombre %></td>
+              <td><%= usuario.apellido %></td>
+              <td><%= usuario.type %></td>
+              <td><%= link_to 'Ver', usuario, class: 'btn btn-info btn-mini' %></td>
+              <td><%= link_to 'Modificar', edit_usuario_path(usuario), class: 'btn btn-warning btn-mini' %></td>
+            </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>

@@ -1,0 +1,41 @@
+<?xml version="1.0" ?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+          xmlns:o="urn:schemas-microsoft-com:office:office"
+          xmlns:x="urn:schemas-microsoft-com:office:excel"
+          xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+          xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet">
+    <Table>
+      <% total = 0
+         qty = 0
+         @pedidos.each do |pedido| %>
+      <Row>
+        <Cell><Data ss:Type="String"><%=pedido.usuario.nombre + " " + pedido.usuario.apellido %></Data></Cell>
+        <Cell><Data ss:Type="String"><%=pedido.created_at %></Data></Cell>
+        <Cell><Data ss:Type="String">Fecha: <%=pedido.created_at %></Data></Cell>
+        <Cell><Data ss:Type="String">Circulo: <%=pedido.circulo_id %></Data></Cell>
+      </Row>
+      <Row>
+        <Cell><Data ss:Type="String">Producto</Data></Cell>
+        <Cell><Data ss:Type="String">Cantidad</Data></Cell>
+        <Cell><Data ss:Type="String">Importe</Data></Cell>
+      </Row>
+      <%
+        JSON.parse(pedido.items).each do |i|%>
+          <Row>
+            <Cell><Data ss:Type="String"><%= Producto.find(i['producto_id']).nombre %></Data></Cell>
+            <Cell><Data ss:Type="String"><%=i['cantidad'].to_i  %></Data></Cell>
+            <Cell><Data ss:Type="Currency"><%=i['total']  %></Data></Cell>
+          </Row>
+          <% total = total+i['total']
+          qty = qty +i['cantidad'].to_i %>
+        <% end %>
+          <Row>
+            <Cell><Data ss:Type="String">Total</Data></Cell>
+            <Cell><Data ss:Type="String"><%= qty %></Data></Cell>
+            <Cell><Data ss:Type="Currency"><%= number_to_currency(total) %></Data></Cell>
+          </Row>
+      <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>
