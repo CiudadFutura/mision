@@ -83,22 +83,6 @@ class InitialSeed < SeedMigration::Migration
     productoSocial.supplier = proveedor
     productoSocial.save!
 
-
-    usuarios = [
-      { nombre: 'admin', password: '!QAZzaq1', email: 'admin@example.com', type: 'Admin' },
-      { nombre: 'coordinador', password: '!QAZzaq1', email: 'coordinador@example.com', type: 'Coordinador' },
-      { nombre: 'usuario', password: '!QAZzaq1', email: 'usuario@example.com', type: 'Usuario' },
-      { nombre: 'nicolas', password: '!QAZzaq1', email: 'nicofheredia@gmail.com', type: 'Usuario' },
-      { nombre: 'daniel', password: '!QAZzaq1', email: 'daniel@example.com', type: 'Usuario' },
-      { nombre: 'andres', password: '!QAZzaq1', email: 'andres.cachero@gmail.com', type: 'Usuario' },
-      { nombre: 'diego', password: '!QAZzaq1', email: 'diego@example.com', type: 'Usuario' },
-    ]
-
-    usuarios.each do |u|
-      user = Usuario.new(u)
-      user.save!(validate: false)
-    end
-
     compras = [
         { nombre: 'Abril', descripcion: '!QAZzaq1', fecha_inicio_compras: DateTime.new(2015,04,01), fecha_fin_compras: DateTime.new(2015,04,01), fecha_fin_pagos: DateTime.new(2015,04,01), fecha_entrega_compras:DateTime.new(2015,04,01) },
         { nombre: 'Mayo', descripcion: '!QAZzaq1', fecha_inicio_compras: DateTime.new(2015,05,01), fecha_fin_compras: DateTime.new(2015,05,01), fecha_fin_pagos: DateTime.new(2015,05,01), fecha_entrega_compras: DateTime.new(2015,05,01) },
@@ -109,15 +93,6 @@ class InitialSeed < SeedMigration::Migration
       compra = Compra.new(c)
       compra.save!(validate: false)
     end
-
-    circulo = Circulo.create!(coordinador_id: Usuario.find_by_nombre('coordinador').id)
-    usuario = Usuario.find_by_nombre('usuario')
-    usuario.circulo = circulo
-    usuario.save!
-
-    usuario = Usuario.find_by_nombre('coordinador')
-    usuario.circulo = circulo
-    usuario.save!
 
   end
 
