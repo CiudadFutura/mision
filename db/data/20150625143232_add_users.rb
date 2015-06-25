@@ -1,12 +1,5 @@
 class AddUsers < SeedMigration::Migration
   def up
-    Usuario.delete_all
-    Circulo.delete_all
-
-    puts "Usuario"
-    # puts Usuario.find(1)
-    puts Usuario.all
-    puts "end"
     # Create Usuarios without circulo nor type
     JSON.parse(open("db/json/usuarios_purgados.json").read).each do |u|
       user = Usuario.new()
@@ -29,7 +22,6 @@ class AddUsers < SeedMigration::Migration
     # Create Circulo and assign type to Coordinadores
     JSON.parse(open("db/json/circulos.json").read).each do |circ|
       c = Circulo.find_or_create_by(id: circ['numero']) do |circulo|
-        #puts "circulo['coordinador_id'] #{circulo['coordinador_id']}"
         user = Usuario.find(circ['coordinador_id'])
         user.type = Usuario::COORDINADOR
         user.save!
