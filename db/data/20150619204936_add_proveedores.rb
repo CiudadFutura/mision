@@ -6,7 +6,6 @@ class AddProveedores < SeedMigration::Migration
     proveedores = codigo_proveedor.map{|cp| cp[1]}.uniq
     proveedores.each do |p|
       proveedor = Supplier.create!(name: p, nature: :retailer)
-      puts proveedor
     end
     codigo_proveedor.each do |cp|
       proveedor = Supplier.where(name: cp[1]).first
