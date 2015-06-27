@@ -10,12 +10,22 @@
         <span class="cart-total"><%= number_to_currency(@carrito.total) %></span><br>
         <span class="cart-cantidad"><%= pluralize(@carrito.cantidad, ' producto', ' productos') %></span>
       </li>
-      <li class="col-3">
-        <%=
-           link_to_if(controller.controller_name != "carts", "", cart_path, class: '') do
-             link_to "", productos_path, class: ''
-           end
-        %>
+      <li class="col-4">
+        <% if (controller.controller_name == 'carts')
+           if (@ciclo_actual)%>
+              <%= link_to(cart_path) do %>
+                <span class="icon-lmcart"></span>Ver Mi Compra
+              <%end%>
+           <% else %>
+              <%= link_to(productos_path, class:'prod-list') do %>
+                <i class="icon-lmcart"></i>Ir a la Tienda
+              <% end %>
+           <% end %>
+        <% else %>
+          <%= link_to(cart_path, class:'prod-list') do %>
+                <i class="icon-lmcart"></i>Ver Mi Compra
+            <% end %>
+        <% end %>
       </li>
   </ul>
   </div>
