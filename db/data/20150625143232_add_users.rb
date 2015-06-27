@@ -18,18 +18,17 @@ class AddUsers < SeedMigration::Migration
         user.email    = u['email']
         user.dni      = u['dni']
         user.type     = Usuario::USUARIO
+        next if user.email.empty?
         user.save!(validate: false)
-        puts "user_id: #{user.id}"
       end
 
       # Create Circulo and assign type to Coordinadores
       JSON.parse(open("db/json/circulos.json").read).each do |circ|
         c = Circulo.find_or_create_by(id: circ['numero']) do |circulo|
-          user = Usuario.find(circ['coordinador_id'])
+          user = Usuario.where(email: circ['email_coordinador']).first
           user.type = Usuario::COORDINADOR
           user.save!
-          p user
-          coordinador = Usuario.find(circ['coordinador_id'])
+          coordinador = Usuario.where(email: circ['email_coordinador']).first
           circulo.id = circ['numero']
           circulo.coordinador = coordinador
         end
@@ -37,8 +36,9 @@ class AddUsers < SeedMigration::Migration
 
       # Assign Cirulos to each usuario
       JSON.parse(open("db/json/usuarios_purgados.json").read).each do |u|
-        user = Usuario.find(email: u['email'])
-        user.circulo = Circulo.find(u['circulo_id'])
+        next if u['circulo_id'] == "null" || u['circulo_id'].nil?
+        user = Usuario.where(email: u['email']).first
+        user.circulo = Circulo.find(u['circulo_id']) 
         user.save!
       end
     end
