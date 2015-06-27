@@ -18,6 +18,8 @@ class AddUsers < SeedMigration::Migration
         user.email    = u['email']
         user.dni      = u['dni']
         user.type     = Usuario::USUARIO
+        user.skip_confirmation_notification!
+        user.confirmed_at = Time.now 
         next if user.email.empty?
         user.save!(validate: false)
       end
