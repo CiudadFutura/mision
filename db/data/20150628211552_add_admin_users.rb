@@ -10,6 +10,8 @@ class AddAdminUsers < SeedMigration::Migration
         type: 'Admin' }
 
       user = Usuario.new(usuario)
+      user.skip_confirmation_notification!
+      user.confirmed_at = Time.now
       user.save!(validate: false)
 
     end
