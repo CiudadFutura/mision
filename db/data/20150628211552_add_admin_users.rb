@@ -9,7 +9,7 @@ class AddAdminUsers < SeedMigration::Migration
         email: 'victoriacolectiva@misionantiinflacion.com.ar', 
         type: 'Admin' }
 
-      user = Usuario.new(u)
+      user = Usuario.new(usuario)
       user.save!(validate: false)
 
     end
