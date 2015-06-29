@@ -4,7 +4,7 @@
 <div class="mycart">
   <div id="mycart" class="row cart">
 
-      <% if @ciclo_actual && current_usuario.circulo && !current_usuario.pedido?(Compra::ciclo_actual) %>
+      <% if @ciclo_actual && current_usuario && current_usuario.circulo && !current_usuario.pedido?(Compra::ciclo_actual) %>
         <h1 class="titulo">Revisa tu pedido y confirmalo.</h1>
 
         <p class="explicacion">
@@ -64,7 +64,7 @@
             </tr>
           </tbody>
         </table>
-        <% if @ciclo_actual && current_usuario.circulo && !current_usuario.pedido?(Compra::ciclo_actual) %>
+        <% if @ciclo_actual && current_usuario && current_usuario.circulo && !current_usuario.pedido?(Compra::ciclo_actual) %>
           <div class="row">
             <%= link_to('Finalizar Compra', create_pedido_cart_path, method: :put, class: 'btn btn-default checkout') %>
           </div>
