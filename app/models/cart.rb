@@ -53,11 +53,12 @@ class Cart
   end
 
   def ahorro
-    total = 0.0
+    total_mision = total_ahorro = 0
     @items.each do |_k, v|
-      total += v.ahorro || 0
+      total_mision += v.total
+      total_ahorro += v.total_super
     end
-    total.to_f
+    (1 - (total_mision / total_ahorro)).to_f * 100
   end
 
   def total
