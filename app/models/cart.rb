@@ -58,6 +58,7 @@ class Cart
       total_mision += v.total
       total_ahorro += v.total_super
     end
+    return 0 if total_ahorro == 0
     (1 - (total_mision / total_ahorro)).to_f * 100
   end
 
