@@ -95,6 +95,8 @@ class InitialSeed < SeedMigration::Migration
 
       usuarios.each do |u|
         user = Usuario.new(u)
+        user.skip_confirmation_notification!
+        user.confirmed_at = Time.now
         user.save!(validate: false)
       end
 
