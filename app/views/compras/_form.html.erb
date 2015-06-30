@@ -1,7 +1,7 @@
 <%= form_for(@compra) do |f| %>
   <% if @compra.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@compra.errors.count, "error") %> prohibited this compra from being saved:</h2>
+      <h2><%= pluralize(@compra.errors.count, "error") %> No se pudo guardar el Ciclo de Compra:</h2>
 
       <ul>
       <% @compra.errors.full_messages.each do |message| %>

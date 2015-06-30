@@ -13,8 +13,8 @@
       <li class="col-4">
         <% if (controller.controller_name == 'carts')
            if (@ciclo_actual)%>
-              <%= link_to(cart_path) do %>
-                <span class="icon-lmcart"></span>Ver Mi Compra
+              <%= link_to(cart_path, class:'cart-in') do %>
+
               <%end%>
            <% else %>
               <%= link_to(productos_path, class:'prod-list') do %>
