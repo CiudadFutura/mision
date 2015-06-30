@@ -8,6 +8,8 @@ class Usuario < ActiveRecord::Base
 
   has_paper_trail
 
+  before_create :set_default_role
+
   ADMIN = 'Admin'
   COORDINADOR = 'Coordinador'
   USUARIO = 'Usuario'
@@ -45,6 +47,11 @@ class Usuario < ActiveRecord::Base
     pedido = self.pedidos.where(compra_id: ciclo_de_compra.id).first
     return pedido if pedido
     nil
+  end
+
+  private
+  def set_default_role
+    self.type ||= Usuario::USUARIO
   end
 
 end

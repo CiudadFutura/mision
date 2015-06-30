@@ -2,7 +2,7 @@
   <h1>Usuario <%= @usuario.nombre %></h1>
   <div class="usuarios">
     <div class="breadcrumb">
-      <%= link_to 'Modificar', edit_usuario_path(@usuario) %>
+      <%= link_to 'Modificar', edit_usuario_path(@usuario), class: 'btn btn-primary' %>
     </div>
       <div class="col-md-6">
         <h3>Tus datos:</h3>
@@ -65,7 +65,7 @@
       <div class="col-md-6">
         <% if @usuario.circulo.nil? %>
           <h3>No perteneces a ningun circulo.</h3>
-          <p>Comunicate con un coordinador de circulo para que te agregue. Recuerda que tu codigo de
+          <p class="label-warning">Comunicate con un coordinador de círculo para que te agregue. <br/>Recuerda que tu codigo de
           usuario es el: <b><%= @usuario.id%></b> </p>
         <% else %>
             <% if @ciclo_actual %>

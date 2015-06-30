@@ -36,4 +36,7 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   config.action_mailer.delivery_method = :test
+
+  config.action_mailer.default_url_options = { :host => '0.0.0.0:3000' }
+
 end
