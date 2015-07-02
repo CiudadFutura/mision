@@ -3,7 +3,7 @@
     <% if @producto.errors.any? %>
     <div id="error_expl" class="panel panel-danger">
       <div class="panel-heading">
-        <h3 class="panel-title"><%= pluralize(@producto.errors.count, "error") %> prohibited this producto from being saved:</h3>
+        <h3 class="panel-title"><%= pluralize(@producto.errors.count, "error") %> El producto no pudo ser guardado:</h3>
       </div>
       <div class="panel-body">
         <ul>

@@ -1,7 +1,7 @@
 <%= form_for(@circulo) do |f| %>
   <% if @circulo.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@circulo.errors.count, "error") %> prohibited this circulo from being saved:</h2>
+      <h2><%= pluralize(@circulo.errors.count, "error") %> El Círculo no pudo ser guardado:</h2>
 
       <ul>
       <% @circulo.errors.full_messages.each do |message| %>

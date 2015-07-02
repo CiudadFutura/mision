@@ -1,40 +1,7 @@
-<style>
-  h1 {
-    color: #333;
-    font-family: "Verdana"; /*"liberation_sansregular";*/
-    font-size: 48px;
-    margin-bottom: 40px;
-    text-align: center;
-}
-
-label span {
-    color: #bd3b2f;
-    float: right !important;
-    font-size: 12px;
-}
-
-.desc {
-    color: #333;
-    line-height: 24px;
-    text-align: right;
-}
-
-.lm-form-nav {
-    background: none repeat scroll 0 0 transparent;
-    border: 2px solid #bd3b2f;
-    border-radius: 4px;
-    color: #bd3b2f;
-    display: inline-block;
-    font-size: 16px;
-    font-weight: bold;
-    padding: 14px !important;
-    text-transform: uppercase;
-}
-
-</style>
-<% if @usuario.errors.any? %>
+<div class="usuarios">
+  <% if @usuario.errors.any? %>
   <div id="error_explanation">
-    <h2><%= pluralize(@usuario.errors.count, "error") %> prohibited this usuario from being saved:</h2>
+    <h2><%= pluralize(@usuario.errors.count, "error") %> El usuario no pudo ser guardado:</h2>
 
     <ul>
     <% @usuario.errors.full_messages.each do |message| %>
@@ -100,7 +67,7 @@ label span {
         <%= f.text_field :codigo_postal, class: 'form-control' %>
       </div>
       <div class="form-group">
-        <label for="telefono">Teléfono: <span>[requerido]</span></label>
+        <label for="telefono">Teléfono: </label>
         <%= f.text_field :tel1, class: 'form-control' %>
       </div>
       <div class="form-group">
@@ -129,3 +96,4 @@ label span {
     </div>
   </div>
 <% end %>
+</div>

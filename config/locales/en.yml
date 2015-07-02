@@ -11,6 +11,23 @@ en:
         name: Nombre
         address: Dirección
         nature: Tipo
+    errors:
+      models:
+        usuario:
+          attributes:
+            email:
+              blank: "Debe ingresar el email"
+            password:
+              blank: "Debe ingresar la clave"
+            codigo_postal:
+              blank: "Debe ingresar el CP"
+            ciudad:
+              blank: "Debe ingresar la Ciudad"
+            calle:
+              blank: "Debe ingresar la Calle"
+            dni:
+              blank: "Debe ingresar el DNI"
+
   date:
     formats:
       # Use the strftime parameters for formats.

@@ -13,7 +13,7 @@ en:
       locked: "Your account is locked."
       last_attempt: "You have one more attempt before your account will be locked."
       not_found_in_database: "Invalid email or password."
-      timeout: "Your session expired. Please sign in again to continue."
+      timeout: "Tù sesión expiró. Ingrese nuevamente al sitio."
       unauthenticated: "Debes ingresar con tu cuenta o registrarte para ingresar al sitio."
       unconfirmed: "Por favor confirma tu cuenta antes de continuar."
     mailer:
