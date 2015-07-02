@@ -1,5 +1,8 @@
 <div class="row">
   <h1>Usuarios</h1>
+
+  <%= link_to "Exportar CSV", usuarios_path(format: "csv"), class: "btn btn-success btn-xs" %>
+
   <div class="usuarios">
     <div class="navbar navs-fixed">
       <%= link_to t('.new', :default => t("helpers.links.new")),

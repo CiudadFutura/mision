@@ -1,3 +1,5 @@
+require 'csv'
+
 class Usuario < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -47,6 +49,19 @@ class Usuario < ActiveRecord::Base
     pedido = self.pedidos.where(compra_id: ciclo_de_compra.id).first
     return pedido if pedido
     nil
+  end
+
+  def self.to_csv
+    CSV.generate do |csv|
+      csv << ['Usuario Nro', 'Apellido y Nombre', 'Email']
+      all.each do |usuario|
+        csv << [
+          usuario.id,
+          "#{usuario.apellido}, #{usuario.nombre}",
+          usuario.email,
+        ]
+      end
+    end
   end
 
   private

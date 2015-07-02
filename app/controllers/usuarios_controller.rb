@@ -7,6 +7,10 @@ class UsuariosController < ApplicationController
   def index
     @usuarios = Usuario.all
     authorize! :index, @usuarios
+    respond_to do |format|
+      format.html
+      format.csv { render csv: @usuarios.to_csv, filename: "#{Time.now.to_i}_usuarios" }
+    end
   end
 
   # GET /usuarios/1
