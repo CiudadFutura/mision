@@ -8,7 +8,7 @@ class Producto < ActiveRecord::Base
   mount_uploader :imagen, ImagenUploader
 
   has_paper_trail
-  
+
   scope :disponibles, -> { where(oculto: false) }
 
   after_initialize :default_cantidad_permitida
@@ -33,6 +33,46 @@ class Producto < ActiveRecord::Base
   def populate!(params)
     imagen = params[:imagen]
     categorias = Categoria.find(params[:categorias].select {|k,v| v == "1"}.keys)
+  end
+
+  def self.import(file)
+    all.each do |prod|
+      prod.oculto = true
+      prod.codigo = prod.codigo.upcase
+      prod.save!
+    end
+    CSV.foreach(file.path, {:headers=>:first_row}) do |row|
+      # File Columns: 0)código 1)Estado 2)Cod. Proveedor 3)Proveedor
+      #               4)Producto 5)Descripcion del producto
+      #               6)Precio final 7)Supermercado
+      prod = Producto.find_or_create_by(codigo: row[0].upcase)
+      prod.oculto = false if row[1] == 'activo'
+      prod.supplier = Supplier.find(row[2]) || Supplier.find(1)
+      prod.nombre = row[4]
+      prod.descripcion = row[5]
+      prod.precio = row[6]
+      prod.precio_super = row[7]
+      prod.save!
+    end
+  end
+
+  def self.to_csv
+    CSV.generate do |csv|
+      csv << ['Codigo', 'Estado', 'Cod. Proveedor', 'Proveedor', 'Nombre',
+              'Descripcion', 'Precio final', 'Precio super']
+      all.each do |prod|
+        csv << [
+          prod.codigo,
+          prod.oculto ? 'oculto' : 'activo',
+          prod.supplier.id,
+          prod.supplier.name,
+          prod.nombre,
+          prod.descripcion,
+          prod.precio,
+          prod.precio_super,
+        ]
+      end
+    end
   end
 
 end

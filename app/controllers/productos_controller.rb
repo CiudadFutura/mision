@@ -16,6 +16,13 @@ class ProductosController < ApplicationController
       @productos = Producto.all.order(:nombre)
     end
     @productos = @productos.disponibles.order(:nombre) if current_usuario.nil? || !current_usuario.admin?
+
+    if current_usuario.admin?
+      respond_to do |format|
+        format.html
+        format.csv { render csv: @productos.to_csv, filename: "#{Time.now.to_i}_productos" }
+      end
+    end
   end
 
   # GET /productos/1
@@ -73,6 +80,11 @@ class ProductosController < ApplicationController
     end
   end
 
+  def upload
+    Producto.import(params[:file])
+    redirect_to productos_url, notice: "Productos actualizados."
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_producto
@@ -81,7 +93,7 @@ class ProductosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def producto_params
-      params.require(:producto).permit(:precio, :nombre, :codigo, :descripcion, 
+      params.require(:producto).permit(:precio, :nombre, :codigo, :descripcion,
                                        :precio_super, :oculto, :supplier_id,
                                        :cantidad_permitida, :imagen, categoria_ids: []
                                         )

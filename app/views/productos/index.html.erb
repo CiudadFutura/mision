@@ -4,11 +4,23 @@
 <% end %>
 
 <% if can? [:manage], Producto %>
-    <div class="navbar navs-fixed">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="navbar navs-fixed">
         <%= link_to t('.new', :default => t("helpers.links.new")),
                     new_producto_path,
                     :class => 'btn btn-primary' if can? :manage, Producto %>
+        <%= link_to "Exportar CSV", productos_path(format: "csv"), class: "btn btn-success" %>
+      </div>
+
+      <%= form_tag(upload_productos_path, multipart: true, class: 'form-inline') do %>
+        <div class="form-group">
+          <%= file_field_tag 'file' %>
+        </div>
+        <%= submit_tag 'Subir', class: "btn btn-success btn-xs"%>
+      <% end %>
     </div>
+   </div>
 <% end %>
 
 <div id="productos" class="row list-group">
@@ -39,8 +51,8 @@
             <% end %>
           </select>
           <% if @carrito.producto?(producto.id) %>
-            <%= button_tag(type: 'button', 
-                           class: 'btn btn btn-default', 
+            <%= button_tag(type: 'button',
+                           class: 'btn btn btn-default',
                            data: {
                              action: 'remove',
                              productId: producto.id
@@ -48,8 +60,8 @@
                 <span class="icon-cart glyphicon-align-left"></span> <span class="cart-action">Eliminar del</span> carro
             <% end %>
           <% else %>
-            <%= button_tag(type: 'button', 
-                           class: 'btn btn btn-default', 
+            <%= button_tag(type: 'button',
+                           class: 'btn btn btn-default',
                            data: {
                             productId: producto.id,
                             action: 'add'

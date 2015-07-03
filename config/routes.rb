@@ -17,7 +17,9 @@ Rails.application.routes.draw do
 
   get 'carts/show'
 
-  resources :productos
+  resources :productos do
+    collection { post 'upload' }
+  end
   resources :categorias
   resources :pedidos, only: [:index, :show, :edit]
   resources :home

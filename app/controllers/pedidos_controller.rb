@@ -6,7 +6,7 @@ class PedidosController < ApplicationController
       @pedidos = Pedido.all
       respond_to do |format|
         format.html
-        format.csv { render csv: @pedidos.to_csv, filename: "export" }
+        format.csv { render csv: @pedidos.to_csv, filename: "#{Time.now.to_i}_pedidos" }
       end
     elsif current_usuario.coordinador? || current_usuario.usuario?
       @pedidos = Pedido.where(usuario_id: current_usuario.id)
