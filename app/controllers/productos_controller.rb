@@ -17,7 +17,7 @@ class ProductosController < ApplicationController
     end
     @productos = @productos.disponibles.order(:nombre) if current_usuario.nil? || !current_usuario.admin?
 
-    if current_usuario.admin?
+    if current_usuario && current_usuario.admin?
       respond_to do |format|
         format.html
         format.csv { render csv: @productos.to_csv, filename: "#{Time.now.to_i}_productos" }
