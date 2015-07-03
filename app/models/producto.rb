@@ -57,7 +57,7 @@ class Producto < ActiveRecord::Base
   end
 
   def self.to_csv
-    CSV.generate do |csv|
+    CSV.generate(force_quotes: true) do |csv|
       csv << ['Codigo', 'Estado', 'Cod. Proveedor', 'Proveedor', 'Nombre',
               'Descripcion', 'Precio final', 'Precio super']
       all.each do |prod|
