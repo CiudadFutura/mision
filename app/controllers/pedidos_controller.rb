@@ -4,6 +4,11 @@ class PedidosController < ApplicationController
   def index
     if current_usuario.admin?
       @pedidos = Pedido.all
+      if(params[:ciclo_id])
+        @pedidos = @pedidos.where(compra_id: params[:ciclo_id])
+      end
+      @pedidos = @pedidos.order(:updated_at)
+      @ciclos = Compra.all.order('fecha_fin_compras DESC')
       respond_to do |format|
         format.html
         format.csv { render csv: @pedidos.to_csv, filename: "#{Time.now.to_i}_pedidos" }

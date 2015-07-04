@@ -2,8 +2,22 @@
 <div class="row">
   <div class="pedidos">
       <h1>Pedidos realizados</h1>
-      
-      <%= link_to "Exportar CSV", pedidos_path(format: "csv"), class: "btn btn-success btn-xs" %>
+
+      <% if current_usuario && current_usuario.admin? %>
+        <%= link_to "Exportar CSV", pedidos_path(format: "csv"), class: "btn btn-success btn-xs" %>
+        <%= form_tag pedidos_path, method: :get, class: 'form-inline' do %>
+          <h3>Filtros:</h3>
+          <div class="form-group">
+            <label for="ciclo_id">Ciclo:</label>
+            <select name="ciclo_id" class="form-control input-sm">
+              <% @ciclos.each do |ciclo| %>
+                <option value="<%= ciclo.id %>"><%= ciclo.nombre %></option>
+              <% end %>
+            </select>
+          </div>
+          <%= submit_tag 'Filtrar', class: "btn btn-success btn-xs" %>
+        <% end %>
+      <% end %>
 
       <table class='table table-striped' data-search="true">
         <thead>
