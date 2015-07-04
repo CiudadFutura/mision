@@ -96,7 +96,7 @@
                   <td><%= u.id %></td>
                   <td><%= u.pedido?(Compra::ciclo_actual) ? '<i class="fa fa-check-circle-o" title="Realizado"></i>'.html_safe : '<i class="fa fa-circle-o" title="Pendiente"></i>'.html_safe %></td>
                   <td><%= number_to_currency(u.pedido_del_ciclo(Compra::ciclo_actual).try('total')) %></td>
-                  
+
                     <% if can?(:remove_usuario , @usuario.circulo) && !u.coordinador?%>
                       <td>
                         <%= link_to 'Eliminar', circulo_remove_usuario_path(circulo_id: @usuario.circulo.id, usuario_id: u.id), method: :delete, data: { confirm: 'Esta seguro?' }, class: 'btn btn-danger btn-xs' + (u.pedido?(Compra::ciclo_actual) ? ' disabled' : '') %>
@@ -106,7 +106,7 @@
               <% end %>
             </tbody>
           </table>
-          <div class="text-right csocial"><span>Cuota Social:</span> $<%=Producto.find_by_codigo('CSocial').precio %></div>
+          <div class="text-right csocial"><span>Cuota Social:</span> $<%=Producto.find_by_codigo('CSOCIAL').precio %></div>
           <% if can?(:remove_usuario , @usuario.circulo) %>
             <i>* Solo podras eliminar usuarios sin pedidos realizados.</i><br/>
             <i>** Para abandonar el circulo, comunicate con la mision.</i>
