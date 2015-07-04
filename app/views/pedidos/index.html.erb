@@ -9,11 +9,9 @@
           <h3>Filtros:</h3>
           <div class="form-group">
             <label for="ciclo_id">Ciclo:</label>
-            <select name="ciclo_id" class="form-control input-sm">
-              <% @ciclos.each do |ciclo| %>
-                <option value="<%= ciclo.id %>"><%= ciclo.nombre %></option>
-              <% end %>
-            </select>
+            <%= select_tag "ciclo_id",
+                  options_from_collection_for_select(@ciclos, "id", "nombre", @ciclo_id),
+                  include_blank: true, class: 'form-control input-sm' %>
           </div>
           <%= submit_tag 'Filtrar', class: "btn btn-success btn-xs" %>
         <% end %>

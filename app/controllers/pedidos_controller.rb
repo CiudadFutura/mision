@@ -4,7 +4,9 @@ class PedidosController < ApplicationController
   def index
     if current_usuario.admin?
       @pedidos = Pedido.all
+      @ciclo_id = nil
       if(params[:ciclo_id])
+        @ciclo_id = params[:ciclo_id]
         @pedidos = @pedidos.where(compra_id: params[:ciclo_id])
       end
       @pedidos = @pedidos.order(:updated_at)
