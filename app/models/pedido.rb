@@ -17,27 +17,40 @@ class Pedido < ActiveRecord::Base
 
   def save_in_session(session)
     carrito = Cart.new(session)
-    JSON.parse(items, symbolize_names: true).each do |item| 
+    JSON.parse(items, symbolize_names: true).each do |item|
       carrito.add(item[:producto_id], item[:cantidad])
     end
   end
 
   def self.to_csv
-    CSV.generate do |csv|
+    CSV.generate(force_quotes: true) do |csv|
       csv << ['Pedido Nro', 'Ciclo Nro', 'Usuario Nro', 'Usuario', 'Circulo Nro', 'Codigo Prod.', 'Nombre Prod.', 'Cantidad']
       all.each do |pedido|
         JSON.parse(pedido.items, symbolize_names: true).each do |item|
-          producto = Producto.find(item[:producto_id])
-          csv << [
-            pedido.id,
-            pedido.ciclo.id,
-            pedido.usuario.id,
-            "#{pedido.usuario.apellido}, #{pedido.usuario.nombre}",
-            pedido.circulo.id,
-            producto.codigo,
-            producto.nombre,
-            item[:cantidad]
-          ]
+          begin
+            producto = Producto.find(item[:producto_id])
+            csv << [
+              pedido.id,
+              pedido.ciclo.id,
+              pedido.usuario.id,
+              "#{pedido.usuario.apellido}, #{pedido.usuario.nombre}",
+              pedido.circulo.id,
+              producto.codigo,
+              producto.nombre,
+              item[:cantidad]
+            ]
+          rescue ActiveRecord::RecordNotFound
+            csv << [
+              pedido.id,
+              pedido.ciclo.id,
+              pedido.usuario.id,
+              "#{pedido.usuario.apellido}, #{pedido.usuario.nombre}",
+              pedido.circulo.id,
+              item[:producto_id],
+              'ERROR',
+              item[:cantidad]
+            ]
+          end
         end
       end
     end

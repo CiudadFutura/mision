@@ -4,7 +4,7 @@
       <h1>Pedidos realizados</h1>
 
       <% if current_usuario && current_usuario.admin? %>
-        <%= link_to "Exportar CSV", pedidos_path(format: "csv"), class: "btn btn-success btn-xs" %>
+        <%= link_to "Exportar CSV", pedidos_path(format: "csv", ciclo_id: @ciclo_id), class: "btn btn-success btn-xs" %>
         <%= form_tag pedidos_path, method: :get, class: 'form-inline' do %>
           <h3>Filtros:</h3>
           <div class="form-group">
