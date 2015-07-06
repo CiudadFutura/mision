@@ -19,7 +19,7 @@
       <% @circulos.each do |circulo| %>
         <tr>
           <td><%= circulo.id %></td>
-          <td><%= circulo.coordinador.nombre %></td>
+          <td><%= circulo.try('coordinador').try('nombre') || 'Sin Coordinador' %></td>
           <td><%= link_to 'Mostrar', circulo, class: "btn btn-default btn-xs" %></td>
           <td><%= link_to 'Editar', edit_circulo_path(circulo), class: "btn btn-default btn-xs" %></td>
           <td><%= link_to 'Eliminar', circulo, method: :delete, data: { confirm: 'Esta seguro?' }, class: "btn btn-danger btn-xs"  %></td>
