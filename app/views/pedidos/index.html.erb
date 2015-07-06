@@ -34,7 +34,7 @@
             <td><%= p.id %></td>
             <td><%= l p.created_at %></td>
             <td><%= p.ciclo.nombre %></td>
-            <td><%= p.circulo.try('coordinador') ? (p.circulo.coordinado.rnombre + ' ' + p.circulo.coordinador.apellido) : 'SIN COORDINADOR' %></td>
+            <td><%= p.circulo.try('coordinador') ? (p.circulo.coordinador.nombre + ' ' + p.circulo.coordinador.apellido) : 'SIN COORDINADOR' %></td>
             <td><%= p.circulo.id%></td>
             <td>
               <%= link_to('Ver', pedido_path(p), class: 'btn btn-info btn-mini') %>
