@@ -8,6 +8,12 @@ class Compra < ActiveRecord::Base
     Compra.where('fecha_inicio_compras <= :today AND fecha_fin_compras >= :today', today: Time.current).first
   end
 
+  def self.ciclo_actual_completo
+    Compra.where('fecha_inicio_compras <= :today AND fecha_entrega_compras >= :today', today: Time.current).first
+  end
+
+
+
   def init
     self.fecha_inicio_compras ||= Time.current
     self.fecha_fin_compras ||= Time.current

@@ -17,7 +17,9 @@ class UsuariosController < ApplicationController
   # GET /usuarios/1.json
   def show
     @ciclo_actual = Compra::ciclo_actual
+    @ciclo_actual_completo = Compra::ciclo_actual_completo
   end
+
 
   # GET /usuarios/new
   def new

@@ -68,11 +68,11 @@
           <p class="label-warning">Comunicate con un coordinador de círculo para que te agregue. <br/>Recuerda que tu codigo de
           usuario es el: <b><%= @usuario.id%></b> </p>
         <% else %>
-            <% if @ciclo_actual %>
-                <p class="text-center">Ciclo Actual: <%= @ciclo_actual.nombre %></p>
-                <p>Desde el <strong><%= l @ciclo_actual.fecha_inicio_compras %></strong></p>
-                <p>hasta el <strong><%= l @ciclo_actual.fecha_fin_compras %></strong></p>
-                <p>Ultimo día para realizar el pago <strong><%= l @ciclo_actual.fecha_fin_pagos %></strong></p>
+            <% if @ciclo_actual_completo %>
+                <p class="text-center">Ciclo Actual: <%= @ciclo_actual_completo.nombre %></p>
+                <p>Desde el <strong><%= l @ciclo_actual_completo.fecha_inicio_compras %></strong></p>
+                <p>hasta el <strong><%= l @ciclo_actual_completo.fecha_fin_compras %></strong></p>
+                <p>Ultimo día para realizar el pago <strong><%= l @ciclo_actual_completo.fecha_fin_pagos %></strong></p>
             <% else %>
                 <div class="error text-center">No hay Ciclo Activo</div>
             <% end %>
@@ -94,7 +94,7 @@
                   <td><%= u.type %></td>
                   <td><%= u.nombre %></td>
                   <td><%= u.id %></td>
-                  <td><%= u.pedido?(Compra::ciclo_actual) ? '<i class="fa fa-check-circle-o" title="Realizado"></i>'.html_safe : '<i class="fa fa-circle-o" title="Pendiente"></i>'.html_safe %></td>
+                  <td><%= u.pedido?(Compra::ciclo_actual_completo) ? '<i class="fa fa-check-circle-o" title="Realizado"></i>'.html_safe : '<i class="fa fa-circle-o" title="Pendiente"></i>'.html_safe %></td>
                   <td><%= number_to_currency(u.pedido_del_ciclo(Compra::ciclo_actual).try('total')) %></td>
 
                     <% if can?(:remove_usuario , @usuario.circulo) && !u.coordinador?%>
@@ -106,7 +106,7 @@
               <% end %>
             </tbody>
           </table>
-          <div class="text-right csocial"><span>Cuota Social:</span> $<%=Producto.find_by_codigo('CSOCIAL').precio %></div>
+          <div class="text-right csocial"><span>Cuota Social:</span> $<%=Producto.find_by_codigo('CSocial').precio %></div>
           <% if can?(:remove_usuario , @usuario.circulo) %>
             <i>* Solo podras eliminar usuarios sin pedidos realizados.</i><br/>
             <i>** Para abandonar el circulo, comunicate con la mision.</i>
