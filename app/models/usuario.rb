@@ -24,6 +24,10 @@ class Usuario < ActiveRecord::Base
     super.nil? ? '' : super
   end
 
+  def nombre_completo
+    "#{apellido}, #{nombre}"
+  end
+
   def self.types
     [ADMIN, COORDINADOR, USUARIO]
   end
