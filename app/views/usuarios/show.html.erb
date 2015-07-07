@@ -109,7 +109,7 @@
               <% end %>
             </tbody>
           </table>
-          <div class="text-right csocial"><span>Cuota Social:</span> $<%=Producto.find_by_codigo('CSocial').precio %></div>
+          <div class="text-right csocial"><span>Cuota Social:</span> $<%=Producto.find_by_codigo('CSOCIAL').precio %></div>
           <% if can?(:remove_usuario , @usuario.circulo) %>
             <i>* Solo podras eliminar usuarios sin pedidos realizados.</i><br/>
             <i>** Para abandonar el circulo, comunicate con la mision.</i>

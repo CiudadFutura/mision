@@ -73,7 +73,7 @@ class InitialSeed < SeedMigration::Migration
 
     productoSocial = Producto.new
     productoSocial.descripcion = 'Cada círculo (sin importar si está compuesto por 3, 4 o 5 hogares), para obtener los beneficios de la Gran Misión y poder realizar sus compras a través de este mecanismo, debe abonar una cuota mensual de $150,00 (ciento cincuenta pesos argentinos). La misma se utilizará para el crecimiento y potencialización de la iniciativa, a través de la compra de equipamiento para el Centro de Distribución (cámaras de frío, estanterías, balanzas), como así también para financiar a los pequeños productores o productores familiares que necesiten mejorar su emprendimiento, a través de compra de equipamiento e insumos. Todas estas inversiones serán consultadas y comunicadas a los círculos de consumidores colaborativos, para que puedan ser parte del crecimiento y fortalecimiento de la iniciativa.'
-    productoSocial.codigo = 'CSocial'
+    productoSocial.codigo = 'CSOCIAL'
     productoSocial.nombre = 'Cuota Social Misión'
     productoSocial.precio = '150'
     productoSocial.oculto = true
