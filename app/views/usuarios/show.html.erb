@@ -95,7 +95,7 @@
                   <td><%= u.nombre %></td>
                   <td><%= u.id %></td>
                   <td><%= u.pedido?(Compra::ciclo_actual_completo) ? '<i class="fa fa-check-circle-o" title="Realizado"></i>'.html_safe : '<i class="fa fa-circle-o" title="Pendiente"></i>'.html_safe %></td>
-                  <td><%= number_to_currency(u.pedido_del_ciclo(Compra::ciclo_actual).try('total')) %></td>
+                  <td><%= number_to_currency(u.pedido_del_ciclo(Compra::ciclo_actual_completo).try('total')) %></td>
 
                     <% if can?(:remove_usuario , @usuario.circulo) && !u.coordinador?%>
                       <td>
