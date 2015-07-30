@@ -30,12 +30,20 @@ class Cart
   end
 
   def add(producto_id, cantidad)
-    @session[:items][producto_id] = cantidad
+    cantidad = @session[:items][producto_id] || 0
+    @session[:items][producto_id] = cantidad + 1
     load!
   end
 
-  def remove(producto_id)
-    @session[:items].delete(producto_id)
+  def remove(producto_id, accion)
+    Rails.logger.debug(accion)
+    cantidad = @session[:items][producto_id]
+    Rails.logger.debug(cantidad)
+    if (accion == 'all' or cantidad == 1)
+      @session[:items].delete(producto_id)
+    else
+      @session[:items][producto_id] = cantidad - 1
+    end
     load!
   end
 
@@ -46,8 +54,18 @@ class Cart
   def cantidad
     total = 0.0
     @items.each do |_k, v|
-      Rails.logger.debug(v)
+      #Rails.logger.debug(v)
       total += v.cantidad || 0
+    end
+    total.to_i
+  end
+
+  def producto_qty(producto_id)
+    total = 0
+    @items.each do |_k, v|
+      if(v.producto.id == producto_id)
+        total += v.cantidad || 0
+      end
     end
     total.to_i
   end

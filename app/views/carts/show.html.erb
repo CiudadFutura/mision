@@ -48,7 +48,8 @@
               <td>
                 <%= button_tag(type: 'button', class: 'btn btn btn-danger btn-xs', data: {
                                                    action: 'remove',
-                                                   productId: item.producto.id
+                                                   productId: item.producto.id,
+                                                   accion: 'all'
                                            }) do %>
                   <i class="">Borrar</i>
                 <% end %>

@@ -27,6 +27,7 @@
 <% @productos.each do |producto|%>
     <div class="item col-xs-4 col-lg-4">
       <div class="thumbnail">
+        <div id="mensaje_<%=producto.id%>" class="action span-12 text-center"></div>
         <div class="list-group-image text-center">
           <a href="" onclick="return false;" data-toggle="popover" data-container="body" data-content="<%= producto.descripcion %>" >
           <%= image_tag(producto.imagen, style: "height:180px;", size: "180", class: 'group') %>
@@ -45,30 +46,40 @@
           <p class="ahorro brown text-center">ahorro <%= number_to_percentage(producto.ahorro) %></p>
         </div>
         <div class="col-lg-12 text-center">
-          <select class="cantidad">
+          <select class="cantidad hide">
             <% for i in 1..producto.cantidad_permitida %>
               <option value="<%= i %>"><%= i %></option>
             <% end %>
           </select>
-          <% if @carrito.producto?(producto.id) %>
-            <%= button_tag(type: 'button',
-                           class: 'btn btn btn-default',
-                           data: {
-                             action: 'remove',
-                             productId: producto.id
-                           }) do %>
-                <span class="icon-cart glyphicon-align-left"></span> <span class="cart-action">Eliminar del</span> carro
-            <% end %>
-          <% else %>
-            <%= button_tag(type: 'button',
-                           class: 'btn btn btn-default',
-                           data: {
-                            productId: producto.id,
-                            action: 'add'
+          <% current_qty = @carrito.producto_qty(producto.id) %>
+          <% if(current_qty != 0)
+               existe = false
+          else
+            existe = true
+          end
+          %>
+          <%= button_tag(type: 'button',
+                         class: 'btn btn btn-default',
+                         id:"remove_id#{producto.id}",
+                         disabled: existe,
+                         data: {
+                           action: 'remove',
+                           productId: producto.id,
+                           qty: current_qty,
+                           accion:'uno'
+                         }) do %>
+            <span class="icon-cart glyphicon-align-left"></span> <span class="cart-action">Eliminar del</span> carro
+          <% end %>
+          <%= button_tag(type: 'button',
+                         class: 'btn btn btn-default',
+                         id:"add_id#{producto.id}",
+                         data: {
+                                 productId: producto.id,
+                                 action: 'add',
+                                 qty: current_qty
                            }) do %>
                 <span class="icon-cart glyphicon-align-left"></span> <span class="cart-action">Agregar al</span> carro
             <% end %>
-          <% end %>
         </div>
         <% if can? [:update, :detele], producto %>
             <div class="col-lg-12">

@@ -9,12 +9,13 @@ class CartsController < ApplicationController
   end
 
   def add
-    @carrito.add(params[:producto_id], params[:cantidad])
+    p(params[:producto_id])
+    @carrito.add(params[:producto_id], params[:current_qty] )
     render json: @carrito.to_json, status: 200
   end
 
   def remove
-    @carrito.remove(params[:producto_id])
+    @carrito.remove(params[:producto_id], params[:accion])
     render json: @carrito.to_json, status: 200
   end
 
