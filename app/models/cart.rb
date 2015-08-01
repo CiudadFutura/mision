@@ -36,9 +36,7 @@ class Cart
   end
 
   def remove(producto_id, accion)
-    Rails.logger.debug(accion)
     cantidad = @session[:items][producto_id]
-    Rails.logger.debug(cantidad)
     if (accion == 'all' or cantidad == 1)
       @session[:items].delete(producto_id)
     else

@@ -49,6 +49,7 @@ $(document).ready(function () {
 	    $('#add_id'+productId).data('qty', current_qty-1);
 	    that.data('qty',current_qty-1);
 	    resultClass='danger';
+	    that.parents("tr.cart-item").remove();
     }
 
     $.ajax({
