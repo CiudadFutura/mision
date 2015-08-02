@@ -1,94 +1,3 @@
-<div class="usuarios">
-
-<h1>Completá el formulario, y sos parte.</h1>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), role: 'form') do |f| %>
-  <%= devise_error_messages! %>
-
-  <div class="row">
-    <div class="col-md-6">
-      <h2>Datos del usuario</h2>
-
-      <h4>Completa con tus datos para ser miembro de la Gran Misión</h4>
-
-      <p class="desc">Una vez completado el formulario, un email te será enviado para confirmar tu casilla de correo. Sigue el link que aparece en el correo recibido para activar tu cuenta.<br/>
-      Con tu cuenta activada estas a un paso de poder realizar tu pedido.<br/>
-      Ingresa al sitio y consulta en MIS DATOS (opción del menu) tu numero de identificación. Comunicaselo al coordinador de tu círculo para que este te haga parte del mismo y puedas enviar tu pedido!</p>
-    </div>
-
-    <div class="col-md-6">
-
-      <h3>Consumidor Colaborativo</h3>
-
-      <p>Todos los campos son <strong>requeridos</strong></p>
-
-      <div class="form-group">
-        <label for="nombre">Nombre: <span>[requerido]</span></label>
-        <%= f.text_field :nombre, class: 'form-control' %>
-      </div>
-      <div class="form-group">
-        <label for="apellido">Apellido: <span>[requerido]</span></label>
-        <%= f.text_field :apellido, class: 'form-control' %>
-      </div>
-      <div class="form-group">
-        <label for="email1">Correo Electrónico: <span>[requerido]</span></label>
-        <%= f.email_field :email, autofocus: true, class: 'form-control' %>
-        <p class="help-block">ejemplo: tucorreo@gmail.com</p>
-      </div>
-      <div class="form-group">
-        <label for="fecha_de_nacimiento">Fecha de nacimiento: <span>[requerido]</span></label>
-        <%= f.date_select :fecha_de_nacimiento, {}, { class: 'form-control'} %>
-        <p class="help-block">ejemplo: dd/mm/aaaa - 11/07/1977</p>
-      </div>
-      <div class="form-group">
-        <label for="dni">D.N.I.: <span>[requerido]</span></label>
-        <%= f.text_field :dni, class: 'form-control' %>
-      </div>
-      <div class="form-group">
-        <label for="domicilio">Domicilio: <span>[requerido]</span></label>
-        <%= f.text_field :calle, class: 'form-control' %>
-        <p class="help-block">ejemplo: Calle Nº Piso Depto.</p>
-      </div>
-      <div class="form-group">
-        <label for="localidad">Localidad: <span>[requerido]</span></label>
-        <%= f.text_field :ciudad, class: 'form-control' %>
-      </div>
-      <div class="form-group">
-        <label for="codigo_postal">Cod. Postal: <span>[requerido]</span></label>
-        <%= f.text_field :codigo_postal, class: 'form-control' %>
-      </div>
-      <div class="form-group">
-        <label for="telefono">Teléfono: </label>
-        <%= f.text_field :tel1, class: 'form-control' %>
-      </div>
-      <div class="form-group">
-        <label for="celular">Celular:</label>
-        <%= f.text_field :cel1, class: 'form-control' %>
-      </div>
-      <div class="form-group">
-        <label for="passOne">Contraseña: <span>[requerido]</span></label>
-        <%= f.password_field :password, autocomplete: "off",  class: 'form-control' %>
-        <p class="help-block">* 8 (ocho) caracteres como mínimo</p>
-      </div>
-      <div class="form-group">
-        <label for="passTwo">Repetir Contraseña: <span>[requerido]</span></label>
-        <%= f.password_field :password_confirmation, autocomplete: "off",  class: 'form-control' %>
-      </div>
-       <div class="form-group">
-        <input type="checkbox" checked="" name="terminos" id="term">
-        <label for="term" style="line-height: 26px; padding-top: 24px">
-          Acepto los<button type="button" class="btn btn-link" data-toggle="modal" data-target="#terminos">términos y condiciones.</button>
-        </label>
-      </div>
-      <div class="form-group">
-        <div><%= f.submit "Registrate", class: 'lm-form-nav' %></div>
-      </div>
-
-    </div>
-  </div>
-<% end %>
-</div>
-
 <!--modal términos y condiciones-->
 <div class="modal fade" id="terminos" tabindex="-1" role="dialog" aria-labelledby="terminos" aria-hidden="true">
   <div class="modal-dialog modal-lg">
@@ -643,21 +552,21 @@
           alguno. Sólo a partir del cumplimiento de los requisitos anteriormente detallados, los pedidos se
 
           consideran formalizados, y podrán ser retirados en el Territorio, por el Transportista del círculo.
-        </p>
-        <p>
+	      </p>
+	      <p>
           <b>3.8.</b>El Transportista, será responsable de:
-        </p>
-        <p>
+	      </p>
+	      <p>
           <b>3.8.1</b> Presentarse en el Territorio con algún comprobante de su identidad, y con el comprobante
 
           de pago del círculo. No se entregarán pedidos si no se cumple con alguno de esto dos requisitos.
         </p>
-        <p>
+	      <p>
           <b>3.8.2</b> Controlar que la mercadería que le es entregada corresponde con los pedidosrealizados por
 
           cada miembro del Círculo, detallados en las facturas emitidas por la Asociación.
-        </p>
-        <p>
+	      </p>
+	      <p>
           <b>3.8.3</b> Reclamar en el momento en que le es entregada la mercadería en caso de que haya algún
 
           error en la cantidad, calidad o marca, en relación a los productos pedidos por los Consumidores
@@ -667,8 +576,8 @@
           hace responsable por la pérdida, robo, deterioro, pérdida de la cadena de frío, o intercambio de la
 
           mercadería que figura en la factura.
-        </p>
-        <p>
+	      </p>
+	      <p>
           <b>3.8.4</b> Retirar del Territorio la mercadería de todos los miembros del Círculo con un vehículo a su
 
           cargo, en el horario que previamente haya confirmado el Coordinador del Círculo. La posterior
@@ -678,8 +587,8 @@
           cada uno de ellos hubiera realizado, se hará de la manera que hubieran acordado los mismos. En
 
           ningún caso, la Asociación interviene o se hace responsable de cómo se realicen estas funciones.
-        </p>
-        <p>
+	      </p>
+	      <p>
           <b>3.9.</b> En caso de que el Transportista no haya retirado la mercadería el día y horario convenidos, el
 
           Coordinador del Círculo podrá acordar, vía mail, con la Asociación el retiro de la misma dentro de
@@ -695,9 +604,9 @@
           correspondiente a los productos no perecederos de la compra, sin posibilidad de reclamar el resto
 
           del dinero depositado o transferido a la cuenta bancaria de la Asociación.
-        </p>
+	      </p>
         <p>
-          <b>3.10.</b> La facturación por la compra realizada, será efectuada a título personal a cada Consumidor
+	        <b>3.10.</b> La facturación por la compra realizada, será efectuada a título personal a cada Consumidor
 
           Colaborativo miembro del Círculo. Una vez entregada la mercadería a el Transportista (ver
 
@@ -710,8 +619,8 @@
           que el Transportista es la persona autorizada por cada uno de los Consumidores Colaborativos del
 
           Circulo para retirar los pedidos y firmar las facturas correspondientes.
-        </p>
-        <p>
+	      </p>
+	      <p>
 
           La Cuota Social Mensual de $150,00 (ciento cincuenta pesos argentinos) deberá ser abonada con
 
@@ -833,9 +742,9 @@
           del Servicio, o no cursar la solicitud de que se trate. La Asociación garantiza que se utilizará los
 
           datos únicamente para las finalidades establecidas en las presentes Condicioness.
-        </p>
-        <p>
-          <b>5.2.</b> La Asociación informa a los Consumidores Colaborativos que dentro del Servicio y en el Sitio
+	      </p>
+	      <p>
+		      <b>5.2.</b> La Asociación informa a los Consumidores Colaborativos que dentro del Servicio y en el Sitio
 
           Web se utilizan cookies propias. Las cookies son pequeños archivos que se instalan en el
 
@@ -869,8 +778,8 @@
           comunicación pública, así como cualquier otro acto de disposición quedan terminantemente
 
           prohibidos, a menos que se disponga de la correspondiente autorización expresa de la Asociación.
-        </p>
-        <p>
+	      </p>
+	      <p>
           El Consumidor Colaborativo tan sólo dispone de un derecho de uso estrictamente privado,
 
           exclusivamente con la finalidad de disfrutar de las prestaciones del Servicio de acuerdo con estas
