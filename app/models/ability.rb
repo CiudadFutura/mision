@@ -10,9 +10,10 @@ class Ability
       can :manage, :all
     elsif user.coordinador?
       can [:manage, :add_usuario, :remove_usuario], Circulo
-      can [:read, :create, :update], Usuario
+      can [:read, :create, :update], Usuario, { :id => user.id }
     elsif user.usuario?
       can [:read, :create, :update], Usuario, { :id => user.id }
+      can [:read, :create, :update], Pedido, { :usuario_id => user.id }
       can [:abandonar_circulo], Usuario
     end
     # elsif user.coordinador?

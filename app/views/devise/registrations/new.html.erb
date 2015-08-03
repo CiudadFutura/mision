@@ -23,6 +23,21 @@
       <p>Todos los campos son <strong>requeridos</strong></p>
 
       <div class="form-group">
+        <label for="nombre">Tipo de usuario: <span>[requerido]</span></label>
+        <div class="radio">
+          <label>
+            <%= f.radio_button(:type, "Usuario", checked: true)  %>
+            Usuario
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <%= f.radio_button(:type, "Coordinador")  %>
+            Coordinador
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
         <label for="nombre">Nombre: <span>[requerido]</span></label>
         <%= f.text_field :nombre, class: 'form-control' %>
       </div>
@@ -37,7 +52,7 @@
       </div>
       <div class="form-group">
         <label for="fecha_de_nacimiento">Fecha de nacimiento: <span>[requerido]</span></label>
-        <%= f.date_select :fecha_de_nacimiento, {}, { class: 'form-control'} %>
+        <%= f.date_select :fecha_de_nacimiento, { start_year: 1900 }, { class: 'form-control'} %>
         <p class="help-block">ejemplo: dd/mm/aaaa - 11/07/1977</p>
       </div>
       <div class="form-group">

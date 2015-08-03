@@ -64,5 +64,6 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'simplecov'
   gem 'rspec-rails', '~> 3.0.0'
+  gem 'capybara'
   gem 'shoulda-matchers'
 end
