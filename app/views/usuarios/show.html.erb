@@ -65,7 +65,7 @@
       <div class="col-md-6">
         <% if @usuario.circulo.nil? %>
           <h3>No perteneces a ningun circulo.</h3>
-          <p class="label-warning">Comunicate con un coordinador de círculo para que te agregue. <br/>Recuerda que tu codigo de
+          <p class="label-warning">Comunicate con un coordinador de círculo para que te agregue. <br/>Recuerda que tú código de
           usuario es el: <b><%= @usuario.id%></b> </p>
         <% else %>
           <h3>Perteneces al Círculo N°: <%=@usuario.circulo_id %> </h3>
