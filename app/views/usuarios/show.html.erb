@@ -68,6 +68,7 @@
           <p class="label-warning">Comunicate con un coordinador de círculo para que te agregue. <br/>Recuerda que tu codigo de
           usuario es el: <b><%= @usuario.id%></b> </p>
         <% else %>
+          <h3>Perteneces al Círculo N°: <%=@usuario.circulo_id %> </h3>
             <% if @ciclo_actual_completo %>
                 <p class="text-center">Ciclo Actual: <%= @ciclo_actual_completo.nombre %></p>
                 <p>Desde el <strong><%= l @ciclo_actual_completo.fecha_inicio_compras %></strong></p>
@@ -82,6 +83,7 @@
               <tr>
                 <th>Tipo</th>
                 <th>Nombre</th>
+                <th>Apellido</th>
                 <th>Nro ident.</th>
                 <th>Pedido</th>
                 <th>Importe</th>
@@ -93,6 +95,7 @@
                 <tr <%= (u == current_usuario) ? 'class=strong' : '' %> >
                   <td><%= u.type %></td>
                   <td><%= u.nombre %></td>
+                  <td><%= u.apellido %></td>
                   <td><%= u.id %></td>
                   <td><%= u.pedido?(Compra::ciclo_actual_completo) ? '<i class="fa fa-check-circle-o" title="Realizado"></i>'.html_safe : '<i class="fa fa-circle-o" title="Pendiente"></i>'.html_safe %></td>
                   <td><%= number_to_currency(u.pedido_del_ciclo(Compra::ciclo_actual_completo).try('total')) %></td>
