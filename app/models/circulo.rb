@@ -14,11 +14,11 @@ class Circulo < ActiveRecord::Base
   private
 
   def coordinador_valido?
-    errors.add(:coordinador, 'El usuario no es un coordinador.') and return if self.coordinador.nil?
-    errors.add(:coordinador, 'Ya se encuentra asignado.') if self.coordinador.circulo
+    errors.add(:coordinador, 'El usuario no es un coordinador.') and return if self.try('usuario') && !self.usuario.coordinador?
   end
 
   def assign_coordinador!
+    return unless(self.try('coordinador').try('circulo'))
     self.coordinador.circulo = self
     self.coordinador.save!
   end

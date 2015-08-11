@@ -7,7 +7,7 @@
 
   <p>
     <strong>Coordinador:</strong>
-    <%= @circulo.coordinador.nombre %>
+    <%= @circulo.try('coordinador').try('nombre') || 'Sin Coordinador' %>
   </p>
 
 <h3>Usuarios</h3>
