@@ -2,7 +2,7 @@
 lock '3.1.0'
 
 set :application, 'mision'
-set :repo_url, 'git@bitbucket.org:andrescachero/mision.git'
+set :repo_url, 'git@github.com:CiudadFutura/mision.git'
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
