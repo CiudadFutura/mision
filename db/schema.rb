@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150630195038) do
+ActiveRecord::Schema.define(version: 20150812000158) do
 
   create_table "categorias", force: true do |t|
     t.string   "nombre"
@@ -43,6 +43,15 @@ ActiveRecord::Schema.define(version: 20150630195038) do
     t.datetime "fecha_entrega_compras"
   end
 
+  create_table "packagings", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "parent_id"
+  end
+
+  add_index "packagings", ["parent_id"], name: "index_packagings_on_parent_id"
+
   create_table "pedidos", force: true do |t|
     t.text     "items"
     t.integer  "usuario_id"
@@ -66,8 +75,10 @@ ActiveRecord::Schema.define(version: 20150630195038) do
     t.integer  "supplier_id"
     t.string   "codigo"
     t.boolean  "oculto",             default: false
+    t.integer  "packagings_id"
   end
 
+  add_index "productos", ["packagings_id"], name: "index_productos_on_packagings_id"
   add_index "productos", ["supplier_id"], name: "index_productos_on_supplier_id"
 
   create_table "seed_migration_data_migrations", force: true do |t|

@@ -74,8 +74,8 @@
   <div class="control-group">
     <%= f.label :supplier_id, :class => 'control-label' %>
     <div class="controls">
-      <%= f.select(:supplier_id, 
-                   options_for_select(Supplier.all.map{|s| [s.name,s.id]},@producto[:supplier_id]), 
+      <%= f.select(:supplier_id,
+                   options_for_select(Supplier.all.map{|s| [s.name,s.id]},@producto[:supplier_id]),
                    { include_blank: 'Elija proveedor', class: 'form-control' }) %>
     </div>
     <%= error_span(@producto[:supplier]) %>
@@ -92,8 +92,21 @@
 
   </div>
 
+  <div class="control-group">
+    <%= f.label :packaging_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.select(:packagings_id,
+                   options_for_select(Packaging.all.map{|s| [s.name,s.id]},@producto[:packagings_id]),
+                   { include_blank: 'Elija el packaging', class: 'form-control' }) %>
+    </div>
+    <%= error_span(@producto[:supplier]) %>
+  </div>
+	<br>
+	<br>
+
   <%= f.submit nil, :class => 'btn btn-primary' %>
   <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
             productos_path, :class => 'btn btn-default' %>
+	<br>
 
 <% end %>

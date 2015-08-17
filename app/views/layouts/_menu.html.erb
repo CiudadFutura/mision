@@ -49,6 +49,13 @@
                       <% end %>
                   </li>
                 <% end %>
+                <% if can? [:manage], packagings_path %>
+                  <li>
+                    <%= link_to(packagings_path) do %>
+                      <span class="icon-key2"></span>Packaging
+                    <% end %>
+                  </li>
+                <% end %>
               </ul>
             </li>
             <% end %>

@@ -1,6 +1,8 @@
 class Producto < ActiveRecord::Base
   has_and_belongs_to_many :categorias
   belongs_to :supplier
+  belongs_to :packaging
+
 
   validates :codigo, uniqueness: true
   validates :supplier, presence: true
