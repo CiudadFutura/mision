@@ -17,7 +17,7 @@
                 <% if can? [:manage], circulos_path %>
                   <li>
                     <%= link_to(circulos_path) do %>
-                        <span class="icon-cogs"></span>Circulo
+                        <span class="icon-cogs"></span>Circulos
                     <% end %>
                   </li>
                 <% end %>
@@ -31,7 +31,7 @@
                 <% if can? [:manage], compras_path %>
                   <li>
                     <%= link_to(compras_path) do %>
-                      <span class="icon-key2"></span>Ciclo
+                      <span class="icon-key2"></span>Ciclos
                       <% end %>
                   </li>
                 <% end %>
@@ -52,7 +52,7 @@
               </ul>
             </li>
             <% end %>
-            
+
             <% if usuario_signed_in? %>
               <li>
                 <%= link_to(pedidos_path) do %>
@@ -66,7 +66,7 @@
                   <span class="icon-lmcart"></span>Tienda
               <% end %>
             </li>
-            
+
 
           </ul>
           <ul class="nav navbar-nav navbar-right">

@@ -89,6 +89,10 @@
         <label for="passTwo">Repetir Contraseña: <span>[requerido]</span></label>
         <%= f.password_field :password_confirmation, autocomplete: "off",  class: 'form-control' %>
       </div>
+      <div class="form-group">
+        <%= f.label :tipo %>
+        <%= select(:usuario, :type, Usuario.types.collect {|p| [ p, p ] }, {}, { class: "form-control"}) %>
+      </div>
        <div class="form-group">
         <input type="checkbox" checked="" name="terminos" id="term">
         <label for="term" style="line-height: 26px; padding-top: 24px">

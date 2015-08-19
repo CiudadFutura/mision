@@ -10,7 +10,11 @@ Rails.application.routes.draw do
   end
 
   devise_for :usuarios
-  resources :usuarios
+  resources :usuarios do
+    collection {
+      post 'sign_up', to: 'usuarios#create'
+    }
+  end
   resources :admins, controller: :usuarios
   resources :coordinador, controller: :usuarios
 
