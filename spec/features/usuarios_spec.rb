@@ -15,7 +15,8 @@ RSpec.describe "A Usuario", :type => :request do
       fill_in 'usuario_email', with: 'test@example.com'
       fill_in 'usuario_password', with: '!QAZzaq1'
       fill_in 'usuario_password_confirmation', with: '!QAZzaq1'
-      select 'Usuario', from: 'usuario_type'
+      choose 'Usuario'
+
       click_button 'Registrate'
     }.to change(Usuario, :count).by(1)
   end
@@ -33,7 +34,8 @@ RSpec.describe "A Usuario", :type => :request do
       fill_in 'usuario_email', with: 'test@example.com'
       fill_in 'usuario_password', with: '!QAZzaq1'
       fill_in 'usuario_password_confirmation', with: '!QAZzaq1'
-      select 'Coordinador', from: 'usuario_type'
+      choose 'Coordinador'
+
       click_button 'Registrate'
     }.to change(Usuario, :count).by(1)
   end

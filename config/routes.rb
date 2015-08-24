@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     post 'abandonar', to: 'circulos#abandonar', as: :abandonar
   end
 
-  devise_for :usuarios
+  devise_for :usuarios, :controllers => {:registrations => "user/registrations"}
   resources :usuarios do
     collection {
       post 'sign_up', to: 'usuarios#create'

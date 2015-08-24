@@ -1,0 +1,7 @@
+<p>Bienvenido <%= @email %>!</p>
+
+<p>El usuario <%= @coordinador.nombre_completo %> te ha invitado a formar parte de la Gran Misión.</p>
+
+<p>Puedes confirmar tu cuenta de usuario siguiendo el link siguiente:</p>
+
+<p><%= link_to 'Registrate Aquí!', new_usuario_registration_path %></p>

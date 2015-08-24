@@ -53,4 +53,11 @@ $(document).ready(function () {
     });
   });
 
+  $('#emails-invitados').hide();
+  $('#usuario_type_coordinador').click(function () {
+    $('#emails-invitados').show();
+  });
+  $('#usuario_type_usuario').click(function () {
+    $('#emails-invitados').hide();
+  });
 });
