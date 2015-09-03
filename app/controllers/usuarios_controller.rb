@@ -16,6 +16,9 @@ class UsuariosController < ApplicationController
   # GET /usuarios/1
   # GET /usuarios/1.json
   def show
+    if @usuario.circulo.nil?
+      self.set_circulo @usuario.id
+    end
     @ciclo_actual = Compra::ciclo_actual
     @ciclo_actual_completo = Compra::ciclo_actual_completo
   end
@@ -70,11 +73,16 @@ class UsuariosController < ApplicationController
     end
   end
 
+  def set_circulo id
+    @usuario.circulo = Circulo.find_by_coordinador_id(id)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_usuario
       @usuario = Usuario.find(params[:id])
     end
+
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def usuario_params
