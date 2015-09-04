@@ -29,6 +29,9 @@ class CirculosController < ApplicationController
 
     respond_to do |format|
       if @circulo.save
+        @circulo.coordinador.circulo = @circulo
+        @circulo.coordinador.save!
+
         format.html { redirect_to @circulo, notice: 'Circulo creado exitosamente.' }
         format.json { render :show, status: :created, location: @circulo }
       else
@@ -43,6 +46,11 @@ class CirculosController < ApplicationController
   def update
     respond_to do |format|
       if @circulo.update(circulo_params)
+        if @circulo.coordinador.circulo.nil?
+          @circulo.coordinador.circulo = @circulo
+          @circulo.coordinador.save!
+        end
+
         format.html { redirect_to @circulo, notice: 'Circulo modificado exitosamente..' }
         format.json { render :show, status: :ok, location: @circulo }
       else

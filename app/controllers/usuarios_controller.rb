@@ -16,9 +16,6 @@ class UsuariosController < ApplicationController
   # GET /usuarios/1
   # GET /usuarios/1.json
   def show
-    if @usuario.circulo.nil?
-      self.set_circulo @usuario.id
-    end
     @ciclo_actual = Compra::ciclo_actual
     @ciclo_actual_completo = Compra::ciclo_actual_completo
   end
@@ -75,6 +72,7 @@ class UsuariosController < ApplicationController
 
   def set_circulo id
     @usuario.circulo = Circulo.find_by_coordinador_id(id)
+    @usuario.save!
   end
 
   private
