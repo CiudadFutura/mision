@@ -6,6 +6,11 @@ class CirculosController < ApplicationController
   # GET /circulos.json
   def index
     @circulos = Circulo.all
+
+    respond_to do |format|
+      format.html
+      format.csv { render csv: @circulos.to_csv, filename: "#{Time.now.to_i}_circulos" }
+    end
   end
 
   # GET /circulos/1

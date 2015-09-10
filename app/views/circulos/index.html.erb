@@ -4,6 +4,8 @@
     <%= link_to t('.new', :default => t("helpers.links.new")),
                 new_circulo_path,
                 :class => 'btn btn-primary' if can? [:manage], Circulo %>
+
+    <%= link_to "Exportar CSV", circulos_path(format: "csv"), class: "btn btn-success btn-xs" %>
   </div>
 
   <table class="table table-striped">

@@ -11,6 +11,21 @@ class Circulo < ActiveRecord::Base
     self.usuarios.count >= 5
   end
 
+  def self.to_csv
+    CSV.generate do |csv|
+      csv << ['Circulo N°', 'Coordinador', 'Coordinador Email', 'Tel/Cel']
+      all.each do |circulo|
+        coord = Usuario.find_by_id(circulo.coordinador_id)
+        csv << [
+            circulo.id,
+            "#{coord.apellido}, #{coord.nombre},",
+            coord.email,
+            "#{coord.tel1} / #{coord.cel1}"
+        ]
+      end
+    end
+  end
+
   private
 
   def coordinador_valido?
