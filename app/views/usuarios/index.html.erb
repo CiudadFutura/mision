@@ -12,7 +12,7 @@
             <th>Nombre</th>
             <th>Apellido</th>
             <th>Tipo</th>
-            <th colspan="2"></th>
+            <th colspan="3"></th>
           </tr>
         </thead>
 
@@ -25,6 +25,7 @@
               <td><%= usuario.type %></td>
               <td><%= link_to 'Ver', usuario, class: 'btn btn-info btn-mini' %></td>
               <td><%= link_to 'Modificar', edit_usuario_path(usuario), class: 'btn btn-warning btn-mini' %></td>
+              <td><%= link_to 'Eliminar', usuario, method: :delete, data: { confirm: 'Esta seguro?' }, class: 'btn btn-danger btn-mini' %></td>
             </tr>
         <% end %>
       </tbody>
