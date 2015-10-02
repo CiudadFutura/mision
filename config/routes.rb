@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   resources :pedidos, only: [:index, :show, :edit]
   resources :home
   resources :steps
+  resources :dossier
 
   resource :cart, only: [:show] do
     put 'add/:producto_id', to: 'carts#add', as: :add_to
