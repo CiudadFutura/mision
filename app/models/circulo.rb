@@ -16,12 +16,15 @@ class Circulo < ActiveRecord::Base
       csv << ['Circulo N°', 'Coordinador', 'Coordinador Email', 'Tel/Cel']
       all.each do |circulo|
         coord = Usuario.find_by_id(circulo.coordinador_id)
-        csv << [
-            circulo.id,
-            "#{coord.apellido}, #{coord.nombre},",
-            coord.email,
-            "#{coord.tel1} / #{coord.cel1}"
-        ]
+        if !coord.nil?
+          csv << [
+              circulo.id,
+              "#{coord.apellido}, #{coord.nombre},",
+              coord.email,
+              "#{coord.tel1} / #{coord.cel1}"
+          ]
+        end
+
       end
     end
   end

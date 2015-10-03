@@ -296,6 +296,3 @@ DEPENDENCIES
   twitter-bootstrap-rails
   uglifier (>= 1.3.0)
   writeexcel
-
-BUNDLED WITH
-   1.10.5

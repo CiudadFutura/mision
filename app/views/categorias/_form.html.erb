@@ -12,6 +12,9 @@
   <% end %>
 
   <div class="field">
+	  <%= f.select(:parent_id, Categoria.all.map {|c|[c.nombre, c.id]}, include_blank: true) %>
+  </div>
+  <div class="field">
     <%= f.label :nombre %><br>
     <%= f.text_field :nombre %>
   </div>
