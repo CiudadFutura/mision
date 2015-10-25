@@ -4,7 +4,8 @@ class ProductosController < ApplicationController
   # GET /productos
   # GET /productos.json
   def index
-    if params[:categoria_id].present?
+    @isD7 = false
+    if params[:categoria_id] != 'Todas' && params[:categoria_id].present?
       if params[:subcategoria_id].present?
         @productos = Producto.joins(:categorias)
                          .where("categorias_productos.categoria_id = :sub_id AND categorias.parent_id = :id", id: params[:categoria_id], sub_id: params[:subcategoria_id])
@@ -13,7 +14,17 @@ class ProductosController < ApplicationController
                          .where("categorias.id = :id OR categorias.parent_id = :id", id: params[:categoria_id])
       end
     else
-      @productos = Producto.all.order(:nombre)
+      if params[:categoria_id] == 'Todas' || !Categoria.find_by_nombre('D7')
+        @productos = Producto.all.order(:nombre)
+      else
+        @productos = Producto.joins(:categorias)
+                         .where("categorias.nombre = :nombre", nombre: 'D7')
+
+        @productos_nuevos = Producto.where("categorias.nombre <> ? AND created_at >= ?", "D7", Time.zone.now.beginning_of_month)
+        
+
+        @isD7 = true
+      end
     end
     @productos = @productos.disponibles.order(:nombre) if current_usuario.nil? || !current_usuario.admin?
 

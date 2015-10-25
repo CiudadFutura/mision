@@ -29,7 +29,7 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><%= link_to 'Todas', productos_path, class: 'navbar-link' %></li>
+        <li><%= link_to 'Todas', productos_path(:categoria_id => 'Todas'), class: 'navbar-link' %></li>
 
         <% @categorias_menu.each do |c| -%>
             <% if c[:subcategorias].present? %>
