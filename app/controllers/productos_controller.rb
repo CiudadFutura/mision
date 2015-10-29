@@ -29,9 +29,11 @@ class ProductosController < ApplicationController
     @productos = @productos.disponibles.order(:nombre) if current_usuario.nil? || !current_usuario.admin?
 
     if current_usuario && current_usuario.admin?
+      @todos = Producto.all.order(:nombre)
       respond_to do |format|
         format.html
-        format.csv { render csv: @productos.to_csv, filename: "#{Time.now.to_i}_productos" }
+        format.csv { export_csv(@todos) }
+        # format.csv { render csv: @todos.to_csv, filename: "#{Time.now.to_i}_productos" }
       end
     end
   end
@@ -109,4 +111,15 @@ class ProductosController < ApplicationController
                                        :cantidad_permitida, :imagen, categoria_ids: []
                                         )
     end
+
+  protected
+
+  def export_csv(todos)
+    filename = "#{Time.now.to_i}_productos.csv"
+    content = todos.to_csv
+    send_data content,
+              :type => 'text/csv; charset=utf-8; header=present',
+              :disposition => "attachment",
+              :filename => filename
+  end
 end

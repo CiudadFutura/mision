@@ -45,7 +45,6 @@ class Producto < ActiveRecord::Base
       # File Columns: 0)código 1)Estado 2)Cod. Proveedor 3)Proveedor
       #               4)Producto 5)Descripcion del producto
       #               6)Precio final 7)Supermercado
-      Rails.logger.debug(row)
       prod = Producto.find_or_create_by(codigo: row[0].upcase)
       prod.oculto = false if row[1] == 'activo'
       prod.supplier = Supplier.find(row[2]) || Supplier.find(1)
@@ -53,7 +52,6 @@ class Producto < ActiveRecord::Base
       prod.descripcion = row[5]
       prod.precio = row[6]
       prod.precio_super = row[7]
-      Rails.logger.debug(prod)
       prod.save!
     end
   end
