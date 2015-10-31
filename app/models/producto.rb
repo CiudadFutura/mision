@@ -41,19 +41,44 @@ class Producto < ActiveRecord::Base
       prod.codigo = prod.codigo.upcase
       prod.save!
     end
-    CSV.foreach(file.path, {:headers=>:first_row}) do |row|
+    start_time = Time.now
+    counter = 0
+    data = []
+    CSV.foreach(file.path, {col_sep: ";", :headers=>:first_row}) do |row|
       # File Columns: 0)código 1)Estado 2)Cod. Proveedor 3)Proveedor
       #               4)Producto 5)Descripcion del producto
       #               6)Precio final 7)Supermercado
-      prod = Producto.find_or_create_by(codigo: row[0].upcase)
-      prod.oculto = false if row[1] == 'activo'
-      prod.supplier = Supplier.find(row[2]) || Supplier.find(1)
-      prod.nombre = row[4]
-      prod.descripcion = row[5]
-      prod.precio = row[6]
-      prod.precio_super = row[7]
+      row_hash = row.to_hash
+      puts row.inspect
+      puts row_hash["Codigo"]
+      prod = Producto.find_or_create_by(codigo: row_hash["Codigo"].upcase)
+      puts row_hash["Estado"]
+      prod.oculto = false if row_hash["Estado"] == 'activo'
+      puts row_hash["Cod Proveedor"]
+      if Supplier.where(id: row_hash["Cod. Proveedor"]).nil?
+        prod.supplier = Supplier.find(row_hash["Cod. Proveedor"])
+      else
+        prod.supplier =  Supplier.find(1)
+      end
+      puts row_hash["Nombre"]
+      prod.nombre = row_hash["Nombre"]
+      puts row_hash["Descripcion"]
+      prod.descripcion = row_hash["Descripcion"]
+      puts row_hash["Precio final"]
+      prod.precio = row_hash["Precio final"]
+      puts row_hash["Precio super"]
+      prod.precio_super = row_hash["Precio super"]
       prod.save!
+      data << [codigo = prod.codigo,
+              nombre = prod.nombre,
+              ]
+      counter += 1
     end
+    end_time = Time.now
+    return [
+        :success => true,
+        :message => "#{counter} Productos actualizados #{((end_time - start_time) / 60).round(2)} minutos (#{( counter / (end_time - start_time)).round(2)} productos/segundo)"
+    ]
   end
 
   def self.to_csv

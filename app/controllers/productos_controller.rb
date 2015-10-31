@@ -94,8 +94,10 @@ class ProductosController < ApplicationController
   end
 
   def upload
-    Producto.import(params[:file])
-    redirect_to productos_url, notice: "Productos actualizados."
+    @message = Producto.import(params[:file])
+    if @message[0][:success].present?
+      redirect_to productos_url, :flash => { :notice => @message[0][:message] }
+    end
   end
 
   private
