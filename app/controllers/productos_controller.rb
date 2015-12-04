@@ -18,7 +18,7 @@ class ProductosController < ApplicationController
       else
         @productos = Producto
                          .where("highlight = :destacado", destacado: true)
-                         .order("productos.'order' ASC")
+                         .order("productos.orden ASC")
 
         @productos_nuevos = Producto.where("categorias.nombre <> ? AND created_at >= ?", "D7", Time.zone.now.beginning_of_month)
 
