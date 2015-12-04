@@ -4,6 +4,7 @@ class ProductosController < ApplicationController
   # GET /productos
   # GET /productos.json
   def index
+    @isD7 = false
     if params[:categoria_id] != 'Todas' && params[:categoria_id].present?
       if params[:subcategoria_id].present?
         @productos = Producto.joins(:categorias)
@@ -21,6 +22,8 @@ class ProductosController < ApplicationController
                          .order("productos.orden ASC")
 
         @productos_nuevos = Producto.where("categorias.nombre <> ? AND created_at >= ?", "D7", Time.zone.now.beginning_of_month)
+
+        @isD7 = true
 
       end
     end
