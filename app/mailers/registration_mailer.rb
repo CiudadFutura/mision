@@ -1,5 +1,5 @@
 class RegistrationMailer < ActionMailer::Base
-  default from: "victoriacolectiva@misionantiinflacion.com.ar"
+  default from: "victoriacolectiva@gmail.com"
 
   def invite(to_email, coordinador)
     @email = to_email

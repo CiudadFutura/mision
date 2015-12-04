@@ -81,10 +81,10 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   # SMTP settings for gmail
   config.action_mailer.smtp_settings = {
-   :address              => "ftbn-wbbl.accessdomain.com",
+   :address              => "mail.braica.net",
    :port                 => 587,
-   :user_name            => 'victoriacolectiva@misionantiinflacion.com.ar',
-   :password             => '!QAZzaq1',
+   :user_name            => 'misionantiinflacion@braica.net',
+   :password             => 'Primavera2015',
    :authentication       => "plain",
   :enable_starttls_auto => true
   }
