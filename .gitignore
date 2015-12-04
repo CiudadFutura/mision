@@ -18,3 +18,5 @@
 rails_best_practices_output.html
 coverage
 uploads
+# Ignore application configuration
+/config/application.yml

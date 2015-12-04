@@ -38,6 +38,8 @@ gem 'seed_migration'
 gem 'paper_trail', '~> 4.0.0.rc'
 # Creates Excel files: https://github.com/cxn03651/writeexcel/
 gem 'writeexcel'
+# Enable reading settings from yml file
+gem 'figaro'
 
 group :development do
   # Spring speeds up development by keeping your application running in the
