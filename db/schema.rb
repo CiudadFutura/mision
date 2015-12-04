@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150630195038) do
+ActiveRecord::Schema.define(version: 20151204011021) do
 
   create_table "categorias", force: true do |t|
     t.string   "nombre"
@@ -66,6 +66,8 @@ ActiveRecord::Schema.define(version: 20150630195038) do
     t.integer  "supplier_id"
     t.string   "codigo"
     t.boolean  "oculto",             default: false
+    t.integer  "order",              default: 0
+    t.boolean  "highlight",          default: false
   end
 
   add_index "productos", ["supplier_id"], name: "index_productos_on_supplier_id"

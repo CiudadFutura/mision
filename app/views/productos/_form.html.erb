@@ -23,6 +23,13 @@
     <%= error_span(@producto[:imagen]) %>
   </div>
   <div class="control-group">
+    <%= f.label :order, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :order, :class => 'form-control' %>
+    </div>
+    <%= error_span(@producto[:order]) %>
+  </div>
+  <div class="control-group">
     <%= f.label :precio, :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :precio, :class => 'form-control' %>
@@ -56,6 +63,13 @@
       <%= f.check_box :oculto, :class => 'form-control' %>
     </div>
     <%= error_span(@producto[:oculto]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :destacado, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.check_box :highlight, :class => 'form-control' %>
+    </div>
+    <%= error_span(@producto[:highlight]) %>
   </div>
   <div class="control-group">
     <%= f.label :precio_super, :class => 'control-label' %>

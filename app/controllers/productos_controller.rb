@@ -4,7 +4,6 @@ class ProductosController < ApplicationController
   # GET /productos
   # GET /productos.json
   def index
-    @isD7 = false
     if params[:categoria_id] != 'Todas' && params[:categoria_id].present?
       if params[:subcategoria_id].present?
         @productos = Producto.joins(:categorias)
@@ -14,16 +13,15 @@ class ProductosController < ApplicationController
                          .where("categorias.id = :id OR categorias.parent_id = :id", id: params[:categoria_id])
       end
     else
-      if params[:categoria_id] == 'Todas' || !Categoria.find_by_nombre('D7')
+      if params[:categoria_id] == 'Todas'
         @productos = Producto.all.order(:nombre)
       else
-        @productos = Producto.joins(:categorias)
-                         .where("categorias.nombre = :nombre", nombre: 'D7')
+        @productos = Producto
+                         .where("highlight = :destacado", destacado: true)
+                         .order("productos.'order' ASC")
 
         @productos_nuevos = Producto.where("categorias.nombre <> ? AND created_at >= ?", "D7", Time.zone.now.beginning_of_month)
-        
 
-        @isD7 = true
       end
     end
     @productos = @productos.disponibles.order(:nombre) if current_usuario.nil? || !current_usuario.admin?
@@ -108,8 +106,8 @@ class ProductosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def producto_params
-      params.require(:producto).permit(:precio, :nombre, :codigo, :descripcion,
-                                       :precio_super, :oculto, :supplier_id,
+      params.require(:producto).permit(:precio, :nombre, :codigo, :descripcion, :order,
+                                       :precio_super, :highlight, :oculto, :supplier_id,
                                        :cantidad_permitida, :imagen, categoria_ids: []
                                         )
     end
