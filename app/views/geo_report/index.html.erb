@@ -18,8 +18,8 @@
 			handler.buildMap({ provider: {}, internal: {id: 'map-canvas'}}, function(){
 
 				markers = handler.addMarkers([{
-					"lat": -32.9523035,
-					"lng": -60.6981577
+					"lat": -32.9576644,
+					"lng": -60.6803937
 				}]);
 
 				handler.bounds.extendWith(markers);
@@ -31,9 +31,10 @@
 		}
 
 		function setMarker(handler) {
+			var address;
 			if (consumidores != null && consumidores.length > 0) {
 				for(var i =0;i<consumidores.length;i++){
-					var address = consumidores[i]['calle'] + ', ' + consumidores[i]['ciudad'] + ', Santa Fe, Argentina';
+					address= consumidores[i]['calle'] + ', ' + consumidores[i]['ciudad'] + ', Santa Fe, Argentina';
 					encodeAddress(address, handler);
 				}
 			}
@@ -51,7 +52,7 @@
 
 		function encodeAddress(address, handler) {
 			var newMarkers = {};
-			geocoder = new google.maps.Geocoder();
+			var geocoder = new google.maps.Geocoder();
 			if (geocoder) {
 				geocoder.geocode({'address' : address}, function(results, status) {
 					if (status == google.maps.GeocoderStatus.OK) {
@@ -71,7 +72,7 @@
 					}else if (status == google.maps.GeocoderStatus.OVER_QUERY_LIMIT) {
 						setTimeout(function () {
 							encodeAddress(address, handler);
-						}, 2500);
+						}, 1500);
 					} else {
 						var reason="Code "+status;
 						var msg = 'Domilicio="' + address + '" error=' +reason+ '<br>';
