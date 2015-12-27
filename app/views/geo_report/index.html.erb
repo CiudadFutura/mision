@@ -2,6 +2,8 @@
 <div id="map-container">
   <div id="map-canvas"></div>
 </div>
+</div>
+
 <div id="messages"></div>
 
 <%= javascript_tag do%>
@@ -11,7 +13,7 @@
 <script>
 
 	$(function(){
-		var wait = false;
+		var count = 0;
 
 		function initialize() {
 			handler = Gmaps.build('Google');
@@ -40,18 +42,18 @@
 			}
 		}
 
-		function addMarker(handler, branch) {
-			maker = handler.addMarkers([
-					branch
+		function addMarker(handler, newMarkers) {
+			var maker = handler.addMarkers([
+				newMarkers
 			])
 			handler.bounds.extendWith(maker);
 		}
 
 
 
-
 		function encodeAddress(address, handler) {
 			var newMarkers = {};
+			var delay = 1000;
 			var geocoder = new google.maps.Geocoder();
 			if (geocoder) {
 				geocoder.geocode({'address' : address}, function(results, status) {
@@ -66,13 +68,14 @@
 							},
 							"infowindow": address
 						}
-						var msg = 'Domicilio= "' + address + '" lat= ' +newMarkers['lat']+ ' lng= ' +newMarkers['lng']+'<br>';
-						document.getElementById("messages").innerHTML += msg;
+						count= count + 1;
+						var msg = 'Ingresado: "' + count + '" de:  ' + consumidores.length;
+						document.getElementById("messages").innerHTML = msg;
 						addMarker(handler, newMarkers);
 					}else if (status == google.maps.GeocoderStatus.OVER_QUERY_LIMIT) {
 						setTimeout(function () {
 							encodeAddress(address, handler);
-						}, 1500);
+						}, delay);
 					} else {
 						var reason="Code "+status;
 						var msg = 'Domilicio="' + address + '" error=' +reason+ '<br>';
@@ -81,7 +84,6 @@
 				})
 			}
 		}
-
 
 		google.maps.event.addDomListener(window, 'load', initialize)
 
