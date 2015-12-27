@@ -53,8 +53,8 @@
 			var newMarkers = {};
 			geocoder = new google.maps.Geocoder();
 			if (geocoder) {
-				setTimeout(function() {
-					geocoder.geocode({'address' : address}, function(results, status) {
+				setTimeout(
+						geocoder.geocode({'address' : address}, function(results, status) {
 						if (status == google.maps.GeocoderStatus.OK) {
 							newMarkers = {
 								"lat": results[0].geometry.location.lat(),
@@ -80,8 +80,7 @@
 								console.log(msg);
 							}
 						}
-					});
-				},5500);
+					}), 5000);
 			}
 		}
 
