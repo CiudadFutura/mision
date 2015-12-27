@@ -1,4 +1,4 @@
-<h1>Google Maps Tut</h1>
+<h1>Google Maps Report</h1>
 <div id="map-container">
   <div id="map-canvas"></div>
 </div>
@@ -62,7 +62,7 @@
 					}
 					addMarker(handler, newMarkers);
 				} else {
-					alert("Google Maps had some trouble finding" + address + status);
+					console.log("Google Maps had some trouble finding " + address + ' status: ' + status);
 				}
 			});
 		}
