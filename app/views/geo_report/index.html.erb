@@ -2,6 +2,7 @@
 <div id="map-container">
   <div id="map-canvas"></div>
 </div>
+<div id="messages"></div>
 
 <%= javascript_tag do%>
   window.consumidores= <%=raw @usuarios.to_json %>;
@@ -46,32 +47,41 @@
 		}
 
 
+
+
 		function encodeAddress(address, handler) {
 			var newMarkers = {};
 			geocoder = new google.maps.Geocoder();
 			if (geocoder) {
-				while (wait) { /* Just wait. */ };
-				geocoder.geocode({'address' : address}, function(results, status) {
-					if (status == google.maps.GeocoderStatus.OK) {
-						newMarkers = {
-							"lat": results[0].geometry.location.lat(),
-							"lng": results[0].geometry.location.lng(),
-							"picture": {
-								"url": "http://people.mozilla.com/~faaborg/files/shiretoko/firefoxIcon/firefox-16.png",
-								"width":  16,
-								"height": 16
-							},
-							"infowindow": address
+				setTimeout(function() {
+					geocoder.geocode({'address' : address}, function(results, status) {
+						if (status == google.maps.GeocoderStatus.OK) {
+							newMarkers = {
+								"lat": results[0].geometry.location.lat(),
+								"lng": results[0].geometry.location.lng(),
+								"picture": {
+									"url": "http://people.mozilla.com/~faaborg/files/shiretoko/firefoxIcon/firefox-16.png",
+									"width":  16,
+									"height": 16
+								},
+								"infowindow": address
+							}
+							var msg = 'Domicilio= "' + address + '" lat= ' +newMarkers['lat']+ ' lng= ' +newMarkers['lng']+'<br>';
+							document.getElementById("messages").innerHTML += msg;
+							addMarker(handler, newMarkers);
+						}else {
+							if (status == google.maps.GeocoderStatus.OVER_QUERY_LIMIT) {
+								var reason="Code "+status;
+								var msg = 'Domicilio="' + address + '" error=' +reason+ '<br>';
+								document.getElementById("messages").innerHTML += msg;
+							} else {
+								var reason="Code "+status;
+								var msg = 'Domilicio="' + address + '" error=' +reason+ '<br>';
+								document.getElementById("messages").innerHTML += msg;
+							}
 						}
-						addMarker(handler, newMarkers);
-					} else if (status == google.maps.GeocoderStatus.OVER_QUERY_LIMIT) {
-						wait = true;
-						setTimeout("wait = true", 2000);
-						//alert("OQL: " + status);
-					} else {
-						alert("Geocode was not successful for the following reason: " + status + " address: " + address);
-					}
-				});
+					});
+				},2500);
 			}
 		}
 
