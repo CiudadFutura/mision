@@ -73,15 +73,15 @@
 							if (status == google.maps.GeocoderStatus.OVER_QUERY_LIMIT) {
 								var reason="Code "+status;
 								var msg = 'Domicilio="' + address + '" error=' +reason+ '<br>';
-								document.getElementById("messages").innerHTML += msg;
+								console.log(msg);
 							} else {
 								var reason="Code "+status;
 								var msg = 'Domilicio="' + address + '" error=' +reason+ '<br>';
-								document.getElementById("messages").innerHTML += msg;
+								console.log(msg);
 							}
 						}
 					});
-				},2500);
+				},5500);
 			}
 		}
 
