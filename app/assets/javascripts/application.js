@@ -14,6 +14,8 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require_tree .
+//= require undercore
+//= require gmaps/google
 
 $(document).ready(function () {
 

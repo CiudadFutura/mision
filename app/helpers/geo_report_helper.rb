@@ -1,0 +1,2 @@
+module GeoReportHelper
+end

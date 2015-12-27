@@ -1,0 +1,76 @@
+<h1>Google Maps Tut</h1>
+<div id="map-container">
+  <div id="map-canvas"></div>
+</div>
+
+<%= javascript_tag do%>
+  window.consumidores= <%=raw @usuarios.to_json %>;
+<%end%>
+
+<script>
+
+	$(function(){
+
+		function initialize() {
+			handler = Gmaps.build('Google');
+			handler.buildMap({ provider: {}, internal: {id: 'map-canvas'}}, function(){
+
+				markers = handler.addMarkers([{
+					"lat": -32.9523035,
+					"lng": -60.6981577
+				}]);
+
+				handler.bounds.extendWith(markers);
+				handler.fitMapToBounds();
+				handler.getMap().setZoom(12);
+			});
+
+			setMarker(handler);
+		}
+
+		function setMarker(handler) {
+			if (consumidores != null && consumidores.length > 0) {
+				for(var i =0;i<consumidores.length;i++){
+					var address = consumidores[i]['calle'] + ', ' + consumidores[i]['ciudad']+ ', Santa Fe, ' + consumidores[i]['pais'];
+					encodeAddress(address, handler);
+				}
+			}
+		}
+
+		function addMarker(handler, branch) {
+			maker = handler.addMarkers([
+					branch
+			])
+			handler.bounds.extendWith(maker);
+		}
+
+
+		function encodeAddress(address, handler) {
+			var newMarkers = {};
+			geocoder = new google.maps.Geocoder();
+			geocoder.geocode({'address' : address}, function(results, status) {
+				if (status == google.maps.GeocoderStatus.OK) {
+					newMarkers = {
+						"lat": results[0].geometry.location.lat(),
+						"lng": results[0].geometry.location.lng(),
+						"picture": {
+							"url": "http://people.mozilla.com/~faaborg/files/shiretoko/firefoxIcon/firefox-16.png",
+							"width":  16,
+							"height": 16
+						},
+						"infowindow": address
+					}
+					addMarker(handler, newMarkers);
+				} else {
+					alert("Google Maps had some trouble finding" + address + status);
+				}
+			});
+		}
+
+
+		google.maps.event.addDomListener(window, 'load', initialize)
+
+	});
+
+
+</script>

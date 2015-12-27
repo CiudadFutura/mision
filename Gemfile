@@ -57,6 +57,9 @@ gem 'capistrano-bundler', '~> 1.1.2'
 gem 'capistrano-rails', '~> 1.1.1'
 gem 'capistrano-rvm', github: "capistrano/rvm"
 
+# Google Maps integration
+gem 'gmaps4rails'
+
 group :development, :test do
   gem 'sqlite3'
   gem 'pry'
