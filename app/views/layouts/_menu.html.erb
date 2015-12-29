@@ -49,6 +49,13 @@
                       <% end %>
                   </li>
                 <% end %>
+                <% if can? [:manage], geo_reports_path %>
+                  <li>
+                    <%= link_to(geo_reports_path) do %>
+                      <span class="icon-stats"></span>Mapa Reporte
+                    <% end %>
+                  </li>
+                <% end %>
               </ul>
             </li>
             <% end %>

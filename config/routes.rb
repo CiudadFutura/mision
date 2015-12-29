@@ -30,7 +30,7 @@ Rails.application.routes.draw do
   resources :steps
   resources :dossier
   resources :faqs
-  resources :geo_report
+  resources :geo_reports
 
   resource :cart, only: [:show] do
     put 'add/:producto_id', to: 'carts#add', as: :add_to
