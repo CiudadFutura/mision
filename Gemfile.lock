@@ -105,6 +105,7 @@ GEM
       railties (>= 3.0.0)
     figaro (1.1.1)
       thor (~> 0.14)
+    geocoder (1.2.14)
     gmaps4rails (2.1.2)
     hike (1.2.3)
     i18n (0.7.0)
@@ -274,6 +275,7 @@ DEPENDENCIES
   devise
   factory_girl_rails
   figaro
+  geocoder
   gmaps4rails
   jbuilder (~> 2.0)
   jquery-rails

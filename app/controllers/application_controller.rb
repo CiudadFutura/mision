@@ -48,6 +48,7 @@ class ApplicationController < ActionController::Base
   def configure_permitted_parameters
     permitted_params = [:nombre, :apellido, :email, :"fecha_de_nacimiento(1i)",
       :"fecha_de_nacimiento(2i)", :"fecha_de_nacimiento(3i)", :dni, :calle,
+      :latitude, :longitude, :error_code,
       :ciudad, :codigo_postal, :tel1, :cel1, :type,  :password, :password_confirmation,
       :terminos, :email_invitado_1, :email_invitado_2, :email_invitado_3, :email_invitado_4]
     devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(permitted_params) }

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151204174306) do
+ActiveRecord::Schema.define(version: 20151230133344) do
 
   create_table "categorias", force: true do |t|
     t.string   "nombre"
@@ -115,6 +115,9 @@ ActiveRecord::Schema.define(version: 20151204174306) do
     t.string   "confirmation_token"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "error_code"
   end
 
   add_index "usuarios", ["confirmation_token"], name: "index_usuarios_on_confirmation_token", unique: true

@@ -59,6 +59,7 @@ gem 'capistrano-rvm', github: "capistrano/rvm"
 
 # Google Maps integration
 gem 'gmaps4rails'
+gem 'geocoder'
 
 group :development, :test do
   gem 'sqlite3'
