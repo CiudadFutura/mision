@@ -75,7 +75,7 @@ class Producto < ActiveRecord::Base
   end
 
   def self.to_csv
-    CSV.generate(force_quotes: true, encoding: 'utf-8') do |csv|
+    CSV.generate(force_quotes: true, encoding: 'iso-8859-1') do |csv|
       csv << ['Codigo', 'Estado', 'Cod. Proveedor', 'Proveedor', 'Nombre',
               'Descripcion', 'Precio final', 'Precio super']
       all.each do |prod|
