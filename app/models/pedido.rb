@@ -22,6 +22,13 @@ class Pedido < ActiveRecord::Base
     end
   end
 
+  def self.pedidos_ciclos
+    pedidos_por_ciclos = Pedido.joins(:ciclo)
+                  .select("compras.*, max(pedidos.created_at) as most_recent, count(pedidos.id) as orders_count")
+                  .group('pedidos.compra_id')
+    return pedidos_por_ciclos
+  end
+
   def self.to_csv
     CSV.generate(force_quotes: true) do |csv|
       csv << ['Pedido Nro', 'Ciclo Nro', 'Usuario Nro', 'Usuario', 'Circulo Nro', 'Codigo Prod.', 'Nombre Prod.', 'Cantidad']

@@ -55,6 +55,11 @@ class Usuario < ActiveRecord::Base
     nil
   end
 
+  def self.nuevos_coordinadores()
+    coordinadores = Usuario.where("type=? AND circulo_id = ?","Coordinador", '')
+    return coordinadores
+  end
+
   def self.to_csv
     CSV.generate do |csv|
       csv << ['Usuario Nro', 'Apellido y Nombre', 'Email', 'Circulo Nro']

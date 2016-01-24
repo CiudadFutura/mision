@@ -5,4 +5,31 @@
   Utiliza el menu superior para acceder y administrar el sitio.</p>
 
   <%= image_tag 'acceso_panel_admin.png'%>
+		<% if !@coordinadoresNuevos.blank? %>
+				<div class="row">
+						<table class="table table-striped">
+						  <caption class="text-left">Nuevos Coordinadores sin círculo</caption>
+						  <tr>
+								<th>#</th>
+								<th>Nombre</th>
+								<th>Apellido</th>
+								<th>email</th>
+								<th>Fecha a alta</th>
+							</tr>
+							<tbody>
+							<% @coordinadoresNuevos.each do |p| %>
+								<tr>
+									<td><%=p.id%></td>
+									<td><%=p.nombre%></td>
+									<td><%=p.apellido%></td>
+									<td><%=p.email%></td>
+									<td><%= l p.created_at%></td>
+								</tr>
+							<% end -%>
+							</tbody>
+						</table>
+
+
+				</div>
+		<% end %>
 </div>

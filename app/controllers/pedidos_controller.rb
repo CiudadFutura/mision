@@ -11,6 +11,7 @@ class PedidosController < ApplicationController
       end
       @pedidos = @pedidos.order(:updated_at)
       @ciclos = Compra.all.order('fecha_fin_compras DESC')
+      @suppliers = Supplier.all
       respond_to do |format|
         format.html
         format.csv { render csv: @pedidos.to_csv, filename: "#{Time.now.to_i}_pedidos" }
@@ -37,6 +38,17 @@ class PedidosController < ApplicationController
     @pedido.delete
     redirect_to productos_path
   end
+
+  def pedidos_suppliers(ciclo_id=0, supplier_id=0)
+    if current_usuario.admin?
+      @pedidos = Pedido.all
+      if(params[:ciclo_id])
+        @ciclo_id = params[:ciclo_id]
+        @pedidos = @pedidos.where(compra_id: params[:ciclo_id])
+      end
+    end
+  end
+  helper_method :pedidos_suppliers
 
   private
     # Use callbacks to share common setup or constraints between actions.

@@ -24,7 +24,8 @@
             <td>Fecha</td>
             <td>Ciclo</td>
             <td>Coordinador</td>
-            <td>Cìrculo N°</td>
+            <td>Consumidor</td>
+            <td>Círculo N°</td>
             <th colspan="2"></th>
           </tr>
         </thead>
@@ -35,6 +36,7 @@
             <td><%= l p.created_at %></td>
             <td><%= p.ciclo.nombre %></td>
             <td><%= p.circulo.try('coordinador') ? (p.circulo.coordinador.nombre + ' ' + p.circulo.coordinador.apellido) : 'SIN COORDINADOR' %></td>
+            <td><%= (p.usuario.nombre + ' ' + p.usuario.apellido)  %></td>
             <td><%= p.circulo.id%></td>
             <td>
               <%= link_to('Ver', pedido_path(p), class: 'btn btn-info btn-mini') %>
