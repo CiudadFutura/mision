@@ -56,7 +56,7 @@ class Usuario < ActiveRecord::Base
   end
 
   def self.nuevos_coordinadores()
-    coordinadores = Usuario.where("type=? AND circulo_id = ?","Coordinador", '')
+    coordinadores = Usuario.where("type=? AND circulo_id IS NULL OR circulo_id = ?","Coordinador", '')
     return coordinadores
   end
 
