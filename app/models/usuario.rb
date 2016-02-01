@@ -62,13 +62,18 @@ class Usuario < ActiveRecord::Base
 
   def self.to_csv
     CSV.generate do |csv|
-      csv << ['Usuario Nro', 'Apellido y Nombre', 'Email', 'Circulo Nro']
+      csv << ['Usuario Nro', 'Apellido y Nombre', 'Email', 'Fecha Nac.', 'Teléfono/Celular', 'DNI', 'Domicilio','Circulo Nro', 'Rol']
       all.each do |usuario|
         csv << [
           usuario.id,
           "#{usuario.apellido}, #{usuario.nombre}",
           usuario.email,
-          usuario.try('circulo').try('id') || "sin circulo"
+          usuario.fecha_de_nacimiento || "--",
+          "#{usuario.tel1} / #{usuario.cel1}",
+          usuario.dni || "--",
+          usuario.calle || "--",
+          usuario.try('circulo').try('id') || "sin circulo",
+          usuario.type || "--"
         ]
       end
     end
