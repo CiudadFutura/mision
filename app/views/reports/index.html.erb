@@ -1,0 +1,23 @@
+<h1>Listing reports</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @hash_productos.each do |report| %>
+      <tr>
+        <td><<%= link_to 'Edit', edit_report_path(peeee) %>/td>
+        <td></td>
+        <td></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+

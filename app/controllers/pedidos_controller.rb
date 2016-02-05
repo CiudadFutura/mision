@@ -39,16 +39,6 @@ class PedidosController < ApplicationController
     redirect_to productos_path
   end
 
-  def pedidos_suppliers(ciclo_id=0, supplier_id=0)
-    if current_usuario.admin?
-      @pedidos = Pedido.all
-      if(params[:ciclo_id])
-        @ciclo_id = params[:ciclo_id]
-        @pedidos = @pedidos.where(compra_id: params[:ciclo_id])
-      end
-    end
-  end
-  helper_method :pedidos_suppliers
 
   private
     # Use callbacks to share common setup or constraints between actions.
