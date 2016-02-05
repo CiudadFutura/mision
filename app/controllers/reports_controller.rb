@@ -4,7 +4,8 @@ class ReportsController < ApplicationController
   # GET /reports.json
   def index
     if current_usuario.admin?
-      ciclo_id = ''
+      ciclo_id = nil
+      @reporte = nil
       @ciclos = Compra.all.order('fecha_fin_compras DESC')
       if params[:ciclo_id].present? || Compra.ciclo_actual_completo.present?
         ciclo_id = params[:ciclo_id] || Compra.ciclo_actual_completo.id
