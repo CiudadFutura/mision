@@ -1,0 +1,28 @@
+<h1>Reporte de Ciclo Actual Por Proveedor</h1>
+
+<% @reporte.each do |supplier_id, supplier| %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th width="20%">Proveedor</th>
+        <th width="10%">Prod. ID</th>
+        <th width="60%">Producto</th>
+        <th width="10%">Cantidad</th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+    <% supplier[:products].each do |product_id, product| %>
+      <tr>
+        <td><%= supplier[:name] %></td>
+        <td><%= product_id %></td>
+        <td><%= product[:name] %></td>
+        <td><%= product[:qty] %></td>
+      </tr>
+    <% end %>
+
+    </tbody>
+  </table>
+  <br/>
+<% end %>
