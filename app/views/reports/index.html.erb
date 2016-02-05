@@ -1,23 +1,28 @@
-<h1>Listing reports</h1>
+<h1>Reporte de Ciclo Actual Por Proveedor</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @hash_productos.each do |report| %>
+<% @reporte.each do |supplier_id, supplier| %>
+  <table class="table">
+    <thead>
       <tr>
-        <td><<%= link_to 'Edit', edit_report_path(peeee) %>/td>
-        <td></td>
-        <td></td>
+        <th width="20%">Proveedor</th>
+        <th width="10%">Prod. ID</th>
+        <th width="60%">Producto</th>
+        <th width="10%">Cantidad</th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+    <% supplier[:products].each do |product_id, product| %>
+      <tr>
+        <td><%= supplier[:name] %></td>
+        <td><%= product_id %></td>
+        <td><%= product[:name] %></td>
+        <td><%= product[:qty] %></td>
       </tr>
     <% end %>
-  </tbody>
-</table>
 
-<br>
-
-
+    </tbody>
+  </table>
+  <br/>
+<% end %>

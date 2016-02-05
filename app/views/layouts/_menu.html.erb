@@ -56,6 +56,13 @@
                     <% end %>
                   </li>
                 <% end %>
+                <% if can? [:manage], reports_path %>
+                  <li>
+                    <%= link_to(reports_path) do %>
+                      <span class="icon-stats"></span>Reporte
+                    <% end %>
+                  </li>
+                <% end %>
                 <% if can? [:manage], pedidos_path %>
                   <li>
 
