@@ -7,6 +7,14 @@ class User::RegistrationsController < Devise::RegistrationsController
       RegistrationMailer.invite(params[:email_invitado_2], resource).deliver unless params[:email_invitado_2].blank?
       RegistrationMailer.invite(params[:email_invitado_3], resource).deliver unless params[:email_invitado_3].blank?
       RegistrationMailer.invite(params[:email_invitado_4], resource).deliver unless params[:email_invitado_4].blank?
+      circulo = Circulo.create!(coordinador_id: resource.id)
+      usuario = resource
+      usuario.circulo = circulo
+      usuario.save!
+
+      usuario = resource
+      usuario.circulo = circulo
+      usuario.save!
     end
     super
   end
