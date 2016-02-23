@@ -1,4 +1,4 @@
-class DossierController < ApplicationController
+class DossiersController < ApplicationController
   layout "home"
 
   def index

@@ -1,30 +1,60 @@
-<div id="footer-content col">
-  <!--<div class="container">
-    <div class="col-4 align-left "> <%= image_tag "giros.png" %></div>
-    <div class="col-4 align-center "> <%= image_tag "monteverde.png" %></div>
-    <div class="col-4 align-right "><%= image_tag "fcf.png" %>
-  </div>-->
-  <div id="footer-bar">
+<div class="container menuxs">
+	<div class="visible-xs col-xs-12 ">
+	  <div class="col-xs-12 col-md-4">
+	    <%= link_to(dossiers_url) do %>
+	      <%= image_tag("queeslamision.png", :class => 'img-responsive center-block') %>
+	    <% end %>
+	  </div>
+	  <div class="col-xs-12 col-md-4">
+	    <%= link_to(faqs_path) do %>
+	      <%= image_tag("preguntasfrecuentes.png", :class => 'img-responsive center-block') %>
+	    <% end %>
+	  </div>
+	  <div class="col-xs-12 col-md-4">
+	    <%= link_to(new_usuario_registration_path) do %>
+	      <%= image_tag("comomesumo.png", :class => 'img-responsive center-block') %>
+	    <% end %>
+	  </div>
+	</div>
+</div>
+<div class="panel-footer">
+  <nav class="navbar navbar-default">
     <div class="container">
-      <div class="col-8 footer-bar-left ">
-        <%= link_to(root_path) do %>
-            <span class="icon-house"></span>INICIO
-        <% end %>
-        <a href="http://misionantiinflacion.com.ar/contacto" title="Contacto"><span class="icon-location"></span>Contacto</a>
-        <a href="http://misionantiinflacion.com.ar" title="Contacto"><span class="icon-new"></span>Preg. Frecuentes</a>
-        <a href="http://misionantiinflacion.com.ar/admin?action=logout&amp;redirect_to=http%3A%2F%2Fmisionantiinflacion.com.ar%2F&amp;_wpnonce=8e9bff76f8" title="Cerrar Sesión"><span class="icon-lock"></span>Cerrar Sesión</a>
-      </div>
-      <div class="col-4 footer-bar-right">
-        <a href="https://www.facebook.com/misionantiinflacion" target="_blank" class="lm-facebook"><span class="icon-facebook2"></span>Facebook</a>
-        <a href="mailto:mision@concejaldecalle.com.ar" class="lm-twitter"><span class="icon-envelope"></span>Email</a>
-      </div>
-    </div>
-  </div>
+      <ul class="nav navbar-nav navbar-left hidden-xs">
+	      <li>
+	        <%= link_to(dossiers_url) do %>
+	          <%= image_tag("queeslamision.png", :class => 'img-responsive center-block') %>
+	        <% end %>
+	      </li>
+	      <li>
+	        <%= link_to(faqs_path) do %>
+	          <%= image_tag("preguntasfrecuentes.png", :class => 'img-responsive center-block') %>
+	        <% end %>
+	      </li>
+	      <li>
+	        <%= link_to(new_usuario_registration_path) do %>
+	          <%= image_tag("comomesumo.png", :class => 'img-responsive center-block') %>
+	        <% end %>
+	      </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+	      <li>
+	        <%= link_to(root_path) do %>
+	          <span class="icon-house"></span>INICIO
+	        <% end %>
+	      </li>
+	      <li>
+	        <a href="http://misionantiinflacion.com.ar/contacto" title="Contacto"><span class="icon-location"></span>Contacto</a>
+	      </li>
+	      <li>
+	        <a href="https://www.facebook.com/misionantiinflacion" target="_blank" class="lm-facebook"><span class="icon-facebook2"></span>Facebook</a>
+	      </li>
+      </ul>
+	  </div>
+  </nav>
+
   <div id="footer-info-home" class="full">
     <div class="container">
-      <div class="col-6">
-        <!--<p>© 2014 </p>-->
-      </div>
     </div>
   </div>
 </div>

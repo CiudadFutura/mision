@@ -1,0 +1,25 @@
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12 col-md-6">
+			<div class="text-center">
+				<%= link_to(root_path) do %>
+				<%= image_tag("logoHeader.png", :class => 'img-responsive') %>
+				<% end %>
+			</div>
+			<div class="col-xs-12 col-md-12">
+				<div class="text-center">
+					<h3>Más barato, más fácil. más justo.</h3>
+					<h4>Productores y consumidores vinculados de forma directa, sin intermediarios.</h4>
+				</div>
+			</div>
+		</div>
+		<div class="hidden-xs col-md-6">
+			<div class="text-center">
+				<%= image_tag("verdurasHeader.jpg", :class => 'img-responsive') %>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<%= render 'layouts/menu' %>
+</div>

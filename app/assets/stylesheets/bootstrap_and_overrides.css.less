@@ -160,12 +160,6 @@
 @font-others: 'Kreon', 'serif';
 @lila: #9B6185;
 
-
-
-body {
-  background-image: image-url('bg.png');
-}
-
 .navbar {
   div.usuario {
     background: #333;
@@ -290,18 +284,11 @@ body {
   }
 }
 
-.home {
-  color: #6B6B6B;
-  font-family: 'Verdana';
-  text-align: center;
-
-  .titulo {
-    font-size: 30pt;
-  }
-
-  .explicacion {
-    font-size: 12pt;
-  }
+.fill {
+	min-height: 100%;
+	height: 100%;
+	padding:0px 0px 70px 0px;
+	box-sizing:border-box;
 }
 
 .titulo, .explicacion {
@@ -375,4 +362,41 @@ body {
       font-weight: bold;
     }
   }
+}
+
+
+.panel-footer{
+	.navbar-left {
+		li{
+			a{
+				position: absolute;
+				top: -51px
+			}
+		}
+		li:nth-child(1){
+			a{
+			left: 0px;
+			}
+		}
+		li:nth-child(2){
+			a{
+				left: 140px;
+			}
+		}
+		li:nth-child(3){
+			a{
+			left: 280px;
+			}
+		}
+	}
+}
+
+.menuxs{
+	div:nth-child(1),
+	div:nth-child(2),
+	div:nth-child(3){
+		a{
+			margin: 15px;
+		}
+	}
 }
