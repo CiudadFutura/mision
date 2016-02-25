@@ -71,34 +71,39 @@
         </li>
       <% end %>
 
-      <li>
-        <%= link_to(productos_path) do %>
-          <span class="icon-lmcart"></span>Tienda
-        <% end %>
-      </li>
-
     </ul>
 
     <ul class="nav navbar-nav navbar-right">
-      <li><%= link_to('Registrate', new_usuario_registration_path)%></li>
-      <li><%= link_to('Inicia Sesion', new_usuario_session_path)%></li>
-      <li>
-        <%= link_to(productos_path) do %>
-          <span class="icon-lmcart"></span>Tienda
-        <% end %>
-      </li>
       <% if usuario_signed_in? %>
+        <li>
+          <%= link_to(productos_path) do %>
+            <span class="icon-tienda"></span>Tienda
+          <% end %>
+        </li>
         <li><p class="navbar-text"><%= truncate(current_usuario.email, length: 32) %></p></li>
         <li class="divider"></li>
         <li><%= link_to('Mis Datos', usuario_path(current_usuario))%></li>
         <li class="divider"></li>
         <li><%= link_to('Cerrar Sesion',
                         destroy_usuario_session_path,
-                        method: 'delete') %></li>
+                        method: 'delete') %>
+        </li>
       <% else %>
-        <li><%= link_to('Registrate', new_usuario_registration_path)%></li>
-        <li class="divider"></li>
-        <li><%= link_to('Inicia Sesion', new_usuario_session_path)%></li>
+        <li>
+          <%= link_to(new_usuario_registration_path) do %>
+            <span class="icon-registrate"></span>Registrate
+          <% end %>
+        </li>
+        <li>
+          <%= link_to(new_usuario_session_path) do %>
+            <span class="icon-ingresa"></span>Ingresa
+          <% end %>
+        </li>
+        <li>
+          <%= link_to(productos_path) do %>
+            <span class="icon-tienda"></span>Tienda
+          <% end %>
+        </li>
       <% end %>
     </ul>
     <%= yield(:cart_menu) %>

@@ -1,12 +1,15 @@
-<h2>Renviar instrucciones de desbloqueo</h2>
+<div class="container fill">
+  <h2>Renviar instrucciones de desbloqueo</h2>
 
-<%= form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f| %>
-  <%= devise_error_messages! %>
+	<%= form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f| %>
+	  <%= devise_error_messages! %>
 
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email, autofocus: true %></div>
+	  <div><%= f.label :email %><br />
+	  <%= f.email_field :email, autofocus: true %></div>
 
-  <div><%= f.submit "Renviar" %></div>
-<% end %>
+	  <div><%= f.submit "Renviar" %></div>
+	<% end %>
 
-<%= render "devise/shared/links" %>
+	<%= render "devise/shared/links" %>
+
+</div>

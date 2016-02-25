@@ -3,7 +3,6 @@
 <div class="container fill">
   <div class="row">
     <div class="col-xs-12 col-md-3">
-      <h1>La Tienda</h1>
       <%= render 'carts/menu' %>
     </div>
     <div class="col-xs-12 col-md-9">
@@ -35,7 +34,7 @@
           </div>
         <% end %>
         <% @productos.each do |producto|%>
-          <div class="col-xs-6 col-md-3 thumbnails">
+          <div class="col-xs-6 col-md-4 thumbnails">
             <div class="thumbnail">
               <a href="" onclick="return false;" data-toggle="popover" data-container="body" data-content="<%= producto.descripcion %>" >
                 <%= image_tag(producto.imagen, style: "height:180px;", size: "180", class: 'group') %>
@@ -48,34 +47,38 @@
               </div>
 
               <div class="col-md-12">
-                <select>
-                  <% for i in 1..producto.cantidad_permitida %>
-                    <option value="<%= i %>"><%= i %></option>
-                  <% end %>
-                </select>
-                <% if @carrito.producto?(producto.id) %>
-                  <%= button_tag(type: 'button',
-                                 class: 'btn btn-danger',
-                                 data: {
-		                                 action: 'remove',
-		                                 productId: producto.id
-                                 }) do %>
-                    <span class="icon-cart glyphicon-align-left"></span> <span class="cart-action">Eliminar del</span> carro
-                  <% end %>
-                <% else %>
-                  <%= button_tag(type: 'button',
-                                 class: 'btn btn-success',
-                                 data: {
-		                                 productId: producto.id,
-		                                 action: 'add'
-                                 }) do %>
-                    <span class="icon-cart glyphicon-align-left"></span> <span class="cart-action">Agregar al</span> carro
-                  <% end %>
-                <% end %>
+	              <div class="col-md-4">
+	                <select class="cantidad">
+	                  <% for i in 1..producto.cantidad_permitida %>
+	                    <option value="<%= i %>"><%= i %></option>
+	                  <% end %>
+	                </select>
+	              </div>
+	              <div class="col-md-8">
+	                <% if @carrito.producto?(producto.id) %>
+	                  <%= button_tag(type: 'button',
+	                                 class: 'btn btn-sm btn-danger',
+	                                 data: {
+			                                 action: 'remove',
+			                                 productId: producto.id
+	                                 }) do %>
+	                    <span class="icon-tienda glyphicon-align-left"></span> <span class="cart-action">Eliminar del</span> carro
+	                  <% end %>
+	                <% else %>
+	                  <%= button_tag(type: 'button',
+	                                 class: 'btn btn-sm btn-success',
+	                                 data: {
+			                                 productId: producto.id,
+			                                 action: 'add'
+	                                 }) do %>
+	                    <span class="icon-tienda glyphicon-align-left"></span> <span class="cart-action">Agregar al</span> carro
+	                  <% end %>
+	                <% end %>
+	              </div>
               </div>
               <% if can? [:update, :detele], producto %>
                 <div class="col-md-12">
-                  <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                  <div class="btn-group btn-group-justified" role="group" aria-label="modificar">
                     <div class="btn-group" role="group">
                       <%= button_to t('.edit', :default => t("helpers.links.edit")),
                                     edit_producto_path(producto),

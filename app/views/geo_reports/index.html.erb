@@ -1,10 +1,10 @@
-<h1>Google Maps Report</h1>
-<div id="map-container">
-  <div id="map-canvas"></div>
+<div class="container fill">
+  <h1>Google Maps Report</h1>
+	<div id="map-container">
+	  <div id="map-canvas"></div>
+	</div>
+  <div id="messages"></div>
 </div>
-</div>
-
-<div id="messages"></div>
 
 <%= javascript_tag do%>
   window.consumidores= <%=raw @usuarios.to_json %>;
