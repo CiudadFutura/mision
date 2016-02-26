@@ -7,15 +7,9 @@
     </div>
     <div class="col-xs-12 col-md-9">
       <% if can? [:manage], Producto %>
-        <div class="row">
-          <div class="text-right">
-            <div class="navbar navs-fixed">
-              <%= link_to t('.new', :default => t("helpers.links.new")),
-                          new_producto_path,
-                          :class => 'btn btn-primary' if can? :manage, Producto %>
-              <%= link_to "Exportar CSV", productos_path(format: "csv"), class: "btn btn-success" %>
-            </div>
-
+        <div class="navbar navs-fixed">
+          <div class="col-md-6">
+            <%= link_to "Exportar CSV", productos_path(format: "csv"), class: "btn btn-success" %>
             <%= form_tag(upload_productos_path, multipart: true, class: 'form-inline') do %>
               <div class="form-group">
                 <%= file_field_tag 'file' %>
@@ -23,95 +17,95 @@
               <%= submit_tag 'Subir', class: "btn btn-success btn-xs"%>
             <% end %>
           </div>
+	        <div class="col-md-6 ">
+            <%= link_to t('.new', :default => t("helpers.links.new")),
+                      new_producto_path,
+                      :class => 'btn btn-primary' if can? :manage, Producto %>
+	        </div>
         </div>
       <% end %>
-
-
-      <div class="row">
-        <% if @isD7 %>
-          <div class="row highlight">
-            <h2 class="col-xs-12">Destacados</h2>
-          </div>
-        <% end %>
-        <% @productos.each do |producto|%>
-          <div class="col-xs-6 col-md-4 thumbnails">
-            <div class="thumbnail">
-              <a href="" onclick="return false;" data-toggle="popover" data-container="body" data-content="<%= producto.descripcion %>" >
-                <%= image_tag(producto.imagen, style: "height:180px;", size: "180", class: 'group') %>
-              </a>
-              <div class="caption">
-                <p><%= producto.nombre %></p>
-                <p>precio misión <%= number_to_currency(producto.precio) %></p>
-                <p>Precio hiper <%= number_to_currency(producto.precio_super) %></p>
-                <p>Ahorro <%= number_to_percentage(producto.ahorro) %></p>
-              </div>
-
-              <div class="col-md-12">
-	              <div class="col-md-4">
-	                <select class="cantidad">
-	                  <% for i in 1..producto.cantidad_permitida %>
-	                    <option value="<%= i %>"><%= i %></option>
-	                  <% end %>
-	                </select>
+      <% if @isD7 %>
+        <div class="row highlight">
+          <h2 class="col-xs-12">Destacados</h2>
+        </div>
+      <% end %>
+	    <div class="row">
+	      <% @productos.each do |producto|%>
+	        <div class="col-xs-6 col-md-4 thumbnails">
+	          <div class="thumbnail text-center">
+	            <% if producto.oculto? %>
+	              <div class="oculto">
+	                <span>Oculto</span>
 	              </div>
-	              <div class="col-md-8">
-	                <% if @carrito.producto?(producto.id) %>
-	                  <%= button_tag(type: 'button',
-	                                 class: 'btn btn-sm btn-danger',
-	                                 data: {
-			                                 action: 'remove',
-			                                 productId: producto.id
-	                                 }) do %>
-	                    <span class="icon-tienda glyphicon-align-left"></span> <span class="cart-action">Eliminar del</span> carro
-	                  <% end %>
-	                <% else %>
-	                  <%= button_tag(type: 'button',
-	                                 class: 'btn btn-sm btn-success',
-	                                 data: {
-			                                 productId: producto.id,
-			                                 action: 'add'
-	                                 }) do %>
-	                    <span class="icon-tienda glyphicon-align-left"></span> <span class="cart-action">Agregar al</span> carro
-	                  <% end %>
+	            <% end   %>
+	            <a href="" onclick="return false;" data-toggle="popover" data-container="body" data-content="<%= producto.descripcion %>" >
+	              <%= image_tag(producto.imagen, style: "height:180px;", size: "180", class: 'group') %>
+	            </a>
+	            <div class="caption">
+	              <h4><%= producto.nombre %></h4>
+	              <p>precio misión <%= number_to_currency(producto.precio) %></p>
+	              <p>Precio hiper <%= number_to_currency(producto.precio_super) %></p>
+	              <p>Ahorro <%= number_to_percentage(producto.ahorro) %></p>
+	            </div>
+
+              <select class="cantidad">
+                <% for i in 1..producto.cantidad_permitida %>
+                  <option value="<%= i %>"><%= i %></option>
+                <% end %>
+              </select>
+
+	            <% if @carrito.producto?(producto.id) %>
+	                <%= button_tag(type: 'button',
+	                               class: 'btn btn-sm btn-danger',
+	                               data: {
+		                                 action: 'remove',
+		                                 productId: producto.id
+	                               }) do %>
+	                  <span class="icon-tienda glyphicon-align-left"></span> <span class="cart-action">Eliminar del</span> carro
 	                <% end %>
+	            <% else %>
+	                <%= button_tag(type: 'button',
+	                               class: 'btn btn-sm btn-success',
+	                               data: {
+		                                 productId: producto.id,
+		                                 action: 'add'
+	                               }) do %>
+	                  <span class="icon-tienda glyphicon-align-left"></span> <span class="cart-action">Agregar al</span> carro
+	                <% end %>
+	            <% end %>
+	            <% if can? [:update, :detele], producto %>
+	              <div class="btn-group btn-group-justified" role="group" aria-label="modificar">
+	                <div class="btn-group" role="group">
+	                  <%= button_to t('.edit', :default => t("helpers.links.edit")),
+	                                edit_producto_path(producto),
+	                                :method => :get,
+	                                :class => 'btn btn-primary'  %>
+	                </div>
 	              </div>
-              </div>
-              <% if can? [:update, :detele], producto %>
-                <div class="col-md-12">
-                  <div class="btn-group btn-group-justified" role="group" aria-label="modificar">
-                    <div class="btn-group" role="group">
-                      <%= button_to t('.edit', :default => t("helpers.links.edit")),
-                                    edit_producto_path(producto),
-                                    :method => :get,
-                                    :class => 'btn btn-primary'  %>
-                    </div>
-                  </div>
-                </div>
-                <% if producto.oculto? %>
-                  <div class="oculto">
-                    <span>Oculto</span>
-                  </div>
-                <% end   %>
-              <% end %>
-
-            </div>
-          </div>
-        <% end %>
-      </div>
-    </div>
-  </div>
-</div>
+	            <% end %>
+	          </div>
+	        </div>
+	      <% end %>
+	    </div>
+    </div> <!--col-xs-12 col-md-3-->
+  </div> <!--close row -->
+</div> <!--close containt fill-->
 
 
 
 <script type="text/javascript">
   $(function () {
   $('[data-toggle="popover"]').popover()
-})
-  $('.thumbnails').find('.thumbnail').uniformHeight();
+});
 
-  $(window).resize(function () {
+  $( document ).ready(function() {
 	  $('.thumbnails').find('.thumbnail').uniformHeight();
+
+	  $(window).resize(function () {
+		  $('.thumbnails').find('.thumbnail').uniformHeight();
+	  });
   });
+
+
 
 </script>

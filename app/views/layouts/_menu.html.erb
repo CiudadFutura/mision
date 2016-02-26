@@ -77,7 +77,7 @@
       <% if usuario_signed_in? %>
         <li>
           <%= link_to(productos_path) do %>
-            <span class="icon-tienda"></span>Tienda
+            <span class="icon-tienda glyphicon"></span>Tienda
           <% end %>
         </li>
         <li><p class="navbar-text"><%= truncate(current_usuario.email, length: 32) %></p></li>
@@ -91,17 +91,17 @@
       <% else %>
         <li>
           <%= link_to(new_usuario_registration_path) do %>
-            <span class="icon-registrate"></span>Registrate
+            <span class="icon-registrate glyphicon"></span>Registrate
           <% end %>
         </li>
         <li>
           <%= link_to(new_usuario_session_path) do %>
-            <span class="icon-ingresa"></span>Ingresa
+            <span class="icon-ingresa glyphicon"></span>Ingresa
           <% end %>
         </li>
         <li>
           <%= link_to(productos_path) do %>
-            <span class="icon-tienda"></span>Tienda
+            <span class="icon-tienda glyphicon"></span>Tienda
           <% end %>
         </li>
       <% end %>
