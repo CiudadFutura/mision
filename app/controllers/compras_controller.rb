@@ -74,9 +74,11 @@ class ComprasController < ApplicationController
         :fecha_inicio_compras => [:year, :month, :day, :hour, :minute],
         :fecha_fin_compras => [:year, :month, :day, :hour, :minute],
         :fecha_fin_pagos => [:year, :month, :day, :hour, :minute],
-        :fecha_entrega_compras => [:year, :month, :day, :hour, :minute])
+        :fecha_entrega_compras => [:year, :month, :day, :hour, :minute],
+        circulo_ids:[])
       { nombre: filtered_params[:nombre],
         descripcion: filtered_params[:descripcion],
+        circulo_ids: filtered_params[circulo_ids:[]],
         fecha_inicio_compras: Time.utc(
           filtered_params[:fecha_inicio_compras][:year],
           filtered_params[:fecha_inicio_compras][:month],
