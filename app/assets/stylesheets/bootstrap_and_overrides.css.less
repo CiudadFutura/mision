@@ -419,20 +419,34 @@ body{
 		h4{
 			font-family: @font-din-reg;
 		}
-		.thumbnail{
+		h1{
+			padding-top: 30%;
+			font-family: @font-cursiva;
+			color:@red-char;
+		}
+		.thumbnail {
 			position: relative;
-			button{
+			button {
 				margin: 5px 0px;
 			}
-			.oculto{
+			.oculto {
 				position: absolute;
 				top: 30%;
 				width: 97%;
 				background-color: #d3d3d3;
-				span{
+				span {
 					font-family: @font-mont-reg;
 					color: @red-char;
 					font-size: 16px;
+				}
+			}
+		}
+		#accordion{
+			.panel-default{
+				background-color: transparent;
+				border: none;
+				.panel-heading{
+					margin-bottom: 3px;
 				}
 			}
 		}
@@ -450,14 +464,14 @@ body{
 					line-height: 45px;
 					height: 45px;
 					padding-top: 0;
-					span.glyphicon{
+					.glyphicon{
 						font-size: 35px;
 						padding-right: 5px;
 					}
-					a:hover{
-						background-color: transparent;
-						font-weight: bold ;
-					}
+				}
+				a:hover{
+					background-color: transparent;
+					font-weight: bold ;
 				}
 				ul{
 					li{
@@ -465,6 +479,10 @@ body{
 							height: 30px;
 							line-height: 30px;
 							font-size: 12px;
+							text-transform: inherit;
+						}
+						a:hover{
+							font-weight: bold ;
 						}
 					}
 				}
