@@ -22,22 +22,35 @@ $(document).ready(function () {
   $('button[data-action]').click(function (event) {
     event.preventDefault();
 
+	  var addToCartTimeout;
+
     var that = $(this);
+
+	  if (addToCartTimeout) {
+		  clearTimeout(addToCartTimeout);
+	  }
 
     var new_title, new_action;
     var action = that.data('action');
     var productId = that.data('productid');
     var url = 'cart/' + action + '/' + productId;
+	  var new_class = '';
+	  var old_class = '';
+	  var message_box = '';
 
     if (action === 'add') {
       //Add a new item to cart
       new_action = 'remove';
       new_title = "Eliminar del ";
+	    new_class = 'btn-danger';
+	    old_class = 'btn-success';
     } else if (action === 'remove') {
       //Remove item from cart
       new_action = 'add';
       new_title = "Agregar al ";
       that.parents("tr.cart-item").remove();
+	    new_class = 'btn-success';
+	    old_class = 'btn-danger';
     }
 
     $.ajax({
@@ -52,6 +65,21 @@ $(document).ready(function () {
 
       that.find('span.cart-action').html(new_title);
       that.data('action', new_action);
+	    that.removeClass(old_class);
+	    that.addClass(new_class);
+			if (action ==='add'){
+				$('#js-message-success').show().find('#js-message-product').html(that.prev('select.cantidad').val());
+			}else{
+				$('#js-message-delete').show();
+			}
+
+	    addToCartTimeout = setTimeout(function () {
+		    if (action ==='add'){
+		      $('#js-message-success').hide();
+		    }else{
+			    $('#js-message-delete').hide();
+		    }
+	    }, 3000);
     });
   });
 

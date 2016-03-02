@@ -1,5 +1,4 @@
 <%- model_class = Producto -%>
-
 <div class="container fill">
   <div class="row">
     <div class="col-xs-12 col-md-3">
@@ -29,7 +28,20 @@
           <h2 class="col-xs-12">Destacados</h2>
         </div>
       <% end %>
-	    <div class="row">
+      <div id="js-message-success" style="display: none;">
+        <div class="alert alert-success">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          Se agregó exitosamente el producto: <strong id="js-message-product"></strong>
+        </div>
+      </div>
+      <div id="js-message-delete" style="display: none;">
+        <div class="alert alert-danger">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          Se eliminó el producto del carrito</strong>
+        </div>
+      </div>
+
+      <div class="row">
 	      <% @productos.each do |producto|%>
 	        <div class="col-xs-6 col-md-4 thumbnails">
 	          <div class="thumbnail text-center">
@@ -46,43 +58,43 @@
 	              <p>precio misión <%= number_to_currency(producto.precio) %></p>
 	              <p>Precio hiper <%= number_to_currency(producto.precio_super) %></p>
 	              <p>Ahorro <%= number_to_percentage(producto.ahorro) %></p>
+
+	              <select class="cantidad">
+	                <% for i in 1..producto.cantidad_permitida %>
+	                  <option value="<%= i %>"><%= i %></option>
+	                <% end %>
+	              </select>
+
+		            <% if @carrito.producto?(producto.id) %>
+		                <%= button_tag(type: 'button',
+		                               class: 'btn btn-sm btn-danger',
+		                               data: {
+			                                 action: 'remove',
+			                                 productId: producto.id
+		                               }) do %>
+		                  <span class="icon-tienda glyphicon-align-left"></span> <span class="cart-action">Eliminar del</span> carro
+		                <% end %>
+		            <% else %>
+		                <%= button_tag(type: 'button',
+		                               class: 'btn btn-sm btn-success',
+		                               data: {
+			                                 productId: producto.id,
+			                                 action: 'add'
+		                               }) do %>
+		                  <span class="icon-tienda glyphicon-align-left"></span> <span class="cart-action">Agregar al</span> carro
+		                <% end %>
+		            <% end %>
+		            <% if can? [:update, :detele], producto %>
+		              <div class="btn-group btn-group-justified" role="group" aria-label="modificar">
+		                <div class="btn-group" role="group">
+		                  <%= button_to t('.edit', :default => t("helpers.links.edit")),
+		                                edit_producto_path(producto),
+		                                :method => :get,
+		                                :class => 'btn btn-primary'  %>
+		                </div>
+		              </div>
+		            <% end %>
 	            </div>
-
-              <select class="cantidad">
-                <% for i in 1..producto.cantidad_permitida %>
-                  <option value="<%= i %>"><%= i %></option>
-                <% end %>
-              </select>
-
-	            <% if @carrito.producto?(producto.id) %>
-	                <%= button_tag(type: 'button',
-	                               class: 'btn btn-sm btn-danger',
-	                               data: {
-		                                 action: 'remove',
-		                                 productId: producto.id
-	                               }) do %>
-	                  <span class="icon-tienda glyphicon-align-left"></span> <span class="cart-action">Eliminar del</span> carro
-	                <% end %>
-	            <% else %>
-	                <%= button_tag(type: 'button',
-	                               class: 'btn btn-sm btn-success',
-	                               data: {
-		                                 productId: producto.id,
-		                                 action: 'add'
-	                               }) do %>
-	                  <span class="icon-tienda glyphicon-align-left"></span> <span class="cart-action">Agregar al</span> carro
-	                <% end %>
-	            <% end %>
-	            <% if can? [:update, :detele], producto %>
-	              <div class="btn-group btn-group-justified" role="group" aria-label="modificar">
-	                <div class="btn-group" role="group">
-	                  <%= button_to t('.edit', :default => t("helpers.links.edit")),
-	                                edit_producto_path(producto),
-	                                :method => :get,
-	                                :class => 'btn btn-primary'  %>
-	                </div>
-	              </div>
-	            <% end %>
 	          </div>
 	        </div>
 	      <% end %>

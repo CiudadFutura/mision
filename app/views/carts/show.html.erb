@@ -1,7 +1,7 @@
 <div class="container fill">
 	<div class="row">
     <% if @ciclo_actual && current_usuario && current_usuario.circulo && !current_usuario.pedido?(Compra::ciclo_actual) %>
-      <h1 class="titulo">Revisa tu pedido y confirmalo.</h1>
+      <h3 class="titulo">Revisa tu pedido y confirmalo.</h3>
 
       <p class="explicacion">
         <b>Ciclo Actual: Desde el <%= l @ciclo_actual.fecha_inicio_compras %> hasta el <%= l @ciclo_actual.fecha_fin_compras %></b><br/>
