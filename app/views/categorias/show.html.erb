@@ -1,5 +1,5 @@
-<h1>Categoría <%= @categoria.nombre %></h1>
-<div class="categorias">
+<div class="container fill">
+  <h3>Categoría <%= @categoria.nombre %></h3>
   <div class="breadcrumb">
     <%= link_to 'Editar', edit_categoria_path(@categoria) %> |
     <%= link_to 'Atras', categorias_path %>

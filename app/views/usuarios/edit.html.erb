@@ -1,9 +1,11 @@
-<h1>Modificar usuario</h1>
-<div class="usuarios">
-  <div class="breadcrumb">
-    <%= link_to 'Mostrar', @usuario %> |
-    <%= link_to 'Volver', usuario_path(current_usuario) %>
-  </div>
-  <%= render 'form' %>
+<div class="container fill">
+	<div class="row">
+	  <h2>Modificar usuario</h2>
+	  <div class="breadcrumb">
+	    <%= link_to 'Mostrar', @usuario %> |
+	    <%= link_to 'Volver', usuario_path(current_usuario) %>
+	  </div>
+	  <%= render 'form' %>
 
+	</div>
 </div>

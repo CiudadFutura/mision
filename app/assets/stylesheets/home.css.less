@@ -59,6 +59,7 @@
   font-style: normal;
 }
 
+/*
 @font-face {
   font-family: 'mision-icons';
   src: asset-url("mision-icons.eot?-ptbqre");
@@ -69,59 +70,8 @@
   font-weight: normal;
   font-style: normal;
 }
+*/
 
-[class^="icon-"], [class*=" icon-"] {
-  font-family: 'mision-icons';
-  /*speak: none;*/
-  font-style: normal;
-  font-weight: normal;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1;
-  /* Better Font Rendering =========== */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-.icon-key:before {
-  content: "\f049";
-}
-.icon-lock:before {
-  content: "\f06a";
-}
-
-.icon-facebook:before {
-	content: "\e61e";
-}
-.icon-facebook2:before {
-	content: "\e61f";
-}
-.icon-twitter:before {
-	content: "\e620";
-}
-.icon-twitter2:before {
-	content: "\e621";
-}
-.icon-twitter3:before {
-  content: "\e622";
-}
-.icon-envelope:before {
-  content: "\f0e0";
-}
-.icon-radio-checked:before {
-  content: "\e641";
-}
-.icon-radio-unchecked:before {
-  content: "\e642";
-}
-.icon-house:before {
-  content: "\e674";
-}
-.icon-location:before {
-  content: "\e63b";
-}
-.icon-new:before {
-  content: "\e644";
-}
 
 .bt-1(@font-size:14px, @color: #FFF, @hover: @rojo, @radius:3px) {
   font-size: @font-size;
@@ -154,239 +104,18 @@
   }
 }
 
-body{
-  background: image-url('bg.png') repeat;
-}
 a, a:hover{
   text-decoration: none;
 }
-.col-lg-12{
-  padding: 0px;
-}
-.col-4{
-  width: 33.3333%;
-  float: left;
-}
-#wrapper {
-  position: relative;
-  z-index: 8888;
-  #header {
-    position: absolute;
-    z-index: 8888;
-    text-align: center;
-    min-height: 462px;
-    top: 0px;
-    width: 100%;
-    .header-bar {
-      height: 77px;
-      position: absolute;
-      width: 100%;
-      text-align: center;
-      padding-top: 20px;
-      a.logo {
-        width: 201px;
-        height: 76px;
-        background: image-url('logo-mia.jpg') no-repeat;
-        background-size:cover;
-        display:none;
-        span {
-          display: none;
-        }
-      }
-      a.logo-monteverde {
-        width: 259px;
-        height: 76px;
-        background: image-url('logo.png') no-repeat;
-        background-size:cover;
-        display: inline-block;
-        span {
-          display: none;
-        }
-      }
-    }
-    a.join {
-      position: relative;
-      top: 310px;
-      .bt-1();
-      text-shadow: 0px 0px 2px #000, 0px 0px 6px #000, 0px 0px 6px #000;
-    }
-    a.loginbtn {
-      .bt-1();
-      top:290px;
-      position: absolute;
-      left:42%;
-    }
-    #lm-home-social {
-      position: absolute;
-      bottom: 40px;
-      width: 100%;
-      .lm-facebook {
-        &:hover {
-          color: @facebook;
-          background-color: transparent;
-        }
-      }
-      .lm-twitter{
-        &:hover {
-          color: #ccc;
-          background-color: transparent;
-        }
-      }
-      .lm-social-icons {
-        color: #fff;
-        font-size: 28px;
-        display: inline-block;
-        &:first-child {
-          margin-right: 10px;
-        }
-        &:hover {
-          text-shadow: 0 0 1px #ddd;
-          background-color: transparent;
-        }
-      }
 
-    }
-  }
-}
 
-.lee {
-  margin-top: 30px;
-  margin-bottom: 40px;
-  text-align: center;
-  padding: 10px;
-  height: 280px;
-  color: @texto-home;
-  h2 {
-    font-size:18px;
-    line-height: 22px;
-    color: @rojo;
-    margin-bottom:5px;
-  }
-  h3 {
-    font-size: 14px;
-    line-height:18px;
-    color: #666;
-    margin-bottom: 20px;
-  }
 
-  a {
-    .bt-2(@font-size: 17px, @color: @rojo, @hover: #333, @radius: 4px);
-    font-family: 'liberation_sansbold';
-    margin-bottom: 20px;
-    &:hover{
-      background-color: transparent;
-    }
-  }
-}
-
-#lm-dossier {
-  background: image-url('icono_lee_el_dossier.png') center bottom no-repeat;
-}
-#lm-conoce {
-  background: image-url('icono_conoce_mas.png') center bottom no-repeat;
-}
-
-#lm-activar {
-  background: image-url('icono_activa_tu_circulo.png') center bottom no-repeat;
-}
 #tigre {
   min-height: 280px;
   background: image-url('tigre.png') center 20px no-repeat;
   background-size: contain;
 }
 
-#lm-login {
-  text-align: center;
-  h3 {
-    background: #333;
-    color: #fff !important;
-    display: block;
-    font-size: 20px;
-    line-height: 22px;
-    margin-bottom: 30px;
-    padding: 12px 14px;
-    //@include border-radius(4px 4px 0 0);
-    //@include skew( -10deg, 0deg );
-    //@include box-shadow(#333 5px  5px  0px  0px);
-  }
-  ul li {
-    text-align: left;
-    margin-bottom: 26px;
-
-    label {
-      font-weight: bold;
-      margin-bottom: 8px;
-      color: #222;
-      display: block;
-
-      span {
-        float: right;
-        color: @rojo;
-        font-size: 12px;
-      }
-    }
-    label.lm-error {
-      display: inline-block;
-      font-weight: normal;
-      width: 100%;
-      background: @bg-error;
-      color: #fff;
-      font-size: 12px;
-      padding: 7px;
-      text-align: right;
-
-    }
-    span.lm-example {
-      display: inline-block;
-      width: 100%;
-
-      color: #555;
-      font-size: 12px;
-      padding: 7px;
-      text-align: right;
-    }
-    input[type="text"], input[type="password"] {
-      height: 40px;
-    }
-
-    input[type="submit"] {
-      .bt-2(@font-size: 16px, @color:#fff, @hover: #333, @radius: 4px);
-      font-weight: normal;
-      margin-right: 0;
-      width: 50%;
-      background: @rojo;
-      border: 0px;
-      &:hover {
-        border: 0px;
-        color: #fff;
-        background: #333;
-      }
-    }
-  }
-
-  p#login-msg {
-    background: @bg-error;
-    color: #fff;
-    font-size: 14px;
-    line-height: 46px;
-    margin-bottom: 20px;
-    margin-top: -30px;
-    padding: 0 10px;
-    position: relative;
-    text-align: center;
-
-    span {
-      font-size: 24px;
-      left: 10px;
-      position: absolute;
-      top: 10px;
-    }
-  }
-
-  #login-loader {
-    align-self: center;
-  }
-}
 
 #footer-content {
   width: 100%;

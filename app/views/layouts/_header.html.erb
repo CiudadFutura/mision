@@ -1,0 +1,64 @@
+<% section = get_section(request) %>
+<div class="container header">
+	<div class="row">
+		<div class="col-xs-12 col-md-6">
+			<div class="text-center">
+				<%= link_to(root_path) do %>
+				<%= image_tag("logoHeader.png", :class => 'img-responsive') %>
+				<% end %>
+			</div>
+			<div class="col-xs-12 col-md-12">
+				<div class="text-center">
+					<h1><%= !section[:titulo].nil? ? section[:titulo] : '' %></h1>
+					<h4><%= !section[:subtitulo].nil? ? section[:subtitulo] : '' %></h4>
+				</div>
+			</div>
+		</div>
+		<div class="hidden-xs col-md-6">
+			<div class="text-center">
+				<%= image_tag("#{section[:seccion]}Header.jpg", :class => 'img-responsive') %>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container-fluid">
+  <div class="row">
+    <%= render 'layouts/menu' %>
+  </div>
+</div>
+<% if request.path == '/productos' %>
+<div class="container">
+	<div class="row order-data">
+	  <div class="col-md-3">
+	    <h1>La Tienda</h1>
+		</div>
+	  <div class="col-md-offset-3">
+		  <div class="col-md-2 order-data-title">
+		    <h4>Datos de tu compra</h4>
+		  </div>
+	    <div class="col-md-3 sale-off">
+	      <h4>Ahorro: <span class="cart-ahorro"><%= number_to_percentage(@carrito.ahorro) %></span></h4>
+	    </div>
+	    <div class="col-md-3 total-qty">
+		    <h4>
+		      <span class="cart-total"><%= number_to_currency(@carrito.total) %></span><br>
+		      <span class="cart-cantidad"><%= pluralize(@carrito.cantidad, ' producto', ' productos') %></span>
+		    </h4>
+	    </div>
+	    <div class="col-md-2 cart-link">
+		    <h4>
+		      <% if (controller.controller_name == 'carts') %>
+		        <%= link_to(productos_path, class: 'prod-list') do %>
+		          <i class="icon-lmcart"></i>Ir a la Tienda
+		        <% end %>
+		      <% else %>
+		        <%= link_to(cart_path, class: 'prod-list') do %>
+		          <i class="icon-lmcart"></i>Ver Mi Compra
+		        <% end %>
+		      <% end %>
+		    </h4>
+      </div>
+    </div>
+	</div>
+</div>
+<% end %>

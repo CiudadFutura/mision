@@ -1,46 +1,48 @@
-<div class="row">
-  <div class="reporte">
-    <h1>Reporte cantidad de productos por proveedor por ciclos</h1>
+<div class="container fill">
+	<div class="row">
+	  <div class="reporte">
+	    <h2>Reporte cantidad de productos por proveedor por ciclos</h2>
 
-		<% if current_usuario && current_usuario.admin? %>
-		  <%= form_tag reports_path, method: :get, class: 'form-inline' do %>
-		    <h3>Filtros:</h3>
-		    <div class="form-group">
-		      <label for="ciclo_id">Ciclo:</label>
-		      <%= select_tag "ciclo_id",
-		                     options_from_collection_for_select(@ciclos, "id", "nombre", @ciclo_id),
-		                     include_blank: true, class: 'form-control input-sm' %>
-		    </div>
-		    <%= submit_tag 'Filtrar', class: "btn btn-success btn-xs" %>
-		  <% end %>
-		<% end %>
-		<% if @reporte.present? %>
-			<% @reporte.each do |supplier_id, supplier| %>
-			  <table class="table">
-			    <thead>
-			      <tr>
-			        <th width="20%">Proveedor</th>
-			        <th width="10%">Prod. ID</th>
-			        <th width="60%">Producto</th>
-			        <th width="10%">Cantidad</th>
-			      </tr>
-			    </thead>
-
-			    <tbody>
-
-			    <% supplier[:products].each do |product_id, product| %>
-			      <tr>
-			        <td><%= supplier[:name] %></td>
-			        <td><%= product_id %></td>
-			        <td><%= product[:name] %></td>
-			        <td><%= product[:qty] %></td>
-			      </tr>
-			    <% end %>
-
-			    </tbody>
-			  </table>
-			  <br/>
+			<% if current_usuario && current_usuario.admin? %>
+			  <%= form_tag reports_path, method: :get, class: 'form-inline' do %>
+			    <h3>Filtros:</h3>
+			    <div class="form-group">
+			      <label for="ciclo_id">Ciclo:</label>
+			      <%= select_tag "ciclo_id",
+			                     options_from_collection_for_select(@ciclos, "id", "nombre", @ciclo_id),
+			                     include_blank: true, class: 'form-control input-sm' %>
+			    </div>
+			    <%= submit_tag 'Filtrar', class: "btn btn-success btn-xs" %>
+			  <% end %>
 			<% end %>
-		<% end %>
-  </div>
+			<% if @reporte.present? %>
+				<% @reporte.each do |supplier_id, supplier| %>
+				  <table class="table">
+				    <thead>
+				      <tr>
+				        <th width="20%">Proveedor</th>
+				        <th width="10%">Prod. ID</th>
+				        <th width="60%">Producto</th>
+				        <th width="10%">Cantidad</th>
+				      </tr>
+				    </thead>
+
+				    <tbody>
+
+				    <% supplier[:products].each do |product_id, product| %>
+				      <tr>
+				        <td><%= supplier[:name] %></td>
+				        <td><%= product_id %></td>
+				        <td><%= product[:name] %></td>
+				        <td><%= product[:qty] %></td>
+				      </tr>
+				    <% end %>
+
+				    </tbody>
+				  </table>
+				  <br/>
+				<% end %>
+			<% end %>
+	  </div>
+	</div>
 </div>

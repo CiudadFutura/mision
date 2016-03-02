@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   resources :pedidos, only: [:index, :show, :edit]
   resources :home
   resources :steps
-  resources :dossier
+  resources :dossiers
   resources :faqs
   resources :geo_reports
   resources :dashboards

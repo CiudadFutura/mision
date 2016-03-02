@@ -1,114 +1,116 @@
-<div class="usuarios">
-
-<h1>Completá el formulario, y sos parte.</h1>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), role: 'form') do |f| %>
-  <%= devise_error_messages! %>
-
+<div class="container fill registration">
   <div class="row">
-    <div class="col-md-6">
-      <h2>Datos del usuario</h2>
+	  <div class="col-md-6">
 
-      <h4>Completa con tus datos para ser miembro de la Gran Misión</h4>
+	    <h1>Completa con tus datos y sé parte de la Misión</h1>
 
-      <p class="desc">Una vez completado el formulario, un email te será enviado para confirmar tu casilla de correo. Sigue el link que aparece en el correo recibido para activar tu cuenta.<br/>
-      Con tu cuenta activada estas a un paso de poder realizar tu pedido.<br/>
-      Ingresa al sitio y consulta en MIS DATOS (opción del menu) tu numero de identificación. Comunicaselo al coordinador de tu círculo para que este te haga parte del mismo y puedas enviar tu pedido!</p>
-    </div>
+	    <p>
+	      Una vez completado el formulario, un email te será enviado para confirmar tu casilla de correo. Sigue el link que aparece en el correo recibido para activar tu cuenta.
+	    </p>
+	    <p>
+	      Con tu cuenta activada estas a un paso de poder realizar tu pedido.
+	    </p>
+	    <p>
+	      Ingresa al sitio y consulta en MIS DATOS (opción del menu) tu numero de identificación. Comunicaselo al coordinador de tu círculo para que este te haga parte del mismo y puedas enviar tu pedido!
+	    </p>
+	  </div>
 
-    <div class="col-md-6">
+		<%= form_for(resource, as: resource_name, url: registration_path(resource_name), role: 'form') do |f| %>
+		  <%= devise_error_messages! %>
+			<div class="col-md-6">
 
-      <h3>Consumidor Colaborativo</h3>
+		    <h3>Consumidor Colaborativo</h3>
 
-      <p>Todos los campos son <strong>requeridos</strong></p>
+		    <p>Todos los campos son <strong>requeridos</strong></p>
 
-      <div class="form-group">
-        <label for="nombre">Tipo de usuario: <span>[requerido]</span></label>
-        <div class="radio">
-          <label>
-            <%= f.radio_button(:type, "Usuario", checked: true)  %>
-            Usuario
-          </label>
-        </div>
-        <div class="radio">
-          <label>
-            <%= f.radio_button(:type, "Coordinador")  %>
-            Coordinador
-          </label>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="nombre">Nombre: <span>[requerido]</span></label>
-        <%= f.text_field :nombre, class: 'form-control' %>
-      </div>
-      <div class="form-group">
-        <label for="apellido">Apellido: <span>[requerido]</span></label>
-        <%= f.text_field :apellido, class: 'form-control' %>
-      </div>
-      <div class="form-group">
-        <label for="email1">Correo Electrónico: <span>[requerido]</span></label>
-        <%= f.email_field :email, autofocus: true, class: 'form-control' %>
-        <p class="help-block">ejemplo: tucorreo@gmail.com</p>
-      </div>
-      <div class="form-group">
-        <label for="fecha_de_nacimiento">Fecha de nacimiento: <span>[requerido]</span></label>
-        <%= f.date_select :fecha_de_nacimiento, { start_year: 1900 }, { class: 'form-control'} %>
-        <p class="help-block">ejemplo: dd/mm/aaaa - 11/07/1977</p>
-      </div>
-      <div class="form-group">
-        <label for="dni">D.N.I.: <span>[requerido]</span></label>
-        <%= f.text_field :dni, class: 'form-control' %>
-      </div>
-      <div class="form-group">
-        <label for="domicilio">Domicilio: <span>[requerido]</span></label>
-        <%= f.text_field :calle, class: 'form-control' %>
-        <p class="help-block">ejemplo: Calle Nº Piso Depto.</p>
-      </div>
-      <div class="form-group">
-        <label for="localidad">Localidad: <span>[requerido]</span></label>
-        <%= f.text_field :ciudad, class: 'form-control' %>
-      </div>
-      <div class="form-group">
-        <label for="codigo_postal">Cod. Postal: <span>[requerido]</span></label>
-        <%= f.text_field :codigo_postal, class: 'form-control' %>
-      </div>
-      <div class="form-group">
-        <label for="telefono">Teléfono: </label>
-        <%= f.text_field :tel1, class: 'form-control' %>
-      </div>
-      <div class="form-group">
-        <label for="celular">Celular:</label>
-        <%= f.text_field :cel1, class: 'form-control' %>
-      </div>
-      <div class="form-group">
-        <label for="passOne">Contraseña: <span>[requerido]</span></label>
-        <%= f.password_field :password, autocomplete: "off",  class: 'form-control' %>
-        <p class="help-block">* 8 (ocho) caracteres como mínimo</p>
-      </div>
-      <div class="form-group">
-        <label for="passTwo">Repetir Contraseña: <span>[requerido]</span></label>
-        <%= f.password_field :password_confirmation, autocomplete: "off",  class: 'form-control' %>
-      </div>
-      <div class="form-group" id="emails-invitados">
-        <label>Enviar invitación a los sig. usuarios:</label>
-        <input id="email_invitado_1" name="email_invitado_1" type="email" class="form-control" placeholder="Email invitado 1" />
-        <input id="email_invitado_2" name="email_invitado_2" type="email" class="form-control" placeholder="Email invitado 2" />
-        <input id="email_invitado_3" name="email_invitado_3" type="email" class="form-control" placeholder="Email invitado 3" />
-        <input id="email_invitado_4" name="email_invitado_4" type="email" class="form-control" placeholder="Email invitado 4" />
-      </div>
-       <div class="form-group">
-        <input type="checkbox" checked="" name="terminos" id="term">
-        <label for="term" style="line-height: 26px; padding-top: 24px">
-          Acepto los <a class="btn-link" data-toggle="modal" data-target="#terminos">términos y condiciones.</a>
-        </label>
-      </div>
-      <div class="form-group">
-        <div><%= f.submit "Registrate", class: 'lm-form-nav' %></div>
-      </div>
-
-    </div>
+			  <div class="form-group row">
+			    <label class="col-md-3" for="tipo">Tipo de usuario: <span>[requerido]</span></label>
+			    <div class="col-md-9">
+			      <div class="radio">
+			        <label>
+			          <%= f.radio_button(:type, "Usuario", checked: true, id:"tipo")  %>
+			          Usuario
+			        </label>
+			      </div>
+			      <div class="radio">
+			        <label>
+			          <%= f.radio_button(:type, "Coordinador", id:"tipo")  %>
+			          Coordinador
+			        </label>
+			      </div>
+			    </div>
+			  </div>
+		    <div class="form-group">
+		      <label for="nombre">Nombre: <span>[requerido]</span></label>
+		      <%= f.text_field :nombre, class: 'form-control' %>
+		    </div>
+		    <div class="form-group">
+		      <label for="apellido">Apellido: <span>[requerido]</span></label>
+		      <%= f.text_field :apellido, class: 'form-control' %>
+		    </div>
+		    <div class="form-group">
+		      <label for="email1">Correo Electrónico: <span>[requerido]</span></label>
+		      <%= f.email_field :email, autofocus: true, class: 'form-control' %>
+		      <p class="help-block">ejemplo: tucorreo@gmail.com</p>
+		    </div>
+		    <div class="form-group">
+		      <label for="fecha_de_nacimiento">Fecha de nacimiento: <span>[requerido]</span></label>
+		      <%= f.date_select :fecha_de_nacimiento, { start_year: 1900 }, { class: 'form-control'} %>
+		      <p class="help-block">ejemplo: dd/mm/aaaa - 11/07/1977</p>
+		    </div>
+		    <div class="form-group">
+		      <label for="dni">D.N.I.: <span>[requerido]</span></label>
+		      <%= f.text_field :dni, class: 'form-control' %>
+		    </div>
+		    <div class="form-group">
+		      <label for="domicilio">Domicilio: <span>[requerido]</span></label>
+		      <%= f.text_field :calle, class: 'form-control' %>
+		      <p class="help-block">ejemplo: Calle Nº Piso Depto.</p>
+		    </div>
+		    <div class="form-group">
+		      <label for="localidad">Localidad: <span>[requerido]</span></label>
+		      <%= f.text_field :ciudad, class: 'form-control' %>
+		    </div>
+		    <div class="form-group">
+		      <label for="codigo_postal">Cod. Postal: <span>[requerido]</span></label>
+		      <%= f.text_field :codigo_postal, class: 'form-control' %>
+		    </div>
+		    <div class="form-group">
+		      <label for="telefono">Teléfono: </label>
+		      <%= f.text_field :tel1, class: 'form-control' %>
+		    </div>
+		    <div class="form-group">
+		      <label for="celular">Celular:</label>
+		      <%= f.text_field :cel1, class: 'form-control' %>
+		    </div>
+		    <div class="form-group">
+		      <label for="passOne">Contraseña: <span>[requerido]</span></label>
+		      <%= f.password_field :password, autocomplete: "off",  class: 'form-control' %>
+		      <p class="help-block">* 8 (ocho) caracteres como mínimo</p>
+		    </div>
+		    <div class="form-group">
+		      <label for="passTwo">Repetir Contraseña: <span>[requerido]</span></label>
+		      <%= f.password_field :password_confirmation, autocomplete: "off",  class: 'form-control' %>
+		    </div>
+		    <div class="form-group" id="emails-invitados">
+		      <label>Enviar invitación a los sig. usuarios:</label>
+		      <input id="email_invitado_1" name="email_invitado_1" type="email" class="form-control" placeholder="Email invitado 1" />
+		      <input id="email_invitado_2" name="email_invitado_2" type="email" class="form-control" placeholder="Email invitado 2" />
+		      <input id="email_invitado_3" name="email_invitado_3" type="email" class="form-control" placeholder="Email invitado 3" />
+		      <input id="email_invitado_4" name="email_invitado_4" type="email" class="form-control" placeholder="Email invitado 4" />
+		    </div>
+		     <div class="form-group">
+		      <input type="checkbox" checked="" name="terminos" id="term">
+		      <label for="term" style="line-height: 26px; padding-top: 24px">
+		        Acepto los <a class="btn-link" data-toggle="modal" data-target="#terminos">términos y condiciones.</a>
+		      </label>
+		    </div>
+		    <div class="form-group">
+		      <div><%= f.submit "Registrate", class: 'btn btn-success pull-right ' %></div>
+		    </div>
+		  </div>
+		<% end %>
   </div>
-<% end %>
 </div>
 
 <!--modal términos y condiciones-->
