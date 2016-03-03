@@ -1,6 +1,9 @@
 en:
   wholesaler: Mayorista
   retailer: Productor
+  cooperative: Cooperativa
+  associative: Asociativo
+  family: Empresa familiar
   activerecord:
     models:
       supplier: Proveedor
