@@ -78,7 +78,7 @@ class ComprasController < ApplicationController
         circulo_ids:[])
       { nombre: filtered_params[:nombre],
         descripcion: filtered_params[:descripcion],
-        circulo_ids: filtered_params[circulo_ids:[]],
+        circulo_ids: filtered_params["circulo_ids"],
         fecha_inicio_compras: Time.utc(
           filtered_params[:fecha_inicio_compras][:year],
           filtered_params[:fecha_inicio_compras][:month],
