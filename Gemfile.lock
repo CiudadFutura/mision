@@ -126,7 +126,7 @@ GEM
     mini_portile2 (2.0.0)
     minitest (5.8.4)
     multi_json (1.11.2)
-    mysql2 (0.4.3)
+    mysql2 (0.3.20)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (3.0.2)
@@ -276,7 +276,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   less-rails
-  mysql2
+  mysql2 (~> 0.3.18)
   paper_trail (~> 4.0.0.rc)
   pry
   pry-byebug
