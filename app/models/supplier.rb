@@ -3,7 +3,7 @@ require 'cgi'
 require 'nokogiri'
 
 class Supplier < ActiveRecord::Base
-  enum nature: [:wholesaler, :retailer, :cooperative, :cooperative, :associative, :family]
+  enum nature: [:wholesaler, :retailer, :cooperative, :associative, :family]
 
   before_save :geocode_with_cache
 

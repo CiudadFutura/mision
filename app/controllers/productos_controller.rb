@@ -33,8 +33,7 @@ class ProductosController < ApplicationController
       @todos = Producto.all.order(:nombre)
       respond_to do |format|
         format.html
-        format.csv { export_csv(@todos) }
-        # format.csv { render csv: @todos.to_csv, filename: "#{Time.now.to_i}_productos" }
+        format.csv { render csv: @todos.to_csv, type: "text/csv; charset=iso-8859-1; header=present", filename: "#{Time.now.to_i}_productos" }
       end
     end
   end
@@ -114,15 +113,4 @@ class ProductosController < ApplicationController
                                        :cantidad_permitida, :imagen, categoria_ids: []
                                         )
     end
-
-  protected
-
-  def export_csv(todos)
-    filename = "#{Time.now.to_i}_productos.csv"
-    content = todos.to_csv
-    send_data content,
-              :type => 'text/csv; charset=utf-8; header=present',
-              :disposition => "attachment",
-              :filename => filename
-  end
 end
