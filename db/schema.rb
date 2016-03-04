@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20160303030538) do
     t.integer  "parent_id"
   end
 
-  add_index "categorias", ["parent_id"], name: "index_categorias_on_parent_id"
+  add_index "categorias", ["parent_id"], name: "index_categorias_on_parent_id", using: :btree
 
   create_table "categorias_productos", force: true do |t|
     t.integer "categoria_id"
@@ -32,11 +32,6 @@ ActiveRecord::Schema.define(version: 20160303030538) do
     t.integer  "coordinador_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "circulos_compras", force: true do |t|
-    t.integer "circulo_id"
-    t.integer "compra_id"
   end
 
   create_table "compras", force: true do |t|
@@ -57,25 +52,25 @@ ActiveRecord::Schema.define(version: 20160303030538) do
     t.integer  "compra_id"
   end
 
-  add_index "pedidos", ["compra_id"], name: "index_pedidos_on_compra_id"
+  add_index "pedidos", ["compra_id"], name: "index_pedidos_on_compra_id", using: :btree
 
   create_table "productos", force: true do |t|
-    t.float    "precio"
+    t.float    "precio",             limit: 24
     t.string   "nombre"
     t.text     "descripcion"
     t.integer  "cantidad_permitida"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "imagen"
-    t.float    "precio_super"
+    t.float    "precio_super",       limit: 24
     t.integer  "supplier_id"
     t.string   "codigo"
-    t.boolean  "oculto",             default: false
-    t.integer  "orden",              default: 0
-    t.boolean  "highlight",          default: false
+    t.boolean  "oculto",                        default: false
+    t.integer  "orden",                         default: 0
+    t.boolean  "highlight",                     default: false
   end
 
-  add_index "productos", ["supplier_id"], name: "index_productos_on_supplier_id"
+  add_index "productos", ["supplier_id"], name: "index_productos_on_supplier_id", using: :btree
 
   create_table "seed_migration_data_migrations", force: true do |t|
     t.string   "version"
@@ -89,18 +84,18 @@ ActiveRecord::Schema.define(version: 20160303030538) do
     t.integer  "nature",                                   default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "razon_social",                             default: ""
-    t.text     "calle",                                    default: ""
-    t.text     "ciudad",                                   default: ""
-    t.text     "codigo_postal",                            default: ""
-    t.text     "telefono",                                 default: ""
-    t.text     "nombre_contacto",                          default: ""
-    t.text     "email",                                    default: ""
-    t.text     "web",                                      default: ""
+    t.text     "razon_social"
+    t.text     "calle"
+    t.text     "ciudad"
+    t.text     "codigo_postal"
+    t.text     "telefono"
+    t.text     "nombre_contacto"
+    t.text     "email"
+    t.text     "web"
     t.decimal  "latitude",        precision: 10, scale: 6
     t.decimal  "longitude",       precision: 10, scale: 6
-    t.text     "error_code",                               default: ""
-    t.text     "description",                              default: ""
+    t.text     "error_code"
+    t.text     "description"
   end
 
   create_table "usuarios", force: true do |t|
@@ -132,14 +127,11 @@ ActiveRecord::Schema.define(version: 20160303030538) do
     t.string   "confirmation_token"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
-    t.float    "latitude"
-    t.float    "longitude"
-    t.string   "error_code"
   end
 
-  add_index "usuarios", ["confirmation_token"], name: "index_usuarios_on_confirmation_token", unique: true
-  add_index "usuarios", ["email"], name: "index_usuarios_on_email", unique: true
-  add_index "usuarios", ["reset_password_token"], name: "index_usuarios_on_reset_password_token", unique: true
+  add_index "usuarios", ["confirmation_token"], name: "index_usuarios_on_confirmation_token", unique: true, using: :btree
+  add_index "usuarios", ["email"], name: "index_usuarios_on_email", unique: true, using: :btree
+  add_index "usuarios", ["reset_password_token"], name: "index_usuarios_on_reset_password_token", unique: true, using: :btree
 
   create_table "versions", force: true do |t|
     t.string   "item_type",  null: false
@@ -150,6 +142,6 @@ ActiveRecord::Schema.define(version: 20160303030538) do
     t.datetime "created_at"
   end
 
-  add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
+  add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
 
 end
