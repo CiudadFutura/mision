@@ -20,70 +20,70 @@
     <div class="controls">
       <%= f.file_field :imagen %>
     </div>
-    <%= error_span(@producto[:imagen]) %>
+
   </div>
   <div class="control-group">
     <%= f.label :orden, :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :orden, :class => 'form-control' %>
     </div>
-    <%= error_span(@producto[:orden]) %>
+
   </div>
   <div class="control-group">
     <%= f.label :precio, :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :precio, :class => 'form-control' %>
     </div>
-    <%= error_span(@producto[:precio]) %>
+
   </div>
   <div class="control-group">
     <%= f.label :nombre, :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :nombre, :class => 'form-control' %>
     </div>
-    <%= error_span(@producto[:nombre]) %>
+
   </div>
   <div class="control-group">
     <%= f.label :codigo, :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :codigo, :class => 'form-control' %>
     </div>
-    <%= error_span(@producto[:codigo]) %>
+
   </div>
   <div class="control-group">
     <%= f.label :descripcion, :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :descripcion, :class => 'form-control' %>
     </div>
-    <%= error_span(@producto[:descripcion]) %>
+
   </div>
   <div class="control-group">
     <%= f.label :oculto, :class => 'control-label' %>
     <div class="controls">
       <%= f.check_box :oculto, :class => 'form-control' %>
     </div>
-    <%= error_span(@producto[:oculto]) %>
+
   </div>
   <div class="control-group">
     <%= f.label :destacado, :class => 'control-label' %>
     <div class="controls">
       <%= f.check_box :highlight, :class => 'form-control' %>
     </div>
-    <%= error_span(@producto[:highlight]) %>
+
   </div>
   <div class="control-group">
     <%= f.label :precio_super, :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :precio_super, :class => 'form-control' %>
     </div>
-    <%= error_span(@producto[:precio_super]) %>
+
   </div>
   <div class="control-group">
     <%= f.label :cantidad_permitida, :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :cantidad_permitida, :class => 'form-control' %>
     </div>
-    <%= error_span(@producto[:cantidad_permitida]) %>
+
   </div>
   <div class="control-group">
     <%= f.label :supplier_id, :class => 'control-label' %>
@@ -92,7 +92,7 @@
                    options_for_select(Supplier.all.map{|s| [s.name,s.id]},@producto[:supplier_id]), 
                    { include_blank: 'Elija proveedor', class: 'form-control' }) %>
     </div>
-    <%= error_span(@producto[:supplier]) %>
+
   </div>
 
   <div class="control-group">
