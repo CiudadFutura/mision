@@ -1,6 +1,5 @@
 require 'open-uri'
 require 'cgi'
-require 'nokogiri'
 
 class Supplier < ActiveRecord::Base
   enum nature: [:wholesaler, :retailer, :cooperative, :associative, :family]
