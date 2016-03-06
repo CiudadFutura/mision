@@ -60,7 +60,7 @@ gem 'capistrano-rvm', github: "capistrano/rvm"
 # Google Maps integration
 gem 'gmaps4rails'
 gem 'geocoder'
-gem 'nokogiri', '~> 1.6'
+gem 'nokogiri', '~> 1.3.3'
 
 group :development, :test do
   gem 'sqlite3'
