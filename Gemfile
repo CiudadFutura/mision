@@ -10,7 +10,7 @@ gem 'therubyracer',  platforms: :ruby
 gem 'sprockets', '2.11.0'
 gem 'less-rails', '~> 2.5.0'
 # https://github.com/seyhunak/twitter-bootstrap-rails
-gem 'twitter-bootstrap-rails'
+gem 'twitter-bootstrap-rails', '3.2.0'
 # https://github.com/carrierwaveuploader/carrierwave
 gem 'carrierwave'
 
@@ -60,6 +60,7 @@ gem 'capistrano-rvm', github: "capistrano/rvm"
 # Google Maps integration
 gem 'gmaps4rails'
 gem 'geocoder'
+gem 'nokogiri', '~> 1.6'
 
 group :development, :test do
   gem 'sqlite3'

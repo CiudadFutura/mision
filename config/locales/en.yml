@@ -4,6 +4,11 @@ en:
   cooperative: Cooperativa
   associative: Asociativo
   family: Empresa familiar
+  warehouse: Almacen
+  freshes: Frescos
+  vegetables: Frutas y verduras
+  fragile: Frágiles
+  cleaning: Limpieza
   activerecord:
     models:
       supplier: Proveedor
