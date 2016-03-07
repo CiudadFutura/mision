@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+
+  get 'remitos_pedido/index'
+  get 'remitos_pedido/generate'
+
   resources :suppliers
 
   resources :compras
@@ -23,7 +27,10 @@ Rails.application.routes.draw do
 
   resources :productos do
     collection { post 'upload' }
+    collection { put 'edit_multiple' }
   end
+
+
   resources :categorias
   resources :pedidos, only: [:index, :show, :edit]
   resources :home

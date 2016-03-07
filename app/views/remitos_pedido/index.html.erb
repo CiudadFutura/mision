@@ -1,0 +1,57 @@
+<%- model_class = Pedido -%>
+<div class="container fill">
+  <div class="row remitos">
+    <h2>Pedidos realizados</h2>
+
+    <% if current_usuario && current_usuario.admin? %>
+      <div class="col-md-3">
+        <%= link_to "Crear Faltantes", remitos_pedido_generate_path(), class: "btn btn-success btn-xs" %>
+      </div>
+      <div class="col-md-12">
+	      <%= form_tag remitos_pedido_index_path, method: :get, class: 'form-inline' do %>
+	        <h4>Filtros:</h4>
+	        <div class="form-group">
+	          <label for="ciclo_id">Ciclo:</label>
+	          <%= select_tag "ciclo_id",
+	                         options_from_collection_for_select(@ciclos, "id", "nombre", @ciclo_id),
+	                         include_blank: true, class: 'form-control input-sm' %>
+	        </div>
+	        <%= submit_tag 'Filtrar', class: "btn btn-success btn-xs" %>
+	      <% end %>
+			</div>
+    <% end %>
+		<% if !@reporte.nil? %>
+      <% @reporte.each do |circulo_id, circulo|  %>
+			  <div class="col-md-12">
+				  <h3>Círculo N°: <%=circulo_id %></h3>
+			    <% circulo[:grupos].each do |grupo_id, grupo| %>
+					  <h4><%= grupo_id %></h4>
+				    <table class='table table-striped remitos' data-search="true">
+				      <thead>
+				      <tr>
+				        <td>Cantidad</td>
+				        <td>Item</td>
+				        <td>Comp</td>
+				        <td>Falta</td>
+				      </tr>
+				      </thead>
+				      <tbody>
+				      <% grupo[:productos].each do |product_id, product| %>
+			          <tr>
+				          <td><%= product[:qty] %></td>
+				          <td class="<%= product[:faltante] ? 'faltante':''%>"><%= product[:name] %></td>
+				          <td><%= !product[:faltante] ? image_tag("Check.png", class:'img-responsive', size:"25x25") : ''%></td>
+				          <td><%= product[:faltante] ? image_tag("Delete.png", class:'img-responsive', size:"25x25") : ''%></td>
+			          </tr>
+					    <% end %>
+				      </tbody>
+				    </table>
+					  <% end %>
+			  </div>
+      <% end %>
+		<% else %>
+	    <h2>No existen pedidos</h2>
+		<% end %>
+  </div>
+</div>
+

@@ -63,4 +63,43 @@ class Pedido < ActiveRecord::Base
     end
   end
 
+  def self.remitos(pedidos)
+    reporte = {}
+
+    pedidos.each do |pedido|
+      JSON.parse(pedido.items).map do |i|
+        producto = Producto.find(i['producto_id'])
+        circulo_id = pedido.circulo_id
+
+        grupo = producto.grupo_remito
+
+        unless reporte.has_key?(circulo_id)
+          reporte[circulo_id] = {
+              grupos: {}
+          }
+        end
+
+        unless reporte[circulo_id][:grupos].has_key?(grupo)
+          reporte[circulo_id][:grupos][grupo] = {
+              productos: {}
+          }
+        end
+
+
+        # If the product exist on the report sums, if it's new it assignes
+        if reporte[circulo_id][:grupos][grupo][:productos].has_key?(i['producto_id'])
+          reporte[circulo_id][:grupos][grupo][:productos][i['producto_id']][:qty] += i['cantidad']
+        else
+          reporte[circulo_id][:grupos][grupo][:productos][i['producto_id']] = {}
+          reporte[circulo_id][:grupos][grupo][:productos][i['producto_id']][:name] = producto.nombre
+          reporte[circulo_id][:grupos][grupo][:productos][i['producto_id']][:qty] = i['cantidad']
+          reporte[circulo_id][:grupos][grupo][:productos][i['producto_id']][:faltante] = producto.faltante
+        end
+
+      end
+    end
+    puts(reporte)
+    reporte
+  end
+
 end

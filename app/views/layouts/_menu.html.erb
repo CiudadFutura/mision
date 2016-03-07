@@ -56,7 +56,9 @@
             <% end %>
             <% if can? [:manage], pedidos_path %>
               <li>
-
+                <%= link_to(remitos_pedido_index_path) do %>
+                  <span class="icon-stats"></span>Remitos
+                <% end %>
               </li>
             <% end %>
           </ul>

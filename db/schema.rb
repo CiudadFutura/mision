@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160303030538) do
+ActiveRecord::Schema.define(version: 20160306143610) do
 
   create_table "categorias", force: true do |t|
     t.string   "nombre"
@@ -68,6 +68,8 @@ ActiveRecord::Schema.define(version: 20160303030538) do
     t.boolean  "oculto",                        default: false
     t.integer  "orden",                         default: 0
     t.boolean  "highlight",                     default: false
+    t.boolean  "faltante"
+    t.integer  "pack"
   end
 
   add_index "productos", ["supplier_id"], name: "index_productos_on_supplier_id", using: :btree
