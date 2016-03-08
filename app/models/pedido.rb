@@ -9,6 +9,7 @@ class Pedido < ActiveRecord::Base
 
   has_paper_trail
 
+
   def total
     total = 0.0
     JSON.parse(items).each { |item| total += item['total'] || 0 }
@@ -71,7 +72,7 @@ class Pedido < ActiveRecord::Base
         producto = Producto.find(i['producto_id'])
         circulo_id = pedido.circulo_id
 
-        grupo = producto.grupo_remito
+        grupo = I18n.t(producto.pack)
 
         unless reporte.has_key?(circulo_id)
           reporte[circulo_id] = {
@@ -98,7 +99,6 @@ class Pedido < ActiveRecord::Base
 
       end
     end
-    puts(reporte)
     reporte
   end
 
