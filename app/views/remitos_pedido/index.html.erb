@@ -1,33 +1,44 @@
 <%- model_class = Pedido -%>
 <div class="container fill">
-  <div class="row remitos">
-    <h2>Pedidos realizados</h2>
+  <div class="row">
+    <h2>Remitos pedidos realizados</h2>
 
     <% if current_usuario && current_usuario.admin? %>
-      <div class="col-md-3">
+      <div class="col-md-6">
+        <%= form_tag remitos_pedido_index_path, method: :get, class: 'form-inline' do %>
+          <h4>Filtros:</h4>
+          <div class="form-group">
+            <label for="ciclo_id">Ciclo:</label>
+            <%= select_tag "ciclo_id",
+                           options_from_collection_for_select(@ciclos, "id", "nombre", @ciclo_id),
+                           include_blank: true, class: 'form-control input-sm' %>
+          </div>
+          <%= submit_tag 'Filtrar', class: "btn btn-success btn-xs" %>
+        <% end %>
+      </div>
+      <div class="col-md-6">
         <%= link_to "Crear Faltantes", remitos_pedido_generate_path(), class: "btn btn-success btn-xs" %>
       </div>
-      <div class="col-md-12">
-	      <%= form_tag remitos_pedido_index_path, method: :get, class: 'form-inline' do %>
-	        <h4>Filtros:</h4>
-	        <div class="form-group">
-	          <label for="ciclo_id">Ciclo:</label>
-	          <%= select_tag "ciclo_id",
-	                         options_from_collection_for_select(@ciclos, "id", "nombre", @ciclo_id),
-	                         include_blank: true, class: 'form-control input-sm' %>
-	        </div>
-	        <%= submit_tag 'Filtrar', class: "btn btn-success btn-xs" %>
-	      <% end %>
-			</div>
     <% end %>
+  </div>
+  <div class="col-md-12"><hr></div>
+  <div class="row remitos">
 		<% if !@reporte.nil? %>
       <% @reporte.each do |circulo_id, circulo|  %>
-			  <div class="col-md-12">
-				  <h3>Círculo N°: <%=circulo_id %></h3>
+			  <div class="col-md-6 table-responsive">
 			    <% circulo[:grupos].each do |grupo_id, grupo| %>
-					  <h4><%= grupo_id %></h4>
-				    <table class='table table-striped remitos' data-search="true">
+				    <table class='table table-bordered' data-search="true">
 				      <thead>
+				      <tr>
+				        <td colspan="4">
+				          <h3 class="text-center">Círculo N°: <%=circulo_id %></h3>
+				        </td>
+				      </tr>
+				      <tr>
+				        <td colspan="4">
+				          <h4 class="text-center"><%= grupo_id %></h4>
+				        </td>
+				      </tr>
 				      <tr>
 				        <td>Cantidad</td>
 				        <td>Item</td>
