@@ -114,7 +114,7 @@
 	<div class="control-group">
 	  <fieldset class="form-group">
 	    <%= f.label :pack, for:'pack' %>
-	    <%= f.select(:pack, options_for_select(Producto.packs.map{|x,y| [t(x), x]}, selected: @producto.pack), {}, class:'form-control', id:'pack') %>
+	    <%= f.select(:pack, options_for_select(Producto.packs.map{|x,y| [t(x), x]}, selected: @producto.pack), {:include_blank => 'Seleccione...'}, class:'form-control', id:'pack') %>
 	  </fieldset>
 	</div>
 
