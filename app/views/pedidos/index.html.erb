@@ -49,7 +49,11 @@
                       class: 'btn btn-warning btn-mini') %>
               <% end %>
             </td>
-
+            <td>
+              <% if p.has_missing %>
+		            <button class="btn btn-default">Nota de Crédito</button>
+		          <% end %>
+            </td>
           </tr>
         <% end %>
         </tbody>

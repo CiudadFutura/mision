@@ -33,7 +33,7 @@ class Pedido < ActiveRecord::Base
   def has_missing
     missing = false
     JSON.parse(self.items, symbolize_names: true).each do |item|
-      producto = Producto.find(item[:producto_id])
+      producto = Producto.find(item[:producto_id]) rescue nil
       if !producto.blank?
         if producto.faltante?
           missing = true
