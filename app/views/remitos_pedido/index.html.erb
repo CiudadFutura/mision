@@ -5,19 +5,23 @@
 
     <% if current_usuario && current_usuario.admin? %>
       <div class="col-md-6">
-        <%= form_tag remitos_pedido_index_path, method: :get, class: 'form-inline' do %>
+        <%= form_tag remitos_pedido_index_path, method: :get, class: '' do %>
           <h4>Filtros:</h4>
-          <div class="form-group">
+          <div class="form-group required">
             <label for="ciclo_id">Ciclo:</label>
             <%= select_tag "ciclo_id",
-                           options_from_collection_for_select(@ciclos, "id", "nombre", @ciclo_id),
-                           include_blank: true, class: 'form-control input-sm' %>
+                           options_from_collection_for_select(@ciclos, "id", "nombre", params[:ciclo_id]),
+                           include_blank: true, class: 'form-control' %>
           </div>
+		      <div class="form-group">
+			      <label for="circulo_id">Círculo: </label>
+			      <%= text_field_tag(:circulo_id, params[:circulo_id],class:'form-control') %>
+		      </div>
           <%= submit_tag 'Filtrar', class: "btn btn-success btn-xs" %>
         <% end %>
       </div>
-      <div class="col-md-6">
-        <%= link_to "Crear Faltantes", remitos_pedido_generate_path(), class: "btn btn-success btn-xs" %>
+      <div class="col-xs-6 col-md-6">
+        <%= link_to "Cargar Faltantes", remitos_pedido_generate_path(), class: "btn btn-success btn-xs" %>
       </div>
     <% end %>
   </div>

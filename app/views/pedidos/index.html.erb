@@ -26,7 +26,7 @@
             <td>Coordinador</td>
             <td>Consumidor</td>
             <td>Círculo N°</td>
-            <th colspan="2"></th>
+            <th colspan="3"></th>
           </tr>
         </thead>
         <tbody>
@@ -48,6 +48,11 @@
                       data: { confirm: 'Luego de modificar el pedido recuerda volver a enviarlo.' },
                       class: 'btn btn-warning btn-mini') %>
               <% end %>
+            </td>
+            <td>
+              <% if p.has_missing %>
+		            <button class="btn btn-default">Nota de Crédito</button>
+		          <% end %>
             </td>
           </tr>
         <% end %>

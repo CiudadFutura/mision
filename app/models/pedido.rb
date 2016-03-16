@@ -30,6 +30,21 @@ class Pedido < ActiveRecord::Base
     return pedidos_por_ciclos
   end
 
+  def has_missing
+    missing = false
+    JSON.parse(self.items, symbolize_names: true).each do |item|
+      producto = Producto.find(item[:producto_id])
+      puts(producto.faltante)
+      if producto.faltante?
+        missing = true
+        break
+      else
+        missing = false
+      end
+    end
+    return missing
+  end
+
   def self.to_csv
     CSV.generate(force_quotes: true) do |csv|
       csv << ['Pedido Nro', 'Ciclo Nro', 'Usuario Nro', 'Usuario', 'Circulo Nro', 'Codigo Prod.', 'Nombre Prod.', 'Cantidad']

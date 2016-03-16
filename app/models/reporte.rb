@@ -22,6 +22,7 @@ class Reporte
           reporte[supplier_id][:products][i['producto_id']] = {}
           reporte[supplier_id][:products][i['producto_id']][:name] = product.nombre
           reporte[supplier_id][:products][i['producto_id']][:qty] = i['cantidad']
+          reporte[supplier_id][:products][i['producto_id']][:codigo] = product.codigo
         end
 
       end
