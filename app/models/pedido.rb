@@ -34,12 +34,13 @@ class Pedido < ActiveRecord::Base
     missing = false
     JSON.parse(self.items, symbolize_names: true).each do |item|
       producto = Producto.find(item[:producto_id])
-      puts(producto.faltante)
-      if producto.faltante?
-        missing = true
-        break
-      else
-        missing = false
+      if !producto.nil?
+        if producto.faltante?
+          missing = true
+          break
+        else
+          missing = false
+        end
       end
     end
     return missing
