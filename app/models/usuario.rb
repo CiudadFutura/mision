@@ -7,6 +7,7 @@ class Usuario < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   belongs_to :circulo
   has_many :pedidos
+  has_one :account
 
   has_paper_trail
 

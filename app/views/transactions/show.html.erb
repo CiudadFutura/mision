@@ -1,0 +1,36 @@
+<div class="container fill">
+  <div class="row">
+    <h2>Transacción</h2>
+    <div class="breadcrumb">
+      <%= link_to 'Editar', edit_transaction_path(@transaction) %> |
+      <%= link_to 'Atras', transactions_path %>
+    </div>
+    <p id="notice"><%= notice %></p>
+
+		<p>
+		  <strong>Cuenta:</strong>
+		  <%= @transaction.account_id %>
+		</p>
+
+		<p>
+		  <strong>Pedido:</strong>
+		  <%= @transaction.pedido_id %>
+		</p>
+
+		<p>
+		  <strong>Transacción tipo:</strong>
+		  <%= @transaction.transaction_type %>
+		</p>
+
+		<p>
+		  <strong>Monto:</strong>
+		  <%= @transaction.amount %>
+		</p>
+
+		<p>
+		  <strong>Descripción:</strong>
+		  <%= @transaction.description %>
+		</p>
+
+	</div>
+</div>

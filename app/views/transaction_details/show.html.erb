@@ -1,0 +1,35 @@
+<div class="container fill">
+  <div class="row">
+    <div class="breadcrumb">
+      <%= link_to 'Modificar', edit_transaction_detail_path(@transaction_detail) %> |
+      <%= link_to 'Atras', transaction_details_path %>
+    </div>
+
+		<p id="notice"><%= notice %></p>
+
+		<p>
+		  <strong>Transaction:</strong>
+		  <%= @transaction_detail.transaction_id %>
+		</p>
+
+		<p>
+		  <strong>Producto:</strong>
+		  <%= @transaction_detail.producto_id %>
+		</p>
+
+		<p>
+		  <strong>Price:</strong>
+		  <%= @transaction_detail.price %>
+		</p>
+
+		<p>
+		  <strong>Quantity:</strong>
+		  <%= @transaction_detail.quantity %>
+		</p>
+
+		<p>
+		  <strong>Subtotal:</strong>
+		  <%= @transaction_detail.subtotal %>
+		</p>
+	</div>
+</div>

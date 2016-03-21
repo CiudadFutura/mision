@@ -1,9 +1,8 @@
-require 'csv'
-
 class Pedido < ActiveRecord::Base
   belongs_to :circulo
   belongs_to :usuario
   belongs_to :ciclo, class_name: "Compra", foreign_key: :compra_id
+  belongs_to :owner, foreign_key: 'transaction_id', class_name: 'Transaction'
 
   validate :circulo, presence: true
 
@@ -46,6 +45,11 @@ class Pedido < ActiveRecord::Base
     return missing
   end
 
+  def generar_nota_credito
+
+
+  end
+
   def self.to_csv
     CSV.generate(force_quotes: true) do |csv|
       csv << ['Pedido Nro', 'Ciclo Nro', 'Usuario Nro', 'Usuario', 'Circulo Nro', 'Codigo Prod.', 'Nombre Prod.', 'Cantidad']
@@ -85,33 +89,37 @@ class Pedido < ActiveRecord::Base
 
     pedidos.each do |pedido|
       JSON.parse(pedido.items).map do |i|
-        producto = Producto.find(i['producto_id'])
-        circulo_id = pedido.circulo_id
+        producto = Producto.find(i['producto_id']) rescue nil
+        if !producto.blank?
+          circulo_id = pedido.circulo_id
 
-        grupo = I18n.t(producto.pack)
+          grupo = I18n.t(producto.pack)
 
-        unless reporte.has_key?(circulo_id)
-          reporte[circulo_id] = {
-              grupos: {}
-          }
+          unless reporte.has_key?(circulo_id)
+            reporte[circulo_id] = {
+                grupos: {}
+            }
+          end
+
+          unless reporte[circulo_id][:grupos].has_key?(grupo)
+            reporte[circulo_id][:grupos][grupo] = {
+                productos: {}
+            }
+          end
+
+
+          # If the product exist on the report sums, if it's new it assignes
+          if reporte[circulo_id][:grupos][grupo][:productos].has_key?(i['producto_id'])
+            reporte[circulo_id][:grupos][grupo][:productos][i['producto_id']][:qty] += i['cantidad']
+          else
+            reporte[circulo_id][:grupos][grupo][:productos][i['producto_id']] = {}
+            reporte[circulo_id][:grupos][grupo][:productos][i['producto_id']][:name] = producto.nombre
+            reporte[circulo_id][:grupos][grupo][:productos][i['producto_id']][:qty] = i['cantidad']
+            reporte[circulo_id][:grupos][grupo][:productos][i['producto_id']][:faltante] = producto.faltante
+          end
+
         end
 
-        unless reporte[circulo_id][:grupos].has_key?(grupo)
-          reporte[circulo_id][:grupos][grupo] = {
-              productos: {}
-          }
-        end
-
-
-        # If the product exist on the report sums, if it's new it assignes
-        if reporte[circulo_id][:grupos][grupo][:productos].has_key?(i['producto_id'])
-          reporte[circulo_id][:grupos][grupo][:productos][i['producto_id']][:qty] += i['cantidad']
-        else
-          reporte[circulo_id][:grupos][grupo][:productos][i['producto_id']] = {}
-          reporte[circulo_id][:grupos][grupo][:productos][i['producto_id']][:name] = producto.nombre
-          reporte[circulo_id][:grupos][grupo][:productos][i['producto_id']][:qty] = i['cantidad']
-          reporte[circulo_id][:grupos][grupo][:productos][i['producto_id']][:faltante] = producto.faltante
-        end
 
       end
     end

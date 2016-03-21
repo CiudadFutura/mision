@@ -1,0 +1,39 @@
+<div class="container fill">
+  <div class="row">
+    <h2>Lista de detalles de transacciones</h2>
+    <div class="navbar navs-fixed">
+      <%= link_to t('Nuevo detalle de transacción', :default => t("helpers.links.new")),
+                  new_transaction_detail_path ,
+                  :class => 'btn btn-primary' if can? [:manage], TransactionDetail
+      %>
+    </div>
+		<table class="table table-striped">
+		  <thead>
+		    <tr>
+		      <th>Transaction</th>
+		      <th>Producto</th>
+		      <th>Price</th>
+		      <th>Quantity</th>
+		      <th>Subtotal</th>
+		      <th colspan="3"></th>
+		    </tr>
+		  </thead>
+
+		  <tbody>
+		    <% @transaction_details.each do |transaction_detail| %>
+		      <tr>
+		        <td><%= transaction_detail.transaction_id %></td>
+		        <td><%= transaction_detail.producto_id %></td>
+		        <td><%= transaction_detail.price %></td>
+		        <td><%= transaction_detail.quantity %></td>
+		        <td><%= transaction_detail.subtotal %></td>
+		        <td><%= link_to 'Ver', transaction_detail, class: 'btn btn-default btn-xs' %></td>
+		        <td><%= link_to 'Editar', edit_transaction_detail_path(transaction_detail), class: 'btn btn-default btn-xs' %></td>
+		        <td><%= link_to 'Borrar', transaction_detail, method: :delete, data: { confirm: 'Esta seguro' }, class: 'btn btn-default btn-xs' %></td>
+		      </tr>
+		    <% end %>
+		  </tbody>
+		</table>
+
+	</div>
+</div>

@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160306143610) do
+ActiveRecord::Schema.define(version: 20160320145510) do
+
+  create_table "accounts", force: true do |t|
+    t.integer  "usuario_id"
+    t.boolean  "status"
+    t.float    "balance",    limit: 24
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "categorias", force: true do |t|
     t.string   "nombre"
@@ -69,7 +77,7 @@ ActiveRecord::Schema.define(version: 20160306143610) do
     t.integer  "orden",                         default: 0
     t.boolean  "highlight",                     default: false
     t.boolean  "faltante"
-    t.integer  "pack"
+    t.integer  "pack",                          default: 0
   end
 
   add_index "productos", ["supplier_id"], name: "index_productos_on_supplier_id", using: :btree
@@ -98,6 +106,26 @@ ActiveRecord::Schema.define(version: 20160306143610) do
     t.decimal  "longitude",       precision: 10, scale: 6
     t.text     "error_code"
     t.text     "description"
+  end
+
+  create_table "transaction_details", force: true do |t|
+    t.integer  "transaction_id"
+    t.integer  "producto_id"
+    t.float    "price",          limit: 24
+    t.integer  "quantity"
+    t.float    "subtotal",       limit: 24
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "transactions", force: true do |t|
+    t.integer  "account_id"
+    t.integer  "pedido_id"
+    t.integer  "transaction_type"
+    t.float    "amount",           limit: 24
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "usuarios", force: true do |t|

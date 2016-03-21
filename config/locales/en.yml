@@ -9,6 +9,8 @@ en:
   vegetables: Frutas y verduras
   fragile: Frágiles
   cleaning: Limpieza
+  credit_note: Nota de crédito
+  debit_note: Nota de débito
   activerecord:
     models:
       supplier: Proveedor
