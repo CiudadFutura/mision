@@ -29,7 +29,7 @@ class Pedido < ActiveRecord::Base
     return pedidos_por_ciclos
   end
 
-  def has_missing
+  def has_missing?
     missing = false
     JSON.parse(self.items, symbolize_names: true).each do |item|
       producto = Producto.find(item[:producto_id]) rescue nil
@@ -43,11 +43,6 @@ class Pedido < ActiveRecord::Base
       end
     end
     return missing
-  end
-
-  def generar_nota_credito
-
-
   end
 
   def self.to_csv

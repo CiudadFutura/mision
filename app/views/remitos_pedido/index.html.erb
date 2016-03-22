@@ -39,7 +39,7 @@
         <%=
             link_to_if(params[:ciclo_id].blank?, "Generar Notas de Crédito",
                        { controller: "remitos_pedido", action: "index" }, class:'btn btn-primary btn-xs disabled') do
-              link_to "Generar Notas de credito", transaction_generar_path(), class: "btn btn-primary btn-xs"
+              link_to "Generar Notas de credito", transaction_generar_path(ciclo_id: params[:ciclo_id]), class: "btn btn-primary btn-xs"
             end
         %>
       </div>
