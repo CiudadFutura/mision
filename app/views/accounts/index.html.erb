@@ -12,7 +12,7 @@
 		  <thead>
 		    <tr>
 		      <th>Usuario</th>
-		      <th>Status</th>
+		      <th>Estado</th>
 		      <th>Balance</th>
 		      <th colspan="3"></th>
 		    </tr>
@@ -21,9 +21,9 @@
 		  <tbody>
 		    <% @accounts.each do |account| %>
 		      <tr>
-		        <td><%= account.usuario_id %></td>
-		        <td><%= account.status %></td>
-		        <td><%= account.balance %></td>
+		        <td><%= account.usuario.nombre_completo %></td>
+		        <td><%= account.status ? 'Activa' : 'Inactiva' %></td>
+		        <td><%= number_to_currency(account.total) %></td>
 		        <td><%= link_to 'Ver', account, class: 'btn btn-default btn-xs' %></td>
 		        <td><%= link_to 'Editar', edit_account_path(account), class: 'btn btn-default btn-xs' %></td>
 		        <td><%= link_to 'Borrar', account, method: :delete, data: { confirm: 'Está seguro?' }, class: 'btn btn-default btn-xs' %></td>

@@ -56,6 +56,13 @@ class Usuario < ActiveRecord::Base
     nil
   end
 
+  def ultimos_pedidos(usuario)
+    return nil if usuario.nil?
+    pedido = self.pedidos.where(usuario_id: usuario.id).last
+    return pedido if pedido
+    nil
+  end
+
   def self.nuevos_coordinadores()
     coordinadores = Usuario.where("type=? AND circulo_id IS NULL OR circulo_id = ?","Coordinador", '')
     return coordinadores

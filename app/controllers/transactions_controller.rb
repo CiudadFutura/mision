@@ -5,7 +5,6 @@ class TransactionsController < ApplicationController
 
   def index
     @transactions = Transaction.all
-    respond_with(@transactions)
   end
 
   def show
@@ -13,15 +12,35 @@ class TransactionsController < ApplicationController
   end
 
   def new
+    if params['pedido_id']
+      @pedido = Pedido.find(params['pedido_id'])
+      @usuario = Usuario.find(@pedido.usuario_id)
+    end
     @transaction = Transaction.new
-    respond_with(@transaction)
   end
 
   def edit
   end
 
   def create
+    puts('entro create')
     @transaction = Transaction.new(transaction_params)
+    if params['producto_ids']
+      pedido = Pedido.find(@transaction.pedido_id)
+      params['producto_ids'].each do |i|
+        JSON.parse(pedido.items, symbolize_names: true).each do |item|
+          if i.to_i == item[:producto_id].to_i
+            @transaction.transaction_details << TransactionDetail.create(
+                transaction_id: @transaction.id,
+                producto_id: i,
+                price: item[:total]/item[:cantidad],
+                quantity: item[:cantidad],
+                subtotal: item[:total]
+            )
+          end
+        end
+      end
+    end
     @transaction.save
     respond_with(@transaction)
   end
@@ -29,6 +48,11 @@ class TransactionsController < ApplicationController
   def update
     @transaction.update(transaction_params)
     respond_with(@transaction)
+  end
+
+  def list
+    @widgets = Widget.order(:name).where("name like ?", "%#{params[:term]}%")
+    render json: @widgets.map(&:name)
   end
 
   def destroy
@@ -83,6 +107,9 @@ class TransactionsController < ApplicationController
     end
 
     def transaction_params
-      params.require(:transaction).permit(:account_id, :pedido_id, :transaction_type, :amount, :description)
+      params.require(:transaction).permit(
+          :account_id, :pedido_id, :transaction_type, :amount, :description,
+          producto_ids:[]
+      )
     end
 end

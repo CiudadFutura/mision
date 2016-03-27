@@ -13,6 +13,9 @@ en:
   debit_note: Nota de débito
   activerecord:
     models:
+      account:
+        attributes:
+          status: Estado
       supplier: Proveedor
     attributes:
       usuario:

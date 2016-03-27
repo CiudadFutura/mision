@@ -1,35 +1,38 @@
-<div class="container">
-  <h1 class="titulo">Bienvenido a tu panel de administración.</h1>
+<div class="container fill">
+  <div class="row">
+	  <h2>Bienvenido a tu panel de administración.</h2>
 
-  <p class="explicacion">Si estas acá, es porque sos administrador en la Misión Anti Inflación.<br/>
-  Utiliza el menu superior para acceder y administrar el sitio.</p>
-
-  <%= image_tag 'acceso_panel_admin.png'%>
-		<% if !@coordinadoresNuevos.blank? %>
-				<div class="row">
-						<table class="table table-striped">
-						  <caption class="text-left">Nuevos Coordinadores sin círculo</caption>
-						  <tr>
-								<th>#</th>
-								<th>Nombre</th>
-								<th>Apellido</th>
-								<th>email</th>
-								<th>Fecha a alta</th>
+	  <p class="explicacion">Si estas acá, es porque sos administrador en la Misión Anti Inflación.<br/>
+	  Utiliza el menu superior para acceder y administrar el sitio.</p>
+  </div>
+	<div class="row text-center">
+    <%= image_tag 'acceso_panel_admin.png', :class => 'img-responsive center-block'%>
+	</div>
+	<% if !@coordinadoresNuevos.blank? %>
+			<div class="row">
+					<table class="table table-striped">
+					  <caption class="text-left">Nuevos Coordinadores sin círculo</caption>
+					  <tr>
+							<th>#</th>
+							<th>Nombre</th>
+							<th>Apellido</th>
+							<th>email</th>
+							<th>Fecha a alta</th>
+						</tr>
+						<tbody>
+						<% @coordinadoresNuevos.each do |p| %>
+							<tr>
+								<td><%=p.id%></td>
+								<td><%=p.nombre%></td>
+								<td><%=p.apellido%></td>
+								<td><%=p.email%></td>
+								<td><%= l p.created_at%></td>
 							</tr>
-							<tbody>
-							<% @coordinadoresNuevos.each do |p| %>
-								<tr>
-									<td><%=p.id%></td>
-									<td><%=p.nombre%></td>
-									<td><%=p.apellido%></td>
-									<td><%=p.email%></td>
-									<td><%= l p.created_at%></td>
-								</tr>
-							<% end -%>
-							</tbody>
-						</table>
+						<% end -%>
+						</tbody>
+					</table>
 
 
-				</div>
-		<% end %>
+			</div>
+	<% end %>
 </div>

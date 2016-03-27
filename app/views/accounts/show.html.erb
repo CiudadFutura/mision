@@ -1,28 +1,35 @@
 <div class="container fill">
   <div class="row">
-    <div class="breadcrumb">
-      <%= link_to 'Modificar', edit_account_path(@account) %> |
-      <%= link_to 'Atras', accounts_path %>
-    </div>
-
+	  <% if current_usuario.admin? %>
+	    <h2>Cuenta corriente: <%= @account.usuario.nombre_completo %></h2>
+      <div class="breadcrumb">
+        <% if current_usuario.admin? %>
+          <%= link_to 'Modificar', edit_account_path(@account) %> |
+        <% end %>
+        <%= link_to 'Atras', accounts_path %>
+      </div>
+    <% else %>
+      <h2>Mi Cuenta Corriente</h2>
+    <% end %>
+	</div>
+	<div class="row">
 		<p id="notice"><%= notice %></p>
+	</div>
 
-		<p>
-		  <strong>Usuario:</strong>
-		  <%= @account.usuario.nombre_completo %>
-		</p>
-
-		<p>
-		  <strong>Status:</strong>
-		  <%= @account.status %>
-		</p>
-
-		<p>
-		  <strong>Balance:</strong>
-		  <%= @account.balance %>
-		  <%= @account.total %>
-		</p>
-
+  <div class="row">
+    <div class="col-md-4">
+      <strong>Estado:</strong>
+	    <%= @account.status ? 'Activa' : 'Inactiva' %>
+	  </div>
+  </div>
+	<div class="row">
+		<div class="col-md-2 col-md-offset-10 text-center">
+	    <h4>Balance:</h4>
+	    <h2><%= number_to_currency(@account.total) %></h2>
+		</div>
+	</div>
+	<div class="row">
+		<h4>Transacciones realizadas</h4>
 	  <div class="table-responsive">
 	    <table class="table table-striped">
 	      <thead>
@@ -39,8 +46,8 @@
 	      <% @account.transactions.each do |transaction| %>
 	        <tr>
 	          <td><%= transaction.pedido_id %></td>
-	          <td><%=t transaction.transaction_type %></td>
-	          <td><%= transaction.amount %></td>
+	          <td><%= transaction.transaction_type %></td>
+	          <td><%= number_to_currency(transaction.amount) %></td>
 	          <td><%= transaction.description %></td>
 	          <td><%= link_to 'Ver', transaction, class: 'btn btn-default btn-xs' %></td>
 	          <td><%= link_to 'Editar', edit_transaction_path(transaction), class: 'btn btn-default btn-xs' %></td>
