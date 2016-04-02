@@ -42,6 +42,11 @@ ActiveRecord::Schema.define(version: 20160401225435) do
     t.datetime "updated_at"
   end
 
+  create_table "circulos_compras", force: true do |t|
+    t.integer "circulo_id"
+    t.integer "compra_id"
+  end
+
   create_table "compras", force: true do |t|
     t.string   "nombre"
     t.text     "descripcion"
