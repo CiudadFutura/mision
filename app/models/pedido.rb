@@ -9,6 +9,7 @@ class Pedido < ActiveRecord::Base
 
   has_paper_trail
 
+
   def total
     total = 0.0
     JSON.parse(items).each { |item| total += item['total'] || 0 }
@@ -27,6 +28,22 @@ class Pedido < ActiveRecord::Base
                   .select("compras.*, max(pedidos.created_at) as most_recent, count(pedidos.id) as orders_count")
                   .group('pedidos.compra_id')
     return pedidos_por_ciclos
+  end
+
+  def has_missing
+    missing = false
+    JSON.parse(self.items, symbolize_names: true).each do |item|
+      producto = Producto.find(item[:producto_id]) rescue nil
+      if !producto.blank?
+        if producto.faltante?
+          missing = true
+          break
+        else
+          missing = false
+        end
+      end
+    end
+    return missing
   end
 
   def self.to_csv
@@ -61,6 +78,44 @@ class Pedido < ActiveRecord::Base
         end
       end
     end
+  end
+
+  def self.remitos(pedidos)
+    reporte = {}
+
+    pedidos.each do |pedido|
+      JSON.parse(pedido.items).map do |i|
+        producto = Producto.find(i['producto_id'])
+        circulo_id = pedido.circulo_id
+
+        grupo = I18n.t(producto.pack)
+
+        unless reporte.has_key?(circulo_id)
+          reporte[circulo_id] = {
+              grupos: {}
+          }
+        end
+
+        unless reporte[circulo_id][:grupos].has_key?(grupo)
+          reporte[circulo_id][:grupos][grupo] = {
+              productos: {}
+          }
+        end
+
+
+        # If the product exist on the report sums, if it's new it assignes
+        if reporte[circulo_id][:grupos][grupo][:productos].has_key?(i['producto_id'])
+          reporte[circulo_id][:grupos][grupo][:productos][i['producto_id']][:qty] += i['cantidad']
+        else
+          reporte[circulo_id][:grupos][grupo][:productos][i['producto_id']] = {}
+          reporte[circulo_id][:grupos][grupo][:productos][i['producto_id']][:name] = producto.nombre
+          reporte[circulo_id][:grupos][grupo][:productos][i['producto_id']][:qty] = i['cantidad']
+          reporte[circulo_id][:grupos][grupo][:productos][i['producto_id']][:faltante] = producto.faltante
+        end
+
+      end
+    end
+    reporte
   end
 
 end

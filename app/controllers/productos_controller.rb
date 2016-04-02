@@ -33,8 +33,7 @@ class ProductosController < ApplicationController
       @todos = Producto.all.order(:nombre)
       respond_to do |format|
         format.html
-        format.csv { export_csv(@todos) }
-        # format.csv { render csv: @todos.to_csv, filename: "#{Time.now.to_i}_productos" }
+        format.csv { render csv: @todos.to_csv, type: "text/csv; charset=iso-8859-1; header=present", filename: "#{Time.now.to_i}_productos" }
       end
     end
   end
@@ -94,6 +93,15 @@ class ProductosController < ApplicationController
     end
   end
 
+  def edit_multiple
+    @productos = Producto.find(params[:producto_ids])
+    @productos.each do |producto|
+      producto.update_attributes(:faltante => true)
+    end
+    flash[:notice] = "Updated productos!"
+    redirect_to remitos_pedido_index_path
+  end
+
   def upload
     @message = Producto.import(params[:file])
     if @message[0][:success].present?
@@ -111,18 +119,8 @@ class ProductosController < ApplicationController
     def producto_params
       params.require(:producto).permit(:precio, :nombre, :codigo, :descripcion, :order,
                                        :precio_super, :highlight, :oculto, :supplier_id,
-                                       :cantidad_permitida, :imagen, categoria_ids: []
+                                       :pack, :faltante,:cantidad_permitida, :imagen,
+                                       categoria_ids: [],
                                         )
     end
-
-  protected
-
-  def export_csv(todos)
-    filename = "#{Time.now.to_i}_productos.csv"
-    content = todos.to_csv
-    send_data content,
-              :type => 'text/csv; charset=utf-8; header=present',
-              :disposition => "attachment",
-              :filename => filename
-  end
 end

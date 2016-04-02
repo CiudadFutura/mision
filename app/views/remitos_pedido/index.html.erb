@@ -1,0 +1,72 @@
+<%- model_class = Pedido -%>
+<div class="container fill">
+  <div class="row">
+    <h2>Remitos pedidos realizados</h2>
+
+    <% if current_usuario && current_usuario.admin? %>
+      <div class="col-md-6">
+        <%= form_tag remitos_pedido_index_path, method: :get, class: '' do %>
+          <h4>Filtros:</h4>
+          <div class="form-group required">
+            <label for="ciclo_id">Ciclo:</label>
+            <%= select_tag "ciclo_id",
+                           options_from_collection_for_select(@ciclos, "id", "nombre", params[:ciclo_id]),
+                           include_blank: true, class: 'form-control' %>
+          </div>
+		      <div class="form-group">
+			      <label for="circulo_id">Círculo: </label>
+			      <%= text_field_tag(:circulo_id, params[:circulo_id],class:'form-control') %>
+		      </div>
+          <%= submit_tag 'Filtrar', class: "btn btn-success btn-xs" %>
+        <% end %>
+      </div>
+      <div class="col-xs-6 col-md-6">
+        <%= link_to "Cargar Faltantes", remitos_pedido_generate_path(), class: "btn btn-success btn-xs" %>
+      </div>
+    <% end %>
+  </div>
+  <div class="col-md-12"><hr></div>
+  <div class="row remitos">
+		<% if !@reporte.nil? %>
+      <% @reporte.each do |circulo_id, circulo|  %>
+			  <div class="col-md-12 table-responsive">
+			    <% circulo[:grupos].each do |grupo_id, grupo| %>
+				    <table class='table table-bordered' data-search="true">
+				      <thead>
+				      <tr>
+				        <td colspan="4">
+				          <h3 class="text-center">Círculo N°: <%=circulo_id %></h3>
+				        </td>
+				      </tr>
+				      <tr>
+				        <td colspan="4">
+				          <h4 class="text-center"><%= grupo_id %></h4>
+				        </td>
+				      </tr>
+				      <tr>
+				        <td>Cantidad</td>
+				        <td>Item</td>
+				        <td>Comp</td>
+				        <td>Falta</td>
+				      </tr>
+				      </thead>
+				      <tbody>
+				      <% grupo[:productos].each do |product_id, product| %>
+			          <tr>
+				          <td><%= product[:qty] %></td>
+				          <td class="<%= product[:faltante] ? 'faltante':''%>"><%= product[:name] %></td>
+				          <td><%= !product[:faltante] ? image_tag("Check.png", class:'img-responsive', size:"25x25") : ''%></td>
+				          <td><%= product[:faltante] ? image_tag("Delete.png", class:'img-responsive', size:"25x25") : ''%></td>
+			          </tr>
+					    <% end %>
+				      </tbody>
+				    </table>
+					  <% end %>
+			  </div>
+      <% end %>
+		<% else %>
+	    <h2>No existen pedidos</h2>
+		<% end %>
+  </div>
+</div>
+

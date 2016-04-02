@@ -1,4 +1,5 @@
 class Producto < ActiveRecord::Base
+  enum pack: [:warehouse, :freshes, :vegetables, :fragile, :cleaning]
   has_and_belongs_to_many :categorias
   belongs_to :supplier
 
@@ -25,6 +26,24 @@ class Producto < ActiveRecord::Base
     end
   end
 
+  def grupo_remito
+    grupo = ''
+    puts(self.codigo.from(0).to(2))
+    case self.codigo.from(0).to(2)
+      when 'ALM'
+        grupo = "Almacen"
+      when 'LIM', 'HIP'
+        grupo = "Limpieza"
+      when 'FYV'
+        grupo = "Fruta y Verdura"
+      when 'FRE'
+        grupo = "Frescos"
+      else
+        grupo = 'Otros'
+    end
+    return grupo
+  end
+
   def ahorro
     return 0 if precio_super.nil? || precio_super == 0
     100 * (precio_super - precio) / precio_super
@@ -45,7 +64,7 @@ class Producto < ActiveRecord::Base
     counter = 0
     data = []
 
-    CSV.foreach(file.path, {col_sep: ",", :headers=>:first_row, :encoding => "UTF-8"}) do |row|
+    CSV.foreach(file.path, {col_sep: ",", :headers=>:first_row}) do |row|
       # File Columns: 0)código 1)Estado 2)Cod. Proveedor 3)Proveedor
       #               4)Producto 5)Descripcion del producto
       #               6)Precio final 7)Supermercado
@@ -75,7 +94,7 @@ class Producto < ActiveRecord::Base
   end
 
   def self.to_csv
-    CSV.generate(force_quotes: true, encoding: 'iso-8859-1') do |csv|
+    CSV.generate(force_quotes: true) do |csv|
       csv << ['Codigo', 'Estado', 'Cod. Proveedor', 'Proveedor', 'Nombre',
               'Descripcion', 'Precio final', 'Precio super']
       all.each do |prod|

@@ -89,21 +89,38 @@
     <%= f.label :supplier_id, :class => 'control-label' %>
     <div class="controls">
       <%= f.select(:supplier_id, 
-                   options_for_select(Supplier.all.map{|s| [s.name,s.id]},@producto[:supplier_id]), 
-                   { include_blank: 'Elija proveedor', class: 'form-control' }) %>
+                   options_for_select(Supplier.all.map{|s| [s.name,s.id]},@producto[:supplier_id]),
+                   { include_blank: 'Elija proveedor'},
+		               class: 'form-control') %>
     </div>
     <%= error_span(@producto[:supplier]) %>
   </div>
 
-  <div class="control-group">
+  <fieldset class="form-group">
+	  <div class="col-md-12">
+		  <h3>Categorías</h3>
+	  </div>
 
     <% Categoria.all.each do |categoria| %>
-    <div class="controls">
+    <div class="col-md-3">
       <label><%= categoria.nombre -%>
       <%= check_box_tag "producto[categoria_ids][]", categoria.id, @producto.categorias.include?(categoria) %>
-      </label></div>
+      </label>
+    </div>
     <% end %>
 
+  </fieldset>
+
+	<div class="control-group">
+	  <fieldset class="form-group">
+	    <%= f.label :pack, for:'pack' %>
+	    <%= f.select(:pack, options_for_select(Producto.packs.map{|x,y| [t(x), x]}, selected: @producto.pack), {:include_blank => 'Seleccione...'}, class:'form-control', id:'pack') %>
+	  </fieldset>
+	</div>
+
+  <div class="form-group">
+    <%= f.label :faltante, :class => 'control-label' %>
+    <%= f.check_box :faltante, :class => 'form-control' %>
   </div>
 
   <%= f.submit nil, :class => 'btn btn-primary' %>

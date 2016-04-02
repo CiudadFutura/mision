@@ -1,0 +1,13 @@
+<% producto = Producto.find(i['producto_id']) %>
+<tr data-item>
+  <td>
+    <%= check_box_tag "producto_ids[]" %>
+  </td>
+  <td data-item-nombre=""><%= text_field_tag 'item_ids[]' %></td>
+  <td data-item-precio="" class="text-right">
+    <%= text_field_tag 'precio_ids[]' %>
+  </td>
+  <td data-item-cantidad="" class="text-right"><%= text_field_tag 'cantidad_ids[]' %>
+  </td>
+  <td class="text-right" data-item-total=""><%= text_field_tag 'total_ids[]' %></td>
+</tr>
