@@ -12,89 +12,103 @@
   <% end %>
 
 	<% if @pedido %>
-		<%= f.label :account_id %>
+		<%= f.label :account_id, 'Cuenta N°' %>
     <%= f.text_field :account_id, value: @usuario.account.id, readonly: true, class:'form-control' %>
   <% else %>
-      <div class="field form-group">
-        <%= f.label :account_id %><br>
-        <%= f.number_field :account_id, class:'form-control' %>
-      </div>
+    <div class="field form-group">
+      <%= f.label :account_id, 'Cuenta N°' %><br>
+      <%= f.number_field :account_id, readonly: true, class:'form-control' %>
+    </div>
   <% end %>
 
 
 	<% if @pedido %>
       <div class="field form-group">
-        <%= f.label :pedido_id %><br>
+        <%= f.label :pedido_id, 'Pedido N°' %><br>
         <%= f.text_field :pedido_id, value: @pedido.id, readonly: true, class:'form-control' %>
       </div>
   <% else %>
       <div class="field form-group">
         <%= f.label :pedido_id %><br>
-        <%= f.number_field :pedido_id, class:'form-control' %>
+        <%= f.number_field :pedido_id, readonly: true, class:'form-control' %>
       </div>
   <% end %>
 
 
   <fieldset class="form-group">
-    <%= f.label :transaction_type, for:'transaction_type' %>
+    <%= f.label :transaction_type, 'Tipo de transacción', for:'transaction_type' %>
     <%= f.select(:transaction_type, options_for_select(Transaction.tipos.map{|x,y| [t(x), x]}),{}, class:'form-control', id:'transaction_type') %>
   </fieldset>
 
-  <div class="field form-group">
-    <%= f.label :amount %><br>
-    <%= f.text_field :amount, readonly: true, class:'form-control' %>
-  </div>
-  <div class="field form-group">
-    <%= f.label :description %><br>
-    <%= f.text_area :description, class:'form-control' %>
-  </div>
+  <% if @pedido %>
+	  <div class="field form-group">
+	    <%= f.label :amount, 'Monto' %><br>
+	    <%= f.text_field :amount, readonly: true, class:'form-control' %>
+	  </div>
+	<% else %>
+    <div class="field form-group">
+      <%= f.label :amount, 'Monto' %><br>
+      <%= f.text_field :amount, class:'form-control' %>
+    </div>
+	<% end %>
+	  <div class="field form-group">
+	    <%= f.label :description, 'Descripción' %><br>
+	    <%= f.text_area :description, class:'form-control' %>
+	  </div>
+  <% if !@pedido.blank? %>
+		<div class="row">
+			<div class="col-md-12 text-right">
+		    <div class="btn btn-default" id="additem">Agregar item manualmente</div>
+			</div>
+			<div class="col-md-12" id="form-add-item">
+				<label for="prod-nombre">Producto</label>
+				<input id="prod-nombre" type="text" class="form-control">
 
-	<div class="row">
-	  <div class="table-responsive">
-	    <table class='table table-striped', id="pord-pedidos">
-	      <thead>
-	      <tr>
-	        <th></th>
-	        <th>Producto</th>
-	        <th class="text-right">Precio</th>
-	        <th class="text-right">Cantidad</th>
-	        <th class="text-right">Importe Total</th>
-	      </tr>
-	      </thead>
-	      <tbody>
-	      <% total = 0
-	         qty = 0
-	      %>
-	      <% JSON.parse(@pedido.items).each do |i| %>
-	      <% producto = Producto.find(i['producto_id']) %>
-	        <tr data-item>
-	          <td>
-	            <%= check_box_tag "producto_ids[]", i['producto_id'] %>
-	          </td>
-	          <td data-item-nombre="<%= producto.nombre %>"><%= producto.nombre %></td>
-	          <td data-item-precio="<%= number_to_currency(i['total']/i['cantidad'].to_i) %>" class="text-right">
-	            <%= number_to_currency(i['total']/i['cantidad'].to_i) %>
-	          </td>
-	          <td data-item-cantidad="<%= i['cantidad'].to_i %>" class="text-right"><%= i['cantidad'].to_i%>
-	          </td>
-	          <td class="text-right" data-item-total="<%= i['total'] %>"><%= number_to_currency(i['total']) %></td>
-	        </tr>
-	        <% total = total+i['total']
-	           qty = qty +i['cantidad'].to_i %>
-	      <% end %>
-	      </tbody>
-	      <tfoot>
-	      <tr class="info">
-	        <td></td>
-	        <td></td>
-	        <td class="text-right">Total</td>
-	        <td class="text-right"><%= qty %></td>
-	        <td class="text-right"><%= number_to_currency(total) %></td>
-	      </tr>
-	      </tfoot>
-	    </table>
+			  <label for="prod-precio">Precio</label>
+			  <input id="prod-precio" type="text" class="form-control">
+
+			  <label for="prod-cantidad">Cantidad</label>
+			  <input id="prod-cantidad" type="text" class="form-control">
+
+			  <div class="btn btn-success" id="agregar">Agregar</div>
+			</div>
 		</div>
-	</div>
+
+	  <div class="row">
+		  <div class="table-responsive">
+		    <table class='table table-striped', id="pord-pedidos">
+		      <thead>
+		      <tr>
+		        <th></th>
+		        <th>Producto</th>
+		        <th class="text-right">Precio</th>
+		        <th class="text-right">Cantidad</th>
+		        <th class="text-right">Importe Total</th>
+		      </tr>
+		      </thead>
+		      <tbody>
+		      <% total = 0
+		         qty = 0
+		      %>
+		      <% JSON.parse(@pedido.items).each do |i| %>
+		        <%= render "items", i: i %>
+		        <% total = total+i['total']
+		           qty = qty +i['cantidad'].to_i %>
+		      <% end %>
+		      </tbody>
+		      <tfoot>
+		      <tr class="info">
+		        <td></td>
+		        <td></td>
+		        <td class="text-right">Total</td>
+		        <td class="text-right"><%= qty %></td>
+		        <td class="text-right"><%= number_to_currency(total) %></td>
+		      </tr>
+		      </tfoot>
+		    </table>
+			</div>
+		</div>
+	<% end %>
 
   <div class="actions form-group">
     <%= f.submit class: 'btn btn-success' %>

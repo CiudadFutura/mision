@@ -20,4 +20,43 @@ $(document).ready(function () {
 		description.val(detalle);
 	});
 
+	$("#additem" ).click(function() {
+		$("#form-add-item").toggle();
+	});
+
+	$("#agregar").click(function(){
+		var nombre = $("#prod-nombre");
+		var precio = $("#prod-precio");
+		var cantidad = $("#prod-cantidad");
+		var detalle = $('#transaction_description').val();
+		var total = $('#transaction_amount').val();
+		var subTotal = 0;
+		var detalleadd = detalle + '\n Producto: '+ nombre.val() + '\t' +
+				'Cantidad: '+ cantidad.val() + '\t' +
+				'Precio: $'+ precio.val() +'\n';
+		subTotal = (cantidad.val())*(precio.val());
+		var index = 0;
+		if ($("#index").val() == undefined){
+			$("#index").val(0);
+		}else{
+			index = $("#index").val() + 1;
+		}
+
+		var row = '<tr data-item><td><input id="no_producto_ids_" name="no_producto_ids[]" type="checkbox" value="0" checked="checked" <input id="index" type="hidden" value="'+index+'"></td>' +
+				'<td data-item-nombre="'+nombre.val()+'"><input class="form-control" id="producto_nombre" name="no_producto_nombre_'+index+'" type="hidden" value="'+nombre.val()+'">'+nombre.val()+'</td>' +
+				'<td data-item-precio="'+precio.val()+'" class="text-right"><input class="form-control" id="producto_precio" name="no_producto_precio_'+index+'" type="hidden" value="'+precio.val()+'">'+precio.val()+'</td>' +
+				'<td data-item-cantidad="'+cantidad.val()+'" class="text-right"><input class="form-control" id="producto_cantidad" name="no_producto_cantidad_'+index+'" type="hidden" value="'+cantidad.val()+'">'+cantidad.val()+'</td>' +
+				'<td class="text-right" data-item-total="'+subTotal+'"><input class="form-control" id="producto_total" name="no_producto_total_'+index+'" type="hidden" value="'+subTotal+'">'+subTotal+'</td></tr>';
+		$("#pord-pedidos").append(row);
+		$('#transaction_amount').val(total + subTotal);
+		$('#transaction_description').val(detalleadd);
+		nombre.val('');
+		precio.val('');
+		cantidad.val('');
+		$("#form-add-item").toggle();
+	})
+
 });
+
+
+

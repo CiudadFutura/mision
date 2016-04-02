@@ -4,7 +4,10 @@ class Account < ActiveRecord::Base
 
   def total
     total = 0.0
-    transactions.each { |transaction| total += transaction.amount }
-    total.to_f
+    if !transactions.nil?
+      transactions.each { |transaction| total+= transaction.amount || 0 }
+      total.to_f
+    end
+
   end
 end

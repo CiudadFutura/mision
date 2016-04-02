@@ -6,6 +6,9 @@ class CartsController < ApplicationController
 
   def show
     @ciclo_actual = Compra::ciclo_actual
+    if usuario_signed_in?
+        @transactions = Transaction.where(["account_id = :id and parent_id is null", {id: current_usuario.account.id }])
+    end
   end
 
   def add

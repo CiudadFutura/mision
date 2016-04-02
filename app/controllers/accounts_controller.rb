@@ -1,10 +1,15 @@
 class AccountsController < ApplicationController
   before_action :set_account, only: [:show, :edit, :update, :destroy]
+  authorize_resource
 
   respond_to :html
 
   def index
-    @accounts = Account.all
+    if current_usuario.admin?
+      @accounts = Account.all
+    elsif current_usuario.usuario?
+      @accounts = Account.where(usuario_id: current_usuario.id)
+    end
     respond_with(@accounts)
   end
 

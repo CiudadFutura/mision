@@ -23,23 +23,37 @@ class TransactionsController < ApplicationController
   end
 
   def create
-    puts('entro create')
     @transaction = Transaction.new(transaction_params)
     if params['producto_ids']
       pedido = Pedido.find(@transaction.pedido_id)
       params['producto_ids'].each do |i|
-        JSON.parse(pedido.items, symbolize_names: true).each do |item|
-          if i.to_i == item[:producto_id].to_i
-            @transaction.transaction_details << TransactionDetail.create(
-                transaction_id: @transaction.id,
-                producto_id: i,
-                price: item[:total]/item[:cantidad],
-                quantity: item[:cantidad],
-                subtotal: item[:total]
-            )
+        if i != 0
+          JSON.parse(pedido.items, symbolize_names: true).each do |item|
+            if i.to_i == item[:producto_id].to_i
+              @transaction.transaction_details << TransactionDetail.create(
+                  transaction_id: @transaction.id,
+                  producto_id: i,
+                  price: item[:total]/item[:cantidad],
+                  quantity: item[:cantidad],
+                  subtotal: item[:total]
+              )
+            end
           end
-        end
+
       end
+      end
+    if params['no_producto_ids']
+      puts('noproducto')
+      params['no_producto_ids'].each do |i|
+        @transaction.transaction_details << TransactionDetail.create(
+            transaction_id: @transaction.id,
+            price: params['no_producto_precio_'+i],
+            quantity: params['no_producto_cantidad_'+i],
+            subtotal: params['no_producto_total_'+i],
+        )
+      end
+    end
+
     end
     @transaction.save
     respond_with(@transaction)

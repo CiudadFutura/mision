@@ -1,6 +1,6 @@
 <div class="container fill">
   <div class="row">
-    <h2>Transacción</h2>
+    <h2><%= @transaction.transaction_type == 0 ? 'Nota de Crédito' : 'Nota de Débito'%> N°: <%= @transaction.id %></h2>
     <div class="breadcrumb">
       <%= link_to 'Editar', edit_transaction_path(@transaction) %> |
       <%= link_to 'Atras', transactions_path %>
@@ -8,28 +8,24 @@
     <p id="notice"><%= notice %></p>
 
 		<p>
-		  <strong>Cuenta:</strong>
-		  <%= @transaction.account_id %>
+		  <strong>Consumidor:</strong>
+		  <%= Usuario.find(@transaction.account.usuario.id).nombre_completo %>
 		</p>
-
-		<p>
-		  <strong>Pedido:</strong>
-		  <%= @transaction.pedido_id %>
-		</p>
-
-		<p>
-		  <strong>Transacción tipo:</strong>
-		  <%= @transaction.transaction_type %>
-		</p>
+    <% if !@transaction.pedido_id.blank? %>
+			<p>
+			  <strong>Pedido:</strong>
+			  <%= @transaction.pedido_id %>
+			</p>
+		  <% end %>
 
 		<p>
 		  <strong>Monto:</strong>
-		  <%= @transaction.amount %>
+		  <%= number_to_currency(@transaction.amount) %>
 		</p>
 
 		<p>
 		  <strong>Descripción:</strong>
-		  <%= @transaction.description %>
+		  <%= simple_format(@transaction.description) %>
 		</p>
 
 	</div>

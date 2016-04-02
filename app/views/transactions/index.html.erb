@@ -11,7 +11,7 @@
 		<table class="table table-striped">
 		  <thead>
 		    <tr>
-		      <th>Cuenta N°</th>
+		      <th>Consumidor</th>
 		      <th>Pedido</th>
 		      <th>Tipo de transacción</th>
 		      <th>Monto</th>
@@ -23,14 +23,14 @@
 		  <tbody>
 		    <% @transactions.each do |transaction| %>
 		      <tr>
-		        <td><%= transaction.account_id %></td>
+		        <td><%= Usuario.find(transaction.account.usuario.id).nombre_completo %></td>
 		        <td><%= transaction.pedido_id %></td>
-		        <td><%= transaction.transaction_type %></td>
-		        <td><%= transaction.amount %></td>
-		        <td><%= transaction.description %></td>
-		        <td><%= link_to 'Ver', transaction, class: 'btn btn-default btn-xs' %></td>
-		        <td><%= link_to 'Editar', edit_transaction_path(transaction), class: 'btn btn-default btn-xs' %></td>
-		        <td><%= link_to 'Borrar', transaction, method: :delete, data: { confirm: 'Está seguro?' }, class: 'btn btn-default btn-xs' %></td>
+		        <td><%= transaction.transaction_type == 0 ? 'Nota de Crédito' : 'Nota de Débito'%></td>
+		        <td><%= number_to_currency(transaction.amount) %></td>
+		        <td><%= simple_format(transaction.description) %></td>
+		        <td><%= link_to 'Ver', transaction, class: 'btn btn-default btn-xs' if can? [:manage], Transaction %></td>
+		        <td><%= link_to 'Editar', edit_transaction_path(transaction), class: 'btn btn-default btn-xs' if can? [:manage], Transaction %></td>
+		        <td><%= link_to 'Borrar', transaction, method: :delete, data: { confirm: 'Está seguro?' }, class: 'btn btn-default btn-xs' if can? [:manage], Transaction %></td>
 		      </tr>
 		    <% end %>
 		  </tbody>

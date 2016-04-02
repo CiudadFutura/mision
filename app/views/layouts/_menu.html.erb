@@ -85,7 +85,7 @@
               <span class="icon-stats"></span>Cuentas Corriente
             <% end %>
           <% else %>
-            <%= link_to(account_path) do %>
+            <%= link_to(account_path(current_usuario.account.id)) do %>
               <span class="icon-stats"></span>Mi Cuenta Corriente
             <% end %>
           <% end %>

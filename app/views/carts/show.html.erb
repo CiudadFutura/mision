@@ -42,20 +42,34 @@
             <td><%= number_to_currency(item.total) %></td>
             <td><%= number_to_percentage(item.ahorro) %></td>
             <td>
-              <%= button_tag(type: 'button', class: 'btn btn btn-danger btn-xs', data: {
-                                                 action: 'remove',
-                                                 productId: item.producto.id
-                                         }) do %>
+              <%= button_tag(type: 'button', class: 'btn btn btn-danger btn-xs',
+                             data: {
+		                             action: 'remove',
+                                 productId: item.producto.id
+                             }) do %>
                 <i class="">Borrar</i>
               <% end %>
             </td>
           </tr>
         <%end%>
+        <% if !@transactions.blank? %>
+          <% @transactions.each do |transaction| %>
+            <tr class="nota-credito">
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td><strong>NOTA DE CRÉDITO:</strong></td>
+              <td>#<%= transaction.id %></td>
+              <td><%= number_to_currency(transaction.amount) %></td>
+	            <td></td>
+            </tr>
+          <% end %>
+        <% end %>
           <tr class="checkout-totales">
             <td>&nbsp;</td>
             <td>&nbsp;</td>
             <td>&nbsp;</td>
-            <td>TOTAL:</td>
+            <td><strong>TOTAL:</strong></td>
             <td><span class="cart-total"><%= number_to_currency(@carrito.total) %></span></td>
             <td><span class="cart-ahorro"><%= number_to_percentage(@carrito.ahorro) %></span></td>
             <td>&nbsp;</td>
@@ -63,8 +77,8 @@
         </tbody>
       </table>
       <% if @ciclo_actual && current_usuario && current_usuario.circulo && !current_usuario.pedido?(Compra::ciclo_actual) %>
-        <div class="row">
-          <%= link_to('Finalizar Compra', create_pedido_cart_path, method: :put, class: 'btn btn-default checkout') %>
+        <div class="row text-right">
+          <%= link_to('Finalizar Compra', create_pedido_cart_path, method: :put, class: 'btn btn-success') %>
         </div>
       <% end %>
     <% else %>

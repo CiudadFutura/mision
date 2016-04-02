@@ -28,34 +28,40 @@
 	    <h2><%= number_to_currency(@account.total) %></h2>
 		</div>
 	</div>
-	<div class="row">
-		<h4>Transacciones realizadas</h4>
-	  <div class="table-responsive">
-	    <table class="table table-striped">
-	      <thead>
-	      <tr>
-	        <th>Pedido#</th>
-	        <th>Tipo de transacción</th>
-	        <th>Monto</th>
-	        <th>Descripción</th>
-	        <th colspan="3"></th>
-	      </tr>
-	      </thead>
+	<% if !@account.transactions.blank? %>
+		<div class="row">
+			<h4>Transacciones realizadas</h4>
+		  <div class="table-responsive">
+		    <table class="table table-striped">
+		      <thead>
+		      <tr>
+		        <th>Pedido#</th>
+		        <th>Tipo de transacción</th>
+		        <th>Monto</th>
+		        <th>Descripción</th>
+			      <% if can? [:manage], Transaction %>
+		          <th colspan="3"></th>
+				    <% end %>
+		      </tr>
+		      </thead>
 
-	      <tbody>
-	      <% @account.transactions.each do |transaction| %>
-	        <tr>
-	          <td><%= transaction.pedido_id %></td>
-	          <td><%= transaction.transaction_type %></td>
-	          <td><%= number_to_currency(transaction.amount) %></td>
-	          <td><%= transaction.description %></td>
-	          <td><%= link_to 'Ver', transaction, class: 'btn btn-default btn-xs' %></td>
-	          <td><%= link_to 'Editar', edit_transaction_path(transaction), class: 'btn btn-default btn-xs' %></td>
-	          <td><%= link_to 'Borrar', transaction, method: :delete, data: { confirm: 'Está seguro?' }, class: 'btn btn-default btn-xs' %></td>
-	        </tr>
-	      <% end %>
-	      </tbody>
-	    </table>
-	  </div>
-	</div>
+		      <tbody>
+		      <% @account.transactions.each do |transaction| %>
+		        <tr>
+		          <td><%= transaction.pedido_id %></td>
+		          <td><%= transaction.transaction_type == 0 ? 'Nota de Crédito' : 'Nota de Débito'%></td>
+		          <td><%= number_to_currency(transaction.amount) %></td>
+		          <td><%= simple_format(transaction.description) %></td>
+		          <% if can? [:manage], Transaction %>
+		            <td><%= link_to 'Ver', transaction, class: 'btn btn-default btn-xs' %></td>
+		            <td><%= link_to 'Editar', edit_transaction_path(transaction), class: 'btn btn-default btn-xs' %></td>
+		            <td><%= link_to 'Borrar', transaction, method: :delete, data: { confirm: 'Está seguro?' }, class: 'btn btn-default btn-xs' %></td>
+		          <% end %>
+		        </tr>
+		      <% end %>
+		      </tbody>
+		    </table>
+		  </div>
+		</div>
+		<% end %>
 </div>
