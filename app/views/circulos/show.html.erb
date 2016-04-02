@@ -39,35 +39,36 @@
       </tbody>
     </table>
   </div>
+  <% if !@circulo.pedidos.blank? %>
 
-
-  <div class="table-responsive">
-    <table class="table table-striped">
-      <caption><h4>Ultimos pedidos del Círculo</h4></caption>
-      <thead>
-      <tr>
-        <th>Pedido#</th>
-        <th>Consumidor</th>
-        <th>Ciclo</th>
-        <th>Fecha</th>
-        <th></th>
-      </tr>
-      </thead>
-      <tbody>
-      <% @circulo.usuarios.each do |u| %>
-      <% p = u.ultimos_pedidos(u) %>
-        <tr>
-          <td><%= p.try('id') || 'Sin Nommbre' %></td>
-          <td><%= u.nombre_completo %></td>
-          <td><%= p.ciclo.nombre%></td>
-          <td><%= l p.try('created_at')%></td>
-          <td><%= link_to 'Crear Transacción', new_transaction_path(pedido_id:p.id), class: "btn btn-default btn-xs" %></td>
-          <td><%= link_to 'Mostrar', usuario_path(u.id), class: "btn btn-default btn-xs" %></td>
-        </tr>
-      <% end %>
-      </tbody>
-    </table>
-  </div>
-
-
+	  <div class="table-responsive">
+	    <table class="table table-striped">
+	      <caption><h4>Ultimos pedidos del Círculo</h4></caption>
+	      <thead>
+	      <tr>
+	        <th>Pedido#</th>
+	        <th>Consumidor</th>
+	        <th>Ciclo</th>
+	        <th>Fecha</th>
+	        <th></th>
+	      </tr>
+	      </thead>
+	      <tbody>
+	      <% @circulo.usuarios.each do |u| %>
+	        <% p = u.ultimos_pedidos(u) %>
+	        <% if !p.blank? %>
+		        <tr>
+		          <td><%= p.try('id') || 'Sin Nommbre' %></td>
+		          <td><%= u.nombre_completo %></td>
+		          <td><%= p.try('ciclo.nombre') || 'sin circulo'%></td>
+		          <td><%= l p.try('created_at') || ' '%></td>
+		          <td><%= link_to 'Crear Transacción', new_transaction_path(pedido_id:p.id), class: "btn btn-default btn-xs" %></td>
+		          <td><%= link_to 'Mostrar', usuario_path(u.id), class: "btn btn-default btn-xs" %></td>
+		        </tr>
+		      <% end %>
+	      <% end %>
+	      </tbody>
+	    </table>
+	  </div>
+  <% end %>
 </div>

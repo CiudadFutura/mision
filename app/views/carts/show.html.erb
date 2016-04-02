@@ -70,14 +70,15 @@
           </tr>
         </tbody>
       </table>
-	      <% if @ciclo_actual && current_usuario && current_usuario.circulo && !current_usuario.pedido?(Compra::ciclo_actual) %>
-	        <div class="row">
-	          <%= link_to('Finalizar Compra', create_pedido_cart_path, method: :put, class: 'btn btn-default checkout') %>
-	        </div>
-	      <% end %>
-	    <% else %>
+	    <% if @ciclo_actual && current_usuario && current_usuario.circulo && !current_usuario.pedido?(Compra::ciclo_actual) %>
+	      <div class="row text-right">
+	        <%= link_to('Finalizar Compra', create_pedido_cart_path, method: :put, class: 'btn btn-success') %>
+	      </div>
+	    <% end %>
+	  <% else %>
       <h3>No tiene productos agregado a su pedido</h3>
-    <% elsif !@ciclo_actual %>
+	  <% end %>
+	  <% elsif !@ciclo_actual %>
       <p class="explicacion"><span class="label label-warning">No hay un ciclo de compras activo, en estos momentos no se puede relizar el pedido.</span></p>
     <% elsif current_usuario && !current_usuario.circulo %>
       <p class="explicacion"><span class="label label-warning">No perteneces a ningun circulo. Comunicate con un coordinador. Recuerda que tu numero de usuario es <b><%= current_usuario.id %></b></span></p>

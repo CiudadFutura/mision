@@ -7,6 +7,7 @@ class AccountsController < ApplicationController
   def index
     if current_usuario.admin?
       @accounts = Account.all
+      create_all_current_account
     elsif current_usuario.usuario?
       @accounts = Account.where(usuario_id: current_usuario.id)
     end
@@ -61,4 +62,17 @@ class AccountsController < ApplicationController
     def account_params
       params.require(:account).permit(:usuario_id, :status, :balance)
     end
+
+  def create_all_current_account()
+    Usuario.all.each do |usuario|
+      if usuario.account.nil? and usuario.type != 'Admin'
+        puts(usuario.id)
+        account = Account.new
+        account.usuario_id = usuario.id
+        account.status = true
+        account.balance = 0
+        account.save
+      end
+    end
+  end
 end

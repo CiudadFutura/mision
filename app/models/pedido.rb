@@ -12,6 +12,12 @@ class Pedido < ActiveRecord::Base
   def total
     total = 0.0
     JSON.parse(items).each { |item| total += item['total'] || 0 }
+    transactions = Transaction.where(pedido_id: self.id)
+    if !transactions.blank?
+      transactions.each do |transaction|
+        total -= transaction.amount
+      end
+    end
     total.to_f
   end
 

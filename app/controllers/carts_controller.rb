@@ -7,7 +7,7 @@ class CartsController < ApplicationController
   def show
     @ciclo_actual = Compra::ciclo_actual
     if usuario_signed_in?
-        @transactions = Transaction.where(["account_id = :id and parent_id is null", {id: current_usuario.account.id }])
+        @transactions = Transaction.where(["account_id = :id and pedido_id is null", {id: current_usuario.account.id }])
     end
   end
 
@@ -22,6 +22,7 @@ class CartsController < ApplicationController
   end
 
   def create_pedido
+    transactions = Transaction.where(["account_id = :id and pedido_id is null", {id: current_usuario.account.id }])
     pedido = Pedido.new
     ciclo_id = Compra.ciclo_actual.id
     pedido.items = @carrito.items.map { |_k,item| item.purchase_data }.to_json
@@ -30,6 +31,12 @@ class CartsController < ApplicationController
     pedido.compra_id = ciclo_id
     respond_to do |format|
       if pedido.save!
+        if !transactions.nil?
+          transactions.each do |transaction|
+            transaction.pedido_id = pedido.id
+            transaction.save
+          end
+        end
         @carrito.empty!
         format.html { redirect_to root_path, notice: 'Pedido enviado a al coordinador' }
       else

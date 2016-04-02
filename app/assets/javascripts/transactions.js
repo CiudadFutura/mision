@@ -7,11 +7,11 @@ $(document).ready(function () {
 
 	$('[data-item] input:checkbox').change(function (event) {
 		var total = 0;
-		var detalle = '';
+		var detalle = $('#hidden-description').val();
 		$('[data-item]').each(function(i, obj) {
 			if ($(obj).find('input:checkbox:checked').length) {
 				total += $(obj).find('[data-item-total]').data('item-total');
-				detalle += 'Producto: '+ $(obj).find('[data-item-nombre]').data('item-nombre') + '\t' +
+				detalle += '\n Producto: '+ $(obj).find('[data-item-nombre]').data('item-nombre') + '\t' +
 				'Cantidad: '+ $(obj).find('[data-item-cantidad]').data('item-cantidad') + '\t' +
 				'Precio: '+ $(obj).find('[data-item-precio]').data('item-precio') +'\n';
 			}
@@ -31,7 +31,7 @@ $(document).ready(function () {
 		var detalle = $('#transaction_description').val();
 		var total = $('#transaction_amount').val();
 		var subTotal = 0;
-		var detalleadd = detalle + '\n Producto: '+ nombre.val() + '\t' +
+		var detalleadd = $('#hidden-description').val() +'\n '+ detalle + '\n Producto: '+ nombre.val() + '\t' +
 				'Cantidad: '+ cantidad.val() + '\t' +
 				'Precio: $'+ precio.val() +'\n';
 		subTotal = (cantidad.val())*(precio.val());
@@ -44,9 +44,9 @@ $(document).ready(function () {
 
 		var row = '<tr data-item><td><input id="no_producto_ids_" name="no_producto_ids[]" type="checkbox" value="0" checked="checked" <input id="index" type="hidden" value="'+index+'"></td>' +
 				'<td data-item-nombre="'+nombre.val()+'"><input class="form-control" id="producto_nombre" name="no_producto_nombre_'+index+'" type="hidden" value="'+nombre.val()+'">'+nombre.val()+'</td>' +
-				'<td data-item-precio="'+precio.val()+'" class="text-right"><input class="form-control" id="producto_precio" name="no_producto_precio_'+index+'" type="hidden" value="'+precio.val()+'">'+precio.val()+'</td>' +
+				'<td data-item-precio="'+precio.val()+'" class="text-right"><input class="form-control" id="producto_precio" name="no_producto_precio_'+index+'" type="hidden" value="'+precio.val()+'">$'+precio.val()+'</td>' +
 				'<td data-item-cantidad="'+cantidad.val()+'" class="text-right"><input class="form-control" id="producto_cantidad" name="no_producto_cantidad_'+index+'" type="hidden" value="'+cantidad.val()+'">'+cantidad.val()+'</td>' +
-				'<td class="text-right" data-item-total="'+subTotal+'"><input class="form-control" id="producto_total" name="no_producto_total_'+index+'" type="hidden" value="'+subTotal+'">'+subTotal+'</td></tr>';
+				'<td class="text-right" data-item-total="'+subTotal+'"><input class="form-control" id="producto_total" name="no_producto_total_'+index+'" type="hidden" value="'+subTotal+'">$'+subTotal+'</td></tr>';
 		$("#pord-pedidos").append(row);
 		$('#transaction_amount').val(total + subTotal);
 		$('#transaction_description').val(detalleadd);

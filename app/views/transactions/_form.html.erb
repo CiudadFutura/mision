@@ -22,53 +22,48 @@
   <% end %>
 
 
-	<% if @pedido %>
-      <div class="field form-group">
-        <%= f.label :pedido_id, 'Pedido N°' %><br>
-        <%= f.text_field :pedido_id, value: @pedido.id, readonly: true, class:'form-control' %>
-      </div>
-  <% else %>
-      <div class="field form-group">
-        <%= f.label :pedido_id %><br>
-        <%= f.number_field :pedido_id, readonly: true, class:'form-control' %>
-      </div>
-  <% end %>
-
-
   <fieldset class="form-group">
     <%= f.label :transaction_type, 'Tipo de transacción', for:'transaction_type' %>
-    <%= f.select(:transaction_type, options_for_select(Transaction.tipos.map{|x,y| [t(x), x]}),{}, class:'form-control', id:'transaction_type') %>
+    <%= f.select(:transaction_type, options_for_select(Transaction.tipos.map{|x,y| [t(x), x]}),{}, class:'form-control', id:'transaction_type', readonly: true) %>
   </fieldset>
 
   <% if @pedido %>
 	  <div class="field form-group">
 	    <%= f.label :amount, 'Monto' %><br>
-	    <%= f.text_field :amount, readonly: true, class:'form-control' %>
+	    <%= f.number_field :amount, readonly: true, class:'form-control' %>
 	  </div>
 	<% else %>
     <div class="field form-group">
       <%= f.label :amount, 'Monto' %><br>
-      <%= f.text_field :amount, class:'form-control' %>
+      <%= f.number_field :amount, class:'form-control' %>
     </div>
 	<% end %>
+  <% if @pedido %>
 	  <div class="field form-group">
+		  <%= hidden_field_tag 'hidden-description', "Transacción por el pedido N° #{@pedido.id}"  %>
 	    <%= f.label :description, 'Descripción' %><br>
-	    <%= f.text_area :description, class:'form-control' %>
+	    <%= f.text_area :description, rows:5, class:'form-control', readonly: true %>
 	  </div>
+  <% else %>
+    <div class="field form-group">
+      <%= f.label :description, 'Descripción' %><br>
+      <%= f.text_area :description, class:'form-control' %>
+    </div>
+  <% end %>
   <% if !@pedido.blank? %>
 		<div class="row">
 			<div class="col-md-12 text-right">
 		    <div class="btn btn-default" id="additem">Agregar item manualmente</div>
 			</div>
 			<div class="col-md-12" id="form-add-item">
-				<label for="prod-nombre">Producto</label>
-				<input id="prod-nombre" type="text" class="form-control">
+				<%= label_tag "prodnombre-label", "Nombre"%>
+				<%= text_field_tag "prod-nombre", nil, class:"form-control" %>
 
 			  <label for="prod-precio">Precio</label>
-			  <input id="prod-precio" type="text" class="form-control">
+			  <%= number_field_tag "prod-precio", nil, class:"form-control" %>
 
 			  <label for="prod-cantidad">Cantidad</label>
-			  <input id="prod-cantidad" type="text" class="form-control">
+			  <%= number_field_tag "prod-cantidad", nil, class:"form-control" %>
 
 			  <div class="btn btn-success" id="agregar">Agregar</div>
 			</div>
