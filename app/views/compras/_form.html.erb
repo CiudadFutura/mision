@@ -10,30 +10,59 @@
       </ul>
     </div>
   <% end %>
-    <div class="field">
-      <%= f.label :nombre %><br>
-      <%= f.text_field :nombre %>
+  <div class="field">
+    <%= f.label :nombre %><br>
+    <%= f.text_field :nombre %>
+  </div>
+  <div class="field">
+    <%= f.label :descripcion %><br>
+    <%= f.text_area :descripcion %>
+  </div>
+  <div class="field">
+    <%= f.label :fecha_inicio_compras %><br>
+    <%= select_datetime @compra.fecha_inicio_compras, prefix: 'compra[fecha_inicio_compras]' %>
+  </div>
+  <div class="field">
+    <%= f.label :fecha_fin_compras %><br>
+    <%= select_datetime @compra.fecha_fin_compras, prefix: 'compra[fecha_fin_compras]' %>
+  </div>
+  <div class="field">
+    <%= f.label :fecha_fin_pagos %><br>
+    <%= select_datetime @compra.fecha_fin_pagos, prefix: 'compra[fecha_fin_pagos]' %>
+  </div>
+  <div class="field">
+    <%= f.label :fecha_entrega_compras %><br>
+    <%= select_datetime @compra.fecha_entrega_compras, prefix: 'compra[fecha_entrega_compras]' %>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Circulos</h3>
     </div>
-    <div class="field">
-      <%= f.label :descripcion %><br>
-      <%= f.text_area :descripcion %>
+    <div class="panel-body">
+
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>Nro Circulo</th>
+          <th>Coordinador</th>
+          <th colspan="3"></th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <% Circulo.all.each do |circulo| %>
+          <tr>
+            <td><%= circulo.id %></td>
+            <td><%= circulo.try('coordinador').try('nombre_completo') || 'Sin Coordinador' %></td>
+            <td><%= check_box_tag "compra[circulo_ids][]", circulo.id, @compra.circulos.include?(circulo) %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
     </div>
-    <div class="field">
-      <%= f.label :fecha_inicio_compras %><br>
-      <%= select_datetime @compra.fecha_inicio_compras, prefix: 'compra[fecha_inicio_compras]' %>
-    </div>
-    <div class="field">
-      <%= f.label :fecha_fin_compras %><br>
-      <%= select_datetime @compra.fecha_fin_compras, prefix: 'compra[fecha_fin_compras]' %>
-    </div>
-    <div class="field">
-      <%= f.label :fecha_fin_pagos %><br>
-      <%= select_datetime @compra.fecha_fin_pagos, prefix: 'compra[fecha_fin_pagos]' %>
-    </div>
-    <div class="field">
-      <%= f.label :fecha_entrega_compras %><br>
-      <%= select_datetime @compra.fecha_entrega_compras, prefix: 'compra[fecha_entrega_compras]' %>
-    </div>
+    <div class="panel-footer"></div>
+  </div>
 
   <div class="actions">
     <%= f.submit class: 'btn btn-success' %>

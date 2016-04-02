@@ -34,6 +34,11 @@ ActiveRecord::Schema.define(version: 20160306143610) do
     t.datetime "updated_at"
   end
 
+  create_table "circulos_compras", force: true do |t|
+    t.integer "circulo_id"
+    t.integer "compra_id"
+  end
+
   create_table "compras", force: true do |t|
     t.string   "nombre"
     t.text     "descripcion"
@@ -69,7 +74,7 @@ ActiveRecord::Schema.define(version: 20160306143610) do
     t.integer  "orden",                         default: 0
     t.boolean  "highlight",                     default: false
     t.boolean  "faltante"
-    t.integer  "pack"
+    t.integer  "pack",                          default: 0
   end
 
   add_index "productos", ["supplier_id"], name: "index_productos_on_supplier_id", using: :btree

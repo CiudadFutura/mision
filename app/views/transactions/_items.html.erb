@@ -1,0 +1,15 @@
+<% producto = Producto.find(i['producto_id']) rescue nil %>
+<% if !producto.blank? %>
+	<tr data-item>
+		<td>
+			<%= check_box_tag "producto_ids[]", i['producto_id'] %>
+		</td>
+		<td data-item-nombre="<%= producto.nombre %>"><%= producto.nombre %></td>
+		<td data-item-precio="<%= number_to_currency(i['total']/i['cantidad'].to_i) %>" class="text-right">
+			<%= number_to_currency(i['total']/i['cantidad'].to_i) %>
+		</td>
+		<td data-item-cantidad="<%= i['cantidad'].to_i %>" class="text-right"><%= i['cantidad'].to_i%>
+		</td>
+		<td class="text-right" data-item-total="<%= i['total'] %>"><%= number_to_currency(i['total']) %></td>
+	</tr>
+<% end %>
