@@ -5,6 +5,7 @@ class ProductosController < ApplicationController
   # GET /productos.json
   def index
     @isD7 = false
+    @ciclo_actual = Compra::ciclo_actual
     if params[:categoria_id] != 'Todas' && params[:categoria_id].present?
       if params[:subcategoria_id].present?
         @productos = Producto.joins(:categorias)

@@ -13,6 +13,10 @@ class Compra < ActiveRecord::Base
     Compra.where('fecha_inicio_compras <= :today AND fecha_entrega_compras >= :today', today: Time.current).first
   end
 
+  def puedo_comprar?(current_usuario)
+    Compra.joins(:circulos).where(:circulos => {:id => current_usuario.circulo.id})
+  end
+
 
 
   def init

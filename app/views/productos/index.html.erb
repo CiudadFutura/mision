@@ -58,7 +58,7 @@
 	              <p class="precio_mision">Precio misión <%= number_to_currency(producto.precio) %></p>
 	              <p>Precio hiper <%= number_to_currency(producto.precio_super) %></p>
 	              <p>Ahorro <%= number_to_percentage(producto.ahorro) %></p>
-	              <% if @ciclo_actual %>
+	              <% if @ciclo_actual and @ciclo_actual.puedo_comprar?(current_usuario) %>
 		              <select class="cantidad">
 		                <% for i in 1..producto.cantidad_permitida %>
 		                  <option value="<%= i %>"><%= i %></option>
