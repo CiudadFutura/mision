@@ -14,7 +14,9 @@ class Compra < ActiveRecord::Base
   end
 
   def puedo_comprar?(current_usuario)
-    Compra.joins(:circulos).where(:circulos => {:id => current_usuario.circulo.id})
+    if !current_usuario.circulo.blank?
+      Compra.joins(:circulos).where(:circulos => {:id => current_usuario.circulo.id})
+    end
   end
 
 
