@@ -59,6 +59,7 @@ class Producto < ActiveRecord::Base
     all.each do |prod|
       prod.oculto = true
       prod.codigo = prod.codigo.upcase
+      prod.faltante = false
       prod.save!
     end
     start_time = Time.now

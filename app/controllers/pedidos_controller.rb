@@ -22,6 +22,7 @@ class PedidosController < ApplicationController
   end
 
   def show
+    @transactions = Transaction.where(pedido_id: params[:id])
     if current_usuario.admin?
       @pedidos = Pedido.all
       respond_to do |format|
