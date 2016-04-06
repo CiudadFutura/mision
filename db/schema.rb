@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160306143610) do
+ActiveRecord::Schema.define(version: 20160402180615) do
+
+  create_table "accounts", force: true do |t|
+    t.integer  "usuario_id"
+    t.boolean  "status"
+    t.float    "balance",    limit: 24
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "categorias", force: true do |t|
     t.string   "nombre"
@@ -104,6 +112,29 @@ ActiveRecord::Schema.define(version: 20160306143610) do
     t.text     "error_code"
     t.text     "description"
   end
+
+  create_table "transaction_details", force: true do |t|
+    t.integer  "transaction_id"
+    t.integer  "producto_id"
+    t.float    "price",          limit: 24
+    t.integer  "quantity"
+    t.float    "subtotal",       limit: 24
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "transactions", force: true do |t|
+    t.integer  "account_id"
+    t.integer  "pedido_id"
+    t.integer  "transaction_type"
+    t.float    "amount",           limit: 24
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "parent_id"
+  end
+
+  add_index "transactions", ["parent_id"], name: "index_transactions_on_parent_id", using: :btree
 
   create_table "usuarios", force: true do |t|
     t.string   "nombre"

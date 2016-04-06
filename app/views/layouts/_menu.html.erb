@@ -67,8 +67,27 @@
 
       <% if usuario_signed_in? %>
         <li>
-          <%= link_to(pedidos_path) do %>
-            <span class="icon-stats"></span>Mis Pedidos
+          <% if can? [:manage], pedidos_path %>
+            <%= link_to(pedidos_path) do %>
+              <span class="icon-stats"></span>Pedidos
+            <% end %>
+          <% else %>
+              <%= link_to(pedidos_path) do %>
+                <span class="icon-stats"></span>Mis Pedidos
+              <% end %>
+          <% end %>
+        </li>
+      <% end %>
+      <% if usuario_signed_in? %>
+        <li>
+          <% if can? [:manage], accounts_path %>
+            <%= link_to(accounts_path) do %>
+              <span class="icon-stats"></span>Cuentas Corriente
+            <% end %>
+          <% else %>
+            <%= link_to(account_path(current_usuario.account.id)) do %>
+              <span class="icon-stats"></span>Mi Cuenta Corriente
+            <% end %>
           <% end %>
         </li>
       <% end %>

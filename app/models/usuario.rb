@@ -7,6 +7,7 @@ class Usuario < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   belongs_to :circulo
   has_many :pedidos
+  has_one :account
 
   has_paper_trail
 
@@ -51,6 +52,13 @@ class Usuario < ActiveRecord::Base
   def pedido_del_ciclo(ciclo_de_compra)
     return nil if ciclo_de_compra.nil?
     pedido = self.pedidos.where(compra_id: ciclo_de_compra.id).first
+    return pedido if pedido
+    nil
+  end
+
+  def ultimos_pedidos(usuario)
+    return nil if usuario.nil?
+    pedido = self.pedidos.where(usuario_id: usuario.id).last
     return pedido if pedido
     nil
   end

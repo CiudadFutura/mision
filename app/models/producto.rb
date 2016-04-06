@@ -2,6 +2,7 @@ class Producto < ActiveRecord::Base
   enum pack: [:warehouse, :freshes, :vegetables, :fragile, :cleaning]
   has_and_belongs_to_many :categorias
   belongs_to :supplier
+  has_many :transaction_details
 
   validates :codigo, uniqueness: true
   validates :supplier, presence: true
@@ -58,6 +59,7 @@ class Producto < ActiveRecord::Base
     all.each do |prod|
       prod.oculto = true
       prod.codigo = prod.codigo.upcase
+      prod.faltante = false
       prod.save!
     end
     start_time = Time.now

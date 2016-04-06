@@ -21,13 +21,13 @@
           </li>
       <% end %>
     </div>
-
-      <table class='table table-striped'>
+    <div class="table-responsive">
+      <table class='table table-striped' id="table-pedido">
         <thead>
           <tr>
-            <th class="span8">Producto</th>
-            <th class="span2 text-right">Cantidad</th>
-            <th class="span2 text-right">Importe Total</th>
+            <th>Producto</th>
+            <th class="text-right">Cantidad</th>
+            <th class="text-right">Importe Total</th>
           </tr>
         </thead>
         <tbody>
@@ -36,21 +36,37 @@
         %>
           <% JSON.parse(@pedido.items).each do |i| %>
             <tr>
-              <td class="span8"><%= Producto.find(i['producto_id']).nombre %></td>
-              <td class="span2 text-right"><%= i['cantidad'].to_i %></td>
-              <td class="span2 text-right"><%= number_to_currency(i['total']) %></td>
+              <td><%= Producto.find(i['producto_id']).nombre %></td>
+              <td class="text-right"><%= i['cantidad'].to_i %></td>
+              <td class="text-right"><%= number_to_currency(i['total']) %></td>
             </tr>
             <% total = total+i['total']
             qty = qty +i['cantidad'].to_i %>
           <% end %>
         </tbody>
         <tfoot>
-            <tr class="info">
-              <td class="span8 text-right">Total</td>
-              <td class="span2 text-right"><%= qty %></td>
-              <td class="span2 text-right"><%= number_to_currency(total) %></td>
-            </tr>
+          <%if !@transactions.blank?%>
+	          <tr class="info">
+	            <td class="text-right">SubTotal</td>
+	            <td class="text-right"><%= qty %></td>
+	            <td class="text-right"><%= number_to_currency(total) %></td>
+	          </tr>
+            <% @transactions.each do |transaction| %>
+              <tr class="info">
+	              <td class="text-right"><%= transaction.transaction_type == 0 ? 'Nota de Crédito' : 'Nota de Débito'%></td>
+	              <td class="text-right">#<%= transaction.id%></td>
+	              <td class="text-right"><%= number_to_currency(transaction.amount * -1) %></td>
+	              <% total -= transaction.amount %>
+              </tr>
+            <%end%>
+          <%end%>
+          <tr class="info">
+            <td class="text-right">Total</td>
+            <td class="text-right"><%= qty %></td>
+            <td class="text-right"><%= number_to_currency(total) %></td>
+          </tr>
         </tfoot>
       </table>
+    </div>
   </div>
 </div>

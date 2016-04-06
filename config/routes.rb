@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
 
+  resources :transaction_details
+  resources :transactions
+  resources :accounts
   get 'remitos_pedido/index'
   get 'remitos_pedido/generate'
+  #get 'transaction/generar'
+  get '/transaction/generar/:ciclo_id' => 'transactions#generar', as: :transaction_generar
 
   resources :suppliers
 
