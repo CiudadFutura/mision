@@ -37,7 +37,7 @@
             <td><%= p.ciclo.nombre %></td>
             <td><%= p.circulo.try('coordinador') ? (p.circulo.coordinador.nombre + ' ' + p.circulo.coordinador.apellido) : 'SIN COORDINADOR' %></td>
             <td><%= (p.usuario.try('nombre') ? (p.usuario.nombre) : '---' )+ ' ' + (p.usuario.try('apellido')? (p.usuario.apellido) : '---')  %></td>
-            <td><%= p.circulo.id%></td>
+            <td><%= p.circulo.id %></td>
             <td>
               <%= link_to('Ver', pedido_path(p), class: 'btn btn-info btn-mini') %>
             </td>
