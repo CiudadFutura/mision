@@ -70,10 +70,12 @@
         <% else %>
           <h3>Perteneces al Círculo N°: <%=@usuario.circulo_id %> </h3>
             <% if @ciclo_actual_completo %>
+              <% if @ciclo_actual_completo.puedo_comprar?(current_usuario) %>
                 <p class="text-center">Ciclo Actual: <%= @ciclo_actual_completo.nombre %></p>
                 <p>Desde el <strong><%= l @ciclo_actual_completo.fecha_inicio_compras %></strong></p>
                 <p>hasta el <strong><%= l @ciclo_actual_completo.fecha_fin_compras %></strong></p>
                 <p>Ultimo día para realizar el pago <strong><%= l @ciclo_actual_completo.fecha_fin_pagos %></strong></p>
+				      <% end %>
             <% else %>
                 <div class="error text-center">No hay Ciclo Activo</div>
             <% end %>
