@@ -70,7 +70,7 @@
         <% else %>
           <h3>Perteneces al Círculo N°: <%=@usuario.circulo_id %> </h3>
             <% if @ciclo_actual_completo %>
-              <% if @ciclo_actual_completo.puedo_comprar?(current_usuario) %>
+              <% if @ciclo_actual_completo.circulos.include?(current_usuario.circulo) %>
                 <p class="text-center">Ciclo Actual: <%= @ciclo_actual_completo.nombre %></p>
                 <p>Desde el <strong><%= l @ciclo_actual_completo.fecha_inicio_compras %></strong></p>
                 <p>hasta el <strong><%= l @ciclo_actual_completo.fecha_fin_compras %></strong></p>

@@ -59,7 +59,7 @@
 	              <p>Precio hiper <%= number_to_currency(producto.precio_super) %></p>
 	              <p>Ahorro <%= number_to_percentage(producto.ahorro) %></p>
 	              <% if @ciclo_actual and usuario_signed_in? %>
-	                <% if @ciclo_actual.puedo_comprar?(current_usuario) %>
+	                <% if @ciclo_actual.circulos.include?(current_usuario.circulo) %>
 			              <select class="cantidad">
 			                <% for i in 1..producto.cantidad_permitida %>
 			                  <option value="<%= i %>"><%= i %></option>
