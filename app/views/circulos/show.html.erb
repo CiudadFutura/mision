@@ -56,12 +56,12 @@
 	      <tbody>
 	      <% @circulo.usuarios.each do |u| %>
 	        <% p = u.ultimos_pedidos(u) %>
-	        <% if !p.blank? %>
+	        <% if p.present? %>
 		        <tr>
-		          <td><%= p.try('id') || 'Sin Nommbre' %></td>
+		          <td><%= p.try('id') || 'Sin ID' %></td>
 		          <td><%= u.nombre_completo %></td>
-		          <td><%= p.try('ciclo.nombre') || 'sin circulo'%></td>
-		          <td><%= l p.try('created_at') || ' '%></td>
+		          <td><%= p.ciclo.try('nombre') || 'SIN CICLO'%></td>
+		          <td><%= l p.try('created_at') || ' SIN FECHA '%></td>
 		          <td><%= link_to 'Crear Transacción', new_transaction_path(pedido_id:p.id), class: "btn btn-default btn-xs" %></td>
 		          <td><%= link_to 'Mostrar', usuario_path(u.id), class: "btn btn-default btn-xs" %></td>
 		        </tr>

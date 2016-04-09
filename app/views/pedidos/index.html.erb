@@ -34,12 +34,12 @@
 		        <% @pedidos.each do |p| %>
 		          <% if p.present? %>
 			          <tr>
-			            <td><%= p.id %></td>
-			            <td><%= l (p.created_at)%></td>
-			            <td><%= p.ciclo.nombre %></td>
+			            <td><%= p.try('id') || 'Sin ID' %></td>
+			            <td><%= l (p.try('created_at')) || 'SIN FECHA' %></td>
+			            <td><%= p.ciclo.try('nombre') || 'SIN CICLO' %></td>
 			            <td><%= p.circulo.try('coordinador') ? (p.circulo.coordinador.nombre + ' ' + p.circulo.coordinador.apellido) : 'SIN COORDINADOR' %></td>
 			            <td><%= (p.usuario.try('nombre') ? (p.usuario.nombre) : '---' )+ ' ' + (p.usuario.try('apellido')? (p.usuario.apellido) : '---')  %></td>
-			            <td><%= !(p.circulo.id.blank?) ? p.circulo.id : "no tiene" %></td>
+			            <td><%= p.circulo.try('id') || "SIN CIRCULO" %></td>
 			            <td>
 			              <%= link_to('Ver', pedido_path(p), class: 'btn btn-info btn-mini') %>
 			            </td>
