@@ -20,7 +20,8 @@
       <table class='table table-striped' data-search="true">
         <thead>
           <tr>
-            <td>Numero</td>
+	          <td>#</td>
+            <td>Número de pedido</td>
             <td>Fecha</td>
             <td>Ciclo</td>
             <td>Coordinador</td>
@@ -30,10 +31,12 @@
           </tr>
         </thead>
         <tbody>
-          <% if @pedidos.present? %>
+          <% if @pedidos.present?
+            i = 1%>
 		        <% @pedidos.each do |p| %>
 		          <% if p.present? %>
 			          <tr>
+				          <td><%= i %></td>
 			            <td><%= p.try('id') || 'Sin ID' %></td>
 			            <td><%= l (p.try('created_at')) || 'SIN FECHA' %></td>
 			            <td><%= p.ciclo.try('nombre') || 'SIN CICLO' %></td>
@@ -60,6 +63,7 @@
 			            </td>
 			          </tr>
 		          <% end %>
+              <% i += i %>
 		        <% end %>
 	        <% else %>
 	          <tr>
