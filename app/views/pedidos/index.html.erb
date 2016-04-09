@@ -30,36 +30,50 @@
           </tr>
         </thead>
         <tbody>
-        <% @pedidos.each do |p| %>
-          <% if !p.blank? %>
+          <% if @pedidos.present? %>
+		        <% @pedidos.each do |p| %>
+		          <% if p.present? %>
+			          <tr>
+			            <td><%= p.id %></td>
+			            <td><%= l (p.created_at)%></td>
+			            <td><%= p.ciclo.nombre %></td>
+			            <td><%= p.circulo.try('coordinador') ? (p.circulo.coordinador.nombre + ' ' + p.circulo.coordinador.apellido) : 'SIN COORDINADOR' %></td>
+			            <td><%= (p.usuario.try('nombre') ? (p.usuario.nombre) : '---' )+ ' ' + (p.usuario.try('apellido')? (p.usuario.apellido) : '---')  %></td>
+			            <td><%= !(p.circulo.id.blank?) ? p.circulo.id : "no tiene" %></td>
+			            <td>
+			              <%= link_to('Ver', pedido_path(p), class: 'btn btn-info btn-mini') %>
+			            </td>
+			            <td>
+			              <% if(p.ciclo.id && Compra::ciclo_actual.try(:id) == p.ciclo.id)%>
+			                <%= link_to('Modificar',
+			                      edit_pedido_path(p),
+			                      data: { confirm: 'Luego de modificar el pedido recuerda volver a enviarlo.' },
+			                      class: 'btn btn-warning btn-mini') %>
+			              <% end %>
+			            </td>
+			            <td>
+			              <% if current_usuario && current_usuario.admin? %>
+				              <% if p.has_missing? %>
+						            <button class="btn btn-default disabled">Nota de Crédito</button>
+						          <% end %>
+					          <% end %>
+			            </td>
+			          </tr>
+		          <% end %>
+		        <% end %>
+	        <% else %>
 	          <tr>
-	            <td><%= p.id %></td>
-	            <td><%= l (p.created_at)%></td>
-	            <td><%= p.ciclo.nombre %></td>
-	            <td><%= p.circulo.try('coordinador') ? (p.circulo.coordinador.nombre + ' ' + p.circulo.coordinador.apellido) : 'SIN COORDINADOR' %></td>
-	            <td><%= (p.usuario.try('nombre') ? (p.usuario.nombre) : '---' )+ ' ' + (p.usuario.try('apellido')? (p.usuario.apellido) : '---')  %></td>
-	            <td><%= !(p.circulo.id.blank?) ? p.circulo.id : "no tiene" %></td>
-	            <td>
-	              <%= link_to('Ver', pedido_path(p), class: 'btn btn-info btn-mini') %>
-	            </td>
-	            <td>
-	              <% if(p.ciclo.id && Compra::ciclo_actual.try(:id) == p.ciclo.id)%>
-	                <%= link_to('Modificar',
-	                      edit_pedido_path(p),
-	                      data: { confirm: 'Luego de modificar el pedido recuerda volver a enviarlo.' },
-	                      class: 'btn btn-warning btn-mini') %>
-	              <% end %>
-	            </td>
-	            <td>
-	              <% if current_usuario && current_usuario.admin? %>
-		              <% if p.has_missing? %>
-				            <button class="btn btn-default disabled">Nota de Crédito</button>
-				          <% end %>
-			          <% end %>
-	            </td>
+		          <td></td>
+		          <td></td>
+		          <td></td>
+		          <td></td>
+		          <td></td>
+		          <td></td>
+		          <td></td>
+		          <td></td>
+		          <td></td>
 	          </tr>
-          <% end %>
-        <% end %>
+	        <% end %>
         </tbody>
       </table>
   </div>
