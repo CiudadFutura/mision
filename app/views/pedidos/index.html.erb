@@ -31,12 +31,11 @@
           </tr>
         </thead>
         <tbody>
-          <% if @pedidos.present?
-            i = 1%>
-		        <% @pedidos.each do |p| %>
+          <% if @pedidos.present? %>
+		        <% @pedidos.each_with_index do |p, n| %>
 		          <% if p.present? %>
 			          <tr>
-				          <td><%= i %></td>
+				          <td><%= n + 1 %></td>
 			            <td><%= p.try('id') || 'Sin ID' %></td>
 			            <td><%= l (p.try('created_at')) || 'SIN FECHA' %></td>
 			            <td><%= p.ciclo.try('nombre') || 'SIN CICLO' %></td>
@@ -63,7 +62,6 @@
 			            </td>
 			          </tr>
 		          <% end %>
-              <% i += i %>
 		        <% end %>
 	        <% else %>
 	          <tr>
