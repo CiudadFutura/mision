@@ -59,6 +59,7 @@ class Producto < ActiveRecord::Base
     all.each do |prod|
       prod.oculto = true
       prod.codigo = prod.codigo.upcase
+      prod.supplier_id = 1
       prod.faltante = false
       prod.save!
     end
@@ -66,7 +67,7 @@ class Producto < ActiveRecord::Base
     counter = 0
     data = []
 
-    CSV.foreach(file.path, {col_sep: ",", :headers=>:first_row}) do |row|
+    CSV.foreach(file.path, {col_sep: ",", :headers=>:first_row, encoding: 'utf-8'}) do |row|
       # File Columns: 0)código 1)Estado 2)Cod. Proveedor 3)Proveedor
       #               4)Producto 5)Descripcion del producto
       #               6)Precio final 7)Supermercado
@@ -96,7 +97,7 @@ class Producto < ActiveRecord::Base
   end
 
   def self.to_csv
-    CSV.generate(force_quotes: true) do |csv|
+    CSV.generate(force_quotes: true, encoding: 'utf-8') do |csv|
       csv << ['Codigo', 'Estado', 'Cod. Proveedor', 'Proveedor', 'Nombre',
               'Descripcion', 'Precio final', 'Precio super']
       all.each do |prod|
