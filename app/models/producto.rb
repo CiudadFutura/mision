@@ -58,8 +58,6 @@ class Producto < ActiveRecord::Base
   def self.import(file)
     all.each do |prod|
       prod.oculto = true
-      prod.codigo = prod.codigo.upcase
-      prod.supplier_id = 1
       prod.faltante = false
       prod.save!
     end
