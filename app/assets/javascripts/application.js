@@ -90,4 +90,7 @@ $(document).ready(function () {
   $('#usuario_type_usuario').click(function () {
     $('#emails-invitados').hide();
   });
+    $('#finalizar').on('click',function() {
+        $(this).attr("disabled", "disabled"); }
+    );
 });
