@@ -23,9 +23,15 @@ class TransactionsController < ApplicationController
   end
 
   def create
-    @transaction = Transaction.new(transaction_params)
+    @transaction = Transaction.new()
     if params['producto_ids']
-      pedido = Pedido.find(@transaction.pedido_id)
+      pedido = Pedido.find(transaction_params['pedido_id'])
+
+      @transaction.account_id = transaction_params['account_id']
+      @transaction.transaction_type = transaction_params['transaction_type']
+      @transaction.amount = transaction_params['amount']
+      @transaction.description = transaction_params['description']
+      @transaction.save
       params['producto_ids'].each do |i|
         if i != 0
           JSON.parse(pedido.items, symbolize_names: true).each do |item|
@@ -42,17 +48,16 @@ class TransactionsController < ApplicationController
 
       end
       end
-    if params['no_producto_ids']
-      puts('noproducto')
-      params['no_producto_ids'].each do |i|
-        @transaction.transaction_details << TransactionDetail.create(
-            transaction_id: @transaction.id,
-            price: params['no_producto_precio_'+i],
-            quantity: params['no_producto_cantidad_'+i],
-            subtotal: params['no_producto_total_'+i],
-        )
+      if params['no_producto_ids']
+        params['no_producto_ids'].each do |i|
+          @transaction.transaction_details << TransactionDetail.create(
+              transaction_id: @transaction.id,
+              price: params['no_producto_precio_'+i],
+              quantity: params['no_producto_cantidad_'+i],
+              subtotal: params['no_producto_total_'+i],
+          )
+        end
       end
-    end
 
     end
     @transaction.save

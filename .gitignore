@@ -20,3 +20,14 @@ coverage
 uploads
 # Ignore application configuration
 /config/application.yml
+.DS_Store
+.idea/.generators
+.idea/.rakeTasks
+.idea/dataSources.ids
+.idea/dataSources.local.xml
+.idea/dataSources.xml
+.idea/misc.xml
+.idea/mision.iml
+.idea/modules.xml
+.idea/vcs.xml
+.idea/workspace.xml

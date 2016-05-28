@@ -78,7 +78,7 @@
           <% end %>
         </li>
       <% end %>
-      <% if usuario_signed_in? and 1==2 %>
+      <% if usuario_signed_in?%>
         <li>
           <% if can? [:manage], accounts_path %>
             <%= link_to(accounts_path) do %>
