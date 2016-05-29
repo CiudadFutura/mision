@@ -34,7 +34,12 @@ class PedidosController < ApplicationController
   end
 
   def edit
+    transaction = Transaction.find_by_pedido_id(@pedido.id)
     @pedido.save_in_session(session)
+    if transaction.present?
+      transaction.pedido_id = nil
+      transaction.save
+    end
     @pedido.delete
     redirect_to productos_path
   end

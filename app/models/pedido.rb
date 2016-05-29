@@ -13,7 +13,7 @@ class Pedido < ActiveRecord::Base
     total = 0.0
     JSON.parse(items).each { |item| total += item['total'] || 0 }
     transactions = Transaction.where(pedido_id: self.id)
-    if !transactions.blank?
+    if transactions.present?
       transactions.each do |transaction|
         total -= transaction.amount
       end
@@ -53,7 +53,8 @@ class Pedido < ActiveRecord::Base
 
   def self.to_csv
     CSV.generate(force_quotes: true) do |csv|
-      csv << ['Pedido Nro', 'Ciclo Nro', 'Usuario Nro', 'Usuario', 'Circulo Nro', 'Codigo Prod.', 'Nombre Prod.', 'Cantidad']
+      csv << ['Pedido Nro', 'Ciclo Nro', 'Usuario Nro', 'Usuario', 'Circulo Nro', 'Codigo Prod.', 'Nombre Prod.',
+              'Cantidad', 'Nota de Credito']
       all.each do |pedido|
         JSON.parse(pedido.items, symbolize_names: true).each do |item|
           begin
@@ -68,6 +69,10 @@ class Pedido < ActiveRecord::Base
               producto.nombre,
               item[:cantidad]
             ]
+            transaction = Transaction.find_by_pedido_id(pedido.id)
+            if transaction.present?
+              "#{transaction.id}, #{transaction.amount}"
+            end
           rescue ActiveRecord::RecordNotFound
             csv << [
               pedido.id,

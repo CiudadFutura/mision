@@ -15,6 +15,7 @@
 *.log
 *.sql
 /tmp
+.idea/
 rails_best_practices_output.html
 coverage
 uploads
