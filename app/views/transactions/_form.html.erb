@@ -52,7 +52,7 @@
 	<% end %>
   <% if @pedido %>
 	  <div class="field form-group">
-		  <%= hidden_field_tag 'hidden-description', "Transacción por el pedido N° #{@pedido.id}"  %>
+		  <%= hidden_field_tag 'hidden-description', "Transacción por el pedido N° #{@pedido.id}\n"  %>
 	    <%= f.label :description, 'Descripción' %><br>
 	    <%= f.text_area :description, rows:5, class:'form-control', readonly: true %>
 	  </div>
@@ -62,7 +62,7 @@
       <%= f.text_area :description, class:'form-control' %>
     </div>
   <% end %>
-  <% if !@pedido.blank? %>
+  <% if @pedido.present? %>
 		<div class="row">
 			<div class="col-md-12 text-right">
 		    <div class="btn btn-default" id="additem">Agregar item manualmente</div>

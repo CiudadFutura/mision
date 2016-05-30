@@ -11,7 +11,7 @@ $(document).ready(function () {
 		$('[data-item]').each(function(i, obj) {
 			if ($(obj).find('input:checkbox:checked').length) {
 				total += $(obj).find('[data-item-total]').data('item-total');
-				detalle += '\n Producto: '+ $(obj).find('[data-item-nombre]').data('item-nombre') + '\t' +
+				detalle += 'Producto: '+ $(obj).find('[data-item-nombre]').data('item-nombre') + '\t' +
 				'Cantidad: '+ $(obj).find('[data-item-cantidad]').data('item-cantidad') + '\t' +
 				'Precio: '+ $(obj).find('[data-item-precio]').data('item-precio') +'\n';
 			}
@@ -31,9 +31,9 @@ $(document).ready(function () {
 		var detalle = $('#transaction_description').val();
 		var total = $('#transaction_amount').val();
 		var subTotal = 0;
-		var detalleadd = $('#hidden-description').val() +'\n '+ detalle + '\n Producto: '+ nombre.val() + '\t' +
+		var detalleadd = $('#hidden-description').val() + detalle + 'Producto: '+ nombre.val() + '\t' +
 				'Cantidad: '+ cantidad.val() + '\t' +
-				'Precio: $'+ precio.val() +'\n';
+				'Precio: $'+ precio.val();
 		subTotal = (cantidad.val())*(precio.val());
 		var index = 0;
 		if ($("#index").val() == undefined){
@@ -55,6 +55,15 @@ $(document).ready(function () {
 		cantidad.val('');
 		$("#form-add-item").toggle();
 	})
+
+	$('input').bind('keypress', function (event) {
+		var regex = new RegExp("^(\d|-)?(\d|,)*\.?\d*$");
+		var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+		if (!regex.test(key)) {
+			event.preventDefault();
+			return false;
+		}
+	});
 
 });
 
