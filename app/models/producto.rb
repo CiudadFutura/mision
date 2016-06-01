@@ -64,23 +64,24 @@ class Producto < ActiveRecord::Base
     start_time = Time.now
     counter = 0
     data = []
-
+    ActiveRecord::Base.clear_cache!
     CSV.foreach(file.path, {col_sep: ",", :headers=>:first_row, encoding: 'utf-8'}) do |row|
       # File Columns: 0)código 1)Estado 2)Cod. Proveedor 3)Proveedor
       #               4)Producto 5)Descripcion del producto
       #               6)Precio final 7)Supermercado
       row_hash = row.to_hash
-      prod = Producto.find_or_create_by(codigo: row[0].upcase)
-      prod.oculto = false if row[1] == 'activo'
-      if Supplier.where(id: row[2]).nil?
-        prod.supplier = Supplier.find(row[2])
+      prod = Producto.find_or_create_by(codigo: row_hash['Codigo'].upcase)
+      prod.oculto = false if row_hash['Estado'] == 'activo'
+      supplier = Supplier.find_by_id(row_hash['Cod. Proveedor'])
+      if supplier.present?
+        prod.supplier_id= supplier.id
       else
-        prod.supplier =  Supplier.find(1)
+        prod.supplier_id =  1
       end
-      prod.nombre = row[4]
-      prod.descripcion = row[5]
-      prod.precio = row[6]
-      prod.precio_super = row[7]
+      prod.nombre = row_hash['Nombre']
+      prod.descripcion = row_hash['Descripcion']
+      prod.precio = row_hash['Precio final']
+      prod.precio_super = row_hash['Precio super']
       prod.save!
       data << [codigo = prod.codigo,
               nombre = prod.nombre,
