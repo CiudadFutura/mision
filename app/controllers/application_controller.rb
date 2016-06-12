@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
+  rescue_from ActionController::RoutingError, :with => :render_404
 
   before_filter :init_carrito
   before_filter :categorias_menu
@@ -58,5 +59,14 @@ class ApplicationController < ActionController::Base
   # Overwriting the sign_out redirect path method
   def after_sign_out_path_for(resource_or_scope)
     root_path
+  end
+
+  def render_404(exception = nil)
+    if exception
+      logger.info "Rendering 404: #{exception.message}"
+    end
+
+    render :file => "#{Rails.root}/public/404.html", :status =>404, :layout => false
+
   end
 end

@@ -8,7 +8,8 @@
     <div class="col-md-4">
       <h3 class="text-right"><%= (@pedido.created_at).strftime('%d/%m/%Y')%></h3>
     </div>
-
+	</div>
+	<div class="row">
     <div class="breadcrumb col-md-12">
        <%= link_to t('.back', :default => t("helpers.links.back")),
                    pedidos_path %>
@@ -21,10 +22,12 @@
           </li>
       <% end %>
     </div>
+	</div>
+	<div class="row">
     <div class="table-responsive">
       <table class='table table-striped' id="table-pedido">
         <thead>
-          <tr>
+          <tr>application.yml
             <th>Producto</th>
             <th class="text-right">Cantidad</th>
             <th class="text-right">Importe Total</th>
