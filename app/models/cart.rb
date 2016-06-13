@@ -46,10 +46,23 @@ class Cart
   def cantidad
     total = 0.0
     @items.each do |_k, v|
-      Rails.logger.debug(v)
+      #Rails.logger.debug(v)
+      #Rails.logger.debug(_k.inspect)
       total += v.cantidad || 0
     end
     total.to_i
+  end
+
+  def cantidad_prod(producto_id)
+    total_items = 0.0
+
+    @items.each do |_k, v|
+      #Rails.logger.debug(v)
+      if v.producto[:id] == producto_id
+        total_items += v.cantidad || 0
+      end
+    end
+    total_items.to_i
   end
 
   def ahorro

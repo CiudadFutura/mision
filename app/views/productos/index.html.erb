@@ -56,17 +56,31 @@
 	            <div class="caption">
 	              <h4><%= producto.nombre %></h4>
 	              <p class="precio_mision">Precio misión <%= number_to_currency(producto.precio) %></p>
-	              <p>Precio hiper <%= number_to_currency(producto.precio_super) %></p>
+		            <% if producto.precio_super.present?
+			            if producto.precio > producto.precio_super
+			              precio_super = 0.0
+			            else
+			              precio_super = producto.precio_super
+			            end
+		            else
+			              precio_super = 0.0
+		            end%>
+
+	              <p>Precio hiper <%= number_to_currency(precio_super) %></p>
 	              <p>Ahorro <%= number_to_percentage(producto.ahorro) %></p>
 	              <% if @ciclo_actual and usuario_signed_in? %>
 	                <% if @ciclo_actual.circulos.include?(current_usuario.circulo) %>
 			              <select class="cantidad">
 			                <% for i in 1..producto.cantidad_permitida %>
-			                  <option value="<%= i %>"><%= i %></option>
+					              <% if @carrito.producto?(producto.id) %>
+			                    <option value="<%= i%>" <%= (i == @carrito.cantidad_prod(producto.id)) ?'selected':''%>><%= i %></option>
+						            <% else %>
+			                    <option value="<%= i %>"><%= i %></option>
+			                  <% end %>
 			                <% end %>
 			              </select>
-
 				            <% if @carrito.producto?(producto.id) %>
+
 			                <%= button_tag(type: 'button',
 			                               class: 'btn btn-sm btn-danger',
 			                               data: {

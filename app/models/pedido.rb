@@ -39,7 +39,7 @@ class Pedido < ActiveRecord::Base
     missing = false
     JSON.parse(self.items, symbolize_names: true).each do |item|
       producto = Producto.find(item[:producto_id]) rescue nil
-      if !producto.blank?
+      if producto.present?
         if producto.faltante?
           missing = true
           break
@@ -98,7 +98,7 @@ class Pedido < ActiveRecord::Base
     pedidos.each do |pedido|
       JSON.parse(pedido.items).map do |i|
         producto = Producto.find(i['producto_id']) rescue nil
-        if !producto.blank?
+        if producto.present?
           circulo_id = pedido.circulo_id
 
           grupo = I18n.t(producto.pack)

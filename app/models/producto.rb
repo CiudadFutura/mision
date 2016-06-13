@@ -46,7 +46,7 @@ class Producto < ActiveRecord::Base
   end
 
   def ahorro
-    return 0 if precio_super.nil? || precio_super == 0
+    return 0 if precio_super.nil? || precio_super == 0 || precio_super < precio
     100 * (precio_super - precio) / precio_super
   end
 
