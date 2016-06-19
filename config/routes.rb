@@ -29,6 +29,8 @@ Rails.application.routes.draw do
 
 
   get 'carts/show'
+  get '/carts/create_pedido', to: 'carts#create_pedido', as: :create_pedido
+
 
   resources :productos do
     collection { post 'upload' }
@@ -49,7 +51,6 @@ Rails.application.routes.draw do
   resource :cart, only: [:show] do
     put 'add/:producto_id', to: 'carts#add', as: :add_to
     put 'remove/:producto_id', to: 'carts#remove', as: :remove_from
-    put 'create_pedido', to: 'carts#create_pedido', as: :create_pedido
   end
 
   root to: 'home#index'
