@@ -4,10 +4,14 @@
 	<%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
 	  <%= devise_error_messages! %>
 
-	  <div><%= f.label :email %><br />
-	  <%= f.email_field :email, autofocus: true %></div>
+	  <fieldset class="form-group">
+      <%= f.label :email %><br />
+      <%= f.email_field :email, class:'form-control', autofocus: true %>
+    </fieldset>
 
-	  <div><%= f.submit "enviar" %></div>
+	  <fieldset class='form-group',>
+      <%= f.submit "enviar", class:'btn btn-primary' %>
+    </fieldset>
 	<% end %>
 
 	<%= render "devise/shared/links" %>
