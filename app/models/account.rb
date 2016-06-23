@@ -4,8 +4,9 @@ class Account < ActiveRecord::Base
 
   def total
     total = 0.0
-    if !transactions.nil?
-      transactions.each { |transaction| total+= transaction.amount || 0 }
+    if transactions.present?
+      @transactions = transactions.includes(:pedido).where('pedido_id IS NULL')
+      @transactions.each { |transaction| total+= transaction.amount || 0 }
       total.to_f
     end
 

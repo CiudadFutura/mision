@@ -31,7 +31,7 @@ class CartsController < ApplicationController
     pedido.compra_id = ciclo_id
     respond_to do |format|
       if pedido.save!
-        if !transactions.nil?
+        if transactions.present?
           transactions.each do |transaction|
             transaction.pedido_id = pedido.id
             transaction.save
