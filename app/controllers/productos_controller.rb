@@ -34,7 +34,7 @@ class ProductosController < ApplicationController
       @todos = Producto.all.order(:nombre)
       respond_to do |format|
         format.html
-        format.csv { render csv: @todos.to_csv, type: "text/csv; charset=iso-8859-1; header=present", filename: "#{Time.now.to_i}_productos" }
+        format.csv { render csv: @todos.to_csv, type: "text/csv; charset=UTF-8; header=present", filename: "#{Time.now.to_i}_productos" }
       end
     end
   end
