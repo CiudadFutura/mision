@@ -52,7 +52,7 @@ group :development do
 end
 
 # Use Capistrano for deployment
-gem 'capistrano', '~> 3.1.0'
+gem 'capistrano', '~> 3.4.1'
 gem 'capistrano-bundler', '~> 1.1.2'
 gem 'capistrano-rails', '~> 1.1.1'
 gem 'capistrano-rvm', github: "capistrano/rvm"
@@ -70,7 +70,7 @@ group :development, :test do
   gem 'pry-stack_explorer'
   gem 'pry-byebug'
   gem 'simplecov'
-  gem 'rspec-rails', '~> 3.0.0'
+  gem 'rspec-rails', '~> 3.4.2'
   gem 'capybara'
   gem 'shoulda-matchers'
   gem 'database_cleaner'
