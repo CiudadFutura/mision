@@ -1,5 +1,8 @@
 class Compra < ActiveRecord::Base
-  has_and_belongs_to_many :circulos
+  #has_and_belongs_to_many :circulos
+  has_many :deliveries
+  has_many :circulos, :through => :deliveries
+
   validates :nombre, :descripcion, :fecha_inicio_compras, :fecha_fin_compras,
             :fecha_fin_pagos, :fecha_entrega_compras, presence: true
 

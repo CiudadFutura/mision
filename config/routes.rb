@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  resources :sectors_statuses
+  resources :statuses
+  resources :sectors
+  resources :delivery_statuses
   resources :transaction_details
   resources :transactions
   resources :accounts

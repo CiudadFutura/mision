@@ -1,5 +1,7 @@
 class Circulo < ActiveRecord::Base
-  has_and_belongs_to_many :compras
+  #has_and_belongs_to_many :compras
+  has_many :deliveries
+  has_many :compras, :through => :deliveries
   belongs_to :coordinador
   has_many :pedidos
   has_many :usuarios

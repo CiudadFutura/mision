@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160402180615) do
+ActiveRecord::Schema.define(version: 20160724181430) do
 
   create_table "accounts", force: true do |t|
     t.integer  "usuario_id"
@@ -56,6 +56,16 @@ ActiveRecord::Schema.define(version: 20160402180615) do
     t.datetime "fecha_entrega_compras"
   end
 
+  create_table "delivery_statuses", force: true do |t|
+    t.integer  "delivery_id"
+    t.integer  "sector_id"
+    t.integer  "status_id"
+    t.integer  "checkpoint"
+    t.datetime "delivery_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "pedidos", force: true do |t|
     t.text     "items"
     t.integer  "usuario_id"
@@ -87,10 +97,23 @@ ActiveRecord::Schema.define(version: 20160402180615) do
 
   add_index "productos", ["supplier_id"], name: "index_productos_on_supplier_id", using: :btree
 
+  create_table "sectors", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "seed_migration_data_migrations", force: true do |t|
     t.string   "version"
     t.integer  "runtime"
     t.datetime "migrated_on"
+  end
+
+  create_table "statuses", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "suppliers", force: true do |t|
