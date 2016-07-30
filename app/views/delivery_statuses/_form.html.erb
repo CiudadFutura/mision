@@ -11,7 +11,20 @@
     </div>
   <% end %>
 
-  <div class="actions">
-    <%= f.submit %>
+  <div class="field form-group">
+    <%= f.label :delivery_id %><br>
+    <%= f.select(:delivery_id, Delivery.all.map {|c|[c.id, c.id]}, include_blank: 'Entrega') %>
+  </div>
+
+  <div class="field form-group">
+    <%= f.label :sector_id %><br>
+    <%= f.select(:sector_id, Sector.all.map {|c|[c.name, c.id]}, include_blank: 'Sector') %>
+  </div>
+  <div class="field form-group">
+    <%= f.label :checkpoint %><br>
+    <%= f.text_field :checkpoint, class:'form-control' %>
+  </div>
+  <div class="actions form-group">
+    <%= f.submit class: 'btn btn-success'%>
   </div>
 <% end %>

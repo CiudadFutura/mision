@@ -9,6 +9,7 @@ class DeliveryStatusesController < ApplicationController
   end
 
   def show
+    @circulos = @delivery_status.delivery.circulo.all
     respond_with(@delivery_status)
   end
 
@@ -43,5 +44,9 @@ class DeliveryStatusesController < ApplicationController
 
     def delivery_status_params
       params[:delivery_status]
+    end
+
+    def categoria_params
+      params.require(:delivery_status).permit(:delivery_id, :sector_id, :status_id, :checkpoint, :delivery_date)
     end
 end

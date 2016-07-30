@@ -1,27 +1,36 @@
-<h1>Listing sectors</h1>
+<div class="container fill">
+  <div class="row">
+    <h2>Lista de sectores</h2>
+    <div class="navbar navs-fixed">
+      <%= link_to t('Crear Sector', :default => t("helpers.links.new")),
+                  new_sector_path,
+                  :class => 'btn btn-primary' if can? [:manage], Sector
+      %>
+    </div>
+	</div>
+	<div class="table-responsive">
+		<table class="table">
+		  <thead>
+		    <tr>
+		      <th>Nombre</th>
+		      <th>Descripcción</th>
+		      <th colspan="3"></th>
+		    </tr>
+		  </thead>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+		  <tbody>
+		    <% @sectors.each do |sector| %>
+		      <tr>
+		        <td><%= sector.name %></td>
+		        <td><%= sector.description %></td>
+		        <td><%= link_to 'Ver', sector %></td>
+		        <td><%= link_to 'Editar', edit_sector_path(sector) %></td>
+		        <td><%= link_to 'Borrar', sector, method: :delete, data: { confirm: 'Está seguro?' } %></td>
+		      </tr>
+		    <% end %>
+		  </tbody>
+		</table>
 
-  <tbody>
-    <% @sectors.each do |sector| %>
-      <tr>
-        <td><%= sector.name %></td>
-        <td><%= sector.description %></td>
-        <td><%= link_to 'Show', sector %></td>
-        <td><%= link_to 'Edit', edit_sector_path(sector) %></td>
-        <td><%= link_to 'Destroy', sector, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+	</div>
+</div>
 
-<br>
-
-<%= link_to 'New Sector', new_sector_path %>

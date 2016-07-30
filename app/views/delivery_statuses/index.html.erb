@@ -1,23 +1,37 @@
-<h1>Listing delivery_statuses</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @delivery_statuses.each do |delivery_status| %>
+<div class="container fill">
+  <div class="row">
+    <h2>Lista de Entrega de  sectores</h2>
+    <div class="navbar navs-fixed">
+      <%= link_to t('Crear Entrega por sector', :default => t("helpers.links.new")),
+                  new_delivery_status_path,
+                  :class => 'btn btn-primary' if can? [:manage], Sector
+      %>
+    </div>
+  </div>
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
       <tr>
-        <td><%= link_to 'Show', delivery_status %></td>
-        <td><%= link_to 'Edit', edit_delivery_status_path(delivery_status) %></td>
-        <td><%= link_to 'Destroy', delivery_status, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>id</th>
+        <th>Circulo</th>
+        <th>Puesto</th>
+        <th>Estado</th>
+        <th colspan="3"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+      </thead>
 
-<br>
+      <tbody>
+      <% @delivery_statuses.each do |delivery_status| %>
+        <tr>
+          <td><%= delivery_status.id %></td>
+          <td><%= delivery_status.delivery.circulo.id %></td>
+          <td><%= link_to 'Ver', delivery_status %></td>
+          <td><%= link_to 'Editar', edit_delivery_status_path(delivery_status) %></td>
+          <td><%= link_to 'Borrar', delivery_status, method: :delete, data: { confirm: 'Está seguro?' } %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
 
-<%= link_to 'New Delivery status', new_delivery_status_path %>
+  </div>
+</div>

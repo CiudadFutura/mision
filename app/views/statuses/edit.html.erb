@@ -1,6 +1,10 @@
-<h1>Editing status</h1>
+<div class="container fill">
+  <h3>Modificar Estado</h3>
+  <div class="breadcrumb">
+    <%= link_to 'Mostrar', @status %> |
+    <%= link_to 'Atrás', statuses_path %>
+  </div>
 
-<%= render 'form' %>
+  <%= render 'form' %>
 
-<%= link_to 'Show', @status %> |
-<%= link_to 'Back', statuses_path %>
+</div>

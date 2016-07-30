@@ -4,7 +4,35 @@
     <%= link_to 'Atrás', delivery_statuses_path %>
   </div>
 	<div class="row">
-		<h2><%=@delivery_status.compra %></h2>
+		<h2>Ciclo: <%=@delivery_status.delivery.compra.nombre %></h2>
 	</div>
-<%= @delivery_status.to_yaml %>
+	<div class="row">
+		<div class="col-md-3">Total de círculos:<%= %></div>
+		<div class="col-md-3">Total Círculos Completados: <%= %></div>
+		<div class="col-md-3">Total Círculos en Espera: <%= %></div>
+		<div class="col-md-3">Total Círculos Agendados: <%= %></div>
+	</div>
+	<div class="table-responsive">
+		<table class="table">
+			<thead>
+				<th>Círculo</th>
+				<th>Frescos</th>
+				<th>Frágil</th>
+				<th>Almacen</th>
+				<th>Fruta y Verdura</th>
+				<th>Higiene y Limpieza</th>
+				<th>Estado</th>
+				<th>Puesto</th>
+			</thead>
+			<tbody>
+
+			<% Delivery.all.each do |ds| %>
+				<tr>
+					<td><%= ds.circulo.id %></td>
+				</tr>
+			<% end%>
+			</tbody>
+		</table>
+	</div>
+
 </div>
