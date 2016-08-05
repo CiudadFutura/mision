@@ -61,6 +61,13 @@
                 <% end %>
               </li>
             <% end %>
+            <% if can? [:manage], sectors_path %>
+                <li>
+                  <%= link_to(sectors_path) do %>
+                      <span class="icon-stats"></span>Sectores
+                  <% end %>
+                </li>
+            <% end %>
           </ul>
         </li>
       <% end %>

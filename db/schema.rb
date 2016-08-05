@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160724181430) do
+ActiveRecord::Schema.define(version: 20160731205616) do
 
   create_table "accounts", force: true do |t|
     t.integer  "usuario_id"
@@ -43,8 +43,11 @@ ActiveRecord::Schema.define(version: 20160724181430) do
   end
 
   create_table "circulos_compras", force: true do |t|
-    t.integer "circulo_id"
-    t.integer "compra_id"
+    t.integer  "circulo_id"
+    t.integer  "compra_id"
+    t.integer  "status_id"
+    t.integer  "checkpoint"
+    t.datetime "delivery_time"
   end
 
   create_table "compras", force: true do |t|
@@ -59,11 +62,9 @@ ActiveRecord::Schema.define(version: 20160724181430) do
   create_table "delivery_statuses", force: true do |t|
     t.integer  "delivery_id"
     t.integer  "sector_id"
-    t.integer  "status_id"
-    t.integer  "checkpoint"
-    t.datetime "delivery_date"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "status_id"
   end
 
   create_table "pedidos", force: true do |t|

@@ -3,8 +3,8 @@
     <%= link_to 'Modificar', edit_delivery_status_path(@delivery_status) %> |
     <%= link_to 'Atrás', delivery_statuses_path %>
   </div>
-	<div class="row">
-		<h2>Ciclo: <%=@delivery_status.delivery.compra.nombre %></h2>
+	<div class="row text-center">
+		<h3>Ciclo: <%=@delivery_status.delivery.compra.nombre %></h3>
 	</div>
 	<div class="row">
 		<div class="col-md-3">Total de círculos:<%= %></div>
@@ -26,9 +26,21 @@
 			</thead>
 			<tbody>
 
-			<% Delivery.all.each do |ds| %>
+			<% @deliveries.each do |d| %>
 				<tr>
-					<td><%= ds.circulo.id %></td>
+					<td><%= d.circulo.id %></td>
+          <% d.delivery_statuses.all.each do |ds|%>
+              <td>
+                 <% if ds.status.present? %>
+                    <a href="#" id="username" data-type="text" data-resource="post" data-name="username" data-url="/posts/1" data-original-title="Enter username">superuser</a>
+
+                <% else %>
+                    <a href="#" id="username" data-type="text" data-resource="post" data-name="username" data-url="/posts/1" data-original-title="Enter username">superuser</a>
+
+                <% end %>
+              </td>
+
+          <% end %>
 				</tr>
 			<% end%>
 			</tbody>

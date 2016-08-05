@@ -9,7 +9,9 @@ class DeliveryStatusesController < ApplicationController
   end
 
   def show
-    @circulos = @delivery_status.delivery.circulo.all
+    @deliveries = Delivery.where('compra_id = ? ', @delivery_status.delivery.compra.id)
+
+
     respond_with(@delivery_status)
   end
 
@@ -28,8 +30,18 @@ class DeliveryStatusesController < ApplicationController
   end
 
   def update
-    @delivery_status.update(delivery_status_params)
-    respond_with(@delivery_status)
+    puts params.to_yaml
+    @delivery_status = DeliveryStatus.find(params[:id])
+    puts @delivery_status.to_yaml
+    respond_to do |format|
+      if @delivery_status.update(status_id: params[:status_id] )
+        format.html { redirect_to @delivery_status, notice: 'Post was successfully updated.' }
+        format.json { head :no_content } # 204 No Content
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @delivery_status.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def destroy
@@ -47,6 +59,6 @@ class DeliveryStatusesController < ApplicationController
     end
 
     def categoria_params
-      params.require(:delivery_status).permit(:delivery_id, :sector_id, :status_id, :checkpoint, :delivery_date)
+      params.require(:delivery_status).permit(:delivery_id, :sector_id, :status_id)
     end
 end

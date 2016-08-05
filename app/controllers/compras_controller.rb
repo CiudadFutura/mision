@@ -11,6 +11,13 @@ class ComprasController < ApplicationController
   # GET /compras/1
   # GET /compras/1.json
   def show
+    @circulos = @compra.circulos.includes(:deliveries)
+    @sectors = Sector.all
+    @statuses = []
+    Status.all.each do |x|
+      @statuses << {id: x.id, name: "#{x.name}"}
+    end
+    puts @statuses.to_json
   end
 
   # GET /compras/new
