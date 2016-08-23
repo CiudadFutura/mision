@@ -66,7 +66,6 @@ class AccountsController < ApplicationController
   def create_all_current_account()
     Usuario.all.each do |usuario|
       if usuario.account.nil? and usuario.type != 'Admin'
-        puts(usuario.id)
         account = Account.new
         account.usuario_id = usuario.id
         account.status = true

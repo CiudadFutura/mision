@@ -5,7 +5,7 @@ class Reporte
     pedidos.each do |pedido|
       JSON.parse(pedido.items).map do |i|
         product = Producto.find(i['producto_id']) rescue nil
-        if !product.blank?
+        if product.present?
           supplier_id = product.supplier.id
 
           unless reporte.has_key?(supplier_id)

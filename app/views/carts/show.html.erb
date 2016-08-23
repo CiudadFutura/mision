@@ -46,7 +46,7 @@
             </td>
           </tr>
         <%end%>
-        <% if !@transactions.blank? %>
+        <% if @transactions.present? %>
           <% @transactions.each do |transaction| %>
             <tr class="nota-credito">
               <td>&nbsp;</td>

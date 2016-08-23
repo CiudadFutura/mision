@@ -11,13 +11,7 @@ class ComprasController < ApplicationController
   # GET /compras/1
   # GET /compras/1.json
   def show
-    @circulos = @compra.circulos.includes(:deliveries)
-    @sectors = Sector.all
-    @statuses = []
-    Status.all.each do |x|
-      @statuses << {id: x.id, name: "#{x.name}"}
-    end
-    puts @statuses.to_json
+    @circulos = @compra.get_deliveries
   end
 
   # GET /compras/new
@@ -67,6 +61,31 @@ class ComprasController < ApplicationController
       format.html { redirect_to compras_url, notice: 'Ciclo eliminado exitosamente.' }
       format.json { head :no_content }
     end
+  end
+
+  def add_status
+    deliveryStatus = DeliveryStatus.where('delivery_id = ? AND sector_id = ?',
+                                          params[:id_delivery], params[:id_sector])
+
+    @compra = Compra.find(params[:id])
+
+    if deliveryStatus.blank?
+
+        deliveryStatus = DeliveryStatus.new
+        deliveryStatus.delivery_id = params[:id_delivery]
+        deliveryStatus.sector_id = params[:id_sector]
+        deliveryStatus.status_id = params[:new_status]
+        flash[:notice] = 'Estado correctamente creado.' if deliveryStatus.save!
+    else
+      deliveryStatus.first.status_id = params[:new_status]
+      flash[:notice] = 'Estado correctamente editado.' if deliveryStatus.first.save
+    end
+    @circulos = @compra.get_deliveries
+
+    respond_to do |format|
+      format.html { render 'show'}
+    end
+
   end
 
   private

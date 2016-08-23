@@ -22,6 +22,7 @@ class CartsController < ApplicationController
   end
 
   def create_pedido
+
     transactions = Transaction.where(["account_id = :id and pedido_id is null", {id: current_usuario.account.id }])
     pedido = Pedido.new
     ciclo_id = Compra.ciclo_actual.id
@@ -36,6 +37,15 @@ class CartsController < ApplicationController
             transaction.pedido_id = pedido.id
             transaction.save
           end
+        end
+        delivery = Delivery.includes(:circulo).where(
+            "delivery_time is null and compra_id = :compra_id and circulo_id =  :circulo_id",
+                                                     { compra_id: ciclo_id,
+                                                       circulo_id: current_usuario.circulo_id
+                                                     }).take
+        if delivery.present?
+          delivery.delivery_time = Compra.ciclo_actual.fecha_entrega_compras
+          delivery.save
         end
         @carrito.empty!
         format.html { redirect_to root_path, notice: 'Pedido enviado a al coordinador' }

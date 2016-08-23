@@ -4,9 +4,11 @@ Rails.application.routes.draw do
   resources :statuses
   resources :sectors
   resources :delivery_statuses
+  resources :deliveries
   resources :transaction_details
   resources :transactions
   resources :accounts
+  resources :compras
   get 'remitos_pedido/index'
   get 'remitos_pedido/generate'
   #get 'transaction/generar'
@@ -14,7 +16,7 @@ Rails.application.routes.draw do
 
   resources :suppliers
 
-  resources :compras
+  get 'compras/add_status/:id', to: 'compras#add_status', as: :add_status
 
   resources :circulos do
     post 'add_usuario', to: 'circulos#add_usuario', as: :add_usuario

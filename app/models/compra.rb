@@ -16,6 +16,31 @@ class Compra < ActiveRecord::Base
     Compra.where('fecha_inicio_compras <= :today AND fecha_entrega_compras >= :today', today: Time.current).first
   end
 
+  def get_deliveries
+    deliveries = {}
+    statusList = Status.all
+    self.deliveries.each do |delivery|
+      deliveries[delivery.circulo_id] = {
+          delivery_id: delivery.id,
+          delivery_date: delivery.delivery_time,
+          checkpoint: delivery.checkpoint,
+          sectors: {}
+      }
+      statuses = DeliveryStatus.where(:delivery_id => delivery.id)
+
+      Sector.all.each do |sector|
+        status = statuses.where(:sector_id => sector.id).as_json
+        deliveries[delivery.circulo_id][:sectors][sector.id.to_s] = {}
+        deliveries[delivery.circulo_id][:sectors][sector.id.to_s][:id] = sector.id
+        deliveries[delivery.circulo_id][:sectors][sector.id.to_s][:name] = sector.name
+        deliveries[delivery.circulo_id][:sectors][sector.id.to_s][:status] = (status.present?) ? status[0]['status_id'] : nil
+      end
+
+    end
+
+    deliveries
+  end
+
 
   def init
     self.fecha_inicio_compras ||= Time.current

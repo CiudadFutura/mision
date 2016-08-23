@@ -21,27 +21,45 @@
     <div class="panel-body">
 
       <div class="table-responsive">
-        <table class="table">
+        <table class="table" id="statuses-table">
           <thead>
+          </thead>
+          <tr>
             <th>Círculo</th>
-            <% @sectors.each do |sector|%>
-              <th><%= sector.name%></th>
+            <% Sector.all.each do |sector|%>
+                <th><%= sector.name%></th>
             <% end %>
             <th>Puesto</th>
-          </thead>
+          </tr>
           <tbody>
-
-          <% @compra.deliveries.each do |d| %>
+          <% @circulos.each do |circulo , d| %>
               <tr>
-                <td><%= d.circulo.id %></td>
-                <% d.delivery_statuses.all.each do |ds|%>
+                <td><%= circulo %></td>
+                <% d[:sectors].each do |sector_id, sector| %>
                     <td>
-                      <%= link_to '#', class: 'editable status editable-disabled',
-                                  data: { pk: ds.id,
-                                          url: delivery_status_path(ds.id),
-                                          name: 'status_id',
-                                          value: ds.status_id
-                                  } do %>
+                      <% if sector_id == '6' %>
+                          <%= select_tag :statuses_id,
+                                         options_for_select(Status.all.map{|s| [s.name,s.id]},sector[:status]),
+                                         include_blank: 'Elija Estado',
+                                         data: {
+                                             sector_id: sector_id,
+                                             delivery_id: d[:delivery_id],
+                                             compra_id: @compra.id,
+                                             status_id: sector[:status],
+                                         },
+                                         class: 'select-statuses'%>
+                      <% else %>
+                          <%= check_box_tag 'status_id', sector_id,
+                                            sector[:status],
+                                            data: {
+                                                sector_id: sector_id,
+                                                delivery_id: d[:delivery_id],
+                                                compra_id: @compra.id,
+                                                status_id: sector[:status]
+
+                                            },
+                                            remote: true,
+                                            class: 'input-large' %>
                       <% end %>
 
                     </td>
@@ -49,14 +67,15 @@
                 <% end %>
                 <td><%= link_to '#',
                                 class: 'editable checkpoint editable-disabled',
-                                data: { pk: d.id,
-                                        type: 'text',
-                                        title: 'Ingrese el Nº de puesto',
-                                        url: delivery_status_path(d.id),
-                                        name: 'checkpoint',
-                                        value: d.checkpoint },
-                                id: "checkpoint#{d.id}" do %>
-                      <%= d.try('checkpoint') || 'Sin puesto'  %>
+                                data: {
+                                    pk: d[:delivery_id],
+                                    type: 'text',
+                                    title: 'Ingrese el Nº de puesto',
+                                    url: delivery_path(d[:delivery_id]),
+                                    name: 'checkpoint',
+                                    value: d[:checkpoint] },
+                                id: "checkpoint#{d[:delivery_id]}" do %>
+                      <%= d[:checkpoint].present? ?  d[:checkpoint] : 'Sin puesto'  %>
                   <% end %>
                 </td>
               </tr>

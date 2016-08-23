@@ -30,9 +30,7 @@ class DeliveryStatusesController < ApplicationController
   end
 
   def update
-    puts params.to_yaml
     @delivery_status = DeliveryStatus.find(params[:id])
-    puts @delivery_status.to_yaml
     respond_to do |format|
       if @delivery_status.update(status_id: params[:status_id] )
         format.html { redirect_to @delivery_status, notice: 'Post was successfully updated.' }
@@ -46,6 +44,11 @@ class DeliveryStatusesController < ApplicationController
 
   def destroy
     @delivery_status.destroy
+    respond_with(@delivery_status)
+  end
+
+  def add_status
+
     respond_with(@delivery_status)
   end
 
