@@ -64,8 +64,9 @@ class ComprasController < ApplicationController
   end
 
   def add_status
-    deliveryStatus = DeliveryStatus.where('delivery_id = ? AND sector_id = ?',
-                                          params[:id_delivery], params[:id_sector])
+
+      deliveryStatus = DeliveryStatus.where('delivery_id = ? AND sector_id = ?',
+                                            params[:id_delivery], params[:id_sector])
 
     @compra = Compra.find(params[:id])
 

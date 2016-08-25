@@ -38,8 +38,11 @@
                 <% d[:sectors].each do |sector_id, sector| %>
                     <td>
                       <% if sector_id == '6' %>
+
+                          <%  status = d[:sectors].to_a.last %>
+
                           <%= select_tag :statuses_id,
-                                         options_for_select(Status.all.map{|s| [s.name,s.id]},sector[:status]),
+                                         options_for_select(Status.all.map{|s| [s.name,s.id]},status[1][:status]),
                                          include_blank: 'Elija Estado',
                                          data: {
                                              sector_id: sector_id,

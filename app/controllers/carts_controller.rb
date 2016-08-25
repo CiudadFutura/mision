@@ -29,6 +29,7 @@ class CartsController < ApplicationController
     pedido.items = @carrito.items.map { |_k,item| item.purchase_data }.to_json
     pedido.usuario_id = current_usuario.id
     pedido.circulo_id = current_usuario.circulo_id
+    circulo = Circulo.find(pedido.circulo_id)
     pedido.compra_id = ciclo_id
     respond_to do |format|
       if pedido.save!
@@ -38,14 +39,23 @@ class CartsController < ApplicationController
             transaction.save
           end
         end
-        delivery = Delivery.includes(:circulo).where(
-            "delivery_time is null and compra_id = :compra_id and circulo_id =  :circulo_id",
-                                                     { compra_id: ciclo_id,
-                                                       circulo_id: current_usuario.circulo_id
-                                                     }).take
-        if delivery.present?
-          delivery.delivery_time = Compra.ciclo_actual.fecha_entrega_compras
-          delivery.save
+        if circulo.has_delivery_time?(ciclo_id)
+          Sector.all.each do |sector|
+            if sector.id == 6
+              status_id = 1
+            else
+              satatus_id = nil
+            end
+            delivery = circulo.deliveries.where('compra_id = ?', ciclo_id)
+            delivery_status = DeliveryStatus.create(
+                                                delivery_id: delivery.first.id,
+                                                sector_id: sector.id,
+                                                status_id: status_id
+            )
+            delivery.first.delivery_time = Compra.ciclo_actual.fecha_entrega_compras
+            delivery.first.save
+            delivery_status.save
+          end
         end
         @carrito.empty!
         format.html { redirect_to root_path, notice: 'Pedido enviado a al coordinador' }

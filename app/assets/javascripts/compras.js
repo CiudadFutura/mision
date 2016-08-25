@@ -54,7 +54,7 @@ $(document).ready(function() {
         });
     });
     $('.select-statuses').change(function() {
-        var checked = ($(this).is(':checked'))
+        var checked = 'combo'
         var new_value = $(this).val()
         $.ajax({
             type: 'GET',
