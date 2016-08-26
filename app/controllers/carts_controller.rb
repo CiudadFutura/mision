@@ -44,7 +44,7 @@ class CartsController < ApplicationController
             if sector.id == 6
               status_id = 1
             else
-              satatus_id = nil
+              status_id = nil
             end
             delivery = circulo.deliveries.where('compra_id = ?', ciclo_id)
             delivery_status = DeliveryStatus.create(
