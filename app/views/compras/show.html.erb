@@ -21,70 +21,7 @@
     <div class="panel-body">
 
       <div class="table-responsive">
-        <table class="table" id="statuses-table">
-          <thead>
-          </thead>
-          <tr>
-            <th>Círculo</th>
-            <% Sector.all.each do |sector|%>
-                <th><%= sector.name%></th>
-            <% end %>
-            <th>Puesto</th>
-          </tr>
-          <tbody>
-          <% @circulos.each do |circulo , d| %>
-              <tr>
-                <td><%= circulo %></td>
-                <% d[:sectors].each do |sector_id, sector| %>
-                    <td>
-                      <% if sector_id == '6' %>
-
-                          <%  status = d[:sectors].to_a.last %>
-
-                          <%= select_tag :statuses_id,
-                                         options_for_select(Status.all.map{|s| [s.name,s.id]},status[1][:status]),
-                                         include_blank: 'Elija Estado',
-                                         data: {
-                                             sector_id: sector_id,
-                                             delivery_id: d[:delivery_id],
-                                             compra_id: @compra.id,
-                                             status_id: sector[:status],
-                                         },
-                                         class: 'select-statuses'%>
-                      <% else %>
-                          <%= check_box_tag 'status_id', sector_id,
-                                            sector[:status],
-                                            data: {
-                                                sector_id: sector_id,
-                                                delivery_id: d[:delivery_id],
-                                                compra_id: @compra.id,
-                                                status_id: sector[:status]
-
-                                            },
-                                            remote: true,
-                                            class: 'input-large' %>
-                      <% end %>
-
-                    </td>
-
-                <% end %>
-                <td><%= link_to '#',
-                                class: 'editable checkpoint editable-disabled',
-                                data: {
-                                    pk: d[:delivery_id],
-                                    type: 'text',
-                                    title: 'Ingrese el Nº de puesto',
-                                    url: delivery_path(d[:delivery_id]),
-                                    name: 'checkpoint',
-                                    value: d[:checkpoint] },
-                                id: "checkpoint#{d[:delivery_id]}" do %>
-                      <%= d[:checkpoint].present? ?  d[:checkpoint] : 'Sin puesto'  %>
-                  <% end %>
-                </td>
-              </tr>
-          <% end%>
-          </tbody>
-        </table>
+        <%= render 'status' %>
       </div>
     </div>
     <div class="panel-footer"></div>

@@ -18,26 +18,25 @@ class Compra < ActiveRecord::Base
 
   def get_deliveries
     deliveries = {}
-    self.deliveries.each do |delivery|
-      if delivery.delivery_time.present?
-        deliveries[delivery.circulo_id] = {
-            delivery_id: delivery.id,
-            delivery_date: delivery.delivery_time,
-            checkpoint: delivery.checkpoint,
-            sectors: {}
+    self.deliveries.map do |i|
+      if i.delivery_time.present?
+        deliveries[i.circulo_id] ={
+            delivery_id: i.id,
+            delivery_date: i.delivery_time,
+            checkpoint: i.checkpoint,
+            sectors:{}
         }
-        statuses = DeliveryStatus.where(:delivery_id => delivery.id)
+        i.delivery_statuses.map do |ds|
+          deliveries[i.circulo_id][:sectors][ds.sector_id] = {}
+          deliveries[i.circulo_id][:sectors][ds.sector_id][:id] = ds.sector_id
+          deliveries[i.circulo_id][:sectors][ds.sector_id][:status] = ds.try(:status_id)
+          deliveries[i.circulo_id][:sectors][ds.sector_id][:name] = ds.status.try(:name)
 
-        Sector.all.each do |sector|
-          status = statuses.where(:sector_id => sector.id).as_json
-          deliveries[delivery.circulo_id][:sectors][sector.id.to_s] = {}
-          deliveries[delivery.circulo_id][:sectors][sector.id.to_s][:id] = sector.id
-          deliveries[delivery.circulo_id][:sectors][sector.id.to_s][:name] = sector.name
-          deliveries[delivery.circulo_id][:sectors][sector.id.to_s][:status] = (status.present?) ? status[0]['status_id'] : nil
         end
       end
     end
     deliveries
+    #deliveries = self.deliveries.collect(&:delivery_statuses).flatten.uniq
   end
 
 

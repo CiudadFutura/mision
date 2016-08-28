@@ -83,10 +83,14 @@ class ComprasController < ApplicationController
     end
     @circulos = @compra.get_deliveries
 
-    respond_to do |format|
-      format.html { render 'show'}
-    end
+    render 'status'
 
+  end
+
+  def refresh_status
+    @compra = Compra.find(params[:id])
+    @circulos = @compra.get_deliveries
+    render 'status'
   end
 
   private

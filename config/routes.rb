@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   resources :suppliers
 
   get 'compras/add_status/:id', to: 'compras#add_status', as: :add_status
+  get 'compras/refresh_status/:id', to: 'compras#refresh_status', as: :refresh_status
 
   resources :circulos do
     post 'add_usuario', to: 'circulos#add_usuario', as: :add_usuario
