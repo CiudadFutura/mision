@@ -9,3 +9,4 @@ Rails.application.config.assets.version = '1.0'
 Rails.application.config.assets.precompile += %w( compras.js )
 Rails.application.config.assets.precompile += %w( productos.js )
 Rails.application.config.assets.precompile += %w( home.js )
+Rails.application.config.assets.precompile += %w( transactions.js )
