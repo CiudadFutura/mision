@@ -4,7 +4,6 @@ class Delivery < ActiveRecord::Base
   belongs_to :compra
   belongs_to :circulo
   has_many :delivery_statuses
-  has_many :statuses, :through => :delivery_statuses
   has_many :sectors, :through => :delivery_statuses
 
 end

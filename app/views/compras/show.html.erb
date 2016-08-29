@@ -1,3 +1,4 @@
+<%= javascript_include_tag "compras", params[:controller] %>
 <div class="container fill">
   <div class="breadcrumb">
     <%= link_to 'Modificar', edit_compra_path(@compra) %> |
@@ -9,9 +10,9 @@
 
   <div class="row">
     <div class="col-md-3">Total de círculos:<%= @compra.deliveries.count %></div>
-    <div class="col-md-3">Total Círculos Completados: <%= @compra.deliveries.where(:status_id =>  4).count %></div>
-    <div class="col-md-3">Total Círculos en Espera: <%= @compra.deliveries.where(:status_id =>  2).count %></div>
-    <div class="col-md-3">Total Círculos Agendados: <%= @compra.deliveries.where(:status_id => 1).count %></div>
+    <div class="col-md-3">Total Círculos Completados: <%= @compra.deliveries.first.delivery_statuses.where(:status_id =>  4).count %></div>
+    <div class="col-md-3">Total Círculos en Espera: <%= @compra.deliveries.first.delivery_statuses.where(:status_id =>  2).count %></div>
+    <div class="col-md-3">Total Círculos Agendados: <%= @compra.deliveries.first.delivery_statuses.where(:status_id => 1).count %></div>
   </div>
 
   <div class="panel panel-default">

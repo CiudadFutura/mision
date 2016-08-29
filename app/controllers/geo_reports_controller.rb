@@ -1,4 +1,5 @@
 class GeoReportsController < ApplicationController
+  authorize_resource
 
   # GET /usuarios
   # GET /usuarios.json

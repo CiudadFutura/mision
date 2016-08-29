@@ -45,9 +45,10 @@ ActiveRecord::Schema.define(version: 20160731205616) do
   create_table "circulos_compras", force: true do |t|
     t.integer  "circulo_id"
     t.integer  "compra_id"
-    t.integer  "status_id"
     t.integer  "checkpoint"
     t.datetime "delivery_time"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "compras", force: true do |t|
@@ -62,9 +63,9 @@ ActiveRecord::Schema.define(version: 20160731205616) do
   create_table "delivery_statuses", force: true do |t|
     t.integer  "delivery_id"
     t.integer  "sector_id"
+    t.integer  "status_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "status_id"
   end
 
   create_table "pedidos", force: true do |t|

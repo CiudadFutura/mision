@@ -1,5 +1,6 @@
 class SectorsController < ApplicationController
   before_action :set_sector, only: [:show, :edit, :update, :destroy]
+  authorize_resource
 
   respond_to :html
 

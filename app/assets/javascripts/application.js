@@ -17,7 +17,6 @@
 //= require gmaps/google
 //= require bootstrap-editable
 //= require bootstrap-editable-rails
-//= require_tree .
 
 
 $(document).ready(function () {
@@ -50,7 +49,7 @@ $(document).ready(function () {
     } else if (action === 'remove') {
       //Remove item from cart
       new_action = 'add';
-      new_title = "Agregar al ";
+      new_title = "Agregar al ";a
       that.parents("tr.cart-item").remove();
 	    new_class = 'btn-success';
 	    old_class = 'btn-danger';

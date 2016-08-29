@@ -13,13 +13,14 @@ $(document).ready(function() {
     });
 
     function refreshPartial(){
-      $.ajax({
-          type: 'GET',
-          url: 'refresh_status/'+ $('.input-large').data('compraId'),
-          dataType: "html",
-          success: onAddStatusSuccess
-      })
-
+	    if ($('.input-large').data('compraId') != undefined) {
+		    $.ajax({
+			    type: 'GET',
+			    url: 'refresh_status/'+ $('.input-large').data('compraId'),
+			    dataType: "html",
+			    success: onAddStatusSuccess
+		    })
+	    }
     };
 
     var ESTADO_COMPLETADO = 5;
