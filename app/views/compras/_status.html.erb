@@ -14,12 +14,8 @@
   <tbody>
     <% @circulos.each do |circulo , d| %>
       <%
-        status_class = ''
-        d[:sectors].each do |sector_id, sector|
-          if sector_id == 6
-            status_class = sector[:status].present? ? (Status.find(sector[:status]).name).split(' ').map{|s| s.downcase}.join('-') : 'inicial'
-          end
-        end
+        status = Compra.get_last_status(d[:sectors], d[:delivery_id])
+        status_class = status.present? ? (Status.find(status.status_id).name).split(' ').map{|s| s.downcase}.join('-') : 'inicial'
       %>
       <% disabled = true %>
         <tr class="<%= "estado_#{status_class}" %>">
@@ -28,11 +24,11 @@
               <td>
                 <% if status_class == 'asignado'
                      disabled = false
-                   end %>
-                <% if sector_id == 6 %>
-                    <%  status = d[:sectors].to_a.last %>
+                   end
+                %>
+                <% if sector_id == Sector::CONSUMERS %>
                     <%= select_tag :status_is,
-                                   options_for_select(Status.all.map{|s| [s.name,s.id]},status[1][:status]),
+                                   options_for_select(Status.all.map{|s| [s.name,s.id]},status.status_id),
                                    include_blank: 'Elija Estado',
                                    data: {
                                        sector_id: sector_id,
