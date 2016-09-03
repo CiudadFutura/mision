@@ -70,8 +70,10 @@
 	              <p>Ahorro <%= number_to_percentage(producto.ahorro) %></p>
 	              <% if @ciclo_actual and usuario_signed_in? %>
 	                <% if @ciclo_actual.circulos.include?(current_usuario.circulo) %>
+                  	<% cantidad = producto.stock.present? ? producto.stock : producto.cantidad_permitida
+                    %>
 			              <select class="cantidad">
-			                <% for i in 1..producto.cantidad_permitida %>
+			                <% for i in 1..cantidad %>
 					              <% if @carrito.producto?(producto.id) %>
 			                    <option value="<%= i%>" <%= (i == @carrito.cantidad_prod(producto.id)) ?'selected':''%>><%= i %></option>
 						            <% else %>

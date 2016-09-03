@@ -6,6 +6,7 @@ class CartsController < ApplicationController
 
   def show
     @ciclo_actual = Compra::ciclo_actual
+    @missing = @carrito.check_item_stock
     if usuario_signed_in?
         @transactions = Transaction.where(["account_id = :id and pedido_id is null", {id: current_usuario.account.id }])
     end
@@ -29,18 +30,25 @@ class CartsController < ApplicationController
     pedido.usuario_id = current_usuario.id
     pedido.circulo_id = current_usuario.circulo_id
     pedido.compra_id = ciclo_id
+    missing = @carrito.check_item_stock
     respond_to do |format|
-      if pedido.save!
-        if transactions.present?
-          transactions.each do |transaction|
-            transaction.pedido_id = pedido.id
-            transaction.save
-          end
+      if missing.blank?
+        if pedido.save!
+          if transactions.present?
+            transactions.each do |transaction|
+              transaction.pedido_id = pedido.id
+              transaction.save
+            end
+					end
+					@carrito.discount_stock
+          @carrito.empty!
+          format.html { redirect_to root_path, notice: 'Pedido enviado a al coordinador' }
+        else
+          format.html { render :show }
         end
-        @carrito.empty!
-        format.html { redirect_to root_path, notice: 'Pedido enviado a al coordinador' }
       else
-        format.html { render :show }
+        flash[:error] = missing
+        format.html { redirect_to carts_show_path }
       end
     end
   end
@@ -54,6 +62,6 @@ class CartsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def cart_params
-    params.permit(:producto_id, :cantidad)
+    params.permit(:producto_id, :cantidad, :stock)
   end
 end
