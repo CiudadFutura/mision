@@ -114,6 +114,9 @@
 		              </div>
 			            <p>Rubro: <%= I18n.t(producto.pack, :default => '')%></p>
 		            <% end %>
+								<% if producto.stock.present? %>
+									<p><i>Stock disponible: <%= producto.stock %></i></p>
+								<% end %>
 	            </div>
 	          </div>
 	        </div>

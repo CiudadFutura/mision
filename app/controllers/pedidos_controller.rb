@@ -35,6 +35,14 @@ class PedidosController < ApplicationController
 
   def edit
     transaction = Transaction.find_by_pedido_id(@pedido.id)
+    JSON.parse(@pedido.items).map do |item|
+			producto = Producto.find(item['producto_id'])
+			if producto.stock.present?
+				producto.oculto = false if producto.oculto?
+				producto.stock += item['cantidad']
+				producto.save
+			end
+		end
     @pedido.save_in_session(session)
     if transaction.present?
       transaction.pedido_id = nil
