@@ -7,7 +7,7 @@ class CartsController < ApplicationController
   def show
     @ciclo_actual = Compra::ciclo_actual
     @missing = @carrito.check_item_stock
-    if usuario_signed_in?
+    if usuario_signed_in? && !current_usuario.admin?
         @transactions = Transaction.where(["account_id = :id and pedido_id is null", {id: current_usuario.account.id }])
     end
   end
@@ -58,6 +58,7 @@ class CartsController < ApplicationController
 							delivery.first.save
 							delivery_status.save
 						end
+					end
 					@carrito.discount_stock
 					@carrito.empty!
 					format.html { redirect_to root_path, notice: 'Pedido enviado a al coordinador' }
@@ -67,6 +68,7 @@ class CartsController < ApplicationController
 			else
 				flash[:error] = missing
 				format.html { redirect_to carts_show_path }
+			end
     end
   end
 
