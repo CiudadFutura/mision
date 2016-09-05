@@ -1,0 +1,25 @@
+<%= form_for(@sector) do |f| %>
+  <% if @sector.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@sector.errors.count, "error") %> prohibited this sector from being saved:</h2>
+
+      <ul>
+      <% @sector.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field form-group">
+    <%= f.label :name %><br>
+    <%= f.text_field :name, class:'form-control' %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_area :description, class:'form-control' %>
+  </div>
+  <div class="actions form-group">
+    <%= f.submit class: 'btn btn-success' %>
+  </div>
+<% end %>

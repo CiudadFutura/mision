@@ -58,9 +58,13 @@ gem 'capistrano-rails', '~> 1.1.1'
 gem 'capistrano-rvm', github: "capistrano/rvm"
 
 # Google Maps integration
+gem 'coffee-rails'
 gem 'gmaps4rails'
 gem 'geocoder'
 gem 'nokogiri', '~> 1.3.3'
+
+# X - Editable for Rails
+gem 'bootstrap-editable-rails'
 
 group :development, :test do
   gem 'sqlite3'

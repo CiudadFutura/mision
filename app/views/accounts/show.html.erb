@@ -28,7 +28,7 @@
 	    <h2><%= number_to_currency(@account.total) %></h2>
 		</div>
 	</div>
-	<% if !@account.transactions.blank? %>
+	<% if @account.transactions.present? %>
 		<div class="row">
 			<h4>Transacciones realizadas</h4>
 		  <div class="table-responsive">

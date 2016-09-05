@@ -1,4 +1,5 @@
 class RemitosPedidoController < ApplicationController
+  authorize_resource
 
   def index
     if current_usuario.admin?

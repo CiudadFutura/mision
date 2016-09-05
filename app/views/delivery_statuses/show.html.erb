@@ -1,0 +1,50 @@
+<div class="container fill">
+  <div class="breadcrumb">
+    <%= link_to 'Modificar', edit_delivery_status_path(@delivery_status) %> |
+    <%= link_to 'Atrás', delivery_statuses_path %>
+  </div>
+	<div class="row text-center">
+		<h3>Ciclo: <%=@delivery_status.delivery.compra.nombre %></h3>
+	</div>
+	<div class="row">
+		<div class="col-md-3">Total de círculos:<%= %></div>
+		<div class="col-md-3">Total Círculos Completados: <%= %></div>
+		<div class="col-md-3">Total Círculos en Espera: <%= %></div>
+		<div class="col-md-3">Total Círculos Agendados: <%= %></div>
+	</div>
+	<div class="table-responsive">
+		<table class="table">
+			<thead>
+				<th>Círculo</th>
+				<th>Frescos</th>
+				<th>Frágil</th>
+				<th>Almacen</th>
+				<th>Fruta y Verdura</th>
+				<th>Higiene y Limpieza</th>
+				<th>Estado</th>
+				<th>Puesto</th>
+			</thead>
+			<tbody>
+
+			<% @deliveries.each do |d| %>
+				<tr>
+					<td><%= d.circulo.id %></td>
+          <% d.delivery_statuses.all.each do |ds|%>
+              <td>
+                 <% if ds.status.present? %>
+                    <a href="#" id="username" data-type="text" data-resource="post" data-name="username" data-url="/posts/1" data-original-title="Enter username">superuser</a>
+
+                <% else %>
+                    <a href="#" id="username" data-type="text" data-resource="post" data-name="username" data-url="/posts/1" data-original-title="Enter username">superuser</a>
+
+                <% end %>
+              </td>
+
+          <% end %>
+				</tr>
+			<% end%>
+			</tbody>
+		</table>
+	</div>
+
+</div>

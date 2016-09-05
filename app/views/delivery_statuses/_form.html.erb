@@ -1,0 +1,27 @@
+<%= form_for(@delivery_status) do |f| %>
+  <% if @delivery_status.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@delivery_status.errors.count, "error") %> prohibited this delivery_status from being saved:</h2>
+
+      <ul>
+      <% @delivery_status.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field form-group">
+    <%= f.label :delivery_id %><br>
+    <%= f.select(:delivery_id, Delivery.all.map {|c|[c.id, c.id]}, include_blank: 'Entrega') %>
+  </div>
+
+  <div class="field form-group">
+    <%= f.label :sector_id %><br>
+    <%= f.select(:sector_id, Sector.all.map {|c|[c.name, c.id]}, include_blank: 'Sector') %>
+  </div>
+
+  <div class="actions form-group">
+    <%= f.submit class: 'btn btn-success'%>
+  </div>
+<% end %>

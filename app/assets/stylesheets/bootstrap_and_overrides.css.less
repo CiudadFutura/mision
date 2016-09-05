@@ -122,7 +122,6 @@
 
 
 
-
 // Glyphicons
 //@import "twitter/bootstrap/glyphicons.less";
 
@@ -372,6 +371,40 @@ body{
 				}
 			}
 		}
+        #statuses-table{
+          .estado_agendado{
+            background-color: #f5f5f5;
+          }
+          .estado_en-espera{
+            background-color: lightyellow;
+          }
+          .estado_asignado{
+            background-color: aquamarine;
+          }
+          .estado_entregado{
+            background-color: lightcoral;
+          }
+          .estado_completado{
+            background-color: lavender;
+          }
+        }
+        #divLoading{
+          display : none;
+          .loading{
+            display : block;
+            position : fixed;
+            z-index: 100;
+            background-image : url('http://loadinggif.com/images/image-selection/4.gif');
+            background-color:#666;
+            opacity : 0.4;
+            background-repeat : no-repeat;
+            background-position : center;
+            left : 0;
+            bottom : 0;
+            right : 0;
+            top : 0;
+          }
+        }
 	}
 	.menuxs{
 		div:nth-child(1),

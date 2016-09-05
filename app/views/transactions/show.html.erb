@@ -11,7 +11,7 @@
 		  <strong>Consumidor:</strong>
 		  <%= Usuario.find(@transaction.account.usuario.id).nombre_completo %>
 		</p>
-    <% if !@transaction.pedido_id.blank? %>
+    <% if @transaction.pedido_id.present? %>
 			<p>
 			  <strong>Pedido:</strong>
 			  <%= @transaction.pedido_id %>
