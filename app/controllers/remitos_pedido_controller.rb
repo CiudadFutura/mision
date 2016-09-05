@@ -1,5 +1,4 @@
 class RemitosPedidoController < ApplicationController
-  authorize_resource
 
   def index
     if current_usuario.admin?
@@ -19,5 +18,7 @@ class RemitosPedidoController < ApplicationController
     if current_usuario.admin?
       @productos = Producto.all
     end
-  end
+	end
+
+
 end
