@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160731205616) do
+ActiveRecord::Schema.define(version: 20160830001252) do
 
   create_table "accounts", force: true do |t|
     t.integer  "usuario_id"
@@ -95,6 +95,7 @@ ActiveRecord::Schema.define(version: 20160731205616) do
     t.boolean  "highlight",                     default: false
     t.boolean  "faltante"
     t.integer  "pack",                          default: 0
+    t.integer  "stock"
   end
 
   add_index "productos", ["supplier_id"], name: "index_productos_on_supplier_id", using: :btree

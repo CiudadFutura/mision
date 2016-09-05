@@ -6,6 +6,7 @@ class CartsController < ApplicationController
 
   def show
     @ciclo_actual = Compra::ciclo_actual
+    @missing = @carrito.check_item_stock
     if usuario_signed_in?
         @transactions = Transaction.where(["account_id = :id and pedido_id is null", {id: current_usuario.account.id }])
     end
@@ -22,7 +23,6 @@ class CartsController < ApplicationController
   end
 
   def create_pedido
-
     transactions = Transaction.where(["account_id = :id and pedido_id is null", {id: current_usuario.account.id }])
     pedido = Pedido.new
     ciclo_id = Compra.ciclo_actual.id
@@ -31,37 +31,42 @@ class CartsController < ApplicationController
     pedido.circulo_id = current_usuario.circulo_id
     circulo = Circulo.find(pedido.circulo_id)
     pedido.compra_id = ciclo_id
+    missing = @carrito.check_item_stock
     respond_to do |format|
-      if pedido.save!
-        if transactions.present?
-          transactions.each do |transaction|
-            transaction.pedido_id = pedido.id
-            transaction.save
-          end
-        end
-        if circulo.has_delivery_time?(ciclo_id)
-          Sector.all.each do |sector|
-            if sector.id == 6
-              status_id = 1
-            else
-              status_id = nil
-            end
-            delivery = circulo.deliveries.where('compra_id = ?', ciclo_id)
-            delivery_status = DeliveryStatus.create(
-                                                delivery_id: delivery.first.id,
-                                                sector_id: sector.id,
-                                                status_id: status_id
-            )
-            delivery.first.delivery_time = Compra.ciclo_actual.fecha_entrega_compras
-            delivery.first.save
-            delivery_status.save
-          end
-        end
-        @carrito.empty!
-        format.html { redirect_to root_path, notice: 'Pedido enviado a al coordinador' }
-      else
-        format.html { render :show }
-      end
+			if missing.blank?
+				if pedido.save!
+					if transactions.present?
+						transactions.each do |transaction|
+							transaction.pedido_id = pedido.id
+							transaction.save
+						end
+					end
+					if circulo.has_delivery_time?(ciclo_id)
+						Sector.all.each do |sector|
+							if sector.id == 6
+								status_id = 1
+							else
+								status_id = nil
+							end
+							delivery = circulo.deliveries.where('compra_id = ?', ciclo_id)
+							delivery_status = DeliveryStatus.create(
+									delivery_id: delivery.first.id,
+									sector_id: sector.id,
+									status_id: status_id
+							)
+							delivery.first.delivery_time = Compra.ciclo_actual.fecha_entrega_compras
+							delivery.first.save
+							delivery_status.save
+						end
+					@carrito.discount_stock
+					@carrito.empty!
+					format.html { redirect_to root_path, notice: 'Pedido enviado a al coordinador' }
+				else
+					format.html { render :show }
+				end
+			else
+				flash[:error] = missing
+				format.html { redirect_to carts_show_path }
     end
   end
 
@@ -74,6 +79,6 @@ class CartsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def cart_params
-    params.permit(:producto_id, :cantidad)
+    params.permit(:producto_id, :cantidad, :stock)
   end
 end

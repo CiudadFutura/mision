@@ -1,94 +1,122 @@
 <div class="container fill">
-	<div class="row">
-    <% if @ciclo_actual && current_usuario && current_usuario.circulo &&
-		    !current_usuario.pedido?(Compra::ciclo_actual) &&
-				@ciclo_actual.circulos.include?(current_usuario.circulo) %>
-      <h3 class="titulo">Revisa tu pedido y confirmalo.</h3>
-
-      <p class="explicacion">
-        <b>Ciclo Actual: Desde el <%= l @ciclo_actual.fecha_inicio_compras %> hasta el <%= l @ciclo_actual.fecha_fin_compras %></b><br/>
-        <b>Ultimo dia para pago:</b> <%= l @ciclo_actual.fecha_fin_pagos %><br/><br/>
-        A continuación, un listado con tu pedido. Revisalo, y si está todo bien,<br />
-        confirmalo haciendo click en el boton "Finalizar compra".</p>
-
-    <div class="span-12 text-right"><%= link_to('Seguir comprando', productos_path) %></div>
-    <% unless @carrito.empty? %>
-				
-      <table class="table">
-        <thead>
-          <tr>
-            <th>&nbsp;</th>
-            <th>Producto</th>
-            <th>Código</th>
-            <th>Precio Unit.</th>
-            <th>Precio Total</th>
-            <th>Ahorro Total</th>
-            <th>Acción</th>
-          </tr>
-        </thead>
-        <tbody>
-        <% @carrito.items.each do |_producto_id, item| %>
-          <tr class="cart-item">
-            <td><%= item.cantidad.to_i %> x</td>
-            <td><%= item.producto.nombre %></td>
-            <td><%= item.producto.codigo %></td>
-            <td><%= number_to_currency(item.producto.precio) %></td>
-            <td><%= number_to_currency(item.total) %></td>
-            <td><%= number_to_percentage(item.ahorro) %></td>
-            <td>
-              <%= button_tag(type: 'button', class: 'btn btn btn-danger btn-xs',
-                             data: {
-		                             action: 'remove',
-                                 productId: item.producto.id
-                             }) do %>
-                <i class="">Borrar</i>
-              <% end %>
-            </td>
-          </tr>
-        <%end%>
-        <% if @transactions.present? %>
-          <% @transactions.each do |transaction| %>
-            <tr class="nota-credito">
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td><strong>NOTA DE CRÉDITO:</strong></td>
-              <td>#<%= transaction.id %></td>
-              <td><%= number_to_currency(transaction.amount) %></td>
-	            <td></td>
-            </tr>
+  <div class="row">
+    <% flash.each do |key, value| %>
+        <%= content_tag :div, value, class: "flash #{key}" %>
+    <% end %>
+    <% if @missing.present? %>
+      <div class="alert alert-danger">
+        <p>No hay cantidad suficiente para los siguientes productos</p>
+        <ul>
+          <% @missing.each do |k, miss| %>
+                <li><%= miss.nombre%>. Cantidad sugerida: <%= miss.stock%></li>
           <% end %>
-        <% end %>
-          <tr class="checkout-totales">
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td><strong>TOTAL:</strong></td>
-            <td><span class="cart-total"><%= number_to_currency(@carrito.total) %></span></td>
-            <td><span class="cart-ahorro"><%= number_to_percentage(@carrito.ahorro) %></span></td>
-            <td>&nbsp;</td>
+        </ul>
+      </div>
+    <% end %>
+  </div>
+
+  <% if @ciclo_actual && current_usuario && current_usuario.circulo &&
+      !current_usuario.pedido?(Compra::ciclo_actual) &&
+      @ciclo_actual.circulos.include?(current_usuario.circulo) %>
+      <div class="row">
+        <h3 class="titulo">Revisa tu pedido y confirmalo.</h3>
+
+        <p class="explicacion">
+          <b>Ciclo Actual: Desde el <%= l @ciclo_actual.fecha_inicio_compras %> hasta el <%= l @ciclo_actual.fecha_fin_compras %></b><br/>
+          <b>Ultimo dia para pago:</b> <%= l @ciclo_actual.fecha_fin_pagos %><br/><br/>
+          A continuación, un listado con tu pedido. Revisalo, y si está todo bien,<br />
+          confirmalo haciendo click en el boton "Finalizar compra".</p>
+
+      </div>
+      <div class="row">
+        <div class="text-right"><%= link_to('Seguir comprando', productos_path, class: 'btn btn-info') %></div>
+        <br>
+      </div>
+    <% unless @carrito.empty? %>
+      <div class="table-responsive">
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th>&nbsp;</th>
+              <th>Producto</th>
+              <th>Código</th>
+              <th>Precio Unit.</th>
+              <th>Precio Total</th>
+              <th>Ahorro Total</th>
+              <th>Acción</th>
+            </tr>
+          </thead>
+          <tbody>
+          <% @missing.each do |k, v| %>
+          <tr>
+            <td><%= v.id %></td>
           </tr>
-        </tbody>
-      </table>
-	    <% if @ciclo_actual && current_usuario && current_usuario.circulo && !current_usuario.pedido?(Compra::ciclo_actual) %>
-	      <div class="row text-right">
-	        <%= link_to('Finalizar Compra', create_pedido_path, method: :get, class: 'btn btn-success',
+          <% end %>
+          <% @carrito.items.each do |_producto_id, item| %>
+            <%
+              mclass ||=  'missing' if @missing.key?(item.producto.id.to_s) %>
+            <tr class="cart-item <%="#{mclass} "%>">
+              <td><%= item.cantidad.to_i %> x</td>
+              <td><%= item.producto.nombre %></td>
+              <td><%= item.producto.codigo %></td>
+              <td><%= number_to_currency(item.producto.precio) %></td>
+              <td><%= number_to_currency(item.total) %></td>
+              <td><%= number_to_percentage(item.ahorro) %></td>
+              <td>
+                <%= button_tag(type: 'button', class: 'btn btn btn-danger btn-xs',
+                               data: {
+                                   action: 'remove',
+                                   productId: item.producto.id
+                               }) do %>
+                  <i class="">Borrar</i>
+                <% end %>
+              </td>
+            </tr>
+          <%end%>
+          <% if @transactions.present? %>
+            <% @transactions.each do |transaction| %>
+              <tr class="nota-credito">
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td><strong>NOTA DE CRÉDITO:</strong></td>
+                <td>#<%= transaction.id %></td>
+                <td><%= number_to_currency(transaction.amount) %></td>
+                <td></td>
+              </tr>
+            <% end %>
+          <% end %>
+            <tr class="checkout-totales">
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td><strong>TOTAL:</strong></td>
+              <td><span class="cart-total"><%= number_to_currency(@carrito.total) %></span></td>
+              <td><span class="cart-ahorro"><%= number_to_percentage(@carrito.ahorro) %></span></td>
+              <td>&nbsp;</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <% if @ciclo_actual && current_usuario && current_usuario.circulo && !current_usuario.pedido?(Compra::ciclo_actual) %>
+        <div class="row text-right">
+          <%= link_to('Finalizar Compra', create_pedido_path, method: :get, class: "btn btn-success #{'disabled' if @missing.present?}",
                       id: 'finalizar') %>
-	      </div>
-	    <% end %>
-	  <% else %>
+        </div>
+      <% end %>
+    <% else %>
       <h3>No tiene productos agregado a su pedido</h3>
-	  <% end %>
-	  <% elsif !@ciclo_actual %>
+    <% end %>
+  <% elsif !@ciclo_actual %>
       <p class="explicacion"><span class="label label-warning">No hay un ciclo de compras activo, en estos momentos no se puede relizar el pedido.</span></p>
-    <% elsif current_usuario && !current_usuario.circulo %>
+  <% elsif current_usuario && !current_usuario.circulo %>
       <p class="explicacion"><span class="label label-warning">No perteneces a ningun circulo. Comunicate con un coordinador. Recuerda que tu numero de usuario es <b><%= current_usuario.id %></b></span></p>
-    <% elsif current_usuario && current_usuario.pedido?(Compra::ciclo_actual) %>
+  <% elsif current_usuario && current_usuario.pedido?(Compra::ciclo_actual) %>
       <p class="explicacion"><span class="label label-warning">Disculpa. Ya haz realizado tu pedido. Por el momento la misión solo admite un pedido por usuario por ciclo.</span></p>
-    <% elsif current_usuario.nil? %>
+  <% elsif current_usuario.nil? %>
       <p class="explicacion"><span class="label label-warning">Disculpa. Para realizar una compra debes ingresar al sitio (previa registracion).</span></p>
-    <% elsif !@ciclo_actual.circulos.include?(current_usuario.circulo) %>
+  <% elsif !@ciclo_actual.circulos.include?(current_usuario.circulo) %>
     <p class="explicacion"><span class="label label-warning">Tú Círculo no está habilitado para realizar la compra en este ciclo.</span></p>
   <% end %>
-  </div>
 </div>

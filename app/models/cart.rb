@@ -65,6 +65,19 @@ class Cart
     total_items.to_i
   end
 
+  def check_item_stock
+    missing = {}
+    @items.map{ |k, item|
+      next if item.check_stock.blank?
+      missing[k] = item.check_stock
+    }
+    return missing
+  end
+
+  def discount_stock
+    @items.map{|k,item|	item.discount_qty_stock }
+  end
+
   def ahorro
     total_mision = total_ahorro = 0
     @items.each do |_k, v|
