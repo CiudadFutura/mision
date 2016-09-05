@@ -1,5 +1,7 @@
 class Circulo < ActiveRecord::Base
-  has_and_belongs_to_many :compras
+  #has_and_belongs_to_many :compras
+  has_many :deliveries
+  has_many :compras, :through => :deliveries
   belongs_to :coordinador
   has_many :pedidos
   has_many :usuarios
@@ -12,12 +14,16 @@ class Circulo < ActiveRecord::Base
     self.usuarios.count >= 5
   end
 
+  def has_delivery_time?(compra_id)
+    self.deliveries.where('compra_id = ? AND delivery_time IS NULL', compra_id)
+  end
+
   def self.to_csv
     CSV.generate do |csv|
       csv << ['Circulo N°', 'Coordinador', 'Coordinador Email', 'Tel/Cel']
       all.each do |circulo|
         coord = Usuario.find_by_id(circulo.coordinador_id)
-        if !coord.nil?
+        if coord.present?
           csv << [
               circulo.id,
               "#{coord.apellido}, #{coord.nombre},",

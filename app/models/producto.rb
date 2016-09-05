@@ -29,7 +29,6 @@ class Producto < ActiveRecord::Base
 
   def grupo_remito
     grupo = ''
-    puts(self.codigo.from(0).to(2))
     case self.codigo.from(0).to(2)
       when 'ALM'
         grupo = "Almacen"
