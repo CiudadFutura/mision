@@ -2,7 +2,7 @@
 // All this logic will automatically be available in application.js.
 $(document).ready(function() {
 
-    setInterval(refreshPartial, 20000);
+    setInterval(refreshPartial, 60000);
 
     var $loading = $('#divLoading');
 
