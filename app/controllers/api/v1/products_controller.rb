@@ -1,38 +1,16 @@
 class Api::V1::ProductsController < ApplicationController
   respond_to :json
 
-  CATAGORIA_TODAS = 'Todas'
-
-  # GET /users.json
   def index
     if !(params[:categoria_id].present?)
-
-        logger.debug "PRIMER"
-
-        @products = Producto.where("highlight = :destacado", destacado: true).order(:orden)
-    elsif params[:categoria_id] != CATAGORIA_TODAS
-
-        logger.debug "SEGUNDO"
-
+        @products = Producto.destacados
+    elsif params[:categoria_id] != Categoria::TODAS
         if params[:subcategoria_id].present?
-            @products = Producto.joins(:categorias)
-                            .where(
-                                "categorias_productos.categoria_id = :sub_id AND categorias.parent_id = :id",
-                                id: params[:categoria_id],
-                                sub_id: params[:subcategoria_id]
-                            )
-                            .order(:orden, :nombre)
+            @products = Producto.bySubcategoria(params[:categoria_id], params[:subcategoria_id])
         else
-            @products = Producto.joins(:categorias)
-                            .where(
-                                "categorias.id = :id OR categorias.parent_id = :id",
-                                id: params[:categoria_id]
-                            )
-                            .order(:orden, :nombre)
+            @products = Producto.byCategoria(params[:categoria_id])
         end
     else
-        logger.debug "ELSE"
-
         @products = Producto.all.order(:orden, :nombre)
     end
 
