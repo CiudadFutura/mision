@@ -67,7 +67,7 @@ class Producto < ActiveRecord::Base
     CSV.foreach(file.path, {col_sep: "|", :headers=>:first_row, :encoding => 'ISO-8859-1:utf-8'}) do |row|
       # File Columns: 0)código 1)Estado 2)Cod. Proveedor 3)Proveedor
       #               4)Producto 5)Descripcion del producto
-      #               6)Precio final 7)Supermercado
+      #               6)Precio final 7)Supermercado 8)Stock
       row_hash = row.to_hash
       prod = Producto.find_or_create_by(codigo: row_hash['Codigo'].upcase)
       prod.oculto = false if row_hash['Estado'] == 'activo'
@@ -81,6 +81,7 @@ class Producto < ActiveRecord::Base
       prod.descripcion = row_hash['Descripcion']
       prod.precio = row_hash['Precio final'].to_s.to_s.gsub(',', '.').to_f
       prod.precio_super = row_hash['Precio super'].to_s.gsub(',', '.').to_f
+      prod.stock = row_hash['Stock']
       prod.save!
       data << [codigo = prod.codigo,
               nombre = prod.nombre,
@@ -97,7 +98,7 @@ class Producto < ActiveRecord::Base
   def self.to_csv
     CSV.generate(force_quotes: true, encoding: 'utf-8', col_sep:'|') do |csv|
       csv << ['Codigo', 'Estado', 'Cod. Proveedor', 'Proveedor', 'Nombre',
-              'Descripcion', 'Precio final', 'Precio super']
+              'Descripcion', 'Precio final', 'Precio super', 'Stock']
       all.each do |prod|
         csv << [
           prod.codigo,
@@ -108,6 +109,7 @@ class Producto < ActiveRecord::Base
           prod.descripcion,
           prod.precio,
           prod.precio_super,
+          prod.stock,
         ]
       end
     end
