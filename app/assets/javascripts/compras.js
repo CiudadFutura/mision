@@ -16,7 +16,6 @@ $(document).ready(function() {
 	    if ($('.input-large').data('compraId') != undefined) {
 		    $.ajax({
 			    type: 'GET',
-				cache:false,
 			    url: 'refresh_status/'+ $('.input-large').data('compraId'),
 			    dataType: "html",
 			    success: onAddStatusSuccess
@@ -75,7 +74,6 @@ $(document).ready(function() {
     function add_status(args) {
         $.ajax({
             type: 'GET',
-			cache:false,
             url: 'add_status/' + args.compraId,
             data: {
                 id_sector: args.sectorId,
