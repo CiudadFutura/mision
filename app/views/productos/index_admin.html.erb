@@ -1,0 +1,186 @@
+<%= javascript_include_tag "productos", params[:controller] %>
+<%- model_class = Producto -%>
+<div class="container fill">
+	<div class="row">
+		<div class="col-xs-12 col-md-3">
+			<%= render 'carts/menu' %>
+		</div>
+		<div class="col-xs-12 col-md-9">
+			<% if can? [:manage], Producto %>
+					<div class="navbar navs-fixed">
+						<div class="col-md-6">
+							<%= link_to "Exportar CSV", productos_path(format: "csv"), class: "btn btn-success" %>
+							<%= form_tag(upload_productos_path, multipart: true, class: 'form-inline') do %>
+									<div class="form-group">
+										<%= file_field_tag 'file' %>
+									</div>
+									<%= submit_tag 'Subir', class: "btn btn-success btn-xs"%>
+							<% end %>
+						</div>
+						<div class="col-md-6 ">
+							<%= link_to t('.new', :default => t("helpers.links.new")),
+													new_producto_path,
+													:class => 'btn btn-primary' if can? :manage, Producto %>
+						</div>
+					</div>
+			<% end %>
+			<% if @isD7 %>
+					<div class="row highlight">
+						<h2 class="col-xs-12">Destacados</h2>
+					</div>
+			<% end %>
+			<div id="js-message-success" style="display: none;">
+				<div class="alert alert-success">
+					<button type="button" class="close" data-dismiss="alert">&times;</button>
+					Se agregó exitosamente el producto: <strong id="js-message-product"></strong>
+				</div>
+			</div>
+			<div id="js-message-delete" style="display: none;">
+				<div class="alert alert-danger">
+					<button type="button" class="close" data-dismiss="alert">&times;</button>
+					Se eliminó el producto del carrito</strong>
+				</div>
+			</div>
+			<div class="table-responsive">
+				<table class="table">
+					<thead></thead>
+					<tr>
+						<th>Código</th>
+						<th>Nombre</th>
+						<th>Oculto</th>
+						<th>Descripción</th>
+						<th>Precio</th>
+						<th>Precio Super</th>
+						<th>Cantidad Permitida</th>
+						<th>Stock</th>
+						<th>Faltante</th>
+						<th></th>
+					</tr>
+					<tbody>
+						<% @productos.each do |producto|%>
+							<tr>
+								<td><%= producto.codigo%></td>
+								<td><%= link_to '#',
+																class: 'editable',
+																data: { pk: producto.id,
+																				type: 'text',
+																				title: 'Nuevo nombre',
+																				url: producto_path(producto.id),
+																				name: 'nombre',
+																				value: producto.nombre,
+																				resource: 'producto',
+																				turbolinks:'false'
+																			} do %>
+											<%= producto.try(:nombre)  %>
+									<% end %>
+								</td>
+								<td><%= link_to '#',
+																class: 'editable oculto',
+																data: { pk: producto.id,
+																				type: 'select',
+																				title: 'Oculto?',
+																				url: producto_path(producto.id),
+																				name: 'oculto',
+																				value: producto.oculto,
+																				resource: 'producto',
+																				turbolinks:'false'
+																} do %>
+											<%= producto.try(:oculto)  %>
+									<% end %>
+								</td>
+								<td><%= link_to '#',
+																class: 'editable descripcion',
+																data: { pk: producto.id,
+																				type: 'textarea',
+																				title: 'Descripción',
+																				url: producto_path(producto.id),
+																				name: 'descripcion',
+																				value: producto.descripcion,
+																				resource: 'producto',
+																				turbolinks:'false'
+																} do %><%= producto.try(:descripcion)  %>
+									<% end %>
+								</td>
+								<td><%= link_to '#',
+																class: 'editable precio',
+																data: { pk: producto.id,
+																				type: 'text',
+																				title: 'Precio',
+																				url: producto_path(producto.id),
+																				name: 'precio',
+																				value: producto.precio,
+																				resource: 'producto',
+																				turbolinks:'false'
+																} do %><%= number_to_currency(producto.try(:precio))  %>
+									<% end %>
+								</td>
+								<td>
+									<%= link_to '#',
+															class: 'editable precio-super',
+															data: { pk: producto.id,
+																			type: 'text',
+																			title: 'Precio Super',
+																			url: producto_path(producto.id),
+																			name: 'precio-super',
+																			value: producto.precio_super,
+																			resource: 'producto',
+																			turbolinks:'false'
+															} do %><%= number_to_currency(producto.try(:precio_super))  %>
+									<% end %>
+								</td>
+								<td>
+									<%= link_to '#',
+															class: 'editable cantidad-permitida',
+															data: { pk: producto.id,
+																			type: 'text',
+																			title: 'Cantidad Permitida',
+																			url: producto_path(producto.id),
+																			name: 'cantidad-permitida',
+																			value: producto.cantidad_permitida,
+																			resource: 'producto',
+																			turbolinks:'false'
+															} do %><%= producto.try(:cantidad_permitida)  %>
+									<% end %>
+								</td>
+								<td>
+									<%= link_to '#',
+															class: 'editable stock',
+															data: { pk: producto.id,
+																			type: 'text',
+																			title: 'Stock',
+																			url: producto_path(producto.id),
+																			name: 'stock',
+																			value: producto.stock,
+																			resource: 'producto',
+																			turbolinks:'false'
+															} do %><%= producto.try(:stock)  %>
+									<% end %>
+								</td>
+								<td>
+									<%= link_to '#',
+															class: 'editable faltante',
+															data: { pk: producto.id,
+																			type: 'select',
+																			title: 'Faltante',
+																			url: producto_path(producto.id),
+																			name: 'faltante',
+																			value: producto.faltante,
+																			resource: 'producto',
+																			turbolinks:'false'
+															} do %><%= producto.try(:faltante)  %>
+									<% end %>
+								</td>
+								<td>
+									<%= button_to t('.edit', :default => t("helpers.links.edit")),
+																edit_producto_path(producto),
+																:method => :get,
+																:class => 'btn btn-link'  %>
+								</td>
+							</tr>
+						<% end %>
+					</tbody>
+				</table>
+			</div>
+		</div> <!--col-xs-12 col-md-3-->
+	</div> <!--close row -->
+</div> <!--close containt fill-->

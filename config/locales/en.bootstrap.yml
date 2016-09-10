@@ -15,7 +15,7 @@ en:
       confirm: "Esta seguro?"
       destroy: "Eliminar"
       new: "Crear"
-      edit: "Modificar"
+      edit: "Editar"
     titles:
       edit: "Modificar %{model}"
       save: "Guardar %{model}"

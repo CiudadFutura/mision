@@ -2,11 +2,16 @@
  * Created by niquito on 22/02/16.
  */
 
-(function ($) {
+$(document).ready(function() {
+
+	$.fn.editable.defaults.ajaxOptions = {type: "PUT"};
+
+	$('.editable').editable();
+
 	$.fn.uniformHeight = function () {
 		var maxHeight = 0,
-				wrapper,
-				wrapperHeight;
+			wrapper,
+			wrapperHeight;
 
 		return this.each(function () {
 			wrapper = $(this).wrapInner('<div class="wrapper" />').children('.wrapper');
@@ -18,6 +23,18 @@
 
 		}).height(maxHeight);
 	}
-})(jQuery);
+
+
+	$('.oculto').editable({
+		value: true,
+		source: [
+			{value: true, text: 'Oculto'},
+			{value: false, text: 'Visible'},
+		]
+	});
+
+
+});
+
 
 
