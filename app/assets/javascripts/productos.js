@@ -6,7 +6,12 @@ $(document).ready(function() {
 
 	$.fn.editable.defaults.ajaxOptions = {type: "PUT"};
 
-	$('.editable').editable();
+	$('.editable').editable({
+		source: [
+			{value: 'true', text: 'Si'},
+			{value: 'false', text: 'No'},
+		]
+	});
 
 	$.fn.uniformHeight = function () {
 		var maxHeight = 0,
@@ -23,17 +28,6 @@ $(document).ready(function() {
 
 		}).height(maxHeight);
 	}
-
-
-	$('.oculto').editable({
-		value: true,
-		source: [
-			{value: true, text: 'Oculto'},
-			{value: false, text: 'Visible'},
-		]
-	});
-
-
 });
 
 

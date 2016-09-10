@@ -58,7 +58,7 @@
 					</tr>
 					<tbody>
 						<% @productos.each do |producto|%>
-							<tr>
+							<tr <%= producto.oculto? ? 'class =line-oculto' : ''%>>
 								<td><%= producto.codigo%></td>
 								<td><%= link_to '#',
 																class: 'editable',
@@ -84,8 +84,7 @@
 																				value: producto.oculto,
 																				resource: 'producto',
 																				turbolinks:'false'
-																} do %>
-											<%= producto.try(:oculto)  %>
+																} do %><%= producto.oculto? ? 'Si' : 'No'  %>
 									<% end %>
 								</td>
 								<td><%= link_to '#',
@@ -153,7 +152,7 @@
 																			value: producto.stock,
 																			resource: 'producto',
 																			turbolinks:'false'
-															} do %><%= producto.try(:stock)  %>
+															} do %><%= producto.try(:stock) %>
 									<% end %>
 								</td>
 								<td>
@@ -167,7 +166,7 @@
 																			value: producto.faltante,
 																			resource: 'producto',
 																			turbolinks:'false'
-															} do %><%= producto.try(:faltante)  %>
+															} do %><%= producto.faltante? ? 'Si' : 'No'  %>
 									<% end %>
 								</td>
 								<td>
