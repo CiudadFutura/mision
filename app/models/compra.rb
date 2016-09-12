@@ -24,7 +24,6 @@ class Compra < ActiveRecord::Base
     Compra.where('fecha_inicio_compras <= :today AND fecha_entrega_compras >= :today', today: Time.current).first
   end
 
-
   def self.get_last_status(sectors, delivery_id)
     last_status = 0
     sectors.each do |index, sector|

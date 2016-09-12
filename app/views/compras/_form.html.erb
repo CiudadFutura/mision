@@ -10,6 +10,9 @@
       </ul>
     </div>
   <% end %>
+	<div class="row">
+		<%= link_to 'Enviar mails', send_email_path(@compra), :remote => true  %>
+	</div>
   <div class="field">
     <%= f.label :nombre %><br>
     <%= f.text_field :nombre %>
