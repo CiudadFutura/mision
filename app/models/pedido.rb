@@ -56,6 +56,12 @@ class Pedido < ActiveRecord::Base
       csv << ['Pedido Nro', 'Ciclo Nro', 'Usuario Nro', 'Usuario', 'Circulo Nro', 'Codigo Prod.', 'Nombre Prod.',
               'Cantidad']
       all.each do |pedido|
+				transaction = Transaction.find_by_pedido_id(pedido.id)
+				if transaction.present?
+					csv << [
+							"Nota de Credito: Nº #{transaction.id}, $#{transaction.amount}"
+					]
+				end
         JSON.parse(pedido.items, symbolize_names: true).each do |item|
           begin
             producto = Producto.find(item[:producto_id])
@@ -69,12 +75,6 @@ class Pedido < ActiveRecord::Base
               producto.nombre,
               item[:cantidad]
             ]
-						transaction = Transaction.find_by_pedido_id(pedido.id)
-						if transaction.present?
-							csv << [
-									"Nota de Credito: #{transaction.id}, #{transaction.amount}"
-							]
-						end
           rescue ActiveRecord::RecordNotFound
             csv << [
               pedido.id,
