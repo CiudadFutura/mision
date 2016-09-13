@@ -11,7 +11,10 @@
     </div>
   <% end %>
 	<div class="row">
-		<%= link_to 'Enviar mails', send_email_path(@compra), :remote => true  %>
+		<div class="text-right">
+			<%= link_to 'Enviar mails', send_email_path(@compra), :remote => true, class: 'btn-link',
+									data: {confirm: "Está por enviar mails a los coordinadores, ¿está seguro?"}  %>
+		</div>
 	</div>
   <div class="field">
     <%= f.label :nombre %><br>

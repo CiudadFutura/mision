@@ -152,21 +152,53 @@
 				<td style="padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;" >
 		<![endif]-->
 		<table class="outer" align="center" style="border-spacing:0;font-family:sans-serif;color:#333333;Margin:0 auto;width:100%;max-width:600px;" >
-			<tr>
-				<td class="full-width-image" style="padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;" >
-					<img src="logoHeader.png" alt="" style="border-width:0;width:100%;height:auto;" />
-				</td>
-			</tr>
-			<tr>
-				<td class="one-column" style="padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;" >
-					<table width="100%" style="border-spacing:0;font-family:sans-serif;color:#333333;background-color:#B00100" >
+			<tr style="background-color: #cc0000">
+				<td class="two-column" style="padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;text-align:center;font-size:0;" >
+					<!--[if (gte mso 9)|(IE)]>
+					<table width="100%" style="border-spacing:0;font-family:sans-serif;color:#333333;" >
 						<tr>
-							<td class="inner contents" style="padding-top:10px;padding-bottom:10px;padding-right:10px;padding-left:10px;width:100%;text-align:left;" >
-								<p class="h1" style="Margin:0;font-weight:bold;font-size:20px;Margin-bottom:10px;" >Nuevo ciclo de compras</p>
-								<p style="Margin:0;font-size:14px;Margin-bottom:10px;" >Maecenas sed ante pellentesque, posuere leo id, eleifend dolor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent laoreet malesuada cursus. Maecenas scelerisque congue eros eu posuere. Praesent in felis ut velit pretium lobortis rhoncus ut erat.</p>
-							</td>
-						</tr>
+							<td width="50%" valign="top" style="padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;" >
+					<![endif]-->
+					<div class="column" style="width:100%;max-width:300px;display:inline-block;vertical-align:top;" >
+						<table width="100%" style="border-spacing:0;font-family:sans-serif;color:#333333;" >
+							<tr>
+								<td class="inner" style="padding-top:10px;padding-bottom:10px;padding-right:10px;padding-left:10px;" >
+									<table class="contents" style="border-spacing:0;font-family:sans-serif;color:#333333;width:100%;font-size:14px;text-align:left;" >
+										<tr>
+											<td class="text" style="padding-bottom:0;padding-right:0;padding-left:0;padding-top:10px;" >
+												<h2 style="color:#FFF;font-size:18px">Misión Anti Inflación</h2>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</table>
+					</div>
+					<!--[if (gte mso 9)|(IE)]>
+					</td>
+					<td width="50%" valign="top" style="padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;" >
+					<![endif]-->
+					<div class="column" style="width:100%;max-width:300px;display:inline-block;vertical-align:top;" >
+						<table width="100%" style="border-spacing:0;font-family:sans-serif;color:#333333;" >
+							<tr>
+								<td class="inner" style="padding-top:10px;padding-bottom:10px;padding-right:10px;padding-left:10px;" >
+									<table class="contents" style="border-spacing:0;font-family:sans-serif;color:#333333;width:100%;font-size:14px;text-align:left;" >
+										<tr>
+											<td class="text" style="padding-bottom:0;padding-right:0;padding-left:0;padding-top:10px;" >
+												<h2 style="color:#FFF;font-size:16px" >Pronto comienza un nuevo ciclo de compra</h2>
+												<p style="color:#FFF;font-size:14px" >¡NO TE QUEDES AFUERA!</p>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</table>
+					</div>
+					<!--[if (gte mso 9)|(IE)]>
+					</td>
+					</tr>
 					</table>
+					<![endif]-->
 				</td>
 			</tr>
 			<tr>
@@ -174,7 +206,9 @@
 					<table width="100%" style="border-spacing:0;font-family:sans-serif;color:#FFFFFF;background-color:#000000" >
 						<tr>
 							<td class="inner contents" style="padding-top:10px;padding-bottom:10px;padding-right:10px;padding-left:10px;width:100%;text-align:left;" >
-								<p class="h1" style="Margin:0;font-weight:bold;font-size:16px;Margin-bottom:10px;" >RECORDÁ TÚ CÍRCULO PERTENECE AL 1º CICLO DE ENTREGA</p>
+								<p class="h1" style="margin-left:auto;margin-right:auto;font-weight:bold;font-size:14px;Margin-bottom:10px;">
+									RECORDÁ TÚ CÍRCULO PERTENECE A <%= @compra.nombre%>
+								</p>
 							</td>
 						</tr>
 					</table>
@@ -199,7 +233,24 @@
 										</tr>
 										<tr>
 											<td class="text" style="padding-bottom:0;padding-right:0;padding-left:0;padding-top:10px;" >
-												Maecenas sed ante pellentesque, posuere leo id, eleifend dolor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+												<h2 style="color:#cc0000;font-size:16px">Cronograma</h2>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<%=l @compra.fecha_inicio_compras%>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<p>Realizazación de pagos online</p>
+												<p><%=l @compra.fecha_fin_pagos%></p>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<p><%=l @compra.fecha_entrega_compras%></p>
+												<p>(Constitución 2298 - esquina La Paz | Rosario)</p>
 											</td>
 										</tr>
 									</table>
@@ -223,7 +274,18 @@
 										</tr>
 										<tr>
 											<td class="text" style="padding-bottom:0;padding-right:0;padding-left:0;padding-top:10px;" >
-												Maecenas sed ante pellentesque, posuere leo id, eleifend dolor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+												<h2 style="color:#cc0000;font-size:16px" >¿Dudas o consutas?</h2>
+											</td>
+										</tr>
+										<tr>
+											<td class="text" style="padding-bottom:0;padding-right:0;padding-left:0;padding-top:10px;" >
+												<p>Como siempre, esperamos tus comentarios, opiniones o sugerencias para seguir construyendo una #EconomíaColaborativa</p>
+											</td>
+										</tr>
+										<tr>
+											<td class="text" style="padding-bottom:0;padding-right:0;padding-left:0;padding-top:10px;" >
+												<p>Comunicate telefónicamente, vía WhatsApp o SMS al 0341-156 830910 (Ivon) o 0341-153 826152 (Julián).</p>
+												<p>También nos podés escribir a través de nuestra Fan Page en Facebook o a victoriacolectiva@gmail.com</p>
 											</td>
 										</tr>
 									</table>
@@ -236,6 +298,17 @@
 					</tr>
 					</table>
 					<![endif]-->
+				</td>
+			</tr>
+			<tr>
+				<td class="one-column" style="padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;" >
+					<table width="100%" style="border-spacing:0;font-family:sans-serif;color:#333333;background-color:#ce2227" >
+						<tr>
+							<td class="inner contents" style="padding-top:10px;padding-bottom:10px;padding-right:10px;padding-left:10px;width:100%;text-align:left;" >
+								<p class="h1" style="Margin:0;font-weight:bold;font-size:20px;Margin-bottom:10px;" >No te olvides de reenviar este mail a todos los integrantes de Tú círculo</p>
+							</td>
+						</tr>
+					</table>
 				</td>
 			</tr>
 			<tr>
