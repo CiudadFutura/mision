@@ -69,6 +69,12 @@ class Pedido < ActiveRecord::Base
               producto.nombre,
               item[:cantidad]
             ]
+						transaction = Transaction.find_by_pedido_id(pedido.id)
+						if transaction.present?
+							csv << [
+									"Nota de Credito: #{transaction.id}, #{transaction.amount}"
+							]
+						end
           rescue ActiveRecord::RecordNotFound
             csv << [
               pedido.id,
@@ -81,12 +87,6 @@ class Pedido < ActiveRecord::Base
               item[:cantidad]
             ]
           end
-        end
-        transaction = Transaction.find_by_pedido_id(pedido.id)
-        if transaction.present?
-          csv << [
-              "Nota de Credito: #{transaction.id}, #{transaction.amount}"
-          ]
         end
       end
     end
