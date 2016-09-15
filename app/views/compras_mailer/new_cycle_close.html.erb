@@ -152,7 +152,7 @@
 				<td style="padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;" >
 		<![endif]-->
 		<table class="outer" align="center" style="border-spacing:0;font-family:sans-serif;color:#333333;Margin:0 auto;width:100%;max-width:600px;" >
-			<tr style="background-color: #cc0000">
+			<tr style="background-color: #eb1c23">
 				<td class="two-column" style="padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;text-align:center;font-size:0;" >
 					<!--[if (gte mso 9)|(IE)]>
 					<table width="100%" style="border-spacing:0;font-family:sans-serif;color:#333333;" >
@@ -165,8 +165,8 @@
 								<td class="inner" style="padding-top:10px;padding-bottom:10px;padding-right:10px;padding-left:10px;" >
 									<table class="contents" style="border-spacing:0;font-family:sans-serif;color:#333333;width:100%;font-size:14px;text-align:left;" >
 										<tr>
-											<td class="text" style="padding-bottom:0;padding-right:0;padding-left:0;padding-top:10px;" >
-												<h2 style="color:#FFF;font-size:18px">Misión Anti Inflación</h2>
+											<td class="text" style="padding-bottom:0;padding-right:0;padding-left:0;padding-top:10px;border-right:solid 1px #ffffff">
+												<%= image_tag attachments['headerlogo'].url -%>
 											</td>
 										</tr>
 									</table>
@@ -188,6 +188,9 @@
 												<h2 style="color:#FFF;font-size:16px" >Pronto comienza un nuevo ciclo de compra</h2>
 												<p style="color:#FFF;font-size:14px" >¡NO TE QUEDES AFUERA!</p>
 											</td>
+											<td>
+												<%= image_tag attachments['headerbasket'].url -%>
+											</td>
 										</tr>
 									</table>
 								</td>
@@ -203,10 +206,10 @@
 			</tr>
 			<tr>
 				<td class="one-column" style="padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;" >
-					<table width="100%" style="border-spacing:0;font-family:sans-serif;color:#FFFFFF;background-color:#000000" >
+					<table width="100%" style="border-spacing:0;font-family:sans-serif;color:#FFFFFF;background-color:#404041" >
 						<tr>
-							<td class="inner contents" style="padding-top:10px;padding-bottom:10px;padding-right:10px;padding-left:10px;width:100%;text-align:left;" >
-								<p class="h1" style="margin-left:auto;margin-right:auto;font-weight:bold;font-size:14px;Margin-bottom:10px;">
+							<td class="inner contents" style="padding-top:10px;padding-bottom:10px;padding-right:10px;padding-left:10px;width:100%;text-align:center;" >
+								<p class="h1" style="font-weight:bold;font-size:14px;Margin-bottom:10px;">
 									RECORDÁ TÚ CÍRCULO PERTENECE A <%= @compra.nombre%>
 								</p>
 							</td>
@@ -228,12 +231,9 @@
 									<table class="contents" style="border-spacing:0;font-family:sans-serif;color:#333333;width:100%;font-size:14px;text-align:left;" >
 										<tr>
 											<td style="padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;" >
-												<img src="images/two-column-01.jpg" alt="" style="border-width:0;width:100%;height:auto;" />
-											</td>
-										</tr>
-										<tr>
-											<td class="text" style="padding-bottom:0;padding-right:0;padding-left:0;padding-top:10px;" >
-												<h2 style="color:#cc0000;font-size:16px">Cronograma</h2>
+												<%= image_tag attachments['bodycalendar'].url -%>
+											<td>
+												<h2 style="color:#ec1c24;font-size:16px">Cronograma</h2>
 											</td>
 										</tr>
 										<tr>
@@ -268,13 +268,11 @@
 								<td class="inner" style="padding-top:10px;padding-bottom:10px;padding-right:10px;padding-left:10px;" >
 									<table class="contents" style="border-spacing:0;font-family:sans-serif;color:#333333;width:100%;font-size:14px;text-align:left;" >
 										<tr>
-											<td style="padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;" >
-												<img src="images/two-column-01.jpg" alt="" style="border-width:0;width:100%;height:auto;" />
-											</td>
-										</tr>
-										<tr>
 											<td class="text" style="padding-bottom:0;padding-right:0;padding-left:0;padding-top:10px;" >
 												<h2 style="color:#cc0000;font-size:16px" >¿Dudas o consutas?</h2>
+											</td>
+											<td style="padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;" >
+												<%= image_tag attachments['bodycomunication'].url -%>
 											</td>
 										</tr>
 										<tr>
@@ -302,9 +300,9 @@
 			</tr>
 			<tr>
 				<td class="one-column" style="padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;" >
-					<table width="100%" style="border-spacing:0;font-family:sans-serif;color:#333333;background-color:#ce2227" >
+					<table width="100%" style="border-spacing:0;font-family:sans-serif;color:#333333;background-color:#eb1c23" >
 						<tr>
-							<td class="inner contents" style="padding-top:10px;padding-bottom:10px;padding-right:10px;padding-left:10px;width:100%;text-align:left;" >
+							<td class="inner contents" style="padding-top:10px;padding-bottom:10px;padding-right:10px;padding-left:10px;width:100%;text-align:center;" >
 								<p class="h1" style="Margin:0;font-weight:bold;font-size:20px;Margin-bottom:10px;" >No te olvides de reenviar este mail a todos los integrantes de Tú círculo</p>
 							</td>
 						</tr>
@@ -324,12 +322,7 @@
 								<table class="contents" style="border-spacing:0;font-family:sans-serif;color:#333333;width:100%;font-size:14px;text-align:center;" >
 									<tr>
 										<td style="padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;" >
-											<img src="images/three-column-01.jpg" alt="" style="border-width:0;width:100%;height:auto;" />
-										</td>
-									</tr>
-									<tr>
-										<td class="text" style="padding-bottom:0;padding-right:0;padding-left:0;padding-top:10px;" >
-											Scelerisque congue eros eu posuere. Praesent in felis ut velit pretium lobortis rhoncus ut erat.
+											<%= image_tag attachments['footerteam'].url -%>
 										</td>
 									</tr>
 								</table>
@@ -346,12 +339,10 @@
 								<table class="contents" style="border-spacing:0;font-family:sans-serif;color:#333333;width:100%;font-size:14px;text-align:center;" >
 									<tr>
 										<td style="padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;" >
-											<img src="images/three-column-01.jpg" alt="" style="border-width:0;width:100%;height:auto;" />
+											<%= image_tag attachments['footerface'].url -%>
 										</td>
-									</tr>
-									<tr>
-										<td class="text" style="padding-bottom:0;padding-right:0;padding-left:0;padding-top:10px;" >
-											Scelerisque congue eros eu posuere. Praesent in felis ut velit pretium lobortis rhoncus ut erat.
+										<td>
+											<a href="http://www.misionantiinflacion.com.ar" target="_blank">Misión Anti Inflación</a>
 										</td>
 									</tr>
 								</table>
@@ -368,12 +359,10 @@
 								<table class="contents" style="border-spacing:0;font-family:sans-serif;color:#333333;width:100%;font-size:14px;text-align:center;" >
 									<tr>
 										<td style="padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;" >
-											<img src="images/three-column-01.jpg" alt="" style="border-width:0;width:100%;height:auto;" />
+											<%= image_tag attachments['footerwwww'].url -%>
 										</td>
-									</tr>
-									<tr>
-										<td class="text" style="padding-bottom:0;padding-right:0;padding-left:0;padding-top:10px;" >
-											Scelerisque congue eros eu posuere. Praesent in felis ut velit pretium lobortis rhoncus ut erat.
+										<td>
+											<a href="http://www.misionantiinflacion.com.ar" target="_blank">www.misiónantiinflación.com.ar</a>
 										</td>
 									</tr>
 								</table>
