@@ -21,7 +21,7 @@
 		  <tbody>
 		    <% @accounts.each do |account| %>
 		      <tr>
-		        <td><%= account.usuario.nombre_completo %></td>
+		        <td><%= account.usuario.present? ? account.usuario.nombre_completo : 'Sin usuario' %></td>
 		        <td><%= account.status ? 'Activa' : 'Inactiva' %></td>
 		        <td><%= number_to_currency(account.total) %></td>
 		        <td><%= link_to 'Ver', account, class: 'btn btn-default btn-xs' %></td>
