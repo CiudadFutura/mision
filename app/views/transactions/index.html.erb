@@ -23,7 +23,7 @@
 		  <tbody>
 		    <% @transactions.each do |transaction| %>
 		      <tr>
-		        <td><%= Usuario.find(transaction.account.usuario.id).nombre_completo %></td>
+		        <td><%= transaction.account.usuario.nombre_completo.present? ? transaction.account.usuario.nombre_completo : 'sin usuario' %></td>
 		        <td><%= transaction.pedido_id %></td>
 		        <td><%= transaction.transaction_type == 0 ? 'Nota de Crédito' : 'Nota de Débito'%></td>
 		        <td><%= number_to_currency(transaction.amount) %></td>
