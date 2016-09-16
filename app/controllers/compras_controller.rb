@@ -12,6 +12,8 @@ class ComprasController < ApplicationController
   # GET /compras/1.json
   def show
     @circulos = @compra.get_deliveries
+		@statuses = @compra.get_statuses
+
   end
 
   # GET /compras/new
@@ -64,8 +66,7 @@ class ComprasController < ApplicationController
   end
 
   def add_status
-
-      deliveryStatus = DeliveryStatus.where('delivery_id = ? AND sector_id = ?',
+		deliveryStatus = DeliveryStatus.where('delivery_id = ? AND sector_id = ?',
                                             params[:id_delivery], params[:id_sector])
 
     @compra = Compra.find(params[:id])

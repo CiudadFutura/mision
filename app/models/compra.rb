@@ -60,7 +60,34 @@ class Compra < ActiveRecord::Base
       end
     end
     deliveries.sort_by { |k, v| v[:sorted] }
-  end
+	end
+
+	def get_statuses
+		statuses = {}
+		self.deliveries.map do |delivery|
+			delivery.delivery_statuses.map do |ds|
+
+				if ds.sector_id == Sector::CONSUMERS
+					if ds.status_id == Status::SCHEDULED
+						statuses[ds.status.name] = ds.status
+					end
+					if ds.status_id == Status::ON_HOLD
+						statuses[ds.status.name] = ds.status
+					end
+					if ds.status_id == Status::COMPLETED
+						statuses[ds.status.name] = ds.status
+					end
+					if ds.status_id == Status::DELIVERED
+						statuses[ds.status.name] = ds.status
+					end
+					if ds.status_id == Status::ASSIGNED
+						statuses[ds.status.name] = ds.status
+					end
+				end
+			end
+		end
+		return statuses
+	end
 
 
   private

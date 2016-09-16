@@ -29,7 +29,7 @@ $(document).ready(function() {
         title: 'Seleccione el Estado',
         placement: 'top',
         emptytext : 'Sin puesto',
-        success: onAddStatusSuccess,
+        success: refreshPartial,
         error: function(response, newValue) {
             if(response.status === 500) {
                 return 'Servicio no disponible. Intente luego.';
