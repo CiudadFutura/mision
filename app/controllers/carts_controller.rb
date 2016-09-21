@@ -41,21 +41,21 @@ class CartsController < ApplicationController
 							transaction.save
 						end
 					end
-					if circulo.has_delivery_time?(ciclo_id)
+					delivery = circulo.get_delivery(ciclo_id)
+					if delivery.take.delivery_time.blank?
 						Sector.all.each do |sector|
-							if sector.id == 6
-								status_id = 1
+							if sector.id == Sector::CONSUMERS
+								status_id = Status::SCHEDULED
 							else
 								status_id = nil
 							end
-							delivery = circulo.deliveries.where('compra_id = ?', ciclo_id)
 							delivery_status = DeliveryStatus.create(
-									delivery_id: delivery.first.id,
+									delivery_id: delivery.take.id,
 									sector_id: sector.id,
 									status_id: status_id
 							)
-							delivery.first.delivery_time = Compra.ciclo_actual.fecha_entrega_compras
-							delivery.first.save
+							delivery.take.delivery_time = Compra.ciclo_actual.fecha_entrega_compras
+							delivery.take.save
 							delivery_status.save
 						end
 					end

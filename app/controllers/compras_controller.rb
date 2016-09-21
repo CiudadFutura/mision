@@ -66,22 +66,21 @@ class ComprasController < ApplicationController
   end
 
   def add_status
-		deliveryStatus = DeliveryStatus.where('delivery_id = ? AND sector_id = ?',
-                                            params[:id_delivery], params[:id_sector])
 
-    @compra = Compra.find(params[:id])
+		deliveryStatus = DeliveryStatus.where('delivery_id = ? AND sector_id = ? AND status_id = ?',
+																					params[:id_delivery], params[:id_sector], params[:new_status]).order('updated_at').last
+		@compra = Compra.find(params[:id])
 
     if deliveryStatus.blank?
-
-        deliveryStatus = DeliveryStatus.new
-        deliveryStatus.delivery_id = params[:id_delivery]
-        deliveryStatus.sector_id = params[:id_sector]
-        deliveryStatus.status_id = params[:new_status]
-        flash[:notice] = 'Estado correctamente creado.' if deliveryStatus.save!
-    else
-      deliveryStatus.first.status_id = params[:new_status]
-      flash[:notice] = 'Estado correctamente editado.' if deliveryStatus.first.save
-    end
+				deliveryStatus = DeliveryStatus.new
+				deliveryStatus.delivery_id = params[:id_delivery]
+				deliveryStatus.sector_id = params[:id_sector]
+				deliveryStatus.status_id = params[:new_status]
+				flash[:notice] = 'Estado correctamente creado.' if deliveryStatus.save
+		else
+				deliveryStatus.status_id = params[:new_status]
+				flash[:notice] = 'Estado correctamente editado.' if deliveryStatus.save
+		end
     @circulos = @compra.get_deliveries
 
     render 'status'

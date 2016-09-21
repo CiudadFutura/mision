@@ -34,7 +34,13 @@ class Compra < ActiveRecord::Base
     end
     return last_status
 
-  end
+	end
+
+	def prueba
+		self.deliveries.map do |k,v|
+			k.delivery_statuses.order('updated_at').last
+		end
+	end
 
   def get_deliveries
     deliveries = {}
@@ -53,6 +59,7 @@ class Compra < ActiveRecord::Base
           deliveries[i.circulo_id][:sectors][ds.sector_id][:status] = ds.try(:status_id)
           deliveries[i.circulo_id][:sectors][ds.sector_id][:name] = ds.status.try(:name)
           if ds.sector_id == Sector::CONSUMERS
+						puts deliveries[i.circulo_id][:sorted]
             deliveries[i.circulo_id][:sorted] =  assign_status_sort(ds.try(:status_id))
           end
 

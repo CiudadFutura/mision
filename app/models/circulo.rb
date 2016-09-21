@@ -14,9 +14,9 @@ class Circulo < ActiveRecord::Base
     self.usuarios.count >= 5
   end
 
-  def has_delivery_time?(compra_id)
-    self.deliveries.where('compra_id = ? AND delivery_time IS NULL', compra_id)
-  end
+  def self.has_delivery_time?(compra_id)
+    Delivery.where('compra_id = ? AND delivery_time IS NULL', compra_id,)
+	end
 
   def self.to_csv
     CSV.generate do |csv|
