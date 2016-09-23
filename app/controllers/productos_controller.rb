@@ -32,12 +32,8 @@ class ProductosController < ApplicationController
     if current_usuario && current_usuario.admin?
       @todos = Producto.all.order(:orden, :nombre)
       respond_to do |format|
-        if current_usuario.admin?
-					format.html {render :template => 'productos/index_admin'}
-        else
-					format.html
-        	format.csv { render csv: @todos.to_csv, type: "text/csv; charset=UTF-8; header=present", filename: "#{Time.now.to_i}_productos" }
-				end
+				format.html
+       	format.csv { render csv: @todos.to_csv, type: "text/csv; charset=UTF-8; header=present", filename: "#{Time.now.to_i}_productos" }
       end
     end
   end
@@ -129,6 +125,7 @@ class ProductosController < ApplicationController
       params.require(:producto).permit(:precio, :nombre, :codigo, :descripcion, :orden,
                                        :precio_super, :highlight, :oculto, :supplier_id,
                                        :pack, :faltante,:cantidad_permitida, :imagen, :stock,
+                                       :orden_remito,
                                        categoria_ids: [])
     end
 end

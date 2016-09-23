@@ -29,6 +29,13 @@
     </div>
     <%= error_span(@producto[:orden]) %>
   </div>
+		<div class="control-group">
+			<%= f.label :orden_remito, :class => 'control-label' %>
+			<div class="controls">
+				<%= f.text_field :orden_remito, :class => 'form-control' %>
+			</div>
+			<%= error_span(@producto[:orden_remito]) %>
+		</div>
   <div class="control-group">
     <%= f.label :precio, :class => 'control-label' %>
     <div class="controls">
