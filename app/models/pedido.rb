@@ -96,10 +96,12 @@ class Pedido < ActiveRecord::Base
     reporte = {}
 
     pedidos.each do |pedido|
+      circulo_id = pedido.circulo_id
+
       JSON.parse(pedido.items).map do |i|
         producto = Producto.find(i['producto_id']) rescue nil
+
         if producto.present?
-          circulo_id = pedido.circulo_id
 
           grupo = I18n.t(producto.pack)
 
@@ -115,7 +117,6 @@ class Pedido < ActiveRecord::Base
             }
           end
 
-
           # If the product exist on the report sums, if it's new it assignes
           if reporte[circulo_id][:grupos][grupo][:productos].has_key?(i['producto_id'])
             reporte[circulo_id][:grupos][grupo][:productos][i['producto_id']][:qty] += i['cantidad']
@@ -128,10 +129,20 @@ class Pedido < ActiveRecord::Base
           end
 
         end
-
-
       end
+
+      reporte[circulo_id][:grupos].each do |grupo, productos|
+        productos_array = []
+
+        productos[:productos].each do |producto_id, producto|
+          productos_array.push(producto)
+        end
+
+        productos[:productos] = productos_array.sort {|a,b| a[:name] <=> b[:name]}
+      end
+
     end
+
     reporte
   end
 
