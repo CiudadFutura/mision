@@ -1,0 +1,10 @@
+<%= form_for 'envio_email' do |f|%>
+		<fieldset class="well">
+			<legend>Envío de email masivos</legend>
+			<div class="form-group ">
+				<%= f.label 'tipo_email', 'Tipo de email' %><br>
+				<%= f.select('tipo_email', [['Nuevo Ciclo', 1], ['Recordatorio', 2], ['Pago', 3], ['Entrega', 4]], {:prompt => 'Seleccione un tipo'}, {:class => 'form-control', :id => 'tipo_email' })%>
+			</div>
+			<%= submit_tag 'enviar'	%>
+		</fieldset>
+<% end %>
