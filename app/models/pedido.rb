@@ -133,7 +133,7 @@ class Pedido < ActiveRecord::Base
 
       reporte[circulo_id][:grupos].each do |grupo, productos|
         productos_array = productos[:productos].values
-        productos[:productos] = productos_array.sort {|a,b| a[:name] <=> b[:name]}
+        productos[:productos] = productos_array.sort {|a,b| a[:orden_remito] <=> b[:orden_remito]}
       end
 
     end
