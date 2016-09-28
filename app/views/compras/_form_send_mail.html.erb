@@ -7,6 +7,6 @@
 				<%= fm.label 'tipo_email', 'Tipo de email' %><br>
 				<%= fm.select('tipo_email', [['Nuevo Ciclo', 1], ['Recordatorio', 2], ['Pago', 3], ['Entrega', 4]], {:prompt => 'Seleccione un tipo'}, {:class => 'form-control', :id => 'tipo_email' })%>
 			</div>
-			<p><%= button_tag "Enviar", type: 'submit', id: 'enviar_mails', class: 'btn btn-success', data: { disable_with: "Please wait..." }  %></p>
+			<p><%= button_tag "Enviar", type: 'submit', id: 'enviar_mails', class: 'btn btn-success', data: { disable_with: "Enviando emails..." }  %></p>
 		</fieldset>
 <% end %>

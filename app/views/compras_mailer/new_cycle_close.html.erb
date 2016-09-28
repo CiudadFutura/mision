@@ -32,6 +32,10 @@
 		img {
 			border: 0;
 		}
+		.basket, .calendar{
+			width: 15px;
+			height: 15px;
+		}
 		.wrapper {
 			width: 100%;
 			table-layout: fixed;
@@ -165,8 +169,8 @@
 								<td class="inner" style="padding-top:10px;padding-bottom:10px;padding-right:10px;padding-left:10px;" >
 									<table class="contents" style="border-spacing:0;font-family:sans-serif;color:#333333;width:100%;font-size:14px;text-align:left;" >
 										<tr>
-											<td class="text" style="padding-bottom:0;padding-right:0;padding-left:0;padding-top:10px;border-right:solid 1px #ffffff">
-												<%= image_tag attachments['headerlogo'].url -%>
+											<td class="text" style="padding-bottom:0;padding-right:10px;padding-left:5px;padding-top:10px;border-right:solid 2px #ffffff">
+												<%= image_tag attachments['headerlogo'].url, class: 'logo' -%>
 											</td>
 										</tr>
 									</table>
@@ -189,7 +193,7 @@
 												<p style="color:#FFF;font-size:14px" >¡NO TE QUEDES AFUERA!</p>
 											</td>
 											<td>
-												<%= image_tag attachments['headerbasket'].url -%>
+												<%= image_tag attachments['headerbasket'].url, size:'15', class: 'basket' -%>
 											</td>
 										</tr>
 									</table>
@@ -208,9 +212,9 @@
 				<td class="one-column" style="padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;" >
 					<table width="100%" style="border-spacing:0;font-family:sans-serif;color:#FFFFFF;background-color:#404041" >
 						<tr>
-							<td class="inner contents" style="padding-top:10px;padding-bottom:10px;padding-right:10px;padding-left:10px;width:100%;text-align:center;" >
+							<td class="inner contents" style="padding-top:5px;padding-bottom:0px;padding-right:5px;padding-left:5px;width:100%;text-align:center;" >
 								<p class="h1" style="font-weight:bold;font-size:14px;Margin-bottom:10px;">
-									RECORDÁ TÚ CÍRCULO PERTENECE A <%= @compra.nombre%>
+									<%= @coordinador.try('nombre') %> RECORDÁ QUE TÚ CÍRCULO PERTENECE A <%= @compra.nombre%>
 								</p>
 							</td>
 						</tr>
@@ -231,24 +235,24 @@
 									<table class="contents" style="border-spacing:0;font-family:sans-serif;color:#333333;width:100%;font-size:14px;text-align:left;" >
 										<tr>
 											<td style="padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;" >
-												<%= image_tag attachments['bodycalendar'].url -%>
+												<%= image_tag attachments['bodycalendar'].url, class: 'calendar' -%>
 											<td>
 												<h2 style="color:#ec1c24;font-size:16px">Cronograma</h2>
 											</td>
 										</tr>
 										<tr>
-											<td>
+											<td colspan="2">
 												<%=l @compra.fecha_inicio_compras%>
 											</td>
 										</tr>
 										<tr>
-											<td>
+											<td colspan="2">
 												<p>Realizazación de pagos online</p>
 												<p><%=l @compra.fecha_fin_pagos%></p>
 											</td>
 										</tr>
 										<tr>
-											<td>
+											<td colspan="2">
 												<p><%=l @compra.fecha_entrega_compras%></p>
 												<p>(Constitución 2298 - esquina La Paz | Rosario)</p>
 											</td>
@@ -272,16 +276,16 @@
 												<h2 style="color:#cc0000;font-size:16px" >¿Dudas o consutas?</h2>
 											</td>
 											<td style="padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;" >
-												<%= image_tag attachments['bodycomunication'].url -%>
+												<%= image_tag attachments['bodycomunication'].url, class: 'comunication' -%>
 											</td>
 										</tr>
 										<tr>
-											<td class="text" style="padding-bottom:0;padding-right:0;padding-left:0;padding-top:10px;" >
+											<td class="text" colspan="2" style="padding-bottom:0;padding-right:0;padding-left:0;padding-top:10px;" >
 												<p>Como siempre, esperamos tus comentarios, opiniones o sugerencias para seguir construyendo una #EconomíaColaborativa</p>
 											</td>
 										</tr>
 										<tr>
-											<td class="text" style="padding-bottom:0;padding-right:0;padding-left:0;padding-top:10px;" >
+											<td class="text" colspan="2" style="padding-bottom:0;padding-right:0;padding-left:0;padding-top:10px;" >
 												<p>Comunicate telefónicamente, vía WhatsApp o SMS al 0341-156 830910 (Ivon) o 0341-153 826152 (Julián).</p>
 												<p>También nos podés escribir a través de nuestra Fan Page en Facebook o a victoriacolectiva@gmail.com</p>
 											</td>
@@ -302,8 +306,8 @@
 				<td class="one-column" style="padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;" >
 					<table width="100%" style="border-spacing:0;font-family:sans-serif;color:#333333;background-color:#eb1c23" >
 						<tr>
-							<td class="inner contents" style="padding-top:10px;padding-bottom:10px;padding-right:10px;padding-left:10px;width:100%;text-align:center;" >
-								<p class="h1" style="Margin:0;font-weight:bold;font-size:20px;Margin-bottom:10px;" >No te olvides de reenviar este mail a todos los integrantes de Tú círculo</p>
+							<td class="inner contents" style="padding-top:5px;padding-bottom:0px;padding-right:5px;padding-left:5px;width:100%;text-align:center;" >
+								<p class="h1" style="Margin:0;font-weight:bold;font-size:16px;Margin-bottom:10px;" >No te olvides de reenviar este mail a todos los integrantes de Tú círculo</p>
 							</td>
 						</tr>
 					</table>
