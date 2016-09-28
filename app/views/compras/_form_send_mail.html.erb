@@ -1,10 +1,12 @@
-<%= form_for 'envio_email' do |f|%>
-		<fieldset class="well">
+<%= form_for 'envio_email', remote: true, html: {role: :form, id: 'form-send'},
+						 url: send_email_compra_path(@compra) do |fm|%>
+
+				<fieldset class="well">
 			<legend>Envío de email masivos</legend>
 			<div class="form-group ">
-				<%= f.label 'tipo_email', 'Tipo de email' %><br>
-				<%= f.select('tipo_email', [['Nuevo Ciclo', 1], ['Recordatorio', 2], ['Pago', 3], ['Entrega', 4]], {:prompt => 'Seleccione un tipo'}, {:class => 'form-control', :id => 'tipo_email' })%>
+				<%= fm.label 'tipo_email', 'Tipo de email' %><br>
+				<%= fm.select('tipo_email', [['Nuevo Ciclo', 1], ['Recordatorio', 2], ['Pago', 3], ['Entrega', 4]], {:prompt => 'Seleccione un tipo'}, {:class => 'form-control', :id => 'tipo_email' })%>
 			</div>
-			<%= submit_tag 'enviar'	%>
+			<p><%= button_tag "Enviar", type: 'submit', id: 'enviar_mails', class: 'btn btn-success', data: { disable_with: "Please wait..." }  %></p>
 		</fieldset>
 <% end %>

@@ -8,7 +8,9 @@ Rails.application.routes.draw do
   resources :transaction_details
   resources :transactions
   resources :accounts
-  resources :compras
+  resources :compras do
+		post :send_email, on: :member
+	end
   get 'remitos_pedido/index'
   get 'remitos_pedido/generate'
   get '/transaction/generar/:ciclo_id' => 'transactions#generar', as: :transaction_generar
@@ -17,7 +19,7 @@ Rails.application.routes.draw do
 
   get 'compras/add_status/:id', to: 'compras#add_status', as: :add_status
   get 'compras/refresh_status/:id', to: 'compras#refresh_status', as: :refresh_status
-  get 'compras/send_email/:id', to: 'compras#send_email', as: :send_email
+
 
   resources :circulos do
     post 'add_usuario', to: 'circulos#add_usuario', as: :add_usuario

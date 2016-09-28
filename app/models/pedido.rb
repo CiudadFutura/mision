@@ -124,7 +124,7 @@ class Pedido < ActiveRecord::Base
             reporte[circulo_id][:grupos][grupo][:productos][i['producto_id']][:name] = producto.nombre
             reporte[circulo_id][:grupos][grupo][:productos][i['producto_id']][:qty] = i['cantidad']
             reporte[circulo_id][:grupos][grupo][:productos][i['producto_id']][:faltante] = producto.faltante
-            reporte[circulo_id][:grupos][grupo][:productos][i['producto_id']][:orden_remito] = producto.orden_remito
+            reporte[circulo_id][:grupos][grupo][:productos][i['producto_id']][:orden_remito] = producto.orden_remito || 0
           end
 
         end
