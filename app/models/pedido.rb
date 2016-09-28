@@ -96,12 +96,11 @@ class Pedido < ActiveRecord::Base
     reporte = {}
 
     pedidos.each do |pedido|
-      circulo_id = pedido.circulo_id
-
       JSON.parse(pedido.items).map do |i|
         producto = Producto.find(i['producto_id']) rescue nil
 
         if producto.present?
+          circulo_id = pedido.circulo_id
 
           grupo = I18n.t(producto.pack)
 
@@ -130,12 +129,13 @@ class Pedido < ActiveRecord::Base
 
         end
       end
+    end
 
-      reporte[circulo_id][:grupos].each do |grupo, productos|
+    reporte.each do |circulo_id, repo|
+      repo[:grupos].each do |grupo, productos|
         productos_array = productos[:productos].values
         productos[:productos] = productos_array.sort {|a,b| a[:orden_remito] <=> b[:orden_remito]}
       end
-
     end
 
     reporte
