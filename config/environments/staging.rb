@@ -80,7 +80,9 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { :host => 'http://pruebas.misionantiinflacion.com.ar' }
 
   config.action_mailer.delivery_method = :smtp
-  # SMTP settings for gmail
+
+=begin
+	# SMTP settings for gmail
   config.action_mailer.smtp_settings = {
       address: "smtp.gmail.com",
       port: 587,
@@ -89,6 +91,24 @@ Rails.application.configure do
       enable_starttls_auto: true,
       user_name: ENV["GMAIL_USERNAME"],
       password: ENV["GMAIL_PASSWORD"]
+  }
+=end
+
+
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.default :charset => "utf-8"
+
+  config.action_mailer.smtp_settings = {
+      :address                          => 'smtp.zoho.com',
+      :port                                 => 465,
+      :user_name                     => ENV["ZOHO_MAIL_USERNAME"],
+      :domain                           => ENV["ZOHO_MAIL_DOMAIN"],
+      :password                       => ENV["ZOHO_MAIL_PASSWORD"],
+      :authentication                => :plain,
+      :ssl                                  => true,
+      :tls                                  => true,
+      :enable_starttls_auto     => true
   }
 
 end

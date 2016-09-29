@@ -1,5 +1,5 @@
 class ComprasController < ApplicationController
-  before_action :set_compra, only: [:show, :edit, :update, :destroy]
+  before_action :set_compra, only: [:show, :edit, :update, :destroy, :send_email, :refresh_status]
   authorize_resource
 
   # GET /compras
@@ -87,8 +87,25 @@ class ComprasController < ApplicationController
 
   end
 
+	def send_email
+		new_cycle = '1'
+		tipo_mail = params[:envio_email]
+		puts tipo_mail[:tipo_email]
+		puts new_cycle
+		@compra.deliveries.each do |delivery|
+			coordinador = delivery.circulo.usuarios.find(delivery.circulo.coordinador_id)
+			sleep(2)
+			if tipo_mail[:tipo_email] == new_cycle
+				puts 'entro'
+				ComprasMailer.new_cycle_close(coordinador, @compra).deliver
+			end
+		end
+		respond_to do |format|
+			format.js { render nothing: true }
+		end
+	end
+
   def refresh_status
-    @compra = Compra.find(params[:id])
     @circulos = @compra.get_deliveries
     render 'status'
   end

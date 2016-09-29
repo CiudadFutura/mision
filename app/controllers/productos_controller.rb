@@ -19,9 +19,7 @@ class ProductosController < ApplicationController
       if params[:categoria_id] == 'Todas'
         @productos = Producto.all.order(:orden, :nombre)
       else
-        @productos = Producto
-                         .where("highlight = :destacado", destacado: true)
-                         .order(:orden)
+        @productos = Producto.where("highlight = :destacado", destacado: true).order(:orden)
 
         @productos_nuevos = Producto.where("categorias.nombre <> ? AND created_at >= ?", "D7", Time.zone.now.beginning_of_month).order(:orden, :nombre)
 
@@ -34,8 +32,8 @@ class ProductosController < ApplicationController
     if current_usuario && current_usuario.admin?
       @todos = Producto.all.order(:orden, :nombre)
       respond_to do |format|
-        format.html
-        format.csv { render csv: @todos.to_csv, type: "text/csv; charset=UTF-8; header=present", filename: "#{Time.now.to_i}_productos" }
+				format.html
+       	format.csv { render csv: @todos.to_csv, type: "text/csv; charset=UTF-8; header=present", filename: "#{Time.now.to_i}_productos" }
       end
     end
   end
@@ -77,7 +75,8 @@ class ProductosController < ApplicationController
     respond_to do |format|
       if @producto.update(producto_params)
         format.html { redirect_to @producto, notice: 'Producto modificado exitosamente..' }
-        format.json { render :show, status: :ok, location: @producto }
+				format.js {}
+        format.json { render json: @producto, status: :ok, location: @producto }
       else
         format.html { render :edit }
         format.json { render json: @producto.errors, status: :unprocessable_entity }
@@ -102,7 +101,7 @@ class ProductosController < ApplicationController
     end
     flash[:notice] = "Updated productos!"
     redirect_to remitos_pedido_index_path
-  end
+	end
 
   def upload
     @message = Producto.import(params[:file])
@@ -114,14 +113,19 @@ class ProductosController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_producto
+
+			puts 'entro'
       @producto = Producto.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def producto_params
+			puts params
+			puts @producto.to_yaml
       params.require(:producto).permit(:precio, :nombre, :codigo, :descripcion, :orden,
                                        :precio_super, :highlight, :oculto, :supplier_id,
                                        :pack, :faltante,:cantidad_permitida, :imagen, :stock,
+                                       :orden_remito,
                                        categoria_ids: [])
     end
 end

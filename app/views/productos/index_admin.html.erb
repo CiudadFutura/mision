@@ -1,0 +1,47 @@
+<%= javascript_include_tag "productos", params[:controller] %>
+<%- model_class = Producto -%>
+<div class="container fill">
+	<div class="row">
+		<div class="col-xs-12 col-md-3">
+			<%= render 'carts/menu' %>
+		</div>
+		<div class="col-xs-12 col-md-9">
+			<% if can? [:manage], Producto %>
+					<div class="navbar navs-fixed">
+						<div class="col-md-6">
+							<%= link_to "Exportar CSV", productos_path(format: "csv"), class: "btn btn-success" %>
+							<%= form_tag(upload_productos_path, multipart: true, class: 'form-inline') do %>
+									<div class="form-group">
+										<%= file_field_tag 'file' %>
+									</div>
+									<%= submit_tag 'Subir', class: "btn btn-success btn-xs"%>
+							<% end %>
+						</div>
+						<div class="col-md-6 ">
+							<%= link_to t('.new', :default => t("helpers.links.new")),
+													new_producto_path,
+													:class => 'btn btn-primary' if can? :manage, Producto %>
+						</div>
+					</div>
+			<% end %>
+			<% if @isD7 %>
+					<div class="row highlight">
+						<h2 class="col-xs-12">Destacados</h2>
+					</div>
+			<% end %>
+			<div id="js-message-success" style="display: none;">
+				<div class="alert alert-success">
+					<button type="button" class="close" data-dismiss="alert">&times;</button>
+					Se agregó exitosamente el producto: <strong id="js-message-product"></strong>
+				</div>
+			</div>
+			<div id="js-message-delete" style="display: none;">
+				<div class="alert alert-danger">
+					<button type="button" class="close" data-dismiss="alert">&times;</button>
+					Se eliminó el producto del carrito</strong>
+				</div>
+			</div>
+
+		</div> <!--col-xs-12 col-md-3-->
+	</div> <!--close row -->
+</div> <!--close containt fill-->

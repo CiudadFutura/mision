@@ -1,4 +1,4 @@
-<%= form_for(@compra) do |f| %>
+<%= form_for @compra, :html => {:class => 'form'} do |f| %>
   <% if @compra.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@compra.errors.count, "error") %> No se pudo guardar el Ciclo de Compra:</h2>
@@ -10,34 +10,35 @@
       </ul>
     </div>
   <% end %>
-  <div class="field">
+
+  <div class="form-group">
     <%= f.label :nombre %><br>
-    <%= f.text_field :nombre %>
+    <%= f.text_field :nombre, :class => 'form-control' %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :descripcion %><br>
-    <%= f.text_area :descripcion %>
+    <%= f.text_area :descripcion, :class => 'form-control' %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :fecha_inicio_compras %><br>
-    <%= select_datetime @compra.fecha_inicio_compras, prefix: 'compra[fecha_inicio_compras]' %>
+    <%= select_datetime @compra.fecha_inicio_compras, prefix: 'compra[fecha_inicio_compras]', :class => 'form-control' %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :fecha_fin_compras %><br>
-    <%= select_datetime @compra.fecha_fin_compras, prefix: 'compra[fecha_fin_compras]' %>
+    <%= select_datetime @compra.fecha_fin_compras, prefix: 'compra[fecha_fin_compras]', :class => 'form-control' %>
   </div>
-  <div class="field">
+  <div class="form-groupm">
     <%= f.label :fecha_fin_pagos %><br>
-    <%= select_datetime @compra.fecha_fin_pagos, prefix: 'compra[fecha_fin_pagos]' %>
+    <%= select_datetime @compra.fecha_fin_pagos, prefix: 'compra[fecha_fin_pagos]', :class => 'form-control' %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :fecha_entrega_compras %><br>
-    <%= select_datetime @compra.fecha_entrega_compras, prefix: 'compra[fecha_entrega_compras]' %>
+    <%= select_datetime @compra.fecha_entrega_compras, prefix: 'compra[fecha_entrega_compras]', :class => 'form-control' %>
   </div>
 
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h3 class="panel-title">Circulos</h3>
+      <h3 class="panel-title">Círculos</h3>
     </div>
     <div class="panel-body">
 
@@ -65,6 +66,6 @@
   </div>
 
   <div class="actions">
-    <%= f.submit class: 'btn btn-success' %>
+    <%= f.submit "Crear Ciclo", class: 'btn btn-success' %>
   </div>
 <% end %>

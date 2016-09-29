@@ -1,0 +1,169 @@
+<div class="table-responsive">
+	<table class="table">
+		<thead></thead>
+		<tr>
+			<th>Código</th>
+			<th>Nombre</th>
+			<th>Oculto</th>
+			<th>Descripción</th>
+			<th>Precio</th>
+			<th>Precio Super</th>
+			<th>Cantidad Permitida</th>
+			<th>Stock</th>
+			<th>Faltante</th>
+			<th>Rubro</th>
+			<th>Orden Remito</th>
+			<th></th>
+		</tr>
+		<tbody>
+		<% @productos.each do |producto|%>
+				<tr <%= "id=prod-#{producto.id}"%> <%= producto.oculto? ? 'class =line-oculto' : ''%>>
+					<td><%= producto.codigo%></td>
+					<td><%= link_to '#',
+													class: 'editable nombre',
+													data: { pk: producto.id,
+																	type: 'text',
+																	title: 'Nuevo nombre',
+																	url: producto_path(producto.id),
+																	name: 'nombre',
+																	value: producto.nombre,
+																	resource: 'producto',
+																	turbolinks:'false'
+													} do %>
+								<%= producto.try(:nombre)  %>
+						<% end %>
+					</td>
+					<td><%= link_to '#',
+													class: 'editable oculto',
+													data: { pk: producto.id,
+																	type: 'select',
+																	title: 'Oculto?',
+																	url: producto_path(producto.id),
+																	name: 'oculto',
+																	value: producto.oculto,
+																	resource: 'producto',
+																	turbolinks:'false'
+													} do %><%= producto.oculto? ? 'Si' : 'No'  %>
+						<% end %>
+					</td>
+					<td><%= link_to '#',
+													class: 'editable descripcion',
+													data: { pk: producto.id,
+																	type: 'textarea',
+																	title: 'Descripción',
+																	url: producto_path(producto.id),
+																	name: 'descripcion',
+																	value: producto.descripcion,
+																	resource: 'producto',
+																	turbolinks:'false'
+													} do %><%= producto.try(:descripcion)  %>
+						<% end %>
+					</td>
+					<td><%= link_to '#',
+													class: 'editable precio',
+													data: { pk: producto.id,
+																	type: 'text',
+																	title: 'Precio',
+																	url: producto_path(producto.id),
+																	name: 'precio',
+																	value: producto.precio,
+																	resource: 'producto',
+																	turbolinks:'false'
+													} do %><%= number_to_currency(producto.try(:precio))  %>
+						<% end %>
+					</td>
+					<td>
+						<%= link_to '#',
+												class: 'editable precio-super',
+												data: { pk: producto.id,
+																type: 'text',
+																title: 'Precio Super',
+																url: producto_path(producto.id),
+																name: 'precio-super',
+																value: producto.precio_super,
+																resource: 'producto',
+																turbolinks:'false'
+												} do %><%= number_to_currency(producto.try(:precio_super))  %>
+						<% end %>
+					</td>
+					<td>
+						<%= link_to '#',
+												class: 'editable cantidad-permitida',
+												data: { pk: producto.id,
+																type: 'text',
+																title: 'Cantidad Permitida',
+																url: producto_path(producto.id),
+																name: 'cantidad-permitida',
+																value: producto.cantidad_permitida,
+																resource: 'producto',
+																turbolinks:'false'
+												} do %><%= producto.try(:cantidad_permitida)  %>
+						<% end %>
+					</td>
+					<td>
+						<%= link_to '#',
+												class: 'editable stock',
+												data: { pk: producto.id,
+																type: 'text',
+																title: 'Stock',
+																url: producto_path(producto.id),
+																name: 'stock',
+																value: producto.stock,
+																resource: 'producto',
+																turbolinks:'false'
+												} do %><%= producto.try(:stock) %>
+						<% end %>
+					</td>
+					<td>
+						<%= link_to '#',
+												class: 'editable faltante',
+												data: { pk: producto.id,
+																type: 'select',
+																title: 'Faltante',
+																url: producto_path(producto.id),
+																name: 'faltante',
+																value: producto.faltante,
+																resource: 'producto',
+																turbolinks:'false'
+												} do %><%= producto.faltante? ? 'Si' : 'No'  %>
+						<% end %>
+					</td>
+					<td>
+						<%= link_to '#',
+												class: 'editable pack',
+												data: { pk: producto.id,
+																type: 'select',
+																title: 'Rubro',
+																url: producto_path(producto.id),
+																name: 'pack',
+																value: producto.pack,
+																resource: 'producto',
+																turbolinks:'false'
+												} do %><%= I18n.t(producto.pack, :default => '')%>
+						<% end %>
+					</td>
+					<td>
+						<%= link_to '#',
+												class: 'editable orden-remito',
+												data: { pk: producto.id,
+																type: 'text',
+																title: 'Orden Remito',
+																url: producto_path(producto.id),
+																name: 'orden_remito',
+																value: producto.orden_remito,
+																resource: 'producto',
+																turbolinks:'false'
+												} do %><%= producto.try('orden_remito')  %>
+						<% end %>
+					</td>
+					<td>
+						<%= button_to t('.edit', :default => t("helpers.links.edit")),
+													edit_producto_path(producto),
+													:method => :get,
+													:class => 'btn btn-link'  %>
+					</td>
+				</tr>
+		<% end %>
+		</tbody>
+	</table>
+</div>
