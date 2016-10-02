@@ -90,13 +90,10 @@ class ComprasController < ApplicationController
 	def send_email
 		new_cycle = '1'
 		tipo_mail = params[:envio_email]
-		puts tipo_mail[:tipo_email]
-		puts new_cycle
 		@compra.deliveries.each do |delivery|
 			coordinador = delivery.circulo.usuarios.find(delivery.circulo.coordinador_id)
 			sleep(2)
 			if tipo_mail[:tipo_email] == new_cycle
-				puts 'entro'
 				ComprasMailer.new_cycle_close(coordinador, @compra).deliver
 			end
 		end

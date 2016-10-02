@@ -27,23 +27,6 @@ class Producto < ActiveRecord::Base
     end
   end
 
-  def grupo_remito
-    grupo = ''
-    case self.codigo.from(0).to(2)
-      when 'ALM'
-        grupo = "Almacen"
-      when 'LIM', 'HIP'
-        grupo = "Limpieza"
-      when 'FYV'
-        grupo = "Fruta y Verdura"
-      when 'FRE'
-        grupo = "Frescos"
-      else
-        grupo = 'Otros'
-    end
-    return grupo
-  end
-
   def ahorro
     return 0 if precio_super.nil? || precio_super == 0 || precio_super < precio
     100 * (precio_super - precio) / precio_super

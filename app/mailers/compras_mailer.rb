@@ -20,7 +20,7 @@ class ComprasMailer < ActionMailer::Base
 		#logo web
 		attachments.inline['footerwwww'] = File.read(path.join('www.png'))
 
-		puts @coordinador.to_yaml
+
 		mail(to: coordinador.email, subject: '[Misión Anti Inflación] Nuevo ciclo de compra')
 	end
 

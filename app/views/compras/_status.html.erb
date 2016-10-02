@@ -6,6 +6,7 @@
   </thead>
   <tr>
     <th>Círculo</th>
+    <th>Remito</th>
     <% Sector.all.each do |sector|%>
         <th><%= sector.name%></th>
     <% end %>
@@ -20,6 +21,10 @@
       <% disabled = true %>
         <tr class="<%= "estado_#{status_class}" %>">
           <td><%= circulo %></td>
+          <td><%= link_to remitos_by_cycle_circle_remitos_pedido_path(circulo: circulo),
+													data: {toggle: "modal", target:"#ajax-modal"},
+													remote: true do %> ver remito
+						<% end %></td>
           <% d[:sectors].each do |sector_id, sector| %>
               <td>
                 <% if status_class == 'asignado'
@@ -51,8 +56,7 @@
                                       remote: true,
                                       class: 'input-large' %>
                 <% end %>
-
-              </td>
+							</td>
 
           <% end %>
           <td><%= link_to '#',

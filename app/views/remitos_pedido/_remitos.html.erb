@@ -1,0 +1,34 @@
+<% @reporte.each do |circulo_id, circulo|  %>
+		<% circulo[:grupos].each do |grupo_id, grupo| %>
+				<table class='table table-bordered' data-search="true">
+					<thead>
+					<tr>
+						<td colspan="4">
+							<h3 class="text-center">Círculo N°: <%=circulo_id %></h3>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="4">
+							<h4 class="text-center"><%= grupo_id %></h4>
+						</td>
+					</tr>
+					<tr>
+						<td>Cantidad</td>
+						<td>Item</td>
+						<td>Comp</td>
+						<td>Falta</td>
+					</tr>
+					</thead>
+					<tbody>
+					<% grupo[:productos].each do |product| %>
+							<tr>
+								<td><%= product[:qty] %></td>
+								<td class="<%= product[:faltante] ? 'faltante':''%>"><%= product[:name] %></td>
+								<td><%= !product[:faltante] ? image_tag("Check.png", class:'img-responsive', size:"25x25") : ''%></td>
+								<td><%= product[:faltante] ? image_tag("Delete.png", class:'img-responsive', size:"25x25") : ''%></td>
+							</tr>
+					<% end %>
+					</tbody>
+				</table>
+		<% end %>
+<% end %>

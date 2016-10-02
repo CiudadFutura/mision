@@ -11,7 +11,10 @@ Rails.application.routes.draw do
   resources :compras do
 		post :send_email, on: :member
 	end
-  get 'remitos_pedido/index'
+	resources :remitos_pedido do
+		get :remitos_by_cycle_circle, on: :member
+	end
+
   get 'remitos_pedido/generate'
   get '/transaction/generar/:ciclo_id' => 'transactions#generar', as: :transaction_generar
 

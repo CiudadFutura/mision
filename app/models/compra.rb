@@ -58,7 +58,6 @@ class Compra < ActiveRecord::Base
           deliveries[i.circulo_id][:sectors][ds.sector_id][:status] = ds.try(:status_id)
           deliveries[i.circulo_id][:sectors][ds.sector_id][:name] = ds.status.try(:name)
           if ds.sector_id == Sector::CONSUMERS
-						puts deliveries[i.circulo_id][:sorted]
             deliveries[i.circulo_id][:sorted] =  assign_status_sort(ds.try(:status_id))
           end
 
