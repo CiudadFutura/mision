@@ -5,6 +5,7 @@ class ComprasMailer < ActionMailer::Base
 		@coordinador = coordinador
 		@compra = compra
 		path = Rails.root.join('app','assets','images')
+		#attachments.inline['banner.jpeg'] = File.read("#{Rails.root}/app/assets/images/banner.jpeg")
 		#logo mision
 		attachments.inline['headerlogo'] = File.read(path.join('logoM.png'))
 		#logo canasta
@@ -23,5 +24,13 @@ class ComprasMailer < ActionMailer::Base
 
 		mail(to: coordinador.email, subject: '[Misión Anti Inflación] Nuevo ciclo de compra')
 	end
+
+	def remember_cycle(coordinador, compra)
+		@coordinador = coordinador
+		@compra = compra
+
+		mail(to: coordinador.email, subject: '[Misión Anti Inflación] Recuerda')
+	end
+
 
 end

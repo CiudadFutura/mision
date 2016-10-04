@@ -99,16 +99,16 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = false
   config.action_mailer.default :charset => "utf-8"
 
-  config.action_mailer.smtp_settings = {
-      :address                          => 'smtp.zoho.com',
-      :port                                 => 465,
-      :user_name                     => ENV["ZOHO_MAIL_USERNAME"],
-      :domain                           => ENV["ZOHO_MAIL_DOMAIN"],
-      :password                       => ENV["ZOHO_MAIL_PASSWORD"],
-      :authentication                => :plain,
-      :ssl                                  => true,
-      :tls                                  => true,
-      :enable_starttls_auto     => true
-  }
+	config.action_mailer.smtp_settings = {
+			:address                          => 'smtp.zoho.com',
+			:port                                 => 465,
+			:user_name                     => ENV["ZOHO_MAIL_USERNAME"],
+			:domain                           => ENV["ZOHO_MAIL_DOMAIN"],
+			:password                       => ENV["ZOHO_MAIL_PASSWORD"],
+			:authentication                => :plain,
+			:ssl                                  => true,
+			:tls                                  => true,
+			:enable_starttls_auto     => true
+	}
 
 end

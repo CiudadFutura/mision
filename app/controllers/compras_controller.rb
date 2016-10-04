@@ -89,12 +89,16 @@ class ComprasController < ApplicationController
 
 	def send_email
 		new_cycle = '1'
+		remember_cycle = '2'
 		tipo_mail = params[:envio_email]
 		@compra.deliveries.each do |delivery|
 			coordinador = delivery.circulo.usuarios.find(delivery.circulo.coordinador_id)
-			sleep(2)
+			sleep(1)
 			if tipo_mail[:tipo_email] == new_cycle
 				ComprasMailer.new_cycle_close(coordinador, @compra).deliver
+			end
+			if tipo_mail[:tipo_email] == remember_cycle
+				ComprasMailer.remember_cycle(coordinador, @compra).deliver
 			end
 		end
 		respond_to do |format|
