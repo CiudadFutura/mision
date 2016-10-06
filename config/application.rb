@@ -22,7 +22,7 @@ module Mision
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
     config.assets.enabled = true
-    config.assets.paths << "#{Rails.root}/app/assets/fonts"
+    config.assets.paths << "#{Rails.root}/app/assets"
 
 		config.before_configuration do
 			env_file = File.join(Rails.root, 'config', 'local_env.yml')

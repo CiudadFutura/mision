@@ -38,7 +38,10 @@ Rails.application.configure do
 	config.action_mailer.delivery_method = :smtp
 	config.action_mailer.smtp_settings = { :address => "localhost", :port => 1025 }
 
-  # config.action_mailer.default_url_options = { :host => '0.0.0.0:3000' }
+	config.action_controller.asset_host =
+	config.action_mailer.asset_host  = "http://0.0.0.0:3000"
+
+	#config.action_mailer.default_url_options = { :host => '0.0.0.0:3000' }
 =begin
   config.action_mailer.smtp_settings = {
       address: "smtp.gmail.com",
@@ -49,6 +52,17 @@ Rails.application.configure do
       user_name: ENV["GMAIL_USERNAME"],
       password: ENV["GMAIL_PASSWORD"]
   }
-=end
 
+	config.action_mailer.smtp_settings = {
+			:address                          => 'smtp.zoho.com',
+			:port                                 => 465,
+			:user_name                     => ENV["ZOHO_MAIL_USERNAME"],
+			:domain                           => ENV["ZOHO_MAIL_DOMAIN"],
+			:password                       => ENV["ZOHO_MAIL_PASSWORD"],
+			:authentication                => :plain,
+			:ssl                                  => true,
+			:tls                                  => true,
+			:enable_starttls_auto     => true
+	}
+=end
 end
