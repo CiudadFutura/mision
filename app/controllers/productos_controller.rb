@@ -5,6 +5,13 @@ class ProductosController < ApplicationController
   # GET /productos.json
   def index
     @isD7 = false
+
+		if params['commit'] == 'Cambiar' and params['view_type'] == 'admin'
+			session[:view_type] = 'admin'
+		elsif params['commit'] == 'Cambiar' and params['view_type'] == 'user'
+			session.delete(:view_type)
+		end
+		@view_type = session[:view_type]
     @ciclo_actual = Compra::ciclo_actual
     if params[:categoria_id] != 'Todas' && params[:categoria_id].present?
       if params[:subcategoria_id].present?
@@ -114,18 +121,15 @@ class ProductosController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_producto
 
-			puts 'entro'
       @producto = Producto.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def producto_params
-			puts params
-			puts @producto.to_yaml
       params.require(:producto).permit(:precio, :nombre, :codigo, :descripcion, :orden,
                                        :precio_super, :highlight, :oculto, :supplier_id,
                                        :pack, :faltante,:cantidad_permitida, :imagen, :stock,
-                                       :orden_remito,
+                                       :orden_remito, :view_type,
                                        categoria_ids: [])
     end
 end

@@ -12,7 +12,7 @@ class HomeController < ApplicationController
       when Usuario::COORDINADOR
         render 'home_coord'
       when Usuario::USUARIO
-        redirect_to productos_path
+        render 'home_user'
     end
   end
 end
