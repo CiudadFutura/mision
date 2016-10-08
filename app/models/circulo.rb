@@ -14,7 +14,7 @@ class Circulo < ActiveRecord::Base
     self.usuarios.count >= 5
   end
 
-  def self.has_delivery_time?(compra_id)
+  def self.get_delivery(compra_id)
     Delivery.where('compra_id = ? AND delivery_time IS NULL', compra_id,)
 	end
 
