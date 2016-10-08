@@ -51,7 +51,7 @@ Rails.application.routes.draw do
 
 
   resources :categorias
-  resources :pedidos, only: [:index, :show, :edit]
+  resources :pedidos, only: [:index, :show, :edit, :destroy]
   resources :home
   resources :steps
   resources :dossiers

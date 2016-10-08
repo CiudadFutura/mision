@@ -41,7 +41,7 @@ class CartsController < ApplicationController
 							transaction.save
 						end
 					end
-					delivery = circulo.get_delivery(ciclo_id)
+					delivery = circulo.deliveries.where(compra_id: ciclo_id)
 					if delivery.take.delivery_time.blank?
 						Sector.all.each do |sector|
 							if sector.id == Sector::CONSUMERS

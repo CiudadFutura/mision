@@ -1,5 +1,5 @@
 class PedidosController < ApplicationController
-  before_action :set_pedido, only: [:show, :edit]
+  before_action :set_pedido, only: [:show, :edit, :destroy]
 
   def index
     if current_usuario.admin?
@@ -51,6 +51,16 @@ class PedidosController < ApplicationController
     @pedido.delete
     redirect_to productos_path
   end
+
+  # DELETE /categoria/1
+  # DELETE /categoria/1.json
+  def destroy
+    @pedido.destroy
+    respond_to do |format|
+      format.html { redirect_to pedidos_url, notice: 'Pedido eliminado exitosamente.' }
+      format.json { head :no_content }
+    end
+	end
 
 
   private

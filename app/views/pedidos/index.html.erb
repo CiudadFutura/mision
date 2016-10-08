@@ -27,7 +27,12 @@
             <td>Coordinador</td>
             <td>Consumidor</td>
             <td>Círculo N°</td>
-            <th colspan="3"></th>
+						<% if current_usuario && current_usuario.admin? %>
+							<th colspan="4"></th>
+            <% else %>
+							<th colspan="3"></th>
+            <% end %>
+
           </tr>
         </thead>
         <tbody>
@@ -53,6 +58,11 @@
 			                      class: 'btn btn-warning btn-mini') %>
 			              <% end %>
 			            </td>
+									<td>
+										<% if current_usuario && current_usuario.admin? %>
+												<%= link_to 'Eliminar', p, method: :delete, data: { confirm: 'Esta seguro?' }, class: "btn btn-danger btn-xs" %>
+										<% end %>
+									</td>
 			            <td>
 			              <% if current_usuario && current_usuario.admin? %>
 				              <% if p.has_missing? %>
