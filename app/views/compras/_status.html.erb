@@ -21,7 +21,7 @@
       <% disabled = true %>
         <tr class="<%= "estado_#{status_class}" %>">
           <td><%= circulo %></td>
-          <td><%= link_to remitos_by_cycle_circle_remitos_pedido_path(circulo: circulo),
+          <td><%= link_to get_by_cycle_circle_path(@compra.id, circulo),
 													data: {toggle: "modal", target:"#ajax-modal"},
 													remote: true do %> ver remito
 						<% end %></td>

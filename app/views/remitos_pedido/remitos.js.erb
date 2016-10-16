@@ -11,7 +11,8 @@ $(title).html('Remito');
 $(loader).fadeToggle('fast', function() {
 	$(loader).fadeOut('slow');
 	$(content).html('<%= j render("remitos") %>');
-	$(modal).modal('show');
+	$('#ajax-modal').removeClass('hide');
+	$(modal).modal();
 });
 //brings the loader back up + gets rid of the content when linking to another controller method etc
 $(content).on('click', dataRemote, function(){

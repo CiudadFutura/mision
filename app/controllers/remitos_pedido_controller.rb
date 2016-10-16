@@ -14,7 +14,7 @@ class RemitosPedidoController < ApplicationController
     end
   end
 
-	def remitos_by_cycle_circle
+	def get_by_cycle_circle
 		@compra = Compra.find(params[:id])
 		@reporte = Pedido.remitos(@compra.circulos.find(params[:circulo]).pedidos)
 

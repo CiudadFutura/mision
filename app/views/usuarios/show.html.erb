@@ -1,3 +1,4 @@
+<%= javascript_include_tag "usuarios", params[:controller] %>
 <div class="container fill">
 <div class="row">
   <h2>Usuario: <%= @usuario.nombre %>  <%= @usuario.apellido %></h2>
@@ -79,6 +80,16 @@
             <% else %>
                 <div class="error text-center">No hay Ciclo Activo</div>
             <% end %>
+						<% if @usuario.coordinador?%>
+								<p><%= link_to get_by_cycle_circle_path(@ciclo_actual.id, @usuario.circulo.id),
+															 data: {toggle: "modal", target:"#ajax-modal"},
+															 id: 'user-remito',
+															 class: 'btn btn-primary btn-xs',
+															 remote: true do %> ver remito de la compra
+									<% end %>
+								</p>
+						<% end %>
+
           <h3>Usuarios en tu circulo:</h3>
           <table class="table table-bordered">
             <thead>
@@ -141,6 +152,7 @@
       </div>
 	</div>
 </div>
+<%= render 'layouts/modal' %>
 
 
 

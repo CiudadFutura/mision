@@ -11,9 +11,10 @@ Rails.application.routes.draw do
   resources :compras do
 		post :send_email, on: :member
 	end
-	resources :remitos_pedido do
-		get :remitos_by_cycle_circle, on: :member
-	end
+	resources :remitos_pedido
+
+	get 'remitos_pedido/get_by_cycle_circle/:id/circulo=:circulo',
+			to: 'remitos_pedido#get_by_cycle_circle', as: :get_by_cycle_circle
 
   get 'remitos_pedido/generate'
   get '/transaction/generar/:ciclo_id' => 'transactions#generar', as: :transaction_generar
@@ -28,7 +29,8 @@ Rails.application.routes.draw do
     post 'add_usuario', to: 'circulos#add_usuario', as: :add_usuario
     delete 'remove_usuario/:usuario_id', to: 'circulos#remove_usuario', as: :remove_usuario
     post 'abandonar', to: 'circulos#abandonar', as: :abandonar
-  end
+	end
+	get 'circulos/remito_circulo/:circulo_id/compra=:compra_id', to: 'circulos#remito_circulo', as: :remito_circulo
 
   devise_for :usuarios, :controllers => {:registrations => "user/registrations"}
   resources :usuarios do
