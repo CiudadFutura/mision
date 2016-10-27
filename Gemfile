@@ -66,6 +66,9 @@ gem 'nokogiri', '~> 1.3.3'
 # X - Editable for Rails
 gem 'bootstrap-editable-rails'
 
+# Create PDF files
+gem 'prawn-rails', '~> 0.1.1'
+
 group :development, :test do
   gem 'sqlite3'
   gem 'pry'

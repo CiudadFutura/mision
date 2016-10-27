@@ -1,32 +1,36 @@
 include ActionView::Helpers::NumberHelper
 include ActionView::Helpers::TextHelper
 
-class Cart
+class Cart < ActiveRecord::Base
   attr_reader :items
+	has_many :carts_products
 
+=begin
   def initialize(session)
     @session = session
     @session[:items] ||= {}
     load!
   end
+=end
 
   def load!
     @items = {}
-    @session[:items].each do |producto_id, cantidad|
-      @items[producto_id] = Item.new(
-                  Producto.find_by_id(producto_id),
-                  cantidad
+    self.carts_products.each do |item|
+			next if item.producto_id.blank?
+      @items[item.producto_id] = Item.new(
+                  Producto.find_by_id(item.producto_id),
+                  item.quantity
                 )
     end
   end
 
   def empty!
-    @session[:items] = {}
+    self.carts_products = {}
     load!
   end
 
   def empty?
-    @session[:items].empty?
+    self.carts_products.empty?
   end
 
   def add(producto_id, cantidad)
@@ -46,8 +50,8 @@ class Cart
   def cantidad
     total = 0.0
     @items.each do |_k, v|
-      #Rails.logger.debug(v)
-      #Rails.logger.debug(_k.inspect)
+      #Rails.logger.debug(item)
+      #Rails.logger.debug(item.inspect)
       total += v.cantidad || 0
     end
     total.to_i
@@ -80,7 +84,10 @@ class Cart
 
   def ahorro
     total_mision = total_ahorro = 0
+
     @items.each do |_k, v|
+			Rails.logger.debug(_k.inspect)
+			Rails.logger.debug(v.inspect)
       next if v.total == 0 || v.total_super == 0
       total_mision += v.total
       total_ahorro += v.total_super
@@ -92,6 +99,8 @@ class Cart
   def total
     total = 0.0
     @items.each do |_k, v|
+			puts _k
+			puts v
       total += v.total || 0
     end
     total.to_f

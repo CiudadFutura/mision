@@ -81,7 +81,7 @@
                 <div class="error text-center">No hay Ciclo Activo</div>
             <% end %>
 						<% if @usuario.coordinador?%>
-								<p><%= link_to get_by_cycle_circle_path(@ciclo_actual.id, @usuario.circulo.id),
+								<p><%= link_to get_by_cycle_circle_path(@ciclo_actual_completo.id, @usuario.circulo.id),
 															 data: {toggle: "modal", target:"#ajax-modal"},
 															 id: 'user-remito',
 															 class: 'btn btn-primary btn-xs',

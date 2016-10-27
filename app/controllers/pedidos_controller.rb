@@ -33,6 +33,24 @@ class PedidosController < ApplicationController
     end
   end
 
+  def create_invoice
+		@transactions = Transaction.where(pedido_id: params[:id])
+		if current_usuario.admin?
+			@pedidos = Pedido.all
+			respond_to do |format|
+				format.html
+				format.pdf do
+					pdf = Pedido.Pdf.new(@pedido, view_context)
+					send_data pdf.render, filename:
+							"factura_#{@pedido.created_at.strftime("%d"/"%m"/"%Y")}.pdf",
+							type: "application/pdf"
+				end
+			end
+		elsif current_usuario.coordinador? || current_usuario.usuario?
+			@pedidos = Pedido.where(usuario_id: current_usuario.id)
+		end
+	end
+
   def edit
     transaction = Transaction.find_by_pedido_id(@pedido.id)
     JSON.parse(@pedido.items).map do |item|

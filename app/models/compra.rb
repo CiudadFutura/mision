@@ -35,11 +35,6 @@ class Compra < ActiveRecord::Base
 
 	end
 
-	def prueba
-		self.deliveries.map do |k,v|
-			k.delivery_statuses.order('updated_at').last
-		end
-	end
 
   def get_deliveries
     deliveries = {}

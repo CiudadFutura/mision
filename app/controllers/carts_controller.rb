@@ -10,7 +10,28 @@ class CartsController < ApplicationController
     if usuario_signed_in? && !current_usuario.admin?
         @transactions = Transaction.where(["account_id = :id and pedido_id is null", {id: current_usuario.account.id }])
     end
-  end
+	end
+
+	# GET /cart/new
+	def new
+		@carrito = Cart.new(session)
+	end
+
+	# POST /carritos
+	# POST /carritos.json
+	def create
+		@carrito = Cart.new(carrito_params)
+
+		respond_to do |format|
+			if @carrito.save
+				format.html { redirect_to @carrito, notice: 'Cart was successfully created.' }
+				format.json { render :show, status: :created, location: @carrito }
+			else
+				format.html { render :new }
+				format.json { render json: @carrito.errors, status: :unprocessable_entity }
+			end
+		end
+	end
 
   def add
     @carrito.add(params[:producto_id], params[:cantidad])

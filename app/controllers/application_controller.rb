@@ -16,10 +16,27 @@ class ApplicationController < ActionController::Base
 
   def user_for_paper_trail
     current_usuario ? current_usuario.id : 'Public user'
-  end
+	end
+
+	def after_sign_in_path_for(resource)
+		@carrito = Cart.where(usuario_id: resource.id, active: 1).last
+		session[:cart_id] = @carrito.id
+		if session[:cart_id]
+			@carrito = Cart.find(session[:cart_id])
+		end
+		if session[:cart_id].nil?
+			@carrito = Cart.create!
+			session[:cart_id] = @carrito.id
+		end
+		@carrito
+		root_path
+	end
 
   def init_carrito
-    @carrito = Cart.new(session)
+		if session[:cart_id]
+			@carrito = Cart.find(session[:cart_id])
+			@carrito.load!
+		end
   end
 
   def categorias_menu
