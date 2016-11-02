@@ -3,6 +3,7 @@ class Pedido < ActiveRecord::Base
   belongs_to :usuario
   belongs_to :ciclo, class_name: "Compra", foreign_key: :compra_id
   belongs_to :owner, foreign_key: 'transaction_id', class_name: 'Transaction'
+	has_many :pedidos_details
 
   validate :circulo, presence: true
 
@@ -23,8 +24,8 @@ class Pedido < ActiveRecord::Base
 
   def save_in_session(session)
     carrito = Cart.new(session)
-    JSON.parse(items, symbolize_names: true).each do |item|
-      carrito.add(item[:producto_id], item[:cantidad])
+    self.pedidos_details.each do |item|
+      carrito.add(item.product_id, item.product_qty)
     end
   end
 

@@ -1,5 +1,4 @@
 class CartsProduct < ActiveRecord::Base
-	belongs_to :cart
 
 =begin
 	def initialize(producto, cantidad)

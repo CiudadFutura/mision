@@ -16,7 +16,7 @@ class PedidosController < ApplicationController
         format.csv { render csv: @pedidos.to_csv, filename: "#{Time.now.to_i}_pedidos" }
       end
     elsif current_usuario.coordinador? || current_usuario.usuario?
-      @pedidos = Pedido.where(usuario_id: current_usuario.id)
+      @pedidos = Pedido.where(usuario_id: current_usuario.id, active: true)
     end
   end
 
@@ -29,7 +29,7 @@ class PedidosController < ApplicationController
         format.xls
       end
     elsif current_usuario.coordinador? || current_usuario.usuario?
-      @pedidos = Pedido.where(usuario_id: current_usuario.id)
+      @pedidos = Pedido.where(usuario_id: current_usuario.id, active: true)
     end
   end
 
@@ -66,7 +66,8 @@ class PedidosController < ApplicationController
       transaction.pedido_id = nil
       transaction.save
     end
-    @pedido.delete
+    @pedido.active = false
+		@pedido.save
     redirect_to productos_path
   end
 

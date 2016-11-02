@@ -12,29 +12,9 @@ class CartsController < ApplicationController
     end
 	end
 
-	# GET /cart/new
-	def new
-		@carrito = Cart.new(session)
-	end
-
-	# POST /carritos
-	# POST /carritos.json
-	def create
-		@carrito = Cart.new(carrito_params)
-
-		respond_to do |format|
-			if @carrito.save
-				format.html { redirect_to @carrito, notice: 'Cart was successfully created.' }
-				format.json { render :show, status: :created, location: @carrito }
-			else
-				format.html { render :new }
-				format.json { render json: @carrito.errors, status: :unprocessable_entity }
-			end
-		end
-	end
-
   def add
     @carrito.add(params[:producto_id], params[:cantidad])
+		Rails.logger.debug(@carrito.to_yaml)
     render json: @carrito.to_json, status: 200
   end
 
@@ -53,9 +33,27 @@ class CartsController < ApplicationController
     circulo = Circulo.find(pedido.circulo_id)
     pedido.compra_id = ciclo_id
     missing = @carrito.check_item_stock
+		pedido.active = true
     respond_to do |format|
 			if missing.blank?
 				if pedido.save!
+					@carrito.items.map do |_k, item|
+						next if item.blank?
+						producto = Producto.find(item.producto.id)
+						supplier = Supplier.find(producto.supplier)
+						pedido_detail = PedidosDetail.create(
+																						 pedido_id: pedido.id,
+																						 supplier_id: supplier.id,
+																						 supplier_name: supplier.name,
+																						 product_id: producto.id,
+																						 product_codigo: producto.codigo,
+																						 product_name: producto.nombre,
+																						 product_qty: item.cantidad.to_i,
+																						 product_price: producto.precio,
+																						 total_line: (item.cantidad.to_i * producto.precio).to_f
+																						 )
+						pedido_detail.save
+					end
 					if transactions.present?
 						transactions.each do |transaction|
 							transaction.pedido_id = pedido.id

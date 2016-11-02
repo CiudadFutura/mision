@@ -46,7 +46,7 @@ class Usuario < ActiveRecord::Base
   end
 
   def pedido?(ciclo_de_compra)
-    ciclo_de_compra && self.pedidos.try(:last).try(:ciclo) == ciclo_de_compra
+    ciclo_de_compra && self.pedidos.try(:last).try(:ciclo).try(:active) == ciclo_de_compra
   end
 
   def pedido_del_ciclo(ciclo_de_compra)
