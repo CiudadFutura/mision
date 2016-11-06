@@ -8,15 +8,16 @@ Rails.application.routes.draw do
   resources :transaction_details
   resources :transactions
   resources :accounts
+  resources :invoices
   resources :compras do
 		post :send_email, on: :member
 	end
-	resources :remitos_pedido
+	resources :remitos
 
-	get 'remitos_pedido/get_by_cycle_circle/:id/circulo=:circulo',
-			to: 'remitos_pedido#get_by_cycle_circle', as: :get_by_cycle_circle
+	get 'remitos/get_by_cycle_circle/:id/circulo=:circulo',
+			to: 'remitos#get_by_cycle_circle', as: :get_by_cycle_circle
 
-  get 'remitos_pedido/generate'
+  get 'remitos/generate'
   get '/transaction/generar/:ciclo_id' => 'transactions#generar', as: :transaction_generar
 
   resources :suppliers

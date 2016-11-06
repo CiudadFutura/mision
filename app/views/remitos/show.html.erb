@@ -1,0 +1,13 @@
+<div class="container fill">
+  <h3>Categoría <%= @remito %></h3>
+  <div class="breadcrumb">
+    <%= link_to 'Editar', edit_categoria_path(@remito) %> |
+    <%= link_to 'Atras', remito_path %>
+  </div>
+  <p id="notice"><%= notice %></p>
+  <p>
+    <strong>Descripcion:</strong>
+    <%= @remito.to_yaml %>
+  </p>
+
+</div>

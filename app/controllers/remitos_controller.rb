@@ -1,4 +1,4 @@
-class RemitosPedidoController < ApplicationController
+class RemitosController < ApplicationController
 
   def index
     if current_usuario.admin?
@@ -12,7 +12,18 @@ class RemitosPedidoController < ApplicationController
         @reporte = Pedido.remitos(pedidos)
       end
     end
-  end
+	end
+
+	# remito/show
+	def show
+		pedido = Pedido.find(params[:id])
+		@remito = Remito.new(pedido)
+		respond_to do |format|
+			format.html # show.html.erb
+			format.xml  { render :xml => @remito }
+			format.pdf { render :layout => false } # Add this line
+		end
+	end
 
 	def get_by_cycle_circle
 		@compra = Compra.find(params[:id])

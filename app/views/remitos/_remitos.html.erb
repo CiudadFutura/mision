@@ -2,6 +2,13 @@
 		<% circulo[:grupos].each do |grupo_id, grupo| %>
 				<table class='table table-bordered' data-search="true">
 					<thead>
+					<% if !current_usuario.admin? %>
+						<tr>
+							<td colspan="4">
+								<h3 class="text-center">Ciclo: <%=@compra.nombre %></h3>
+							</td>
+						</tr>
+					<% end %>
 					<tr>
 						<td colspan="4">
 							<h3 class="text-center">Círculo N°: <%=circulo_id %></h3>
@@ -15,8 +22,10 @@
 					<tr>
 						<td>Cantidad</td>
 						<td>Item</td>
-						<td>Comp</td>
-						<td>Falta</td>
+						<% if current_usuario.admin? %>
+							<td>Comp</td>
+							<td>Falta</td>
+						<% end %>
 					</tr>
 					</thead>
 					<tbody>
@@ -24,8 +33,10 @@
 							<tr>
 								<td><%= product[:qty] %></td>
 								<td class="<%= product[:faltante] ? 'faltante':''%>"><%= product[:name] %></td>
-								<td><%= !product[:faltante] ? image_tag("Check.png", class:'img-responsive', size:"25x25") : ''%></td>
-								<td><%= product[:faltante] ? image_tag("Delete.png", class:'img-responsive', size:"25x25") : ''%></td>
+								<% if current_usuario.admin? %>
+									<td><%= !product[:faltante] ? image_tag("Check.png", class:'img-responsive', size:"25x25") : ''%></td>
+									<td><%= product[:faltante] ? image_tag("Delete.png", class:'img-responsive', size:"25x25") : ''%></td>
+								<% end %>
 							</tr>
 					<% end %>
 					</tbody>

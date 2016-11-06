@@ -107,7 +107,7 @@ class ProductosController < ApplicationController
       producto.update_attributes(:faltante => true)
     end
     flash[:notice] = "Updated productos!"
-    redirect_to remitos_pedido_index_path
+    redirect_to remitos_path
 	end
 
   def upload

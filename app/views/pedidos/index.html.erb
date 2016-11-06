@@ -28,9 +28,9 @@
             <td>Consumidor</td>
             <td>Círculo N°</td>
 						<% if current_usuario && current_usuario.admin? %>
-							<th colspan="4"></th>
+							<th colspan="5"></th>
             <% else %>
-							<th colspan="3"></th>
+							<th colspan="4"></th>
             <% end %>
 
           </tr>
@@ -68,6 +68,11 @@
 				              <% if p.has_missing? %>
 						            <button class="btn btn-default disabled">Nota de Crédito</button>
 						          <% end %>
+					          <% end %>
+			            </td>
+									<td>
+			              <% if current_usuario %>
+											<%= link_to "PDF Invoice", invoice_path(1, :format => 'pdf') %>
 					          <% end %>
 			            </td>
 			          </tr>
