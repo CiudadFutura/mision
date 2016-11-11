@@ -11,12 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160923032011) do
+ActiveRecord::Schema.define(version: 20161016194601) do
 
   create_table "accounts", force: true do |t|
     t.integer  "usuario_id"
     t.boolean  "status"
     t.float    "balance",    limit: 24
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "carts", force: true do |t|
+    t.integer  "mai_id"
+    t.integer  "usuario_id"
+    t.boolean  "active"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "carts_products", force: true do |t|
+    t.integer  "cart_id"
+    t.integer  "producto_id"
+    t.integer  "quantity"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -69,6 +85,37 @@ ActiveRecord::Schema.define(version: 20160923032011) do
     t.integer  "status_id"
   end
 
+  create_table "invoices", force: true do |t|
+    t.integer  "pedido_id"
+    t.integer  "number"
+    t.string   "type"
+    t.datetime "emission_date"
+    t.integer  "warehouse"
+    t.integer  "mai_id"
+    t.float    "total_discount", limit: 24
+    t.float    "total",          limit: 24
+    t.integer  "total_products"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "invoices_details", force: true do |t|
+    t.integer  "pedido_id"
+    t.integer  "invoice_id"
+    t.integer  "warehouse"
+    t.integer  "mai_id"
+    t.integer  "supplier_id"
+    t.string   "supplier_name"
+    t.integer  "product_id"
+    t.integer  "product_codigo"
+    t.string   "product_name"
+    t.integer  "product_qty"
+    t.float    "product_price",  limit: 24
+    t.float    "total_line",     limit: 24
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "pedidos", force: true do |t|
     t.text     "items"
     t.integer  "usuario_id"
@@ -76,9 +123,33 @@ ActiveRecord::Schema.define(version: 20160923032011) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "compra_id"
+    t.float    "total_discount", limit: 24
+    t.float    "total",          limit: 24
+    t.integer  "total_products"
+    t.integer  "invoice_number"
+    t.datetime "invoice_date"
+    t.boolean  "active"
+    t.float    "saving",         limit: 24
   end
 
   add_index "pedidos", ["compra_id"], name: "index_pedidos_on_compra_id", using: :btree
+
+  create_table "pedidos_details", force: true do |t|
+    t.integer  "pedido_id"
+    t.integer  "invoice_id"
+    t.integer  "warehouse"
+    t.integer  "mai_id"
+    t.integer  "supplier_id"
+    t.string   "supplier_name"
+    t.integer  "product_id"
+    t.integer  "product_codigo"
+    t.string   "product_name"
+    t.integer  "product_qty"
+    t.float    "product_price",  limit: 24
+    t.float    "total_line",     limit: 24
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "productos", force: true do |t|
     t.float    "precio",             limit: 24
@@ -96,8 +167,8 @@ ActiveRecord::Schema.define(version: 20160923032011) do
     t.boolean  "highlight",                     default: false
     t.boolean  "faltante"
     t.integer  "pack",                          default: 0
-    t.integer  "stock"
     t.integer  "orden_remito"
+    t.integer  "stock"
   end
 
   add_index "productos", ["supplier_id"], name: "index_productos_on_supplier_id", using: :btree
