@@ -41,7 +41,7 @@ class Compra < ActiveRecord::Base
 			description: self.descripcion || '',
 			start: self.fecha_inicio_compras,
 			end: self.fecha_entrega_compras,
-			url: Rails.application.routes.url_helpers.compra_path(id)
+
 		}
 	end
 
