@@ -67,9 +67,9 @@ class Pedido < ActiveRecord::Base
             producto = Producto.find(item[:producto_id])
             csv << [
               pedido.id,
-              pedido.ciclo.id,
-              pedido.usuario.id,
-              "#{pedido.usuario.apellido}, #{pedido.usuario.nombre}",
+              pedido.ciclo.id || 'Sin Circulo',
+              pedido.usuario.id || 'Sin id usuario',
+							pedido.usuario.try('apellido'), pedido.usuario.try('nombre'),
               pedido.circulo.id,
               producto.codigo,
               producto.nombre,
@@ -78,9 +78,9 @@ class Pedido < ActiveRecord::Base
           rescue ActiveRecord::RecordNotFound
             csv << [
               pedido.id,
-              pedido.ciclo.id,
-              pedido.usuario.id,
-              "#{pedido.usuario.apellido}, #{pedido.usuario.nombre}",
+							pedido.ciclo.id || 'Sin Circulo',
+							pedido.usuario.id || 'Sin id usuario',
+              pedido.usuario.try('apellido'), pedido.usuario.try('nombre'),
               pedido.circulo.id,
               item[:producto_id],
               'ERROR',
