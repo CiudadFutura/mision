@@ -5,14 +5,30 @@ class HomeController < ApplicationController
     user_type = current_usuario.nil? ? 'Guess' : current_usuario.type
     if !current_usuario.blank? and !current_usuario.admin? and current_usuario.account.blank?
       create_current_account
-    end
+		end
     case user_type
       when Usuario::ADMIN
         redirect_to dashboards_path
-      when Usuario::COORDINADOR
-        render 'home_coord'
-      when Usuario::USUARIO
-        render 'home_user'
+			when Usuario::COORDINADOR
+				circulo = Circulo.find(current_usuario.circulo_id)
+				@compra = circulo.next_delivery
+
+				respond_to do |format|
+
+					format.html {render 'home/home_coord'}
+					format.json { render json: @compra.as_json }
+
+				end
+			when Usuario::USUARIO
+				circulo = Circulo.find(current_usuario.circulo_id)
+				@compra = circulo.next_delivery
+
+				respond_to do |format|
+
+					format.html {render 'home/home_user'}
+					format.json { render json: @compra.as_json }
+
+				end
     end
   end
 end

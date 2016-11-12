@@ -35,10 +35,14 @@ class Compra < ActiveRecord::Base
 
 	end
 
-	def prueba
-		self.deliveries.map do |k,v|
-			k.delivery_statuses.order('updated_at').last
-		end
+	def as_json(option = {})
+		{ id: self.id,
+			title: self.nombre,
+			description: self.descripcion || '',
+			start: self.fecha_inicio_compras,
+			end: self.fecha_entrega_compras,
+
+		}
 	end
 
   def get_deliveries

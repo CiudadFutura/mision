@@ -17,6 +17,8 @@
 //= require gmaps/google
 //= require bootstrap-editable
 //= require bootstrap-editable-rails
+//= require moment
+//= require fullcalendar
 
 
 $(document).ready(function () {

@@ -18,6 +18,12 @@ class Circulo < ActiveRecord::Base
     Delivery.where('compra_id = ? AND delivery_time IS NULL', compra_id,)
 	end
 
+	def next_delivery
+		self.compras
+				.where('compras.fecha_inicio_compras >= ?', Date.today).order('compras.fecha_inicio_compras')
+	end
+
+
   def self.to_csv
     CSV.generate do |csv|
       csv << ['Circulo N°', 'Coordinador', 'Coordinador Email', 'Tel/Cel']

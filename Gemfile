@@ -66,6 +66,10 @@ gem 'nokogiri', '~> 1.3.3'
 # X - Editable for Rails
 gem 'bootstrap-editable-rails'
 
+# full calendar
+gem 'fullcalendar-rails'
+gem 'momentjs-rails'
+
 group :development, :test do
   gem 'sqlite3'
   gem 'pry'
