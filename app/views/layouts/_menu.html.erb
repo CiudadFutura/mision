@@ -85,16 +85,10 @@
           <% end %>
         </li>
       <% end %>
-      <% if usuario_signed_in? and 1==2 %>
+      <% if can? [:manage], accounts_path %>
         <li>
-          <% if can? [:manage], accounts_path %>
-            <%= link_to(accounts_path) do %>
-              <span class="icon-stats"></span>Cuentas Corriente
-            <% end %>
-          <% else %>
-            <%= link_to(account_path(current_usuario.account.id)) do %>
-              <span class="icon-stats"></span>Mi Cuenta Corriente
-            <% end %>
+					<%= link_to(accounts_path) do %>
+            <span class="icon-stats"></span>Cuentas Corriente
           <% end %>
         </li>
       <% end %>
@@ -102,12 +96,12 @@
     </ul>
 
     <ul class="nav navbar-nav navbar-right">
+			<li>
+				<%= link_to(productos_path) do %>
+						<span class="icon-tienda glyphicon"></span>Tienda
+				<% end %>
+			</li>
       <% if usuario_signed_in? %>
-        <li>
-          <%= link_to(productos_path) do %>
-            <span class="icon-tienda glyphicon"></span>Tienda
-          <% end %>
-        </li>
         <li><p class="navbar-text"><%= truncate(current_usuario.email, length: 32) %></p></li>
         <li class="divider"></li>
         <li><%= link_to('Mis Datos', usuario_path(current_usuario))%></li>

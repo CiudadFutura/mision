@@ -5,46 +5,41 @@
 
     <% if current_usuario.admin? %>
       <div class="col-md-6">
-        <%= form_tag remitos_pedido_index_path, method: :get, class: '' do %>
-          <h4>Filtros:</h4>
-          <div class="form-group required">
-            <label for="ciclo_id">Ciclo:</label>
-            <%= select_tag "ciclo_id",
-                           options_from_collection_for_select(@ciclos, "id", "nombre", params[:ciclo_id]),
-                           include_blank: true, class: 'form-control' %>
-          </div>
-		      <div class="form-group">
-			      <label for="circulo_id">Círculo: </label>
-			      <%= text_field_tag(:circulo_id, params[:circulo_id],class:'form-control') %>
-		      </div>
-          <div class="form-group text-right">
-            <%= submit_tag 'Filtrar', class: "btn btn-success btn-xs" %>
-		      </div>
-        <% end %>
-      </div>
-      <div class="col-xs-6 col-md-6">
-        <div class="col-xs-6 col-md-6">
-          <%= link_to "Cargar Faltantes", remitos_pedido_generate_path(), class: "btn btn-success btn-xs" %>
-        </div>
+				<div class="well">
+					<%= form_tag remitos_pedido_index_path, method: :get, class: '' do %>
+						<h4>Filtros:</h4>
+						<div class="form-group required">
+							<label for="ciclo_id">Ciclo:</label>
+							<%= select_tag "ciclo_id",
+														 options_from_collection_for_select(@ciclos, "id", "nombre", params[:ciclo_id]),
+														 include_blank: true, class: 'form-control' %>
+						</div>
+						<div class="form-group">
+							<label for="circulo_id">Círculo: </label>
+							<%= text_field_tag(:circulo_id, params[:circulo_id],class:'form-control') %>
+						</div>
+						<div class="form-group text-right">
+							<%= submit_tag 'Filtrar', class: "btn btn-success btn-xs" %>
+						</div>
+					<% end %>
+      	</div>
       </div>
     <% end %>
-    <div class="col-md-12 divider"><hr></div>
-  </div>
-  <div class="row text-right">
-    <div class="col-xs-12 col-md-12">
-      <div class="col-xs-9 col-md-9">
-        <%= link_to "Cargar Faltantes", remitos_pedido_generate_path(), class: "btn btn-primary btn-xs" %>
-      </div>
-      <div class="col-xs-3 col-md-3">
-        <%=
-            link_to_if(params[:ciclo_id].blank?, "Generar Notas de Crédito",
-                       { controller: "remitos_pedido", action: "index" }, class:'btn btn-primary btn-xs disabled') do
-              link_to "Generar Notas de credito", transaction_generar_path(ciclo_id: params[:ciclo_id]), class: "btn btn-primary btn-xs"
-            end
-        %>
-      </div>
-    </div>
-    <div class="col-md-12 divider"><hr></div>
+		<div class="col-md-6">
+			<div class="well">
+				<div class="col-xs-8 col-md-8">
+					<%= link_to "Cargar Faltantes", remitos_pedido_generate_path(), class: "btn btn-primary btn-xs" %>
+				</div>
+				<div>
+					<%=
+						link_to_if(params[:ciclo_id].blank?, "Generar Notas de Crédito",
+											 { controller: "remitos_pedido", action: "index" }, class:'btn btn-primary btn-xs disabled') do
+							link_to "Generar Notas de credito", transaction_generar_path(ciclo_id: params[:ciclo_id]), class: "btn btn-primary btn-xs"
+						end
+					%>
+				</div>
+  		</div>
+  	</div>
   </div>
 	<div class="row remitos">
   	<% if @reporte.present? %>

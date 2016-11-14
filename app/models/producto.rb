@@ -96,6 +96,29 @@ class Producto < ActiveRecord::Base
         ]
       end
     end
-  end
+	end
+
+	def self.destacados
+		Producto.where("highlight = :destacado", destacado: true).order(:orden)
+	end
+
+	def self.bySubcategoria(categoria_id, subcategoria_id)
+		Producto.joins(:categorias)
+				.where(
+						"categorias_productos.categoria_id = :sub_id AND categorias.parent_id = :id",
+						id: categoria_id,
+						sub_id: subcategoria_id
+				)
+				.order(:orden, :nombre)
+	end
+
+	def self.byCategoria(categoria_id)
+		Producto.joins(:categorias)
+				.where(
+						"categorias.id = :id OR categorias.parent_id = :id",
+						id: categoria_id
+				)
+				.order(:orden, :nombre)
+	end
 
 end

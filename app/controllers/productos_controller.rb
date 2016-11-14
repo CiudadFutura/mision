@@ -4,7 +4,19 @@ class ProductosController < ApplicationController
   # GET /productos
   # GET /productos.json
   def index
-    @isD7 = false
+		@destacados = false
+		if params[:categoria_id].blank?
+			@destacados = true
+			@productos = Producto.destacados
+		elsif params[:categoria_id] != Categoria::TODAS
+			if params[:subcategoria_id].present?
+				@productos = Producto.bySubcategoria(params[:categoria_id], params[:subcategoria_id])
+			else
+				@productos = Producto.byCategoria(params[:categoria_id])
+			end
+		else
+			@productos = Producto.all.order(:orden, :nombre)
+		end
 
 		if params['commit'] == 'Cambiar' and params['view_type'] == 'admin'
 			session[:view_type] = 'admin'
@@ -13,27 +25,7 @@ class ProductosController < ApplicationController
 		end
 		@view_type = session[:view_type]
     @ciclo_actual = Compra::ciclo_actual
-    if params[:categoria_id] != 'Todas' && params[:categoria_id].present?
-      if params[:subcategoria_id].present?
-        @productos = Producto.joins(:categorias)
-                         .where("categorias_productos.categoria_id = :sub_id AND categorias.parent_id = :id",
-                                id: params[:categoria_id], sub_id: params[:subcategoria_id]).order(:orden, :nombre)
-      else
-        @productos = Producto.joins(:categorias)
-                         .where("categorias.id = :id OR categorias.parent_id = :id", id: params[:categoria_id]).order(:orden, :nombre)
-      end
-    else
-      if params[:categoria_id] == 'Todas'
-        @productos = Producto.all.order(:orden, :nombre)
-      else
-        @productos = Producto.where("highlight = :destacado", destacado: true).order(:orden)
 
-        @productos_nuevos = Producto.where("categorias.nombre <> ? AND created_at >= ?", "D7", Time.zone.now.beginning_of_month).order(:orden, :nombre)
-
-        @isD7 = true
-
-      end
-    end
     @productos = @productos.disponibles.order(:orden, :nombre) if current_usuario.nil? || !current_usuario.admin?
 
     if current_usuario && current_usuario.admin?
@@ -59,6 +51,7 @@ class ProductosController < ApplicationController
 
   # GET /productos/1/edit
   def edit
+		session[:return_to] ||= request.referer
   end
 
   # POST /productos
@@ -81,7 +74,7 @@ class ProductosController < ApplicationController
   def update
     respond_to do |format|
       if @producto.update(producto_params)
-        format.html { redirect_to @producto, notice: 'Producto modificado exitosamente..' }
+        format.html { redirect_to session.delete(:return_to), notice: 'Producto modificado exitosamente..' }
 				format.js {}
         format.json { render json: @producto, status: :ok, location: @producto }
       else

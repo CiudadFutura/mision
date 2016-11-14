@@ -13,6 +13,7 @@ gem 'less-rails', '~> 2.5.0'
 gem 'twitter-bootstrap-rails', '3.2.0'
 # https://github.com/carrierwaveuploader/carrierwave
 gem 'carrierwave'
+gem 'mini_magick'
 
 gem 'tilt'
 
@@ -32,6 +33,12 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise', '3.5.6'
 # Authorization: https://github.com/ryanb/cancan/wiki
 gem 'cancan'
+
+# Authorization with OAuth
+gem 'omniauth'
+# Facebook
+gem 'omniauth-facebook'
+
 # Seed Migration: https://github.com/harrystech/seed_migration
 gem 'seed_migration'
 # Versioning models: https://github.com/airblade/paper_trail

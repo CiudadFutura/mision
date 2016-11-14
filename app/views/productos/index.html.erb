@@ -42,11 +42,6 @@
 					<br>
 				</div>
       <% end %>
-      <% if @isD7 %>
-        <div class="row highlight">
-          <h2 class="col-xs-12">Destacados</h2>
-        </div>
-      <% end %>
       <div id="js-message-success" style="display: none;">
         <div class="alert alert-success">
           <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -60,11 +55,12 @@
         </div>
       </div>
 			<div id="product-list">
-				<% if current_usuario.admin? && @view_type.present? %>
-						<%= render 'admin_product' %>
-				<% else %>
-						<%= render 'products' %>
+				<% if usuario_signed_in? %>
+					<% if current_usuario.admin? && @view_type.present? %>
+							<%= render 'admin_product' %>
+					<% end %>
 				<% end %>
+				<%= render 'products' %>
 			</div>
 
     </div> <!--col-xs-12 col-md-3-->
@@ -75,8 +71,10 @@
 
 <script type="text/javascript">
   $(function () {
-  $('[data-toggle="popover"]').popover()
-});
+  	$('[data-toggle="popover"]').popover({
+  		placement: 'auto right'
+		})
+	});
 
   $( document ).ready(function() {
 	  $('.thumbnails').find('.thumbnail').uniformHeight();

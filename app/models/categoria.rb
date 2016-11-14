@@ -4,4 +4,6 @@ class Categoria < ActiveRecord::Base
                            foreign_key: "parent_id"
  
   belongs_to :parent, class_name: "Categoria"
+
+	TODAS = 'Todas'
 end
