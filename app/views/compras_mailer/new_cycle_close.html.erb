@@ -142,7 +142,7 @@
 
 
 		@-ms-viewport {
-			width: device-width;
+
 		}
 
 	</style>
@@ -235,26 +235,32 @@
 									<table class="contents" style="border-spacing:0;font-family:sans-serif;color:#333333;width:100%;font-size:14px;text-align:left;" >
 										<tr>
 											<td style="padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;" >
-												<%= image_tag "calendario.png", class: 'calendar' -%>
+												<%= image_tag "calendario.png", :height => '68', :width => '67', class: 'calendar' -%>
 											<td>
 												<h2 style="color:#ec1c24;font-size:16px">Cronograma</h2>
+												<p><%= @compra.nombre %></p>
 											</td>
 										</tr>
 										<tr>
 											<td colspan="2">
-												<%=l @compra.fecha_inicio_compras%>
+												<p><%=l @compra.fecha_inicio_compras, format: :short%> -
+												<%=l @compra.fecha_fin_compras, format: :short%></p>
+												<p> Realización de pedidos OnLine</p>
 											</td>
 										</tr>
 										<tr>
 											<td colspan="2">
-												<p>Realizazación de pagos online</p>
-												<p><%=l @compra.fecha_fin_pagos%></p>
+												<% fecha_inicio_pago = @compra.fecha_fin_pagos.to_time - 2.days %>
+												<p><%=l fecha_inicio_pago, format: :short %> -
+												<%=l @compra.fecha_fin_pagos, format: :short%></p>
+												<p>Plazo de pago de compra + cuota social</p>
 											</td>
 										</tr>
 										<tr>
 											<td colspan="2">
 												<p><%=l @compra.fecha_entrega_compras%></p>
-												<p>(Constitución 2298 - esquina La Paz | Rosario)</p>
+												<p>Entrega en el <b>Centro de Distribución</b>
+												(Constitución 2298 - esquina La Paz | Rosario)</p>
 											</td>
 										</tr>
 									</table>
@@ -326,7 +332,9 @@
 								<table class="contents" style="border-spacing:0;font-family:sans-serif;color:#333333;width:100%;font-size:14px;text-align:center;" >
 									<tr>
 										<td style="padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;" >
-											<%= image_tag "cfLogo.png" -%>
+											<a href="http://www.ciudadfutura.com.ar", target="_blank">
+												<%= image_tag "cfLogo.png" -%>
+											</a>
 										</td>
 									</tr>
 								</table>
