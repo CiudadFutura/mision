@@ -14,66 +14,68 @@
 							<span>Oculto</span>
 						</div>
 				<% end   %>
-				<% if producto.imagen.blank? %>
-					<%= image_tag('image-not-found.png', :height => '60%', :width => '90%') %>
-				<% else %>
-					<a href="" onclick="return false;" data-toggle="popover" data-container="body" data-content="<%= producto.descripcion %>" >
-						<%= image_tag(producto.imagen, :height => '60%', :width => '90%') %>
-					</a>
-				<% end %>
-
+				<a href="" onclick="return false;" data-toggle="popover" data-container="body" data-content="<%= producto.descripcion %>" >
+					<% if producto.imagen.blank? %>
+						<%= image_tag('image-not-found.png', :height => '60%', :width => '90%') %>
+					<% else %>
+							<%= image_tag(producto.imagen, :height => '60%', :width => '90%') %>
+					<% end %>
+				</a>
 				<div class="caption">
 					<h4><%= producto.nombre %></h4>
 					<% if @ciclo_actual and usuario_signed_in? %>
 						<p class="precio_mision">Precio misión <%= number_to_currency(producto.precio) %></p>
-					<%end%>
-					<% if producto.precio_super.present?
-							 if producto.precio > producto.precio_super
-								 precio_super = 0.0
-							 else
-								 precio_super = producto.precio_super
-							 end
-						 else
-							 precio_super = 0.0
-						 end%>
 
-					<p>Precio hiper <%= number_to_currency(precio_super) %></p>
-					<p>Ahorro <%= number_to_percentage(producto.ahorro) %></p>
-					<% if @ciclo_actual and usuario_signed_in? %>
-							<% if @ciclo_actual.circulos.include?(current_usuario.circulo) %>
-									<% cantidad = producto.stock.present? ? producto.stock : producto.cantidad_permitida
-									%>
-									<select class="cantidad">
-										<% for i in 1..cantidad %>
-												<% if @carrito.producto?(producto.id) %>
-														<option value="<%= i%>" <%= (i == @carrito.cantidad_prod(producto.id)) ?'selected':''%>><%= i %></option>
-												<% else %>
-														<option value="<%= i %>"><%= i %></option>
+						<% if producto.precio_super.present?
+								 if producto.precio > producto.precio_super
+									 precio_super = 0.0
+								 else
+									 precio_super = producto.precio_super
+								 end
+							 else
+								 precio_super = 0.0
+						end%>
+
+						<p>Precio hiper <%= number_to_currency(precio_super) %></p>
+						<p>Ahorro <%= number_to_percentage(producto.ahorro) %></p>
+						<% if @ciclo_actual and usuario_signed_in? %>
+								<% if @ciclo_actual.circulos.include?(current_usuario.circulo) %>
+										<% cantidad = producto.stock.present? ? producto.stock : producto.cantidad_permitida
+										%>
+										<select class="cantidad">
+											<% for i in 1..cantidad %>
+													<% if @carrito.producto?(producto.id) %>
+															<option value="<%= i%>" <%= (i == @carrito.cantidad_prod(producto.id)) ?'selected':''%>><%= i %></option>
+													<% else %>
+															<option value="<%= i %>"><%= i %></option>
+													<% end %>
+											<% end %>
+										</select>
+										<% if @carrito.producto?(producto.id) %>
+
+												<%= button_tag(type: 'button',
+																			 class: 'btn btn-sm btn-danger',
+																			 data: {
+																					 action: 'remove',
+																					 productId: producto.id
+																			 }) do %>
+														<span class="icon-tienda glyphicon-align-left"></span> <span class="cart-action">Eliminar del</span> carro
+												<% end %>
+										<% else %>
+												<%= button_tag(type: 'button',
+																			 class: 'btn btn-sm btn-success',
+																			 data: {
+																					 productId: producto.id,
+																					 orden_remito: producto.orden_remito,
+																					 action: 'add'
+																			 }) do %>
+														<span class="icon-tienda glyphicon-align-left"></span> <span class="cart-action">Agregar al</span> carro
 												<% end %>
 										<% end %>
-									</select>
-									<% if @carrito.producto?(producto.id) %>
-
-											<%= button_tag(type: 'button',
-																		 class: 'btn btn-sm btn-danger',
-																		 data: {
-																				 action: 'remove',
-																				 productId: producto.id
-																		 }) do %>
-													<span class="icon-tienda glyphicon-align-left"></span> <span class="cart-action">Eliminar del</span> carro
-											<% end %>
-									<% else %>
-											<%= button_tag(type: 'button',
-																		 class: 'btn btn-sm btn-success',
-																		 data: {
-																				 productId: producto.id,
-																				 orden_remito: producto.orden_remito,
-																				 action: 'add'
-																		 }) do %>
-													<span class="icon-tienda glyphicon-align-left"></span> <span class="cart-action">Agregar al</span> carro
-											<% end %>
-									<% end %>
-							<% end %>
+								<% end %>
+						<% end %>
+					<% else %>
+							<p>Ahorro <%= number_to_percentage(producto.ahorro) %></p>
 					<% end %>
 					<% if can? [:update, :detele], producto %>
 							<div class="btn-group btn-group-justified" role="group" aria-label="modificar">
