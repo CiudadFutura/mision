@@ -15,8 +15,7 @@ class RemitosPedidoController < ApplicationController
   end
 
 	def get_by_cycle_circle
-		@compra = Compra.find(params[:id])
-		@reporte = Pedido.remitos(@compra.circulos.find(params[:circulo]).pedidos)
+		@reporte = Pedido.remitos(Pedido.where(circulo_id: params[:circulo], compra_id: params[:id] ))
 
 		render 'remitos'
 

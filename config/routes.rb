@@ -13,11 +13,12 @@ Rails.application.routes.draw do
 	end
 	resources :remitos_pedido
 
-	get 'remitos_pedido/get_by_cycle_circle/:id/circulo=:circulo',
+	get 'get_by_cycle_circle/:id/circulo=:circulo',
 			to: 'remitos_pedido#get_by_cycle_circle', as: :get_by_cycle_circle
 
-  get 'remitos_pedido/generate'
-  get '/transaction/generar/:ciclo_id' => 'transactions#generar', as: :transaction_generar
+	get 'remitos_pedidos/generate', to: 'remitos_pedido#generate', as: :generate
+
+	get '/transaction/generar/:ciclo_id' => 'transactions#generar', as: :transaction_generar
 
   resources :suppliers
 
@@ -65,7 +66,10 @@ Rails.application.routes.draw do
   resource :cart, only: [:show] do
     put 'add/:producto_id', to: 'carts#add', as: :add_to
     put 'remove/:producto_id', to: 'carts#remove', as: :remove_from
-  end
+	end
+
+	get "/callback" => "facebook#callback"
+	get "/facebook_profile" => "facebook#facebook_profile"
 
   root to: 'home#index'
 

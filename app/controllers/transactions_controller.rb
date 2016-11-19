@@ -118,7 +118,7 @@ class TransactionsController < ApplicationController
       end
       message = { notice: "Se generaron #{count} Notas de cédito" }
     end
-    redirect_to remitos_pedido_index_path(), message
+    redirect_to remitos_pedido_index_path, message
   end
 
   private

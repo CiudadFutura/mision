@@ -28,12 +28,12 @@
 		<div class="col-md-6">
 			<div class="well">
 				<div class="col-xs-8 col-md-8">
-					<%= link_to "Cargar Faltantes", remitos_pedido_generate_path(), class: "btn btn-primary btn-xs" %>
+					<%= link_to "Cargar Faltantes", generate_path, class: "btn btn-primary btn-xs" %>
 				</div>
 				<div>
 					<%=
 						link_to_if(params[:ciclo_id].blank?, "Generar Notas de Crédito",
-											 { controller: "remitos_pedido", action: "index" }, class:'btn btn-primary btn-xs disabled') do
+											 remitos_pedido_index_path, class:'btn btn-primary btn-xs disabled') do
 							link_to "Generar Notas de credito", transaction_generar_path(ciclo_id: params[:ciclo_id]), class: "btn btn-primary btn-xs"
 						end
 					%>
