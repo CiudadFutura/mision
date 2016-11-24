@@ -24,6 +24,7 @@ Rails.application.routes.draw do
 
   get 'compras/add_status/:id', to: 'compras#add_status', as: :add_status
   get 'compras/refresh_status/:id', to: 'compras#refresh_status', as: :refresh_status
+  get 'compras/clone/:id', to: 'compras#clone', as: :clone
 
 
   resources :circulos do

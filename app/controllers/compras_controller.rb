@@ -25,6 +25,15 @@ class ComprasController < ApplicationController
   def edit
   end
 
+	def clone
+		@source = Compra.find(params[:id])
+		@compra = @source.clone
+		@source.deliveries.each do |delivery|
+			@compra.deliveries << delivery.clone
+		end
+		render :new
+	end
+
   # POST /compras
   # POST /compras.json
   def create
