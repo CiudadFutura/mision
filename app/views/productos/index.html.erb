@@ -57,7 +57,9 @@
 			<div id="product-list">
 				<% if usuario_signed_in? %>
 					<% if current_usuario.admin? && @view_type.present? %>
-							<%= render 'admin_product' %>
+						<%= render 'admin_product' %>
+					<% else %>
+						<%= render 'products' %>
 					<% end %>
 				<% else %>
 						<%= render 'products' %>
