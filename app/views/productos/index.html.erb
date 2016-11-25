@@ -59,8 +59,9 @@
 					<% if current_usuario.admin? && @view_type.present? %>
 							<%= render 'admin_product' %>
 					<% end %>
+				<% else %>
+						<%= render 'products' %>
 				<% end %>
-				<%= render 'products' %>
 			</div>
 
     </div> <!--col-xs-12 col-md-3-->

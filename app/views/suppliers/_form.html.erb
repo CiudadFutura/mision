@@ -22,7 +22,7 @@
 
   <fieldset class="form-group">
     <%= f.label :nature, for:'nature' %>
-    <%= f.select(:nature, options_for_select(Supplier.natures.map{|x,y| [t(x), x]}), class:'form-control', id:'nature') %>
+    <%= f.select(:nature, options_for_select(Supplier.natures.map{|x,y| [t(x), x]}), class:'form-control', id:'nature', include_blank: 'Tipo de proveedor') %>
   </fieldset>
 
   <fieldset class="form-group">

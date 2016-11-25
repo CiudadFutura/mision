@@ -2,7 +2,7 @@ require 'open-uri'
 require 'cgi'
 
 class Supplier < ActiveRecord::Base
-  enum nature: [:wholesaler, :retailer, :cooperative, :associative, :family]
+  enum nature: [:wholesaler, :producer, :factory]
 
   before_save :geocode_with_cache
 

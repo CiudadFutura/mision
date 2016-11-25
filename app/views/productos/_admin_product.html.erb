@@ -14,6 +14,7 @@
 			<th>Rubro</th>
 			<th>Orden Remito</th>
 			<th></th>
+			<th></th>
 		</tr>
 		<tbody>
 		<% @productos.each do |producto|%>
@@ -161,6 +162,9 @@
 													edit_producto_path(producto),
 													:method => :get,
 													:class => 'btn btn-link'  %>
+					</td>
+					<td>
+						<%= link_to 'Eliminar', producto, method: :delete, data: { confirm: 'Esta seguro?' }, class: "btn btn-danger btn-xs" %>
 					</td>
 				</tr>
 		<% end %>

@@ -51,6 +51,7 @@ Rails.application.routes.draw do
   resources :productos do
     collection { post 'upload' }
     collection { put 'edit_multiple' }
+		delete 'delete/:id', to: 'productos#delete', as: :delete
   end
 
 
