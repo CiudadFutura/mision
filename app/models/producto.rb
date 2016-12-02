@@ -41,6 +41,7 @@ class Producto < ActiveRecord::Base
     all.each do |prod|
       prod.oculto = true
       prod.faltante = false
+			prod.supplier_id = 1
       prod.save!
     end
     start_time = Time.now
