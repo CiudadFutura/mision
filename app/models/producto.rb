@@ -41,6 +41,7 @@ class Producto < ActiveRecord::Base
     all.each do |prod|
       prod.oculto = true
       prod.faltante = false
+			puts prod.to_yaml
 			prod.supplier ? prod.supplier_id :  1
       prod.save!
     end
