@@ -45,21 +45,26 @@ $(document).ready(function() {
 		]
 	})
 
-	$.fn.uniformHeight = function () {
-		var maxHeight = 0,
-			wrapper,
-			wrapperHeight;
 
-		return this.each(function () {
-			wrapper = $(this).wrapInner('<div class="wrapper" />').children('.wrapper');
-			wrapperHeight = wrapper.outerHeight();
 
-			maxHeight = Math.max(maxHeight, wrapperHeight);
+	$('.thumbnails').find('.thumbnail').uniformHeight();
 
-			wrapper.children().unwrap();
 
-		}).height(maxHeight);
-	}
+});
+
+$.fn.uniformHeight = function() {
+	var maxHeight   = 0,
+		max         = Math.max;
+
+	return this.each(function() {
+		maxHeight = max(maxHeight, $(this).height());
+	}).height(maxHeight);
+}
+
+$(function () {
+	$('[data-toggle="popover"]').popover({
+		placement: 'auto right'
+	})
 });
 
 
