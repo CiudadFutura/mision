@@ -86,7 +86,7 @@ class Producto < ActiveRecord::Base
         csv << [
           prod.codigo,
           prod.oculto ? 'oculto' : 'activo',
-          prod.supplier.id,
+          prod.supplier.id ? prod.supplier.id : 'sin proveedor',
           prod.supplier.name,
           prod.nombre,
           prod.descripcion,
