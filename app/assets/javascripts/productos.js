@@ -2,7 +2,7 @@
  * Created by niquito on 22/02/16.
  */
 
-$(document).ready(function() {
+window.onload = (function() {
 
 	$.fn.editable.defaults.ajaxOptions = {type: "PUT"};
 
