@@ -27,9 +27,9 @@ class ComprasController < ApplicationController
 
 	def clone
 		@source = Compra.find(params[:id])
-		@compra = @source.clone
+		@compra = @source.dup
 		@source.deliveries.each do |delivery|
-			@compra.deliveries << delivery.clone
+			@compra.deliveries << delivery.dup
 		end
 		render :new
 	end
