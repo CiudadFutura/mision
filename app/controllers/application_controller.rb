@@ -4,6 +4,9 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   rescue_from ActionController::RoutingError, :with => :render_404
 
+	before_filter :redirect_if_old
+
+
   before_filter :init_carrito
   before_filter :categorias_menu
   before_filter :configure_permitted_parameters, if: :devise_controller?
@@ -46,7 +49,13 @@ class ApplicationController < ActionController::Base
 
   protected
 
-  def configure_permitted_parameters
+	def redirect_if_old
+		if request.host == 'www.misionantiinflacion.com.ar'
+			redirect_to "#{request.protocol}104.131.98.114#{request.fullpath}", :status => :moved_permanently
+		end
+	end
+
+	def configure_permitted_parameters
     permitted_params = [:nombre, :apellido, :email, :"fecha_de_nacimiento(1i)",
       :"fecha_de_nacimiento(2i)", :"fecha_de_nacimiento(3i)", :dni, :calle,
       :ciudad, :codigo_postal, :tel1, :cel1, :type,  :password, :password_confirmation,
