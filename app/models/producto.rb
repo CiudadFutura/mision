@@ -5,7 +5,7 @@ class Producto < ActiveRecord::Base
   has_many :transaction_details
 
   validates :codigo, uniqueness: true
-  validates :supplier, presence: true
+  #validates :supplier, presence: true
 
   mount_uploader :imagen, ImagenUploader
 
@@ -41,7 +41,6 @@ class Producto < ActiveRecord::Base
     all.each do |prod|
       prod.oculto = true
       prod.faltante = false
-			puts prod.to_yaml
 			prod.supplier ? prod.supplier_id :  1
       prod.save!
     end
