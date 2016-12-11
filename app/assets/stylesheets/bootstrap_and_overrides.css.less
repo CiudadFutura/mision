@@ -200,6 +200,11 @@ body{
 			}
 		}
 	}
+	.vcenter {
+	  display: inline-block;
+	  vertical-align: middle;
+	  float: none;
+	}
 	.panel-footer{
 		nav{
 			background-color: #46505a;
@@ -290,13 +295,19 @@ body{
 			color:@red-char;
             font-size: 25px;
 		}
-	  .calendar {
+	  .calendar, .home {
 		h1{
 		  padding-top: 0;
 		  font-family: @font-mont-reg;
 		  color:@red-char;
-		  font-size: 25px;
+		  font-size: 35px;
 		}
+	  }
+	  .free-sale{
+		margin-top: 10px;
+		margin-bottom: 10px;
+		border: 2px solid #000;
+		padding: 5px;
 	  }
 	  .block {
 		border: 1px solid red;
@@ -330,7 +341,7 @@ body{
 				font-size: 14px;
 				font-weight: bold;
 			}
-			.oculto {
+			.oculto{
 				position: absolute;
 				top: 30%;
 				width: 97%;
