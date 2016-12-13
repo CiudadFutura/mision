@@ -11,8 +11,10 @@ class ComprasController < ApplicationController
   # GET /compras/1
   # GET /compras/1.json
   def show
-    @circulos = @compra.get_deliveries
-		@statuses = @compra.get_statuses
+		if @compra.tipo != 'free'
+    	@circulos = @compra.get_deliveries
+			@statuses = @compra.get_statuses
+		end
 
   end
 
