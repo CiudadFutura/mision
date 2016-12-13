@@ -1,0 +1,97 @@
+<div class="row">
+	<div class="col-md-2">
+
+	</div>
+	<div class="col-md-8">
+		<%= form_for :usuarios, url: create_pedido_path,  method: :get, html: {id: 'register-guest'} do |f| %>
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					<h4>Datos para la compra</h4>
+				</div>
+				<div class="panel-body">
+					<div class="col-md-5 vcenter">
+
+						<h1>Completa con tus datos y sé parte de la Misión</h1>
+						<p>
+							Una vez completado el formulario, un email te será enviado para confirmar tu casilla de correo. Sigue el link que aparece en el correo recibido para activar tu cuenta.
+						</p>
+						<p>
+							Con tu cuenta activada estas a un paso de poder realizar tu pedido.
+						</p>
+						<p>
+							Ingresa al sitio y consulta en MIS DATOS (opción del menu) tu numero de identificación. Comunicaselo al coordinador de tu círculo para que este te haga parte del mismo y puedas enviar tu pedido!
+						</p>
+					</div>
+					<div class="col-md-7">
+
+						<h3>Consumidor Colaborativo</h3>
+						<%= f.hidden_field :guest, value: 1 %>
+						<%= f.hidden_field :ciclo_actual, value: "#{@ciclo_actual.id}" %>
+						<%= f.hidden_field :password, value: "#{@ciclo_actual.fecha_inicio_compras}" %>
+						<div id="errorMessages" class="alert alert-danger hide">
+							<span></span>
+						</div>
+						<div class="form-group">
+							<label for="nombre">Nombre: <span>[requerido]</span></label>
+							<%= f.text_field :nombre, class:'form-control' %>
+							<div id="error-name"></div>
+						</div>
+						<div class="form-group">
+							<label for="apellido">Apellido: <span>[requerido]</span></label>
+							<%= f.text_field :apellido, class: 'form-control' %>
+							<div id="error-lastname"></div>
+						</div>
+						<div class="form-group">
+							<label for="email">Correo Electrónico: <span>[requerido]</span></label>
+							<%= f.email_field :email, class: 'form-control' %>
+							<small id="emailHelp" class="form-text text-muted">ejemplo: tucorreo@gmail.com</small>
+							<div id="error-email"></div>
+						</div>
+						<div class="form-group">
+							<label for="dni">D.N.I.: <span>[requerido]</span></label>
+							<%= f.text_field :dni, class: 'form-control' %>
+							<small id="dniHelp" class="form-text text-muted">Tiene que presentarse para retirar los productos</small>
+							<div id="error-dni"></div>
+						</div>
+						<div class="form-group">
+							<label for="domicilio">Domicilio: <span>[requerido]</span></label>
+							<%= f.text_field :calle, class: 'form-control' %>
+							<small id="domicilioHelp" class="form-text text-muted">ejemplo: Calle Nº Piso Depto.</small>
+							<div id="error-address"></div>
+						</div>
+
+						<div class="form-group">
+							<label for="celular">Celular: <span>[requerido]</span></label>
+							<%= f.text_field :cel1, class: 'form-control' %>
+							<div id="error-celphone"></div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4>Seleccione el lugar donde quiere retirar</h4>
+							</div>
+							<div class="panel-body">
+								<div class="form-group">
+									<div class="radio">
+										<% Warehouse.all.each do |warehouse| %>
+												<label>
+													<%= f.radio_button :warehouse, warehouse.id %>
+													<%= warehouse.name %>
+												</label>
+												<br>
+												<small id="warehouseHelp" class="form-text text-muted"><%= warehouse.address %></small>
+										<% end %>
+									</div>
+									<div id="error-warehouse"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+				<div class="form-group">
+					<div><%= submit_tag "Realizar pedido", class: "btn btn-success pull-right #{'disabled' if @missing.present?}" %></div>
+				</div>
+		<% end %>
+	</div>
+</div>

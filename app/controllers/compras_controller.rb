@@ -28,8 +28,9 @@ class ComprasController < ApplicationController
 	def clone
 		@source = Compra.find(params[:id])
 		@compra = @source.dup
+		@circulos = {}
 		@source.deliveries.each do |delivery|
-			@compra.deliveries << delivery.dup
+			@circulos[delivery.circulo_id] = delivery.clone
 		end
 		render :new
 	end
@@ -128,14 +129,18 @@ class ComprasController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def compra_params
-      filtered_params = params.require(:compra).permit(:nombre, :descripcion, 
+      filtered_params = params.require(:compra).permit(:nombre, :descripcion, :tipo,
         :fecha_inicio_compras => [:year, :month, :day, :hour, :minute],
         :fecha_fin_compras => [:year, :month, :day, :hour, :minute],
+        :fecha_inicio_pagos => [:year, :month, :day, :hour, :minute],
         :fecha_fin_pagos => [:year, :month, :day, :hour, :minute],
+        :fecha_inicio_armado => [:year, :month, :day, :hour, :minute],
+        :fecha_fin_armado => [:year, :month, :day, :hour, :minute],
         :fecha_entrega_compras => [:year, :month, :day, :hour, :minute],
         circulo_ids:[])
       { nombre: filtered_params[:nombre],
         descripcion: filtered_params[:descripcion],
+				tipo: filtered_params[:tipo],
         circulo_ids: filtered_params["circulo_ids"],
         fecha_inicio_compras: Time.utc(
           filtered_params[:fecha_inicio_compras][:year],
@@ -149,12 +154,30 @@ class ComprasController < ApplicationController
           filtered_params[:fecha_fin_compras][:day],
           filtered_params[:fecha_fin_compras][:hour],
           filtered_params[:fecha_fin_compras][:min]),
+				fecha_inicio_pagos: Time.utc(
+						filtered_params[:fecha_inicio_pagos][:year],
+						filtered_params[:fecha_inicio_pagos][:month],
+						filtered_params[:fecha_inicio_pagos][:day],
+						filtered_params[:fecha_inicio_pagos][:hour],
+						filtered_params[:fecha_inicio_pagos][:min]),
         fecha_fin_pagos: Time.utc(
           filtered_params[:fecha_fin_pagos][:year],
           filtered_params[:fecha_fin_pagos][:month],
           filtered_params[:fecha_fin_pagos][:day],
           filtered_params[:fecha_fin_pagos][:hour],
           filtered_params[:fecha_fin_pagos][:min]),
+				fecha_inicio_armado: Time.utc(
+						filtered_params[:fecha_inicio_armado][:year],
+						filtered_params[:fecha_inicio_armado][:month],
+						filtered_params[:fecha_inicio_armado][:day],
+						filtered_params[:fecha_inicio_armado][:hour],
+						filtered_params[:fecha_inicio_armado][:min]),
+				fecha_fin_armado: Time.utc(
+						filtered_params[:fecha_fin_armado][:year],
+						filtered_params[:fecha_fin_armado][:month],
+						filtered_params[:fecha_fin_armado][:day],
+						filtered_params[:fecha_fin_armado][:hour],
+						filtered_params[:fecha_fin_armado][:min]),
         fecha_entrega_compras: Time.utc(
           filtered_params[:fecha_entrega_compras][:year],
           filtered_params[:fecha_entrega_compras][:month],

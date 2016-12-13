@@ -1,0 +1,34 @@
+<div id="content-circulos" class="<%= 'hide' if @compra.tipo == 'free' %> ">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">Círculos</h3>
+		</div>
+		<div class="panel-body">
+
+			<table class="table table-striped">
+				<thead>
+				<tr>
+					<th>Nro Circulo</th>
+					<th>Coordinador</th>
+					<th colspan="3"></th>
+				</tr>
+				</thead>
+
+				<tbody>
+				<% Circulo.all.each do |circulo| %>
+						<tr>
+							<td><%= circulo.id %></td>
+							<td><%= circulo.try('coordinador').try('nombre_completo') || 'Sin Coordinador' %></td>
+							<% if @circulos.present? %>
+									<td><%= check_box_tag "compra[circulo_ids][]", circulo.id, @circulos.has_key?(circulo.id) %></td>
+							<% else %>
+									<td><%= check_box_tag "compra[circulo_ids][]", circulo.id, @compra.circulos.include?(circulo) %></td>
+							<% end %>
+						</tr>
+				<% end %>
+				</tbody>
+			</table>
+		</div>
+		<div class="panel-footer"></div>
+	</div>
+</div>

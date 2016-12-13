@@ -68,6 +68,13 @@
                   <% end %>
                 </li>
             <% end %>
+						<% if can? [:manage], warehouses_path %>
+								<li>
+									<%= link_to(warehouses_path) do %>
+											<span class="icon-stats"></span>Depósitos
+									<% end %>
+								</li>
+						<% end %>
           </ul>
         </li>
       <% end %>

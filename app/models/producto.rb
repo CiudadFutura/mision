@@ -103,6 +103,10 @@ class Producto < ActiveRecord::Base
 		Producto.where("highlight = :destacado", destacado: true).order(:orden)
 	end
 
+	def self.freesale
+		Producto.where("sale_type = :free and oculto = :oculto" , free: 1, oculto: false).order(:orden)
+	end
+
 	def self.bySubcategoria(categoria_id, subcategoria_id)
 		Producto.joins(:categorias)
 				.where(

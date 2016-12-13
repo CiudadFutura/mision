@@ -31,7 +31,6 @@ class Reporte
 
       end
     end
-
     reporte
   end
 end

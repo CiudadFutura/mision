@@ -13,6 +13,8 @@ en:
   cleaning: Limpieza
   credit_note: Nota de crédito
   debit_note: Nota de débito
+  free: Libre
+  circles: Círculos
   activerecord:
     models:
       account:

@@ -73,6 +73,9 @@ gem 'nokogiri', '~> 1.3.3'
 # X - Editable for Rails
 gem 'bootstrap-editable-rails'
 
+# jquery Validate
+gem 'jquery-validation-rails'
+
 # full calendar
 gem 'fullcalendar-rails'
 gem 'momentjs-rails'

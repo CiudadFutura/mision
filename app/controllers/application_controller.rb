@@ -42,8 +42,13 @@ class ApplicationController < ActionController::Base
       end
       menu
     end
-  end
+	end
+=begin
+	def after_sign_in_path_for(resource)
 
+		usuario_omniauth_authorize_path('facebook')
+	end
+=end
   protected
 
 	def configure_permitted_parameters

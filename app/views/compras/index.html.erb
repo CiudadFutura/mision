@@ -5,34 +5,45 @@
                 new_compra_path,
                 :class => 'btn btn-primary' if can? [:manage], Compra %>
   </div>
-  <table class="table table-striped">
-    <thead>
-    <tr>
-      <th>Nombre</th>
-      <th>Fecha inicio pedidos</th>
-      <th>Fecha fin pedidos</th>
-      <th>Fecha fin pagos</th>
-      <th>Fecha entrega</th>
-      <th>&nbsp;</th>
-      <th>&nbsp;</th>
-      <th>&nbsp;</th>
-    </tr>
-    </thead>
+	<div class="table-responsive">
+		<table class="table table-striped">
+			<thead>
+			<tr>
+				<th>Nombre</th>
+				<th>Tipo</th>
+				<th>Fecha inicio pedidos</th>
+				<th>Fecha fin pedidos</th>
+				<th>Fecha inicio pagos</th>
+				<th>Fecha fin pagos</th>
+				<th>Fecha inicio armado</th>
+				<th>Fecha fin armado</th>
+				<th>Fecha entrega</th>
+				<th>&nbsp;</th>
+				<th>&nbsp;</th>
+				<th>&nbsp;</th>
+			</tr>
+			</thead>
 
-    <tbody>
-    <% @compras.each do |compra| %>
-        <tr>
-          <td><%= compra.nombre %></td>
-          <td><%= l compra.fecha_inicio_compras %></td>
-          <td><%= l compra.fecha_fin_compras %></td>
-          <td><%= l compra.fecha_fin_pagos %></td>
-          <td><%= l compra.fecha_entrega_compras %></td>
-          <td><%= link_to 'Modificar', edit_compra_path(compra), class: "btn btn-default btn-xs" %></td>
-          <td><%= link_to 'Entrega', compra_path(compra.id), class: "btn btn-default btn-xs" %></td>
-          <td><%= link_to 'Clonar', clone_path(compra.id), class: "btn btn-warning btn-xs" %></td>
-        </tr>
-    <% end %>
-    </tbody>
-  </table>
+			<tbody>
+			<% @compras.each do |compra| %>
+					<tr>
+						<td><%= compra.nombre %></td>
+						<td><%= compra.tipo.present? ? t(compra.tipo) : 'Círculos'%></td>
+						<td><%= compra.fecha_inicio_compras.present? ? l(compra.fecha_inicio_compras) : 'Sin fecha' %></td>
+						<td><%= compra.fecha_fin_compras.present? ? l(compra.fecha_fin_compras) : 'Sin fecha' %></td>
+						<td><%= compra.fecha_inicio_pagos.present? ? l(compra.fecha_inicio_pagos) : 'Sin fecha'  %></td>
+						<td><%= compra.fecha_fin_pagos.present? ? l(compra.fecha_fin_pagos) : 'Sin fecha' %></td>
+						<td><%= compra.fecha_inicio_armado.present? ? l(compra.fecha_inicio_armado) : 'Sin fecha' %></td>
+						<td><%= compra.fecha_fin_armado.present? ? l(compra.fecha_fin_armado) : 'Sin fecha' %></td>
+						<td><%= compra.fecha_entrega_compras.present? ? l(compra.fecha_entrega_compras) : 'Sin fecha' %></td>
+						<td><%= link_to 'Modificar', edit_compra_path(compra), class: "btn btn-default btn-xs" %></td>
+						<td><%= link_to 'Entrega', compra_path(compra.id), class: "btn btn-default btn-xs" %></td>
+						<td><%= link_to 'Clonar', clone_path(compra.id), class: "btn btn-warning btn-xs" %></td>
+					</tr>
+			<% end %>
+			</tbody>
+		</table>
+	</div>
+
 
 </div>

@@ -2,6 +2,7 @@ class PedidosController < ApplicationController
   before_action :set_pedido, only: [:show, :edit, :destroy]
 
   def index
+		@ciclos_actuales = Compra::ciclos_actuales
     if current_usuario.admin?
       @ciclo_id = nil
       if(params[:ciclo_id])

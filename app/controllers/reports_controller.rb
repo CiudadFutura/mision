@@ -3,12 +3,14 @@ class ReportsController < ApplicationController
   # GET /reports
   # GET /reports.json
   def index
+
     if current_usuario.admin?
       ciclo_id = nil
       @reporte = nil
       @ciclos = Compra.all.order('fecha_fin_compras DESC')
-      if params[:ciclo_id].present? || Compra.ciclo_actual_completo.present?
-        ciclo_id = params[:ciclo_id] || Compra.ciclo_actual_completo.id
+      if params[:ciclo_id].present?
+				@ciclo = @ciclos.find(params[:ciclo_id])
+        ciclo_id = params[:ciclo_id]
         p ciclo_id
         p '-----------------------'
         pedidos = Pedido.where(compra_id: ciclo_id)
