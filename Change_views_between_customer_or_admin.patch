@@ -1,0 +1,37 @@
+Index: app/controllers/productos_controller.rb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/controllers/productos_controller.rb	(revision 3487f2b36f1e553ca7fde477374b504dc9466cd6)
++++ app/controllers/productos_controller.rb	(revision )
+@@ -5,6 +5,9 @@
+   # GET /productos.json
+   def index
+     @isD7 = false
++		if params['view_type'].present? or
++			@view_type = 'admin'
++		end
+     @ciclo_actual = Compra::ciclo_actual
+     if params[:categoria_id] != 'Todas' && params[:categoria_id].present?
+       if params[:subcategoria_id].present?
+@@ -114,18 +117,15 @@
+     # Use callbacks to share common setup or constraints between actions.
+     def set_producto
+ 
+-			puts 'entro'
+       @producto = Producto.find(params[:id])
+     end
+ 
+     # Never trust parameters from the scary internet, only allow the white list through.
+     def producto_params
+-			puts params
+-			puts @producto.to_yaml
+       params.require(:producto).permit(:precio, :nombre, :codigo, :descripcion, :orden,
+                                        :precio_super, :highlight, :oculto, :supplier_id,
+                                        :pack, :faltante,:cantidad_permitida, :imagen, :stock,
+-                                       :orden_remito,
++                                       :orden_remito, :view_type,
+                                        categoria_ids: [])
+     end
+ end

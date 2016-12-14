@@ -1,0 +1,2638 @@
+Index: config/routes.rb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- config/routes.rb	(revision de0080c807648c2349220c901653d7fee497f439)
++++ config/routes.rb	(revision )
+@@ -1,5 +1,6 @@
+ Rails.application.routes.draw do
+ 
++  resources :warehouses
+   resources :sectors_statuses
+   resources :statuses
+   resources :sectors
+@@ -34,7 +35,10 @@
+ 	end
+ 	get 'circulos/remito_circulo/:circulo_id/compra=:compra_id', to: 'circulos#remito_circulo', as: :remito_circulo
+ 
+-  devise_for :usuarios, :controllers => {:registrations => "user/registrations"}
++  devise_for :usuarios, :controllers => {:registrations => "user/registrations", :omniauth_callbacks => 'user/omniauth_callbacks'}
++	scope "carts" do
++		resources :usuarios
++	end
+   resources :usuarios do
+     collection {
+       post 'sign_up', to: 'usuarios#create'
+@@ -69,9 +73,6 @@
+     put 'add/:producto_id', to: 'carts#add', as: :add_to
+     put 'remove/:producto_id', to: 'carts#remove', as: :remove_from
+ 	end
+-
+-	get "/callback" => "facebook#callback"
+-	get "/facebook_profile" => "facebook#facebook_profile"
+ 
+   root to: 'home#index'
+ 
+Index: app/views/compras/form_circulos.js.erb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/views/compras/form_circulos.js.erb	(revision )
++++ app/views/compras/form_circulos.js.erb	(revision )
+@@ -0,0 +1,1 @@
++<%= (render partial: 'form_circulos') %>
+\ No newline at end of file
+Index: db/migrate/20161210013049_add_column_free_to_productos_table.rb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- db/migrate/20161210013049_add_column_free_to_productos_table.rb	(revision )
++++ db/migrate/20161210013049_add_column_free_to_productos_table.rb	(revision )
+@@ -0,0 +1,6 @@
++class AddColumnFreeToProductosTable < ActiveRecord::Migration
++  def change
++		add_column :productos, :sale_type, :integer
++		add_column :productos, :remito_name, :string
++  end
++end
+Index: app/views/reports/index.html.erb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/views/reports/index.html.erb	(revision de0080c807648c2349220c901653d7fee497f439)
++++ app/views/reports/index.html.erb	(revision )
+@@ -9,7 +9,7 @@
+ 			    <div class="form-group">
+ 			      <label for="ciclo_id">Ciclo:</label>
+ 			      <%= select_tag "ciclo_id",
+-			                     options_from_collection_for_select(@ciclos, "id", "nombre", @ciclo_id),
++			                     options_from_collection_for_select(@ciclos, "id", "nombre", @ciclo ? @ciclo.id : '' ),
+ 			                     include_blank: true, class: 'form-control input-sm' %>
+ 			    </div>
+ 			    <%= submit_tag 'Filtrar', class: "btn btn-success btn-xs" %>
+\ No newline at end of file
+Index: Gemfile.lock
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- Gemfile.lock	(revision de0080c807648c2349220c901653d7fee497f439)
++++ Gemfile.lock	(revision )
+@@ -122,6 +122,7 @@
+     jquery-rails (3.1.4)
+       railties (>= 3.0, < 5.0)
+       thor (>= 0.14, < 2.0)
++    jquery-validation-rails (1.15.0.0)
+     json (1.8.3)
+     jwt (1.5.6)
+     less (2.5.1)
+@@ -325,6 +326,7 @@
+   gmaps4rails
+   jbuilder (~> 2.0)
+   jquery-rails
++  jquery-validation-rails
+   less-rails (~> 2.5.0)
+   mini_magick
+   momentjs-rails
+Index: config/environments/development.rb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- config/environments/development.rb	(revision de0080c807648c2349220c901653d7fee497f439)
++++ config/environments/development.rb	(revision )
+@@ -41,7 +41,7 @@
+ 	config.action_controller.asset_host =
+ 	config.action_mailer.asset_host  = "http://0.0.0.0:3000"
+ 
+-	#config.action_mailer.default_url_options = { :host => '0.0.0.0:3000' }
++	config.action_mailer.default_url_options = { :host => '0.0.0.0:3000' }
+ =begin
+   config.action_mailer.smtp_settings = {
+       address: "smtp.gmail.com",
+Index: db/migrate/20161207215753_create_warehouses.rb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- db/migrate/20161207215753_create_warehouses.rb	(revision )
++++ db/migrate/20161207215753_create_warehouses.rb	(revision )
+@@ -0,0 +1,14 @@
++class CreateWarehouses < ActiveRecord::Migration
++  def change
++    create_table :warehouses do |t|
++			t.string :name
++			t.text :description
++			t.string :address
++			t.string :telephone
++			t.string :working_hours
++			t.string :attendant
++
++			t.timestamps
++    end
++  end
++end
+Index: app/views/usuarios/show.html.erb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/views/usuarios/show.html.erb	(revision de0080c807648c2349220c901653d7fee497f439)
++++ app/views/usuarios/show.html.erb	(revision )
+@@ -61,6 +61,9 @@
+           <strong>Tipo:</strong>
+           <%= @usuario.type %>
+         </p>
++				<p>
++					<%= link_to "Mi cuenta con Facebook", usuario_omniauth_authorize_path('facebook') %>
++				</p>
+       </div>
+       <div class="col-md-6">
+         <% if @usuario.circulo.nil? %>
+Index: app/views/compras/_form_circulos.html.erb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/views/compras/_form_circulos.html.erb	(revision )
++++ app/views/compras/_form_circulos.html.erb	(revision )
+@@ -0,0 +1,34 @@
++<div id="content-circulos" class="<%= 'hide' if @compra.tipo == 'free' %> ">
++	<div class="panel panel-default">
++		<div class="panel-heading">
++			<h3 class="panel-title">Círculos</h3>
++		</div>
++		<div class="panel-body">
++
++			<table class="table table-striped">
++				<thead>
++				<tr>
++					<th>Nro Circulo</th>
++					<th>Coordinador</th>
++					<th colspan="3"></th>
++				</tr>
++				</thead>
++
++				<tbody>
++				<% Circulo.all.each do |circulo| %>
++						<tr>
++							<td><%= circulo.id %></td>
++							<td><%= circulo.try('coordinador').try('nombre_completo') || 'Sin Coordinador' %></td>
++							<% if @circulos.present? %>
++									<td><%= check_box_tag "compra[circulo_ids][]", circulo.id, @circulos.has_key?(circulo.id) %></td>
++							<% else %>
++									<td><%= check_box_tag "compra[circulo_ids][]", circulo.id, @compra.circulos.include?(circulo) %></td>
++							<% end %>
++						</tr>
++				<% end %>
++				</tbody>
++			</table>
++		</div>
++		<div class="panel-footer"></div>
++	</div>
++</div>
+\ No newline at end of file
+Index: app/controllers/usuarios_controller.rb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/controllers/usuarios_controller.rb	(revision de0080c807648c2349220c901653d7fee497f439)
++++ app/controllers/usuarios_controller.rb	(revision )
+@@ -16,8 +16,9 @@
+   # GET /usuarios/1
+   # GET /usuarios/1.json
+   def show
+-    @ciclo_actual = Compra::ciclo_actual
+-    @ciclo_actual_completo = Compra::ciclo_actual_completo
++		@ciclos_actuales = Compra::ciclos_actuales
++    @ciclo_actual = Compra::get_ciclo_actual(@ciclos_actuales, nil)
++    @ciclo_actual_completo = Compra::ciclos_actuales_completos
+   end
+ 
+ 
+Index: config/initializers/devise.rb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- config/initializers/devise.rb	(revision de0080c807648c2349220c901653d7fee497f439)
++++ config/initializers/devise.rb	(revision )
+@@ -230,6 +230,7 @@
+   # Add a new OmniAuth provider. Check the wiki for more information on setting
+   # up on your models and hooks.
+   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
++	config.omniauth :facebook, "607075456166316", "37acc45fefc1cdbc4a48805fc0cd0954"
+ 
+   # ==> Warden configuration
+   # If you want to use other strategies, that are not supported by Devise, or
+Index: app/views/productos/_products.html.erb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/views/productos/_products.html.erb	(revision de0080c807648c2349220c901653d7fee497f439)
++++ app/views/productos/_products.html.erb	(revision )
+@@ -10,20 +10,20 @@
+ 		<div class="col-xs-6 col-md-4 thumbnails">
+ 			<div class="thumbnail text-center">
+ 				<% if producto.oculto? %>
+-						<div class="oculto">
++						<div class="oculto-prod">
+ 							<span>Oculto</span>
+ 						</div>
+ 				<% end   %>
+ 				<a href="" onclick="return false;" data-toggle="popover" data-container="body" data-content="<%= producto.descripcion %>" >
+ 					<% if producto.imagen.blank? %>
+-						<%= image_tag('image-not-found.png', :height => '60%', :width => '90%') %>
++						<%= image_tag('image-not-found.png', :height => '90%', :width => '90%') %>
+ 					<% else %>
+-							<%= image_tag(producto.imagen, :height => '60%', :width => '90%') %>
++							<%= image_tag(producto.imagen, :height => '80%', :width => '90%') %>
+ 					<% end %>
+ 				</a>
+ 				<div class="caption">
+ 					<h4><%= producto.nombre %></h4>
+-					<% if @ciclo_actual and usuario_signed_in? %>
++					<% if @ciclos_actuales.present? and usuario_signed_in?  %>
+ 						<p class="precio_mision">Precio misión <%= number_to_currency(producto.precio) %></p>
+ 
+ 						<% if producto.precio_super.present?
+@@ -35,45 +35,43 @@
+ 							 else
+ 								 precio_super = 0.0
+ 						end%>
+-
++						<%= producto.sale_type %>
+ 						<p>Precio hiper <%= number_to_currency(precio_super) %></p>
+ 						<p>Ahorro <%= number_to_percentage(producto.ahorro) %></p>
+-						<% if @ciclo_actual and usuario_signed_in? %>
+-								<% if @ciclo_actual.circulos.include?(current_usuario.circulo) %>
++							<% if @ciclos_actuales.exists?(current_usuario.circulo) || producto.sale_type == 1 %>
+-										<% cantidad = producto.stock.present? ? producto.stock : producto.cantidad_permitida
+-										%>
+-										<select class="cantidad">
+-											<% for i in 1..cantidad %>
+-													<% if @carrito.producto?(producto.id) %>
+-															<option value="<%= i%>" <%= (i == @carrito.cantidad_prod(producto.id)) ?'selected':''%>><%= i %></option>
+-													<% else %>
+-															<option value="<%= i %>"><%= i %></option>
+-													<% end %>
+-											<% end %>
+-										</select>
+-										<% if @carrito.producto?(producto.id) %>
++									<% cantidad = producto.stock.present? ? producto.stock : producto.cantidad_permitida
++									%>
++									<select class="cantidad">
++										<% for i in 1..cantidad %>
++												<% if @carrito.producto?(producto.id) %>
++														<option value="<%= i%>" <%= (i == @carrito.cantidad_prod(producto.id)) ?'selected':''%>><%= i %></option>
++												<% else %>
++														<option value="<%= i %>"><%= i %></option>
++												<% end %>
++										<% end %>
++									</select>
++									<% if @carrito.producto?(producto.id) %>
+ 
+-												<%= button_tag(type: 'button',
+-																			 class: 'btn btn-sm btn-danger',
+-																			 data: {
+-																					 action: 'remove',
+-																					 productId: producto.id
+-																			 }) do %>
+-														<span class="icon-tienda glyphicon-align-left"></span> <span class="cart-action">Eliminar del</span> carro
+-												<% end %>
+-										<% else %>
+-												<%= button_tag(type: 'button',
+-																			 class: 'btn btn-sm btn-success',
+-																			 data: {
+-																					 productId: producto.id,
+-																					 orden_remito: producto.orden_remito,
+-																					 action: 'add'
+-																			 }) do %>
+-														<span class="icon-tienda glyphicon-align-left"></span> <span class="cart-action">Agregar al</span> carro
++											<%= button_tag(type: 'button',
++																		 class: 'btn btn-sm btn-danger',
++																		 data: {
++																				 action: 'remove',
++																				 productId: producto.id
++																		 }) do %>
++													<span class="icon-tienda glyphicon-align-left"></span> <span class="cart-action">Eliminar del</span> carro
++											<% end %>
++									<% else %>
++											<%= button_tag(type: 'button',
++																		 class: 'btn btn-sm btn-success',
++																		 data: {
++																				 productId: producto.id,
++																				 orden_remito: producto.orden_remito,
++																				 action: 'add'
++																		 }) do %>
++													<span class="icon-tienda glyphicon-align-left"></span> <span class="cart-action">Agregar al</span> carro
+-												<% end %>
+-										<% end %>
+-								<% end %>
+-						<% end %>
++											<% end %>
++									<% end %>
++							<% end %>
+ 					<% else %>
+ 							<p>Ahorro <%= number_to_percentage(producto.ahorro) %></p>
+ 					<% end %>
+Index: app/models/identity.rb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/models/identity.rb	(revision )
++++ app/models/identity.rb	(revision )
+@@ -0,0 +1,24 @@
++class Identity < ActiveRecord::Base
++	belongs_to :usuario
++	validates_presence_of :uid, :provider
++	validates_uniqueness_of :uid, scope: :provider
++
++	def self.find_for_facebook_oauth(auth)
++		identity = Identity.where(:provider => auth.provider, :uid => auth.uid).first
++		if identity.nil?
++			registered_user = Usuario.where(:email => auth.info.email).first
++			unless registered_user.nil?
++				Identity.create!(
++						provider: auth.provider,
++						uid: auth.uid,
++						usuario_id: registered_user.id,
++						email: auth.info.email,
++						oauth_token: auth.credentials.token,
++						oauth_expired_at: Time.at(auth.credentials.expires_at)
++				)
++			end
++		end
++		identity.usuario
++	end
++
++end
+\ No newline at end of file
+Index: app/views/layouts/_menu.html.erb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/views/layouts/_menu.html.erb	(revision de0080c807648c2349220c901653d7fee497f439)
++++ app/views/layouts/_menu.html.erb	(revision )
+@@ -68,6 +68,13 @@
+                   <% end %>
+                 </li>
+             <% end %>
++						<% if can? [:manage], warehouses_path %>
++								<li>
++									<%= link_to(warehouses_path) do %>
++											<span class="icon-stats"></span>Depósitos
++									<% end %>
++								</li>
++						<% end %>
+           </ul>
+         </li>
+       <% end %>
+Index: app/controllers/productos_controller.rb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/controllers/productos_controller.rb	(revision de0080c807648c2349220c901653d7fee497f439)
++++ app/controllers/productos_controller.rb	(revision )
+@@ -5,6 +5,8 @@
+   # GET /productos.json
+   def index
+ 		@destacados = false
++		@freesale = Producto.freesale
++		puts @freesale.to_yaml
+ 		if params[:categoria_id].blank?
+ 			@destacados = true
+ 			@productos = Producto.destacados
+@@ -24,7 +26,7 @@
+ 			session.delete(:view_type)
+ 		end
+ 		@view_type = session[:view_type]
+-    @ciclo_actual = Compra::ciclo_actual
++    @ciclos_actuales = Compra::ciclos_actuales
+ 
+     @productos = @productos.disponibles.order(:orden, :nombre) if current_usuario.nil? || !current_usuario.admin?
+ 
+@@ -113,7 +115,6 @@
+   private
+     # Use callbacks to share common setup or constraints between actions.
+     def set_producto
+-
+       @producto = Producto.find(params[:id])
+     end
+ 
+Index: app/views/carts/show.html.erb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/views/carts/show.html.erb	(revision de0080c807648c2349220c901653d7fee497f439)
++++ app/views/carts/show.html.erb	(revision )
+@@ -1,3 +1,4 @@
++<%= javascript_include_tag "cart" %>
+ <div class="container fill">
+   <div class="row">
+     <% flash.each do |key, value| %>
+@@ -14,109 +15,23 @@
+       </div>
+     <% end %>
+   </div>
+-
+-  <% if @ciclo_actual && current_usuario && current_usuario.circulo &&
+-      !current_usuario.pedido?(Compra::ciclo_actual) &&
+-      @ciclo_actual.circulos.include?(current_usuario.circulo) %>
+-      <div class="row">
+-        <h3 class="titulo">Revisa tu pedido y confirmalo.</h3>
+-
+-        <p class="explicacion">
+-          <b>Ciclo Actual: Desde el <%= l @ciclo_actual.fecha_inicio_compras %> hasta el <%= l @ciclo_actual.fecha_fin_compras %></b><br/>
+-          <b>Ultimo dia para pago:</b> <%= l @ciclo_actual.fecha_fin_pagos %><br/><br/>
+-          A continuación, un listado con tu pedido. Revisalo, y si está todo bien,<br />
+-          confirmalo haciendo click en el boton "Finalizar compra".</p>
+-
+-      </div>
+-      <div class="row">
+-        <div class="text-right"><%= link_to('Seguir comprando', productos_path, class: 'btn btn-info') %></div>
+-        <br>
+-      </div>
+-    <% unless @carrito.empty? %>
+-      <div class="table-responsive">
+-
+-        <table class="table">
+-          <thead>
+-            <tr>
+-              <th>&nbsp;</th>
+-              <th>Producto</th>
+-              <th>Código</th>
+-              <th>Precio Unit.</th>
+-              <th>Precio Total</th>
+-              <th>Ahorro Total</th>
+-              <th>Acción</th>
+-            </tr>
+-          </thead>
+-          <tbody>
+-          <% @missing.each do |k, v| %>
+-          <tr>
+-            <td><%= v.id %></td>
+-          </tr>
++	<% if @ciclo_actual.present? %>
++		<% if current_usuario && current_usuario.circulo %>
++			<% if @ciclo_actual_include.present? %>
++				<% if !current_usuario.pedido?(@ciclo_actual_include) %>
++					<%= render 'carts/cart' %>
++				<% else %>
++					<p class="explicacion"><span class="label label-warning">Disculpa. Ya haz realizado tu pedido. Por el momento la misión solo admite un pedido por usuario por ciclo.</span></p>
+-          <% end %>
++				<% end %>
+-          <% @carrito.items.each do |_producto_id, item| %>
+-            <%
+-              mclass ||=  'missing' if @missing.key?(item.producto.id.to_s) %>
+-            <tr class="cart-item <%="#{mclass} "%>">
+-              <td><%= item.cantidad.to_i %> x</td>
+-              <td><%= item.producto.nombre %></td>
+-              <td><%= item.producto.codigo %></td>
+-              <td><%= number_to_currency(item.producto.precio) %></td>
+-              <td><%= number_to_currency(item.total) %></td>
+-              <td><%= number_to_percentage(item.ahorro) %></td>
+-              <td>
+-                <%= button_tag(type: 'button', class: 'btn btn btn-danger btn-xs',
+-                               data: {
+-                                   action: 'remove',
+-                                   productId: item.producto.id
+-                               }) do %>
+-                  <i class="">Borrar</i>
++			<% else %>
++				<p class="explicacion"><span class="label label-warning">Tú Círculo no está habilitado para realizar la compra en este ciclo.</span></p>
+-                <% end %>
++			<% end %>
+-              </td>
+-            </tr>
+-          <%end%>
+-          <% if @transactions.present? %>
+-            <% @transactions.each do |transaction| %>
+-              <tr class="nota-credito">
+-                <td>&nbsp;</td>
+-                <td>&nbsp;</td>
+-                <td>&nbsp;</td>
+-                <td><strong>NOTA DE CRÉDITO:</strong></td>
+-                <td>#<%= transaction.id %></td>
+-                <td><%= number_to_currency(transaction.amount) %></td>
+-                <td></td>
+-              </tr>
+-            <% end %>
+-          <% end %>
+-            <tr class="checkout-totales">
+-              <td>&nbsp;</td>
+-              <td>&nbsp;</td>
+-              <td>&nbsp;</td>
+-              <td><strong>TOTAL:</strong></td>
+-              <td><span class="cart-total"><%= number_to_currency(@carrito.total) %></span></td>
+-              <td><span class="cart-ahorro"><%= number_to_percentage(@carrito.ahorro) %></span></td>
+-              <td>&nbsp;</td>
+-            </tr>
+-          </tbody>
+-        </table>
+-      </div>
+-      <% if @ciclo_actual && current_usuario && current_usuario.circulo && !current_usuario.pedido?(Compra::ciclo_actual) %>
+-        <div class="row text-right">
+-          <%= link_to('Finalizar Compra', create_pedido_path, method: :get, class: "btn btn-success #{'disabled' if @missing.present?}",
+-                      id: 'finalizar') %>
+-        </div>
+-      <% end %>
++		<% elsif @ciclo_actual.tipo == 'free'%>
++				<%= render 'carts/cart_free' %>
+-    <% else %>
++		<% else %>
+-      <h3>No tiene productos agregado a su pedido</h3>
++			<p class="explicacion"><span class="label label-warning">No perteneces a ningun circulo. Comunicate con un coordinador. Recuerda que tu numero de usuario es <b><%= current_usuario.id %></b></span></p>
+-    <% end %>
++		<% end %>
+-  <% elsif !@ciclo_actual %>
++	<% else %>
+-      <p class="explicacion"><span class="label label-warning">No hay un ciclo de compras activo, en estos momentos no se puede relizar el pedido.</span></p>
++			<p class="explicacion"><span class="label label-warning">No hay un ciclo de compras activo, en estos momentos no se puede relizar el pedido.</span></p>
+-  <% elsif current_usuario && !current_usuario.circulo %>
+-      <p class="explicacion"><span class="label label-warning">No perteneces a ningun circulo. Comunicate con un coordinador. Recuerda que tu numero de usuario es <b><%= current_usuario.id %></b></span></p>
+-  <% elsif current_usuario && current_usuario.pedido?(Compra::ciclo_actual) %>
+-      <p class="explicacion"><span class="label label-warning">Disculpa. Ya haz realizado tu pedido. Por el momento la misión solo admite un pedido por usuario por ciclo.</span></p>
+-  <% elsif current_usuario.nil? %>
+-      <p class="explicacion"><span class="label label-warning">Disculpa. Para realizar una compra debes ingresar al sitio (previa registracion).</span></p>
+-  <% elsif !@ciclo_actual.circulos.include?(current_usuario.circulo) %>
+-    <p class="explicacion"><span class="label label-warning">Tú Círculo no está habilitado para realizar la compra en este ciclo.</span></p>
+-  <% end %>
++	<% end %>
+ </div>
+\ No newline at end of file
+Index: app/views/warehouses/edit.html.erb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/views/warehouses/edit.html.erb	(revision )
++++ app/views/warehouses/edit.html.erb	(revision )
+@@ -0,0 +1,9 @@
++<div class="container fill">
++  <h3>Modificar Depósito</h3>
++  <div class="breadcrumb">
++    <%= link_to 'Mostrar', @warehouse%> |
++    <%= link_to 'Atrás', warehouses_path %>
++  </div>
++    <%= render 'form' %>
++
++</div>
+\ No newline at end of file
+Index: app/views/pedidos/index.html.erb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/views/pedidos/index.html.erb	(revision de0080c807648c2349220c901653d7fee497f439)
++++ app/views/pedidos/index.html.erb	(revision )
+@@ -24,6 +24,7 @@
+             <td>Número de pedido</td>
+             <td>Fecha</td>
+             <td>Ciclo</td>
++            <td>Ciclo Tipo</td>
+             <td>Coordinador</td>
+             <td>Consumidor</td>
+             <td>Círculo N°</td>
+@@ -44,6 +45,7 @@
+ 			            <td><%= p.try('id') || 'Sin ID' %></td>
+ 			            <td><%= l (p.try('created_at')) || 'SIN FECHA' %></td>
+ 			            <td><%= p.ciclo.try('nombre') || 'SIN CICLO' %></td>
++			            <td><%= p.ciclo.try('tipo') || '' %></td>
+ 			            <td><%= p.circulo.try('coordinador') ? (p.circulo.coordinador.nombre + ' ' + p.circulo.coordinador.apellido) : 'SIN COORDINADOR' %></td>
+ 			            <td><%= (p.usuario.try('nombre') ? (p.usuario.nombre) : '---' )+ ' ' + (p.usuario.try('apellido')? (p.usuario.apellido) : '---')  %></td>
+ 			            <td><%= p.circulo.try('id') || "SIN CIRCULO" %></td>
+@@ -51,7 +53,7 @@
+ 			              <%= link_to('Ver', pedido_path(p), class: 'btn btn-info btn-mini') %>
+ 			            </td>
+ 			            <td>
+-			              <% if(p.ciclo.id && Compra::ciclo_actual.try(:id) == p.ciclo.id)%>
++			              <% if(p.ciclo.id && Compra::get_ciclo_actual(@ciclos_actuales, p.usuario) == p.ciclo.id)%>
+ 			                <%= link_to('Modificar',
+ 			                      edit_pedido_path(p),
+ 			                      data: { confirm: 'Luego de modificar el pedido recuerda volver a enviarlo.' },
+Index: app/views/carts/_cart_free.html.erb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/views/carts/_cart_free.html.erb	(revision )
++++ app/views/carts/_cart_free.html.erb	(revision )
+@@ -0,0 +1,71 @@
++<div class="row">
++	<h3 class="titulo">Revisa tu pedido y confirmalo.</h3>
++
++	<p class="explicacion">
++		<b>Ciclo Actual: Desde el <%= l @ciclo_actual.fecha_inicio_compras %> hasta el <%= l @ciclo_actual.fecha_fin_compras %></b><br/>
++		<b>Ultimo dia para pago:</b> <%= l @ciclo_actual.fecha_fin_pagos %><br/><br/>
++		A continuación, un listado con tu pedido. Revisalo, y si está todo bien,<br />
++		confirmalo haciendo click en el boton "Finalizar compra" que se encuentra debajo del formulario.</p>
++
++</div>
++<div class="row">
++	<div class="text-right"><%= link_to('Seguir comprando', productos_path, class: 'btn btn-info') %></div>
++	<br>
++</div>
++<% unless @carrito.empty? %>
++		<div class="table-responsive">
++
++			<table class="table">
++				<thead>
++				<tr>
++					<th>&nbsp;</th>
++					<th>Producto</th>
++					<th>Código</th>
++					<th>Precio Unit.</th>
++					<th>Precio Total</th>
++					<th>Acción</th>
++				</tr>
++				</thead>
++				<tbody>
++				<% @missing.each do |k, v| %>
++						<tr>
++							<td><%= v.id %></td>
++						</tr>
++				<% end %>
++				<% @carrito.items.each do |_producto_id, item| %>
++						<%
++							mclass ||=  'missing' if @missing.key?(item.producto.id.to_s) %>
++						<tr class="cart-item <%="#{mclass} "%>">
++							<td><%= item.cantidad.to_i %> x</td>
++							<td><%= item.producto.nombre %></td>
++							<td><%= item.producto.codigo %></td>
++							<td><%= number_to_currency(item.producto.precio) %></td>
++							<td><%= number_to_currency(item.total) %></td>
++							<td>
++								<%= button_tag(type: 'button', class: 'btn btn btn-danger btn-xs',
++															 data: {
++																	 action: 'remove',
++																	 productId: item.producto.id
++															 }) do %>
++										<i class="">Borrar</i>
++								<% end %>
++							</td>
++						</tr>
++				<%end%>
++				<tr class="checkout-totales">
++					<td>&nbsp;</td>
++					<td>&nbsp;</td>
++					<td>&nbsp;</td>
++					<td><strong>TOTAL:</strong></td>
++					<td><span class="cart-total"><%= number_to_currency(@carrito.total) %></span></td>
++					<td>&nbsp;</td>
++				</tr>
++				</tbody>
++			</table>
++		</div>
++		<% if !current_usuario %>
++				<%= render 'carts/register_guest' %>
++		<% end %>
++<% else %>
++		<h3>No tiene productos agregado a su pedido</h3>
++<% end %>
+Index: app/views/carts/_register_guest.html.erb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/views/carts/_register_guest.html.erb	(revision )
++++ app/views/carts/_register_guest.html.erb	(revision )
+@@ -0,0 +1,97 @@
++<div class="row">
++	<div class="col-md-2">
++
++	</div>
++	<div class="col-md-8">
++		<%= form_for :usuarios, url: create_pedido_path,  method: :get, html: {id: 'register-guest'} do |f| %>
++			<div class="panel panel-info">
++				<div class="panel-heading">
++					<h4>Datos para la compra</h4>
++				</div>
++				<div class="panel-body">
++					<div class="col-md-5 vcenter">
++
++						<h1>Completa con tus datos y sé parte de la Misión</h1>
++						<p>
++							Una vez completado el formulario, un email te será enviado para confirmar tu casilla de correo. Sigue el link que aparece en el correo recibido para activar tu cuenta.
++						</p>
++						<p>
++							Con tu cuenta activada estas a un paso de poder realizar tu pedido.
++						</p>
++						<p>
++							Ingresa al sitio y consulta en MIS DATOS (opción del menu) tu numero de identificación. Comunicaselo al coordinador de tu círculo para que este te haga parte del mismo y puedas enviar tu pedido!
++						</p>
++					</div>
++					<div class="col-md-7">
++
++						<h3>Consumidor Colaborativo</h3>
++						<%= f.hidden_field :guest, value: 1 %>
++						<%= f.hidden_field :ciclo_actual, value: "#{@ciclo_actual.id}" %>
++						<%= f.hidden_field :password, value: "#{@ciclo_actual.fecha_inicio_compras}" %>
++						<div id="errorMessages" class="alert alert-danger hide">
++							<span></span>
++						</div>
++						<div class="form-group">
++							<label for="nombre">Nombre: <span>[requerido]</span></label>
++							<%= f.text_field :nombre, class:'form-control' %>
++							<div id="error-name"></div>
++						</div>
++						<div class="form-group">
++							<label for="apellido">Apellido: <span>[requerido]</span></label>
++							<%= f.text_field :apellido, class: 'form-control' %>
++							<div id="error-lastname"></div>
++						</div>
++						<div class="form-group">
++							<label for="email">Correo Electrónico: <span>[requerido]</span></label>
++							<%= f.email_field :email, class: 'form-control' %>
++							<small id="emailHelp" class="form-text text-muted">ejemplo: tucorreo@gmail.com</small>
++							<div id="error-email"></div>
++						</div>
++						<div class="form-group">
++							<label for="dni">D.N.I.: <span>[requerido]</span></label>
++							<%= f.text_field :dni, class: 'form-control' %>
++							<small id="dniHelp" class="form-text text-muted">Tiene que presentarse para retirar los productos</small>
++							<div id="error-dni"></div>
++						</div>
++						<div class="form-group">
++							<label for="domicilio">Domicilio: <span>[requerido]</span></label>
++							<%= f.text_field :calle, class: 'form-control' %>
++							<small id="domicilioHelp" class="form-text text-muted">ejemplo: Calle Nº Piso Depto.</small>
++							<div id="error-address"></div>
++						</div>
++
++						<div class="form-group">
++							<label for="celular">Celular: <span>[requerido]</span></label>
++							<%= f.text_field :cel1, class: 'form-control' %>
++							<div id="error-celphone"></div>
++						</div>
++						<div class="panel panel-default">
++							<div class="panel-heading">
++								<h4>Seleccione el lugar donde quiere retirar</h4>
++							</div>
++							<div class="panel-body">
++								<div class="form-group">
++									<div class="radio">
++										<% Warehouse.all.each do |warehouse| %>
++												<label>
++													<%= f.radio_button :warehouse, warehouse.id %>
++													<%= warehouse.name %>
++												</label>
++												<br>
++												<small id="warehouseHelp" class="form-text text-muted"><%= warehouse.address %></small>
++										<% end %>
++									</div>
++									<div id="error-warehouse"></div>
++								</div>
++							</div>
++						</div>
++					</div>
++
++				</div>
++			</div>
++				<div class="form-group">
++					<div><%= submit_tag "Realizar pedido", class: "btn btn-success pull-right #{'disabled' if @missing.present?}" %></div>
++				</div>
++		<% end %>
++	</div>
++</div>
+Index: config/application.rb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- config/application.rb	(revision de0080c807648c2349220c901653d7fee497f439)
++++ config/application.rb	(revision )
+@@ -24,6 +24,8 @@
+     config.assets.enabled = true
+     config.assets.paths << "#{Rails.root}/app/assets"
+ 
++		config.assets.initialize_on_precompile = false
++
+ 		config.before_configuration do
+ 			env_file = File.join(Rails.root, 'config', 'local_env.yml')
+ 			YAML.load(File.open(env_file)).each do |key, value|
+Index: app/views/warehouses/_form.html.erb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/views/warehouses/_form.html.erb	(revision )
++++ app/views/warehouses/_form.html.erb	(revision )
+@@ -0,0 +1,49 @@
++<%= form_for(@warehouse) do |f| %>
++  <% if @warehouse.errors.any? %>
++    <div id="error_explanation">
++      <h2><%= pluralize(@warehouse.errors.count, "error") %> prohibited this warehouse from being saved:</h2>
++
++      <ul>
++      <% @warehouse.errors.full_messages.each do |message| %>
++        <li><%= message %></li>
++      <% end %>
++      </ul>
++    </div>
++  <% end %>
++
++
++  <fieldset class="form-group">
++		<%= f.label :name, 'Nombre', for: 'name' %>
++		<%= f.text_field :name, class:'form-control' %>
++  </fieldset>
++
++	<fieldset class="form-group">
++		<%= f.label :address, 'Dirección', for: 'address' %>
++		<%= f.text_field :address, class:'form-control' %>
++	</fieldset>
++
++	<fieldset class="form-group">
++		<%= f.label :telephone, 'Teléfono', for: 'telephone' %>
++		<%= f.text_field :telephone, class:'form-control' %>
++	</fieldset>
++
++	<fieldset class="form-group">
++		<%= f.label :working_hours, 'Horario atención', for: 'working_hours' %>
++		<%= f.text_field :working_hours, class:'form-control' %>
++	</fieldset>
++
++	<fieldset class="form-group">
++		<%= f.label :attendant, 'Encargado', for: 'attendant' %>
++		<%= f.text_field :attendant, class:'form-control' %>
++	</fieldset>
++
++	<div class="field">
++		<%= f.label :description, for: 'description' %><br>
++		<%= f.text_area :description, class:'form-control' %>
++	</div>
++
++
++  <div class="actions form-group">
++    <%= f.submit class: 'btn btn-success' %>
++  </div>
++<% end %>
+\ No newline at end of file
+Index: app/models/warehouse.rb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/models/warehouse.rb	(revision )
++++ app/models/warehouse.rb	(revision )
+@@ -0,0 +1,3 @@
++class Warehouse < ActiveRecord::Base
++
++end
+Index: app/controllers/user/omniauth_callbacks_controller.rb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/controllers/user/omniauth_callbacks_controller.rb	(revision )
++++ app/controllers/user/omniauth_callbacks_controller.rb	(revision )
+@@ -0,0 +1,13 @@
++class User::OmniauthCallbacksController < Devise::OmniauthCallbacksController
++
++	def facebook
++		@usuario = Identity.find_for_facebook_oauth(request.env["omniauth.auth"])
++
++		if @usuario.persisted?
++			session['devise.facebook_data'] = request.env["omniauth.auth"]
++			redirect_to usuario_path(@usuario)
++		else
++			redirect_to '/'
++		end
++	end
++end
+\ No newline at end of file
+Index: app/views/compras/index.html.erb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/views/compras/index.html.erb	(revision de0080c807648c2349220c901653d7fee497f439)
++++ app/views/compras/index.html.erb	(revision )
+@@ -5,34 +5,45 @@
+                 new_compra_path,
+                 :class => 'btn btn-primary' if can? [:manage], Compra %>
+   </div>
++	<div class="table-responsive">
+-  <table class="table table-striped">
+-    <thead>
+-    <tr>
+-      <th>Nombre</th>
++		<table class="table table-striped">
++			<thead>
++			<tr>
++				<th>Nombre</th>
++				<th>Tipo</th>
+-      <th>Fecha inicio pedidos</th>
+-      <th>Fecha fin pedidos</th>
++				<th>Fecha inicio pedidos</th>
++				<th>Fecha fin pedidos</th>
++				<th>Fecha inicio pagos</th>
+-      <th>Fecha fin pagos</th>
++				<th>Fecha fin pagos</th>
++				<th>Fecha inicio armado</th>
++				<th>Fecha fin armado</th>
+-      <th>Fecha entrega</th>
+-      <th>&nbsp;</th>
+-      <th>&nbsp;</th>
+-      <th>&nbsp;</th>
+-    </tr>
+-    </thead>
++				<th>Fecha entrega</th>
++				<th>&nbsp;</th>
++				<th>&nbsp;</th>
++				<th>&nbsp;</th>
++			</tr>
++			</thead>
+ 
+-    <tbody>
+-    <% @compras.each do |compra| %>
+-        <tr>
+-          <td><%= compra.nombre %></td>
++			<tbody>
++			<% @compras.each do |compra| %>
++					<tr>
++						<td><%= compra.nombre %></td>
+-          <td><%= l compra.fecha_inicio_compras %></td>
+-          <td><%= l compra.fecha_fin_compras %></td>
+-          <td><%= l compra.fecha_fin_pagos %></td>
+-          <td><%= l compra.fecha_entrega_compras %></td>
++						<td><%= compra.tipo.present? ? t(compra.tipo) : 'Círculos'%></td>
++						<td><%= compra.fecha_inicio_compras.present? ? l(compra.fecha_inicio_compras) : 'Sin fecha' %></td>
++						<td><%= compra.fecha_fin_compras.present? ? l(compra.fecha_fin_compras) : 'Sin fecha' %></td>
++						<td><%= compra.fecha_inicio_pagos.present? ? l(compra.fecha_inicio_pagos) : 'Sin fecha'  %></td>
++						<td><%= compra.fecha_fin_pagos.present? ? l(compra.fecha_fin_pagos) : 'Sin fecha' %></td>
++						<td><%= compra.fecha_inicio_armado.present? ? l(compra.fecha_inicio_armado) : 'Sin fecha' %></td>
++						<td><%= compra.fecha_fin_armado.present? ? l(compra.fecha_fin_armado) : 'Sin fecha' %></td>
++						<td><%= compra.fecha_entrega_compras.present? ? l(compra.fecha_entrega_compras) : 'Sin fecha' %></td>
+-          <td><%= link_to 'Modificar', edit_compra_path(compra), class: "btn btn-default btn-xs" %></td>
+-          <td><%= link_to 'Entrega', compra_path(compra.id), class: "btn btn-default btn-xs" %></td>
+-          <td><%= link_to 'Clonar', clone_path(compra.id), class: "btn btn-warning btn-xs" %></td>
+-        </tr>
+-    <% end %>
+-    </tbody>
+-  </table>
++						<td><%= link_to 'Modificar', edit_compra_path(compra), class: "btn btn-default btn-xs" %></td>
++						<td><%= link_to 'Entrega', compra_path(compra.id), class: "btn btn-default btn-xs" %></td>
++						<td><%= link_to 'Clonar', clone_path(compra.id), class: "btn btn-warning btn-xs" %></td>
++					</tr>
++			<% end %>
++			</tbody>
++		</table>
++	</div>
++
+ 
+ </div>
+\ No newline at end of file
+Index: app/models/producto.rb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/models/producto.rb	(revision de0080c807648c2349220c901653d7fee497f439)
++++ app/models/producto.rb	(revision )
+@@ -13,7 +13,7 @@
+ 
+   scope :disponibles, -> { where(oculto: false) }
+ 
+-  after_initialize :default_cantidad_permitida
++	after_initialize :default_cantidad_permitida
+ 
+   def default_cantidad_permitida
+     self.cantidad_permitida ||= 10
+@@ -103,6 +103,10 @@
+ 		Producto.where("highlight = :destacado", destacado: true).order(:orden)
+ 	end
+ 
++	def self.freesale
++		Producto.where("sale_type = :free and oculto = :oculto" , free: 1, oculto: false).order(:orden)
++	end
++
+ 	def self.bySubcategoria(categoria_id, subcategoria_id)
+ 		Producto.joins(:categorias)
+ 				.where(
+Index: app/controllers/carts_controller.rb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/controllers/carts_controller.rb	(revision de0080c807648c2349220c901653d7fee497f439)
++++ app/controllers/carts_controller.rb	(revision )
+@@ -5,7 +5,13 @@
+   # before_action :set_carrito, only: [:show, :add, :remove]
+ 
+   def show
+-    @ciclo_actual = Compra::ciclo_actual
++    @ciclos_actuales = Compra::ciclos_actuales
++		if current_usuario
++			@ciclo_actual = Compra::get_ciclo_actual(@ciclos_actuales, current_usuario.id).last
++			@ciclo_actual_include = @ciclo_actual.deliveries.where(circulo_id: current_usuario.circulo.id).last
++		else
++			@ciclo_actual = @ciclos_actuales.where(tipo:1).last
++		end
+     @missing = @carrito.check_item_stock
+     if usuario_signed_in? && !current_usuario.admin?
+         @transactions = Transaction.where(["account_id = :id and pedido_id is null", {id: current_usuario.account.id }])
+@@ -13,23 +19,49 @@
+   end
+ 
+   def add
+-    @carrito.add(params[:producto_id], params[:cantidad])
+-    render json: @carrito.to_json, status: 200
++			@carrito.add(params[:producto_id], params[:cantidad])
++			render json: @carrito.to_json, status: 200
+   end
+ 
+   def remove
+     @carrito.remove(params[:producto_id])
+     render json: @carrito.to_json, status: 200
+-  end
++	end
+ 
+   def create_pedido
++		@ciclos_actuales = Compra::ciclos_actuales
++		if current_usuario
++			@ciclo_actual = Compra::get_ciclo_actual(@ciclos_actuales, current_usuario.id).last
++			@ciclo_actual_include = @ciclo_actual.deliveries.where(circulo_id: current_usuario.circulo.id).last
+-    transactions = Transaction.where(["account_id = :id and pedido_id is null", {id: current_usuario.account.id }])
++			transactions = Transaction.where(["account_id = :id and pedido_id is null", {id: current_usuario.account.id }])
++		else
++			@ciclo_actual = Compra.find(params[:usuarios][:ciclo_actual])
++			usuario = Usuario.find_by_email(params[:usuarios][:email])
++			if usuario.blank?
++				new_usuario = Usuario.new(
++						email: params[:usuarios][:email],
++						nombre: params[:usuarios][:nombre],
++						apellido: params[:usuarios][:apellido],
++						password: ::BCrypt::Password.create(params[:usuarios][:password]).to_s,
++						calle: params[:usuarios][:calle],
++						ciudad: 'Rosario',
++						pais: 'Argentina',
++						cel1: params[:usuarios][:cel1],
++						dni: params[:usuarios][:dni]
++				)
++				if new_usuario.save!
++					usuario = new_usuario
++				end
++			end
++		end
+     pedido = Pedido.new
+-    ciclo_id = Compra.ciclo_actual.id
++    ciclo_id = @ciclo_actual.id
+     pedido.items = @carrito.items.map { |_k,item| item.purchase_data }.to_json
+-    pedido.usuario_id = current_usuario.id
+-    pedido.circulo_id = current_usuario.circulo_id
++    pedido.usuario_id = current_usuario.present? ? current_usuario.id : usuario.id
++    pedido.circulo_id = current_usuario.present? ? current_usuario.circulo.id : ''
++		if current_usuario
+-    circulo = Circulo.find(pedido.circulo_id)
++			circulo = Circulo.find(pedido.circulo_id)
++		end
+     pedido.compra_id = ciclo_id
+     missing = @carrito.check_item_stock
+     respond_to do |format|
+@@ -41,8 +73,17 @@
+ 							transaction.save
+ 						end
+ 					end
+-					delivery = circulo.deliveries.where(compra_id: ciclo_id)
+-					if delivery.take.delivery_time.blank?
++					if circulo.present?
++						delivery = circulo.deliveries.find_by(compra_id: ciclo_id).take
++					else
++						delivery = Delivery.new(
++																	 usuarios_id: usuario.id,
++																	 compra_id: ciclo_id,
++																	 delivery_time: @ciclo_actual.fecha_entrega_compras,
++																	 warehouses_id: params[:usuarios][:warehouse]
++						).save
++					end
++					if delivery.blank?
+ 						Sector.all.each do |sector|
+ 							if sector.id == Sector::CONSUMERS
+ 								status_id = Status::SCHEDULED
+@@ -50,12 +91,12 @@
+ 								status_id = nil
+ 							end
+ 							delivery_status = DeliveryStatus.create(
+-									delivery_id: delivery.take.id,
++									delivery_id: delivery.id,
+ 									sector_id: sector.id,
+ 									status_id: status_id
+ 							)
+-							delivery.take.delivery_time = Compra.ciclo_actual.fecha_entrega_compras
+-							delivery.take.save
++							delivery.delivery_time = @ciclo_actual.fecha_entrega_compras
++							delivery.save
+ 							delivery_status.save
+ 						end
+ 					end
+Index: app/models/compra.rb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/models/compra.rb	(revision de0080c807648c2349220c901653d7fee497f439)
++++ app/models/compra.rb	(revision )
+@@ -2,27 +2,36 @@
+   #has_and_belongs_to_many :circulos
+   has_many :deliveries
+   has_many :circulos, :through => :deliveries
++	enum tipo: [:circles, :free]
+ 
+   validates :nombre, :descripcion, :fecha_inicio_compras, :fecha_fin_compras,
+             :fecha_fin_pagos, :fecha_entrega_compras, presence: true
+ 
+   after_initialize :init
+ 
+-
+   def init
+     self.fecha_inicio_compras ||= Time.current
+     self.fecha_fin_compras ||= Time.current
++    self.fecha_inicio_pagos ||= Time.current
+     self.fecha_fin_pagos ||= Time.current
++    self.fecha_inicio_armado ||= Time.current
++    self.fecha_fin_armado ||= Time.current
+     self.fecha_entrega_compras ||= Time.current
+   end
+ 
+-  def self.ciclo_actual
+-    Compra.where('fecha_inicio_compras <= :today AND fecha_fin_compras >= :today', today: Time.current).first
++  def self.ciclos_actuales
++    Compra.where('fecha_inicio_compras <= :today AND fecha_fin_compras >= :today', today: Time.current)
+   end
+ 
+-  def self.ciclo_actual_completo
++  def self.ciclos_actuales_completos
+     Compra.where('fecha_inicio_compras <= :today AND fecha_entrega_compras >= :today', today: Time.current).first
++	end
++
++	def self.get_ciclo_actual(ciclos, usuario_id)
++		ciclos.each do |ciclo|
++			return ciclo if ciclo.deliveries.exists?(usuario_id)
++		end
+-  end
++	end
+ 
+   def self.get_last_status(sectors, delivery_id)
+     last_status = 0
+Index: app/views/compras/_form.html.erb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/views/compras/_form.html.erb	(revision de0080c807648c2349220c901653d7fee497f439)
++++ app/views/compras/_form.html.erb	(revision )
+@@ -15,7 +15,22 @@
+     <%= f.label :nombre %><br>
+     <%= f.text_field :nombre, :class => 'form-control' %>
+   </div>
+-  <div class="form-group">
++	<div class="form-group">
++		<%= f.label :tipo %>
++		<div class="radio">
++			<label>
++				<%= f.radio_button :tipo, 'circulos', checked: (@compra.tipo == 0 || @compra.tipo.nil?) ? true : false%>
++				Círculos
++			</label>
++		</div>
++		<div class="radio">
++			<label>
++				<%= f.radio_button :tipo, 'free' , checked: (@compra.tipo == 'free') ? true : false  %>
++				Libre
++			</label>
++		</div>
++	</div>
++  <div class="form-group">
+     <%= f.label :descripcion %><br>
+     <%= f.text_area :descripcion, :class => 'form-control' %>
+   </div>
+@@ -27,43 +42,28 @@
+     <%= f.label :fecha_fin_compras %><br>
+     <%= select_datetime @compra.fecha_fin_compras, prefix: 'compra[fecha_fin_compras]', :class => 'form-control' %>
+   </div>
+-  <div class="form-groupm">
++		<div class="form-group">
++			<%= f.label :fecha_inicio_pagos %><br>
++			<%= select_datetime @compra.fecha_inicio_pagos, prefix: 'compra[fecha_inicio_pagos]', :class => 'form-control' %>
++		</div>
++  <div class="form-group">
+     <%= f.label :fecha_fin_pagos %><br>
+     <%= select_datetime @compra.fecha_fin_pagos, prefix: 'compra[fecha_fin_pagos]', :class => 'form-control' %>
+   </div>
+-  <div class="form-group">
++	<div class="form-group">
++		<%= f.label :fecha_inicio_armado %><br>
++		<%= select_datetime @compra.fecha_inicio_armado, prefix: 'compra[fecha_inicio_armado]', :class => 'form-control' %>
++	</div>
++	<div class="form-group">
++		<%= f.label :fecha_fin_armado %><br>
++		<%= select_datetime @compra.fecha_fin_armado, prefix: 'compra[fecha_fin_armado]', :class => 'form-control' %>
++	</div>
++  <div class="form-group">
+     <%= f.label :fecha_entrega_compras %><br>
+     <%= select_datetime @compra.fecha_entrega_compras, prefix: 'compra[fecha_entrega_compras]', :class => 'form-control' %>
+   </div>
+ 
+-  <div class="panel panel-default">
+-    <div class="panel-heading">
+-      <h3 class="panel-title">Círculos</h3>
+-    </div>
+-    <div class="panel-body">
+-
+-      <table class="table table-striped">
+-        <thead>
+-        <tr>
+-          <th>Nro Circulo</th>
+-          <th>Coordinador</th>
+-          <th colspan="3"></th>
+-        </tr>
+-        </thead>
+-
+-        <tbody>
+-        <% Circulo.all.each do |circulo| %>
+-          <tr>
+-            <td><%= circulo.id %></td>
+-            <td><%= circulo.try('coordinador').try('nombre_completo') || 'Sin Coordinador' %></td>
+-            <td><%= check_box_tag "compra[circulo_ids][]", circulo.id, @compra.circulos.include?(circulo) %></td>
+-          </tr>
+-        <% end %>
+-        </tbody>
+-      </table>
+-    </div>
+-    <div class="panel-footer"></div>
+-  </div>
++	<%= render 'compras/form_circulos' %>
+ 
+   <div class="actions">
+     <%= f.submit "Crear Ciclo", class: 'btn btn-success' %>
+Index: db/migrate/20161207214357_add_columms_armado_to_compras.rb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- db/migrate/20161207214357_add_columms_armado_to_compras.rb	(revision )
++++ db/migrate/20161207214357_add_columms_armado_to_compras.rb	(revision )
+@@ -0,0 +1,8 @@
++class AddColummsArmadoToCompras < ActiveRecord::Migration
++  def change
++		add_column :compras, :fecha_inicio_pagos, :datetime, after: :fecha_fin_compras
++		add_column :compras, :fecha_inicio_armado, :datetime
++		add_column :compras, :fecha_fin_armado, :datetime
++		add_column :compras, :tipo, :integer
++  end
++end
+Index: app/views/warehouses/new.html.erb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/views/warehouses/new.html.erb	(revision )
++++ app/views/warehouses/new.html.erb	(revision )
+@@ -0,0 +1,7 @@
++<div class="container fill">
++	<h3>Nuevo depósito</h3>
++	<div class="breadcrumb">
++		<%= link_to 'Volver', warehouses_path %>
++	</div>
++	<%= render 'form' %>
++</div>
+\ No newline at end of file
+Index: app/views/carts/_cart.html.erb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/views/carts/_cart.html.erb	(revision )
++++ app/views/carts/_cart.html.erb	(revision )
+@@ -0,0 +1,90 @@
++<div class="row">
++	<h3 class="titulo">Revisa tu pedido y confirmalo.</h3>
++
++	<p class="explicacion">
++		<b>Ciclo Actual: Desde el <%= l @ciclo_actual.fecha_inicio_compras %> hasta el <%= l @ciclo_actual.fecha_fin_compras %></b><br/>
++		<b>Ultimo dia para pago:</b> <%= l @ciclo_actual.fecha_fin_pagos %><br/><br/>
++		A continuación, un listado con tu pedido. Revisalo, y si está todo bien,<br />
++		confirmalo haciendo click en el boton "Finalizar compra".</p>
++
++</div>
++<div class="row">
++	<div class="text-right"><%= link_to('Seguir comprando', productos_path, class: 'btn btn-info') %></div>
++	<br>
++</div>
++<% unless @carrito.empty? %>
++		<div class="table-responsive">
++
++			<table class="table">
++				<thead>
++				<tr>
++					<th>&nbsp;</th>
++					<th>Producto</th>
++					<th>Código</th>
++					<th>Precio Unit.</th>
++					<th>Precio Total</th>
++					<th>Ahorro Total</th>
++					<th>Acción</th>
++				</tr>
++				</thead>
++				<tbody>
++				<% @missing.each do |k, v| %>
++						<tr>
++							<td><%= v.id %></td>
++						</tr>
++				<% end %>
++				<% @carrito.items.each do |_producto_id, item| %>
++						<%
++							mclass ||=  'missing' if @missing.key?(item.producto.id.to_s) %>
++						<tr class="cart-item <%="#{mclass} "%>">
++							<td><%= item.cantidad.to_i %> x</td>
++							<td><%= item.producto.nombre %></td>
++							<td><%= item.producto.codigo %></td>
++							<td><%= number_to_currency(item.producto.precio) %></td>
++							<td><%= number_to_currency(item.total) %></td>
++							<td><%= number_to_percentage(item.ahorro) %></td>
++							<td>
++								<%= button_tag(type: 'button', class: 'btn btn btn-danger btn-xs',
++															 data: {
++																	 action: 'remove',
++																	 productId: item.producto.id
++															 }) do %>
++										<i class="">Borrar</i>
++								<% end %>
++							</td>
++						</tr>
++				<%end%>
++				<% if @transactions.present? %>
++						<% @transactions.each do |transaction| %>
++								<tr class="nota-credito">
++									<td>&nbsp;</td>
++									<td>&nbsp;</td>
++									<td>&nbsp;</td>
++									<td><strong>NOTA DE CRÉDITO:</strong></td>
++									<td>#<%= transaction.id %></td>
++									<td><%= number_to_currency(transaction.amount) %></td>
++									<td></td>
++								</tr>
++						<% end %>
++				<% end %>
++				<tr class="checkout-totales">
++					<td>&nbsp;</td>
++					<td>&nbsp;</td>
++					<td>&nbsp;</td>
++					<td><strong>TOTAL:</strong></td>
++					<td><span class="cart-total"><%= number_to_currency(@carrito.total) %></span></td>
++					<td><span class="cart-ahorro"><%= number_to_percentage(@carrito.ahorro) %></span></td>
++					<td>&nbsp;</td>
++				</tr>
++				</tbody>
++			</table>
++		</div>
++		<% if @ciclo_actual && current_usuario && current_usuario.circulo && !current_usuario.pedido?(Compra:@ciclo_actual) %>
++				<div class="row text-right">
++					<%= link_to('Finalizar Compra', create_pedido_path, method: :get, class: "btn btn-success #{'disabled' if @missing.present?}",
++											id: 'finalizar') %>
++				</div>
++		<% end %>
++<% else %>
++		<h3>No tiene productos agregado a su pedido</h3>
++<% end %>
+Index: app/controllers/callbacks_controller.rb
+===================================================================
+--- app/controllers/callbacks_controller.rb	(revision de0080c807648c2349220c901653d7fee497f439)
++++ app/controllers/callbacks_controller.rb	(revision de0080c807648c2349220c901653d7fee497f439)
+@@ -1,6 +0,0 @@
+-class CallbacksController < Devise::OmniauthCallbacksController
+-	def facebook
+-		@usuario = Usuario.from_omniauth(request.env["omniauth.auth"])
+-		sign_in_and_redirect @usuario
+-	end
+-end
+\ No newline at end of file
+Index: app/views/warehouses/show.html.erb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/views/warehouses/show.html.erb	(revision )
++++ app/views/warehouses/show.html.erb	(revision )
+@@ -0,0 +1,2 @@
++<h1>Warehouses#show</h1>
++<p>Find me in app/views/warehouses/show.html.erb</p>
+Index: app/assets/javascripts/cart.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/assets/javascripts/cart.js	(revision )
++++ app/assets/javascripts/cart.js	(revision )
+@@ -0,0 +1,43 @@
++
++$(document).ready(function() {
++	$("#register-guest").validate({
++		rules: {
++			'usuarios[warehouse]': "required",
++			'usuarios[email]': {
++				required: true,
++				email: true
++			},
++			'usuarios[nombre]': 'required',
++			'usuarios[apellido]': 'required',
++			'usuarios[dni]': 'required',
++			'usuarios[calle]': 'required',
++			'usuarios[cel1]': 'required',
++		},
++		messages: {
++			'usuarios[warehouse]': "Indique donde retira",
++			'usuarios[email]': {
++				required: "Necesitamos su email, para contactarlo",
++				email: "Su email tiene que tener la forma nombre@dominio.com"
++			},
++			'usuarios[nombre]': 'El Nombre es requerido',
++			'usuarios[apellido]': 'El Apellido es requerido',
++			'usuarios[dni]': 'El DNI es requerido',
++			'usuarios[calle]': 'El Domicilio es requerido',
++			'usuarios[cel1]': 'El Celular es requerido',
++		},
++		invalidHandler: function(event, validator) {
++			// 'this' refers to the form
++			var errors = validator.numberOfInvalids();
++			if (errors) {
++				var message = errors == 1
++					? 'Debe completar el campo requerido'
++					: 'Complete los ' + errors + ' campos requeridos';
++				$("#errorMessages span").html(message);
++				$("#errorMessages").removeClass('hide');
++			} else {
++				$("#errorMessages").addClass('hide');
++			}
++		}
++
++	});
++})
+\ No newline at end of file
+Index: app/controllers/compras_controller.rb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/controllers/compras_controller.rb	(revision de0080c807648c2349220c901653d7fee497f439)
++++ app/controllers/compras_controller.rb	(revision )
+@@ -28,8 +28,9 @@
+ 	def clone
+ 		@source = Compra.find(params[:id])
+ 		@compra = @source.dup
++		@circulos = {}
+ 		@source.deliveries.each do |delivery|
+-			@compra.deliveries << delivery.dup
++			@circulos[delivery.circulo_id] = delivery.clone
+ 		end
+ 		render :new
+ 	end
+@@ -128,14 +129,18 @@
+ 
+     # Never trust parameters from the scary internet, only allow the white list through.
+     def compra_params
+-      filtered_params = params.require(:compra).permit(:nombre, :descripcion, 
++      filtered_params = params.require(:compra).permit(:nombre, :descripcion, :tipo,
+         :fecha_inicio_compras => [:year, :month, :day, :hour, :minute],
+         :fecha_fin_compras => [:year, :month, :day, :hour, :minute],
++        :fecha_inicio_pagos => [:year, :month, :day, :hour, :minute],
+         :fecha_fin_pagos => [:year, :month, :day, :hour, :minute],
++        :fecha_inicio_armado => [:year, :month, :day, :hour, :minute],
++        :fecha_fin_armado => [:year, :month, :day, :hour, :minute],
+         :fecha_entrega_compras => [:year, :month, :day, :hour, :minute],
+         circulo_ids:[])
+       { nombre: filtered_params[:nombre],
+         descripcion: filtered_params[:descripcion],
++				tipo: filtered_params[:tipo],
+         circulo_ids: filtered_params["circulo_ids"],
+         fecha_inicio_compras: Time.utc(
+           filtered_params[:fecha_inicio_compras][:year],
+@@ -149,12 +154,30 @@
+           filtered_params[:fecha_fin_compras][:day],
+           filtered_params[:fecha_fin_compras][:hour],
+           filtered_params[:fecha_fin_compras][:min]),
++				fecha_inicio_pagos: Time.utc(
++						filtered_params[:fecha_inicio_pagos][:year],
++						filtered_params[:fecha_inicio_pagos][:month],
++						filtered_params[:fecha_inicio_pagos][:day],
++						filtered_params[:fecha_inicio_pagos][:hour],
++						filtered_params[:fecha_inicio_pagos][:min]),
+         fecha_fin_pagos: Time.utc(
+           filtered_params[:fecha_fin_pagos][:year],
+           filtered_params[:fecha_fin_pagos][:month],
+           filtered_params[:fecha_fin_pagos][:day],
+           filtered_params[:fecha_fin_pagos][:hour],
+           filtered_params[:fecha_fin_pagos][:min]),
++				fecha_inicio_armado: Time.utc(
++						filtered_params[:fecha_inicio_armado][:year],
++						filtered_params[:fecha_inicio_armado][:month],
++						filtered_params[:fecha_inicio_armado][:day],
++						filtered_params[:fecha_inicio_armado][:hour],
++						filtered_params[:fecha_inicio_armado][:min]),
++				fecha_fin_armado: Time.utc(
++						filtered_params[:fecha_fin_armado][:year],
++						filtered_params[:fecha_fin_armado][:month],
++						filtered_params[:fecha_fin_armado][:day],
++						filtered_params[:fecha_fin_armado][:hour],
++						filtered_params[:fecha_fin_armado][:min]),
+         fecha_entrega_compras: Time.utc(
+           filtered_params[:fecha_entrega_compras][:year],
+           filtered_params[:fecha_entrega_compras][:month],
+Index: app/controllers/reports_controller.rb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/controllers/reports_controller.rb	(revision de0080c807648c2349220c901653d7fee497f439)
++++ app/controllers/reports_controller.rb	(revision )
+@@ -3,12 +3,14 @@
+   # GET /reports
+   # GET /reports.json
+   def index
++
+     if current_usuario.admin?
+       ciclo_id = nil
+       @reporte = nil
+       @ciclos = Compra.all.order('fecha_fin_compras DESC')
+-      if params[:ciclo_id].present? || Compra.ciclo_actual_completo.present?
+-        ciclo_id = params[:ciclo_id] || Compra.ciclo_actual_completo.id
++      if params[:ciclo_id].present?
++				@ciclo = @ciclos.find(params[:ciclo_id])
++        ciclo_id = params[:ciclo_id]
+         p ciclo_id
+         p '-----------------------'
+         pedidos = Pedido.where(compra_id: ciclo_id)
+Index: app/views/pedidos/show.html.erb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/views/pedidos/show.html.erb	(revision de0080c807648c2349220c901653d7fee497f439)
++++ app/views/pedidos/show.html.erb	(revision )
+@@ -3,7 +3,11 @@
+     <div class="col-md-8">
+       <h2>Detalle de Pedido</h2>
+       <h4><%= @pedido.usuario.nombre %> <%= @pedido.usuario.apellido %></h4>
++      <% if @pedido.ciclo.tipo == 'free' %>
++				<p>Ciclo Libre de compra: <b><%= @pedido.ciclo.nombre%></b></p>
++			<% else %>
+-        <p>Círculo N°: <%= @pedido.circulo.id%></p>
++				<p>Círculo N°: <%= @pedido.circulo.id%></p>
++			<% end %>
+     </div>
+     <div class="col-md-4">
+       <h3 class="text-right"><%= (@pedido.created_at).strftime('%d/%m/%Y')%></h3>
+Index: app/models/reporte.rb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/models/reporte.rb	(revision de0080c807648c2349220c901653d7fee497f439)
++++ app/models/reporte.rb	(revision )
+@@ -31,7 +31,6 @@
+ 
+       end
+     end
+-
+     reporte
+   end
+ end
+\ No newline at end of file
+Index: app/models/delivery.rb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/models/delivery.rb	(revision de0080c807648c2349220c901653d7fee497f439)
++++ app/models/delivery.rb	(revision )
+@@ -3,6 +3,7 @@
+ 
+   belongs_to :compra
+   belongs_to :circulo
++  belongs_to :usuario
+   has_many :delivery_statuses
+   has_many :sectors, :through => :delivery_statuses
+ 
+Index: app/controllers/pedidos_controller.rb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/controllers/pedidos_controller.rb	(revision de0080c807648c2349220c901653d7fee497f439)
++++ app/controllers/pedidos_controller.rb	(revision )
+@@ -2,6 +2,7 @@
+   before_action :set_pedido, only: [:show, :edit, :destroy]
+ 
+   def index
++		@ciclos_actuales = Compra::ciclos_actuales
+     if current_usuario.admin?
+       @ciclo_id = nil
+       if(params[:ciclo_id])
+Index: db/migrate/20161207215130_add_user_column_to_deliveries.rb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- db/migrate/20161207215130_add_user_column_to_deliveries.rb	(revision )
++++ db/migrate/20161207215130_add_user_column_to_deliveries.rb	(revision )
+@@ -0,0 +1,6 @@
++class AddUserColumnToDeliveries < ActiveRecord::Migration
++  def change
++		add_reference :circulos_compras, :usuarios, index: true, after: :compra_id, null: true
++		add_reference :circulos_compras, :warehouses, index: true
++  end
++end
+Index: app/controllers/home_controller.rb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/controllers/home_controller.rb	(revision de0080c807648c2349220c901653d7fee497f439)
++++ app/controllers/home_controller.rb	(revision )
+@@ -7,29 +7,28 @@
+       create_current_account
+ 		end
+     case user_type
+-      when Usuario::ADMIN
++			when Usuario::ADMIN
+-        redirect_to dashboards_path
++				@pedidosCiclos = Pedido::pedidos_ciclos
++				@coordinadoresNuevos = Usuario::nuevos_coordinadores
++				page =  'home/home_admin'
+ 			when Usuario::COORDINADOR
+ 				circulo = Circulo.find(current_usuario.circulo_id)
+ 				@compra = circulo.next_delivery
++				page = 'home/home_coord'
+ 
+-				respond_to do |format|
+-
+-					format.html {render 'home/home_coord'}
+-					format.json { render json: @compra.as_json }
+-
+-				end
+ 			when Usuario::USUARIO
+ 				circulo = Circulo.find(current_usuario.circulo_id)
+ 				@compra = circulo.next_delivery
+ 
++				page = 'home/home_user'
++
++		end
+-				respond_to do |format|
++		respond_to do |format|
+ 
+-					format.html {render 'home/home_user'}
++			format.html {render page }
+-					format.json { render json: @compra.as_json }
++			format.json { render json: @compra.as_json }
+ 
+-				end
+-    end
++		end
+   end
+ end
+ 
+\ No newline at end of file
+Index: app/views/compras/edit.html.erb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/views/compras/edit.html.erb	(revision de0080c807648c2349220c901653d7fee497f439)
++++ app/views/compras/edit.html.erb	(revision )
+@@ -1,3 +1,4 @@
++<%= javascript_include_tag "compras", params[:controller] %>
+ <div class="container fill">
+   <h3>Editar Ciclo de Compra</h3>
+   <div class="breadcrumb">
+Index: db/schema.rb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- db/schema.rb	(revision de0080c807648c2349220c901653d7fee497f439)
++++ db/schema.rb	(revision )
+@@ -11,203 +11,310 @@
+ #
+ # It's strongly recommended that you check this file into your version control system.
+ 
+-ActiveRecord::Schema.define(version: 20160923032011) do
++ActiveRecord::Schema.define(version: 20161210013049) do
+ 
+-	create_table "accounts", force: true do |t|
+-		t.integer  "usuario_id"
+-		t.boolean  "status"
+-		t.float    "balance",    limit: 24
+-		t.datetime "created_at"
+-		t.datetime "updated_at"
+-	end
++  create_table "accounts", force: true do |t|
++    t.integer  "usuario_id"
++    t.boolean  "status"
++    t.float    "balance",    limit: 24
++    t.datetime "created_at"
++    t.datetime "updated_at"
++  end
+ 
++  create_table "carts", force: true do |t|
++    t.integer  "mai_id"
++    t.integer  "usuario_id"
++    t.boolean  "active"
++    t.datetime "created_at"
++    t.datetime "updated_at"
++  end
++
++  create_table "carts_products", force: true do |t|
++    t.integer  "cart_id"
++    t.integer  "producto_id"
++    t.integer  "quantity"
++    t.datetime "created_at"
++    t.datetime "updated_at"
++  end
++
+-	create_table "categorias", force: true do |t|
+-		t.string   "nombre"
+-		t.text     "descripcion"
+-		t.datetime "created_at"
+-		t.datetime "updated_at"
+-		t.integer  "parent_id"
+-	end
++  create_table "categorias", force: true do |t|
++    t.string   "nombre"
++    t.text     "descripcion"
++    t.datetime "created_at"
++    t.datetime "updated_at"
++    t.integer  "parent_id"
++  end
+ 
+-	add_index "categorias", ["parent_id"], name: "index_categorias_on_parent_id", using: :btree
++  add_index "categorias", ["parent_id"], name: "index_categorias_on_parent_id", using: :btree
+ 
+-	create_table "categorias_productos", force: true do |t|
+-		t.integer "categoria_id"
+-		t.integer "producto_id"
+-	end
++  create_table "categorias_productos", force: true do |t|
++    t.integer "categoria_id"
++    t.integer "producto_id"
++  end
+ 
+-	create_table "circulos", force: true do |t|
+-		t.integer  "coordinador_id"
+-		t.datetime "created_at"
+-		t.datetime "updated_at"
+-	end
++  create_table "circulos", force: true do |t|
++    t.integer  "coordinador_id"
++    t.datetime "created_at"
++    t.datetime "updated_at"
++  end
+ 
+-	create_table "circulos_compras", force: true do |t|
+-		t.integer  "circulo_id"
+-		t.integer  "compra_id"
++  create_table "circulos_compras", force: true do |t|
++    t.integer  "circulo_id"
++    t.integer  "compra_id"
++    t.integer  "usuarios_id"
+-		t.integer  "status_id"
+-		t.integer  "checkpoint"
+-		t.datetime "delivery_time"
+-		t.datetime "created_at"
+-		t.datetime "updated_at"
++    t.integer  "status_id"
++    t.integer  "checkpoint"
++    t.datetime "delivery_time"
++    t.datetime "created_at"
++    t.datetime "updated_at"
++    t.integer  "warehouses_id"
+-	end
++  end
+ 
++  add_index "circulos_compras", ["usuarios_id"], name: "index_circulos_compras_on_usuarios_id", using: :btree
++  add_index "circulos_compras", ["warehouses_id"], name: "index_circulos_compras_on_warehouses_id", using: :btree
++
+-	create_table "compras", force: true do |t|
+-		t.string   "nombre"
+-		t.text     "descripcion"
+-		t.datetime "fecha_inicio_compras"
+-		t.datetime "fecha_fin_compras"
++  create_table "compras", force: true do |t|
++    t.string   "nombre"
++    t.text     "descripcion"
++    t.datetime "fecha_inicio_compras"
++    t.datetime "fecha_fin_compras"
++    t.datetime "fecha_inicio_pagos"
+-		t.datetime "fecha_fin_pagos"
+-		t.datetime "fecha_entrega_compras"
++    t.datetime "fecha_fin_pagos"
++    t.datetime "fecha_entrega_compras"
++    t.datetime "fecha_inicio_armado"
++    t.datetime "fecha_fin_armado"
++    t.integer  "tipo"
+-	end
++  end
+ 
+-	create_table "delivery_statuses", force: true do |t|
+-		t.integer  "delivery_id"
+-		t.integer  "sector_id"
+-		t.datetime "created_at"
+-		t.datetime "updated_at"
+-		t.integer  "status_id"
+-	end
++  create_table "delivery_statuses", force: true do |t|
++    t.integer  "delivery_id"
++    t.integer  "sector_id"
++    t.datetime "created_at"
++    t.datetime "updated_at"
++    t.integer  "status_id"
++  end
+ 
++  create_table "identities", force: true do |t|
++    t.integer  "usuario_id"
++    t.string   "provider"
++    t.string   "uid"
++    t.string   "email"
++    t.string   "name"
++    t.string   "oauth_token"
++    t.datetime "oauth_expired_at"
++    t.datetime "created_at"
++    t.datetime "updated_at"
++  end
++
++  add_index "identities", ["usuario_id"], name: "index_identities_on_usuario_id", using: :btree
++
++  create_table "invoices", force: true do |t|
++    t.integer  "pedido_id"
++    t.integer  "number"
++    t.string   "type"
++    t.datetime "emission_date"
++    t.integer  "warehouse"
++    t.integer  "mai_id"
++    t.float    "total_discount", limit: 24
++    t.float    "total",          limit: 24
++    t.integer  "total_products"
++    t.datetime "created_at"
++    t.datetime "updated_at"
++  end
++
++  create_table "invoices_details", force: true do |t|
++    t.integer  "pedido_id"
++    t.integer  "invoice_id"
++    t.integer  "warehouse"
++    t.integer  "mai_id"
++    t.integer  "supplier_id"
++    t.string   "supplier_name"
++    t.integer  "product_id"
++    t.integer  "product_codigo"
++    t.string   "product_name"
++    t.integer  "product_qty"
++    t.float    "product_price",  limit: 24
++    t.float    "total_line",     limit: 24
++    t.datetime "created_at"
++    t.datetime "updated_at"
++  end
++
+-	create_table "pedidos", force: true do |t|
+-		t.text     "items"
+-		t.integer  "usuario_id"
+-		t.integer  "circulo_id"
+-		t.datetime "created_at"
+-		t.datetime "updated_at"
+-		t.integer  "compra_id"
++  create_table "pedidos", force: true do |t|
++    t.text     "items"
++    t.integer  "usuario_id"
++    t.integer  "circulo_id"
++    t.datetime "created_at"
++    t.datetime "updated_at"
++    t.integer  "compra_id"
++    t.float    "total_discount", limit: 24
++    t.float    "total",          limit: 24
++    t.integer  "total_products"
++    t.integer  "invoice_number"
++    t.datetime "invoice_date"
++    t.boolean  "active"
++    t.float    "saving",         limit: 24
+-	end
++  end
+ 
+-	add_index "pedidos", ["compra_id"], name: "index_pedidos_on_compra_id", using: :btree
++  add_index "pedidos", ["compra_id"], name: "index_pedidos_on_compra_id", using: :btree
+ 
++  create_table "pedidos_details", force: true do |t|
++    t.integer  "pedido_id"
++    t.integer  "invoice_id"
++    t.integer  "warehouse"
++    t.integer  "mai_id"
++    t.integer  "supplier_id"
++    t.string   "supplier_name"
++    t.integer  "product_id"
++    t.integer  "product_codigo"
++    t.string   "product_name"
++    t.integer  "product_qty"
++    t.float    "product_price",  limit: 24
++    t.float    "total_line",     limit: 24
++    t.datetime "created_at"
++    t.datetime "updated_at"
++  end
++
+-	create_table "productos", force: true do |t|
+-		t.float    "precio",             limit: 24
+-		t.string   "nombre"
+-		t.text     "descripcion"
+-		t.integer  "cantidad_permitida"
+-		t.datetime "created_at"
+-		t.datetime "updated_at"
+-		t.string   "imagen"
+-		t.float    "precio_super",       limit: 24
+-		t.integer  "supplier_id"
+-		t.string   "codigo"
+-		t.boolean  "oculto",                        default: false
+-		t.integer  "orden",                         default: 0
+-		t.boolean  "highlight",                     default: false
+-		t.boolean  "faltante"
+-		t.integer  "pack",                          default: 0
++  create_table "productos", force: true do |t|
++    t.float    "precio",             limit: 24
++    t.string   "nombre"
++    t.text     "descripcion"
++    t.integer  "cantidad_permitida"
++    t.datetime "created_at"
++    t.datetime "updated_at"
++    t.string   "imagen"
++    t.float    "precio_super",       limit: 24
++    t.integer  "supplier_id"
++    t.string   "codigo"
++    t.boolean  "oculto",                        default: false
++    t.integer  "orden",                         default: 0
++    t.boolean  "highlight",                     default: false
++    t.boolean  "faltante"
++    t.integer  "pack",                          default: 0
+-		t.integer  "stock"
+-		t.integer  "orden_remito"
++    t.integer  "orden_remito"
++    t.integer  "stock"
++    t.integer  "sale_type"
++    t.string   "remito_name"
+-	end
++  end
+ 
+-	add_index "productos", ["supplier_id"], name: "index_productos_on_supplier_id", using: :btree
++  add_index "productos", ["supplier_id"], name: "index_productos_on_supplier_id", using: :btree
+ 
+-	create_table "sectors", force: true do |t|
+-		t.string   "name"
+-		t.text     "description"
+-		t.datetime "created_at"
+-		t.datetime "updated_at"
+-	end
++  create_table "sectors", force: true do |t|
++    t.string   "name"
++    t.text     "description"
++    t.datetime "created_at"
++    t.datetime "updated_at"
++  end
+ 
+-	create_table "seed_migration_data_migrations", force: true do |t|
+-		t.string   "version"
+-		t.integer  "runtime"
+-		t.datetime "migrated_on"
+-	end
++  create_table "seed_migration_data_migrations", force: true do |t|
++    t.string   "version"
++    t.integer  "runtime"
++    t.datetime "migrated_on"
++  end
+ 
+-	create_table "statuses", force: true do |t|
+-		t.string   "name"
+-		t.datetime "created_at"
+-		t.datetime "updated_at"
+-	end
++  create_table "statuses", force: true do |t|
++    t.string   "name"
++    t.datetime "created_at"
++    t.datetime "updated_at"
++  end
+ 
+-	create_table "suppliers", force: true do |t|
+-		t.string   "name"
+-		t.string   "address"
+-		t.integer  "nature",                                   default: 0
+-		t.datetime "created_at"
+-		t.datetime "updated_at"
+-		t.text     "razon_social"
+-		t.text     "calle"
+-		t.text     "ciudad"
+-		t.text     "codigo_postal"
+-		t.text     "telefono"
+-		t.text     "nombre_contacto"
+-		t.text     "email"
+-		t.text     "web"
+-		t.decimal  "latitude",        precision: 10, scale: 6
+-		t.decimal  "longitude",       precision: 10, scale: 6
+-		t.text     "error_code"
+-		t.text     "description"
+-	end
++  create_table "suppliers", force: true do |t|
++    t.string   "name"
++    t.string   "address"
++    t.integer  "nature",                                   default: 0
++    t.datetime "created_at"
++    t.datetime "updated_at"
++    t.text     "razon_social"
++    t.text     "calle"
++    t.text     "ciudad"
++    t.text     "codigo_postal"
++    t.text     "telefono"
++    t.text     "nombre_contacto"
++    t.text     "email"
++    t.text     "web"
++    t.decimal  "latitude",        precision: 10, scale: 6
++    t.decimal  "longitude",       precision: 10, scale: 6
++    t.text     "error_code"
++    t.text     "description"
++  end
+ 
+-	create_table "transaction_details", force: true do |t|
+-		t.integer  "transaction_id"
+-		t.integer  "producto_id"
+-		t.float    "price",          limit: 24
+-		t.integer  "quantity"
+-		t.float    "subtotal",       limit: 24
+-		t.datetime "created_at"
+-		t.datetime "updated_at"
+-	end
++  create_table "transaction_details", force: true do |t|
++    t.integer  "transaction_id"
++    t.integer  "producto_id"
++    t.float    "price",          limit: 24
++    t.integer  "quantity"
++    t.float    "subtotal",       limit: 24
++    t.datetime "created_at"
++    t.datetime "updated_at"
++  end
+ 
+-	create_table "transactions", force: true do |t|
+-		t.integer  "account_id"
+-		t.integer  "pedido_id"
+-		t.integer  "transaction_type"
+-		t.float    "amount",           limit: 24
+-		t.text     "description"
+-		t.datetime "created_at"
+-		t.datetime "updated_at"
+-		t.integer  "parent_id"
+-	end
++  create_table "transactions", force: true do |t|
++    t.integer  "account_id"
++    t.integer  "pedido_id"
++    t.integer  "transaction_type"
++    t.float    "amount",           limit: 24
++    t.text     "description"
++    t.datetime "created_at"
++    t.datetime "updated_at"
++    t.integer  "parent_id"
++  end
+ 
+-	add_index "transactions", ["parent_id"], name: "index_transactions_on_parent_id", using: :btree
++  add_index "transactions", ["parent_id"], name: "index_transactions_on_parent_id", using: :btree
+ 
+-	create_table "usuarios", force: true do |t|
+-		t.string   "nombre"
+-		t.string   "apellido"
+-		t.date     "fecha_de_nacimiento"
+-		t.string   "calle"
+-		t.string   "codigo_postal"
+-		t.string   "ciudad"
+-		t.string   "pais"
+-		t.string   "tel1"
+-		t.string   "cel1"
+-		t.string   "type"
+-		t.datetime "created_at"
+-		t.datetime "updated_at"
+-		t.string   "email",                  default: "", null: false
+-		t.string   "encrypted_password",     default: "", null: false
+-		t.string   "reset_password_token"
+-		t.datetime "reset_password_sent_at"
+-		t.datetime "remember_created_at"
+-		t.integer  "sign_in_count",          default: 0,  null: false
+-		t.datetime "current_sign_in_at"
+-		t.datetime "last_sign_in_at"
+-		t.string   "current_sign_in_ip"
+-		t.string   "last_sign_in_ip"
+-		t.integer  "circulo_id"
+-		t.string   "dni"
+-		t.datetime "confirmed_at"
+-		t.string   "confirmation_token"
+-		t.datetime "confirmation_sent_at"
+-		t.string   "unconfirmed_email"
+-	end
++  create_table "usuarios", force: true do |t|
++    t.string   "nombre"
++    t.string   "apellido"
++    t.date     "fecha_de_nacimiento"
++    t.string   "calle"
++    t.string   "codigo_postal"
++    t.string   "ciudad"
++    t.string   "pais"
++    t.string   "tel1"
++    t.string   "cel1"
++    t.string   "type"
++    t.datetime "created_at"
++    t.datetime "updated_at"
++    t.string   "email",                  default: "", null: false
++    t.string   "encrypted_password",     default: "", null: false
++    t.string   "reset_password_token"
++    t.datetime "reset_password_sent_at"
++    t.datetime "remember_created_at"
++    t.integer  "sign_in_count",          default: 0,  null: false
++    t.datetime "current_sign_in_at"
++    t.datetime "last_sign_in_at"
++    t.string   "current_sign_in_ip"
++    t.string   "last_sign_in_ip"
++    t.integer  "circulo_id"
++    t.string   "dni"
++    t.datetime "confirmed_at"
++    t.string   "confirmation_token"
++    t.datetime "confirmation_sent_at"
++    t.string   "unconfirmed_email"
++  end
+ 
+-	add_index "usuarios", ["confirmation_token"], name: "index_usuarios_on_confirmation_token", unique: true, using: :btree
+-	add_index "usuarios", ["email"], name: "index_usuarios_on_email", unique: true, using: :btree
+-	add_index "usuarios", ["reset_password_token"], name: "index_usuarios_on_reset_password_token", unique: true, using: :btree
++  add_index "usuarios", ["confirmation_token"], name: "index_usuarios_on_confirmation_token", unique: true, using: :btree
++  add_index "usuarios", ["email"], name: "index_usuarios_on_email", unique: true, using: :btree
++  add_index "usuarios", ["reset_password_token"], name: "index_usuarios_on_reset_password_token", unique: true, using: :btree
+ 
+-	create_table "versions", force: true do |t|
+-		t.string   "item_type",  null: false
+-		t.integer  "item_id",    null: false
+-		t.string   "event",      null: false
+-		t.string   "whodunnit"
+-		t.text     "object"
+-		t.datetime "created_at"
+-	end
++  create_table "versions", force: true do |t|
++    t.string   "item_type",  null: false
++    t.integer  "item_id",    null: false
++    t.string   "event",      null: false
++    t.string   "whodunnit"
++    t.text     "object"
++    t.datetime "created_at"
++  end
+ 
+-	add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
++  add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
++
++  create_table "warehouses", force: true do |t|
++    t.string   "name"
++    t.text     "description"
++    t.string   "address"
++    t.string   "telephone"
++    t.string   "working_hours"
++    t.string   "attendant"
++    t.datetime "created_at"
++    t.datetime "updated_at"
++  end
+ 
+ end
+Index: Gemfile
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- Gemfile	(revision de0080c807648c2349220c901653d7fee497f439)
++++ Gemfile	(revision )
+@@ -73,6 +73,9 @@
+ # X - Editable for Rails
+ gem 'bootstrap-editable-rails'
+ 
++# jquery Validate
++gem 'jquery-validation-rails'
++
+ # full calendar
+ gem 'fullcalendar-rails'
+ gem 'momentjs-rails'
+Index: app/models/ability.rb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/models/ability.rb	(revision de0080c807648c2349220c901653d7fee497f439)
++++ app/models/ability.rb	(revision )
+@@ -10,10 +10,10 @@
+       can :manage, :all
+     elsif user.coordinador?
+       can [:manage, :add_usuario, :remove_usuario], Circulo
+-      can [:read, :create, :update], Usuario, { :id => user.id }
++      can [:read, :create, :update, :finish_signup], Usuario, { :id => user.id }
+       can [:read], Account, { :usuario_id => user.id }
+     elsif user.usuario?
+-      can [:read, :create, :update], Usuario, { :id => user.id }
++      can [:read, :create, :update, :finish_signup], Usuario, { :id => user.id }
+       can [:read, :create, :update], Pedido, { :usuario_id => user.id }
+       can [:abandonar_circulo], Usuario
+       can [:read], Account, { :usuario_id => user.id }
+Index: db/migrate/20161116223037_create_identities.rb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- db/migrate/20161116223037_create_identities.rb	(revision )
++++ db/migrate/20161116223037_create_identities.rb	(revision )
+@@ -0,0 +1,15 @@
++class CreateIdentities < ActiveRecord::Migration
++  def change
++    create_table :identities do |t|
++      t.references :usuario, index: true
++      t.string :provider
++      t.string :uid
++			t.string :email
++			t.string :name
++			t.string :oauth_token
++			t.datetime :oauth_expired_at
++
++      t.timestamps
++    end
++  end
++end
+Index: app/assets/stylesheets/bootstrap_and_overrides.css.less
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/assets/stylesheets/bootstrap_and_overrides.css.less	(revision de0080c807648c2349220c901653d7fee497f439)
++++ app/assets/stylesheets/bootstrap_and_overrides.css.less	(revision )
+@@ -205,6 +205,10 @@
+ 	  vertical-align: middle;
+ 	  float: none;
+ 	}
++  	.error{
++		color: red;
++	  	font-size: 12px;
++  	}
+ 	.panel-footer{
+ 		nav{
+ 			background-color: #46505a;
+@@ -341,7 +345,7 @@
+ 				font-size: 14px;
+ 				font-weight: bold;
+ 			}
+-			.oculto{
++			.oculto-prod {
+ 				position: absolute;
+ 				top: 30%;
+ 				width: 97%;
+Index: config/initializers/assets.rb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- config/initializers/assets.rb	(revision de0080c807648c2349220c901653d7fee497f439)
++++ config/initializers/assets.rb	(revision )
+@@ -10,3 +10,4 @@
+ Rails.application.config.assets.precompile += %w( productos.js )
+ Rails.application.config.assets.precompile += %w( home.js )
+ Rails.application.config.assets.precompile += %w( transactions.js )
++Rails.application.config.assets.precompile += %w( cart.js )
+Index: app/assets/javascripts/compras.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/assets/javascripts/compras.js	(revision de0080c807648c2349220c901653d7fee497f439)
++++ app/assets/javascripts/compras.js	(revision )
+@@ -95,9 +95,6 @@
+         $('.checkpoint').editable(editable_conf);
+     }
+ 
+-	/*$('a[data-toggle=modal]').on('click', function(){
+-		$('.dropdown').removeClass('open');
+-	});*/
+ 
+ 	$('a[data-target=#ajax-modal]').on('click', function(e){
+ 		e.preventDefault();
+@@ -107,6 +104,21 @@
+ 
+ 	});
+ 
++	function showHideCirculos(valor){
++		var LIBRE = 1;
++		if (valor == LIBRE){
++			$('#content-circulos').addClass('hide');
++		}else{
++			$('#content-circulos').removeClass('hide');
++		}
++	};
++
++
++	$(document).on('click', "[id*='compra_tipo_']", function(){
++		var valor = $( this ).val();
++		showHideCirculos(valor);
++	})
++
+ 	$(document).on ('click', '[data-dismiss=modal], .modal-scrollable', function(){
+ 		$('.modal-body-content').empty()
+ 	})
+@@ -114,8 +126,5 @@
+ 	$(document).on ('click', '#ajax-modal', function(e){
+ 		e.stopPropagation()
+ 	})
+-
+-
+-
+ 
+ });
+Index: config/locales/en.yml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- config/locales/en.yml	(revision de0080c807648c2349220c901653d7fee497f439)
++++ config/locales/en.yml	(revision )
+@@ -13,6 +13,8 @@
+   cleaning: Limpieza
+   credit_note: Nota de crédito
+   debit_note: Nota de débito
++  free: Libre
++  circles: Círculos
+   activerecord:
+     models:
+       account:
+\ No newline at end of file
+Index: app/views/carts/_cart_messages.html.erb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/views/carts/_cart_messages.html.erb	(revision )
++++ app/views/carts/_cart_messages.html.erb	(revision )
+@@ -0,0 +1,1 @@
++
+\ No newline at end of file
+Index: app/assets/javascripts/application.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/assets/javascripts/application.js	(revision de0080c807648c2349220c901653d7fee497f439)
++++ app/assets/javascripts/application.js	(revision )
+@@ -19,6 +19,8 @@
+ //= require bootstrap-editable-rails
+ //= require moment
+ //= require fullcalendar
++//= require jquery.validate
++//= require jquery.validate.additional-methods
+ 
+ 
+ $(document).ready(function () {
+\ No newline at end of file
+Index: app/views/productos/_products_freesale.html.erb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/views/productos/_products_freesale.html.erb	(revision )
++++ app/views/productos/_products_freesale.html.erb	(revision )
+@@ -0,0 +1,89 @@
++<div class="row">
++<div class="col-md-12">
++	<div class="panel panel-default">
++		<div class="panel-heading">
++			<div class="row">
++				<div class="col-lg-4">
++					<%= image_tag 'Logo-Campania-Fiestas-small.png', size: '120', class: 'img-responsive'%>
++				</div>
++				<div class="col-lg-8 vcenter">
++					<h3> Productos para las fiestas </h3>
++				</div>
++			</div>
++		</div>
++		<div class="panel-body">
++
++<% @freesale.each do |producto|%>
++		<div class="col-xs-6 col-md-4 thumbnails">
++			<div class="thumbnail free text-center">
++				<% if producto.oculto? %>
++						<div class="oculto-prod">
++							<span>Oculto</span>
++						</div>
++				<% end   %>
++				<a href="" onclick="return false;" data-toggle="popover" data-container="body" data-content="<%= producto.descripcion %>" >
++					<% if producto.imagen.blank? %>
++							<%= image_tag('image-not-found.png', :height => '90%', :width => '90%') %>
++					<% else %>
++							<%= image_tag(producto.imagen, :height => '80%', :width => '90%') %>
++					<% end %>
++				</a>
++				<div class="caption">
++					<h4><%= producto.nombre %></h4>
++					<p class="precio_mision">Precio misión <%= number_to_currency(producto.precio) %></p>
++					<% cantidad = producto.stock.present? ? producto.stock : producto.cantidad_permitida %>
++					<select class="cantidad">
++						<% for i in 1..cantidad %>
++								<% if @carrito.producto?(producto.id) %>
++										<option value="<%= i%>" <%= (i == @carrito.cantidad_prod(producto.id)) ?'selected':''%>><%= i %></option>
++								<% else %>
++										<option value="<%= i %>"><%= i %></option>
++								<% end %>
++						<% end %>
++					</select>
++					<% if @carrito.producto?(producto.id) %>
++						<%= button_tag(type: 'button',
++													 class: 'btn btn-sm btn-danger',
++													 data: {
++															 action: 'remove',
++															 productId: producto.id
++													 }) do %>
++								<span class="icon-tienda glyphicon-align-left"></span> <span class="cart-action">Eliminar del</span> carro
++						<% end %>
++					<% else %>
++						<%= button_tag(type: 'button',
++													 class: 'btn btn-sm btn-success',
++													 data: {
++															 productId: producto.id,
++															 orden_remito: producto.orden_remito,
++															 action: 'add'
++													 }) do %>
++								<span class="icon-tienda glyphicon-align-left"></span> <span class="cart-action">Agregar al</span> carro
++						<% end %>
++					<% end %>
++
++					<% if can? [:update, :detele], producto %>
++							<div class="btn-group btn-group-justified" role="group" aria-label="modificar">
++								<div class="btn-group" role="group">
++									<%= button_to t('.edit', :default => t("helpers.links.edit")),
++																edit_producto_path(producto),
++																:method => :get,
++																:class => 'btn btn-primary'  %>
++								</div>
++							</div>
++							<p>Rubro: <%= I18n.t(producto.pack, :default => '')%></p>
++					<% end %>
++					<% if producto.stock.present? %>
++							<p><i>Stock disponible: <%= producto.stock %></i></p>
++					<% end %>
++				</div>
++			</div>
++		</div>
++<% end %>
++</div>
++		<div class="panel-footer">
++			<p><i>* Agrega el producto y tenés que hacer clic en " Ver mi Compra" para confirmar tú pedido </i></p>
++		</div>
++</div>
++</div>
++</div>
+\ No newline at end of file
+Index: app/views/warehouses/index.html.erb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/views/warehouses/index.html.erb	(revision )
++++ app/views/warehouses/index.html.erb	(revision )
+@@ -0,0 +1,34 @@
++<div class="container fill">
++	<h3>Listado de Depósitos</h3>
++	<div class="navbar navs-fixed">
++		<%= link_to t('.new', :default => t("helpers.links.new")),
++								new_warehouse_path,
++								:class => 'btn btn-primary' if can? [:manage], Warehouse %>
++	</div>
++	<div class="table-responsive">
++		<table class="table table-striped table-md">
++			<thead>
++			<tr>
++				<th>Nombre</th>
++				<th>Address</th>
++				<th>Descripción</th>
++				<th colspan="2"></th>
++			</tr>
++			</thead>
++
++			<tbody>
++			<% @warehouses.each do |warehouse| %>
++					<tr>
++						<td><%= warehouse.name %></td>
++						<td><%= warehouse.address %></td>
++						<td><%= warehouse.description %></td>
++						<td><%= link_to 'Modificar', edit_warehouse_path(warehouse), class: "btn btn-default btn-xs" %></td>
++						<td><%= link_to 'Eliminar', warehouse, method: :delete, data: { confirm: 'Esta seguro?' }, class: "btn btn-danger btn-xs" %></td>
++					</tr>
++			<% end %>
++			</tbody>
++		</table>
++	</div>
++	<br>
++
++</div>
+\ No newline at end of file
+Index: spec/factories/warehouses.rb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- spec/factories/warehouses.rb	(revision )
++++ spec/factories/warehouses.rb	(revision )
+@@ -0,0 +1,5 @@
++FactoryGirl.define do
++  factory :warehouse do
++    
++  end
++end
+Index: spec/models/warehouse_spec.rb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- spec/models/warehouse_spec.rb	(revision )
++++ spec/models/warehouse_spec.rb	(revision )
+@@ -0,0 +1,5 @@
++require 'rails_helper'
++
++RSpec.describe Warehouse, type: :model do
++  pending "add some examples to (or delete) #{__FILE__}"
++end
+Index: app/models/usuario.rb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/models/usuario.rb	(revision de0080c807648c2349220c901653d7fee497f439)
++++ app/models/usuario.rb	(revision )
+@@ -4,10 +4,13 @@
+   # Include default devise modules. Others available are:
+   # :confirmable, :lockable, :timeoutable and :omniauthable
+   devise :confirmable, :database_authenticatable, :registerable,
+-         :recoverable, :rememberable, :trackable, :validatable
++         :recoverable, :rememberable, :trackable, :validatable, :omniauthable,
++				 :omniauth_providers => [:facebook]
+   belongs_to :circulo
+   has_many :pedidos
+   has_one :account
++	has_many :deliveries
++	has_many :compras, :through => :deliveries
+ 
+   has_paper_trail
+ 
+Index: app/views/productos/index.html.erb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/views/productos/index.html.erb	(revision de0080c807648c2349220c901653d7fee497f439)
++++ app/views/productos/index.html.erb	(revision )
+@@ -55,6 +55,9 @@
+         </div>
+       </div>
+ 			<div id="product-list">
++				<% if @ciclos_actuales.present? %>
++					<%= render 'products_freesale' %>
++				<% end %>
+ 				<% if usuario_signed_in? %>
+ 					<% if current_usuario.admin? && @view_type.present? %>
+ 						<%= render 'admin_product' %>
+@@ -66,7 +69,7 @@
+ 				<% end %>
+ 			</div>
+ 
+-    </div> <!--col-xs-12 col-md-3-->
++    </div>
+   </div> <!--close row -->
+ </div> <!--close containt fill-->
+ 
+Index: app/controllers/application_controller.rb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/controllers/application_controller.rb	(revision de0080c807648c2349220c901653d7fee497f439)
++++ app/controllers/application_controller.rb	(revision )
+@@ -42,8 +42,13 @@
+       end
+       menu
+     end
+-  end
++	end
++=begin
++	def after_sign_in_path_for(resource)
+ 
++		usuario_omniauth_authorize_path('facebook')
++	end
++=end
+   protected
+ 
+ 	def configure_permitted_parameters
