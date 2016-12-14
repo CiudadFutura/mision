@@ -1,11 +1,10 @@
 <div class="container fill">
 	<div class="row">
-		<div class="home text-center">
-			<h1> Próximamente</h1>
-		</div>
 	  <div class="col-xs-12 col-md-12 text-center">
 	    <div class="col-xs-12 col-md-12">
-	      <%= image_tag 'Portada-Campania-Fiestas.png', class: 'img-responsive center-block'%>
+				<%= link_to image_tag('Portada-Campania-Fiestas.png', border: 0),
+										{action: 'index', controller: 'productos'},
+										class: 'img-responsive center-block' %>
 	    </div>
 
 		</div>

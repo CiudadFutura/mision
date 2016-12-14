@@ -102,7 +102,7 @@ class CartsController < ApplicationController
 					end
 					@carrito.discount_stock
 					@carrito.empty!
-					format.html { redirect_to root_path, notice: 'Pedido enviado a al coordinador' }
+					format.html { redirect_to success_path(pedido.id) }
 				else
 					format.html { render :show }
 				end
@@ -111,7 +111,12 @@ class CartsController < ApplicationController
 				format.html { redirect_to carts_show_path }
 			end
     end
-  end
+	end
+
+	def success
+		@pedido = Pedido.find(params[:id])
+		render 'carts/success'
+	end
 
   private
 
