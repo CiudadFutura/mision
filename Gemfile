@@ -33,6 +33,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise', '3.5.6'
 # Authorization: https://github.com/ryanb/cancan/wiki
 gem 'cancan'
+gem 'bcrypt-ruby'
 
 # Authorization with OAuth
 gem 'omniauth'
