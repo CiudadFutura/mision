@@ -42,7 +42,7 @@ class CartsController < ApplicationController
 						email: params[:usuarios][:email],
 						nombre: params[:usuarios][:nombre],
 						apellido: params[:usuarios][:apellido],
-						password: ::BCrypt::Password.create('12345678'),
+						password: BCrypt::Password.create(params[:usuarios][:password]),
 						calle: params[:usuarios][:calle],
 						ciudad: 'Rosario',
 						pais: 'Argentina',
