@@ -118,7 +118,11 @@
                         method: 'delete') %>
         </li>
       <% else %>
-
+        <li>
+          <%= link_to(new_usuario_session_path) do %>
+            <span class="icon-ingresa glyphicon"></span>Ingresa
+          <% end %>
+        </li>
 
       <% end %>
     </ul>
