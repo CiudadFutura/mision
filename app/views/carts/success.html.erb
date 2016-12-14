@@ -4,6 +4,7 @@
 	</div>
 	<div class="row">
 		<h3>Pedido #<%= @pedido.id.to_s.rjust(8, '0') %> </h3>
+		<h4>La única forma de pago es en efectivo al momento de retirar su pedido</h4>
 	</div>
 	<div class="row">
 		<% unless @pedido.blank? %>

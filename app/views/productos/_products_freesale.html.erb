@@ -1,90 +1,87 @@
 <div class="row">
-<div class="col-md-12">
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			<div class="row">
-				<div class="col-lg-4">
-					<%= image_tag 'Logo-Campania-Fiestas-small.png', size: '120', class: 'img-responsive'%>
-				</div>
-				<div class="col-lg-8 vcenter">
-					<h3> Productos para las fiestas </h3>
-					<p>Una vez agregado los productos, hacé clic en "ver mi compra" en el margen superior derecho de la pantalla.</p>
+	<div class="col-md-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="row">
+					<div class="col-lg-4">
+						<%= image_tag 'Logo-Campania-Fiestas-small.png', size: '120', class: 'img-responsive'%>
+					</div>
+					<div class="col-lg-8 vcenter">
+						<h3> Productos para las fiestas </h3>
+						<p>Una vez agregado los productos, hacé clic en "ver mi compra" en el margen superior derecho de la pantalla.</p>
+					</div>
 				</div>
 			</div>
-		</div>
-		<div class="panel-body">
+			<div class="panel-body">
 
-<% @freesale.each do |producto|%>
-		<div class="col-xs-6 col-md-4 thumbnails">
-			<div class="thumbnail free text-center">
-				<% if producto.oculto? %>
-						<div class="oculto-prod">
-							<span>Oculto</span>
-						</div>
-				<% end   %>
-				<a href="" onclick="return false;" data-toggle="popover" data-container="body" data-content="<%= producto.descripcion %>" >
-					<% if producto.imagen.blank? %>
-							<%= image_tag('image-not-found.png', :height => '90%', :width => '90%') %>
-					<% else %>
-							<%= image_tag(producto.imagen, :height => '80%', :width => '90%') %>
-					<% end %>
-				</a>
-				<div class="caption">
-					<h4><%= producto.nombre %></h4>
-					<p class="precio_mision">Precio misión <%= number_to_currency(producto.precio) %></p>
-					<% cantidad = producto.stock.present? ? producto.stock : producto.cantidad_permitida %>
-					<select class="cantidad">
-						<% for i in 1..cantidad %>
-								<% if @carrito.producto?(producto.id) %>
-										<option value="<%= i%>" <%= (i == @carrito.cantidad_prod(producto.id)) ?'selected':''%>><%= i %></option>
-								<% else %>
-										<option value="<%= i %>"><%= i %></option>
-								<% end %>
-						<% end %>
-					</select>
-					<% if @carrito.producto?(producto.id) %>
-						<%= button_tag(type: 'button',
-													 class: 'btn btn-sm btn-danger',
-													 data: {
-															 action: 'remove',
-															 productId: producto.id
-													 }) do %>
-								<span class="icon-tienda glyphicon-align-left"></span> <span class="cart-action">Eliminar del</span> carro
-						<% end %>
-					<% else %>
-						<%= button_tag(type: 'button',
-													 class: 'btn btn-sm btn-success',
-													 data: {
-															 productId: producto.id,
-															 orden_remito: producto.orden_remito,
-															 action: 'add'
-													 }) do %>
-								<span class="icon-tienda glyphicon-align-left"></span> <span class="cart-action">Agregar al</span> carro
-						<% end %>
-					<% end %>
+				<% @freesale.each do |producto|%>
+						<div class="col-xs-6 col-md-4 thumbnails">
+							<div class="thumbnail free text-center">
+								<% if producto.oculto? %>
+										<div class="oculto-prod">
+											<span>Oculto</span>
+										</div>
+								<% end   %>
+								<a href="" onclick="return false;" data-toggle="popover" data-container="body" data-content="<%= producto.descripcion %>" >
+									<% if producto.imagen.blank? %>
+											<%= image_tag('image-not-found.png', :height => '90%', :width => '90%') %>
+									<% else %>
+											<%= image_tag(producto.imagen, :height => '80%', :width => '90%') %>
+									<% end %>
+								</a>
+								<div class="caption">
+									<h4><%= producto.nombre %></h4>
+									<p class="precio_mision">Precio misión <%= number_to_currency(producto.precio) %></p>
+									<% cantidad = producto.stock.present? ? producto.stock : producto.cantidad_permitida %>
+									<select class="cantidad">
+										<% for i in 1..cantidad %>
+												<% if @carrito.producto?(producto.id) %>
+														<option value="<%= i%>" <%= (i == @carrito.cantidad_prod(producto.id)) ?'selected':''%>><%= i %></option>
+												<% else %>
+														<option value="<%= i %>"><%= i %></option>
+												<% end %>
+										<% end %>
+									</select>
+									<% if @carrito.producto?(producto.id) %>
+										<%= button_tag(type: 'button',
+																	 class: 'btn btn-sm btn-danger',
+																	 data: {
+																			 action: 'remove',
+																			 productId: producto.id
+																	 }) do %>
+												<span class="icon-tienda glyphicon-align-left"></span> <span class="cart-action">Eliminar del</span> carro
+										<% end %>
+									<% else %>
+										<%= button_tag(type: 'button',
+																	 class: 'btn btn-sm btn-success',
+																	 data: {
+																			 productId: producto.id,
+																			 orden_remito: producto.orden_remito,
+																			 action: 'add'
+																	 }) do %>
+												<span class="icon-tienda glyphicon-align-left"></span> <span class="cart-action">Agregar al</span> carro
+										<% end %>
+									<% end %>
 
-					<% if can? [:update, :detele], producto %>
-							<div class="btn-group btn-group-justified" role="group" aria-label="modificar">
-								<div class="btn-group" role="group">
-									<%= button_to t('.edit', :default => t("helpers.links.edit")),
-																edit_producto_path(producto),
-																:method => :get,
-																:class => 'btn btn-primary'  %>
+									<% if can? [:update, :detele], producto %>
+											<div class="btn-group btn-group-justified" role="group" aria-label="modificar">
+												<div class="btn-group" role="group">
+													<%= button_to t('.edit', :default => t("helpers.links.edit")),
+																				edit_producto_path(producto),
+																				:method => :get,
+																				:class => 'btn btn-primary'  %>
+												</div>
+											</div>
+											<p>Rubro: <%= I18n.t(producto.pack, :default => '')%></p>
+									<% end %>
+									<% if producto.stock.present? %>
+											<p><i>Stock disponible: <%= producto.stock %></i></p>
+									<% end %>
 								</div>
 							</div>
-							<p>Rubro: <%= I18n.t(producto.pack, :default => '')%></p>
-					<% end %>
-					<% if producto.stock.present? %>
-							<p><i>Stock disponible: <%= producto.stock %></i></p>
-					<% end %>
-				</div>
+						</div>
+				<% end %>
 			</div>
 		</div>
-<% end %>
-</div>
-		<div class="panel-footer">
-			<p><i>* Agrega el producto y tenés que hacer clic en " Ver mi Compra" para confirmar tú pedido </i></p>
-		</div>
-</div>
-</div>
+	</div>
 </div>
