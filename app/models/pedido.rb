@@ -54,7 +54,7 @@ class Pedido < ActiveRecord::Base
   def self.to_csv
     CSV.generate(force_quotes: true) do |csv|
       csv << ['Pedido Nro', 'Ciclo Nro', 'Usuario Nro', 'Usuario', 'Circulo Nro', 'Codigo Prod.', 'Nombre Prod.',
-              'Cantidad']
+              'Cantidad', ['Depósito']]
       all.each do |pedido|
 				transaction = Transaction.find_by_pedido_id(pedido.id)
 				if transaction.present?
@@ -67,10 +67,10 @@ class Pedido < ActiveRecord::Base
             producto = Producto.find(item[:producto_id])
             csv << [
               pedido.id,
-              pedido.ciclo.id || 'Sin Circulo',
-              pedido.usuario.id || 'Sin id usuario',
+              pedido.ciclo.try('id') || 'Sin Circulo',
+              pedido.usuario.try('id') || 'Sin id usuario',
 							pedido.usuario.try('apellido'), pedido.usuario.try('nombre'),
-              pedido.circulo.id,
+              pedido.circulo.try('id') || 'Sin circulo',
               producto.codigo,
               producto.nombre,
               item[:cantidad]
@@ -78,11 +78,11 @@ class Pedido < ActiveRecord::Base
           rescue ActiveRecord::RecordNotFound
             csv << [
               pedido.id,
-							pedido.ciclo.id || 'Sin Circulo',
+							pedido.ciclo.try('id') || 'Sin Ciclo',
 							pedido.usuario.id || 'Sin id usuario',
               pedido.usuario.try('apellido'), pedido.usuario.try('nombre'),
-              pedido.circulo.id,
-              item[:producto_id],
+							pedido.circulo.try('id') || 'Sin circulo',
+							item[:producto_id],
               'ERROR',
               item[:cantidad]
             ]
