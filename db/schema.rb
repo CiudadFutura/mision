@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160923032011) do
+ActiveRecord::Schema.define(version: 20161210013049) do
 
 	create_table "accounts", force: true do |t|
 		t.integer  "usuario_id"
@@ -42,24 +42,33 @@ ActiveRecord::Schema.define(version: 20160923032011) do
 		t.datetime "updated_at"
 	end
 
-	create_table "circulos_compras", force: true do |t|
-		t.integer  "circulo_id"
-		t.integer  "compra_id"
-		t.integer  "status_id"
-		t.integer  "checkpoint"
-		t.datetime "delivery_time"
-		t.datetime "created_at"
-		t.datetime "updated_at"
-	end
+  create_table "circulos_compras", force: true do |t|
+    t.integer  "circulo_id"
+    t.integer  "compra_id"
+    t.integer  "usuarios_id"
+    t.integer  "status_id"
+    t.integer  "checkpoint"
+    t.datetime "delivery_time"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "warehouses_id"
+  end
 
-	create_table "compras", force: true do |t|
-		t.string   "nombre"
-		t.text     "descripcion"
-		t.datetime "fecha_inicio_compras"
-		t.datetime "fecha_fin_compras"
-		t.datetime "fecha_fin_pagos"
-		t.datetime "fecha_entrega_compras"
-	end
+  add_index "circulos_compras", ["usuarios_id"], name: "index_circulos_compras_on_usuarios_id", using: :btree
+  add_index "circulos_compras", ["warehouses_id"], name: "index_circulos_compras_on_warehouses_id", using: :btree
+
+  create_table "compras", force: true do |t|
+    t.string   "nombre"
+    t.text     "descripcion"
+    t.datetime "fecha_inicio_compras"
+    t.datetime "fecha_fin_compras"
+    t.datetime "fecha_inicio_pagos"
+    t.datetime "fecha_fin_pagos"
+    t.datetime "fecha_entrega_compras"
+    t.datetime "fecha_inicio_armado"
+    t.datetime "fecha_fin_armado"
+    t.integer  "tipo"
+  end
 
 	create_table "delivery_statuses", force: true do |t|
 		t.integer  "delivery_id"
@@ -80,25 +89,27 @@ ActiveRecord::Schema.define(version: 20160923032011) do
 
 	add_index "pedidos", ["compra_id"], name: "index_pedidos_on_compra_id", using: :btree
 
-	create_table "productos", force: true do |t|
-		t.float    "precio",             limit: 24
-		t.string   "nombre"
-		t.text     "descripcion"
-		t.integer  "cantidad_permitida"
-		t.datetime "created_at"
-		t.datetime "updated_at"
-		t.string   "imagen"
-		t.float    "precio_super",       limit: 24
-		t.integer  "supplier_id"
-		t.string   "codigo"
-		t.boolean  "oculto",                        default: false
-		t.integer  "orden",                         default: 0
-		t.boolean  "highlight",                     default: false
-		t.boolean  "faltante"
-		t.integer  "pack",                          default: 0
-		t.integer  "stock"
-		t.integer  "orden_remito"
-	end
+  create_table "productos", force: true do |t|
+    t.float    "precio",             limit: 24
+    t.string   "nombre"
+    t.text     "descripcion"
+    t.integer  "cantidad_permitida"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "imagen"
+    t.float    "precio_super",       limit: 24
+    t.integer  "supplier_id"
+    t.string   "codigo"
+    t.boolean  "oculto",                        default: false
+    t.integer  "orden",                         default: 0
+    t.boolean  "highlight",                     default: false
+    t.boolean  "faltante"
+    t.integer  "pack",                          default: 0
+    t.integer  "orden_remito"
+    t.integer  "stock"
+    t.integer  "sale_type"
+    t.string   "remito_name"
+  end
 
 	add_index "productos", ["supplier_id"], name: "index_productos_on_supplier_id", using: :btree
 
@@ -209,5 +220,16 @@ ActiveRecord::Schema.define(version: 20160923032011) do
 	end
 
 	add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
+
+  create_table "warehouses", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.string   "address"
+    t.string   "telephone"
+    t.string   "working_hours"
+    t.string   "attendant"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

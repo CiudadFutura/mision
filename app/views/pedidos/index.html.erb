@@ -24,6 +24,7 @@
             <td>Número de pedido</td>
             <td>Fecha</td>
             <td>Ciclo</td>
+            <td>Ciclo Tipo</td>
             <td>Coordinador</td>
             <td>Consumidor</td>
             <td>Círculo N°</td>
@@ -44,6 +45,7 @@
 			            <td><%= p.try('id') || 'Sin ID' %></td>
 			            <td><%= l (p.try('created_at')) || 'SIN FECHA' %></td>
 			            <td><%= p.ciclo.try('nombre') || 'SIN CICLO' %></td>
+			            <td><%= p.ciclo.try('tipo') || '' %></td>
 			            <td><%= p.circulo.try('coordinador') ? (p.circulo.coordinador.nombre + ' ' + p.circulo.coordinador.apellido) : 'SIN COORDINADOR' %></td>
 			            <td><%= (p.usuario.try('nombre') ? (p.usuario.nombre) : '---' )+ ' ' + (p.usuario.try('apellido')? (p.usuario.apellido) : '---')  %></td>
 			            <td><%= p.circulo.try('id') || "SIN CIRCULO" %></td>
@@ -51,7 +53,7 @@
 			              <%= link_to('Ver', pedido_path(p), class: 'btn btn-info btn-mini') %>
 			            </td>
 			            <td>
-			              <% if(p.ciclo.id && Compra::ciclo_actual.try(:id) == p.ciclo.id)%>
+			              <% if(p.ciclo.id && Compra::get_ciclo_actual(@ciclos_actuales, p.usuario) == p.ciclo.id)%>
 			                <%= link_to('Modificar',
 			                      edit_pedido_path(p),
 			                      data: { confirm: 'Luego de modificar el pedido recuerda volver a enviarlo.' },

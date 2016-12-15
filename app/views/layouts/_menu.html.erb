@@ -68,6 +68,13 @@
                   <% end %>
                 </li>
             <% end %>
+						<% if can? [:manage], warehouses_path %>
+								<li>
+									<%= link_to(warehouses_path) do %>
+											<span class="icon-stats"></span>Depósitos
+									<% end %>
+								</li>
+						<% end %>
           </ul>
         </li>
       <% end %>
@@ -111,11 +118,6 @@
                         method: 'delete') %>
         </li>
       <% else %>
-        <li>
-          <%= link_to(new_usuario_registration_path) do %>
-            <span class="icon-registrate glyphicon"></span>Registrate
-          <% end %>
-        </li>
         <li>
           <%= link_to(new_usuario_session_path) do %>
             <span class="icon-ingresa glyphicon"></span>Ingresa

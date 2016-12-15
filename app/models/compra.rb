@@ -2,27 +2,36 @@ class Compra < ActiveRecord::Base
   #has_and_belongs_to_many :circulos
   has_many :deliveries
   has_many :circulos, :through => :deliveries
+	enum tipo: [:circles, :free]
 
   validates :nombre, :descripcion, :fecha_inicio_compras, :fecha_fin_compras,
             :fecha_fin_pagos, :fecha_entrega_compras, presence: true
 
   after_initialize :init
 
-
   def init
     self.fecha_inicio_compras ||= Time.current
     self.fecha_fin_compras ||= Time.current
+    self.fecha_inicio_pagos ||= Time.current
     self.fecha_fin_pagos ||= Time.current
+    self.fecha_inicio_armado ||= Time.current
+    self.fecha_fin_armado ||= Time.current
     self.fecha_entrega_compras ||= Time.current
   end
 
-  def self.ciclo_actual
-    Compra.where('fecha_inicio_compras <= :today AND fecha_fin_compras >= :today', today: Time.current).first
+  def self.ciclos_actuales
+    Compra.where('fecha_inicio_compras <= :today AND fecha_fin_compras >= :today', today: Time.current)
   end
 
-  def self.ciclo_actual_completo
+  def self.ciclos_actuales_completos
     Compra.where('fecha_inicio_compras <= :today AND fecha_entrega_compras >= :today', today: Time.current).first
-  end
+	end
+
+	def self.get_ciclo_actual(ciclos, usuario_id)
+		ciclos.each do |ciclo|
+			return ciclo if ciclo.deliveries.exists?(usuario_id)
+		end
+	end
 
   def self.get_last_status(sectors, delivery_id)
     last_status = 0

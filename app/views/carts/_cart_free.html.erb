@@ -1,0 +1,68 @@
+<div class="row">
+	<h3 class="titulo">Revisa tu pedido y confirmalo.</h3>
+
+	<p>A continuación, un listado con tu pedido. Revisalo, y si está todo bien,<br />
+		confirmalo haciendo click en el boton "Finalizar compra" que se encuentra debajo del formulario.</p>
+
+</div>
+<div class="row">
+	<div class="text-right"><%= link_to('Seguir comprando', productos_path, class: 'btn btn-info') %></div>
+	<br>
+</div>
+<% unless @carrito.empty? %>
+		<div class="table-responsive">
+
+			<table class="table">
+				<thead>
+				<tr>
+					<th>&nbsp;</th>
+					<th>Producto</th>
+					<th>Código</th>
+					<th>Precio Unit.</th>
+					<th>Precio Total</th>
+					<th>Acción</th>
+				</tr>
+				</thead>
+				<tbody>
+				<% @missing.each do |k, v| %>
+						<tr>
+							<td><%= v.id %></td>
+						</tr>
+				<% end %>
+				<% @carrito.items.each do |_producto_id, item| %>
+						<%
+							mclass ||=  'missing' if @missing.key?(item.producto.id.to_s) %>
+						<tr class="cart-item <%="#{mclass} "%>">
+							<td><%= item.cantidad.to_i %> x</td>
+							<td><%= item.producto.nombre %></td>
+							<td><%= item.producto.codigo %></td>
+							<td><%= number_to_currency(item.producto.precio) %></td>
+							<td><%= number_to_currency(item.total) %></td>
+							<td>
+								<%= button_tag(type: 'button', class: 'btn btn btn-danger btn-xs',
+															 data: {
+																	 action: 'remove',
+																	 productId: item.producto.id
+															 }) do %>
+										<i class="">Borrar</i>
+								<% end %>
+							</td>
+						</tr>
+				<%end%>
+				<tr class="checkout-totales">
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td><strong>TOTAL:</strong></td>
+					<td><span class="cart-total"><%= number_to_currency(@carrito.total) %></span></td>
+					<td>&nbsp;</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+		<% if !current_usuario %>
+				<%= render 'carts/register_guest' %>
+		<% end %>
+<% else %>
+		<h3>No tiene productos agregado a su pedido</h3>
+<% end %>

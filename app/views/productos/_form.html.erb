@@ -65,12 +65,19 @@
     <%= error_span(@producto[:descripcion]) %>
   </div>
   <div class="control-group">
-    <%= f.label :oculto, :class => 'control-label' %>
+    <%= f.label 'Venta Libre', :class => 'control-label' %>
     <div class="controls">
-      <%= f.check_box :oculto, :class => 'form-control' %>
+      <%= f.check_box :sale_type, :class => 'form-control' %>
     </div>
     <%= error_span(@producto[:oculto]) %>
   </div>
+	<div class="control-group">
+		<%= f.label :oculto, :class => 'control-label' %>
+		<div class="controls">
+			<%= f.check_box :oculto, :class => 'form-control' %>
+		</div>
+		<%= error_span(@producto[:oculto]) %>
+	</div>
   <div class="control-group">
     <%= f.label :destacado, :class => 'control-label' %>
     <div class="controls">

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :warehouses
   resources :sectors_statuses
   resources :statuses
   resources :sectors
@@ -34,7 +35,10 @@ Rails.application.routes.draw do
 	end
 	get 'circulos/remito_circulo/:circulo_id/compra=:compra_id', to: 'circulos#remito_circulo', as: :remito_circulo
 
-  devise_for :usuarios, :controllers => {:registrations => "user/registrations"}
+  devise_for :usuarios, :controllers => {:registrations => "user/registrations", :omniauth_callbacks => 'user/omniauth_callbacks'}
+	scope "carts" do
+		resources :usuarios
+	end
   resources :usuarios do
     collection {
       post 'sign_up', to: 'usuarios#create'
@@ -46,6 +50,7 @@ Rails.application.routes.draw do
 
   get 'carts/show'
   get '/carts/create_pedido', to: 'carts#create_pedido', as: :create_pedido
+  get '/carts/success/:id', to: 'carts#success', as: :success
 
 
   resources :productos do
@@ -69,9 +74,6 @@ Rails.application.routes.draw do
     put 'add/:producto_id', to: 'carts#add', as: :add_to
     put 'remove/:producto_id', to: 'carts#remove', as: :remove_from
 	end
-
-	get "/callback" => "facebook#callback"
-	get "/facebook_profile" => "facebook#facebook_profile"
 
   root to: 'home#index'
 

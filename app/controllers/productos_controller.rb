@@ -5,6 +5,7 @@ class ProductosController < ApplicationController
   # GET /productos.json
   def index
 		@destacados = false
+		@freesale = Producto.freesale
 		if params[:categoria_id].blank?
 			@destacados = true
 			@productos = Producto.destacados
@@ -24,7 +25,7 @@ class ProductosController < ApplicationController
 			session.delete(:view_type)
 		end
 		@view_type = session[:view_type]
-    @ciclo_actual = Compra::ciclo_actual
+    @ciclos_actuales = Compra::ciclos_actuales
 
     @productos = @productos.disponibles.order(:orden, :nombre) if current_usuario.nil? || !current_usuario.admin?
 
@@ -113,7 +114,6 @@ class ProductosController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_producto
-
       @producto = Producto.find(params[:id])
     end
 
@@ -122,7 +122,7 @@ class ProductosController < ApplicationController
       params.require(:producto).permit(:precio, :nombre, :codigo, :descripcion, :orden,
                                        :precio_super, :highlight, :oculto, :supplier_id,
                                        :pack, :faltante,:cantidad_permitida, :imagen, :stock,
-                                       :orden_remito, :view_type,
+                                       :orden_remito, :view_type, :sale_type,
                                        categoria_ids: [])
     end
 end

@@ -1,0 +1,34 @@
+<div class="container fill">
+	<h3>Listado de Depósitos</h3>
+	<div class="navbar navs-fixed">
+		<%= link_to t('.new', :default => t("helpers.links.new")),
+								new_warehouse_path,
+								:class => 'btn btn-primary' if can? [:manage], Warehouse %>
+	</div>
+	<div class="table-responsive">
+		<table class="table table-striped table-md">
+			<thead>
+			<tr>
+				<th>Nombre</th>
+				<th>Address</th>
+				<th>Descripción</th>
+				<th colspan="2"></th>
+			</tr>
+			</thead>
+
+			<tbody>
+			<% @warehouses.each do |warehouse| %>
+					<tr>
+						<td><%= warehouse.name %></td>
+						<td><%= warehouse.address %></td>
+						<td><%= warehouse.description %></td>
+						<td><%= link_to 'Modificar', edit_warehouse_path(warehouse), class: "btn btn-default btn-xs" %></td>
+						<td><%= link_to 'Eliminar', warehouse, method: :delete, data: { confirm: 'Esta seguro?' }, class: "btn btn-danger btn-xs" %></td>
+					</tr>
+			<% end %>
+			</tbody>
+		</table>
+	</div>
+	<br>
+
+</div>
