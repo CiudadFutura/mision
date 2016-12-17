@@ -53,8 +53,8 @@ class Pedido < ActiveRecord::Base
 
   def self.to_csv
     CSV.generate(force_quotes: true) do |csv|
-      csv << ['Pedido Nro', 'Ciclo Nro', 'Usuario Nro', 'Usuario', 'Circulo Nro', 'Codigo Prod.', 'Nombre Prod.',
-              'Cantidad', ['Depósito']]
+      csv << ['Pedido Nro',['Depósito'], 'Ciclo Nro', 'Usuario Nro', 'Usuario', 'Circulo Nro', 'Codigo Prod.', 'Nombre Prod.',
+              'Cantidad']
       all.each do |pedido|
 				transaction = Transaction.find_by_pedido_id(pedido.id)
 				if transaction.present?
@@ -62,11 +62,16 @@ class Pedido < ActiveRecord::Base
 							"Nota de Credito: Nº #{transaction.id}, $#{transaction.amount}"
 					]
 				end
+				delivery = Delivery.where(usuarios_id: pedido.usuario_id, compra_id: pedido.compra_id)
+				if delivery.present? and delivery.first.warehouses_id.present?
+					warehouse = Warehouse.where(id: delivery.take.warehouses_id)
+				end
         JSON.parse(pedido.items, symbolize_names: true).each do |item|
           begin
             producto = Producto.find(item[:producto_id])
             csv << [
               pedido.id,
+							warehouse.present? ? warehouse.take.name : 'Sin depósito',
               pedido.ciclo.try('id') || 'Sin Circulo',
               pedido.usuario.try('id') || 'Sin id usuario',
 							pedido.usuario.try('apellido'), pedido.usuario.try('nombre'),
