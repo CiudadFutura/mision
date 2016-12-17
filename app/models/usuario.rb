@@ -10,6 +10,7 @@ class Usuario < ActiveRecord::Base
   has_many :pedidos
   has_one :account
 	has_many :deliveries
+	has_many :warehouses
 	has_many :compras, :through => :deliveries
 
   has_paper_trail

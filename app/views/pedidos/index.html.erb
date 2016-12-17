@@ -25,6 +25,7 @@
             <td>Fecha</td>
             <td>Ciclo</td>
             <td>Ciclo Tipo</td>
+            <td>Depósito</td>
             <td>Coordinador</td>
             <td>Consumidor</td>
             <td>Círculo N°</td>
@@ -41,11 +42,16 @@
 		        <% @pedidos.each_with_index do |p, n| %>
 		          <% if p.present? %>
 			          <tr>
+									<%  delivery = Delivery.where(usuarios_id: p.usuario_id, compra_id: p.compra_id) %>
+									<% if delivery.present? and delivery.first.warehouses_id.present? %>
+										<%  warehouse = Warehouse.where(id: delivery.take.warehouses_id) %>
+									<% end %>
 				          <td><%= n + 1 %></td>
 			            <td><%= p.try('id') || 'Sin ID' %></td>
 			            <td><%= l (p.try('created_at')) || 'SIN FECHA' %></td>
 			            <td><%= p.ciclo.try('nombre') || 'SIN CICLO' %></td>
 			            <td><%= p.ciclo.try('tipo') || '' %></td>
+			            <td><%= warehouse.present? ? warehouse.take.name : '---' %></td>
 			            <td><%= p.circulo.try('coordinador') ? (p.circulo.coordinador.nombre + ' ' + p.circulo.coordinador.apellido) : 'SIN COORDINADOR' %></td>
 			            <td><%= (p.usuario.try('nombre') ? (p.usuario.nombre) : '---' )+ ' ' + (p.usuario.try('apellido')? (p.usuario.apellido) : '---')  %></td>
 			            <td><%= p.circulo.try('id') || "SIN CIRCULO" %></td>
