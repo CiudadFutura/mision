@@ -35,7 +35,6 @@
 							 else
 								 precio_super = 0.0
 						end%>
-						<%= producto.sale_type %>
 						<p>Precio hiper <%= number_to_currency(precio_super) %></p>
 						<p>Ahorro <%= number_to_percentage(producto.ahorro) %></p>
 							<% if @ciclos_actuales.exists?(current_usuario.circulo) || producto.sale_type == 1 %>
