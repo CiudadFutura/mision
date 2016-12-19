@@ -53,7 +53,7 @@ class Pedido < ActiveRecord::Base
 
   def self.to_csv
     CSV.generate(force_quotes: true) do |csv|
-      csv << ['Pedido Nro',['Depósito'], 'Ciclo Nro', 'Usuario Nro', 'Usuario', 'Circulo Nro', 'Codigo Prod.', 'Nombre Prod.',
+      csv << ['Pedido Nro',['Depósito'], 'Ciclo Nro', 'Usuario Nro', 'Usuario', 'Email', 'Cealular', 'Codigo Prod.', 'Nombre Prod.',
               'Cantidad']
       all.each do |pedido|
 				transaction = Transaction.find_by_pedido_id(pedido.id)
@@ -75,7 +75,8 @@ class Pedido < ActiveRecord::Base
               pedido.ciclo.try('id') || 'Sin Circulo',
               pedido.usuario.try('id') || 'Sin id usuario',
 							pedido.usuario.try('apellido'), pedido.usuario.try('nombre'),
-              pedido.circulo.try('id') || 'Sin circulo',
+              pedido.usuario.try('email') || 'Sin email',
+              pedido.usuario.try('cel1') || 'Sin celular',
               producto.codigo,
               producto.nombre,
               item[:cantidad]

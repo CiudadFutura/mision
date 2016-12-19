@@ -28,12 +28,8 @@
             <td>Depósito</td>
             <td>Coordinador</td>
             <td>Consumidor</td>
-            <td>Círculo N°</td>
-						<% if current_usuario && current_usuario.admin? %>
-							<th colspan="4"></th>
-            <% else %>
-							<th colspan="3"></th>
-            <% end %>
+            <td>Email</td>
+            <td>Celular</td>
 
           </tr>
         </thead>
@@ -54,7 +50,8 @@
 			            <td><%= warehouse.present? ? warehouse.take.name : '---' %></td>
 			            <td><%= p.circulo.try('coordinador') ? (p.circulo.coordinador.nombre + ' ' + p.circulo.coordinador.apellido) : 'SIN COORDINADOR' %></td>
 			            <td><%= (p.usuario.try('nombre') ? (p.usuario.nombre) : '---' )+ ' ' + (p.usuario.try('apellido')? (p.usuario.apellido) : '---')  %></td>
-			            <td><%= p.circulo.try('id') || "SIN CIRCULO" %></td>
+			            <td><%= p.usuario.try('email') || "SIN email" %></td>
+			            <td><%= p.usuario.try('cel1') || "Sin celular" %></td>
 			            <td>
 			              <%= link_to('Ver', pedido_path(p), class: 'btn btn-info btn-mini') %>
 			            </td>
@@ -71,13 +68,7 @@
 												<%= link_to 'Eliminar', p, method: :delete, data: { confirm: 'Esta seguro?' }, class: "btn btn-danger btn-xs" %>
 										<% end %>
 									</td>
-			            <td>
-			              <% if current_usuario && current_usuario.admin? %>
-				              <% if p.has_missing? %>
-						            <button class="btn btn-default disabled">Nota de Crédito</button>
-						          <% end %>
-					          <% end %>
-			            </td>
+
 			          </tr>
 		          <% end %>
 		        <% end %>
