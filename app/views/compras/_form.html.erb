@@ -52,13 +52,17 @@
         </thead>
 
         <tbody>
-        <% Circulo.all.each do |circulo| %>
-          <tr>
-            <td><%= circulo.id %></td>
-            <td><%= circulo.try('coordinador').try('nombre_completo') || 'Sin Coordinador' %></td>
-            <td><%= check_box_tag "compra[circulo_ids][]", circulo.id, @compra.circulos.include?(circulo) %></td>
-          </tr>
-        <% end %>
+				<% Circulo.all.each do |circulo| %>
+						<tr>
+							<td><%= circulo.id %></td>
+							<td><%= circulo.try('coordinador').try('nombre_completo') || 'Sin Coordinador' %></td>
+							<% if @circulos.present? %>
+									<td><%= check_box_tag "compra[circulo_ids][]", circulo.id, @circulos.has_key?(circulo.id) %></td>
+							<% else %>
+									<td><%= check_box_tag "compra[circulo_ids][]", circulo.id, @compra.circulos.include?(circulo) %></td>
+							<% end %>
+						</tr>
+				<% end %>
         </tbody>
       </table>
     </div>
