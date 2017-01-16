@@ -20,8 +20,10 @@ class HomeController < ApplicationController
 
 				end
 			when Usuario::USUARIO
-				circulo = Circulo.find(current_usuario.circulo_id)
-				@compra = circulo.next_delivery
+				if current_usuario.circulo_id.present?
+					circulo = Circulo.find(current_usuario.circulo_id)
+					@compra = circulo.next_delivery
+				end
 
 				respond_to do |format|
 
