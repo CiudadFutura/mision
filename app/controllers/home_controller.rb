@@ -10,9 +10,10 @@ class HomeController < ApplicationController
       when Usuario::ADMIN
         redirect_to dashboards_path
 			when Usuario::COORDINADOR
-				circulo = Circulo.find(current_usuario.circulo_id)
-				@compra = circulo.next_delivery
-
+				if current_usuario.circulo_id.present?
+					circulo = Circulo.find(current_usuario.circulo_id)
+					@compra = circulo.next_delivery
+				end
 				respond_to do |format|
 
 					format.html {render 'home/home_coord'}
