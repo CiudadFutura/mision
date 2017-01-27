@@ -38,10 +38,10 @@ Rails.application.configure do
 	config.action_mailer.delivery_method = :smtp
 	config.action_mailer.smtp_settings = { :address => "localhost", :port => 1025 }
 
-	config.action_controller.asset_host =
+	config.action_controller.asset_host = "http://0.0.0.0:3000"
 	config.action_mailer.asset_host  = "http://0.0.0.0:3000"
 
-	#config.action_mailer.default_url_options = { :host => '0.0.0.0:3000' }
+	config.action_mailer.default_url_options = { :host => '0.0.0.0:3000' }
 =begin
   config.action_mailer.smtp_settings = {
       address: "smtp.gmail.com",

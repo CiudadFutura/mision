@@ -12,6 +12,12 @@ class Producto < ActiveRecord::Base
   has_paper_trail
 
   scope :disponibles, -> { where(oculto: false) }
+	scope :destacados, -> {where(highlight: true)}
+	scope :categoria, lambda { |categoria| joins(:categorias).where('categorias.id = :id OR categorias.parent_id = :id',
+			id: categoria).order(:orden, :nombre) if categoria }
+	scope :subcategoria, lambda { |categoria, subcategoria| joins(:categorias)
+																															.where('categorias_productos.categoria_id = :sub_id AND categorias.parent_id = :id', id: categoria, sub_id: subcategoria)
+																															.order(:orden, :nombre) if categoria && subcategoria }
 
   after_initialize :default_cantidad_permitida
 

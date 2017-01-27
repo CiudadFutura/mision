@@ -46,6 +46,7 @@ Rails.application.routes.draw do
 
   get 'carts/show'
   get '/carts/create_pedido', to: 'carts#create_pedido', as: :create_pedido
+	get '/carts/success/:id', to: 'carts#success', as: :success
 
 
   resources :productos do
