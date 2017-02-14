@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :init_carrito
   before_filter :categorias_menu
-	before_filter :migrate
+	#before_filter :migrate
   before_filter :configure_permitted_parameters, if: :devise_controller?
 
   layout 'layout'
