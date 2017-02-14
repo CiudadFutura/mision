@@ -7,32 +7,29 @@ class HomeController < ApplicationController
       create_current_account
 		end
     case user_type
-      when Usuario::ADMIN
-        redirect_to dashboards_path
+			when Usuario::ADMIN
+				@pedidosCiclos = Pedido::pedidos_ciclos
+				@coordinadoresNuevos = Usuario::nuevos_coordinadores
+				page = 'home/home_admin'
 			when Usuario::COORDINADOR
 				if current_usuario.circulo_id.present?
 					circulo = Circulo.find(current_usuario.circulo_id)
 					@compra = circulo.next_delivery
 				end
-				respond_to do |format|
-
-					format.html {render 'home/home_coord'}
-					format.json { render json: @compra.as_json }
-
-				end
+				page = 'home/home_coord'
 			when Usuario::USUARIO
 				if current_usuario.circulo_id.present?
 					circulo = Circulo.find(current_usuario.circulo_id)
 					@compra = circulo.next_delivery
 				end
+				page = 'home/home_user'
+		end
+		respond_to do |format|
 
-				respond_to do |format|
+			format.html {render page }
+			format.json { render json: @compra.as_json }
 
-					format.html {render 'home/home_user'}
-					format.json { render json: @compra.as_json }
-
-				end
-    end
+		end
   end
 end
 

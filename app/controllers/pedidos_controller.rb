@@ -6,8 +6,7 @@ class PedidosController < ApplicationController
       @ciclo_id = nil
       if(params[:ciclo_id])
         @ciclo_id = params[:ciclo_id]
-        @pedidos = Pedido.where(compra_id: params[:ciclo_id])
-        @pedidos = @pedidos.order(:updated_at)
+        @pedidos = Pedido.where(compra_id: params[:ciclo_id]).order(:updated_at)
       end
       @ciclos = Compra.all.order('fecha_fin_compras DESC')
       @suppliers = Supplier.all
@@ -43,14 +42,19 @@ class PedidosController < ApplicationController
 				producto.save
 			end
 		end
+		delivery = Delivery.where(circulo_id: @pedido.circulo, usuarios_id: @pedido.usuario_id)
+		if delivery.present?
+			delivery.delete_all(circulo_id: @pedido.circulo, usuarios_id: @pedido.usuario_id)
+		end
     @pedido.save_in_session(session)
     if transaction.present?
       transaction.pedido_id = nil
       transaction.save
-    end
-    @pedido.delete
+		end
+    @pedido.destroy
     redirect_to productos_path
-  end
+	end
+
 
   # DELETE /categoria/1
   # DELETE /categoria/1.json

@@ -19,9 +19,11 @@
 //= require bootstrap-editable-rails
 //= require moment
 //= require fullcalendar
+//= require jquery.validate
+//= require jquery.validate.additional-methods
 
 
-$(document).ready(function () {
+		$(document).ready(function () {
 
   $('button[data-action]').click(function (event) {
     event.preventDefault();

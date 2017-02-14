@@ -1,0 +1,26 @@
+<%= form_for :pedidos, url: create_pedido_path,  method: :get, html: {id: 'warehouses-choose'} do |f| %>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h4>Seleccione el lugar donde quiere retirar</h4>
+		</div>
+		<div class="panel-body">
+			<div class="form-group">
+				<div class="radio">
+					<% Warehouse.all.each do |warehouse| %>
+							<label>
+								<%= f.radio_button :warehouse, warehouse.id %>
+								<%= warehouse.name %>
+							</label>
+							<br>
+							<small id="warehouseHelp" class="form-text text-muted"><%= warehouse.address %></small>
+							<br>
+					<% end %>
+				</div>
+				<div id="error-warehouse"></div>
+			</div>
+		</div>
+	</div>
+		<div class="form-group">
+			<div><%= submit_tag "Realizar pedido", class: "btn btn-success pull-right #{'disabled' if @missing.present?}" %></div>
+		</div>
+<% end %>

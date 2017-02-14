@@ -15,6 +15,6 @@ class ReportsController < ApplicationController
         @reporte = Reporte.pedidos_por_proveedor(pedidos)
       end
     end
-  end
+	end
 
 end

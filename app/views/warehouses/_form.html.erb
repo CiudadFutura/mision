@@ -1,0 +1,49 @@
+<%= form_for(@warehouse) do |f| %>
+		<% if @warehouse.errors.any? %>
+				<div id="error_explanation">
+					<h2><%= pluralize(@warehouse.errors.count, "error") %> prohibited this warehouse from being saved:</h2>
+
+					<ul>
+						<% @warehouse.errors.full_messages.each do |message| %>
+								<li><%= message %></li>
+						<% end %>
+					</ul>
+				</div>
+		<% end %>
+
+
+		<fieldset class="form-group">
+			<%= f.label :name, 'Nombre', for: 'name' %>
+			<%= f.text_field :name, class:'form-control' %>
+		</fieldset>
+
+		<fieldset class="form-group">
+			<%= f.label :address, 'Dirección', for: 'address' %>
+			<%= f.text_field :address, class:'form-control' %>
+		</fieldset>
+
+		<fieldset class="form-group">
+			<%= f.label :telephone, 'Teléfono', for: 'telephone' %>
+			<%= f.text_field :telephone, class:'form-control' %>
+		</fieldset>
+
+		<fieldset class="form-group">
+			<%= f.label :working_hours, 'Horario atención', for: 'working_hours' %>
+			<%= f.text_field :working_hours, class:'form-control' %>
+		</fieldset>
+
+		<fieldset class="form-group">
+			<%= f.label :attendant, 'Encargado', for: 'attendant' %>
+			<%= f.text_field :attendant, class:'form-control' %>
+		</fieldset>
+
+		<div class="field">
+			<%= f.label :description, for: 'description' %><br>
+			<%= f.text_area :description, class:'form-control' %>
+		</div>
+
+
+		<div class="actions form-group">
+			<%= f.submit class: 'btn btn-success' %>
+		</div>
+<% end %>

@@ -205,6 +205,10 @@ body{
 	  vertical-align: middle;
 	  float: none;
 	}
+  	.error{
+	  color: red;
+  	  font-size: 12px;
+    }
 	.panel-footer{
 		nav{
 			background-color: #46505a;
@@ -240,28 +244,24 @@ body{
 
     }
 	.order-data{
-		.order-data-title,
+	  	background-color: #eeeeee;
+		margin-right: 10px;
+		max-height: 50px;
+		min-height: 50px;
+
+		.order-data-title{
+		  h4{
+			color: @gray-char;
+		  }
+
+		}
 		.total-qty,
 		.sale-off,
 		.cart-link{
-			background-color: #eeeeee;
-			margin-right: 10px;
-			max-height: 70px;
-			min-height: 70px;
-		}
-		.order-data-title{
-			padding-top: 5px;
-		}
-		.total-qty{
-			padding-top: 5px;
-		}
-		.sale-off{
-			padding-top: 14px;
-		}
-		.cart-link{
-			padding-top: 5px;
+		  color: @red-char;
 			a{
 				text-transform: capitalize;
+			  text-decoration: underline;
 			}
 		}
 		h1{
@@ -271,9 +271,10 @@ body{
 		}
 		h4{
 			font-family: @font-mont-light;
-			color: @red-char;
 			text-transform: uppercase;
+		  	font-size: 14px;
 		}
+
 	}
 	.fill{
 		min-height: 100%;
@@ -295,6 +296,136 @@ body{
 			color:@red-char;
             font-size: 25px;
 		}
+	  .panel-heading{
+		.ribbon {
+		  position: relative;
+		  width: 100%;
+		  margin: 0;
+		}
+
+		.ribbon:before,
+		.ribbon i:before {
+		  content: '';
+		  position: absolute;
+		  bottom: -23px;
+		  border: 24px solid #c45045;
+		}
+
+		.ribbon:before {
+		  left: -54px;
+		  border-left-color: transparent;
+		  -webkit-transform: rotate(-16deg);
+		  -moz-transform: rotate(-16deg);
+		  -ms-transform: rotate(-16deg);
+		  -o-transform: rotate(-16deg);
+		  transform: rotate(-16deg);
+		}
+		.oldie .ribbon:before {
+		  left: -48px;
+		}
+
+		.ribbon i:before {
+		  right: -54px;
+		  border-right-color: transparent;
+		  -webkit-transform: rotate(16deg);
+		  -moz-transform: rotate(16deg);
+		  -ms-transform: rotate(16deg);
+		  -o-transform: rotate(16deg);
+		  transform: rotate(16deg);
+		  z-index: -1;
+		}
+		.oldie .ribbon i:before {
+		  right: -48px;
+		}
+
+		.ribbon i:after,
+		.ribbon u:after {
+		  content: '';
+		  position: absolute;
+		  border-style: solid;
+		  bottom: -16px;
+		  z-index: 0;
+		}
+
+		.ribbon i:after {
+		  right: -16px;
+		  border-color: transparent transparent transparent #a33d33;
+		  border-width: 0 0 16px 16px;
+		}
+
+		.ribbon u:after {
+		  left: 0;
+		  border-color: transparent #a33d33 transparent transparent;
+		  border-width: 0 16px 16px 0;
+		}
+
+		.ribbon u {
+		  display: block;
+		  position: relative;
+		  width: 100%;
+		  left: -16px;
+		  padding: 0 16px 16px;
+		  background: #d0726a;
+		  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#d0726a), to(#c7574d));
+		  background-image: -webkit-linear-gradient(#d0726a, #c7574d);
+		  background-image:    -moz-linear-gradient(#d0726a, #c7574d);
+		  background-image:     -ms-linear-gradient(#d0726a, #c7574d);
+		  background-image:         linear-gradient(#d0726a, #c7574d);
+		  -webkit-border-top-left-radius: 50% 16px;
+		  border-top-left-radius: 50% 16px;
+		  -webkit-border-top-right-radius: 50% 16px;
+		  border-top-right-radius: 50% 16px;
+		  text-align: center;
+		  font: 20px/50px @font-mont-reg;
+		  text-decoration: none;
+		  color: #fff;
+		  text-shadow: 0 1px 1px rgba(163, 61, 51, .8), 0 2px 1px rgba(163, 61, 51, .6);
+		}
+		.oldie .ribbon u {
+		  padding: 0 16px;
+		  *left: 0px;
+		  *padding: 0;
+		}
+
+		.ribbon u {
+		  left: 0;
+		  margin: 0 -16px;
+		  width: auto;
+		}
+
+		.ribbon u::selection { background-color: #a33d33; }
+		.ribbon u::-moz-selection { background-color: #a33d33; }
+
+		.ribbon u:before,
+		.ribbon:after {
+		  content: '';
+		  position: absolute;
+		  height: 16px;
+		  left: 0;
+		  bottom: 0;
+		  -webkit-border-top-left-radius: 50% 16px;
+		  border-top-left-radius: 50% 16px;
+		  -webkit-border-top-right-radius: 50% 16px;
+		  border-top-right-radius: 50% 16px;
+		  box-shadow: inset 0 2px 3px rgba(0, 0, 0, .3);
+		}
+		.oldie .ribbon u:before,
+		.oldie .ribbon:after {
+		  content: none;
+		}
+
+		.ribbon u:before {
+		  width: 100%;
+		  background: #a33d33;
+		}
+
+		.ribbon:after {
+		  width: 100%;
+		  background: #f5f5f5;
+		  z-index: 1;
+		}
+	  }
+
 	  .calendar, .home {
 		h1{
 		  padding-top: 0;
@@ -332,34 +463,77 @@ body{
 		  background-color: #BBBBBB;
 		}
 		.thumbnail {
-			position: relative;
-			button {
-				margin: 5px 0px;
-			}
-			.precio_mision{
-				font-family: @font-din-reg;
-				font-size: 14px;
-				font-weight: bold;
-			}
-			.oculto{
-				position: absolute;
-				top: 30%;
-				width: 97%;
-				background-color: #d3d3d3;
-				span {
-					font-family: @font-mont-reg;
-					color: @red-char;
-					font-size: 16px;
-				}
-			}
-			img.prod-img{
-				width: 180px;
-				height: auto;
-			}
-		  	img.sin-img{
-				width: 180px;
-				height: 180px;
-		  	}
+		  position: relative;
+		  button {
+			  margin: 5px 0px;
+		  }
+		  .ribbon {
+			position: absolute;
+			left: -5px; top: -5px;
+			z-index: 1;
+			overflow: hidden;
+			width: 75px; height: 75px;
+			text-align: right;
+		  }
+		  .ribbon span {
+			font-size: 10px;
+			font-weight: bold;
+			color: #FFF;
+			text-transform: uppercase;
+			text-align: center;
+			line-height: 20px;
+			transform: rotate(-45deg);
+			-webkit-transform: rotate(-45deg);
+			width: 100px;
+			display: block;
+			background: #79A70A;
+			background: linear-gradient(#9BC90D 0%, #79A70A 100%);
+			box-shadow: 0 3px 10px -5px rgba(0, 0, 0, 1);
+			position: absolute;
+			top: 19px; left: -21px;
+		  }
+		  .ribbon span::before {
+			content: "";
+			position: absolute; left: 0px; top: 100%;
+			z-index: -1;
+			border-left: 3px solid #79A70A;
+			border-right: 3px solid transparent;
+			border-bottom: 3px solid transparent;
+			border-top: 3px solid #79A70A;
+		  }
+		  .ribbon span::after {
+			content: "";
+			position: absolute; right: 0px; top: 100%;
+			z-index: -1;
+			border-left: 3px solid transparent;
+			border-right: 3px solid #79A70A;
+			border-bottom: 3px solid transparent;
+			border-top: 3px solid #79A70A;
+		  }
+		  .precio_mision{
+			  font-family: @font-din-reg;
+			  font-size: 14px;
+			  font-weight: bold;
+		  }
+		  .oculto-prod{
+			  position: absolute;
+			  top: 30%;
+			  width: 97%;
+			  background-color: #d3d3d3;
+			  span {
+				  font-family: @font-mont-reg;
+				  color: @red-char;
+				  font-size: 16px;
+			  }
+		  }
+		  img.prod-img{
+			  width: 180px;
+			  height: auto;
+		  }
+		  img.sin-img{
+			  width: 180px;
+			  height: 180px;
+		  }
 		}
 		#accordion{
 			.panel-default{

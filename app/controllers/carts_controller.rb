@@ -25,24 +25,60 @@ class CartsController < ApplicationController
   def create_pedido
     transactions = Transaction.where(["account_id = :id and pedido_id is null", {id: current_usuario.account.id }])
     pedido = Pedido.new
-    ciclo_id = Compra.ciclo_actual.id
+    ciclo = Compra.ciclo_actual
     pedido.items = @carrito.items.map { |_k,item| item.purchase_data }.to_json
     pedido.usuario_id = current_usuario.id
-    pedido.circulo_id = current_usuario.circulo_id
-    circulo = Circulo.find(pedido.circulo_id)
-    pedido.compra_id = ciclo_id
-    missing = @carrito.check_item_stock
+		if current_usuario.circulo.present?
+    	pedido.circulo_id = current_usuario.circulo_id
+    	circulo = Circulo.find(pedido.circulo_id)
+		end
+		pedido.compra_id = ciclo.id
+		missing = @carrito.check_item_stock
+		pedido.total_discount = @carrito.total_discount
+		pedido.total = @carrito.total
+		pedido.saving = @carrito.ahorro
+		pedido.total_products = @carrito.cantidad
+		pedido.active = true
     respond_to do |format|
 			if missing.blank?
 				if pedido.save!
+					@carrito.items.map do |key, item|
+						next if item.blank?
+						producto = Producto.find(item.producto.id)
+						pedido_details = pedido.pedidos_details.build(
+																											 supplier_id: Supplier.find(producto.supplier).id,
+																											 supplier_name: Supplier.find(producto.supplier).name,
+																											 product_id: producto.id,
+																											 product_codigo: producto.codigo,
+																											 product_name: producto.nombre,
+																											 product_qty: item.cantidad.to_i,
+																											 product_price: producto.precio,
+																											 total_line: (item.cantidad.to_i * producto.precio).to_f
+
+						)
+						if params[:pedidos][:warehouse].present?
+							pedido_details.warehouse = params[:pedidos][:warehouse]
+						end
+						pedido_details.save
+					end
+
 					if transactions.present?
 						transactions.each do |transaction|
 							transaction.pedido_id = pedido.id
 							transaction.save
 						end
 					end
-					delivery = circulo.deliveries.where(compra_id: ciclo_id)
-					if delivery.take.delivery_time.blank?
+					if circulo.present?
+						delivery = circulo.deliveries.where(compra_id: ciclo.id)
+					else
+						delivery = Delivery.new(
+																	 usuarios_id: current_usuario.id,
+																	 compra_id: ciclo.id,
+																	 delivery_time: ciclo.fecha_entrega_compras,
+																	 warehouses_id: params[:pedidos][:warehouse]
+						).save
+					end
+					if delivery.blank?
 						Sector.all.each do |sector|
 							if sector.id == Sector::CONSUMERS
 								status_id = Status::SCHEDULED
@@ -54,7 +90,7 @@ class CartsController < ApplicationController
 									sector_id: sector.id,
 									status_id: status_id
 							)
-							delivery.take.delivery_time = Compra.ciclo_actual.fecha_entrega_compras
+							delivery.take.delivery_time = ciclo.fecha_entrega_compras
 							delivery.take.save
 							delivery_status.save
 						end

@@ -1,13 +1,13 @@
-require 'csv'
-
 class Usuario < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :confirmable, :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable
   belongs_to :circulo
   has_many :pedidos
   has_one :account
+	has_many :deliveries
+	has_many :compras, :through => :deliveries
 
   has_paper_trail
 
@@ -85,9 +85,14 @@ class Usuario < ActiveRecord::Base
         ]
       end
     end
-  end
+	end
 
-  private
+	def confirmation_required?
+		!confirmed?
+	end
+
+
+	private
   def set_default_role
     self.type ||= Usuario::USUARIO
   end

@@ -12,14 +12,14 @@ class User::RegistrationsController < Devise::RegistrationsController
       usuario = resource
       usuario.circulo = circulo
       usuario.save!
-
-      usuario = resource
-      usuario.circulo = circulo
-      usuario.save!
-
+		else
+			usuario = resource
+			usuario.skip_confirmation!
+			usuario.confirm!
+			usuario.save!
     end
     super
-  end
+	end
 
   def create_current_account(resource)
     account = Account.new

@@ -64,6 +64,13 @@
     </div>
     <%= error_span(@producto[:descripcion]) %>
   </div>
+	<div class="control-group">
+		<%= f.label 'Venta Libre', :class => 'control-label' %>
+		<div class="controls">
+			<%= f.check_box :sale_type, :class => 'form-control' %>
+		</div>
+		<%= error_span(@producto[:sale_type]) %>
+	</div>
   <div class="control-group">
     <%= f.label :oculto, :class => 'control-label' %>
     <div class="controls">
@@ -128,7 +135,8 @@
 	<div class="control-group">
 	  <fieldset class="form-group">
 	    <%= f.label :pack, for:'pack' %>
-	    <%= f.select(:pack, options_for_select(Producto.packs.map{|x,y| [t(x), x]}, selected: @producto.pack), {:include_blank => 'Seleccione...'}, class:'form-control', id:'pack') %>
+	    <%= f.select(:pack, options_for_select(Producto.packs.map{|x,y| [t(x), x]}, selected: @producto.pack),
+									 {:include_blank => 'Seleccione...'}, class:'form-control', id:'pack') %>
 	  </fieldset>
 	</div>
 

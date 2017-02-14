@@ -129,7 +129,7 @@ class ComprasController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def compra_params
-      filtered_params = params.require(:compra).permit(:nombre, :descripcion, 
+      filtered_params = params.require(:compra).permit(:nombre, :descripcion, :tipo,
         :fecha_inicio_compras => [:year, :month, :day, :hour, :minute],
         :fecha_fin_compras => [:year, :month, :day, :hour, :minute],
         :fecha_fin_pagos => [:year, :month, :day, :hour, :minute],
@@ -137,6 +137,7 @@ class ComprasController < ApplicationController
         circulo_ids:[])
       { nombre: filtered_params[:nombre],
         descripcion: filtered_params[:descripcion],
+				tipo: filtered_params[:tipo],
         circulo_ids: filtered_params["circulo_ids"],
         fecha_inicio_compras: Time.utc(
           filtered_params[:fecha_inicio_compras][:year],

@@ -9,7 +9,7 @@
 			    <div class="form-group">
 			      <label for="ciclo_id">Ciclo:</label>
 			      <%= select_tag "ciclo_id",
-			                     options_from_collection_for_select(@ciclos, "id", "nombre", @ciclo_id),
+			                     options_from_collection_for_select(@ciclos, "id", "nombre", @ciclo ? @ciclo.id : ''),
 			                     include_blank: true, class: 'form-control input-sm' %>
 			    </div>
 			    <%= submit_tag 'Filtrar', class: "btn btn-success btn-xs" %>

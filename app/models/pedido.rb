@@ -3,6 +3,7 @@ class Pedido < ActiveRecord::Base
   belongs_to :usuario
   belongs_to :ciclo, class_name: "Compra", foreign_key: :compra_id
   belongs_to :owner, foreign_key: 'transaction_id', class_name: 'Transaction'
+	has_many :pedidos_details, dependent: :delete_all
 
   validate :circulo, presence: true
 
@@ -19,7 +20,28 @@ class Pedido < ActiveRecord::Base
       end
     end
     total.to_f
-  end
+	end
+
+	def ahorro
+		total_mision = total_ahorro = 0
+		JSON.parse(items).each do |item|
+			next if item.total == 0 || item.total_super == 0
+			total_mision += item.total
+			total_ahorro += item.total_super
+		end
+		return 0 if total_ahorro == 0
+		(1 - (total_mision / total_ahorro)).to_f * 100
+	end
+
+	def cantidad
+		total = 0.0
+		JSON.parse(items).each do |item|
+			#Rails.logger.debug(v)
+			#Rails.logger.debug(_k.inspect)
+			total += item["cantidad"] || 0
+		end
+		total.to_i
+	end
 
   def save_in_session(session)
     carrito = Cart.new(session)

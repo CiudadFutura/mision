@@ -95,9 +95,6 @@ $(document).ready(function() {
         $('.checkpoint').editable(editable_conf);
     }
 
-	/*$('a[data-toggle=modal]').on('click', function(){
-		$('.dropdown').removeClass('open');
-	});*/
 
 	$('a[data-target=#ajax-modal]').on('click', function(e){
 		e.preventDefault();
@@ -106,6 +103,20 @@ $(document).ready(function() {
 		$.rails.handleRemote($(this))
 
 	});
+
+	function showHideCirculos(valor){
+		if (valor == 'free'){
+			$('#content-circulos').addClass('hide');
+		}else{
+			$('#content-circulos').removeClass('hide');
+		}
+	};
+
+
+	$(document).on('click', "[id*='compra_tipo_']", function(){
+		var valor = $( this ).val();
+		showHideCirculos(valor);
+	})
 
 	$(document).on ('click', '[data-dismiss=modal], .modal-scrollable', function(){
 		$('.modal-body-content').empty()

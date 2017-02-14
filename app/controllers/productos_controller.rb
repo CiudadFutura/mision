@@ -5,6 +5,7 @@ class ProductosController < ApplicationController
   # GET /productos.json
   def index
 		@destacados = false
+		@freesale = Producto.freesale
 		if params[:categoria_id].blank?
 			@destacados = true
 			@productos = Producto.destacados
@@ -123,6 +124,7 @@ class ProductosController < ApplicationController
                                        :precio_super, :highlight, :oculto, :supplier_id,
                                        :pack, :faltante,:cantidad_permitida, :imagen, :stock,
                                        :orden_remito, :view_type,
+																			 :sale_type,
                                        categoria_ids: [])
     end
 end

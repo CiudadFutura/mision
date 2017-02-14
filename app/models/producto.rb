@@ -1,5 +1,5 @@
 class Producto < ActiveRecord::Base
-  enum pack: [:warehouse, :freshes, :vegetables, :fragile, :cleaning]
+  enum pack: [:wholesaler, :freshes, :vegetables, :fragile, :cleaning]
   has_and_belongs_to_many :categorias
   belongs_to :supplier
   has_many :transaction_details
@@ -126,6 +126,10 @@ class Producto < ActiveRecord::Base
 						id: categoria_id
 				)
 				.order(:orden, :nombre)
+	end
+
+	def self.freesale
+		Producto.where("sale_type = :free and oculto = :oculto" , free: 1, oculto: false).order(:orden)
 	end
 
 end

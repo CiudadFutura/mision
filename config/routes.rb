@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 		post :send_email, on: :member
 	end
 	resources :remitos_pedido
+	resources :warehouses
 
 	get 'get_by_cycle_circle/:id/circulo=:circulo',
 			to: 'remitos_pedido#get_by_cycle_circle', as: :get_by_cycle_circle

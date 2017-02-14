@@ -3,7 +3,11 @@
     <div class="col-md-8">
       <h2>Detalle de Pedido</h2>
       <h4><%= @pedido.usuario.nombre %> <%= @pedido.usuario.apellido %></h4>
-        <p>Círculo N°: <%= @pedido.circulo.id%></p>
+			<% if @pedido.ciclo.tipo == 'free' %>
+					<p>Ciclo Libre de compra: <b><%= @pedido.ciclo.nombre%></b></p>
+			<% else %>
+				<p>Círculo N°: <%= @pedido.circulo.id%></p>
+			<% end %>
     </div>
     <div class="col-md-4">
       <h3 class="text-right"><%= (@pedido.created_at).strftime('%d/%m/%Y')%></h3>

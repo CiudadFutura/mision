@@ -95,7 +95,19 @@ class Cart
       total += v.total || 0
     end
     total.to_f
-  end
+	end
+
+	def total_discount
+		total_mision = total_discount = 0
+		@items.each do |_k, v|
+			next if v.total == 0 || v.total_super == 0
+			total_mision += v.total
+			total_discount += v.total_super
+		end
+		return 0 if total_discount == 0
+		(total_discount - total_mision).to_f
+
+	end
 
   def formated_total
     ActionView::Helpers::NumberHelper.number_to_currency(total)
