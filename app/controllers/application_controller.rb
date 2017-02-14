@@ -60,7 +60,7 @@ class ApplicationController < ActionController::Base
 					pedido_details = pedido.pedidos_details.build(
 							supplier_id: supplier.present? ? supplier.id : 'Sin Proveedor ID',
 							supplier_name: supplier.present? ? supplier.name : 'Sin Proveedor Nombre',
-							product_id: producto.present? ? producto.id : 'Sin ID',
+							product_id: item["producto_id"],
 							product_codigo: producto.present? ? producto.codigo : 'Sin Código',
 							product_name: producto.present? ? producto.nombre : 'Sin Nombre',
 							product_qty: item["cantidad"].to_i,

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170213011022) do
+ActiveRecord::Schema.define(version: 20170214184454) do
 
   create_table "accounts", force: true do |t|
     t.integer  "usuario_id"
@@ -165,7 +165,7 @@ ActiveRecord::Schema.define(version: 20170213011022) do
     t.integer  "supplier_id"
     t.string   "supplier_name"
     t.integer  "product_id"
-    t.integer  "product_codigo"
+    t.string   "product_codigo"
     t.string   "product_name"
     t.integer  "product_qty"
     t.float    "product_price",  limit: 24
