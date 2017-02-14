@@ -52,17 +52,20 @@ class ApplicationController < ActionController::Base
 			total_amount = 0
 			JSON.parse(pedido.items).map do |item|
 				producto = Producto.find(item["producto_id"])
+				if producto.present?
+					supplier = Supplier.find(producto.supplier)
+				end
 				total_amount += item["total"].to_i
 				if pedido.pedidos_details.blank?
 					pedido_details = pedido.pedidos_details.build(
-							supplier_id: Supplier.find(producto.supplier).id,
-							supplier_name: Supplier.find(producto.supplier).name,
-							product_id: producto.id,
-							product_codigo: producto.codigo,
-							product_name: producto.nombre,
+							supplier_id: supplier.present? ? supplier.id : 'Sin Proveedor ID',
+							supplier_name: supplier.present? ? supplier.name : 'Sin Proveedor Nombre',
+							product_id: producto.id.present? ? producto.id : 'Sin ID',
+							product_codigo: producto.codigo.present? ? producto.codigo : 'Sin Código',
+							product_name: producto.nombre.present? ? producto.nombre : 'Sin Nombre',
 							product_qty: item["cantidad"].to_i,
 							product_price: (item["total"] / item["cantidad"]).to_f,
-							total_line: (item["cantidad"].to_i * producto.precio).to_f
+							total_line: (item["total"]).to_f
 
 					)
 					pedido.total = total_amount
