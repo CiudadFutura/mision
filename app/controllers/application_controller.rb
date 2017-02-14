@@ -51,7 +51,7 @@ class ApplicationController < ActionController::Base
 			#pedido.saving = pedido.ahorro
 			total_amount = 0
 			JSON.parse(pedido.items).map do |item|
-				producto = Producto.find(item["producto_id"])
+				producto = Producto.find(item["producto_id"]) rescue nil
 				if producto.present?
 					supplier = Supplier.find(producto.supplier)
 				end
@@ -60,9 +60,9 @@ class ApplicationController < ActionController::Base
 					pedido_details = pedido.pedidos_details.build(
 							supplier_id: supplier.present? ? supplier.id : 'Sin Proveedor ID',
 							supplier_name: supplier.present? ? supplier.name : 'Sin Proveedor Nombre',
-							product_id: producto.id.present? ? producto.id : 'Sin ID',
-							product_codigo: producto.codigo.present? ? producto.codigo : 'Sin Código',
-							product_name: producto.nombre.present? ? producto.nombre : 'Sin Nombre',
+							product_id: producto.present? ? producto.id : 'Sin ID',
+							product_codigo: producto.present? ? producto.codigo : 'Sin Código',
+							product_name: producto.present? ? producto.nombre : 'Sin Nombre',
 							product_qty: item["cantidad"].to_i,
 							product_price: (item["total"] / item["cantidad"]).to_f,
 							total_line: (item["total"]).to_f
