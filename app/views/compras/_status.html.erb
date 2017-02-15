@@ -13,65 +13,67 @@
     <th>Puesto</th>
   </tr>
   <tbody>
-    <% @circulos.each do |circulo , d| %>
-      <%
-        status = Compra.get_last_status(d[:sectors], d[:delivery_id])
-        status_class = status.present? ? (Status.find(status.status_id).name).split(' ').map{|s| s.downcase}.join('-') : 'inicial'
-      %>
-      <% disabled = true %>
-        <tr class="<%= "estado_#{status_class}" %>">
-          <td><%= circulo %></td>
-          <td><%= link_to get_by_cycle_circle_path(@compra.id, circulo),
-													data: {toggle: "modal", target:"#ajax-modal"},
-													remote: true do %> ver remito
-						<% end %></td>
-          <% d[:sectors].each do |sector_id, sector| %>
-              <td>
-                <% if status_class == 'asignado'
-                     disabled = false
-                   end
-                %>
-                <% if sector_id == Sector::CONSUMERS %>
-                    <%= select_tag :status_is,
-                                   options_for_select(Status.all.map{|s| [s.name,s.id]},status.status_id),
-                                   include_blank: 'Elija Estado',
-                                   data: {
-                                       sector_id: sector_id,
-                                       delivery_id: d[:delivery_id],
-                                       compra_id: @compra.id,
-                                       status_id: sector[:status]
-                                   },
-                                   class: 'select-statuses'%>
-                <% else %>
-                    <%= check_box_tag 'status_id', sector_id,
-                                      sector[:status],
-                                      data: {
-                                          sector_id: sector_id,
-                                          delivery_id: d[:delivery_id],
-                                          compra_id: @compra.id,
-                                          status_id: sector[:status]
+		<% if @circulos.present? %>
+			<% @circulos.each do |circulo , d| %>
+				<%
+					status = Compra.get_last_status(d[:sectors], d[:delivery_id])
+					status_class = status.present? ? (Status.find(status.status_id).name).split(' ').map{|s| s.downcase}.join('-') : 'inicial'
+				%>
+				<% disabled = true %>
+					<tr class="<%= "estado_#{status_class}" %>">
+						<td><%= circulo %></td>
+						<td><%= link_to get_by_cycle_circle_path(@compra.id, circulo),
+														data: {toggle: "modal", target:"#ajax-modal"},
+														remote: true do %> ver remito
+							<% end %></td>
+						<% d[:sectors].each do |sector_id, sector| %>
+								<td>
+									<% if status_class == 'asignado'
+											 disabled = false
+										 end
+									%>
+									<% if sector_id == Sector::CONSUMERS %>
+											<%= select_tag :status_is,
+																		 options_for_select(Status.all.map{|s| [s.name,s.id]},status.status_id),
+																		 include_blank: 'Elija Estado',
+																		 data: {
+																				 sector_id: sector_id,
+																				 delivery_id: d[:delivery_id],
+																				 compra_id: @compra.id,
+																				 status_id: sector[:status]
+																		 },
+																		 class: 'select-statuses'%>
+									<% else %>
+											<%= check_box_tag 'status_id', sector_id,
+																				sector[:status],
+																				data: {
+																						sector_id: sector_id,
+																						delivery_id: d[:delivery_id],
+																						compra_id: @compra.id,
+																						status_id: sector[:status]
 
-                                      },
-                                      disabled: disabled,
-                                      remote: true,
-                                      class: 'input-large' %>
-                <% end %>
-							</td>
+																				},
+																				disabled: disabled,
+																				remote: true,
+																				class: 'input-large' %>
+									<% end %>
+								</td>
 
-          <% end %>
-          <td><%= link_to '#',
-                          class: 'checkpointEditable editable checkpoint editable-disabled',
-                          data: { pk: d[:delivery_id],
-                                  type: 'text',
-                                  title: 'Ingrese el Nº de puesto',
-                                  url: delivery_path(d[:delivery_id]),
-                                  name: 'checkpoint',
-                                  value: d[:checkpoint]
-                          } do %>
-                <%= d.try(:checkpoint)  %>
-            <% end %>
-          </td>
-        </tr>
-    <% end%>
+						<% end %>
+						<td><%= link_to '#',
+														class: 'checkpointEditable editable checkpoint editable-disabled',
+														data: { pk: d[:delivery_id],
+																		type: 'text',
+																		title: 'Ingrese el Nº de puesto',
+																		url: delivery_path(d[:delivery_id]),
+																		name: 'checkpoint',
+																		value: d[:checkpoint]
+														} do %>
+									<%= d.try(:checkpoint)  %>
+							<% end %>
+						</td>
+					</tr>
+			<% end%>
+		<% end%>
   </tbody>
 </table>

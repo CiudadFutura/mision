@@ -50,7 +50,12 @@ class Compra < ActiveRecord::Base
     deliveries = {}
     self.deliveries.map do |i|
       if i.delivery_time.present?
-        deliveries[i.circulo_id] ={
+				if i.circulo_id.present?
+					circulo_id = i.circulo_id
+				else
+					circulo_id = 0
+				end
+        deliveries[circulo_id] ={
             delivery_id: i.id,
             delivery_date: i.delivery_time,
             checkpoint: i.checkpoint,
@@ -58,18 +63,20 @@ class Compra < ActiveRecord::Base
             sectors:{}
         }
         i.delivery_statuses.map do |ds|
-          deliveries[i.circulo_id][:sectors][ds.sector_id] = {}
-          deliveries[i.circulo_id][:sectors][ds.sector_id][:id] = ds.sector_id
-          deliveries[i.circulo_id][:sectors][ds.sector_id][:status] = ds.try(:status_id)
-          deliveries[i.circulo_id][:sectors][ds.sector_id][:name] = ds.status.try(:name)
+          deliveries[circulo_id][:sectors][ds.sector_id] = {}
+          deliveries[circulo_id][:sectors][ds.sector_id][:id] = ds.sector_id
+          deliveries[circulo_id][:sectors][ds.sector_id][:status] = ds.try(:status_id)
+          deliveries[circulo_id][:sectors][ds.sector_id][:name] = ds.status.try(:name)
           if ds.sector_id == Sector::CONSUMERS
-            deliveries[i.circulo_id][:sorted] =  assign_status_sort(ds.try(:status_id))
+            deliveries[circulo_id][:sorted] =  assign_status_sort(ds.try(:status_id))
           end
 
         end
       end
-    end
-    deliveries.sort_by { |k, v| v[:sorted] }
+		end
+		if self.tipo != 'free'
+			deliveries.sort_by { |k, v| v[:sorted] }
+		end
 	end
 
 	def get_statuses

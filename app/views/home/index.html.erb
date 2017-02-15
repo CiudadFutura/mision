@@ -1,3 +1,4 @@
+<%= javascript_include_tag "home" %>
 <div class="container fill">
 	<div class="row">
 		<div class="col-xs-12 col-md-12 text-center">
@@ -8,3 +9,6 @@
 		</div>
 	</div>
 </div>
+<% if @ciclo_actual.present? %>
+	<%= render 'home/modal_home' %>
+<% end %>

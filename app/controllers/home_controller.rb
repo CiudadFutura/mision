@@ -3,6 +3,7 @@ class HomeController < ApplicationController
 
   def index
     user_type = current_usuario.nil? ? 'Guess' : current_usuario.type
+		@ciclo_actual = Compra::ciclo_actual
     if !current_usuario.blank? and !current_usuario.admin? and current_usuario.account.blank?
       create_current_account
 		end

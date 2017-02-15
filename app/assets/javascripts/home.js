@@ -34,6 +34,17 @@ $(document).ready(function(){
 		}],
 
 	});
-	$('#calendar').fullCalendar('gotoDate', moment(start_date))
+	$('#calendar').fullCalendar('gotoDate', moment(start_date));
+
+	if(localStorage.getItem('popState') != 'shown'){
+		$('#mai-escuela').modal('show');
+		//$("#mai-escuela").delay(2000).fadeIn();
+		localStorage.setItem('popState','shown')
+	}
+
+	$('#popup-close, #popup').click(function(e) // You are clicking the close button
+	{
+		$('#mai-escuela').fadeOut(); // Now the pop up is hiden.
+	});
 
 })
