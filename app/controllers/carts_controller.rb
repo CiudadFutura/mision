@@ -78,21 +78,23 @@ class CartsController < ApplicationController
 																	 warehouses_id: params[:pedidos][:warehouse]
 						).save
 					end
-					if delivery.blank?
-						Sector.all.each do |sector|
-							if sector.id == Sector::CONSUMERS
-								status_id = Status::SCHEDULED
-							else
-								status_id = nil
+					if ciclo.tipo != 'free'
+						if delivery.blank?
+							Sector.all.each do |sector|
+								if sector.id == Sector::CONSUMERS
+									status_id = Status::SCHEDULED
+								else
+									status_id = nil
+								end
+								delivery_status = DeliveryStatus.create(
+										delivery_id: delivery.take.id,
+										sector_id: sector.id,
+										status_id: status_id
+								)
+								delivery.take.delivery_time = ciclo.fecha_entrega_compras
+								delivery.take.save
+								delivery_status.save
 							end
-							delivery_status = DeliveryStatus.create(
-									delivery_id: delivery.take.id,
-									sector_id: sector.id,
-									status_id: status_id
-							)
-							delivery.take.delivery_time = ciclo.fecha_entrega_compras
-							delivery.take.save
-							delivery_status.save
 						end
 					end
 					@carrito.discount_stock
