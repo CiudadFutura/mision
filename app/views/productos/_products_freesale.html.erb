@@ -20,6 +20,7 @@
 											<span>Oculto</span>
 										</div>
 								<% end   %>
+								<p class="details">ver detalle</p>
 								<a href="" onclick="return false;" data-toggle="popover" data-container="body" data-content="<%= producto.descripcion %>" >
 									<% if producto.imagen.blank? %>
 											<%= image_tag('image-not-found.png', :height => '90%', :width => '90%') %>

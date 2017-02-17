@@ -55,7 +55,7 @@
 					<br>
 				</div>
       <% end %>
-			<% if @freesale.present? %>
+			<% if @freesale.present? && @ciclo_actual.tipo == 'free' %>
 					<%= render 'products_freesale' %>
 			<% end %>
 			<div id="product-list">
