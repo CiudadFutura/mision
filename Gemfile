@@ -2,16 +2,18 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.11'
+
 # Use mysql as the database for Active Record in production
 gem 'mysql2', '~> 0.3.17'
 
 gem 'therubyracer',  platforms: :ruby
-# Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
-gem 'sprockets', '2.11.0'
-gem 'less-rails', '~> 2.5.0'
-# https://github.com/seyhunak/twitter-bootstrap-rails
-gem 'twitter-bootstrap-rails', '3.2.0'
-# https://github.com/carrierwaveuploader/carrierwave
+
+# Boostrap with sass
+gem 'bootstrap-sass', '~> 3.2.0'
+gem 'autoprefixer-rails'
+
+
+# https://github.com/carrierwaveuploader/carrierwave Image uploader
 gem 'carrierwave'
 gem 'mini_magick'
 
