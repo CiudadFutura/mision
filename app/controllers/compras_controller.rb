@@ -139,29 +139,29 @@ class ComprasController < ApplicationController
         descripcion: filtered_params[:descripcion],
 				tipo: filtered_params[:tipo],
         circulo_ids: filtered_params["circulo_ids"],
-        fecha_inicio_compras: Time.utc(
+        fecha_inicio_compras: Time.zone.local(
           filtered_params[:fecha_inicio_compras][:year],
           filtered_params[:fecha_inicio_compras][:month],
           filtered_params[:fecha_inicio_compras][:day],
           filtered_params[:fecha_inicio_compras][:hour],
-          filtered_params[:fecha_inicio_compras][:min]),
-        fecha_fin_compras: Time.utc(
+          filtered_params[:fecha_inicio_compras][:minute]),
+        fecha_fin_compras: Time.zone.local(
           filtered_params[:fecha_fin_compras][:year],
           filtered_params[:fecha_fin_compras][:month],
           filtered_params[:fecha_fin_compras][:day],
           filtered_params[:fecha_fin_compras][:hour],
-          filtered_params[:fecha_fin_compras][:min]),
-        fecha_fin_pagos: Time.utc(
+          filtered_params[:fecha_fin_compras][:minute]),
+        fecha_fin_pagos: Time.zone.local(
           filtered_params[:fecha_fin_pagos][:year],
           filtered_params[:fecha_fin_pagos][:month],
           filtered_params[:fecha_fin_pagos][:day],
           filtered_params[:fecha_fin_pagos][:hour],
-          filtered_params[:fecha_fin_pagos][:min]),
-        fecha_entrega_compras: Time.utc(
+          filtered_params[:fecha_fin_pagos][:minute]),
+        fecha_entrega_compras: Time.zone.local(
           filtered_params[:fecha_entrega_compras][:year],
           filtered_params[:fecha_entrega_compras][:month],
           filtered_params[:fecha_entrega_compras][:day],
           filtered_params[:fecha_entrega_compras][:hour],
-          filtered_params[:fecha_entrega_compras][:min])}
+          filtered_params[:fecha_entrega_compras][:minute])}
     end
 end
