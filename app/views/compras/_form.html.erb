@@ -23,7 +23,7 @@
 		<%= f.label :tipo %>
 		<div class="radio">
 			<label>
-				<%= f.radio_button :tipo, 'circulos', checked: (@compra.tipo == 0 || @compra.tipo.nil?) ? true : false%>
+				<%= f.radio_button :tipo, 'circles', checked: (@compra.tipo == 'circles' || @compra.tipo.nil?) ? true : false%>
 				Círculos
 			</label>
 		</div>
