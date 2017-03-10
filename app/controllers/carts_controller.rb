@@ -56,9 +56,7 @@ class CartsController < ApplicationController
 																											 total_line: (item.cantidad.to_i * producto.precio).to_f
 
 						)
-						if params[:pedidos][:warehouse].present?
-							pedido_details.warehouse = params[:pedidos][:warehouse]
-						end
+
 						pedido_details.save
 					end
 
@@ -75,7 +73,6 @@ class CartsController < ApplicationController
 																	 usuarios_id: current_usuario.id,
 																	 compra_id: ciclo.id,
 																	 delivery_time: ciclo.fecha_entrega_compras,
-																	 warehouses_id: params[:pedidos][:warehouse]
 						).save
 					end
 					if ciclo.tipo != 'free'
