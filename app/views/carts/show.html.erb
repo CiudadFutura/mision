@@ -15,10 +15,11 @@
       </div>
     <% end %>
   </div>
+  <%= @ciclo_actual_include %>
 	<% if @ciclo_actual.present? %>
 			<% if current_usuario && current_usuario.circulo && @ciclo_actual.tipo != 'free' %>
-					<% if @ciclo_actual_include.present?  %>
-							<% if !current_usuario.pedido?(@ciclo_actual_include) %>
+					<% if @ciclo_actual.circulos.include?(current_usuario.circulo)  %>
+							<% if !current_usuario.pedido?(@ciclo_actual) %>
 									<%= render 'carts/cart' %>
 							<% else %>
 									<p class="explicacion"><span class="label label-warning">Disculpa. Ya haz realizado tu pedido. Por el momento la misión solo admite un pedido por usuario por ciclo.</span></p>
