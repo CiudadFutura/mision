@@ -39,6 +39,11 @@ class CartsController < ApplicationController
 		pedido.saving = @carrito.ahorro
 		pedido.total_products = @carrito.cantidad
 		pedido.active = true
+    if params[:pedidos] && params[:pedidos][:warehouse]
+      warehouse = params[:pedidos][:warehouse]
+    else
+      warehouse = nil
+    end
     respond_to do |format|
 			if missing.blank?
 				if pedido.save!
@@ -56,7 +61,7 @@ class CartsController < ApplicationController
 																											 total_line: (item.cantidad.to_i * producto.precio).to_f
 
 						)
-
+						pedido_details.warehouse = warehouse
 						pedido_details.save
 					end
 
@@ -73,6 +78,7 @@ class CartsController < ApplicationController
 																	 usuarios_id: current_usuario.id,
 																	 compra_id: ciclo.id,
 																	 delivery_time: ciclo.fecha_entrega_compras,
+																	 warehouses_id: warehouse
 						).save
 					end
 					if ciclo.tipo != 'free'
