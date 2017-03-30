@@ -9,9 +9,11 @@
 <% @productos.each do |producto|%>
 		<div class="col-xs-6 col-md-4 thumbnails">
 			<div class="thumbnail text-center">
-				<% if producto.supplier.nature == 'producer' %>
-						<div class="ribbon"><span><%= I18n.t(producto.supplier.nature, :default => '') %></span></div>
-				<% end %>
+				<% if producto.supplier.present? %>
+          <% if producto.supplier.nature == 'producer' %>
+              <div class="ribbon"><span><%= I18n.t(producto.supplier.nature, :default => '') %></span></div>
+          <% end %>
+        <% end %>
 				<% if producto.oculto? %>
 						<div class="oculto-prod">
 							<span>Oculto</span>
