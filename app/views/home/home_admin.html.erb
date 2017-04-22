@@ -6,10 +6,51 @@
 	  <p class="explicacion">Si estas acá, es porque sos administrador en la Misión Anti Inflación.<br/>
 	  Utiliza el menu superior para acceder y administrar el sitio.</p>
   </div>
-	<div class="row text-center">
+
+  <div class="row">
+    <!-- COLUMN ONE -->
+    <div class="col-sm-6 col-md-4">
+      <!--
+         ****** LINE CHART WIDGET *******
+         -->
+      <div id="line-chart-widget" class="panel">
+        <div class="panel-heading">
+          <h4 class="text-uppercase"><strong>Cantidad de Productos por Ciclo</strong><br><small>Nasdaq: AAPL</small></h4>
+        </div>
+        <div class="panel-body">
+          <canvas id="myLineChart"></canvas>
+        </div>
+        <div class="panel-footer">
+          <div class="list-block">
+            <ul class="text-center legend">
+              <li>
+                <h3>13.5 M</h3>
+                Shares Traded
+              </li>
+              <li>
+                <h3>28.44 B</h3>
+                Market Cap
+              </li>
+            </ul>
+          </div>
+          <div class="chart-block clearfix">
+            <div class="pull-left">
+              Monthly Volume
+              <canvas id="myBarChart"></canvas>
+            </div>
+            <div class="pull-right">
+              Yearly Change<br>
+              <div class="change text-center"><i class="fa fa-plus"></i> 86.01</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row text-center">
     <%= image_tag 'acceso_panel_admin.png', :class => 'img-responsive center-block'%>
-	</div>
-	<% if !@coordinadoresNuevos.blank? %>
+  </div>
+	<% if @coordinadoresNuevos.present? %>
 			<div class="row">
 					<table class="table table-striped">
 					  <caption class="text-left">Nuevos Coordinadores sin círculo</caption>
@@ -37,3 +78,6 @@
 			</div>
 	<% end %>
 </div>
+<script>
+  var datasets = <%= raw @countProductsByCycle.to_json %>;
+</script>

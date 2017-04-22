@@ -11,6 +11,8 @@ class HomeController < ApplicationController
 			when Usuario::ADMIN
 				@pedidosCiclos = Pedido::pedidos_ciclos
 				@coordinadoresNuevos = Usuario::nuevos_coordinadores
+        @countProductsByCycle = Compra::products_by_cycles
+        puts @countProductsByCycle.to_json
 				page = 'home/home_admin'
 			when Usuario::COORDINADOR
 				if current_usuario.circulo_id.present?
