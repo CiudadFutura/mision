@@ -40,6 +40,13 @@
 								<%= label :view_type_admin, 'Administrador' %>
 								<%= radio_button_tag :view_type, 'user', @view_type.nil? %>
 								<%= label :view_type_user, 'Consumidor' %>
+                <br>
+                <%= radio_button_tag :view_prod, 'todos', @view_prod.blank? %>
+                <%= label :view_prod, 'Todos' %>
+                <%= radio_button_tag :view_prod, 'ocultos', @view_prod == 'ocultos' %>
+                <%= label :view_prod, 'Ocultos' %>
+                <%= radio_button_tag :view_prod, 'visibles', @view_prod == 'visibles' %>
+                <%= label :view_prod, 'Visibles' %>
 								<p class="text-right">
 									<%= submit_tag 'Cambiar', class: "btn btn-success btn-xs"%>
 								</p>

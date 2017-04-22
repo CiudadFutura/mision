@@ -4,36 +4,47 @@ class ProductosController < ApplicationController
   # GET /productos
   # GET /productos.json
   def index
-		@destacados = false
-		@freesale = Producto.freesale
-		if params[:categoria_id].blank?
-			@destacados = true
-			@productos = Producto.destacados
-		elsif params[:categoria_id] != Categoria::TODAS
-			if params[:subcategoria_id].present?
-				@productos = Producto.bySubcategoria(params[:categoria_id], params[:subcategoria_id])
-			else
-				@productos = Producto.byCategoria(params[:categoria_id])
-			end
-		else
-			@productos = Producto.all.order(:orden, :nombre)
-		end
-
-		if params['commit'] == 'Cambiar' and params['view_type'] == 'admin'
-			session[:view_type] = 'admin'
-		elsif params['commit'] == 'Cambiar' and params['view_type'] == 'user'
-			session.delete(:view_type)
-		end
-		@view_type = session[:view_type]
+    if params['view_type'] == 'admin'
+      session[:view_type] = 'admin'
+    end
+    if params['view_type'] == 'user'
+      session.delete(:view_type)
+    end
+    if params['view_prod'] == 'ocultos'
+      session[:view_prod] = 'ocultos'
+    end
+    if params['view_prod'] == 'visibles'
+      session[:view_prod] = 'visibles'
+    end
+    if params['view_prod'] == 'todos'
+      session.delete(:view_prod)
+    end
+    @view_type = session[:view_type]
+    @view_prod = session[:view_prod]
     @ciclo_actual = Compra::ciclo_actual
 
+		@productos = Producto.all.order(:orden, :nombre)
+    @todos = @productos
     @productos = @productos.disponibles.order(:orden, :nombre) if current_usuario.nil? || !current_usuario.admin?
+    @productos = @productos.destacados if params[:featured].present?
+    @productos = @productos.categoria(params[:categoria_id]) if params[:categoria_id]
+    @productos = @productos.subcategoria(params[:categoria_id], params[:subcategoria_id]) if params[:subcategoria_id].present?
+    @productos = @productos.disponibles if session['view_prod'] == 'visibles'
+    @productos = @productos.ocultos if session['view_prod'] == 'ocultos'
+
+
 
     if current_usuario && current_usuario.admin?
-      @todos = Producto.all.order(:orden, :nombre)
       respond_to do |format|
 				format.html
-       	format.csv { render csv: @todos.to_csv, type: "text/csv; charset=UTF-8; header=present", filename: "#{Time.now.to_i}_productos" }
+        format.csv { render csv: @todos.to_csv, type: 'text/csv; charset=UTF-8; header=present', filename: "#{Time.now.to_i}_productos" }
+      end
+    else
+      token = Rails.application.secrets.secret_mai_token
+      if token == params[:token]
+        respond_to do |format|
+          format.json { render :json => @todos.to_json }
+        end
       end
     end
   end

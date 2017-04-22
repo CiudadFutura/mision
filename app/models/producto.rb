@@ -13,6 +13,8 @@ class Producto < ActiveRecord::Base
 
   scope :disponibles, -> { where(oculto: false) }
 	scope :destacados, -> {where(highlight: true)}
+  scope :ocultos, -> {where(oculto: true)}
+  scope :freesale, -> {where('sale_type = :free and oculto = :oculto' , free: 1, oculto: false)}
 	scope :categoria, lambda { |categoria| joins(:categorias).where('categorias.id = :id OR categorias.parent_id = :id',
 			id: categoria).order(:orden, :nombre) if categoria }
 	scope :subcategoria, lambda { |categoria, subcategoria| joins(:categorias)
@@ -103,33 +105,6 @@ class Producto < ActiveRecord::Base
         ]
       end
     end
-	end
-
-	def self.destacados
-		Producto.where("highlight = :destacado", destacado: true).order(:orden)
-	end
-
-	def self.bySubcategoria(categoria_id, subcategoria_id)
-		Producto.joins(:categorias)
-				.where(
-						"categorias_productos.categoria_id = :sub_id AND categorias.parent_id = :id",
-						id: categoria_id,
-						sub_id: subcategoria_id
-				)
-				.order(:orden, :nombre)
-	end
-
-	def self.byCategoria(categoria_id)
-		Producto.joins(:categorias)
-				.where(
-						"categorias.id = :id OR categorias.parent_id = :id",
-						id: categoria_id
-				)
-				.order(:orden, :nombre)
-	end
-
-	def self.freesale
-		Producto.where("sale_type = :free and oculto = :oculto" , free: 1, oculto: false).order(:orden)
-	end
+  end
 
 end
