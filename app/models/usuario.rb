@@ -63,6 +63,43 @@ class Usuario < ActiveRecord::Base
     nil
   end
 
+  def self.new_users_per_month
+    count_users = {}
+    users_by_month = []
+    totals = Usuario
+      .select('count(usuarios.id) as users_qty,
+      year(usuarios.created_at) as year,
+      month(usuarios.created_at) as month')
+      .group('year, month')
+      .order('year')
+
+    totals.map do |mes|
+      unless (count_users[mes.year])
+        count_users[mes.year] = {
+          label: mes.year,
+          backgroundColor: self.colors["#{mes.year}"],
+          data: []
+        }
+      end
+      count_users[mes.year][:data].push(mes.users_qty)
+    end
+
+    count_users.each do |key, v|
+      users_by_month.push(v)
+    end
+
+    return users_by_month
+  end
+
+  def self.users_totals_per_year
+    Usuario
+      .select('count(usuarios.id) as total,
+      YEAR(usuarios.created_at) as year')
+      .group('year')
+      .order('year').last(2)
+  end
+
+
   def self.nuevos_coordinadores()
     coordinadores = Usuario.where("type=? AND circulo_id IS NULL OR circulo_id = ?","Coordinador", '')
     return coordinadores
@@ -98,6 +135,15 @@ class Usuario < ActiveRecord::Base
 	private
   def set_default_role
     self.type ||= Usuario::USUARIO
+  end
+
+  def self.colors
+    {
+      '2015' => 'rgba(155, 89, 182, 0.6)',
+      '2016' => 'rgba(46, 204, 113, 0.6)',
+      '2017' => 'rgba(192, 57, 43, 0.6)',
+      '2018' => 'rgba(44, 62, 80,0.6)'
+    }
   end
 
 end

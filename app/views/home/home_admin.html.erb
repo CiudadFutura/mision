@@ -9,13 +9,10 @@
 
   <div class="row">
     <!-- COLUMN ONE -->
-    <div class="col-sm-6 col-md-4">
-      <!--
-         ****** LINE CHART WIDGET *******
-         -->
+    <div class="col-sm-6 col-md-6">
       <div id="line-chart-widget" class="panel">
         <div class="panel-heading">
-          <h4 class="text-uppercase"><strong>Cantidad de Productos por Ciclo</strong><br><small>Nasdaq: AAPL</small></h4>
+          <h4 class="text-uppercase"><strong>Cantidad de Productos por Ciclo</strong></h4>
         </div>
         <div class="panel-body">
           <canvas id="myLineChart"></canvas>
@@ -23,25 +20,35 @@
         <div class="panel-footer">
           <div class="list-block">
             <ul class="text-center legend">
+              <% @total_sales_per_year.each do |year| %>
               <li>
-                <h3>13.5 M</h3>
-                Shares Traded
+                <h3><%= number_to_currency(year.total) %></h3>
+                <%= year.year%>
               </li>
-              <li>
-                <h3>28.44 B</h3>
-                Market Cap
-              </li>
+              <% end %>
             </ul>
           </div>
-          <div class="chart-block clearfix">
-            <div class="pull-left">
-              Monthly Volume
-              <canvas id="myBarChart"></canvas>
-            </div>
-            <div class="pull-right">
-              Yearly Change<br>
-              <div class="change text-center"><i class="fa fa-plus"></i> 86.01</div>
-            </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-6">
+      <div id="line-chart-widget" class="panel">
+        <div class="panel-heading">
+          <h4 class="text-uppercase"><strong>Cantidad de Nuevos Usuarios por mes</strong></h4>
+        </div>
+        <div class="panel-body">
+          <canvas id="myChart"></canvas>
+        </div>
+        <div class="panel-footer">
+          <div class="list-block">
+            <ul class="text-center legend">
+              <% @total_new_users_per_year.each do |year| %>
+                  <li>
+                    <h3><%= number_with_delimiter(year.total, delimiter: '.') %></h3>
+                    <%= year.year%>
+                  </li>
+              <% end %>
+            </ul>
           </div>
         </div>
       </div>
@@ -79,5 +86,6 @@
 	<% end %>
 </div>
 <script>
-  var datasets = <%= raw @countProductsByCycle.to_json %>;
+  var products_by_cycles = <%= raw @countProductsByCycle.to_json %>;
+  var users_by_months = <%= raw @total_users.to_json %>;
 </script>

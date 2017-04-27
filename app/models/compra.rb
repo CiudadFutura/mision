@@ -41,13 +41,8 @@ class Compra < ActiveRecord::Base
 
   def self.products_by_cycles
     count_products = {}
-
-    current_month = 0
-    current_year = 0
-    last_month = 1
-    last_year = 1
     last_label = ''
-
+    products_by_cycles = []
     totals = Compra
                .select('compras.id, sum(pedidos_details.product_qty) as cantidad,
                 YEAR(compras.fecha_inicio_compras) as year,
@@ -65,7 +60,6 @@ class Compra < ActiveRecord::Base
         }
       end
       self.labels.each do |mes|
-        # next if mes.to_i + 1 <= ciclo.month and last_label.present?
         if ciclo.month == mes.to_i
           count_products[ciclo.year][:data].push(ciclo.cantidad)
           last_label = mes.to_i
@@ -75,11 +69,21 @@ class Compra < ActiveRecord::Base
         end
       end
     end
-    retorno = []
+
     count_products.each do |key, v|
-      retorno.push(v)
+      products_by_cycles.push(v)
     end
-    return retorno
+    return products_by_cycles
+  end
+
+  def self.sales_totals_per_year
+    Compra
+      .select('ROUND(sum(pedidos_details.total_line), 2) as total,
+      YEAR(compras.fecha_inicio_compras) as year')
+      .joins(pedidos: :pedidos_details)
+      .group('year')
+      .order('year').last(2)
+
   end
 
 
