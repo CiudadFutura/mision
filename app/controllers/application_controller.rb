@@ -7,7 +7,6 @@ class ApplicationController < ActionController::Base
   before_filter :init_carrito
   before_filter :categorias_menu
   before_filter :configure_permitted_parameters, if: :devise_controller?
-  #before_filter :migrate
 
   layout 'layout'
 
@@ -42,39 +41,6 @@ class ApplicationController < ActionController::Base
         menu << cat
       end
       menu
-    end
-  end
-
-  def migrate
-    if current_usuario.present? and current_usuario.email == 'nicofheredia@gmail.com'
-      pedidos = Pedido.all
-      pedidos.each do |pedido|
-        #pedido.saving = pedido.ahorro
-        total_amount = 0
-        JSON.parse(pedido.items).map do |item|
-          producto = Producto.find(item["producto_id"]) rescue nil
-          if producto.present?
-            supplier = Supplier.find(producto.supplier)
-          end
-          total_amount += item["total"].to_i
-
-          pedido_details = pedido.pedidos_details.build(
-            supplier_id: supplier.present? ? supplier.id : 'Sin Proveedor ID',
-            supplier_name: supplier.present? ? supplier.name : 'Sin Proveedor Nombre',
-            product_id: item["producto_id"],
-            product_codigo: producto.present? ? producto.codigo : 'Sin Código',
-            product_name: producto.present? ? producto.nombre : 'Sin Nombre',
-            product_qty: item["cantidad"].to_i,
-            product_price: (item["total"] / item["cantidad"]).to_f,
-            total_line: (item["total"]).to_f
-
-          )
-          pedido.total = total_amount
-          pedido.total_products = pedido.cantidad
-          pedido_details.save
-          total_amount = 0
-        end
-      end
     end
   end
 
