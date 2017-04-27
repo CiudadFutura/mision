@@ -11,6 +11,10 @@ class HomeController < ApplicationController
 			when Usuario::ADMIN
 				@pedidosCiclos = Pedido::pedidos_ciclos
 				@coordinadoresNuevos = Usuario::nuevos_coordinadores
+        @countProductsByCycle = Compra::products_by_cycles
+        @total_sales_per_year = Compra::sales_totals_per_year
+        @total_users = Usuario::new_users_per_month
+        @total_new_users_per_year = Usuario::users_totals_per_year
 				page = 'home/home_admin'
 			when Usuario::COORDINADOR
 				if current_usuario.circulo_id.present?

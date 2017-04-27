@@ -42,7 +42,7 @@ class ApplicationController < ActionController::Base
       end
       menu
     end
-	end
+  end
 
   protected
 

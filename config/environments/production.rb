@@ -74,6 +74,9 @@ Rails.application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
+  #Token for json in product view
+  config.secret_mai_token = ENV["TOKEN_MAI_GET"].present?
+
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 

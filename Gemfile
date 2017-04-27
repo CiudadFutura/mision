@@ -48,6 +48,8 @@ gem 'paper_trail', '~> 4.0.0.rc'
 gem 'writeexcel'
 # Enable reading settings from yml file
 gem 'figaro'
+# Charts js
+gem 'chart-js-rails'
 
 group :development do
   # Spring speeds up development by keeping your application running in the

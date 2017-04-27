@@ -82,6 +82,11 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :smtp
 
+  #Token for json in product view
+  config.secret_mai_token = ENV["TOKEN_MAI_GET"].present?
+
+
+
 =begin
 	# SMTP settings for gmail
   config.action_mailer.smtp_settings = {

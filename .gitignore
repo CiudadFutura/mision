@@ -22,6 +22,7 @@ uploads
 # Ignore application configuration
 /config/application.yml
 /config/local_env.yml
+/config/secrets.yml
 .DS_Store
 .idea/.generators
 .idea/.rakeTasks
@@ -33,6 +34,4 @@ uploads
 .idea/modules.xml
 .idea/vcs.xml
 .idea/workspace.xml
-Improve_delivery_module.patch
-app/views/compras_mailer/style.css
-config/local_env.yml
+

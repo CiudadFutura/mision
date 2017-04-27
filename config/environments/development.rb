@@ -35,7 +35,11 @@ Rails.application.configure do
   # Raises error for missing translations
   config.action_view.raise_on_missing_translations = true
 
-	config.action_mailer.delivery_method = :smtp
+  #Token for json in product view
+  config.secret_mai_token = ENV["TOKEN_MAI_GET"].present?
+
+
+  config.action_mailer.delivery_method = :smtp
 	config.action_mailer.smtp_settings = { :address => "localhost", :port => 1025 }
 
 	config.action_controller.asset_host = "http://0.0.0.0:3000"
