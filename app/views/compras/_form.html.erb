@@ -39,20 +39,22 @@
     <%= f.text_area :descripcion, :class => 'form-control' %>
   </div>
   <div class="form-group">
+    <%= @compra.fecha_inicio_compras %>
+    <%= Time.current %>
     <%= f.label :fecha_inicio_compras %><br>
-    <%= select_datetime @compra.fecha_inicio_compras, prefix: 'compra[fecha_inicio_compras]', :class => 'form-control' %>
+    <%= select_datetime @compra.fecha_inicio_compras.present? ? @compra.fecha_inicio_compras : Time.current, :class => 'form-control' %>
   </div>
   <div class="form-group">
     <%= f.label :fecha_fin_compras %><br>
-    <%= select_datetime @compra.fecha_fin_compras, prefix: 'compra[fecha_fin_compras]', :class => 'form-control' %>
+    <%= select_datetime @compra.fecha_fin_compras.present? ? @compra.fecha_fin_compras : Time.current, :class => 'form-control' %>
   </div>
   <div class="form-groupm">
     <%= f.label :fecha_fin_pagos %><br>
-    <%= select_datetime @compra.fecha_fin_pagos, prefix: 'compra[fecha_fin_pagos]', :class => 'form-control' %>
+    <%= select_datetime @compra.fecha_fin_pagos.present? ? @compra.fecha_fin_pagos : Time.current, :class => 'form-control' %>
   </div>
   <div class="form-group">
     <%= f.label :fecha_entrega_compras %><br>
-    <%= select_datetime @compra.fecha_entrega_compras, prefix: 'compra[fecha_entrega_compras]', :class => 'form-control' %>
+    <%= select_datetime @compra.fecha_entrega_compras.present? ? @compra.fecha_entrega_compras : Time.current, :class => 'form-control' %>
   </div>
 
 	<%= render 'compras/form_circulos' %>
