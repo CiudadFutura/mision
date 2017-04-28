@@ -57,6 +57,60 @@ class Pedido < ActiveRecord::Base
     return pedidos_por_ciclos
   end
 
+  def self.orders_qty_per_year
+    count_orders = {}
+    last_label = ''
+    orders_by_cycles = []
+    totals = Pedido
+               .select('count(pedidos.id) as qty, compras.id,
+                  YEAR(compras.fecha_inicio_compras) as year,
+                  MONTH(compras.fecha_inicio_compras) as month')
+               .joins(:ciclo)
+               .group('pedidos.compra_id, year, month')
+               .order('year, month')
+
+    totals.map do |ciclo|
+      unless (count_orders[ciclo.year])
+        count_orders[ciclo.year] = {
+          label: ciclo.year,
+          backgroundColor: self.colors["#{ciclo.year}"],
+          data: []
+        }
+      end
+      self.labels.each do |mes|
+        if ciclo.month == mes.to_i
+          count_orders[ciclo.year][:data].push(ciclo.qty)
+          last_label = mes.to_i
+          break
+        elsif last_label.blank?
+          count_orders[ciclo.year][:data].push(0)
+        end
+      end
+    end
+
+    count_orders.each do |key, v|
+      orders_by_cycles.push(v)
+    end
+
+    return orders_by_cycles
+
+  end
+
+  def self.total_orders_month
+    Pedido
+      .select('count(pedidos.id) as qty, compras.id,
+      YEAR(compras.fecha_inicio_compras) as year,
+      MONTH(compras.fecha_inicio_compras) as month,
+      MONTHNAME(compras.fecha_inicio_compras) as monthname',
+      )
+    .joins(:ciclo)
+    .group('compras.id, month, year')
+    .order('year, month')
+    .last(3)
+
+  end
+
+
   def has_missing?
     missing = false
     JSON.parse(self.items, symbolize_names: true).each do |item|
@@ -161,6 +215,21 @@ class Pedido < ActiveRecord::Base
     end
 
     reporte
+  end
+
+  private
+
+  def self.colors
+    {
+      '2015' => 'rgba(155, 89, 182, 0.6)',
+      '2016' => 'rgba(46, 204, 113, 0.6)',
+      '2017' => 'rgba(192, 57, 43, 0.6)',
+      '2018' => 'rgba(44, 62, 80,0.6)'
+    }
+  end
+
+  def self.labels
+    %w(1 1 2 2 3 3 4 4 5 5 6 6 7 7 8 8 9 9 10 10 11 11 12 12)
   end
 
 end

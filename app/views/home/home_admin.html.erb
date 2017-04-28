@@ -54,6 +54,33 @@
       </div>
     </div>
   </div>
+
+  <div class="row">
+    <!-- COLUMN ONE -->
+    <div class="col-sm-6 col-md-4">
+      <div id="pie-chart-widget" class="panel">
+        <div class="panel-heading text-center">
+          <h4 class="text-uppercase"><strong>Cantidad de pedidos por ciclos</strong></h4>
+        </div>
+        <div class="panel-body">
+          <canvas id="myOrdersChart"></canvas>
+        </div>
+        <div class="panel-footer">
+          <div class="list-block">
+            <ul class="text-center legend">
+              <% @total_orders.each do |order| %>
+                <li class="video" style="margin-right: 1px;">
+                  <%= t('date.month_names')[order.month] %>
+                  <h2><%= order.qty%></h2>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="row text-center">
     <%= image_tag 'acceso_panel_admin.png', :class => 'img-responsive center-block'%>
   </div>
@@ -88,4 +115,5 @@
 <script>
   var products_by_cycles = <%= raw @countProductsByCycle.to_json %>;
   var users_by_months = <%= raw @total_users.to_json %>;
+  var orders_by_months = <%= raw @total_orders_year.to_json %>;
 </script>

@@ -15,6 +15,8 @@ class HomeController < ApplicationController
         @total_sales_per_year = Compra::sales_totals_per_year
         @total_users = Usuario::new_users_per_month
         @total_new_users_per_year = Usuario::users_totals_per_year
+        @total_orders_year = Pedido::orders_qty_per_year
+        @total_orders = Pedido::total_orders_month
 				page = 'home/home_admin'
 			when Usuario::COORDINADOR
 				if current_usuario.circulo_id.present?
