@@ -102,35 +102,6 @@
 
     </ul>
 
-    <ul class="nav navbar-nav navbar-right">
-			<li>
-				<%= link_to(productos_path) do %>
-						<span class="icon-tienda glyphicon"></span>Tienda
-				<% end %>
-			</li>
-      <% if usuario_signed_in? %>
-        <li><p class="navbar-text"><%= truncate(current_usuario.email, length: 32) %></p></li>
-        <li class="divider"></li>
-        <li><%= link_to('Mis Datos', usuario_path(current_usuario))%></li>
-        <li class="divider"></li>
-        <li><%= link_to('Cerrar Sesion',
-                        destroy_usuario_session_path,
-                        method: 'delete') %>
-        </li>
-      <% else %>
-        <li>
-          <%= link_to(new_usuario_registration_path) do %>
-            <span class="icon-registrate glyphicon"></span>Registrate
-          <% end %>
-        </li>
-        <li>
-          <%= link_to(new_usuario_session_path) do %>
-            <span class="icon-ingresa glyphicon"></span>Ingresa
-          <% end %>
-        </li>
 
-      <% end %>
-    </ul>
-    <%= yield(:cart_menu) %>
   </div><!-- /.container-fluid -->
 </nav>

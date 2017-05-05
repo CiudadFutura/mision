@@ -10,18 +10,11 @@
     <%= render 'layouts/header_users' %>
 <% end %>
 </div>
-<div class="container-fluid">
-  <div class="row">
-    <%= render 'layouts/menu' %>
-  </div>
-</div>
+
 <% if request.path == '/productos' %>
 	<div class="container">
 		<div class="row">
-			<div class="col-md-3">
-				<h1>La Tienda</h1>
-			</div>
-			<div class="col-md-offset-3 order-data">
+			<div class=" order-data">
 
 					<div class="col-lg-3 order-data-title vcenter">
 							<h4>Datos de tú compra</h4>

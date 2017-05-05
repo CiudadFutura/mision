@@ -34,10 +34,30 @@
                       <% end %>
                     </li>
                 <% end %>
+                <% if can? [:manage], pedidos_path %>
+                    <li>
+                      <%= link_to(pedidos_path) do %>
+                          Pedidos
+                      <% end %>
+                    </li>
+                <% end %>
+                <% if can? [:manage], accounts_path %>
+                    <li>
+                      <%= link_to(accounts_path) do %>
+                          <span class="icon-stats"></span>Cuentas Corrientes
+                      <% end %>
+                    </li>
+                <% end %>
                 <li class="divider"></li>
-                <li class="dropdown-header">Fonts</li>
-                <li><a href="#">Glyphicon</a></li>
-                <li><a href="#">Google Fonts</a></li>
+                <li class="dropdown-header">Gestión</li>
+                <% if can? [:manage], suppliers_path %>
+                    <li>
+                      <%= link_to(suppliers_path) do %>
+                          <span class="icon-key2"></span>Proveedores
+                      <% end %>
+                    </li>
+                <% end %>
+                <li><a href="#">Recetas & tips</a></li>
               </ul>
             </li>
             <li class="col-sm-3">
@@ -62,20 +82,35 @@
             <li class="col-sm-3">
               <ul>
                 <li class="dropdown-header">Administración</li>
-                  <% if can? [:manage], pedidos_path %>
+                <% if can? [:manage], pedidos_path %>
                     <li>
-                      <%= link_to(pedidos_path) do %>
-                        Pedidos
+                      <%= link_to(remitos_pedido_index_path) do %>
+                          <span class="icon-stats"></span>Remitos
                       <% end %>
                     </li>
-                  <% end %>
-                <% if can? [:manage], accounts_path %>
-                  <li>
-                    <%= link_to(accounts_path) do %>
-                      <span class="icon-stats"></span>Cuentas Corrientes
-                    <% end %>
-                  </li>
                 <% end %>
+                <% if can? [:manage], sectors_path %>
+                    <li>
+                      <%= link_to(sectors_path) do %>
+                          <span class="icon-stats"></span>Sectores
+                      <% end %>
+                    </li>
+                <% end %>
+                <% if can? [:manage], warehouses_path %>
+                    <li>
+                      <%= link_to(warehouses_path) do %>
+                          <span class="icon-stats"></span>Depósitos
+                      <% end %>
+                    </li>
+                <% end %>
+                <% if can? [:manage], compras_path %>
+                    <li>
+                      <%= link_to(compras_path) do %>
+                          <span class="icon-key2"></span>Ciclos
+                      <% end %>
+                    </li>
+                <% end %>
+
               </ul>
             </li>
           </ul>
