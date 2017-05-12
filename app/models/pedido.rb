@@ -74,21 +74,20 @@ class Pedido < ActiveRecord::Base
         count_orders[ciclo.year] = {
           label: ciclo.year,
           backgroundColor: self.colors["#{ciclo.year}"],
-          data: []
+          data: [[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0]]
         }
       end
-      self.labels.each do |mes|
-        if ciclo.month == mes.to_i
-          count_orders[ciclo.year][:data].push(ciclo.qty)
-          last_label = mes.to_i
-          break
-        elsif last_label.blank?
-          count_orders[ciclo.year][:data].push(0)
-        end
+
+      if count_orders[ciclo.year][:data][ciclo.month-1][0] == 0
+        count_orders[ciclo.year][:data][ciclo.month-1][0] = ciclo.qty
+      else
+        count_orders[ciclo.year][:data][ciclo.month-1][1] = ciclo.qty
       end
+
     end
 
     count_orders.each do |key, v|
+      v[:data] = v[:data].flatten()
       orders_by_cycles.push(v)
     end
 

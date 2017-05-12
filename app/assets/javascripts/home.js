@@ -51,7 +51,8 @@ $(document).ready(function(){
 
     //Docs at http://www.chartjs.org
     var orders_data = {
-        labels: ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"],
+        labels: ["Enero","Enero","Febrero","Febrero","Marzo","Marzo","Abril","Abril","Mayo","Mayo","Junio","Junio",
+            "Julio","Julio","Agosto","Agosto","Septiembre","Septiembre","Octubre","Octubre","Noviembre","Noviembre","Diciembre","Diciembre"],
         datasets: orders_by_months
 
     };

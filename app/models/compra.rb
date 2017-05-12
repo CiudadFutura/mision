@@ -56,21 +56,19 @@ class Compra < ActiveRecord::Base
         count_products[ciclo.year] = {
           label: ciclo.year,
           backgroundColor: self.colors["#{ciclo.year}"],
-          data: []
+          data: [[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0]]
         }
       end
-      self.labels.each do |mes|
-        if ciclo.month == mes.to_i
-          count_products[ciclo.year][:data].push(ciclo.cantidad)
-          last_label = mes.to_i
-          break
-        elsif last_label.blank?
-          count_products[ciclo.year][:data].push(0)
-        end
+
+      if count_products[ciclo.year][:data][ciclo.month-1][0] == 0
+        count_products[ciclo.year][:data][ciclo.month-1][0] = ciclo.cantidad
+      else
+        count_products[ciclo.year][:data][ciclo.month-1][1] = ciclo.cantidad
       end
     end
 
     count_products.each do |key, v|
+      v[:data] = v[:data].flatten()
       products_by_cycles.push(v)
     end
     return products_by_cycles
