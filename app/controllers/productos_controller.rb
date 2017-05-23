@@ -40,11 +40,12 @@ class ProductosController < ApplicationController
         format.csv { render csv: @todos.to_csv, type: 'text/csv; charset=UTF-8; header=present', filename: "#{Time.now.to_i}_productos" }
       end
     elsif params[:token]
-      token = Rails.application.secrets.secret_mai_token
-      if token == params[:token]
-        render json: @todos.to_json
+      respond_to do |format|
+        token = Rails.application.secrets.secret_mai_token
+        if token == params[:token]
+            format.json { render json: @todos.to_json, status: ok }
+        end
       end
-
     end
   end
 
