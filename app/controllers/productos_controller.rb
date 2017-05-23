@@ -43,7 +43,7 @@ class ProductosController < ApplicationController
       respond_to do |format|
         token = Rails.application.secrets.secret_mai_token
         if token == params[:token]
-            format.json { render json: @todos.to_json, status: ok }
+            format.json { render json: @todos.to_json, status: :ok }
         end
       end
     end
