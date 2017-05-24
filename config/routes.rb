@@ -50,7 +50,7 @@ Rails.application.routes.draw do
 	get '/carts/success/:id', to: 'carts#success', as: :success
 
 
-  resources :productos do
+  resources :productos, :index => { :format => :json } do
     collection { post 'upload' }
     collection { put 'edit_multiple' }
 		delete 'delete/:id', to: 'productos#delete', as: :delete

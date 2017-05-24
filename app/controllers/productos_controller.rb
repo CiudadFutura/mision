@@ -40,7 +40,7 @@ class ProductosController < ApplicationController
       elsif params[:token]
         token = Rails.application.secrets.secret_mai_token
         if token == params[:token]
-          format.json { render json: @todos, status: :created, :content_type => 'application/json' }
+          format.json { render json: @todos.as_json, status: :created, :content_type => 'application/json' }
         end
       end
     end
