@@ -33,19 +33,16 @@ class ProductosController < ApplicationController
     @productos = @productos.ocultos if session['view_prod'] == 'ocultos'
 
 
-
-    if current_usuario && current_usuario.admin?
-      respond_to do |format|
-				format.html
+    respond_to do |format|
+      if current_usuario && current_usuario.admin?
+        format.html
         format.csv { render csv: @todos.to_csv, type: 'text/csv; charset=UTF-8; header=present', filename: "#{Time.now.to_i}_productos" }
-      end
-    elsif params[:token]
+      elsif params[:token]
         token = Rails.application.secrets.secret_mai_token
         if token == params[:token]
-          respond_to do |format|
-            format.json { render :json => @todos, :status => :created }
-          end
+          format.json { render :json => @todos, :status => :created }
         end
+      end
     end
   end
 
