@@ -56,6 +56,14 @@ Rails.application.routes.draw do
 		delete 'delete/:id', to: 'productos#delete', as: :delete
   end
 
+  # API
+  namespace :api do
+    namespace :v1 do
+      resources :products
+    end
+  end
+
+
 
   resources :categorias
   resources :pedidos, only: [:index, :show, :edit, :destroy]
