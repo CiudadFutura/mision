@@ -1,5 +1,30 @@
 <%= javascript_include_tag "home" %>
 <div class="container fill">
+  <% if @cycles.present? %>
+    <div class="row">
+      <h2>Próximos Ciclos de Compras</h2>
+      <div style="display:inline-block;width:100%;overflow-y:auto;">
+      <ul class="timeline timeline-horizontal">
+        <% @cycles.each do |cicle| %>
+          <li class="timeline-item">
+            <div class="timeline-badge success"><i class="glyphicon glyphicon-check"></i></div>
+            <div class="timeline-panel">
+              <div class="timeline-heading">
+                <h4 class="timeline-title"><%= cicle.nombre%></h4>
+                <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> <%= l cicle.fecha_inicio_compras %></small></p>
+                <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> <%= l cicle.fecha_fin_compras %></small></p>
+                <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> <%= l cicle.fecha_entrega_compras %></small></p>
+              </div>
+              <div class="timeline-body">
+                <p><%= cicle.descripcion %></p>
+              </div>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+    </div>
+  <% end %>
 	<div class="row">
 		<div class="col-xs-12 col-md-12 text-center">
 			<div class="col-xs-12 col-md-12">
