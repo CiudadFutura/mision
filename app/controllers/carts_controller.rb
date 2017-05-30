@@ -115,6 +115,10 @@ class CartsController < ApplicationController
 
 	def success
 		@pedido = Pedido.find(params[:id])
+    if current_usuario.circulo_id.present?
+      circulo = Circulo.find(current_usuario.circulo_id) if current_usuario.circulo_id.present?
+      @next_cycle = circulo.next_delivery.offset(1).last
+    end
 		render 'carts/success'
 	end
 
