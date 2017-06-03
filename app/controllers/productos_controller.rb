@@ -25,6 +25,7 @@ class ProductosController < ApplicationController
 
 		@productos = Producto.all.order(:orden, :nombre)
     @todos = @productos
+    @productos = @productos.stock if current_usuario.nil? || current_usuario.present? && !current_usuario.admin?
     @productos = @productos.disponibles.order(:orden, :nombre) if current_usuario.nil? || !current_usuario.admin?
     @productos = @productos.destacados if params[:featured].present?
     @productos = @productos.categoria(params[:categoria_id]) if params[:categoria_id]

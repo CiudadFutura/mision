@@ -14,6 +14,7 @@ class Producto < ActiveRecord::Base
   scope :disponibles, -> { where(oculto: false) }
 	scope :destacados, -> {where(highlight: true)}
   scope :ocultos, -> {where(oculto: true)}
+  scope :stock, -> {where('stock != 0 OR stock IS NULL')}
   scope :freesale, -> {where('sale_type = :free and oculto = :oculto' , free: 1, oculto: false)}
 	scope :categoria, lambda { |categoria| joins(:categorias).where('categorias.id = :id OR categorias.parent_id = :id',
 			id: categoria).order(:orden, :nombre) if categoria }
@@ -36,7 +37,7 @@ class Producto < ActiveRecord::Base
   end
 
   def ahorro
-    return 0 if precio_super.nil? || precio_super == 0 || precio_super < precio
+    return 0 if precio_super.nil? || precio_super == 0 || precio_super < precio || precio.nil?
     100 * (precio_super - precio) / precio_super
   end
 
