@@ -35,11 +35,6 @@ gem 'devise', '3.5.6'
 gem 'cancan'
 gem 'bcrypt-ruby'
 
-# Authorization with OAuth
-gem 'omniauth'
-# Facebook
-gem 'omniauth-facebook'
-
 # Seed Migration: https://github.com/harrystech/seed_migration
 gem 'seed_migration'
 # Versioning models: https://github.com/airblade/paper_trail
@@ -58,7 +53,7 @@ group :development do
   gem 'spring'
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem "rails_best_practices"
+  gem 'rails_best_practices'
 end
 
 # Use Capistrano for deployment
@@ -82,6 +77,17 @@ gem 'jquery-validation-rails'
 # full calendar
 gem 'fullcalendar-rails'
 gem 'momentjs-rails'
+
+# Social network
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'omniauth-twitter'
+gem 'omniauth-instagram'
+gem 'koala', '~> 2.0'
+gem 'twitter'
+gem 'instagram'
+gem 'omniauth-google-oauth2'
+gem 'google-api-client', '~> 0.7.1'
 
 group :development, :test do
   gem 'sqlite3'

@@ -20,5 +20,8 @@
 	      <strong>Tipo:</strong>
 	      <%= @supplier.nature %>
 	    </p>
+      <p>
+        <%= image_tag @supplier.logo.url if @supplier.logo? %>
+      </p>
 	</div>
 </div>

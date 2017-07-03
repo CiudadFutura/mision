@@ -1,17 +1,18 @@
-require 'open-uri'
-require 'cgi'
-
 class Supplier < ActiveRecord::Base
   enum nature: [:wholesaler, :producer, :factory]
+  has_many :identities, dependent: :destroy
 
   before_save :geocode_with_cache
+
+  mount_uploader :logo, ImagenUploader
+
 
   def minimal_clean_address
     [calle,ciudad,codigo_postal,'AR'].to_a.compact.join(",")
   end
 
   def api_url
-    "http://maps.googleapis.com/maps/api/geocode/xml?"
+    'http://maps.googleapis.com/maps/api/geocode/xml?'
   end
 
   def api_query
@@ -28,7 +29,7 @@ class Supplier < ActiveRecord::Base
 
   def parse_response(doc)
     self.error_code = (doc/:status).first.inner_html
-    if error_code.eql? "OK"
+    if error_code.eql? 'OK'
       set_coordinates(doc)
     end
   end
@@ -40,7 +41,7 @@ class Supplier < ActiveRecord::Base
 
   def complete_address(doc)
     (doc/:result/:address_component).each do |ac|
-      if (ac/:type).first.inner_html == "sublocality"
+      if (ac/:type).first.inner_html == 'sublocality'
         self.ciudad = (ac/:long_name).first.inner_html
       end
     end
@@ -60,7 +61,7 @@ class Supplier < ActiveRecord::Base
   end
 
   def cache_query
-    ["calle = ? AND ciudad = ? and codigo_postal = ?",calle,ciudad,codigo_postal]
+    ['calle = ? AND ciudad = ? and codigo_postal = ?',calle,ciudad,codigo_postal]
   end
 
   def copy_cached_data(ca)

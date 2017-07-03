@@ -60,6 +60,14 @@ class ApplicationController < ActionController::Base
   def after_sign_out_path_for(resource_or_scope)
     root_path
   end
+=begin
+  def after_sign_in_path_for(resource)
+    token = resource.identities.exists?(provider: 'facebook')
+    puts token
+    puts 'entro'
+    request.env['omniauth.origin'] || stored_location_for(resource) || root_path
+  end
+=end
 
   def render_404(exception = nil)
     if exception

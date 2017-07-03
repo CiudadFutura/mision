@@ -79,6 +79,9 @@ class UsuariosController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_usuario
       @usuario = Usuario.find(params[:id])
+      if @usuario.identities.present?
+        @profile = Usuario.koala(@usuario.identities(provider: 'facebook').first)
+      end
     end
 
 

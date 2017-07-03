@@ -21,6 +21,13 @@
   </fieldset>
 
   <fieldset class="form-group">
+    <%= f.label :logo, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.file_field :logo %>
+    </div>
+  </fieldset>
+
+  <fieldset class="form-group">
     <%= f.label :nature, for:'nature' %>
     <%= f.select(:nature, options_for_select(Supplier.natures.map{|x,y| [t(x), x]}), class:'form-control', id:'nature', include_blank: 'Tipo de proveedor') %>
   </fieldset>
@@ -53,6 +60,18 @@
     <%= f.label :web, for:'web' %><br>
     <%= f.text_field :web, type:'text', id:'web', class:'form-control' %>
   </div>
+
+  <div class="form-group">
+    <%= f.fields_for @supplier.identities.first do |identity| %>
+        <p>
+          <%= identity.label :provider, 'Facebook' %>
+          <%= identity.text_field :urls, type:'text', class:'form-control' %>
+        </p>
+    <% end %>
+  </div>
+
+
+
 
   <div class="form-group">
     <%= f.label :description, for:'description' %><br>

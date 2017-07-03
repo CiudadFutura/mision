@@ -16,6 +16,7 @@ class SuppliersController < ApplicationController
   # GET /suppliers/new
   def new
     @supplier = Supplier.new
+    @identities = Identity.new
   end
 
   # GET /suppliers/1/edit
@@ -71,6 +72,7 @@ class SuppliersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def supplier_params
       params.require(:supplier).permit(:name, :address, :nature, :latitude, :longitude, :error_code,
-      :calle, :razon_social, :ciudad, :telefono, :web, :email, :nombre_contacto, :codigo_postal )
+                                       :calle, :razon_social, :ciudad, :telefono, :web, :email, :nombre_contacto,
+                                       :codigo_postal, :logo, identity_urls: [])
     end
 end
