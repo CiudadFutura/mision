@@ -1,9 +1,6 @@
 class SessionsController < ApplicationController
   def create
-    puts auth_hash.to_yaml
-    puts 'carajo'
     if auth_hash
-      puts auth_hash.to_yaml
       identity = Identity.where(provider: auth_hash.provider, uid: auth_hash.uid).first
       if identity
         user = Usuario.find_by(id: identity.usuario_id)
