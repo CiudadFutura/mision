@@ -1,4 +1,4 @@
-<%= javascript_include_tag "home" %>
+<%= javascript_include_tag 'home' %>
 <div class="container fill">
   <% if @cycles.present? %>
     <div class="row">
@@ -11,9 +11,12 @@
             <div class="timeline-panel">
               <div class="timeline-heading">
                 <h4 class="timeline-title"><%= cicle.nombre%></h4>
-                <p><span class="text-muted">Inicio de compras: </span><small><i class="glyphicon glyphicon-time"></i> <%= l cicle.fecha_inicio_compras %></small></p>
-                <p><span class="text-muted">Fin de compras:</span><small><i class="glyphicon glyphicon-time"></i> <%= l cicle.fecha_fin_compras %></small></p>
-                <p><span class="text-muted">Retiro de pedidos: </span><small><i class="glyphicon glyphicon-time"></i> <%= l cicle.fecha_entrega_compras %></small></p>
+                <p><span class="text-muted">Inicio de compras: </span><small>
+                  <i class="glyphicon glyphicon-time"></i> <%= l cicle.fecha_inicio_compras %></small></p>
+                <p><span class="text-muted">Fin de compras:</span><small>
+                  <i class="glyphicon glyphicon-time"></i> <%= l cicle.fecha_fin_compras %></small></p>
+                <p><span class="text-muted">Retiro de pedidos: </span><small>
+                  <i class="glyphicon glyphicon-time"></i> <%= l cicle.fecha_entrega_compras %></small></p>
               </div>
               <div class="timeline-body">
                 <p><%= cicle.descripcion %></p>

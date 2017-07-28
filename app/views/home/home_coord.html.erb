@@ -8,14 +8,12 @@
         de tu círculo y realizar el pago de la compra. Ante cualquier duda, consultanos vía mail
         a <b>victoriacolectiva@gmail.com</b></p>
     </div>
-    <%= @token %>
-    <% if !@token %>
+    <!--para la implementación de facebook -->
+    <% if @token %>
       <div class="col-lg-6">
         <div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="true"></div>
       </div>
     <% end %>
-
-
   </div>
   <div class="row">
     <% if @compra.present? %>

@@ -3,7 +3,9 @@
     <ul class="nav navbar-nav navbar-left">
       <% if can? [:manage], categorias_path %>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Menu <i class="fa fa-chevron-down"></i></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+            <i class="glyphicon glyphicon-chevron-down"></i> Menu
+          </a>
           <ul class="dropdown-menu" role="menu">
             <% if can? [:manage], circulos_path %>
               <li>
@@ -83,11 +85,11 @@
         <li>
           <% if can? [:manage], pedidos_path %>
             <%= link_to(pedidos_path) do %>
-              <span class="icon-stats"></span>Pedidos
+              <span class="glyphicon glyphicon-list-alt"></span>Pedidos
             <% end %>
           <% else %>
               <%= link_to(pedidos_path) do %>
-                <span class="icon-stats"></span>Mis Pedidos
+                <span class="glyphicon glyphicon-list-alt"></span>Mis Pedidos
               <% end %>
           <% end %>
         </li>
@@ -95,7 +97,7 @@
       <% if can? [:manage], accounts_path %>
         <li>
 					<%= link_to(accounts_path) do %>
-            <span class="icon-stats"></span>Cuentas Corriente
+            <span class="glyphicon glyphicon-briefcase"></span>Cuentas Corrientes
           <% end %>
         </li>
       <% end %>
@@ -108,14 +110,23 @@
 						<span class="icon-tienda glyphicon"></span>Tienda
 				<% end %>
 			</li>
+      <li>
+        <%= link_to(suppliers_path()) do %>
+          <span class="glyphicon glyphicon-leaf"></span>Productores
+        <% end %>
+      </li>
       <% if usuario_signed_in? %>
-        <li><p class="navbar-text"><%= truncate(current_usuario.email, length: 32) %></p></li>
         <li class="divider"></li>
-        <li><%= link_to('Mis Datos', usuario_path(current_usuario))%></li>
+        <li>
+          <%= link_to(usuario_path(current_usuario)) do %>
+            <span class="glyphicon glyphicon-user"></span>Mis Datos
+          <% end %>
+        </li>
         <li class="divider"></li>
-        <li><%= link_to('Cerrar Sesion',
-                        destroy_usuario_session_path,
-                        method: 'delete') %>
+        <li>
+          <%= link_to(destroy_usuario_session_path, method: 'delete') do %>
+            <span class="	glyphicon glyphicon-log-out"></span>Cerrar Sesión
+          <% end %>
         </li>
       <% else %>
         <li>

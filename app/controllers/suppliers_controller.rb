@@ -1,11 +1,12 @@
 class SuppliersController < ApplicationController
   before_action :set_supplier, only: [:show, :edit, :update, :destroy]
-  authorize_resource
+
   
   # GET /suppliers
   # GET /suppliers.json
   def index
     @suppliers = Supplier.all
+    @suppliers = @suppliers.publicos if current_usuario.nil? || current_usuario.present? && !current_usuario.admin?
   end
 
   # GET /suppliers/1
@@ -16,7 +17,6 @@ class SuppliersController < ApplicationController
   # GET /suppliers/new
   def new
     @supplier = Supplier.new
-    @identities = Identity.new
   end
 
   # GET /suppliers/1/edit
@@ -73,6 +73,6 @@ class SuppliersController < ApplicationController
     def supplier_params
       params.require(:supplier).permit(:name, :address, :nature, :latitude, :longitude, :error_code,
                                        :calle, :razon_social, :ciudad, :telefono, :web, :email, :nombre_contacto,
-                                       :codigo_postal, :logo, identity_urls: [])
+                                       :codigo_postal, :logo, :video)
     end
 end

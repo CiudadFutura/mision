@@ -21,6 +21,7 @@ class Producto < ActiveRecord::Base
 	scope :subcategoria, lambda { |categoria, subcategoria| joins(:categorias)
 																															.where('categorias_productos.categoria_id = :sub_id AND categorias.parent_id = :id', id: categoria, sub_id: subcategoria)
 																															.order(:orden, :nombre) if categoria && subcategoria }
+  scope :supplier, -> (supplier_id) {where('supplier_id = ?', supplier_id)}
 
   after_initialize :default_cantidad_permitida
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170701122857) do
+ActiveRecord::Schema.define(version: 20170725024231) do
 
   create_table "accounts", force: true do |t|
     t.integer  "usuario_id"
@@ -142,6 +142,15 @@ ActiveRecord::Schema.define(version: 20170701122857) do
     t.datetime "updated_at"
   end
 
+  create_table "media", force: true do |t|
+    t.integer  "owner_id"
+    t.string   "file"
+    t.string   "resource_type"
+    t.boolean  "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "pedidos", force: true do |t|
     t.text     "items"
     t.integer  "usuario_id"
@@ -239,6 +248,7 @@ ActiveRecord::Schema.define(version: 20170701122857) do
     t.text     "error_code"
     t.text     "description"
     t.string   "logo"
+    t.text     "video"
   end
 
   create_table "transaction_details", force: true do |t|

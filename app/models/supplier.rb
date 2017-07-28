@@ -1,14 +1,15 @@
 class Supplier < ActiveRecord::Base
   enum nature: [:wholesaler, :producer, :factory]
-  has_many :identities, dependent: :destroy
 
   before_save :geocode_with_cache
+
+  scope :publicos, -> {where('nature = 1')}
 
   mount_uploader :logo, ImagenUploader
 
 
   def minimal_clean_address
-    [calle,ciudad,codigo_postal,'AR'].to_a.compact.join(",")
+    [calle,ciudad,codigo_postal,'AR'].to_a.compact.join(',')
   end
 
   def api_url
