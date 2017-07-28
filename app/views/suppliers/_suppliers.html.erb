@@ -13,7 +13,13 @@
           </div>
           <div class="col-sm-8 col-md-8">
             <blockquote>
-              <p><%= supplier.name %></p> <small><cite title="Source Title"><%= supplier.address %>  <i class="glyphicon glyphicon-map-marker"></i></cite></small>
+              <p><b><%= supplier.name %></b></p>
+              <p><small<%= supplier.description %></small></p>
+              <small>
+                <cite title="Source Title">
+                  <%= supplier.calle %>, <%= supplier.ciudad %>
+                  <i class="glyphicon glyphicon-map-marker"></i>
+                </cite></small>
             </blockquote>
             <p>
               <i class="glyphicon glyphicon-envelope"></i> <%= supplier.email %>

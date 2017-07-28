@@ -4,7 +4,7 @@
     <% if usuario_signed_in? && current_usuario.admin? %>
         <h2>Lista de Proveedores</h2>
     <% else %>
-        <h2>Lista de Productores</h2>
+        <h2>Nuestros productores</h2>
     <% end %>
 	  <div class="navbar navs-fixed">
 	    <%= link_to t('Crear Proveedor', :default => t('helpers.links.new')),
