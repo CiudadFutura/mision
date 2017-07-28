@@ -1,9 +1,9 @@
-<%= form_for @producto, :html => { :multipart => true, :class => "form-horizontal producto" } do |f| %>
+<%= form_for @producto, :html => { :multipart => true, :class => 'form-horizontal producto' } do |f| %>
 
     <% if @producto.errors.any? %>
     <div id="error_expl" class="panel panel-danger">
       <div class="panel-heading">
-        <h3 class="panel-title"><%= pluralize(@producto.errors.count, "error") %> El producto no pudo ser guardado:</h3>
+        <h3 class="panel-title"><%= pluralize(@producto.errors.count, 'error') %> El producto no pudo ser guardado:</h3>
       </div>
       <div class="panel-body">
         <ul>
@@ -125,7 +125,7 @@
     <% Categoria.all.each do |categoria| %>
     <div class="col-md-3">
       <label><%= categoria.nombre -%>
-      <%= check_box_tag "producto[categoria_ids][]", categoria.id, @producto.categorias.include?(categoria) %>
+      <%= check_box_tag 'producto[categoria_ids][]', categoria.id, @producto.categorias.include?(categoria) %>
       </label>
     </div>
     <% end %>
@@ -146,7 +146,7 @@
   </div>
 
   <%= f.submit nil, :class => 'btn btn-primary' %>
-  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+  <%= link_to t('.cancel', :default => t('helpers.links.cancel')),
             productos_path, :class => 'btn btn-default' %>
 
 <% end %>

@@ -42,6 +42,9 @@
           <%= @usuario.ciudad %>
         </p>
 
+        <% if @profile.present? %>
+          <%= image_tag @profile['picture']['data']['url'].to_s %>
+        <% end %>
         <p>
           <strong>Pais:</strong>
           <%= @usuario.pais %>
@@ -60,6 +63,13 @@
         <p>
           <strong>Tipo:</strong>
           <%= @usuario.type %>
+        </p>
+
+        <p>
+          <%= link_to 'Mi cuenta con Facebook', create_social_session_path(:facebook) %>
+        </p>
+        <p>
+          <%= link_to 'Login with Facebook', '/auth/facebook/' %>
         </p>
       </div>
       <div class="col-md-6">

@@ -1,0 +1,60 @@
+<%= javascript_include_tag 'suppliers' %>
+<div class="row">
+  <div class="suppliers">
+    <div class="thumbnail">
+      <% @suppliers.each do |supplier| %>
+        <li class="col-lg-6">
+          <div class="col-sm-4 col-lg-4">
+            <% if supplier.logo.blank? %>
+                <%= image_tag('image-not-found.png', :height => '100%', :width => '100%') %>
+            <% else %>
+                <%= image_tag(supplier.logo, :height => '100%', :width => '100%', class: 'img-rounded img-responsive') %>
+            <% end %>
+          </div>
+          <div class="col-sm-8 col-md-8">
+            <blockquote>
+              <p><b><%= supplier.name %></b></p>
+              <p><small<%= supplier.description %></small></p>
+              <small>
+                <cite title="Source Title">
+                  <%= supplier.calle %>, <%= supplier.ciudad %>
+                  <i class="glyphicon glyphicon-map-marker"></i>
+                </cite></small>
+            </blockquote>
+            <p>
+              <i class="glyphicon glyphicon-envelope"></i> <%= supplier.email %>
+              <br/> <i class="glyphicon glyphicon-globe"></i> <%= supplier.web %>
+              <br/> <i class="glyphicon glyphicon-user"></i> <%= supplier.nombre_contacto %>
+              <br/> <i class="glyphicon glyphicon-earphone"></i> <%= supplier.telefono %>
+            </p>
+            <p>
+              <%= link_to 'Ver sus productos', productos_path(:supplier_id => supplier.id) %>
+            </p>
+            <% if supplier.video.present? %>
+              <p>
+                <button class="btn btn-default video"
+                  data-video="https://www.youtube.com/embed/<%= supplier.video %>" data-toggle="modal"
+                  data-target="#videoModal">Ver video
+                </button>
+              </p>
+            <% end %>
+            <hr class="separator">
+          </div>
+        </li>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="videoModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <div>
+          <iframe width="100%" height="350" src=""></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

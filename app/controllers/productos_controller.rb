@@ -32,8 +32,7 @@ class ProductosController < ApplicationController
     @productos = @productos.subcategoria(params[:categoria_id], params[:subcategoria_id]) if params[:subcategoria_id].present?
     @productos = @productos.disponibles if session['view_prod'] == 'visibles'
     @productos = @productos.ocultos if session['view_prod'] == 'ocultos'
-
-
+    @productos = @productos.supplier(params[:supplier_id]) if params[:supplier_id]
 
     if current_usuario && current_usuario.admin?
       respond_to do |format|

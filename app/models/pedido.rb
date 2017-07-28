@@ -3,7 +3,7 @@ class Pedido < ActiveRecord::Base
   belongs_to :usuario
   belongs_to :ciclo, class_name: "Compra", foreign_key: :compra_id
   belongs_to :owner, foreign_key: 'transaction_id', class_name: 'Transaction'
-	has_many :pedidos_details, dependent: :delete_all
+	has_many :pedidos_details, dependent: :destroy
 
   validate :circulo, presence: true
 

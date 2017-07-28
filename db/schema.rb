@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170214184454) do
+ActiveRecord::Schema.define(version: 20170725024231) do
 
   create_table "accounts", force: true do |t|
     t.integer  "usuario_id"
@@ -63,7 +63,6 @@ ActiveRecord::Schema.define(version: 20170214184454) do
     t.integer  "compra_id"
     t.integer  "usuarios_id"
     t.integer  "warehouses_id"
-    t.integer  "status_id"
     t.integer  "checkpoint"
     t.datetime "delivery_time"
     t.datetime "created_at"
@@ -89,24 +88,28 @@ ActiveRecord::Schema.define(version: 20170214184454) do
   create_table "delivery_statuses", force: true do |t|
     t.integer  "delivery_id"
     t.integer  "sector_id"
+    t.integer  "status_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "status_id"
   end
 
   create_table "identities", force: true do |t|
     t.integer  "usuario_id"
     t.string   "provider"
     t.string   "uid"
-    t.string   "email"
+    t.string   "token"
+    t.string   "secret"
+    t.string   "refresh_token"
     t.string   "name"
-    t.string   "oauth_token"
-    t.datetime "oauth_expired_at"
+    t.string   "email"
+    t.string   "nickname"
+    t.string   "image"
+    t.string   "phone"
+    t.string   "urls"
+    t.datetime "expires_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "identities", ["usuario_id"], name: "index_identities_on_usuario_id", using: :btree
 
   create_table "invoices", force: true do |t|
     t.integer  "pedido_id"
@@ -135,6 +138,15 @@ ActiveRecord::Schema.define(version: 20170214184454) do
     t.integer  "product_qty"
     t.float    "product_price",  limit: 24
     t.float    "total_line",     limit: 24
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "media", force: true do |t|
+    t.integer  "owner_id"
+    t.string   "file"
+    t.string   "resource_type"
+    t.boolean  "status"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -192,8 +204,8 @@ ActiveRecord::Schema.define(version: 20170214184454) do
     t.boolean  "highlight",                     default: false
     t.boolean  "faltante"
     t.integer  "pack",                          default: 0
-    t.integer  "orden_remito"
     t.integer  "stock"
+    t.integer  "orden_remito"
   end
 
   add_index "productos", ["supplier_id"], name: "index_productos_on_supplier_id", using: :btree
@@ -235,6 +247,8 @@ ActiveRecord::Schema.define(version: 20170214184454) do
     t.decimal  "longitude",       precision: 10, scale: 6
     t.text     "error_code"
     t.text     "description"
+    t.string   "logo"
+    t.text     "video"
   end
 
   create_table "transaction_details", force: true do |t|

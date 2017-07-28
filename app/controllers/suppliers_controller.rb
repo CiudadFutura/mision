@@ -1,11 +1,12 @@
 class SuppliersController < ApplicationController
   before_action :set_supplier, only: [:show, :edit, :update, :destroy]
-  authorize_resource
+
   
   # GET /suppliers
   # GET /suppliers.json
   def index
     @suppliers = Supplier.all
+    @suppliers = @suppliers.publicos if current_usuario.nil? || current_usuario.present? && !current_usuario.admin?
   end
 
   # GET /suppliers/1
@@ -71,6 +72,7 @@ class SuppliersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def supplier_params
       params.require(:supplier).permit(:name, :address, :nature, :latitude, :longitude, :error_code,
-      :calle, :razon_social, :ciudad, :telefono, :web, :email, :nombre_contacto, :codigo_postal )
+                                       :calle, :razon_social, :ciudad, :telefono, :web, :email, :nombre_contacto,
+                                       :codigo_postal, :logo, :video)
     end
 end

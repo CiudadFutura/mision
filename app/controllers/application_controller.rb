@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
   end
 
   def categorias_menu
-    @categorias_menu = Rails.cache.fetch("categorias_menu") do
+    @categorias_menu = Rails.cache.fetch('categorias_menu') do
       menu = []
       Categoria.where(parent_id: 'NULL').each do |cat_parent|
         cat = {
@@ -47,8 +47,8 @@ class ApplicationController < ActionController::Base
   protected
 
 	def configure_permitted_parameters
-    permitted_params = [:nombre, :apellido, :email, :"fecha_de_nacimiento(1i)",
-      :"fecha_de_nacimiento(2i)", :"fecha_de_nacimiento(3i)", :dni, :calle,
+    permitted_params = [:nombre, :apellido, :email, :'fecha_de_nacimiento(1i)',
+      :'fecha_de_nacimiento(2i)', :'fecha_de_nacimiento(3i)', :dni, :calle,
       :ciudad, :codigo_postal, :tel1, :cel1, :type,  :password, :password_confirmation,
       :terminos, :email_invitado_1, :email_invitado_2, :email_invitado_3, :email_invitado_4]
     devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(permitted_params) }

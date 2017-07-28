@@ -56,6 +56,8 @@ Rails.application.routes.draw do
 		delete 'delete/:id', to: 'productos#delete', as: :delete
   end
 
+  get '/auth/:provider/callback', to: 'sessions#create', as: :create_social_session
+
   # API
   namespace :api do
     namespace :v1 do
@@ -79,9 +81,6 @@ Rails.application.routes.draw do
     put 'add/:producto_id', to: 'carts#add', as: :add_to
     put 'remove/:producto_id', to: 'carts#remove', as: :remove_from
 	end
-
-	get "/callback" => "facebook#callback"
-	get "/facebook_profile" => "facebook#facebook_profile"
 
   root to: 'home#index'
 
