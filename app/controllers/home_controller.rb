@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  layout "layout"
+  layout 'layout'
 
   def index
     user_type = current_usuario.nil? ? 'Guess' : current_usuario.type
@@ -9,11 +9,6 @@ class HomeController < ApplicationController
       create_current_account
     end
     @token = current_usuario.identities.exists?(provider: 'facebook') if current_usuario.present?
-    if @token.present?
-      puts @token
-    else
-      puts 'entro'
-    end
     case user_type
 			when Usuario::ADMIN
 				@pedidosCiclos = Pedido::pedidos_ciclos

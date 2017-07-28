@@ -10,10 +10,10 @@
     </div>
     <!--para la implementación de facebook -->
     <% if @token %>
-      <div class="col-lg-6">
+      <!--<div class="col-lg-6">
         <div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="true"></div>
       </div>
-    <% end %>
+    <% end %>-->
   </div>
   <div class="row">
     <% if @compra.present? %>
@@ -28,12 +28,4 @@
   </div>
 </div>
 
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v2.9&appId=1082119141920529";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
 
