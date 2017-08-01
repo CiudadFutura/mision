@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170725024231) do
+ActiveRecord::Schema.define(version: 20170731212002) do
 
   create_table "accounts", force: true do |t|
     t.integer  "usuario_id"
@@ -249,6 +249,7 @@ ActiveRecord::Schema.define(version: 20170725024231) do
     t.text     "description"
     t.string   "logo"
     t.text     "video"
+    t.boolean  "active",                                   default: false
   end
 
   create_table "transaction_details", force: true do |t|

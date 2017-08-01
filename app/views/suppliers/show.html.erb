@@ -4,24 +4,47 @@
 	    <%= link_to 'Modificar', edit_supplier_path(@supplier) %> |
 	    <%= link_to 'Atras', suppliers_path %>
 	  </div>
-	    <p id="notice"><%= notice %></p>
+    <p id="notice"><%= notice %></p>
+    <div class="col-lg-6">
+      <p>
+        <strong>Nombre:</strong>
+        <%= @supplier.name %>
+      </p>
 
-	    <p>
-	      <strong>Nombre:</strong>
-	      <%= @supplier.name %>
-	    </p>
+      <p>
+        <strong>Calle:</strong>
+        <%= @supplier.calle %>
+      </p>
+      <p>
+        <strong>Código Postal:</strong>
+        <%= @supplier.codigo_postal%>
+      </p>
+      <p>
+        <strong>Teléfono:</strong>
+        <%= @supplier.telefono %>
+      </p>
 
-	    <p>
-	      <strong>Direccion:</strong>
-	      <%= @supplier.address %>
-	    </p>
-
-	    <p>
-	      <strong>Tipo:</strong>
-	      <%= @supplier.nature %>
-	    </p>
+      <p>
+        <strong>Descripción:</strong>
+        <%= @supplier.description %>
+      </p>
+    </div>
+    <div class="col-lg-6">
+      <p>
+        <strong>Tipo:</strong>
+        <%= t(@supplier.nature) %>
+      </p>
       <p>
         <%= image_tag @supplier.logo.url if @supplier.logo? %>
       </p>
+      <p>
+        <strong>Nombre del contacto:</strong>
+        <%= @supplier.nombre_contacto %>
+      </p>
+      <p>
+        <strong>Web:</strong>
+        <%= @supplier.web %>
+      </p>
+    </div>
 	</div>
 </div>

@@ -3,7 +3,7 @@ class Supplier < ActiveRecord::Base
 
   before_save :geocode_with_cache
 
-  scope :publicos, -> {where('nature = 1')}
+  scope :publicos, -> {where('nature = 1 and active = true').order(:name) }
 
   mount_uploader :logo, ImagenUploader
 

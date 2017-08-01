@@ -68,9 +68,14 @@
     <p><i>* Sólo tiene que guardar el código del video de youtube, ej: hemwyfcKIEE </i></p>
   </div>
 
+  <div class="control-group">
+    <%= f.label :active, for: 'active' %>
+    <%= f.check_box :active, :class => 'form-control' %>
+  </div>
+
   <div class="form-group">
     <%= f.label :description, for:'description' %><br>
-    <%= f.text_area :description, row:'3', id:'description', class:'form-control' %>
+    <%= f.text_area :description, row:'3', class:'form-control' %>
   </div>
 
   <div class="actions">

@@ -73,6 +73,6 @@ class SuppliersController < ApplicationController
     def supplier_params
       params.require(:supplier).permit(:name, :address, :nature, :latitude, :longitude, :error_code,
                                        :calle, :razon_social, :ciudad, :telefono, :web, :email, :nombre_contacto,
-                                       :codigo_postal, :logo, :video)
+                                       :codigo_postal, :logo, :video, :active, :description)
     end
 end

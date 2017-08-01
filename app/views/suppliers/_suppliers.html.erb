@@ -13,19 +13,34 @@
           </div>
           <div class="col-sm-8 col-md-8">
             <blockquote>
-              <p><b><%= supplier.name %></b></p>
-              <p><small<%= supplier.description %></small></p>
-              <small>
-                <cite title="Source Title">
-                  <%= supplier.calle %>, <%= supplier.ciudad %>
+              <% if supplier.name? %>
+                <p><b><%= supplier.name %></b></p>
+              <% end %>
+              <% if supplier.description? %>
+                <p><small><%= supplier.description %></small></p>
+              <% end %>
+              <% if supplier.calle? %>
+                <small>
+                  <i><%= supplier.calle %>, <%= supplier.ciudad %></i>
                   <i class="glyphicon glyphicon-map-marker"></i>
-                </cite></small>
+                </small>
+              <% end %>
             </blockquote>
             <p>
-              <i class="glyphicon glyphicon-envelope"></i> <%= supplier.email %>
-              <br/> <i class="glyphicon glyphicon-globe"></i> <%= supplier.web %>
+              <% if supplier.email? %>
+                <i class="glyphicon glyphicon-envelope"></i> <%= supplier.email %>
+              <% end %>
+              <% if supplier.web.present? %>
+                <br/>
+                  <i class="glyphicon glyphicon-globe"></i>
+                  <%= link_to 'Visitar sitio web', supplier.web, target: '_blank' %>
+              <% end %>
+              <% if supplier.nombre_contacto? %>
               <br/> <i class="glyphicon glyphicon-user"></i> <%= supplier.nombre_contacto %>
-              <br/> <i class="glyphicon glyphicon-earphone"></i> <%= supplier.telefono %>
+              <% end %>
+              <% if supplier.telefono? %>
+                <br/> <i class="glyphicon glyphicon-earphone"></i> <%= supplier.telefono %>
+              <% end %>
             </p>
             <p>
               <%= link_to 'Ver sus productos', productos_path(:supplier_id => supplier.id) %>
