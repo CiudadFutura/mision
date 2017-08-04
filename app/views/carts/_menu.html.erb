@@ -1,11 +1,11 @@
 <ul class="nav nav-pills nav-stacked left-menu" id="stacked-menu">
-  <li><%= link_to 'Categorías', productos_path(),
-                  class: ((params[:categoria_id].blank?) ? 'navbar-link active' : 'navbar-link') %></li>
-  <%
-		 cat = ''
-	%>
-  <% @categorias_menu.each do |c| -%>
-		<% if c[:nombre] == 'Frutas y Verduras'
+  <li>
+    <%= link_to 'Categorías', productos_path(),
+                class: ((params[:categoria_id].blank?) ? 'navbar-link active' : 'navbar-link') %>
+  </li>
+  <% cat = ''	%>
+  <% @categorias_menu.each do |c|
+		if c[:nombre] == 'Frutas y Verduras'
 			cat = 'frutasyverduras'
     elsif c[:nombre] == 'Higiene personal'
 			cat = 'higienepersonal'
@@ -13,6 +13,8 @@
       cat = 'canastas'
     elsif c[:nombre] == 'Tienda'
       cat = 'd7'
+    elsif c[:id] == 55
+      cat = 'especial'
     end %>
       <% if c[:subcategorias].present? %>
           <li class="dropdown">
@@ -29,12 +31,21 @@
             </ul>
           </li>
       <%else %>
+          <% if c[:id] == 55 %>
+              <li>
+                <%= image_tag 'nenesMAIActive.png', class: 'img-responsive'%>
+                <%= link_to(productos_path(categoria_id: c[:id]),
+                            class:  (params[:categoria_id].to_i == c[:id]) ? 'navbar-link active' : 'navbar-link') do %>
+                    <%= c[:nombre]%>
+                <% end %>
+          <% else %>
           <li>
             <%= link_to(productos_path(categoria_id: c[:id]),
                         class:  (params[:categoria_id].to_i == c[:id]) ? 'navbar-link active' : 'navbar-link') do %>
               <span class="glyphicon icon-<%=cat %> pull-left"></span><%= c[:nombre]%>
             <% end %>
 
+          <% end %>
       <% end %>
   <% end -%>
 </ul>
