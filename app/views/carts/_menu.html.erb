@@ -32,10 +32,15 @@
           </li>
       <%else %>
           <% if c[:id] == 55 %>
+              <% cat_status = (params[:categoria_id].to_i == c[:id]) ? 'navbar-link active' : 'navbar-link' %>
               <li>
-                <%= image_tag 'nenesMAIActive.png', class: 'img-responsive'%>
+                <% if cat_status == 'navbar-link'%>
+                  <%= image_tag 'nenesMAI.png', class: 'img-responsive', width: '55' %>
+                <% else %>
+                  <%= image_tag 'nenesMAIActive.png', class: 'img-responsive', width: '55' %>
+                <% end %>
                 <%= link_to(productos_path(categoria_id: c[:id]),
-                            class:  (params[:categoria_id].to_i == c[:id]) ? 'navbar-link active' : 'navbar-link') do %>
+                            class:  cat_status) do %>
                     <%= c[:nombre]%>
                 <% end %>
           <% else %>
