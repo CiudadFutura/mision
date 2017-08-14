@@ -56,7 +56,7 @@ Rails.application.routes.draw do
 		delete 'delete/:id', to: 'productos#delete', as: :delete
   end
 
-  get '/auth/:provider/callback', to: 'sessions#create', as: :create_social_session
+  get '/auth/:provider/callback', to: 'sessions#create', as: :social_session
 
   # API
   namespace :api do

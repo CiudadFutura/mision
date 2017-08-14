@@ -64,13 +64,14 @@
           <strong>Tipo:</strong>
           <%= @usuario.type %>
         </p>
-
-        <p>
-          <%= link_to 'Mi cuenta con Facebook', create_social_session_path(:facebook) %>
-        </p>
-        <p>
-          <%= link_to 'Login with Facebook', '/auth/facebook/' %>
-        </p>
+        <% if 1==0 %>
+          <p>
+            <%= link_to 'Mi cuenta con Facebook', social_session_path(:facebook) %>
+          </p>
+          <p>
+            <%= link_to 'Login with Facebook', '/auth/facebook/' %>
+          </p>
+        <% end %>
       </div>
       <div class="col-md-6">
         <% if @usuario.circulo.nil? %>

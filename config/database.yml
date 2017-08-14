@@ -12,7 +12,7 @@ default: &default
 development:
   <<: *default
   encoding: utf8
-  database: mision
+  database: mision_prod
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
