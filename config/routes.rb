@@ -58,17 +58,6 @@ Rails.application.routes.draw do
 
   get '/auth/:provider/callback', to: 'sessions#create', as: :social_session
 
-  # API
-  namespace :api do
-    namespace :v1 do
-      resources :products
-      resources :suppliers
-      resources :customers
-    end
-  end
-
-
-
   resources :categorias
   resources :pedidos, only: [:index, :show, :edit, :destroy]
   resources :home
