@@ -68,6 +68,36 @@
     <p><i>* Sólo tiene que guardar el código del video de youtube, ej: hemwyfcKIEE </i></p>
   </div>
 
+  <div class="form-group">
+    <%= f.label :operation_type, for:'operation_type' %>
+    <%= f.text_field :operation_type, type:'text', class:'form-control' %>
+    <p><i>* puede ser: Contado, Cta Cte, 30 días, 7 días, Transferencia, etc </i></p>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :iva_condition, for:'iva_condition' %>
+    <%= f.text_field :iva_condition, type:'text', class:'form-control' %>
+    <p><i>* Agregue si el proveedor si es Reesponsable Inscripto, Monotributusta, etc </i></p>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :identity_type, for:'identity_type' %>
+    <%= f.text_field :identity_type, type:'text', class:'form-control' %>
+    <p><i>* CUIT o DNI </i></p>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :identity_number, for:'identity_number' %>
+    <%= f.text_field :identity_number, type:'text', class:'form-control' %>
+    <p><i>* CUIT o DNI </i></p>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :inscription_number, for:'inscription_number' %>
+    <%= f.text_field :inscription_number, type:'text', class:'form-control' %>
+    <p><i>* Número de inscripción en Ingresos Brutos. </i></p>
+  </div>
+
   <div class="control-group">
     <%= f.label :active, for: 'active' %>
     <%= f.check_box :active, :class => 'form-control' %>

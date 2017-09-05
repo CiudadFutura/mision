@@ -75,6 +75,19 @@ class UsuariosController < ApplicationController
     @usuario.save!
   end
 
+  def finish_signup
+    if request.patch? && params[:user] # Revisa si el request es de tipo patch, es decir, llenaron el formulario y lo ingresaron
+      @usuario = Usuario.find(params[:id])
+
+      if @usuario.update(user_params)
+        sign_in(@user, :bypass => true)
+        redirect_to root_path, notice: 'Hemos guardado tu email correctamente.'
+      else
+        @show_errors = true
+      end
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_usuario

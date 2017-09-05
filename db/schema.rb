@@ -11,28 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170731212002) do
+ActiveRecord::Schema.define(version: 20170831224849) do
 
   create_table "accounts", force: true do |t|
     t.integer  "usuario_id"
     t.boolean  "status"
     t.float    "balance",    limit: 24
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "carts", force: true do |t|
-    t.integer  "mai_id"
-    t.integer  "usuario_id"
-    t.boolean  "active"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "carts_products", force: true do |t|
-    t.integer  "cart_id"
-    t.integer  "producto_id"
-    t.integer  "quantity"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -111,37 +95,6 @@ ActiveRecord::Schema.define(version: 20170731212002) do
     t.datetime "updated_at"
   end
 
-  create_table "invoices", force: true do |t|
-    t.integer  "pedido_id"
-    t.integer  "number"
-    t.string   "type"
-    t.datetime "emission_date"
-    t.integer  "warehouse"
-    t.integer  "mai_id"
-    t.float    "total_discount", limit: 24
-    t.float    "total",          limit: 24
-    t.integer  "total_products"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "invoices_details", force: true do |t|
-    t.integer  "pedido_id"
-    t.integer  "invoice_id"
-    t.integer  "warehouse"
-    t.integer  "mai_id"
-    t.integer  "supplier_id"
-    t.string   "supplier_name"
-    t.integer  "product_id"
-    t.integer  "product_codigo"
-    t.string   "product_name"
-    t.integer  "product_qty"
-    t.float    "product_price",  limit: 24
-    t.float    "total_line",     limit: 24
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "media", force: true do |t|
     t.integer  "owner_id"
     t.string   "file"
@@ -206,6 +159,10 @@ ActiveRecord::Schema.define(version: 20170731212002) do
     t.integer  "pack",                          default: 0
     t.integer  "stock"
     t.integer  "orden_remito"
+    t.text     "costo"
+    t.text     "moneda"
+    t.text     "margen"
+    t.text     "alicuota"
   end
 
   add_index "productos", ["supplier_id"], name: "index_productos_on_supplier_id", using: :btree
@@ -232,7 +189,7 @@ ActiveRecord::Schema.define(version: 20170731212002) do
   create_table "suppliers", force: true do |t|
     t.string   "name"
     t.string   "address"
-    t.integer  "nature",                                   default: 0
+    t.integer  "nature",                                      default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "razon_social"
@@ -243,13 +200,18 @@ ActiveRecord::Schema.define(version: 20170731212002) do
     t.text     "nombre_contacto"
     t.text     "email"
     t.text     "web"
-    t.decimal  "latitude",        precision: 10, scale: 6
-    t.decimal  "longitude",       precision: 10, scale: 6
+    t.decimal  "latitude",           precision: 10, scale: 6
+    t.decimal  "longitude",          precision: 10, scale: 6
     t.text     "error_code"
     t.text     "description"
     t.string   "logo"
     t.text     "video"
-    t.boolean  "active",                                   default: false
+    t.boolean  "active",                                      default: false
+    t.text     "operation_type"
+    t.text     "iva_condition"
+    t.text     "identity_type"
+    t.text     "identity_number"
+    t.text     "inscription_number"
   end
 
   create_table "transaction_details", force: true do |t|
@@ -304,6 +266,16 @@ ActiveRecord::Schema.define(version: 20170731212002) do
     t.string   "confirmation_token"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
+    t.text     "nombre_iva"
+    t.text     "zona"
+    t.text     "codigo_vendedor"
+    t.text     "tipo_operacion"
+    t.text     "inscripcion_iva"
+    t.text     "tipo_identificacion"
+    t.text     "numero_identificacion"
+    t.text     "numero_ingresos_brutos"
+    t.text     "codigo_transporte"
+    t.text     "codigo_clasificacion"
   end
 
   add_index "usuarios", ["confirmation_token"], name: "index_usuarios_on_confirmation_token", unique: true, using: :btree

@@ -18,7 +18,7 @@ class Identity < ActiveRecord::Base
     identity.nickname = auth.info.nickname
     identity.image = auth.info.image
     identity.phone = auth.info.phone
-    identity.urls = (auth.info.urls || "").to_json
+    identity.urls = (auth.info.urls || '').to_json
     identity.save
     identity
   end
