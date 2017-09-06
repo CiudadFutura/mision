@@ -1,5 +1,6 @@
 class PedidosController < ApplicationController
   before_action :set_pedido, only: [:show, :edit, :destroy]
+  protect_from_forgery with: :exception
 
   def index
     if current_usuario.admin?

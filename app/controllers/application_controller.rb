@@ -55,6 +55,19 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:account_update) { |u| u.permit(permitted_params) }
   end
 
+  def authenticate
+    authenticate_token || render_unauthorized
+  end
+
+  def authenticate_token
+    Usuario.find_by(confirmation_token: params[:token]).present?
+  end
+
+  def render_unauthorized
+    self.headers['WWW-Authenticate'] = 'Token realm="Application"'
+    render json: 'Bad credentials', status: 401
+  end
+
   private
   # Overwriting the sign_out redirect path method
   def after_sign_out_path_for(resource_or_scope)

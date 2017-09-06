@@ -28,6 +28,12 @@ en:
         name: Nombre
         address: Dirección
         nature: Tipo
+        active: Activo
+        operation_type: Tipo de operación
+        iva_condition: Inscripción al IVA
+        identity_type: Tipo de Identificación
+        identity_number: Número de Identificación
+        inscription_number: Número de Ingresos Brutos
     errors:
       models:
         usuario:
