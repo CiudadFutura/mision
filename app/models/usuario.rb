@@ -1,6 +1,7 @@
 class Usuario < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
+  self.inheritance_column = :_type_disabled
   devise :confirmable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
@@ -15,9 +16,12 @@ class Usuario < ActiveRecord::Base
 
   before_create :set_default_role
 
+  scope :usrs, -> {where('type != "Sistema"')}
+
   ADMIN = 'Admin'
   COORDINADOR = 'Coordinador'
   USUARIO = 'Usuario'
+  SISTEMA = 'Sistema'
 
   def nombre
     super.nil? ? '' : super
@@ -32,7 +36,7 @@ class Usuario < ActiveRecord::Base
   end
 
   def self.types
-    [ADMIN, COORDINADOR, USUARIO]
+    [ADMIN, COORDINADOR, USUARIO, SISTEMA]
   end
 
   def admin?
@@ -45,6 +49,10 @@ class Usuario < ActiveRecord::Base
 
   def usuario?
     type == USUARIO
+  end
+
+  def sistema?
+    type == SISTEMA
   end
 
   def pedido?(ciclo_de_compra)
@@ -189,7 +197,7 @@ class Usuario < ActiveRecord::Base
 
 	private
   def set_default_role
-    self.type ||= Usuario::USUARIO
+    self.type ||= Usuario::USUARIO::SISTEMA
   end
 
   def self.colors
