@@ -9,6 +9,7 @@ class Pedido < ActiveRecord::Base
 
   has_paper_trail
 
+  scope :evo_orders, -> (date_param) {where('updated_at >= :today', today: date_param)}
 
   def total
     total = 0.0
