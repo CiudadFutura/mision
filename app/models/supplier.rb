@@ -4,6 +4,8 @@ class Supplier < ActiveRecord::Base
   before_save :geocode_with_cache
 
   scope :publicos, -> {where('nature = 1 and active = true').order(:name) }
+  scope :evo_suppliers, -> (date_param) {where('updated_at >= :today', today: date_param)}
+
 
   mount_uploader :logo, ImagenUploader
 

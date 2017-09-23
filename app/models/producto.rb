@@ -22,6 +22,8 @@ class Producto < ActiveRecord::Base
 																															.where('categorias_productos.categoria_id = :sub_id AND categorias.parent_id = :id', id: categoria, sub_id: subcategoria)
 																															.order(:orden, :nombre) if categoria && subcategoria }
   scope :supplier, -> (supplier_id) {where('supplier_id = ?', supplier_id)}
+  scope :evo_products, -> (date_param) {where('updated_at >= :today', today: date_param)}
+
 
   after_initialize :default_cantidad_permitida
 
@@ -46,6 +48,21 @@ class Producto < ActiveRecord::Base
     imagen = params[:imagen]
     categorias = Categoria.find(params[:categorias].select {|k,v| v == "1"}.keys)
   end
+
+  def cantidad
+    return self.stock if self.stock.present? and self.cantidad_permitida > self.stock
+    self.cantidad_permitida
+  end
+
+  def precio_super_show
+    if self.precio_super.present?
+      return 0.0 if self.precio > self.precio_super
+        precio_super = self.precio_super
+    else
+      0.0
+    end
+  end
+
 
   def self.import(file)
     all.each do |prod|

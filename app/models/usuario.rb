@@ -17,6 +17,8 @@ class Usuario < ActiveRecord::Base
   before_create :set_default_role
 
   scope :usrs, -> {where('type != "Sistema"')}
+  scope :evo_usuarios, -> (date_param) {where('updated_at >= :today', today: date_param)}
+
 
   ADMIN = 'Admin'
   COORDINADOR = 'Coordinador'
