@@ -3,16 +3,16 @@
   <div class="col-xs-12 col-md-6">
     <div class="text-center">
       <%= link_to(root_path) do %>
-        <%= image_tag("logoHeader.png", :class => 'img-responsive') %>
+        <%= image_tag('logoHeader.png', :class => 'img-responsive') %>
       <% end %>
     </div>
     <div class="col-xs-12 col-md-12">
       <div class="text-center">
-        <h1><%= !section[:titulo].nil? ? section[:titulo] : '' %></h1>
-        <h4><%= !section[:subtitulo].nil? ? section[:subtitulo] : '' %></h4>
+        <h1><%= section[:titulo].present? ? section[:titulo] : '' %></h1>
+        <h4><%= section[:subtitulo].present? ? section[:subtitulo] : '' %></h4>
       </div>
-      <%= link_to('http://www.ciudadfutura.com.ar', target:"_blank") do %>
-        <%= image_tag("logo cf-01.png", :class => 'img-responsive') %>
+      <%= link_to('http://www.ciudadfutura.com.ar', target:'_blank') do %>
+        <%= image_tag('logo cf-01.png', :class => 'img-responsive') %>
       <% end %>
     </div>
   </div>

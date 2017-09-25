@@ -1,117 +1,113 @@
-<%= javascript_include_tag "home" %>
-<div class="container fill">
-  <div class="row">
-	  <h2>Bienvenido a tu panel de administración.</h2>
+<%= javascript_include_tag 'home' %>
+<div class="row">
+  <h2>Bienvenido a tu panel de administración.</h2>
 
-	  <p class="explicacion">Si estas acá, es porque sos administrador en la Misión Anti Inflación.<br/>
-	  Utiliza el menu superior para acceder y administrar el sitio.</p>
-  </div>
-
-  <div class="row">
-    <!-- COLUMN ONE -->
-    <div class="col-sm-6 col-md-6">
-      <div id="line-chart-widget" class="panel">
-        <div class="panel-heading">
-          <h4 class="text-uppercase"><strong>Cantidad de Productos por Ciclo</strong></h4>
-        </div>
-        <div class="panel-body">
-          <canvas id="myLineChart"></canvas>
-        </div>
-        <div class="panel-footer">
-          <div class="list-block">
-            <ul class="text-center legend">
-              <% @total_sales_per_year.each do |year| %>
-              <li>
-                <h3><%= number_to_currency(year.total) %></h3>
-                <%= year.year%>
-              </li>
-              <% end %>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-6 col-md-6">
-      <div id="line-chart-widget" class="panel">
-        <div class="panel-heading">
-          <h4 class="text-uppercase"><strong>Cantidad de Nuevos Usuarios por mes</strong></h4>
-        </div>
-        <div class="panel-body">
-          <canvas id="myChart"></canvas>
-        </div>
-        <div class="panel-footer">
-          <div class="list-block">
-            <ul class="text-center legend">
-              <% @total_new_users_per_year.each do |year| %>
-                  <li>
-                    <h3><%= number_with_delimiter(year.total, delimiter: '.') %></h3>
-                    <%= year.year%>
-                  </li>
-              <% end %>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <!-- COLUMN ONE -->
-    <div class="col-sm-6 col-md-4">
-      <div id="pie-chart-widget" class="panel">
-        <div class="panel-heading text-center">
-          <h4 class="text-uppercase"><strong>Cantidad de pedidos por ciclos</strong></h4>
-        </div>
-        <div class="panel-body">
-          <canvas id="myOrdersChart"></canvas>
-        </div>
-        <div class="panel-footer">
-          <div class="list-block">
-            <ul class="text-center legend">
-              <% @total_orders.each do |order| %>
-                <li class="video" style="margin-right: 1px;">
-                  <%= t('date.month_names')[order.month] %>
-                  <h2><%= order.qty%></h2>
-                </li>
-              <% end %>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="row text-center">
-    <%= image_tag 'acceso_panel_admin.png', :class => 'img-responsive center-block'%>
-  </div>
-	<% if @coordinadoresNuevos.present? %>
-			<div class="row">
-					<table class="table table-striped">
-					  <caption class="text-left">Nuevos Coordinadores sin círculo</caption>
-					  <tr>
-							<th>#</th>
-							<th>Nombre</th>
-							<th>Apellido</th>
-							<th>email</th>
-							<th>Fecha a alta</th>
-						</tr>
-						<tbody>
-						<% @coordinadoresNuevos.each do |p| %>
-							<tr>
-								<td><%=p.id%></td>
-								<td><%=p.nombre%></td>
-								<td><%=p.apellido%></td>
-								<td><%=p.email%></td>
-								<td><%= l p.created_at%></td>
-							</tr>
-						<% end -%>
-						</tbody>
-					</table>
-
-
-			</div>
-	<% end %>
+  <p class="explicacion">Si estas acá, es porque sos administrador en la Misión Anti Inflación.<br/>
+  Utiliza el menu superior para acceder y administrar el sitio.</p>
 </div>
+
+<div class="row">
+  <!-- COLUMN ONE -->
+  <div class="col-sm-6 col-md-6">
+    <div id="line-chart-widget" class="panel">
+      <div class="panel-heading">
+        <h4 class="text-uppercase"><strong>Cantidad de Productos por Ciclo</strong></h4>
+      </div>
+      <div class="panel-body">
+        <canvas id="myLineChart"></canvas>
+      </div>
+      <div class="panel-footer">
+        <div class="list-block">
+          <ul class="text-center legend">
+            <% @total_sales_per_year.each do |year| %>
+            <li>
+              <h3><%= number_to_currency(year.total) %></h3>
+              <%= year.year%>
+            </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-md-6">
+    <div id="line-chart-widget" class="panel">
+      <div class="panel-heading">
+        <h4 class="text-uppercase"><strong>Cantidad de Nuevos Usuarios por mes</strong></h4>
+      </div>
+      <div class="panel-body">
+        <canvas id="myChart"></canvas>
+      </div>
+      <div class="panel-footer">
+        <div class="list-block">
+          <ul class="text-center legend">
+            <% @total_new_users_per_year.each do |year| %>
+                <li>
+                  <h3><%= number_with_delimiter(year.total, delimiter: '.') %></h3>
+                  <%= year.year%>
+                </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <!-- COLUMN ONE -->
+  <div class="col-sm-6 col-md-4">
+    <div id="pie-chart-widget" class="panel">
+      <div class="panel-heading text-center">
+        <h4 class="text-uppercase"><strong>Cantidad de pedidos por ciclos</strong></h4>
+      </div>
+      <div class="panel-body">
+        <canvas id="myOrdersChart"></canvas>
+      </div>
+      <div class="panel-footer">
+        <div class="list-block">
+          <ul class="text-center legend">
+            <% @total_orders.each do |order| %>
+              <li class="video" style="margin-right: 1px;">
+                <%= t('date.month_names')[order.month] %>
+                <h2><%= order.qty%></h2>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row text-center">
+  <%= image_tag 'acceso_panel_admin.png', :class => 'img-responsive center-block'%>
+</div>
+<% if @coordinadoresNuevos.present? %>
+  <div class="row">
+    <table class="table table-striped">
+      <caption class="text-left">Nuevos Coordinadores sin círculo</caption>
+      <tr>
+        <th>#</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>email</th>
+        <th>Fecha a alta</th>
+      </tr>
+      <tbody>
+      <% @coordinadoresNuevos.each do |p| %>
+        <tr>
+          <td><%=p.id%></td>
+          <td><%=p.nombre%></td>
+          <td><%=p.apellido%></td>
+          <td><%=p.email%></td>
+          <td><%= l p.created_at%></td>
+        </tr>
+      <% end -%>
+      </tbody>
+    </table>
+  </div>
+<% end %>
 <script>
   var products_by_cycles = <%= raw @countProductsByCycle.to_json %>;
   var users_by_months = <%= raw @total_users.to_json %>;

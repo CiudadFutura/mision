@@ -24,7 +24,7 @@
 //= require Chart
 
 
-		$(document).ready(function () {
+$(document).ready(function () {
 
   $('button[data-action]').click(function (event) {
     event.preventDefault();
@@ -97,7 +97,18 @@
   $('#usuario_type_usuario').click(function () {
     $('#emails-invitados').hide();
   });
-    $('#finalizar').on('click',function() {
-        $(this).attr("disabled", "disabled"); }
-    );
+  $('#finalizar').on('click',function() {
+    $(this).attr("disabled", "disabled"); }
+  );
+
+  $(".dropdown").hover(
+    function() {
+      $('.dropdown-menu', this).not('.in .dropdown-menu').stop(true,true).slideDown("400");
+        $(this).toggleClass('open');
+      },
+      function() {
+        $('.dropdown-menu', this).not('.in .dropdown-menu').stop(true,true).slideUp("400");
+          $(this).toggleClass('open');
+      }
+  );
 });

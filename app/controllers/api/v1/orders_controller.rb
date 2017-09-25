@@ -7,7 +7,6 @@ class Api::V1::OrdersController < ApplicationController
     else
       @orders = Pedido.all
     end
-
   end
 
 end

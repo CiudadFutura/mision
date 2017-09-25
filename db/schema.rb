@@ -11,12 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170831224849) do
+ActiveRecord::Schema.define(version: 20170912011707) do
 
   create_table "accounts", force: true do |t|
     t.integer  "usuario_id"
     t.boolean  "status"
     t.float    "balance",    limit: 24
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "canastas_productos", force: true do |t|
+    t.integer  "producto_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

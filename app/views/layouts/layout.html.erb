@@ -38,15 +38,19 @@
     <script src="https://cdn.rawgit.com/googlemaps/js-marker-clusterer/gh-pages/src/markerclusterer.js"></script>
     <%= javascript_include_tag "application" %>
   </head>
+
   <body>
-	  <div class="container-fluid">
-
-	    <%= bootstrap_flash %>
-	    <%= render 'layouts/header'%>
+  <div class="container content">
+    <% if @view_type.present? %>
+      <%= render 'layouts/header_admin' %>
+    <% else %>
+        <div class="row header">
+      <%= render 'layouts/header' %>
+        </div>
+    <% end %>
+      <%= bootstrap_flash %>
 	    <%= yield %>
-
-
-	  </div> <!-- /container -->
+    </div> <!-- /container -->
 	  <%= render 'layouts/footer' %>
   </body>
 </html>

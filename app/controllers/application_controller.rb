@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   before_filter :init_carrito
   before_filter :categorias_menu
   before_filter :configure_permitted_parameters, if: :devise_controller?
+  before_filter :get_user_type
 
   layout 'layout'
 
@@ -20,6 +21,10 @@ class ApplicationController < ActionController::Base
 
   def init_carrito
     @carrito = Cart.new(session)
+  end
+
+  def get_user_type
+    @view_type = current_usuario.admin? if current_usuario.present?
   end
 
   def categorias_menu
@@ -73,6 +78,7 @@ class ApplicationController < ActionController::Base
   def after_sign_out_path_for(resource_or_scope)
     root_path
   end
+
 
   def render_404(exception = nil)
     if exception
