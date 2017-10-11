@@ -13,7 +13,6 @@ class Api::V1::ProductsController < ApplicationController
   end
 
   def update
-    puts params.to_yaml
     if @product.update(stock: params[:stock])
       render json: @product, status: :ok
     else
@@ -27,12 +26,7 @@ class Api::V1::ProductsController < ApplicationController
     end
 
     def set_usuario
-      @usuario = Usuario.find_by(confirmation_token: request.params[:token]||request.body[:token])
+      @usuario = Usuario.find_by(confirmation_token: request.params[:token])
     end
 
 end
-
-# user[username]=jesuslerma&user[email]=demo@desafio.com&user[password]=123
-# product[id]=34&prdoduct[stock]=100
-
-#curl -X POST -d"user[username]=jesuslerma&user[email]=demo@desafio.com&user[password]=123" http://localhost:3000/api/users
