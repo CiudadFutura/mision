@@ -60,6 +60,8 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_token
+    puts params
+    resource = Usuario.find_by(params[confirmation_token: :auth_token]||request.headers["X-AUTH-TOKEN"])
     Usuario.find_by(confirmation_token: params[:token]).present?
   end
 
