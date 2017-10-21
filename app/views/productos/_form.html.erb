@@ -106,6 +106,14 @@
       </div>
       <%= error_span(@producto[:stock]) %>
     </div>
+    <div class="control-group">
+      <%= f.label :marca, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :marca, :class => 'form-control' %>
+      </div>
+      <%= error_span(@producto[:marca]) %>
+    </div>
+
   <div class="control-group">
     <%= f.label :supplier_id, :class => 'control-label' %>
     <div class="controls">

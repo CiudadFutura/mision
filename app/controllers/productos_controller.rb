@@ -125,7 +125,7 @@ class ProductosController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def producto_params
       params.require(:producto).permit(:precio, :nombre, :codigo, :descripcion, :orden,
-                                       :precio_super, :highlight, :oculto, :supplier_id,
+                                       :precio_super, :highlight, :oculto, :marca, :supplier_id,
                                        :pack, :faltante,:cantidad_permitida, :imagen, :stock,
                                        :orden_remito, :view_type,
 																			 :sale_type,

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170831224849) do
+ActiveRecord::Schema.define(version: 20171020235652) do
 
   create_table "accounts", force: true do |t|
     t.integer  "usuario_id"
@@ -163,6 +163,7 @@ ActiveRecord::Schema.define(version: 20170831224849) do
     t.text     "moneda"
     t.text     "margen"
     t.text     "alicuota"
+    t.string   "marca"
   end
 
   add_index "productos", ["supplier_id"], name: "index_productos_on_supplier_id", using: :btree
