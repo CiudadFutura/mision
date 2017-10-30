@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   before_filter :configure_permitted_parameters, if: :devise_controller?
   before_filter :get_user_type
 
-  layout 'layout'
+  #layout 'layout'
 
   def current_ability
     @current_ability ||= Ability.new(current_usuario)
@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
   end
 
   def get_user_type
-    @view_type = current_usuario.admin? if current_usuario.present?
+    @is_admin = current_usuario.admin? if current_usuario.present?
   end
 
   def categorias_menu
