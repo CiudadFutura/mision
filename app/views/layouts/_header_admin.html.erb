@@ -1,4 +1,15 @@
-<nav class="navbar navbar-default mega-menu">
+<nav class="navbar navbar-default navbar-fixed-top mega-menu">
+  <div class="container-fluid gestion">
+    <ul class="mgnav-left">
+      <li class="mgnav-left-list">
+        <a class="mgnav-label" href="/">Ciudad Futura</a>
+      </li>
+    </ul>
+    <div class="navbar-header">
+
+    </div>
+  </div>
+  <div class="container">
   <div class="navbar-header">
     <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".js-navbar-collapse">
       <span class="sr-only">Toggle navigation</span>
@@ -7,7 +18,7 @@
       <span class="icon-bar"></span>
     </button>
     <a class="navbar-brand" href="/">
-      <%= image_tag 'misionFB.png', size: '50x50'%>
+      <%= image_tag 'misionFB.png', size: '60x60'%>
     </a>
   </div>
 
@@ -138,8 +149,9 @@
       <% end %>
       <li><%= link_to(productos_path(featured: 'true')) do %>
             Tienda
-        <% end %></li>
-      <li><a href="#">Store locator</a></li>
+        <% end %>
+      </li>
+
     </ul>
     <% if usuario_signed_in? %>
         <ul class="nav navbar-nav navbar-right">
@@ -153,7 +165,7 @@
               </li>
               <li class="divider"></li>
               <li>
-                <%= link_to() do %>
+                <%= link_to(destroy_usuario_session_path, method: 'delete') do %>
                     Cerrar Sesión
                 <% end %>
               </li>
@@ -169,4 +181,5 @@
       </ul>
     <% end %>
   </div><!-- /.nav-collapse -->
+  </div>
 </nav>
