@@ -28,6 +28,7 @@
 				</a>
 				<div class="caption">
 					<h4><%= producto.nombre %></h4>
+					<h5><%= producto.marca %></h5>
 					<% if @ciclo_actual and usuario_signed_in? %>
 						<p class="precio_mision">Precio misión <%= number_to_currency(producto.precio) %></p>
 
