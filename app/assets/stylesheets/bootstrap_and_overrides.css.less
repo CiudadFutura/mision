@@ -215,7 +215,15 @@
     }
   }
   .mega-menu{
-    height: 107px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1000;
+    font-size: 16px;
+    line-height: 1.5em;
+    width: 100%;
+    min-width: 768px;
+    height: 108px;
     .gestion{
       position: relative;
       top: 0;
@@ -225,6 +233,59 @@
       border-bottom: 1px solid #E5E5E5;
       background: white;
       color: #8D8D8D;
+      .mgnav-left{
+        left: 0;
+        position: absolute;
+        top: -1px;
+        display: table;
+        line-height: 39px;
+        .mgnav-left-list{
+          border-right: 1px solid #E5E5E5;
+          a{
+            display: inline-block;
+            padding: 0 32px;
+            font-size: 12px;
+          }
+        }
+      }
+      .mgnav-right{
+        right: 13px;
+        position: absolute;
+        top: -1px;
+        display: table;
+        line-height: 39px;
+        .mgnav-right-list{
+          padding: 0 11px;
+          border-bottom: 2px solid transparent;
+          font-size: 12px;
+          a{
+            height: 37px;
+          }
+        }
+      }
+    }
+    .nav-main{
+      display: table;
+      width: 100%;
+      padding: 0 0 0 31px;
+      background-color: white;
+      border-bottom: 1px solid #E5E5E5;
+      min-width: 768px;
+      >*{
+        display: table-cell;
+        height: 68px;
+      }
+      .navbar-home{
+        text-align: center;
+        vertical-align: middle;
+        width: 58px;
+      }
+      .navbar-sections{
+        background-color: white;
+        text-align: center;
+        padding-left: 166px;
+        font-size: 0;
+      }
     }
     .navbar-header{
       a.navbar-brand{
