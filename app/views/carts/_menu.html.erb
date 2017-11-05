@@ -1,56 +1,40 @@
 <ul class="nav nav-pills nav-stacked left-menu" id="stacked-menu">
-  <li>
-    <%= link_to 'Categorías', productos_path(),
-                class: ((params[:categoria_id].blank?) ? 'navbar-link active' : 'navbar-link') %>
-  </li>
-  <% cat = ''	%>
-  <% @categorias_menu.each do |c|
-		if c[:nombre] == 'Frutas y Verduras'
-			cat = 'frutasyverduras'
-    elsif c[:nombre] == 'Higiene personal'
-			cat = 'higienepersonal'
-    elsif c[:nombre] == 'Canastas'
-      cat = 'canastas'
-    elsif c[:nombre] == 'Tienda'
-      cat = 'd7'
-    elsif c[:id] == 55
-      cat = 'especial'
-    end %>
+  <li><%= link_to 'Categorías', productos_path(),
+                  class: ((params[:categoria_id].blank?) ? 'navbar-link active' : 'navbar-link') %></li>
+  <%
+    cat = ''
+  %>
+  <% @categorias_menu.each do |c| -%>
+      <% if c[:nombre] == 'Frutas y Verduras'
+           cat = 'frutasyverduras'
+         elsif c[:nombre] == 'Higiene personal'
+           cat = 'higienepersonal'
+         elsif c[:nombre] == 'Canastas'
+           cat = 'canastas'
+         elsif c[:nombre] == 'Tienda'
+           cat = 'd7'
+      end %>
       <% if c[:subcategorias].present? %>
           <li class="dropdown">
             <a href="#" class="<%= (params[:categoria_id].to_i == c[:id]) ? 'active': '' %>" data-target="#item<%=c[:id]%>" data-toggle="collapse" data-parent="#stacked-menu"><%= c[:nombre] %><span class="glyphicon icon-<%=c[:nombre].downcase %> pull-left"></span></a>
             <ul class="nav nav-stacked left-submenu <%= (params[:categoria_id].to_i == c[:id]) ? 'collapse in': 'collapse' %>" id="item<%=c[:id]%>">
               <% c[:subcategorias].each do |sm| %>
-                <li>
-                  <%= link_to sm[:nombre],
-                              productos_path(categoria_id: c[:id], subcategoria_id: sm[:id]),
-                              :class => ('active' if params[:subcategoria_id].to_i == sm[:id])
-                  %>
-                </li>
+                  <li>
+                    <%= link_to sm[:nombre],
+                                productos_path(categoria_id: c[:id], subcategoria_id: sm[:id]),
+                                :class => ('active' if params[:subcategoria_id].to_i == sm[:id])
+                    %>
+                  </li>
               <% end %>
             </ul>
           </li>
       <%else %>
-          <% if c[:id] == 55 %>
-              <% cat_status = (params[:categoria_id].to_i == c[:id]) ? 'navbar-link active' : 'navbar-link' %>
-              <li>
-                <% if cat_status == 'navbar-link'%>
-                  <%= image_tag 'nenesMAI.png', class: 'img-responsive', width: '55' %>
-                <% else %>
-                  <%= image_tag 'nenesMAIActive.png', class: 'img-responsive', width: '55' %>
-                <% end %>
-                <%= link_to(productos_path(categoria_id: c[:id]),
-                            class:  cat_status) do %>
-                    <%= c[:nombre]%>
-                <% end %>
-          <% else %>
           <li>
             <%= link_to(productos_path(categoria_id: c[:id]),
                         class:  (params[:categoria_id].to_i == c[:id]) ? 'navbar-link active' : 'navbar-link') do %>
-              <span class="glyphicon icon-<%=cat %> pull-left"></span><%= c[:nombre]%>
+                <span class="glyphicon icon-<%=cat %> pull-left"></span><%= c[:nombre]%>
             <% end %>
 
-          <% end %>
       <% end %>
   <% end -%>
 </ul>
