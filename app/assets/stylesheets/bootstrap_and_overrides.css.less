@@ -224,6 +224,9 @@
     width: 100%;
     min-width: 768px;
     height: 108px;
+    ul > * {
+      list-style: none;
+    }
     .gestion{
       position: relative;
       top: 0;
@@ -271,9 +274,9 @@
       background-color: white;
       border-bottom: 1px solid #E5E5E5;
       min-width: 768px;
+      height: 69px;
       >*{
         display: table-cell;
-        height: 68px;
       }
       .navbar-home{
         text-align: center;
@@ -285,17 +288,51 @@
         text-align: center;
         padding-left: 166px;
         font-size: 0;
+        padding-top: 13px;
+        div > ul > li,
+        div > ul > li.dropdown.mega-dropdown {
+          height: 56px;
+          background-color: inherit;
+          a{
+            background-color: inherit;
+            height: 56px;
+          }
+          a:hover{
+            color: @red-char;
+            border-bottom: black 1px solid;
+          }
+        }
+        div > ul > li.dropdown.mega-dropdown > ul > li > ul > li {
+          height: inherit;
+          border: none;
+        }
+        div > ul > li.dropdown.mega-dropdown > ul > li > ul > li > a,
+        div > ul > li.dropdown.mega-dropdown > ul > li > ul > li > a:hover{
+          height: inherit;
+          border: none;
+        }
       }
     }
-    .navbar-header{
-      a.navbar-brand{
-        padding-bottom: 0px;
-        padding-top: 4px;
-      }
-    }
+
     div.js-navbar-collapse{
       padding-right: 20px;
     }
+  }
+
+  .mega-dropdown-menu > li > ul > li > a:hover,
+  .mega-dropdown-menu > li > ul > li > a {
+    display: block;
+    color: #222;
+    padding: 3px 5px;
+    height: 20px;
+    border-bottom: none;
+  }
+
+  .mega-dropdown-menu .dropdown-header {
+    font-size: 18px;
+    color: #ff3546;
+    padding: 5px 60px 5px 5px;
+    line-height: 30px;
   }
 
   .mega-dropdown {
@@ -309,31 +346,8 @@
     -webkit-box-shadow: none;
     z-index: 900;
   }
-  .mega-dropdown-menu > li > ul {
-    padding: 0;
-    margin: 0;
-  }
-  .mega-dropdown-menu > li > ul > li {
-    list-style: none;
-  }
-  .mega-dropdown-menu > li > ul > li > a {
-    display: block;
-    color: #222;
-    padding: 3px 5px;
-  }
-  .mega-dropdown-menu > li ul > li > a:hover,
-  .mega-dropdown-menu > li ul > li > a:focus {
-    text-decoration: none;
-    background-color: transparent;
-    color: @red-char;
-    font-weight: bold;
-  }
-  .mega-dropdown-menu .dropdown-header {
-    font-size: 18px;
-    color: #ff3546;
-    padding: 5px 60px 5px 5px;
-    line-height: 30px;
-  }
+
+
 
   .carousel-control {
     width: 30px;
