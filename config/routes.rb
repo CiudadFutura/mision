@@ -59,7 +59,9 @@ Rails.application.routes.draw do
   get '/auth/:provider/callback', to: 'sessions#create', as: :social_session
 
   resources :categorias
-  resources :pedidos, only: [:index, :show, :edit, :destroy]
+  resources :pedidos, only: [:index, :show, :edit, :destroy] do
+    get 'download_pdf', to: 'pedidos#download_pdf'
+  end
   resources :home
   resources :steps
   resources :dossiers

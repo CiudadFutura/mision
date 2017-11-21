@@ -54,7 +54,15 @@ class PedidosController < ApplicationController
 		end
     @pedido.destroy
     redirect_to productos_path
-	end
+  end
+
+  def download_pdf
+    pedido = Pedido.find(params[:pedido_id])
+    send_file(
+      "#{Rails.root}/public/facturas/FAC_#{pedido.id}.pdf",
+      type: "application/pdf"
+    )
+  end
 
 
   # DELETE /categoria/1

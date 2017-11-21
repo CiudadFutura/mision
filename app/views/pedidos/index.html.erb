@@ -20,20 +20,19 @@
       <table class='table table-striped' data-search="true">
         <thead>
           <tr>
-	          <td>#</td>
-            <td>Número de pedido</td>
-            <td>Fecha</td>
-            <td>Ciclo</td>
-						<td>Ciclo Tipo</td>
-            <td>Coordinador</td>
-            <td>Consumidor</td>
-            <td>Círculo N°</td>
+	          <th>#</th>
+            <th>Número de pedido</th>
+            <th>Fecha</th>
+            <th>Ciclo</th>
+						<th>Ciclo Tipo</th>
+            <th>Coordinador</th>
+            <th>Consumidor</th>
+            <th>Círculo N°</th>
 						<% if current_usuario && current_usuario.admin? %>
 							<th colspan="4"></th>
             <% else %>
-							<th colspan="3"></th>
+							<th colspan="2"></th>
             <% end %>
-
           </tr>
         </thead>
         <tbody>
@@ -52,26 +51,33 @@
 			            <td>
 			              <%= link_to('Ver', pedido_path(p), class: 'btn btn-info btn-mini') %>
 			            </td>
-			            <td>
-			              <% if(p.ciclo.id && Compra::ciclo_actual.try(:id) == p.ciclo.id)%>
-			                <%= link_to('Modificar',
-			                      edit_pedido_path(p),
-			                      data: { confirm: 'Luego de modificar el pedido recuerda volver a enviarlo.' },
-			                      class: 'btn btn-warning btn-mini') %>
-			              <% end %>
-			            </td>
-									<td>
-										<% if current_usuario && current_usuario.admin? %>
+                  <% if File.exists?("#{Rails.public_path}/facturas/FAC_#{p.id}.pdf") %>
+                    <td>
+                      <%= link_to('Factura', pedido_download_pdf_path(p.id), class: 'btn btn-info btn-mini') %>
+                    </td>
+                  <% else %>
+                    <td></td>
+                  <% end %>
+                  <% if(p.ciclo.id && Compra::ciclo_actual.try(:id) == p.ciclo.id)%>
+                    <td>
+                      <%= link_to('Modificar',
+                            edit_pedido_path(p),
+                            data: { confirm: 'Luego de modificar el pedido recuerda volver a enviarlo.' },
+                            class: 'btn btn-warning btn-mini') %>
+			              </td>
+                  <% end %>
+									<% if current_usuario && current_usuario.admin? %>
+									  <td>
 												<%= link_to 'Eliminar', p, method: :delete, data: { confirm: 'Esta seguro?' }, class: "btn btn-danger btn-xs" %>
-										<% end %>
-									</td>
-			            <td>
-			              <% if current_usuario && current_usuario.admin? %>
+									  </td>
+									<% end %>
+			            <% if current_usuario && current_usuario.admin? %>
+			              <td>
 				              <% if p.has_missing? %>
 						            <button class="btn btn-default disabled">Nota de Crédito</button>
 						          <% end %>
-					          <% end %>
-			            </td>
+			              </td>
+					        <% end %>
 			          </tr>
 		          <% end %>
 		        <% end %>
