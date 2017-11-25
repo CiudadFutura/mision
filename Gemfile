@@ -7,7 +7,7 @@ gem 'mysql2', '~> 0.4.10'
 
 gem 'therubyracer',  platforms: :ruby
 # Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
-gem 'sprockets', '2.11.0'
+gem 'sprockets', '2.11.3'
 gem 'less-rails', '~> 2.5.0'
 # https://github.com/seyhunak/twitter-bootstrap-rails
 gem 'twitter-bootstrap-rails', '3.2.0'
