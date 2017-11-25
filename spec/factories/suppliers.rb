@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :supplier
   factory :supplier1, class: Supplier do
     name 'Proveedor 1'

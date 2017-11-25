@@ -5,13 +5,13 @@ single_instances = lambda do |factory_key|
     saved_single_instances[factory_key].reload
   rescue NoMethodError, ActiveRecord::RecordNotFound
     #was never created (is nil) or was cleared from db
-    saved_single_instances[factory_key] = FactoryGirl.create(factory_key)  #recreate
+    saved_single_instances[factory_key] = FactoryBot.create(factory_key)  #recreate
   end
 
   return saved_single_instances[factory_key]
 end
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :prod1, class: Producto do
     codigo 1
     nombre 'prod1'

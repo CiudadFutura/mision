@@ -1,9 +1,9 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.14.2'
+gem 'rails', '4.2.10'
 # Use mysql as the database for Active Record in production
-gem 'mysql2', '~> 0.3.17'
+gem 'mysql2', '~> 0.4.10'
 
 gem 'therubyracer',  platforms: :ruby
 # Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
@@ -44,7 +44,7 @@ gem 'writeexcel'
 # Enable reading settings from yml file
 gem 'figaro'
 # Charts js
-gem 'chart-js-rails'
+gem 'chart-js-rails', '~> 0.1.4'
 
 group :development do
   # Spring speeds up development by keeping your application running in the
@@ -66,7 +66,7 @@ gem 'capistrano-rvm', github: "capistrano/rvm"
 gem 'coffee-rails'
 gem 'gmaps4rails'
 gem 'geocoder'
-gem 'nokogiri', '~> 1.3.3'
+gem 'nokogiri', '~> 1.6.0'
 
 # X - Editable for Rails
 gem 'bootstrap-editable-rails'
@@ -79,7 +79,7 @@ gem 'fullcalendar-rails'
 gem 'momentjs-rails'
 
 # Social network
-gem 'omniauth'
+gem 'omniauth', '~> 1.4.2'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'omniauth-instagram'
@@ -91,15 +91,15 @@ gem 'google-api-client', '~> 0.7.1'
 
 group :development, :test do
   gem 'sqlite3'
-  gem 'pry'
+  gem 'pry', '~> 0.11.3'
   gem 'pry-remote'
   gem 'pry-rails'
   gem 'pry-stack_explorer'
-  gem 'pry-byebug'
+  gem 'byebug', '~> 4.0', '>= 4.0.5'
   gem 'simplecov'
   gem 'rspec-rails', '~> 3.4.2'
   gem 'capybara'
   gem 'shoulda-matchers'
   gem 'database_cleaner'
-  gem 'factory_girl_rails'
+  gem 'factory_bot'
 end

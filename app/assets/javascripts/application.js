@@ -21,7 +21,7 @@
 //= require fullcalendar
 //= require jquery.validate
 //= require jquery.validate.additional-methods
-//= require Chart
+//= require Chart.min
 
 
 		$(document).ready(function () {

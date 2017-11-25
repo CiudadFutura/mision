@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'user management by admin' do
   before :each do
-    admin = FactoryGirl.create(:admin)
+    admin = FactoryBot.create(:admin)
     sign_in admin
   end
 
@@ -49,7 +49,7 @@ describe 'user management by admin' do
   end
 
   it "can't assign common user as circulo coordinador" do
-    user = FactoryGirl.create(:user)
+    user = FactoryBot.create(:user)
 
     click_link 'Circulos'
     expect(current_path).to eq circulos_path
@@ -66,7 +66,7 @@ describe 'user management by admin' do
   end
 
   it "assign coordinador to circulo" do
-    user = FactoryGirl.create(:coordinador)
+    user = FactoryBot.create(:coordinador)
 
     click_link 'Circulos'
     expect(current_path).to eq circulos_path

@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :transaction_detail do
     transaction_id 1
     producto_id 1

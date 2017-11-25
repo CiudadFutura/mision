@@ -5,7 +5,7 @@ class Pedido < ActiveRecord::Base
   belongs_to :owner, foreign_key: 'transaction_id', class_name: 'Transaction'
 	has_many :pedidos_details, dependent: :destroy
 
-  validate :circulo, presence: true
+  validates :circulo, presence: true
 
   has_paper_trail
 
