@@ -6,7 +6,7 @@ class Circulo < ActiveRecord::Base
   has_many :pedidos
   has_many :usuarios
 
-  validate :coordinador_valido?, before: :save
+  before_save :coordinador_valido?
 
   after_save :assign_coordinador!
 
