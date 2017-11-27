@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :deliveries
   resources :transaction_details
   resources :transactions
+  resources :packs
   resources :accounts
   resources :compras do
 		post :send_email, on: :member
