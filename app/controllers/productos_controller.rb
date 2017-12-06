@@ -37,6 +37,7 @@ class ProductosController < ApplicationController
     if current_usuario && current_usuario.admin?
       respond_to do |format|
         format.html
+        format.json{@todos = Producto.search(params[:term])}
         format.csv { render csv: @todos.to_csv, type: 'text/csv; charset=UTF-8; header=present', filename: "#{Time.now.to_i}_productos" }
       end
     end

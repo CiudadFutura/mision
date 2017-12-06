@@ -64,6 +64,10 @@ class Producto < ActiveRecord::Base
     end
   end
 
+  def self.search(term)
+    where('LOWER(nombre) LIKE :term ', term: "%#{term.downcase}%")
+  end
+
 
   def self.import(file)
     all.each do |prod|

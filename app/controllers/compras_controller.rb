@@ -28,8 +28,11 @@ class ComprasController < ApplicationController
 	def clone
 		@source = Compra.find(params[:id])
 		@compra = @source.dup
+    puts @compra.to_yaml
 		@circulos = {}
 		@source.deliveries.each do |delivery|
+      puts delivery.id
+      next if delivery.circulo_id.blank?
 			@circulos[delivery.circulo_id] = delivery.clone
 		end
 		render :new
@@ -40,7 +43,7 @@ class ComprasController < ApplicationController
   def create
     @compra = Compra.new(compra_params)
     respond_to do |format|
-      if @compra.save
+      if @compra.save!
         format.html { redirect_to @compra, notice: 'Ciclo creado exitosamente.' }
         format.json { render :show, status: :created, location: @compra }
       else

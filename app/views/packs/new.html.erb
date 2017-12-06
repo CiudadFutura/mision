@@ -1,0 +1,8 @@
+<%- model_class = Pack -%>
+<div class="container fill">
+  <div class="row">
+    <h2><%=t '.title', :default => [:'helpers.titles.new', 'New %{model}'], :model => model_class.model_name.human.titleize %></h2>
+    <%= render 'form' %>
+  </div>
+</div>
+

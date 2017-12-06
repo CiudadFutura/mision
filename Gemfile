@@ -60,7 +60,7 @@ end
 gem 'capistrano', '~> 3.4.1'
 gem 'capistrano-bundler', '~> 1.1.2'
 gem 'capistrano-rails', '~> 1.1.1'
-gem 'capistrano-rvm', github: "capistrano/rvm"
+gem 'capistrano-rvm', github: 'capistrano/rvm'
 
 # Google Maps integration
 gem 'coffee-rails'
@@ -73,6 +73,9 @@ gem 'bootstrap-editable-rails'
 
 # JQuery validate
 gem 'jquery-validation-rails'
+
+#JQuery UI
+gem 'jquery-ui-rails', '~> 5.0', '>= 5.0.5'
 
 # full calendar
 gem 'fullcalendar-rails'
