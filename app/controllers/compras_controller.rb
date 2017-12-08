@@ -44,12 +44,13 @@ class ComprasController < ApplicationController
         format.html { redirect_to @compra, notice: 'Ciclo creado exitosamente.' }
         format.json { render :show, status: :created, location: @compra }
       else
+        put @compra.to_yaml
         format.html { render :new }
         format.json { render json: @compra.errors, status: :unprocessable_entity }
       end
     end
   end
-
+  51281542
   # PATCH/PUT /compras/1
   # PATCH/PUT /compras/1.json
   def update
