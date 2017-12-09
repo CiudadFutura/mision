@@ -23,16 +23,22 @@ class ComprasController < ApplicationController
 
   # GET /compras/1/edit
   def edit
+    if params[:previuos].present?
+      @source = Compra.find(params[:previuos])
+      @circulos = {}
+      @source.deliveries.each do |delivery|
+        @circulos[delivery.circulo_id] = delivery.clone
+      end
+    end
   end
 
 	def clone
 		@source = Compra.find(params[:id])
 		@compra = @source.dup
-		@circulos = {}
-		@source.deliveries.each do |delivery|
-			@circulos[delivery.circulo_id] = delivery.clone
-		end
-		render :new
+
+    if @compra.save
+      redirect_to action: 'edit', id:@compra.id, previuos: @source.id
+    end
 	end
 
   # POST /compras
@@ -44,13 +50,12 @@ class ComprasController < ApplicationController
         format.html { redirect_to @compra, notice: 'Ciclo creado exitosamente.' }
         format.json { render :show, status: :created, location: @compra }
       else
-        put @compra.to_yaml
         format.html { render :new }
         format.json { render json: @compra.errors, status: :unprocessable_entity }
       end
     end
   end
-  51281542
+
   # PATCH/PUT /compras/1
   # PATCH/PUT /compras/1.json
   def update
