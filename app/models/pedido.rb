@@ -1,11 +1,11 @@
 class Pedido < ActiveRecord::Base
   belongs_to :circulo
   belongs_to :usuario
-  belongs_to :ciclo, class_name: "Compra", foreign_key: :compra_id
+  belongs_to :ciclo, class_name: 'Compra', foreign_key: :compra_id
   belongs_to :owner, foreign_key: 'transaction_id', class_name: 'Transaction'
 	has_many :pedidos_details, dependent: :destroy
 
-  validates :circulo, presence: true
+  #validates :circulo, presence: true
 
   has_paper_trail
 
@@ -39,7 +39,7 @@ class Pedido < ActiveRecord::Base
 		JSON.parse(items).each do |item|
 			#Rails.logger.debug(v)
 			#Rails.logger.debug(_k.inspect)
-			total += item["cantidad"] || 0
+			total += item['cantidad'] || 0
 		end
 		total.to_i
 	end
@@ -53,7 +53,7 @@ class Pedido < ActiveRecord::Base
 
   def self.pedidos_ciclos
     pedidos_por_ciclos = Pedido.joins(:ciclo)
-                  .select("compras.*, max(pedidos.created_at) as most_recent, count(pedidos.id) as orders_count")
+                  .select('compras.*, max(pedidos.created_at) as most_recent, count(pedidos.id) as orders_count')
                   .group('pedidos.compra_id')
     return pedidos_por_ciclos
   end
@@ -135,7 +135,7 @@ class Pedido < ActiveRecord::Base
 				transaction = Transaction.find_by_pedido_id(pedido.id)
 				if transaction.present?
 					csv << [
-							"Nota de Credito: Nº #{transaction.id}, $#{transaction.amount}"
+							"Nota de Crédito: Nº #{transaction.id}, $#{transaction.amount}"
 					]
 				end
         JSON.parse(pedido.items, symbolize_names: true).each do |item|

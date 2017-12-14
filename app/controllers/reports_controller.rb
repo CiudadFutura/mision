@@ -15,6 +15,12 @@ class ReportsController < ApplicationController
         @reporte = Reporte.pedidos_por_proveedor(pedidos)
       end
     end
-	end
+  end
+
+  def circles_list
+    @ciclos = Compra.order(:fecha_inicio_compras).last(6)
+    @circulos = Circulo.all
+
+  end
 
 end

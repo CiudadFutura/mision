@@ -4,16 +4,16 @@
       <h2>Pedidos realizados</h2>
 
       <% if current_usuario && current_usuario.admin? %>
-        <%= link_to "Exportar CSV", pedidos_path(format: "csv", ciclo_id: @ciclo_id), class: "btn btn-success btn-xs" %>
+        <%= link_to 'Exportar CSV', pedidos_path(format: 'csv', ciclo_id: @ciclo_id), class: 'btn btn-success btn-xs' %>
         <%= form_tag pedidos_path, method: :get, class: 'form-inline' do %>
           <h3>Filtros:</h3>
           <div class="form-group">
             <label for="ciclo_id">Ciclo:</label>
-            <%= select_tag "ciclo_id",
-                  options_from_collection_for_select(@ciclos, "id", "nombre", @ciclo_id),
+            <%= select_tag 'ciclo_id',
+                  options_from_collection_for_select(@ciclos, 'id', 'nombre', @ciclo_id),
                   include_blank: true, class: 'form-control input-sm' %>
           </div>
-          <%= submit_tag 'Filtrar', class: "btn btn-success btn-xs" %>
+          <%= submit_tag 'Filtrar', class: 'btn btn-success btn-xs' %>
         <% end %>
       <% end %>
 
@@ -44,10 +44,10 @@
 			            <td><%= p.try('id') || 'Sin ID' %></td>
 			            <td><%= l (p.try('created_at')) || 'SIN FECHA' %></td>
 			            <td><%= p.ciclo.try('nombre') || 'SIN CICLO' %></td>
-									<td><%= p.ciclo.try('tipo') || '' %></td>
+									<td><%= t (p.ciclo.try('tipo')) || '' %></td>
 			            <td><%= p.circulo.try('coordinador') ? (p.circulo.coordinador.nombre + ' ' + p.circulo.coordinador.apellido) : 'SIN COORDINADOR' %></td>
 			            <td><%= (p.usuario.try('nombre') ? (p.usuario.nombre) : '---' )+ ' ' + (p.usuario.try('apellido')? (p.usuario.apellido) : '---')  %></td>
-			            <td><%= p.circulo.try('id') || "SIN CIRCULO" %></td>
+			            <td><%= p.circulo.try('id') || 'SIN CIRCULO' %></td>
 			            <td>
 			              <%= link_to('Ver', pedido_path(p), class: 'btn btn-info btn-mini') %>
 			            </td>
@@ -68,7 +68,7 @@
                   <% end %>
 									<% if current_usuario && current_usuario.admin? %>
 									  <td>
-												<%= link_to 'Eliminar', p, method: :delete, data: { confirm: 'Esta seguro?' }, class: "btn btn-danger btn-xs" %>
+												<%= link_to 'Eliminar', p, method: :delete, data: { confirm: 'Esta seguro?' }, class: 'btn btn-danger btn-xs' %>
 									  </td>
 									<% end %>
 			            <% if current_usuario && current_usuario.admin? %>

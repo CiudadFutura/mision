@@ -3,10 +3,10 @@
 			<div class="panel-heading">
 				<div class="row">
 					<h2 class=ribbon>
-						<i><u>A la Escuela con la MAI</u></i>
+						<i><u>Canastas Navideñas 2017</u></i>
 					</h2>
 					<div class="col-lg-12 text-center">
-						<span>Para poder realizar tú pedido, tienes que estar registrado</span>
+						<span></span>
 					</div>
 				</div>
 			</div>
@@ -14,7 +14,7 @@
 				<% @freesale.each do |producto|%>
 						<div class="col-xs-6 col-md-4 thumbnails">
 							<div class="thumbnail free text-center">
-								<div class="ribbon"><span>Escuela MAI</span></div>
+								<div class="ribbon"><span>Navidad</span></div>
 								<% if producto.oculto? %>
 										<div class="oculto-prod">
 											<span>Oculto</span>
@@ -32,7 +32,7 @@
 									<h4><%= producto.nombre %></h4>
 
 									<p class="precio_mision">Precio misión <%= number_to_currency(producto.precio) %></p>
-									<% if @ciclo_actual and usuario_signed_in? %>
+									<% if @ciclo_actual  %>
 										<% cantidad = producto.stock.present? ? producto.stock : producto.cantidad_permitida %>
 										<select class="cantidad">
 											<% for i in 1..cantidad %>

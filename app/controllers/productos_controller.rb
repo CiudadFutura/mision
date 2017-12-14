@@ -33,6 +33,7 @@ class ProductosController < ApplicationController
     @productos = @productos.disponibles if session['view_prod'] == 'visibles'
     @productos = @productos.ocultos if session['view_prod'] == 'ocultos'
     @productos = @productos.supplier(params[:supplier_id]) if params[:supplier_id]
+    @freesale = Producto.freesale
 
     if current_usuario && current_usuario.admin?
       respond_to do |format|

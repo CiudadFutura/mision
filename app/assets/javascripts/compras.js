@@ -96,14 +96,6 @@ $(document).ready(function() {
     }
 
 
-	$('a[data-target=#ajax-modal]').on('click', function(e){
-		e.preventDefault();
-		e.stopPropagation();
-		$('#ajax-modal').removeClass('hide');
-		$.rails.handleRemote($(this))
-
-	});
-
 	function showHideCirculos(valor){
 		if (valor == 'free'){
 			$('#content-circulos').addClass('hide');

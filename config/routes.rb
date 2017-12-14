@@ -68,7 +68,11 @@ Rails.application.routes.draw do
   resources :faqs
   resources :geo_reports
   resources :dashboards
-  resources :reports, only: [:index]
+  resources :reports do
+    collection do
+      get 'circles_list'
+    end
+  end
 
   resource :cart, only: [:show] do
     put 'add/:producto_id', to: 'carts#add', as: :add_to

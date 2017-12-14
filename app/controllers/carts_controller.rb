@@ -23,15 +23,40 @@ class CartsController < ApplicationController
   end
 
   def create_pedido
-    transactions = Transaction.where(["account_id = :id and pedido_id is null", {id: current_usuario.account.id }])
+
     pedido = Pedido.new
     ciclo = Compra.ciclo_actual
     pedido.items = @carrito.items.map { |_k,item| item.purchase_data }.to_json
-    pedido.usuario_id = current_usuario.id
-		if current_usuario.circulo.present?
+
+		if current_usuario.present?
     	pedido.circulo_id = current_usuario.circulo_id
-    	circulo = Circulo.find(pedido.circulo_id)
-		end
+      usuario_id = current_usuario.id
+
+      circulo = Circulo.find(pedido.circulo_id)
+      transactions = Transaction.where(["account_id = :id and pedido_id is null", {id: current_usuario.account.id }])
+    elsif params[:usuarios][:guest]
+      usuario = Usuario.find_by_email(params[:usuarios][:email])
+      if usuario.blank?
+        new_usuario = Usuario.new(
+          email: params[:usuarios][:email],
+          nombre: params[:usuarios][:nombre],
+          apellido: params[:usuarios][:apellido],
+          password: BCrypt::Password.create(params[:usuarios][:password]),
+          calle: params[:usuarios][:calle],
+          ciudad: 'Rosario',
+          pais: 'Argentina',
+          cel1: params[:usuarios][:cel1],
+          dni: params[:usuarios][:dni]
+        )
+        if new_usuario.save!
+          usuario = new_usuario
+        end
+      end
+    end
+    if current_usuario.blank?
+      usuario_id = usuario.id
+    end
+    pedido.usuario_id = usuario_id
 		pedido.compra_id = ciclo.id
 		missing = @carrito.check_item_stock
 		pedido.total_discount = @carrito.total_discount
@@ -75,7 +100,7 @@ class CartsController < ApplicationController
 						delivery = circulo.deliveries.where(compra_id: ciclo.id)
 					else
 						delivery = Delivery.new(
-																	 usuarios_id: current_usuario.id,
+																	 usuarios_id: usuario_id,
 																	 compra_id: ciclo.id,
 																	 delivery_time: ciclo.fecha_entrega_compras,
 																	 warehouses_id: warehouse
@@ -115,7 +140,7 @@ class CartsController < ApplicationController
 
 	def success
 		@pedido = Pedido.find(params[:id])
-    if current_usuario.circulo_id.present?
+    if current_usuario.present?
       circulo = Circulo.find(current_usuario.circulo_id) if current_usuario.circulo_id.present?
       @next_cycle = circulo.next_delivery.offset(1).last
     end

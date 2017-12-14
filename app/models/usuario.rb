@@ -199,7 +199,7 @@ class Usuario < ActiveRecord::Base
 
 	private
   def set_default_role
-    self.type ||= Usuario::USUARIO::SISTEMA
+    self.type ||= Usuario::USUARIO
   end
 
   def self.colors

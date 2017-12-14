@@ -1,0 +1,28 @@
+<div class="container fill">
+  <div class="row">
+    <div class="reporte">
+      <h2>Circulos que compraron</h2>
+
+      <% if current_usuario && current_usuario.admin? %>
+
+      <% end %>
+      <% if @ciclos.present? %>
+
+          <table class="table">
+            <thead>
+              <tr>
+                <th width="10%">#Círculo</th>
+                <% @ciclos.each do |ciclo| %>
+                  <th><%=ciclo.nombre%></th>
+                <% end %>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+          <br/>
+
+      <% end %>
+    </div>
+  </div>
+</div>
