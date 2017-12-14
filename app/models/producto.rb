@@ -75,7 +75,7 @@ class Producto < ActiveRecord::Base
     counter = 0
     data = []
     ActiveRecord::Base.clear_cache!
-    CSV.foreach(file.path, {col_sep: "|", :headers=>:first_row, :encoding => 'ISO-8859-1:utf-8'}) do |row|
+    CSV.foreach(file.path, {col_sep: ";", :headers=>:first_row, :encoding => 'ISO-8859-1:utf-8'}) do |row|
       # File Columns: 0)código 1)Estado 2)Cod. Proveedor 3)Proveedor
       #               4)Producto 5)Descripcion del producto 6)Marca
       #               7)Precio final 8)Supermercado 9)Stock
@@ -108,7 +108,7 @@ class Producto < ActiveRecord::Base
   end
 
   def self.to_csv
-    CSV.generate(force_quotes: true, encoding: 'utf-8', col_sep:'|') do |csv|
+    CSV.generate(force_quotes: true, encoding: 'utf-8', col_sep:';') do |csv|
       csv << ['Codigo', 'Estado', 'Cod. Proveedor', 'Proveedor', 'Nombre',
               'Descripcion', 'Marca', 'Precio final', 'Precio super', 'Stock']
       all.each do |prod|
