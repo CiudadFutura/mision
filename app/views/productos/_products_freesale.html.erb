@@ -30,16 +30,30 @@
 								</a>
 								<div class="caption">
 									<h4><%= producto.nombre %></h4>
-
+                  <h5><%= producto.marca %></h5>
 									<p class="precio_mision">Precio misión <%= number_to_currency(producto.precio) %></p>
+
+                  <% if producto.precio_super.present?
+                    if producto.precio > producto.precio_super
+                      precio_super = 0.0
+                    else
+                      precio_super = producto.precio_super
+                    end
+                  else
+                    precio_super = 0.0
+                  end%>
+
+                  <p>Precio hiper <%= number_to_currency(precio_super) %></p>
+                  <p>Ahorro <%= number_to_percentage(producto.ahorro) %></p>
+
 									<% if @ciclo_actual  %>
 										<% cantidad = producto.stock.present? ? producto.stock : producto.cantidad_permitida %>
 										<select class="cantidad">
 											<% for i in 1..cantidad %>
 													<% if @carrito.producto?(producto.id) %>
-															<option value="<%= i%>" <%= (i == @carrito.cantidad_prod(producto.id)) ?'selected':''%>><%= i %></option>
+                            <option value="<%= i%>" <%= (i == @carrito.cantidad_prod(producto.id)) ?'selected':''%>><%= i %></option>
 													<% else %>
-															<option value="<%= i %>"><%= i %></option>
+														<option value="<%= i %>"><%= i %></option>
 													<% end %>
 											<% end %>
 										</select>
