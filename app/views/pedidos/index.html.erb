@@ -28,7 +28,6 @@
             <th>Coordinador</th>
             <th>Consumidor</th>
             <th>Círculo N°</th>
-            <th>Retiro en:</th>
 						<% if current_usuario && current_usuario.admin? %>
 							<th colspan="4"></th>
             <% else %>
@@ -49,7 +48,6 @@
 			            <td><%= p.circulo.try('coordinador') ? (p.circulo.coordinador.nombre + ' ' + p.circulo.coordinador.apellido) : 'SIN COORDINADOR' %></td>
 			            <td><%= (p.usuario.try('nombre') ? (p.usuario.nombre) : '---' )+ ' ' + (p.usuario.try('apellido')? (p.usuario.apellido) : '---')  %></td>
 			            <td><%= p.circulo.try('id') || 'SIN CIRCULO' %></td>
-			            <td><%= p.pedidos_details.first.warehouse.present? ? Warehouse.find(p.pedidos_details.first.warehouse).name : ''%></td>
 			            <td>
 			              <%= link_to('Ver', pedido_path(p), class: 'btn btn-info btn-mini') %>
 			            </td>
