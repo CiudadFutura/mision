@@ -129,7 +129,7 @@ class Pedido < ActiveRecord::Base
 
   def self.to_csv
     CSV.generate(force_quotes: true) do |csv|
-      csv << ['Pedido Nro', 'Ciclo Nro', 'Usuario Nro', 'Usuario', 'Circulo Nro', 'Codigo Prod.', 'Nombre Prod.',
+      csv << ['Pedido Nro', 'Ciclo Nro', 'Usuario Nro', 'Usuario', 'Circulo Nro', 'Retiro en:', 'Codigo Prod.', 'Nombre Prod.',
               'Cantidad']
       all.each do |pedido|
 				transaction = Transaction.find_by_pedido_id(pedido.id)
@@ -141,12 +141,14 @@ class Pedido < ActiveRecord::Base
         JSON.parse(pedido.items, symbolize_names: true).each do |item|
           begin
             producto = Producto.find(item[:producto_id])
+            depo = Warehouse.find(pedido.pedidos_details.try('warehouse').to_i).name  if pedido.pedidos_details.first.warehouse.present?
             csv << [
               pedido.id,
               pedido.ciclo.id || 'Sin Circulo',
-              pedido.usuario.id || 'Sin id usuario',
+              pedido.usuario.try('id') || 'Sin id usuario',
 							pedido.usuario.try('apellido'), pedido.usuario.try('nombre'),
-              pedido.circulo.id,
+              pedido.circulo.try('id') || 'Sin circulo',
+              depo.present? ? depo : '',
               producto.codigo,
               producto.nombre,
               item[:cantidad]
@@ -155,9 +157,9 @@ class Pedido < ActiveRecord::Base
             csv << [
               pedido.id,
 							pedido.ciclo.id || 'Sin Circulo',
-							pedido.usuario.id || 'Sin id usuario',
+							pedido.usuario.try('id') || 'Sin id usuario',
               pedido.usuario.try('apellido'), pedido.usuario.try('nombre'),
-              pedido.circulo.id,
+              pedido.circulo.try('id') || 'Sin Círculo',
               item[:producto_id],
               'ERROR',
               item[:cantidad]
