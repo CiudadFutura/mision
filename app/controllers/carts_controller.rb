@@ -64,8 +64,8 @@ class CartsController < ApplicationController
 		pedido.saving = @carrito.ahorro
 		pedido.total_products = @carrito.cantidad
 		pedido.active = true
-    if params[:pedidos] && params[:pedidos][:warehouse]
-      warehouse = params[:pedidos][:warehouse]
+    if  params[:usuarios][:warehouse]
+      warehouse = params[:usuarios][:warehouse]
     else
       warehouse = nil
     end
