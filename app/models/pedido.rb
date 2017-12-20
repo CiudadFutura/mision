@@ -129,7 +129,7 @@ class Pedido < ActiveRecord::Base
 
   def self.to_csv
     CSV.generate(force_quotes: true) do |csv|
-      csv << ['Pedido Nro', 'Ciclo Nro', 'Usuario Nro', 'Usuario', 'Circulo Nro', 'Retiro en:', 'Codigo Prod.', 'Nombre Prod.',
+      csv << ['Pedido Nro', 'Ciclo Nro', 'Usuario Nro', 'Usuario', 'email', 'Celular', 'Circulo Nro', 'Retiro en:', 'Codigo Prod.', 'Nombre Prod.',
               'Cantidad']
       all.each do |pedido|
 
@@ -151,6 +151,8 @@ class Pedido < ActiveRecord::Base
               pedido.ciclo.id || 'Sin Circulo',
               pedido.usuario.try('id') || 'Sin id usuario',
 							pedido.usuario.try('apellido'), pedido.usuario.try('nombre'),
+							pedido.usuario.try('email') || 'Sin email',
+							pedido.usuario.try('cel1') || 'Sin celular',
               pedido.circulo.try('id') || 'Sin circulo',
               warehouse.present? ? warehouse : 'Sin depósito',
               producto.codigo,
