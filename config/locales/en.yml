@@ -15,6 +15,7 @@ en:
   debit_note: Nota de débito
   free: Libre
   circles: Círculos
+  mini: Mini-Ciclo
   activerecord:
     models:
       account:

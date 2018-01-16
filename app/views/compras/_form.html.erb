@@ -33,6 +33,12 @@
 				Libre
 			</label>
 		</div>
+    <div class="radio">
+      <label>
+        <%= f.radio_button :tipo, 'mini' , checked: (@compra.tipo == 'mini') ? true : false  %>
+        Mini Ciclo
+      </label>
+    </div>
 	</div>
   <div class="form-group">
     <%= f.label :descripcion %><br>

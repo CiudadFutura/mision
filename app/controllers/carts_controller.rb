@@ -108,7 +108,7 @@ class CartsController < ApplicationController
 																	 warehouses_id: warehouse
 						).save
 					end
-					if ciclo.tipo != 'free'
+					if ciclo.tipo == 'circles'
 						if delivery.blank?
 							Sector.all.each do |sector|
 								if sector.id == Sector::CONSUMERS

@@ -45,7 +45,7 @@
 						<p>Precio hiper <%= number_to_currency(precio_super) %></p>
 						<p>Ahorro <%= number_to_percentage(producto.ahorro) %></p>
 						<% if @ciclo_actual and usuario_signed_in? %>
-								<% if @ciclo_actual.circulos.include?(current_usuario.circulo) %>
+								<% if @ciclo_actual.circulos.include?(current_usuario.circulo) or @ciclo_actual.tipo == 'mini'%>
 										<%
                       if producto.stock.present? and producto.cantidad_permitida > producto.stock
                         cantidad = producto.stock

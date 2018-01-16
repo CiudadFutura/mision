@@ -79,7 +79,7 @@
 				</tbody>
 			</table>
 		</div>
-		<% if @ciclo_actual && current_usuario && current_usuario.circulo && !current_usuario.pedido?(Compra:@ciclo_actual) %>
+		<% if @ciclo_actual && current_usuario && !current_usuario.pedido?(Compra:@ciclo_actual) %>
 				<div class="row text-right">
 					<%= link_to('Finalizar Compra', create_pedido_path, method: :get, class: "btn btn-success #{'disabled' if @missing.present?}",
 											id: 'finalizar') %>

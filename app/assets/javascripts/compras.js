@@ -97,7 +97,7 @@ $(document).ready(function() {
 
 
 	function showHideCirculos(valor){
-		if (valor == 'free'){
+		if (valor == 'free' || valor == 'mini'){
 			$('#content-circulos').addClass('hide');
 		}else{
 			$('#content-circulos').removeClass('hide');

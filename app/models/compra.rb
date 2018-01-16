@@ -4,7 +4,7 @@ class Compra < ActiveRecord::Base
   has_many :circulos, :through => :deliveries
   has_many :pedidos
 
-	enum tipo: [:circles, :free]
+	enum tipo: [:circles, :free, :mini]
 
 	validates :nombre, :descripcion, :fecha_inicio_compras, :fecha_fin_compras,
             :fecha_fin_pagos, :fecha_entrega_compras, presence: true

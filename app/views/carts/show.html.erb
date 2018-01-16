@@ -15,10 +15,9 @@
       </div>
     <% end %>
   </div>
-  <%= @ciclo_actual_include %>
 	<% if @ciclo_actual.present? %>
-			<% if current_usuario && current_usuario.circulo && @ciclo_actual.tipo != 'free' %>
-					<% if @ciclo_actual.circulos.include?(current_usuario.circulo)  %>
+			<% if current_usuario && @ciclo_actual.tipo != 'free' || @ciclo_actual.tipo == 'mini' %>
+					<% if @ciclo_actual.circulos.include?(current_usuario.circulo) || @ciclo_actual.tipo == 'mini'  %>
 							<% if !current_usuario.pedido?(@ciclo_actual) %>
 									<%= render 'carts/cart' %>
 							<% else %>
