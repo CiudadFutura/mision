@@ -3,10 +3,10 @@
     <div class="col-md-8">
       <h2>Detalle de Pedido</h2>
       <h4><%= @pedido.usuario.nombre %> <%= @pedido.usuario.apellido %></h4>
-			<% if @pedido.ciclo.tipo == 'free' %>
+			<% if @pedido.ciclo.tipo == 'free' or @pedido.ciclo.tipo == 'mini'  %>
 					<p>Ciclo Libre de compra: <b><%= @pedido.ciclo.nombre%></b></p>
 			<% else %>
-				<p>Círculo N°: <%= @pedido.circulo.id%></p>
+				<p>Círculo N°: <%= @pedido.circulo.id if @pedido.circulo.present? %></p>
 			<% end %>
     </div>
     <div class="col-md-4">

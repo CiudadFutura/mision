@@ -29,10 +29,13 @@ class CartsController < ApplicationController
     pedido.items = @carrito.items.map { |_k,item| item.purchase_data }.to_json
 
 		if current_usuario.present?
-    	pedido.circulo_id = current_usuario.circulo_id
+      if pedido.circulo.present?
+        pedido.circulo_id = current_usuario.circulo_id
+        circulo = Circulo.find(pedido.circulo_id) if current_usuario
+      end
+
       usuario_id = current_usuario.id
 
-      circulo = Circulo.find(pedido.circulo_id)
       transactions = Transaction.where(["account_id = :id and pedido_id is null", {id: current_usuario.account.id }])
     elsif params[:usuarios][:guest]
       usuario = Usuario.find_by_email(params[:usuarios][:email])
@@ -144,7 +147,7 @@ class CartsController < ApplicationController
 		@pedido = Pedido.find(params[:id])
     if current_usuario.present?
       circulo = Circulo.find(current_usuario.circulo_id) if current_usuario.circulo_id.present?
-      @next_cycle = circulo.next_delivery.offset(1).last
+      @next_cycle = circulo.next_delivery.offset(1).last if circulo.present?
     end
 		render 'carts/success'
 	end
