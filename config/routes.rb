@@ -18,6 +18,7 @@ Rails.application.routes.draw do
 			to: 'remitos_pedido#get_by_cycle_circle', as: :get_by_cycle_circle
 
 	get 'remitos_pedidos/generate', to: 'remitos_pedido#generate', as: :generate
+  get 'pedidos/update_issue', to: 'pedidos#update_issue', as: :update_issue
 
 	get '/transaction/generar/:ciclo_id' => 'transactions#generar', as: :transaction_generar
 
