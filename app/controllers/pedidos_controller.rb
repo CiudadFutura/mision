@@ -56,16 +56,6 @@ class PedidosController < ApplicationController
     redirect_to productos_path
   end
 
-  def update_issue
-    @pedidos = Pedido.all.where('compra_id = ? ', 64)
-    @pedidos.each do |p|
-      if p.usuario.circulo_id.present?
-        p.circulo_id = p.usuario.circulo_id
-        p.save
-      end
-    end
-
-  end
 
   def download_pdf
     pedido = Pedido.find(params[:pedido_id])
