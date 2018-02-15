@@ -29,7 +29,7 @@ class CartsController < ApplicationController
     pedido.items = @carrito.items.map { |_k,item| item.purchase_data }.to_json
 
 		if current_usuario.present?
-      if pedido.circulo.present?
+      if current_usuario.circulo.present?
         pedido.circulo_id = current_usuario.circulo_id
         circulo = Circulo.find(pedido.circulo_id) if current_usuario
       end

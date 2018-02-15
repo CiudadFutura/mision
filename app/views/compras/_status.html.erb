@@ -17,7 +17,7 @@
 			<% @circulos.each do |circulo , d| %>
 				<%
 					status = Compra.get_last_status(d[:sectors], d[:delivery_id])
-					status_class = status.present? ? (Status.find(status.status_id).name).split(' ').map{|s| s.downcase}.join('-') : 'inicial'
+					status_class = status.present? or status != 0 ? (Status.find(status.status_id).name).split(' ').map{|s| s.downcase}.join('-') : 'inicial'
 				%>
 				<% disabled = true %>
 					<tr class="<%= "estado_#{status_class}" %>">
