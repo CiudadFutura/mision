@@ -66,6 +66,7 @@ Rails.application.routes.draw do
   resources :steps
   resources :dossiers
   resources :faqs
+  resources :como_compro
   resources :geo_reports
   resources :dashboards
   resources :reports do

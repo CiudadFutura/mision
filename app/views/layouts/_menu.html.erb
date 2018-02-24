@@ -105,6 +105,11 @@
     </ul>
 
     <ul class="nav navbar-nav navbar-right">
+      <li>
+        <%= link_to(como_compro_path(1)) do %>
+          <span class="glyphicon glyphicon-tag"></span>Cómo Compro?
+        <% end %>
+      </li>
 			<li>
 				<%= link_to(productos_path(featured: 'true')) do %>
 						<span class="icon-tienda glyphicon"></span>Tienda
