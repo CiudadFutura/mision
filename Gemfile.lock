@@ -448,7 +448,7 @@ DEPENDENCIES
   mini_magick
   momentjs-rails
   mysql2 (~> 0.4.10)
-  nokogiri (~> 1.6.0)
+  nokogiri (~> 1.6, >= 1.6.6.2)
   omniauth (~> 1.4.2)
   omniauth-facebook
   omniauth-google-oauth2

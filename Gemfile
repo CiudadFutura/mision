@@ -66,7 +66,7 @@ gem 'capistrano-rvm', github: "capistrano/rvm"
 gem 'coffee-rails'
 gem 'gmaps4rails'
 gem 'geocoder'
-gem 'nokogiri', '~> 1.6.0'
+gem 'nokogiri', '~> 1.6', '>= 1.6.6.2'
 
 # X - Editable for Rails
 gem 'bootstrap-editable-rails'
