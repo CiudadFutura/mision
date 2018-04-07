@@ -12,8 +12,8 @@ gem 'less-rails', '~> 2.5.0'
 # https://github.com/seyhunak/twitter-bootstrap-rails
 gem 'twitter-bootstrap-rails', '3.2.0'
 # https://github.com/carrierwaveuploader/carrierwave
-gem 'carrierwave', '~> 1.2', '>= 1.2.2'
-gem 'mini_magick', '~> 4.8'
+gem 'carrierwave'
+gem 'mini_magick'
 
 gem 'tilt'
 
@@ -21,9 +21,9 @@ gem 'tilt'
 gem 'uglifier', '>= 1.3.0'
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
+gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks', '~> 5.1'
+gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
@@ -32,17 +32,17 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Authentication: https://github.com/plataformatec/devise
 gem 'devise', '3.5.6'
 # Authorization: https://github.com/ryanb/cancan/wiki
-gem 'cancan', '~> 1.6', '>= 1.6.10'
-gem 'bcrypt-ruby', '~> 3.1', '>= 3.1.5'
+gem 'cancan'
+gem 'bcrypt-ruby'
 
 # Seed Migration: https://github.com/harrystech/seed_migration
-gem 'seed_migration', '~> 1.2', '>= 1.2.3'
+gem 'seed_migration'
 # Versioning models: https://github.com/airblade/paper_trail
 gem 'paper_trail', '~> 4.0.0.rc'
 # Creates Excel files: https://github.com/cxn03651/writeexcel/
-gem 'writeexcel', '~> 1.0', '>= 1.0.5'
+gem 'writeexcel'
 # Enable reading settings from yml file
-gem 'figaro', '~> 1.1', '>= 1.1.1'
+gem 'figaro'
 # Charts js
 gem 'chart-js-rails', '~> 0.1.4'
 
@@ -50,10 +50,10 @@ group :development do
   # Spring speeds up development by keeping your application running in the
   # background.
   # Read more: https://github.com/rails/spring
-  gem 'spring', '~> 2.0', '>= 2.0.2'
-  gem 'better_errors', '~> 2.4'
-  gem 'binding_of_caller', '~> 0.8.0'
-  gem 'rails_best_practices', '~> 1.19', '>= 1.19.1'
+  gem 'spring'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'rails_best_practices'
 end
 
 # Use Capistrano for deployment
@@ -66,10 +66,10 @@ gem 'capistrano-rvm', github: "capistrano/rvm"
 gem 'coffee-rails'
 gem 'gmaps4rails'
 gem 'geocoder'
-gem 'nokogiri', '~> 1.8', '>= 1.8.2'
+gem 'nokogiri', '~> 1.6.0'
 
 # X - Editable for Rails
-gem 'bootstrap-editable-rails', '~> 0.0.9'
+gem 'bootstrap-editable-rails'
 
 # JQuery validate
 gem 'jquery-validation-rails'
