@@ -1,0 +1,67 @@
+Index: config/secrets.yml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- config/secrets.yml	(revision 569c08bd12c38d93c8c33961da91ba6682640d2d)
++++ config/secrets.yml	(revision 569c08bd12c38d93c8c33961da91ba6682640d2d)
+@@ -1,28 +0,0 @@
+-# Be sure to restart your server when you modify this file.
+-
+-# Your secret key is used for verifying the integrity of signed cookies.
+-# If you change this key, all old signed cookies will become invalid!
+-
+-# Make sure the secret is at least 30 characters and all random,
+-# no regular words or you'll be exposed to dictionary attacks.
+-# You can use `rake secret` to generate a secure secret key.
+-
+-# Make sure the secrets in this file are kept private
+-# if you're sharing your code publicly.
+-
+-development:
+-  secret_mai_token: <%= ENV["TOKEN_MAI_GET"] %>
+-  secret_key_base: 3163eeaedea55005da66ea2f2827eb4f14f7a6c47273b7339269ac0f54ab2cc411d391b274d23d66b2914ee09f048eec74e1cc4f232d4c8345ce93690939c016
+-
+-test:
+-  secret_key_base: e8acc385dd20b039ab93c1a7174f1530553aa0b13d6426d3a367e5283855852e7cf7673dfd16aaf3dbc4ba6fa171b183142687e35ef8e4e7f0d6cbf463a3b000
+-
+-staging:
+-  secret_key_base: e8acc385dd20b039ab93c1a7174f1530553aa0b13d6426d3a367e5283855852e7cf7673dfd16aaf3dbc4ba6fa171b183142687e35ef8e4e7f0d6cbf463a3b000
+-
+-
+-# Do not keep production secrets in the repository,
+-# instead read values from the environment.
+-production:
+-  secret_key_base: <%= ENV["SECRET_KEY_BASE"] %>
+-  secret_mai_token: <%= ENV["TOKEN_MAI_GET"] %>
+Index: app/assets/stylesheets/bootstrap_and_overrides.css.less
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/assets/stylesheets/bootstrap_and_overrides.css.less	(revision 569c08bd12c38d93c8c33961da91ba6682640d2d)
++++ app/assets/stylesheets/bootstrap_and_overrides.css.less	(revision )
+@@ -485,7 +485,7 @@
+ 	.fill{
+ 		min-height: 100%;
+ 		height: 100%;
+-		padding:0px 0px 70px 0px;
++    padding:130px 0px 70px 0px;
+ 		box-sizing:border-box;
+ 		#form-add-item{
+ 			display: none;
+Index: app/assets/stylesheets/home.css.less
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/assets/stylesheets/home.css.less	(revision 569c08bd12c38d93c8c33961da91ba6682640d2d)
++++ app/assets/stylesheets/home.css.less	(revision )
+@@ -650,6 +650,7 @@
+   right: 0 !important;
+   width: 100%;
+   margin-bottom: 20px;
++  width: 30%;
+ }
+ .timeline-horizontal .timeline-item .timeline-panel:before {
+   top: auto;

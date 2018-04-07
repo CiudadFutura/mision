@@ -1,0 +1,47 @@
+Index: app/controllers/api/v1/usuarios_controller.rb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/controllers/api/v1/usuarios_controller.rb	(revision 22a13fcd980465f29051c566bdfd07459341e011)
++++ app/controllers/api/v1/usuarios_controller.rb	(revision )
+@@ -3,7 +3,7 @@
+ 
+   def index
+     if params.has_key?(:usuarios_date)
+-      @suppliers = Usuario.evo_usuarios(DateTime.parse(params[:usuarios_date], '%d/%m/%y'))
++      @users = Usuario.evo_usuarios(DateTime.parse(params[:usuarios_date], '%d/%m/%y'))
+     else
+       @users = Usuario.all
+     end
+\ No newline at end of file
+Index: app/views/api/v1/products/index.json.jbuilder
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/views/api/v1/products/index.json.jbuilder	(revision 22a13fcd980465f29051c566bdfd07459341e011)
++++ app/views/api/v1/products/index.json.jbuilder	(revision )
+@@ -1,3 +1,3 @@
+ json.array! @products do |product|
+-  json.(product, :id, :nombre, :precio, :costo, :moneda, :margen, :alicuota)
++  json.(product, :id, :nombre, :precio, :costo, :moneda, :margen, :alicuota, :stock, :oculto, :precio_super, :pack)
+ end
+\ No newline at end of file
+Index: app/views/api/v1/usuarios/index.json.jbuilder
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/views/api/v1/usuarios/index.json.jbuilder	(revision 22a13fcd980465f29051c566bdfd07459341e011)
++++ app/views/api/v1/usuarios/index.json.jbuilder	(revision )
+@@ -1,5 +1,5 @@
+ json.array! @users do |user|
+-  json.(user, :id, :email, :nombre, :apellido, :dni, :nombre_iva, :calle, :ciudad, :tel1, :cel1, :circulo_id, :codigo_vendedor,
+-    :tipo_operacion, :inscripcion_iva, :tipo_identificacion, :numero_identificacion, :codigo_transporte,
+-    :codigo_clasificacion, :updated_at )
++  json.(user, :id, :email, :nombre, :apellido, :dni, :nombre_iva, :calle, :ciudad, :tel1, :cel1, :circulo_id,
++    :codigo_vendedor, :tipo_operacion, :inscripcion_iva, :tipo_identificacion, :numero_identificacion,
++    :codigo_transporte, :codigo_clasificacion, :updated_at )
+ end
+\ No newline at end of file

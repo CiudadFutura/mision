@@ -1,0 +1,169 @@
+Index: app/models/compra.rb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/models/compra.rb	(date 1474422840000)
++++ app/models/compra.rb	(revision )
+@@ -25,23 +25,17 @@
+   end
+ 
+ 
+-  def self.get_last_status(sectors, delivery_id)
+-    last_status = 0
+-    sectors.each do |index, sector|
+-      if sector[:id] == Sector::CONSUMERS
+-        last_status = DeliveryStatus.where(:delivery_id => delivery_id, :sector_id => sector[:id]).order('updated_at').last
++  def self.get_last_status(delivery_id)
++   return DeliveryStatus.where(:delivery_id => delivery_id, :sector_id => Sector::CONSUMERS).order('updated_at').last
+-      end
++	end
+-    end
+-    return last_status
+ 
+-	end
+-
+ 	def prueba
+ 		self.deliveries.map do |k,v|
+ 			k.delivery_statuses.order('updated_at').last
+ 		end
+ 	end
+ 
++=begin
+   def get_deliveries
+     deliveries = {}
+     self.deliveries.map do |i|
+@@ -59,7 +53,6 @@
+           deliveries[i.circulo_id][:sectors][ds.sector_id][:status] = ds.try(:status_id)
+           deliveries[i.circulo_id][:sectors][ds.sector_id][:name] = ds.status.try(:name)
+           if ds.sector_id == Sector::CONSUMERS
+-						puts deliveries[i.circulo_id][:sorted]
+             deliveries[i.circulo_id][:sorted] =  assign_status_sort(ds.try(:status_id))
+           end
+ 
+@@ -68,6 +61,7 @@
+     end
+     deliveries.sort_by { |k, v| v[:sorted] }
+ 	end
++=end
+ 
+ 	def get_statuses
+ 		statuses = {}
+Index: app/views/compras/_status.html.erb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/views/compras/_status.html.erb	(date 1474422840000)
++++ app/views/compras/_status.html.erb	(revision )
+@@ -12,39 +12,41 @@
+     <th>Puesto</th>
+   </tr>
+   <tbody>
+-    <% @circulos.each do |circulo , d| %>
++    <% @circulos.each do |delivery| %>
+       <%
+-        status = Compra.get_last_status(d[:sectors], d[:delivery_id])
++        status = Compra.get_last_status(delivery.id)
+         status_class = status.present? ? (Status.find(status.status_id).name).split(' ').map{|s| s.downcase}.join('-') : 'inicial'
+       %>
+       <% disabled = true %>
+         <tr class="<%= "estado_#{status_class}" %>">
+-          <td><%= circulo %></td>
+-          <% d[:sectors].each do |sector_id, sector| %>
++          <td><%= delivery.circulo_id %></td>
++          <% delivery.delivery_statuses.each_with_index  do |delivery_status, index|
++						next if index > Sector.count - 1
++					%>
+               <td>
+                 <% if status_class == 'asignado'
+                      disabled = false
+                    end
+                 %>
+-                <% if sector_id == Sector::CONSUMERS %>
+-                    <%= select_tag :status_is,
++                <% if delivery_status.sector_id == Sector::CONSUMERS %>
++                    <%= select_tag delivery_status.id,
+                                    options_for_select(Status.all.map{|s| [s.name,s.id]},status.status_id),
+                                    include_blank: 'Elija Estado',
+                                    data: {
+-                                       sector_id: sector_id,
+-                                       delivery_id: d[:delivery_id],
+-                                       compra_id: @compra.id,
+-                                       status_id: sector[:status]
++                                       sector_id: delivery_status.sector_id,
++                                       delivery_id: delivery.id,
++                                       compra_id: delivery.compra_id,
++                                       status_id: delivery_status.status_id
+                                    },
+                                    class: 'select-statuses'%>
+                 <% else %>
+-                    <%= check_box_tag 'status_id', sector_id,
+-                                      sector[:status],
++                    <%= check_box_tag 'status_id', delivery_status.sector_id,
++																			delivery_status.status_id,
+                                       data: {
+-                                          sector_id: sector_id,
+-                                          delivery_id: d[:delivery_id],
+-                                          compra_id: @compra.id,
+-                                          status_id: sector[:status]
++                                          sector_id: delivery_status.sector_id,
++                                          delivery_id: delivery.id,
++                                          compra_id: delivery.compra_id,
++                                          status_id: delivery_status.status_id
+ 
+                                       },
+                                       disabled: disabled,
+@@ -57,14 +59,14 @@
+           <% end %>
+           <td><%= link_to '#',
+                           class: 'checkpointEditable editable checkpoint editable-disabled',
+-                          data: { pk: d[:delivery_id],
++                          data: { pk: delivery.id,
+                                   type: 'text',
+                                   title: 'Ingrese el Nº de puesto',
+-                                  url: delivery_path(d[:delivery_id]),
++                                  url: delivery_path(delivery.id),
+                                   name: 'checkpoint',
+-                                  value: d[:checkpoint]
++                                  value: delivery.checkpoint
+                           } do %>
+-                <%= d.try(:checkpoint)  %>
++                <%= delivery.try(:checkpoint)  %>
+             <% end %>
+           </td>
+         </tr>
+\ No newline at end of file
+Index: app/controllers/compras_controller.rb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/controllers/compras_controller.rb	(date 1474422840000)
++++ app/controllers/compras_controller.rb	(revision )
+@@ -11,7 +11,8 @@
+   # GET /compras/1
+   # GET /compras/1.json
+   def show
+-    @circulos = @compra.get_deliveries
++    @circulos = @compra.deliveries
++    puts @circulo.to_yaml
+ 		@statuses = @compra.get_statuses
+ 
+   end
+Index: app/models/delivery_status.rb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/models/delivery_status.rb	(date 1474422840000)
++++ app/models/delivery_status.rb	(revision )
+@@ -3,3 +3,7 @@
+   belongs_to :delivery
+   belongs_to :sector
+ end
++
++def get_consumers_status(delivery_id)
++	self.where(:delivery_id => delivery_id, :sector_id => Sector::CONSUMERS).order('updated_at DESC')
++end
+\ No newline at end of file

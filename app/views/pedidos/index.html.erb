@@ -77,9 +77,7 @@
 									<% end %>
 			            <% if current_usuario && current_usuario.admin? %>
 			              <td>
-				              <% if p.has_missing? %>
-						            <button class="btn btn-default disabled">Nota de Crédito</button>
-						          <% end %>
+											<%= link_to 'Crear Transacción', new_transaction_path(pedido_id:p.id), class: "btn btn-default btn-xs" %>
 			              </td>
 					        <% end %>
 			          </tr>

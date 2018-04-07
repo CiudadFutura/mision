@@ -1,0 +1,32 @@
+<div class="container fill">
+  <h3>Listado de Canastas</h3>
+  <div class="navbar navs-fixed">
+    <%= link_to t('.new', :default => t("helpers.links.new")),
+                new_canasta_path,
+                :class => 'btn btn-primary' if can? [:manage], Canasta %>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-striped table-md">
+      <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Descripción</th>
+        <th colspan="2"></th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% @canastas.each do |categoria| %>
+          <tr>
+            <td><%= categoria.id %></td>
+            <td><%= categoria.description %></td>
+            <td><%= link_to 'Modificar', edit_canasta_path(categoria), class: "btn btn-default btn-xs" %></td>
+            <td><%= link_to 'Eliminar', categoria, method: :delete, data: { confirm: 'Esta seguro?' }, class: "btn btn-danger btn-xs" %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+  <br>
+
+</div>

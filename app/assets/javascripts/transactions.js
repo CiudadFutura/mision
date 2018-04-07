@@ -10,13 +10,13 @@ $(document).ready(function () {
 		var detalle = $('#hidden-description').val();
 		$('[data-item]').each(function(i, obj) {
 			if ($(obj).find('input:checkbox:checked').length) {
-				total += $(obj).find('[data-item-total]').data('item-total');
+				total = total + parseFloat($(obj).find('[data-item-total]').data('item-total'));
 				detalle += 'Producto: '+ $(obj).find('[data-item-nombre]').data('item-nombre') + '\t' +
 				'Cantidad: '+ $(obj).find('[data-item-cantidad]').data('item-cantidad') + '\t' +
 				'Precio: '+ $(obj).find('[data-item-precio]').data('item-precio') +'\n';
 			}
 		});
-		amount.val(total.toFixed(2));
+		amount.val(total);
 		description.val(detalle);
 	});
 
