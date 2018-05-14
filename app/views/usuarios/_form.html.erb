@@ -65,6 +65,21 @@
       <div class="col-sm-10"><%= select(:usuario, :type, Usuario.types.collect {|p| [ p, p ] }, {}, { class: "form-control"}) %></div>
     </div>
   <% end %>
+  <fieldset class="form-group">
+    <div class="col-md-12">
+      <h3>Roles del Usuario</h3>
+    </div>
+  <% if current_usuario && current_usuario.admin? %>
+    <% Role.all.each do |role| %>
+      <div class="col-md-3">
+        <label><%= role.name -%>
+          <%= check_box_tag 'usuario[role_ids][]', role.id, @usuario.roles.include?(role) %>
+        </label>
+      </div>
+    <% end %>
+  <% end %>
+
+  </fieldset>
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
       <%= f.submit 'Guardar', class: 'btn btn-success' %>

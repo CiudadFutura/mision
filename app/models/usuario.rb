@@ -11,6 +11,8 @@ class Usuario < ActiveRecord::Base
 	has_many :deliveries
 	has_many :compras, :through => :deliveries
   has_many :identities
+  has_many :usuario_roles
+  has_many :roles, :through => :usuario_roles
 
   has_paper_trail
 
@@ -37,12 +39,17 @@ class Usuario < ActiveRecord::Base
     "#{apellido}, #{nombre}"
   end
 
+  def has_role?(role_sym)
+    puts role_sym
+    roles.any? { |r| r.name.underscore.to_sym == role_sym }
+  end
+
   def self.types
     [ADMIN, COORDINADOR, USUARIO, SISTEMA]
   end
 
   def admin?
-    type == ADMIN
+    self.roles.where(name: ADMIN).exists?
   end
 
   def coordinador?

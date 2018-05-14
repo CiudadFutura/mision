@@ -77,6 +77,13 @@
 									<% end %>
 								</li>
 						<% end %>
+            <% if can? [:manage], roles_path %>
+              <li>
+                <%= link_to(roles_path) do %>
+                  <span class="icon-stats"></span>Roles de usuarios
+                <% end %>
+              </li>
+            <% end %>
           </ul>
         </li>
       <% end %>

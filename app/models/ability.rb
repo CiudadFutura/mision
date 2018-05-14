@@ -6,6 +6,10 @@ class Ability
     #
     user ||= Usuario.new # guest user (not logged in)
 
+    if user.has_role? :coordinador
+      can :manage, :all
+    end
+
     if user.admin?
       can :manage, :all
     elsif user.coordinador?

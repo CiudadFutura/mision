@@ -1,0 +1,15 @@
+<div class="container fill">
+  <div class="row">
+    <div class="breadcrumb">
+      <%= link_to 'Modificar', edit_role_path(@role) %> |
+      <%= link_to 'Atras', roles_path %>
+    </div>
+    <p id="notice"><%= notice %></p>
+    <div class="col-lg-6">
+      <p>
+        <strong>Nombre:</strong>
+        <%= @role.name %>
+      </p>
+    </div>
+  </div>
+</div>

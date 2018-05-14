@@ -120,6 +120,6 @@ class CirculosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def circulo_params
-      params.require(:circulo).permit(:coordinador_id)
+      params.require(:circulo).permit(:coordinador_id, :warehouse_id)
     end
 end
