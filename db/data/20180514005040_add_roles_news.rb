@@ -1,6 +1,6 @@
 class AddRolesNews < SeedMigration::Migration
   def up
-    #if Rails.env.production?
+    if Rails.env.production?
       roles = [
         ['Admin', DateTime.now.to_date, DateTime.now.to_date],
         ['Usuario', DateTime.now.to_date, DateTime.now.to_date],
@@ -13,7 +13,7 @@ class AddRolesNews < SeedMigration::Migration
         Role.create(name: name, created_at: created, updated_at: updated)
       end
 
-    #end
+    end
 
   end
 

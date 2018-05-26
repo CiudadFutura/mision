@@ -100,9 +100,10 @@ class UsuariosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def usuario_params
-      valid_params = [ :nombre, :apellido, :email, :calle, :codigo_postal,
-        :ciudad, :pais, :tel1, :cel1, :type,  :"fecha_de_nacimiento(1i)",
-        :"fecha_de_nacimiento(2i)", :"fecha_de_nacimiento(3i)", :password, :password_confirmation, role_ids:[]]
+      valid_params = [ :nombre, :apellido, :email, :calle, :codigo_postal,:ciudad, :pais, :tel1, :cel1,
+                       :type,  :"fecha_de_nacimiento(1i)", :usuario_roles,
+        :"fecha_de_nacimiento(2i)", :"fecha_de_nacimiento(3i)", :password, :password_confirmation, role_ids:[],
+                       usuario_roles_attributes:[:usuario_id, :role_id, :warehouse_id]]
       valid_params << :circulo_id if current_usuario && current_usuario.admin?
       filtered_params = params.require(:usuario).permit(valid_params)
     end

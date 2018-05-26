@@ -13,6 +13,7 @@ class Usuario < ActiveRecord::Base
   has_many :identities
   has_many :usuario_roles
   has_many :roles, :through => :usuario_roles
+  accepts_nested_attributes_for :usuario_roles
 
   has_paper_trail
 
@@ -26,6 +27,7 @@ class Usuario < ActiveRecord::Base
   COORDINADOR = 'Coordinador'
   USUARIO = 'Usuario'
   SISTEMA = 'Sistema'
+  DIRECTOR = 'Director'
 
   def nombre
     super.nil? ? '' : super
@@ -40,12 +42,11 @@ class Usuario < ActiveRecord::Base
   end
 
   def has_role?(role_sym)
-    puts role_sym
     roles.any? { |r| r.name.underscore.to_sym == role_sym }
   end
 
   def self.types
-    [ADMIN, COORDINADOR, USUARIO, SISTEMA]
+    [ADMIN, COORDINADOR, USUARIO, SISTEMA, DIRECTOR]
   end
 
   def admin?
@@ -53,15 +54,19 @@ class Usuario < ActiveRecord::Base
   end
 
   def coordinador?
-    type == COORDINADOR
+    self.roles.where(name: COORDINADOR).exists?
+  end
+
+  def director?
+    self.roles.where(name: DIRECTOR).exists?
   end
 
   def usuario?
-    type == USUARIO
+    self.roles.where(name: USUARIO).exists?
   end
 
   def sistema?
-    type == SISTEMA
+    self.roles.where(name: SISTEMA).exists?
   end
 
   def pedido?(ciclo_de_compra)

@@ -442,6 +442,7 @@ DEPENDENCIES
   instagram
   jbuilder (~> 2.0)
   jquery-rails
+  jquery-ui-rails
   jquery-validation-rails
   koala (~> 2.0)
   less-rails (~> 2.5.0)

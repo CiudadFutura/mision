@@ -116,9 +116,23 @@ $(document).ready(function() {
 
 	$(document).on ('click', '#ajax-modal', function(e){
 		e.stopPropagation()
-	})
+	});
 
+	$('#warehouse').on('click', function(){
+	    if (this.checked){
+            $.ajax({
+                url: '/circulos/warehouse_id='+this.value,
+                type: 'GET',
+                dataType: 'json',
+                data:{
+                    'completed': this.checked
+                }
+            })
+        }else{
+	        alert('no');
+        }
 
+    });
 
 
 });

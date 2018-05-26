@@ -18,6 +18,8 @@ en:
   mini: Mini-Ciclo
   activerecord:
     models:
+      compra:
+        warehouse: Distritos
       account:
         attributes:
           status: Estado
