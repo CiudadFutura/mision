@@ -24,7 +24,7 @@
             <th>Número de pedido</th>
             <th>Fecha</th>
             <th>Ciclo</th>
-						<th>Ciclo Tipo</th>
+						<th>Pertenece</th>
             <th>Coordinador</th>
             <th>Consumidor</th>
             <th>Email</th>
@@ -46,7 +46,7 @@
 			            <td><%= p.try('id') || 'Sin ID' %></td>
 			            <td><%= l (p.try('created_at')) || 'SIN FECHA' %></td>
 			            <td><%= p.ciclo.try('nombre') || 'SIN CICLO' %></td>
-									<td><%= I18n.t(p.ciclo.tipo, :default => '')%></td>
+									<td><%= p.circulo.try('warehouse_id') ? p.circulo.warehouse.name : '' %></td>
 			            <td><%= p.circulo.try('coordinador') ? (p.circulo.coordinador.nombre + ' ' + p.circulo.coordinador.apellido) : 'SIN COORDINADOR' %></td>
 			            <td><%= (p.usuario.try('nombre') ? (p.usuario.nombre) : '---' )+ ' ' + (p.usuario.try('apellido')? (p.usuario.apellido) : '---')  %></td>
 			            <td><%= (p.usuario.try('email') ? (p.usuario.email) : '---' ) %></td>

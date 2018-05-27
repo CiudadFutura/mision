@@ -92,7 +92,6 @@ class CartsController < ApplicationController
 																											 total_line: (item.cantidad.to_i * producto.precio).to_f
 
 						)
-						pedido_details.warehouse = warehouse
 						pedido_details.save
 					end
 
