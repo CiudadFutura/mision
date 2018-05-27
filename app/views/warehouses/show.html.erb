@@ -1,2 +1,36 @@
-<h1>Warehouse#show</h1>
-<p>Find me in app/views/warehouse/show.html.erb</p>
+<div class="container fill">
+  <div class="row">
+    <div class="breadcrumb">
+      <%= link_to 'Modificar', edit_warehouse_path(@warehouse) %> |
+      <%= link_to 'Atras', warehouses_path %>
+    </div>
+    <p id="notice"><%= notice %></p>
+    <div class="col-lg-6">
+      <p>
+        <strong>Nombre:</strong>
+        <%= @warehouse.name %>
+      </p>
+
+      <p>
+        <strong>Calle:</strong>
+        <%= @warehouse.address %>
+      </p>
+      <p>
+        <strong>Teléfono:</strong>
+        <%= @warehouse.telephone%>
+      </p>
+      <p>
+        <strong>Horario:</strong>
+        <%= @warehouse.working_hours %>
+      </p>
+      <p>
+        <strong>Encargado:</strong>
+        <%= @warehouse.attendant %>
+      </p>
+      <p>
+        <strong>Descripción:</strong>
+        <%= @warehouse.description %>
+      </p>
+    </div>
+  </div>
+</div>

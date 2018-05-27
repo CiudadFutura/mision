@@ -5,6 +5,7 @@ class Circulo < ActiveRecord::Base
   belongs_to :coordinador
   has_many :pedidos
   has_many :usuarios
+  belongs_to :warehouse
 
   before_save :coordinador_valido?
 

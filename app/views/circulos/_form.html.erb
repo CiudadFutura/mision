@@ -1,4 +1,4 @@
-<%= form_for(@circulo) do |f| %>
+<%= form_for @circulo, :html => { :class => 'form-horizontal circulo' }  do |f| %>
   <% if @circulo.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@circulo.errors.count, "error") %> El Círculo no pudo ser guardado:</h2>
@@ -11,11 +11,27 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :coordinador_id %><br>
-    <%= f.number_field :coordinador_id %>
+  <div class="control-group row">
+    <%= f.label :coordinador_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :coordinador_id, class: 'form-control' %>
+    </div>
   </div>
-  <div class="actions">
-    <%= f.submit class: 'btn btn-success' %>
+  <div class="control-group row">
+    <%= f.label :warehouse, for:'warehouse', :class => 'control-label'  %>
+    <div class="controls">
+      <%= f.select(:warehouse_id,
+                   options_for_select(Warehouse.all.map{|s| [s.name,s.id]},@circulo[:warehouse_id]),
+                   { include_blank: 'Elija Distrito a retirar'},
+                   class: 'form-control') %>
+    </div>
+    <%= error_span(@circulo[:warehouse_id]) %>
+  </div>
+  <br>
+  <br>
+  <div class="control-group row">
+    <div class="offset-sm-2 col-sm-10">
+      <%= f.submit class: 'btn btn-success' %>
+    </div>
   </div>
 <% end %>

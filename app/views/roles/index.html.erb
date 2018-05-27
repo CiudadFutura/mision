@@ -1,0 +1,31 @@
+<div class="container fill">
+  <h3>Listado de Roles de Usuarios</h3>
+  <div class="navbar navs-fixed">
+    <%= link_to t('.new', :default => t("helpers.links.new")),
+                new_role_path,
+                :class => 'btn btn-primary' if can? [:manage], Role %>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-striped table-md">
+      <thead>
+      <tr>
+        <th>#</th>
+        <th>Nombre</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% @roles.each do |role| %>
+        <tr>
+          <td><%= role.id %></td>
+          <td><%= role.name %></td>
+          <td><%= link_to 'Modificar', edit_role_path(role), class: "btn btn-default btn-xs" %></td>
+          <td><%= link_to 'Eliminar', role, method: :delete, data: { confirm: 'Esta seguro?' }, class: "btn btn-danger btn-xs" %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+  <br>
+
+</div>

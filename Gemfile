@@ -73,6 +73,7 @@ gem 'bootstrap-editable-rails'
 
 # JQuery validate
 gem 'jquery-validation-rails'
+gem 'jquery-ui-rails'
 
 # full calendar
 gem 'fullcalendar-rails'
