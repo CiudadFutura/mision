@@ -54,7 +54,8 @@ class Usuario < ActiveRecord::Base
   end
 
   def coordinador?
-    self.roles.where(name: COORDINADOR).exists?
+    #self.roles.where(name: COORDINADOR).exists?
+    type == COORDINADOR
   end
 
   def director?
@@ -62,11 +63,13 @@ class Usuario < ActiveRecord::Base
   end
 
   def usuario?
-    self.roles.where(name: USUARIO).exists?
+    #self.roles.where(name: USUARIO).exists?
+    type == USUARIO
   end
 
   def sistema?
-    self.roles.where(name: SISTEMA).exists?
+    #self.roles.where(name: SISTEMA).exists?
+    type == SISTEMA
   end
 
   def pedido?(ciclo_de_compra)

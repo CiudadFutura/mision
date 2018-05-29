@@ -1,0 +1,12 @@
+<% if @circulos%>
+  <% @circulos.all.each do |circulo| %>
+    <tr>
+      <td><%= circulo.id %></td>
+      <td><%= circulo.try('coordinador').try('nombre_completo') || 'Sin Coordinador' %></td>
+      <td><%= circulo.warehouse.present? ? circulo.warehouse.name : '--'%></td>
+
+      <td><%= check_box_tag "compra[circulo_ids][]", circulo.id %></td>
+
+    </tr>
+  <% end %>
+<% end %>

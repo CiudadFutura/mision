@@ -33,6 +33,9 @@ Rails.application.routes.draw do
     post 'add_usuario', to: 'circulos#add_usuario', as: :add_usuario
     delete 'remove_usuario/:usuario_id', to: 'circulos#remove_usuario', as: :remove_usuario
     post 'abandonar', to: 'circulos#abandonar', as: :abandonar
+    collection do
+      get :search
+    end
 	end
 	get 'circulos/remito_circulo/:circulo_id/compra=:compra_id', to: 'circulos#remito_circulo', as: :remito_circulo
 

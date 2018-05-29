@@ -118,18 +118,19 @@ $(document).ready(function() {
 		e.stopPropagation()
 	});
 
-	$('#warehouse').on('click', function(){
+	$('[id*="warehouse_"]').on('click', function(){
 	    if (this.checked){
             $.ajax({
-                url: '/circulos/warehouse_id='+this.value,
-                type: 'GET',
-                dataType: 'json',
+                method: "GET",
+                url: '/circulos/search',
                 data:{
-                    'completed': this.checked
+                    'completed': this.checked,
+                    'warehouse_id': this.value
                 }
             })
-        }else{
-	        alert('no');
+                .done(function( data ) {
+                    $("#circulos_items").html(data);
+                });
         }
 
     });

@@ -79,10 +79,13 @@
       <% end %>
 
     </fieldset>
-    <%= f.fields_for :usuario_roles, @usuario.usuario_roles.build do |r| %>
-      <%= r.label :warehouse_id %>
-      <%= r.select :warehouse_id, Warehouse.all.map{|s| [s.name,s.id]} %>
+    <% if 1 == 0 %>
+      <%= f.fields_for :usuario_roles, @usuario.usuario_roles.build do |r| %>
+        <%= r.label :warehouse_id %>
+        <%= r.select :warehouse_id, Warehouse.all.map{|s| [s.name,s.id]} %>
+      <% end %>
     <% end %>
+
   <% end %>
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
