@@ -1,21 +1,5 @@
 <div id="content-circulos" class="<%= 'hide' if @compra.tipo == 'free' or @compra.tipo == 'mini' %> ">
   <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title">Distritos</h3>
-    </div>
-    <div class="panel-body">
-
-      <% Warehouse.all.each do |warehouse| %>
-        <div class="col-md-3">
-          <label><%= warehouse.name -%>
-            <%= check_box_tag "warehouse_#{warehouse.id}", warehouse.id %>
-          </label>
-        </div>
-      <% end %>
-    </div>
-    <div class="panel-footer"></div>
-  </div>
-  <div class="panel panel-default">
 		<div class="panel-heading">
 			<h3 class="panel-title">Círculos</h3>
 		</div>
@@ -31,9 +15,20 @@
 				</tr>
 				</thead>
 
-				<tbody id="circulos_items">
-          <%= render partial: 'show_circles', locals: {circulos: @circulos} %>
-				</tbody>
+        <tbody>
+          <% Circulo.all.each do |circulo| %>
+            <tr>
+              <td><%= circulo.id %></td>
+              <td><%= circulo.try('coordinador').try('nombre_completo') || 'Sin Coordinador' %></td>
+              <td><%= circulo.warehouse.present? ? circulo.warehouse.name : '--'%></td>
+              <% if @circulos.present? %>
+                <td><%= check_box_tag "compra[circulo_ids][]", circulo.id, @circulos.has_key?(circulo.id) %></td>
+              <% else %>
+                <td><%= check_box_tag "compra[circulo_ids][]", circulo.id, @compra.circulos.include?(circulo) %></td>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
 			</table>
 		</div>
 		<div class="panel-footer"></div>

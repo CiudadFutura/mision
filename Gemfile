@@ -46,6 +46,8 @@ gem 'figaro'
 # Charts js
 gem 'chart-js-rails', '~> 0.1.4'
 
+gem 'thin', '~> 1.7', '>= 1.7.2'
+
 group :development do
   # Spring speeds up development by keeping your application running in the
   # background.
