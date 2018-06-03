@@ -53,7 +53,7 @@ class Pedido < ActiveRecord::Base
 
   def self.pedidos_ciclos
     pedidos_por_ciclos = Pedido.joins(:ciclo)
-                  .select('compras.*, max(pedidos.created_at) as most_recent, count(pedidos.id) as orders_count')
+                  .('compras.*, max(pedidos.created_at) as most_recent, count(pedidos.id) as orders_count')
                   .group('pedidos.compra_id')
     return pedidos_por_ciclos
   end
@@ -134,8 +134,8 @@ class Pedido < ActiveRecord::Base
               'Cantidad']
       all.each do |pedido|
 
-        if pedido.pedidos_details.first.present? && pedido.pedidos_details.first.warehouse.present?
-          warehouse = Warehouse.find(pedido.pedidos_details.first.warehouse).name
+        if pedido.warehouse_id.present?
+          warehouse = Warehouse.find(pedido.warehouse_id).name
         end
 
 				transaction = Transaction.find_by_pedido_id(pedido.id)
