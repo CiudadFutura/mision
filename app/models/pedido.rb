@@ -53,7 +53,7 @@ class Pedido < ActiveRecord::Base
 
   def self.pedidos_ciclos
     pedidos_por_ciclos = Pedido.joins(:ciclo)
-                  .('compras.*, max(pedidos.created_at) as most_recent, count(pedidos.id) as orders_count')
+                  .select('compras.*, max(pedidos.created_at) as most_recent, count(pedidos.id) as orders_count')
                   .group('pedidos.compra_id')
     return pedidos_por_ciclos
   end
