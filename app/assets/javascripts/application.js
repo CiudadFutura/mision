@@ -91,13 +91,25 @@
     });
   });
 
+    $('[id*="usuario_role_ids_"]').on('click', function(){
+
+        var label=$(this).prop("labels");
+        var text = $(label).text();
+
+        if ( text.trim() == 'Coordinador' ){
+
+            $('#emails-invitados').show();
+        }else{
+
+            $('#emails-invitados').hide();
+        }
+
+    });
+
+
   $('#emails-invitados').hide();
-  $('#usuario_type_coordinador').click(function () {
-    $('#emails-invitados').show();
-  });
-  $('#usuario_type_usuario').click(function () {
-    $('#emails-invitados').hide();
-  });
+
+
     $('#finalizar').on('click',function() {
         $(this).attr("disabled", "disabled"); }
     );

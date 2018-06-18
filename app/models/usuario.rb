@@ -54,8 +54,7 @@ class Usuario < ActiveRecord::Base
   end
 
   def coordinador?
-    #self.roles.where(name: COORDINADOR).exists?
-    type == COORDINADOR
+    self.roles.where(name: COORDINADOR).exists?
   end
 
   def director?
@@ -63,8 +62,7 @@ class Usuario < ActiveRecord::Base
   end
 
   def usuario?
-    #self.roles.where(name: USUARIO).exists?
-    type == USUARIO
+    self.roles.where(name: USUARIO).exists?
   end
 
   def sistema?
