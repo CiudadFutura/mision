@@ -22,10 +22,11 @@
 //= require jquery.validate
 //= require jquery.validate.additional-methods
 //= require jquery-ui/widgets/autocomplete
+//= require autocomplete-rails
 //= require Chart.min
 
 
-		$(document).ready(function () {
+$(document).ready(function () {
 
   $('button[data-action]').click(function (event) {
     event.preventDefault();

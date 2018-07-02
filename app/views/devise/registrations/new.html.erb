@@ -100,7 +100,7 @@
           <br>
           <%= f.fields_for :warehouse_id, @usuario.usuario_roles.build do |r| %>
             <%= r.label 'Seleccion el Distrito en dónde retirará sus pedidos' %>
-            <%= r.select :warehouse_id, Warehouse.all.map{|s| [s.name + " (#{s.address})",s.id]},
+            <%= r.select :warehouse_id, Warehouse.all.map{|s| [s.name + " | #{s.address}",s.id]},
                          {:include_blank => 'Seleccione...'}, class:'form-control', id:'warehouses' %>
           <% end %>
 

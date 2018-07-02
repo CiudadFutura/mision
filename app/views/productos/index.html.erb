@@ -61,6 +61,10 @@
 					</div>
 					<br>
 				</div>
+        <div class="products-search">
+          <input type="text" id="products-search-txt" autofocus>
+          <div class="results" id="products-search-results"></div>
+        </div>
       <% end %>
 			<% if @freesale.present? && @ciclo_actual.present? %>
 				<% if @ciclo_actual.tipo == 'free'%>
@@ -83,3 +87,8 @@
   </div> <!--close row -->
 </div> <!--close containt fill-->
 
+<script>
+    $(function() {
+        new app.Products();
+    });
+</script>

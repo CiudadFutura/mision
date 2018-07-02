@@ -58,6 +58,8 @@ Rails.application.routes.draw do
     collection { post 'upload' }
     collection { put 'edit_multiple' }
 		delete 'delete/:id', to: 'productos#delete', as: :delete
+    collection{get :bundle}
+    get :autocomplete_producto_nombre, :on => :collection
   end
 
   get '/auth/:provider/callback', to: 'sessions#create', as: :social_session

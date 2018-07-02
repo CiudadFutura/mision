@@ -3,6 +3,7 @@ class Producto < ActiveRecord::Base
   has_and_belongs_to_many :categorias
   belongs_to :supplier
   has_many :transaction_details
+  has_many :bundle_products
 
   validates :codigo, uniqueness: true
   #validates :supplier, presence: true
@@ -61,6 +62,10 @@ class Producto < ActiveRecord::Base
     else
       0.0
     end
+  end
+
+  def self.search(term)
+    where('LOWER(nombre) LIKE :term OR LOWER(descripcion) LIKE :term', term: "%#{term.downcase}%")
   end
 
 

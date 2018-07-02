@@ -194,6 +194,7 @@
       </div>
     </div>
   </div>
+
   <fieldset class="form-group">
 	  <div class="col-md-12">
 		  <h3>Categorías</h3>
@@ -207,6 +208,28 @@
     </div>
     <% end %>
 
+  </fieldset>
+  <fieldset class="form-group">
+    <div class="col-sm-12">
+      <div class="form-group">
+        <%= @producto.product_type.blank? %>
+<br>
+        <%= f.radio_button :product_type, 0, :checked => @producto.product_type.blank? %>
+        <%= f.label :product_type, 'Común'%>
+        <%= f.radio_button :product_type, 1,
+                           :checked => @producto.product_type == '1',
+                           :data => {
+                             url: bundle_productos_path,
+                             :remote => true
+                           }%>
+        <%= f.label :product_type, 'Canasta'%>
+
+      </div>
+      <div id="bundle"></div>
+      <% if (@producto.product_type == '1') %>
+        <p>esta</p>
+      <% end %>
+    </div>
   </fieldset>
   <%= f.submit nil, :class => 'btn btn-primary' %>
   <%= link_to t('.cancel', :default => t('helpers.links.cancel')),

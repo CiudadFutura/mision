@@ -1,5 +1,7 @@
 class ProductosController < ApplicationController
-  before_action :set_producto, only: [:show, :edit, :update, :destroy]
+  before_action :set_producto, only: [ :edit, :update, :destroy]
+  autocomplete :producto, :nombre, :extra_data =>[:cantidad_permitida, :precio, :precio_super, :descripcion]
+  # autocomplete :producto, :set_producto, :ful => true
 
   # GET /productos
   # GET /productos.json
@@ -46,6 +48,7 @@ class ProductosController < ApplicationController
   # GET /productos/1
   # GET /productos/1.json
   def show
+    puts params.to_yaml
     # todo: Se sigue usando???
     # @cart_action = @producto.cart_action(session)
   end
@@ -116,10 +119,20 @@ class ProductosController < ApplicationController
     end
   end
 
+  def search
+    @productos = Producto.search(params[:term])
+    render 'search.json'
+  end
+
+  def bundle
+    respond_to do |format|
+      format.js
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_producto
-
       @producto = Producto.find(params[:id])
     end
 
@@ -130,6 +143,6 @@ class ProductosController < ApplicationController
                                        :pack, :faltante,:cantidad_permitida, :imagen, :stock,
                                        :orden_remito, :view_type,
 																			 :sale_type,
-                                       categoria_ids: [])
+                                       categoria_ids: [], bundle_prducts: [])
     end
 end
