@@ -70,45 +70,7 @@ $(function () {
 	})
 });
 
-var app = window.app = {};
 
-app.Products = function () {
-    this._input = $('#products-search-txt');
-    this._initAutocomplete();
-}
-
-app.Products.prototype = {
-    _initAutocomplete: function() {
-        this._input
-            .autocomplete({
-                source: '/productos/search',
-                appendTo: '#products-search-results',
-                select: $.proxy(this._select, this)
-                })
-            .autocomplete('instance')._renderItem = $.proxy(this._render, this);
-    },
-
-    _select: function(e, ui) {
-        debugger;
-        this._input.val(ui.item.nombre + ' - ' + ui.item.precio);
-        return false;
-    },
-
-    _render: function(ul, item) {
-        var markup = [
-            '<span class="img">',
-            '<img src="' + item.imagen + '" />',
-            '</span>',
-            '<span class="title">' + item.nombre + '</span>',
-            '<span class="author">' + item.codigo + '</span>',
-            '<span class="price">' + item.precio + '</span>'
-        ];
-        return $('<li>')
-            .append(markup.join(''))
-            .appendTo(ul);
-    }
-
-};
 
 
 

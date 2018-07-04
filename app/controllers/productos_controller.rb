@@ -124,7 +124,7 @@ class ProductosController < ApplicationController
     render 'search.json'
   end
 
-  def bundle
+  def bundle_item
     respond_to do |format|
       format.js
     end
