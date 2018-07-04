@@ -22,7 +22,7 @@
               <td><%= usuario.id %></td>
               <td><%= usuario.nombre %></td>
               <td><%= usuario.apellido %></td>
-              <td><%= usuario.try('roles').first.name %></td>
+              <td><%= usuario.roles.present? ? usuario.roles.first.name : "--" %></td>
               <td><%= usuario.try('circulo').try('warehouse_id') ? usuario.circulo.warehouse.name: '' %></td>
               <td><%= link_to 'Ver', usuario, class: 'btn btn-info btn-mini' %></td>
               <td><%= link_to 'Modificar', edit_usuario_path(usuario), class: 'btn btn-warning btn-mini' %></td>

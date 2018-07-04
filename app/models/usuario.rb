@@ -145,7 +145,7 @@ class Usuario < ActiveRecord::Base
           usuario.calle || "--",
           usuario.try('circulo').try('id') || "sin circulo",
           usuario.circulo.try('warehouse_id') ? usuario.circulo.warehouse.name : '' ,
-          usuario.roles.first.name || "--",
+          usuario.roles.present? ? usuario.roles.first.name : "--",
           usuario.created_at.present? ? usuario.created_at.strftime("%d-%m-%Y") : "--",
           usuario.last_sign_in_at.present? ? usuario.last_sign_in_at.strftime("%d-%m-%Y") : "--"
         ]
