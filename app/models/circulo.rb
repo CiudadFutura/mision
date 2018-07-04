@@ -27,7 +27,7 @@ class Circulo < ActiveRecord::Base
 
   def self.to_csv
     CSV.generate do |csv|
-      csv << ['Circulo N°', 'Coordinador', 'Coordinador Email', 'Tel/Cel']
+      csv << ['Circulo N°', 'Coordinador', 'Coordinador Email', 'Distrito', 'Tel/Cel']
       all.each do |circulo|
         coord = Usuario.find_by_id(circulo.coordinador_id)
         if coord.present?
@@ -35,6 +35,7 @@ class Circulo < ActiveRecord::Base
               circulo.id,
               "#{coord.apellido}, #{coord.nombre},",
               coord.email,
+              circulo.try('warehouse_id') ? circulo.warehouse.name : '',
               "#{coord.tel1} / #{coord.cel1}"
           ]
         end
