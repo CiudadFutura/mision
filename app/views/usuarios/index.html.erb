@@ -23,7 +23,7 @@
               <td><%= usuario.nombre %></td>
               <td><%= usuario.apellido %></td>
               <td><%= usuario.roles.first.name %></td>
-              <td><%= usuario.try('circulo').try('warehouse_id') ? usuario.circulo.warehouse.name : '' %></td>
+              <td><%= usuario.try('circulo').try('warehouse_id') ? usuario.circulo.id : '' %></td>
               <td><%= link_to 'Ver', usuario, class: 'btn btn-info btn-mini' %></td>
               <td><%= link_to 'Modificar', edit_usuario_path(usuario), class: 'btn btn-warning btn-mini' %></td>
               <td><%= link_to 'Eliminar', usuario, method: :delete, data: { confirm: 'Esta seguro?' }, class: 'btn btn-danger btn-mini' %></td>
