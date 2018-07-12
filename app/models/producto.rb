@@ -4,6 +4,7 @@ class Producto < ActiveRecord::Base
   belongs_to :supplier
   has_many :transaction_details
   has_many :bundle_products
+  accepts_nested_attributes_for :bundle_products
 
   validates :codigo, uniqueness: true
   #validates :supplier, presence: true
@@ -30,6 +31,12 @@ class Producto < ActiveRecord::Base
 
   def default_cantidad_permitida
     self.cantidad_permitida ||= 10
+  end
+
+  def self.build
+    producto = self.new
+    producto.bundle_products.build
+    producto
   end
 
   def cart_action(session)
@@ -66,6 +73,11 @@ class Producto < ActiveRecord::Base
 
   def self.search(term)
     where('LOWER(nombre) LIKE :term OR LOWER(descripcion) LIKE :term', term: "%#{term.downcase}%")
+  end
+
+  def bundle_products_for_form
+    collection = bundle_products.where(item_id: id)
+    collection.any? ? collection : bundle_products.build
   end
 
 

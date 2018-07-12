@@ -59,6 +59,7 @@ Rails.application.routes.draw do
     collection { put 'edit_multiple' }
 		delete 'delete/:id', to: 'productos#delete', as: :delete
     collection { get :bundle }
+    collection { get :bundle_item }
     get :autocomplete_producto_nombre, :on => :collection
   end
 

@@ -1,5 +1,5 @@
 class ProductosController < ApplicationController
-  before_action :set_producto, only: [ :edit, :update, :destroy]
+  before_action :set_producto, only: [ :edit, :update, :destroy, :show]
   autocomplete :producto, :nombre, :extra_data =>[:cantidad_permitida, :precio, :precio_super, :descripcion]
   # autocomplete :producto, :set_producto, :ful => true
 
@@ -48,7 +48,6 @@ class ProductosController < ApplicationController
   # GET /productos/1
   # GET /productos/1.json
   def show
-    puts params.to_yaml
     # todo: Se sigue usando???
     # @cart_action = @producto.cart_action(session)
   end
@@ -56,6 +55,7 @@ class ProductosController < ApplicationController
   # GET /productos/new
   def new
     @producto = Producto.new
+    @producto.bundle_products.build
   end
 
   # GET /productos/1/edit
@@ -108,7 +108,7 @@ class ProductosController < ApplicationController
     @productos.each do |producto|
       producto.update_attributes(:faltante => true)
     end
-    flash[:notice] = "Updated productos!"
+    flash[:notice] = 'Productos actualizados!'
     redirect_to remitos_pedido_index_path
 	end
 
@@ -125,9 +125,13 @@ class ProductosController < ApplicationController
   end
 
   def bundle_item
-    respond_to do |format|
-      format.js
-    end
+    @items= Producto.find(params[:id])
+    render 'bundle_item.json'
+  end
+
+  def add_bundle_product
+    @producto = Producto.build
+    render 'add_bundle_product', layout: false
   end
 
   private
@@ -141,8 +145,9 @@ class ProductosController < ApplicationController
       params.require(:producto).permit(:precio, :nombre, :codigo, :descripcion, :orden,
                                        :precio_super, :highlight, :oculto, :marca, :supplier_id,
                                        :pack, :faltante,:cantidad_permitida, :imagen, :stock,
-                                       :orden_remito, :view_type,
+                                       :orden_remito, :view_type, :product_type,
 																			 :sale_type,
-                                       categoria_ids: [], bundle_prducts: [])
+                                       bundle_products_attributes: [:id, :item_id, :qty, :description],
+                                       categoria_ids: [])
     end
 end

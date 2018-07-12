@@ -1,0 +1,37 @@
+<%= javascript_include_tag 'product_bundle' %>
+<div id="bundle" style="<%= 'display:none' if @producto.product_type != 1 %>">
+  <div class="row">
+    <div class="products-search">
+      <%= hidden_field_tag :producto_id, '', id: 'my_producto_id' %>
+      <%= autocomplete_field_tag 'search', '',autocomplete_producto_nombre_productos_path, :id_element => '#my_producto_id', 'data-auto-focus' => true %>
+      <%= link_to '#', :class => 'btn btn-primary', :disabled =>'disabled', :id => 'addItem', :remote => true  do %>
+        <span id="span">
+          <i class="glyphicon glyphicon-plus"></i>
+          Agregar producto
+        </span>
+      <% end %>
+
+    </div>
+  </div>
+
+  <%= f.fields_for :bundle_products, child_index: Time.now.to_i do |bundle| %>
+    <%= bundle.text_field :item_id %>
+    <%= bundle.text_field :qty %>
+    <%= bundle.text_field :description %>
+    <%= link_to "Remove", "#", id: :remove_bundle_product, data: { i: :child_index} %>
+  <% end %>
+  <table class="table table-striped" id="bundleItems">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Producto</th>
+      <th scope="col">Codigo</th>
+      <th scope="col">Precio</th>
+      <th scope="col">Cantidad</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+  </table>
+</div>

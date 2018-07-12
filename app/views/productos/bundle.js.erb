@@ -1,1 +1,1 @@
-$("#bundle").append('<%= escape_javascript(render 'productos/products_bundle') %>');
+$("#bundle").append('<%= escape_javascript(render partial: 'productos/products_bundle', :locals => { :f =>builder}) %>');
