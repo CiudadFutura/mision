@@ -38,7 +38,18 @@
 							mclass ||=  'missing' if @missing.key?(item.producto.id.to_s) %>
 						<tr class="cart-item <%="#{mclass} "%>">
 							<td><%= item.cantidad.to_i %> x</td>
-							<td><%= item.producto.nombre %></td>
+							<td>
+                <%= item.producto.nombre %>
+                <% if item.producto.product_type == 1 %>
+                  <br>
+                  <% item.producto.bundle_products.each do |bundle| %>
+                    <% prod = Producto.find(bundle.item_id) %>
+                    <li>
+                      <small><i><%=prod.nombre%></i></small>
+                    </li>
+                  <% end %>
+                <% end %>
+              </td>
 							<td><%= item.producto.codigo %></td>
 							<td><%= number_to_currency(item.producto.precio) %></td>
 							<td><%= number_to_currency(item.total) %></td>
