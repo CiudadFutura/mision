@@ -12,11 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require twitter/bootstrap
 //= require undercore
 //= require gmaps/google
-//= require bootstrap-editable
-//= require bootstrap-editable-rails
 //= require moment
 //= require fullcalendar
 //= require jquery.validate
@@ -24,6 +21,8 @@
 //= require jquery-ui/widgets/autocomplete
 //= require autocomplete-rails
 //= require Chart.min
+//= require bootstrap-sprockets
+//= require jquery.flexslider-min
 
 
 $(document).ready(function () {

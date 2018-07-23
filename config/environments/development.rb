@@ -37,14 +37,14 @@ Rails.application.configure do
   config.action_view.raise_on_missing_translations = true
 
   #Token for json in product view
-  config.secret_mai_token = ENV["TOKEN_MAI_GET"].present?
+  config.secret_mai_token = ENV['TOKEN_MAI_GET'].present?
 
 
   config.action_mailer.delivery_method = :smtp
 	config.action_mailer.smtp_settings = { :address => "localhost", :port => 1025 }
 
-	config.action_controller.asset_host = "http://0.0.0.0:3000"
-	config.action_mailer.asset_host  = "http://0.0.0.0:3000"
+	config.action_controller.asset_host = 'http://0.0.0.0:3000'
+	config.action_mailer.asset_host  = 'http://0.0.0.0:3000'
 
 	config.action_mailer.default_url_options = { :host => '0.0.0.0:3000' }
 =begin
@@ -57,6 +57,7 @@ Rails.application.configure do
       user_name: ENV["GMAIL_USERNAME"],
       password: ENV["GMAIL_PASSWORD"]
   }
+
 
 	config.action_mailer.smtp_settings = {
 			:address                          => 'smtp.zoho.com',

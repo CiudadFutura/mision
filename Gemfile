@@ -6,11 +6,11 @@ gem 'rails', '4.2.10'
 gem 'mysql2', '~> 0.4.10'
 
 gem 'therubyracer',  platforms: :ruby
-# Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
-gem 'sprockets', '2.11.3'
-gem 'less-rails', '~> 2.5.0'
-# https://github.com/seyhunak/twitter-bootstrap-rails
-gem 'twitter-bootstrap-rails', '3.2.0'
+
+#bootstrap sass
+gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
+gem 'sass-rails', '~> 5.0', '>= 5.0.4'
+
 # https://github.com/carrierwaveuploader/carrierwave
 gem 'carrierwave'
 gem 'mini_magick'
@@ -22,6 +22,9 @@ gem 'uglifier', '>= 1.3.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+
+# Flex Slider
+gem 'flexslider', '~> 2.2'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
