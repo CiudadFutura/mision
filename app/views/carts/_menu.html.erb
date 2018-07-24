@@ -42,6 +42,7 @@
                         class:  (params[:categoria_id].to_i == c[:id]) ? 'navbar-link active' : 'navbar-link') do %>
                 <span class="glyphicon icon-<%=cat %> pull-left"></span><%= c[:nombre]%>
             <% end %>
+          </li>
 
       <% end %>
   <% end -%>
