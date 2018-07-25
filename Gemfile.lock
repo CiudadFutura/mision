@@ -139,6 +139,8 @@ GEM
       thor (~> 0.14)
     flexslider (2.2.0)
       sass-rails (>= 3.1.0)
+    font-awesome-rails (4.7.0.4)
+      railties (>= 3.2, < 6.0)
     fullcalendar-rails (3.9.0.0)
       jquery-rails (>= 4.0.5, < 5.0.0)
       jquery-ui-rails (>= 5.0.2)
@@ -438,6 +440,7 @@ DEPENDENCIES
   factory_bot
   figaro
   flexslider (~> 2.2)
+  font-awesome-rails (~> 4.3)
   fullcalendar-rails
   geocoder
   gmaps4rails

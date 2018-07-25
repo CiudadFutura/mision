@@ -51,6 +51,9 @@ gem 'chart-js-rails', '~> 0.1.4'
 
 gem 'thin', '~> 1.7', '>= 1.7.2'
 
+# Font awesome
+gem 'font-awesome-rails', '~> 4.3'
+
 group :development do
   # Spring speeds up development by keeping your application running in the
   # background.
