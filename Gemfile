@@ -64,12 +64,6 @@ group :development do
   gem 'rails_best_practices'
 end
 
-# Use Capistrano for deployment
-gem 'capistrano', '~> 3.4.1'
-gem 'capistrano-bundler', '~> 1.1.2'
-gem 'capistrano-rails', '~> 1.1.1'
-gem 'capistrano-rvm', github: "capistrano/rvm"
-
 # Google Maps integration
 gem 'coffee-rails'
 gem 'gmaps4rails'
@@ -101,7 +95,13 @@ gem 'instagram'
 gem 'omniauth-google-oauth2'
 gem 'google-api-client', '~> 0.7.1'
 
-group :development, :test do
+group :development do
+  # Use Capistrano for deployment
+  gem 'capistrano', '~> 3.11', require: false
+  gem 'capistrano-rvm', '~> 0.1.2', require: false
+  gem 'capistrano-rails', '~> 1.4', require: false
+  gem 'capistrano-bundler', '~> 1.3', require: false
+
   gem 'sqlite3'
   gem 'pry', '~> 0.11.3'
   gem 'pry-remote'
@@ -115,3 +115,7 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'factory_bot'
 end
+
+gem 'puma', '~> 3.11', '>= 3.11.4'
+
+

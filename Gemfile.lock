@@ -1,11 +1,3 @@
-GIT
-  remote: git://github.com/capistrano/rvm.git
-  revision: 9cfef39cf0022839dca6b5b330dfefeb5fc363e7
-  specs:
-    capistrano-rvm (0.1.2)
-      capistrano (~> 3.0)
-      sshkit (~> 1.2)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -45,6 +37,8 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
+    airbrussh (1.3.0)
+      sshkit (>= 1.6.1, != 1.7.0)
     arel (6.0.4)
     autoparse (0.3.3)
       addressable (>= 2.3.1)
@@ -72,17 +66,21 @@ GEM
     byebug (4.0.5)
       columnize (= 0.9.0)
     cancan (1.6.10)
-    capistrano (3.4.1)
+    capistrano (3.11.0)
+      airbrussh (>= 1.0.0)
       i18n
       rake (>= 10.0.0)
-      sshkit (~> 1.3)
-    capistrano-bundler (1.1.4)
+      sshkit (>= 1.9.0)
+    capistrano-bundler (1.3.0)
       capistrano (~> 3.1)
       sshkit (~> 1.2)
-    capistrano-rails (1.1.8)
+    capistrano-rails (1.4.0)
       capistrano (~> 3.1)
       capistrano-bundler (~> 1.1)
-    capybara (3.4.1)
+    capistrano-rvm (0.1.2)
+      capistrano (~> 3.0)
+      sshkit (~> 1.2)
+    capybara (3.4.2)
       addressable
       mini_mime (>= 0.1.3)
       nokogiri (~> 1.8)
@@ -267,6 +265,7 @@ GEM
       binding_of_caller (>= 0.7)
       pry (>= 0.9.11)
     public_suffix (3.0.2)
+    puma (3.12.0)
     rack (1.6.10)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -291,7 +290,7 @@ GEM
       loofah (~> 2.2, >= 2.2.2)
     rails-jquery-autocomplete (1.0.4)
       rails (>= 3.2)
-    rails_best_practices (1.19.2)
+    rails_best_practices (1.19.3)
       activesupport
       code_analyzer (>= 0.4.8)
       erubis
@@ -404,7 +403,7 @@ GEM
       simple_oauth (~> 0.3.0)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
-    uglifier (4.1.15)
+    uglifier (4.1.16)
       execjs (>= 0.3.0, < 3)
     unf (0.1.4)
       unf_ext
@@ -427,10 +426,10 @@ DEPENDENCIES
   bootstrap-sass (~> 3.3, >= 3.3.7)
   byebug (~> 4.0, >= 4.0.5)
   cancan
-  capistrano (~> 3.4.1)
-  capistrano-bundler (~> 1.1.2)
-  capistrano-rails (~> 1.1.1)
-  capistrano-rvm!
+  capistrano (~> 3.11)
+  capistrano-bundler (~> 1.3)
+  capistrano-rails (~> 1.4)
+  capistrano-rvm (~> 0.1.2)
   capybara
   carrierwave
   chart-js-rails (~> 0.1.4)
@@ -465,6 +464,7 @@ DEPENDENCIES
   pry-rails
   pry-remote
   pry-stack_explorer
+  puma (~> 3.11, >= 3.11.4)
   rails (= 4.2.10)
   rails-jquery-autocomplete (~> 1.0, >= 1.0.3)
   rails_best_practices
