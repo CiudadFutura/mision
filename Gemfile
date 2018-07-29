@@ -95,12 +95,13 @@ gem 'instagram'
 gem 'omniauth-google-oauth2'
 gem 'google-api-client', '~> 0.7.1'
 
-group :development do
+group :development, :test do
   # Use Capistrano for deployment
   gem 'capistrano', '~> 3.11', require: false
   gem 'capistrano-rvm', '~> 0.1.2', require: false
   gem 'capistrano-rails', '~> 1.4', require: false
   gem 'capistrano-bundler', '~> 1.3', require: false
+  gem 'capistrano3-puma',   require: false
 
   gem 'sqlite3'
   gem 'pry', '~> 0.11.3'
