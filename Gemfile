@@ -102,6 +102,7 @@ group :development, :test do
   gem 'capistrano-rails', '~> 1.4', require: false
   gem 'capistrano-bundler', '~> 1.3', require: false
   gem 'capistrano3-puma',   require: false
+  gem 'capistrano-passenger', '~> 0.0.5'
 
   gem 'sqlite3'
   gem 'pry', '~> 0.11.3'
