@@ -21,16 +21,17 @@
 //= require fullcalendar
 //= require jquery.validate
 //= require jquery.validate.additional-methods
+//= require jquery.validate.localization/messages_es
 //= require jquery-ui/widgets/autocomplete
 //= require Chart.min
 
 
-		$(document).ready(function () {
+$(document).ready(function () {
 
   $('button[data-action]').click(function (event) {
     event.preventDefault();
 
-	  var addToCartTimeout;
+    var addToCartTimeout;
 
     var that = $(this);
 
@@ -42,9 +43,9 @@
     var action = that.data('action');
     var productId = that.data('productid');
     var url = 'cart/' + action + '/' + productId;
-	  var new_class = '';
-	  var old_class = '';
-	  var message_box = '';
+    var new_class = '';
+    var old_class = '';
+    var message_box = '';
 
     if (action === 'add') {
       //Add a new item to cart
@@ -75,11 +76,11 @@
       that.data('action', new_action);
 	    that.removeClass(old_class);
 	    that.addClass(new_class);
-			if (action ==='add'){
-				$('#js-message-success').show().find('#js-message-product').html(that.prev('select.cantidad').val());
-			}else{
-				$('#js-message-delete').show();
-			}
+            if (action ==='add'){
+                $('#js-message-success').show().find('#js-message-product').html(that.prev('select.cantidad').val());
+            }else{
+                $('#js-message-delete').show();
+            }
 
 	    addToCartTimeout = setTimeout(function () {
 		    if (action ==='add'){
@@ -91,25 +92,22 @@
     });
   });
 
-    $('[id*="usuario_role_ids_"]').on('click', function(){
+  $('[id*="usuario_role_ids_"]').on('click', function(){
 
-        var label=$(this).prop("labels");
-        var text = $(label).text();
+    var label=$(this).prop("labels");
+    var text = $(label).text();
 
-        if ( text.trim() == 'Coordinador' ){
+    if ( text.trim() == 'Coordinador' ){
 
-            $('#emails-invitados').show();
-        }else{
+      $('#emails-invitados').show();
+    }else{
 
-            $('#emails-invitados').hide();
-        }
+      $('#emails-invitados').hide();
+    }
 
-    });
-
+  });
 
   $('#emails-invitados').hide();
-
-
     $('#finalizar').on('click',function() {
         $(this).attr("disabled", "disabled"); }
     );

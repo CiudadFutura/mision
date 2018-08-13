@@ -23,63 +23,10 @@
 
 		    <p>Todos los campos son <strong>requeridos</strong></p>
 
-			  <div class="form-group row">
-			    <label class="col-md-3" for="tipo">Tipo de usuario: <span>[requerido]</span></label>
-			    <div class="col-md-9">
-            <% Role.all.each do |role| %>
-              <% if role.name == 'Coordinador' || role.name == 'Usuario' %>
-                <div class="radio">
-                  <label>
-                    <%= radio_button_tag 'usuario[role_ids][]', role.id, (role.name == 'Usuario') %>
-                    <%= role.name -%>
-                  </label>
-                </div>
-              <% end %>
-            <% end %>
-			    </div>
-			  </div>
-		    <div class="form-group">
-		      <label for="nombre">Nombre: <span>[requerido]</span></label>
-		      <%= f.text_field :nombre, class: 'form-control' %>
-		    </div>
-		    <div class="form-group">
-		      <label for="apellido">Apellido: <span>[requerido]</span></label>
-		      <%= f.text_field :apellido, class: 'form-control' %>
-		    </div>
 		    <div class="form-group">
 		      <label for="email1">Correo Electrónico: <span>[requerido]</span></label>
-		      <%= f.email_field :email, autofocus: true, class: 'form-control' %>
+		      <%= f.email_field :email, autofocus: true, class: 'form-control', :require => true%>
 		      <p class="help-block">ejemplo: tucorreo@gmail.com</p>
-		    </div>
-		    <div class="form-group">
-		      <label for="fecha_de_nacimiento">Fecha de nacimiento: <span>[requerido]</span></label>
-		      <%= f.date_select :fecha_de_nacimiento, { start_year: 1900 }, { class: 'form-control'} %>
-		      <p class="help-block">ejemplo: dd/mm/aaaa - 11/07/1977</p>
-		    </div>
-		    <div class="form-group">
-		      <label for="dni">D.N.I.: <span>[requerido]</span></label>
-		      <%= f.text_field :dni, class: 'form-control' %>
-		    </div>
-		    <div class="form-group">
-		      <label for="domicilio">Domicilio: <span>[requerido]</span></label>
-		      <%= f.text_field :calle, class: 'form-control' %>
-		      <p class="help-block">ejemplo: Calle Nº Piso Depto.</p>
-		    </div>
-		    <div class="form-group">
-		      <label for="localidad">Localidad: <span>[requerido]</span></label>
-		      <%= f.text_field :ciudad, class: 'form-control' %>
-		    </div>
-		    <div class="form-group">
-		      <label for="codigo_postal">Cod. Postal: <span>[requerido]</span></label>
-		      <%= f.text_field :codigo_postal, class: 'form-control' %>
-		    </div>
-		    <div class="form-group">
-		      <label for="telefono">Teléfono: </label>
-		      <%= f.text_field :tel1, class: 'form-control' %>
-		    </div>
-		    <div class="form-group">
-		      <label for="celular">Celular:</label>
-		      <%= f.text_field :cel1, class: 'form-control' %>
 		    </div>
 		    <div class="form-group">
 		      <label for="passOne">Contraseña: <span>[requerido]</span></label>
@@ -90,21 +37,6 @@
 		      <label for="passTwo">Repetir Contraseña: <span>[requerido]</span></label>
 		      <%= f.password_field :password_confirmation, autocomplete: "off",  class: 'form-control' %>
 		    </div>
-		    <div class="form-group" id="emails-invitados">
-		      <label>Enviar invitación a los sig. usuarios:</label>
-		      <input id="email_invitado_1" name="email_invitado_1" type="email" class="form-control" placeholder="Email invitado 1" />
-		      <input id="email_invitado_2" name="email_invitado_2" type="email" class="form-control" placeholder="Email invitado 2" />
-		      <input id="email_invitado_3" name="email_invitado_3" type="email" class="form-control" placeholder="Email invitado 3" />
-		      <input id="email_invitado_4" name="email_invitado_4" type="email" class="form-control" placeholder="Email invitado 4" />
-          <br>
-          <br>
-          <%= f.fields_for :warehouse_id, @usuario.usuario_roles.build do |r| %>
-            <%= r.label 'Seleccion el Distrito en dónde retirará sus pedidos' %>
-            <%= r.select :warehouse_id, Warehouse.all.map{|s| [s.name + " (#{s.address})",s.id]},
-                         {:include_blank => 'Seleccione...'}, class:'form-control', id:'warehouses' %>
-          <% end %>
-
-		    </div>
 		     <div class="form-group">
 		      <input type="checkbox" checked="" name="terminos" id="term">
 		      <label for="term" style="line-height: 26px; padding-top: 24px">
@@ -112,7 +44,7 @@
 		      </label>
 		    </div>
 		    <div class="form-group">
-		      <div><%= f.submit "Registrate", class: 'btn btn-success pull-right ' %></div>
+		      <div><%= f.submit 'Registrate', class: 'btn btn-success pull-right ' %></div>
 		    </div>
 		  </div>
 		<% end %>

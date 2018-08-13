@@ -117,7 +117,15 @@
             <tbody>
               <% @usuario.circulo.usuarios.each do |u| %>
                 <tr <%= (u == current_usuario) ? 'class=strong' : '' %> >
-                  <td><%= u.type %></td>
+                  <td>
+                    <% if u.roles.present? %>
+                      <% u.roles.each do |role| %>
+                        <li><small><%= role.name %></small></li>
+                      <% end %>
+                    <% else %>
+                      Sin Rol
+                    <% end %>
+                  </td>
                   <td><%= u.nombre %></td>
                   <td><%= u.apellido %></td>
                   <td><%= u.id %></td>

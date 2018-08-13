@@ -5,6 +5,9 @@ class Usuario < ActiveRecord::Base
   devise :confirmable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  validates_format_of :email,:with => Devise.email_regexp
+  validates_uniqueness_of :email
+
   belongs_to :circulo
   has_many :pedidos
   has_one :account
@@ -14,6 +17,7 @@ class Usuario < ActiveRecord::Base
   has_many :usuario_roles
   has_many :roles, :through => :usuario_roles
   accepts_nested_attributes_for :usuario_roles
+  accepts_nested_attributes_for :circulo
 
   has_paper_trail
 

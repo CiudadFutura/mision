@@ -23,6 +23,7 @@ class UsuariosController < ApplicationController
 
   # GET /usuarios/new
   def new
+    puts 'entro'
     @usuario = Usuario.new
   end
 
@@ -103,6 +104,7 @@ class UsuariosController < ApplicationController
       valid_params = [ :nombre, :apellido, :email, :calle, :codigo_postal,:ciudad, :pais, :tel1, :cel1,
                        :type,  :"fecha_de_nacimiento(1i)", :usuario_roles,
         :"fecha_de_nacimiento(2i)", :"fecha_de_nacimiento(3i)", :password, :password_confirmation, role_ids:[],
+                       circulo_attributes:[:coordinador_id, :warehouse_id],
                        usuario_roles_attributes:[:usuario_id, :role_id, :warehouse_id]]
       valid_params << :circulo_id if current_usuario && current_usuario.admin?
       filtered_params = params.require(:usuario).permit(valid_params)

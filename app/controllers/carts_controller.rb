@@ -7,7 +7,7 @@ class CartsController < ApplicationController
   def show
     @ciclo_actual = Compra::ciclo_actual
     @missing = @carrito.check_item_stock
-    if usuario_signed_in? && !current_usuario.admin?
+    if usuario_signed_in?
         @transactions = Transaction.where(["account_id = :id and pedido_id is null", {id: current_usuario.account.id }])
     end
   end
