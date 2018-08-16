@@ -12,8 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require twitter/bootstrap
-//= require undercore
+//= require bootstrap-sprockets
+//= require jquery.flexslider-min
 //= require gmaps/google
 //= require bootstrap-editable
 //= require bootstrap-editable-rails
@@ -24,9 +24,20 @@
 //= require jquery.validate.localization/messages_es
 //= require jquery-ui/widgets/autocomplete
 //= require Chart.min
+//= require_tree .
 
 
 $(document).ready(function () {
+
+    var navoffeset=$(".agileits_header").offset().top;
+    $(window).scroll(function(){
+        var scrollpos=$(window).scrollTop();
+        if(scrollpos >=navoffeset){
+            $(".agileits_header").addClass("fixed");
+        }else{
+            $(".agileits_header").removeClass("fixed");
+        }
+    });
 
   $('button[data-action]').click(function (event) {
     event.preventDefault();
@@ -111,4 +122,13 @@ $(document).ready(function () {
     $('#finalizar').on('click',function() {
         $(this).attr("disabled", "disabled"); }
     );
+});
+
+$(window).load(function(){
+    $('.flexslider').flexslider({
+        animation: "slide",
+        start: function(slider){
+            $('body').removeClass('loading');
+        }
+    });
 });

@@ -1,4 +1,6 @@
-<%= javascript_include_tag 'home' %>
+<%=render 'home/menu_banner' %>
+<%=render 'home/featured' %>
+<%=render 'home/offers' %>
 <div class="container fill">
   <% if @cycles.present? %>
     <div class="row">

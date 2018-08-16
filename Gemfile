@@ -6,11 +6,11 @@ gem 'rails', '4.2.10'
 gem 'mysql2', '~> 0.4.10'
 
 gem 'therubyracer',  platforms: :ruby
-# Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
-gem 'sprockets', '2.11.3'
-gem 'less-rails', '~> 2.5.0'
-# https://github.com/seyhunak/twitter-bootstrap-rails
-gem 'twitter-bootstrap-rails', '3.2.0'
+
+# Rails Sass gem
+gem 'bootstrap-sass', '~> 3.3.7'
+gem 'sass-rails', '>= 3.2'
+
 # https://github.com/carrierwaveuploader/carrierwave
 gem 'carrierwave'
 gem 'mini_magick'
@@ -47,6 +47,9 @@ gem 'figaro'
 gem 'chart-js-rails', '~> 0.1.4'
 
 gem 'thin', '~> 1.7', '>= 1.7.2'
+
+# Flex slider
+gem 'flexslider', '~> 2.2'
 
 group :development do
   # Spring speeds up development by keeping your application running in the

@@ -1,5 +1,4 @@
 class HomeController < ApplicationController
-  layout 'layout'
 
   def index
     user_type = current_usuario.nil? ? 'Guess' : current_usuario.type
