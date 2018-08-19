@@ -1,3 +1,43 @@
+<div class="w3l_banner_nav_left">
+  <%=render 'layouts/menu' %>
+</div>
+<div class="w3l_banner_nav_right">
+  <div class="clearfix"></div>
+  <div class="w3_login">
+    <h3>Iniciar sesión & Registrarse</h3>
+    <div class="w3_login_module">
+      <div class="module form-module">
+        <div class="toggle"><i class="fa fa-times fa-pencil"></i>
+          <div class="tooltip">Clickeame</div>
+        </div>
+        <div class="form">
+          <h2>Ingresar a Tú cuenta</h2>
+          <form action="#" method="post">
+            <input type="text" name="Username" placeholder="Email" required=" ">
+            <input type="password" name="Password" placeholder="Password" required=" ">
+            <input type="submit" value="Ingresar">
+          </form>
+        </div>
+        <div class="form">
+          <h2>Create an account</h2>
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name), role: 'form') do |f| %>
+            <input type="text" name="Username" placeholder="Username" required=" ">
+            <input type="password" name="Password" placeholder="Password" required=" ">
+            <input type="email" name="Email" placeholder="Email Address" required=" ">
+            <input type="text" name="Phone" placeholder="Phone Number" required=" ">
+            <input type="submit" value="Register">
+          <% end %>
+        </div>
+        <div class="cta"><a href="#">Olvidé mi contraseña</a></div>
+      </div>
+    </div>
+
+  </div>
+  <!-- //login -->
+</div>
+
+
+
 <div class="container fill registration">
   <div class="row">
 	  <div class="col-md-6">
@@ -994,3 +1034,16 @@
     </div>
   </div>
 </div>
+<script>
+    $('.toggle').click(function(){
+        // Switches the Icon
+        $(this).children('i').toggleClass('fa-pencil');
+        // Switches the forms
+        $('.form').animate({
+            height: "toggle",
+            'padding-top': 'toggle',
+            'padding-bottom': 'toggle',
+            opacity: "toggle"
+        }, "slow");
+    });
+</script>

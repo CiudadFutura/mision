@@ -1,11 +1,11 @@
 <!-- header -->
 <div class="agileits_header">
   <div class="w3l_offers">
-    <a href="products.html">Today's special Offers !</a>
+    <a href="products.html">Ciudad Futura</a>
   </div>
   <div class="w3l_search">
     <form action="#" method="post">
-      <input type="text" name="Product" value="Search a product..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search a product...';}" required="">
+      <input type="text" name="Product" value="Buscar producto..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search a product...';}" required="">
       <input type="submit" value=" ">
     </form>
   </div>
@@ -25,8 +25,14 @@
         <div class="mega-dropdown-menu">
           <div class="w3ls_vegetables">
             <ul class="dropdown-menu drp-mnu">
-              <li><a href="login.html">Login</a></li>
-              <li><a href="login.html">Sign Up</a></li>
+              <li>
+                <a href="login.html">Ingresar</a>
+              </li>
+              <li>
+                <%= link_to(new_usuario_registration_path) do %>
+                  Registrate
+                <% end %>
+              </li>
             </ul>
           </div>
         </div>
@@ -41,12 +47,20 @@
 <div class="logo_products">
   <div class="container">
     <div class="w3ls_logo_products_left">
-      <h1><a href="index.html"><span>Grocery</span> Store</a></h1>
+      <h1><a href="/"><span>Grocery</span> Store</a></h1>
     </div>
     <div class="w3ls_logo_products_left1">
       <ul class="special_items">
-        <li><a href="events.html">Events</a><i>/</i></li>
-        <li><a href="about.html">About Us</a><i>/</i></li>
+        <li>
+          <%= link_to(compras_path) do %>
+            Ciclos <i>/</i>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to(como_compro_path(1)) do %>
+            Cómo comprar <i>/</i>
+          <% end %>
+        </li>
         <li><a href="products.html">Best Deals</a><i>/</i></li>
         <li><a href="services.html">Services</a></li>
       </ul>
@@ -61,3 +75,4 @@
   </div>
 </div>
 <!-- //header -->
+<%= render 'layouts/breadcumb' %>

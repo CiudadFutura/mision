@@ -1,159 +1,48 @@
-<nav class="navbar navbar-default">
-  <div class="container">
-    <ul class="nav navbar-nav navbar-left">
-      <% if can? [:manage], categorias_path %>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-            <i class="glyphicon glyphicon-chevron-down"></i> Menu
-          </a>
-          <ul class="dropdown-menu" role="menu">
-            <% if can? [:manage], circulos_path %>
-              <li>
-                <%= link_to(circulos_path) do %>
-                  <span class="icon-cogs"></span>Circulos
-                <% end %>
-              </li>
+<nav class="navbar nav_bottom">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header nav_2">
+    <button type="button" class="navbar-toggle collapsed navbar-toggle1" data-toggle="collapse" data-target="#bs-megadropdown-tabs">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
+    <ul class="nav navbar-nav nav_1">
+      <% @categorias_menu.each do |c| %>
+        <% if c[:subcategorias].present? %>
+
+          <li class="dropdown mega-dropdown active">
+            <%= link_to '#', class: 'dropdown-toggle', title: '', data: { toggle: 'dropdown'} do %>
+              <%= c[:nombre] %><span class="caret"></span>
             <% end %>
-            <% if can? [:manage], categorias_path %>
-              <li>
-                <%= link_to(categorias_path) do %>
-                  <span class="icon-key2"></span>Categorías
-                <% end %>
-              </li>
-            <% end %>
-            <% if can? [:manage], compras_path %>
-              <li>
-                <%= link_to(compras_path) do %>
-                  <span class="icon-key2"></span>Ciclos
-                <% end %>
-              </li>
-            <% end %>
-            <% if can? [:manage], suppliers_path %>
-              <li>
-                <%= link_to(suppliers_path) do %>
-                  <span class="icon-key2"></span>Proveedores
-                <% end %>
-              </li>
-            <% end %>
-            <% if can? [:manage], usuarios_path %>
-              <li>
-                <%= link_to(usuarios_path) do %>
-                  <span class="icon-key2"></span>Usuarios
-                <% end %>
-              </li>
-            <% end %>
-            <% if can? [:manage], geo_reports_path %>
-              <li>
-                <%= link_to(geo_reports_path) do %>
-                  <span class="icon-stats"></span>Mapa Reporte
-                <% end %>
-              </li>
-            <% end %>
-            <% if can? [:manage], reports_path %>
-              <li>
-                <%= link_to(reports_path) do %>
-                  <span class="icon-stats"></span>Productos por Prov.
-                <% end %>
-              </li>
-            <% end %>
-            <% if can? [:manage], pedidos_path %>
-              <li>
-                <%= link_to(remitos_pedido_index_path) do %>
-                  <span class="icon-stats"></span>Remitos
-                <% end %>
-              </li>
-            <% end %>
-            <% if can? [:manage], sectors_path %>
-                <li>
-                  <%= link_to(sectors_path) do %>
-                      <span class="icon-stats"></span>Sectores
+            <div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu">
+              <div class="w3ls_vegetables">
+                <ul>
+                  <% c[:subcategorias].each do |sm| %>
+                    <li>
+                      <%= link_to sm[:nombre],
+                                  productos_path(categoria_id: c[:id], subcategoria_id: sm[:id]),
+                                  :class => ('active' if params[:subcategoria_id].to_i == sm[:id])
+                      %>
+                    </li>
                   <% end %>
-                </li>
-            <% end %>
-						<% if can? [:manage], warehouses_path %>
-								<li>
-									<%= link_to(warehouses_path) do %>
-											<span class="icon-stats"></span>Depósitos
-									<% end %>
-								</li>
-						<% end %>
-            <% if can? [:manage], roles_path %>
-              <li>
-                <%= link_to(roles_path) do %>
-                  <span class="icon-stats"></span>Roles de usuarios
-                <% end %>
-              </li>
-            <% end %>
-          </ul>
-        </li>
-      <% end %>
+                </ul>
+              </div>
+            </div>
+          </li>
 
-      <% if usuario_signed_in? %>
-        <li>
-          <% if can? [:manage], pedidos_path %>
-            <%= link_to(pedidos_path) do %>
-              <span class="glyphicon glyphicon-list-alt"></span>Pedidos
+        <% else %>
+          <li>
+            <%= link_to productos_path(categoria_id: c[:id]) do %>
+              <%= c[:nombre] %>
             <% end %>
-          <% else %>
-              <%= link_to(pedidos_path) do %>
-                <span class="glyphicon glyphicon-list-alt"></span>Mis Pedidos
-              <% end %>
-          <% end %>
-        </li>
-      <% end %>
-      <% if can? [:manage], accounts_path %>
-        <li>
-					<%= link_to(accounts_path) do %>
-            <span class="glyphicon glyphicon-briefcase"></span>Cuentas Corrientes
-          <% end %>
-        </li>
-      <% end %>
+          </li>
 
-    </ul>
-
-    <ul class="nav navbar-nav navbar-right">
-      <li>
-        <%= link_to(como_compro_path(1)) do %>
-          <span class="glyphicon glyphicon-tag"></span>Cómo Compro?
         <% end %>
-      </li>
-			<li>
-				<%= link_to(productos_path(featured: 'true')) do %>
-						<span class="icon-tienda glyphicon"></span>Tienda
-				<% end %>
-			</li>
-      <li>
-        <%= link_to(suppliers_path()) do %>
-          <span class="glyphicon glyphicon-leaf"></span>Productores
-        <% end %>
-      </li>
-      <% if usuario_signed_in? %>
-        <li class="divider"></li>
-        <li>
-          <%= link_to(usuario_path(current_usuario)) do %>
-            <span class="glyphicon glyphicon-user"></span>Mis Datos
-          <% end %>
-        </li>
-        <li class="divider"></li>
-        <li>
-          <%= link_to(destroy_usuario_session_path, method: 'delete') do %>
-            <span class="	glyphicon glyphicon-log-out"></span>Cerrar Sesión
-          <% end %>
-        </li>
-      <% else %>
-        <li>
-          <%= link_to(new_usuario_registration_path) do %>
-            <span class="icon-registrate glyphicon"></span>Registrate
-          <% end %>
-        </li>
-        <li>
-          <%= link_to(new_usuario_session_path) do %>
-            <span class="icon-ingresa glyphicon"></span>Ingresa
-          <% end %>
-        </li>
-
       <% end %>
     </ul>
-    <%= yield(:cart_menu) %>
-  </div><!-- /.container-fluid -->
+  </div><!-- /.navbar-collapse -->
 </nav>

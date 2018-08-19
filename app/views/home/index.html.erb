@@ -1,4 +1,10 @@
-<%=render 'home/menu_banner' %>
+<div class="w3l_banner_nav_left">
+  <%=render 'layouts/menu' %>
+</div>
+<div class="w3l_banner_nav_right">
+  <%= render 'home/banner' %>
+</div>
+<div class="clearfix"></div>
 <%=render 'home/featured' %>
 <%=render 'home/offers' %>
 <div class="container fill">
@@ -33,11 +39,4 @@
       </div>
     </div>
   <% end %>
-	<div class="row">
-		<div class="col-xs-12 col-md-12 text-center">
-			<div class="col-xs-12 col-md-12">
-				<%= image_tag 'pieza.png', class: 'img-responsive center-block'%>
-			</div>
-		</div>
-	</div>
 </div>
