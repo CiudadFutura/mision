@@ -14,7 +14,7 @@
       <fieldset>
         <input type="hidden" name="cmd" value="_cart" />
         <input type="hidden" name="display" value="1" />
-        <input type="submit" name="submit" value="View your cart" class="button" />
+        <input type="submit" name="submit" value="Ver mi carrito" class="button" />
       </fieldset>
     </form>
   </div>
@@ -26,7 +26,9 @@
           <div class="w3ls_vegetables">
             <ul class="dropdown-menu drp-mnu">
               <li>
-                <a href="login.html">Ingresar</a>
+                <%= link_to(usuario_session_path) do %>
+                  Ingresar
+                <% end %>
               </li>
               <li>
                 <%= link_to(new_usuario_registration_path) do %>
@@ -40,7 +42,7 @@
     </ul>
   </div>
   <div class="w3l_header_right1">
-    <h2><a href="mail.html">Contact Us</a></h2>
+    <h2><a href="mail.html">Contacto</a></h2>
   </div>
   <div class="clearfix"> </div>
 </div>
@@ -61,7 +63,11 @@
             Cómo comprar <i>/</i>
           <% end %>
         </li>
-        <li><a href="products.html">Best Deals</a><i>/</i></li>
+        <li>
+          <%= link_to(suppliers_path()) do %>
+            Productores
+          <% end %>
+          <i>/</i></li>
         <li><a href="services.html">Services</a></li>
       </ul>
     </div>
@@ -75,4 +81,3 @@
   </div>
 </div>
 <!-- //header -->
-<%= render 'layouts/breadcumb' %>

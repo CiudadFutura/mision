@@ -1,94 +1,65 @@
+<% content_for :title, 'Registrarse' %>
+<% navigation_add 'Registrarse', '#' %>
 <div class="w3l_banner_nav_left">
   <%=render 'layouts/menu' %>
 </div>
 <div class="w3l_banner_nav_right">
   <div class="clearfix"></div>
   <div class="w3_login">
-    <h3>Iniciar sesión & Registrarse</h3>
+    <h3>Registrarse</h3>
     <div class="w3_login_module">
       <div class="module form-module">
-        <div class="toggle"><i class="fa fa-times fa-pencil"></i>
-          <div class="tooltip">Clickeame</div>
+        <div class="toggle">
+
         </div>
         <div class="form">
-          <h2>Ingresar a Tú cuenta</h2>
-          <form action="#" method="post">
-            <input type="text" name="Username" placeholder="Email" required=" ">
-            <input type="password" name="Password" placeholder="Password" required=" ">
-            <input type="submit" value="Ingresar">
-          </form>
-        </div>
-        <div class="form">
-          <h2>Create an account</h2>
+          <h2>Crear mi cuenta</h2>
           <%= form_for(resource, as: resource_name, url: registration_path(resource_name), role: 'form') do |f| %>
-            <input type="text" name="Username" placeholder="Username" required=" ">
-            <input type="password" name="Password" placeholder="Password" required=" ">
-            <input type="email" name="Email" placeholder="Email Address" required=" ">
-            <input type="text" name="Phone" placeholder="Phone Number" required=" ">
-            <input type="submit" value="Register">
+
+            <div class="form-group">
+              <label for="email">Correo Electrónico: <span>[requerido]</span></label>
+              <%= f.email_field :email, autofocus: true, class: 'form-control',
+                                :require => true, placeholder: 'ejemplo: tucorreo@gmail.com'%>
+            </div>
+
+            <div class="form-group">
+              <label for="passOne">Contraseña: <span>[requerido]</span></label>
+              <%= f.password_field :password, autocomplete: "off",  class: 'form-control',
+                                   :require => true, placeholder: '8 (ocho) caracteres como mínimo'%>
+            </div>
+            <div class="form-group">
+              <label for="passTwo">Repetir Contraseña: <span>[requerido]</span></label>
+              <%= f.password_field :password_confirmation, autocomplete: 'off',  class: 'form-control',
+                                   :require => true, placeholder: 'repita su password'%>
+            </div>
+            <div class="form-group">
+              <input type="checkbox" checked="" name="terminos" id="term">
+              <label for="term" style="line-height: 26px; padding-top: 24px">
+                Acepto los <a class="btn-link" data-toggle="modal" data-target="#terminos">términos y condiciones.</a>
+              </label>
+            </div>
+            <div class="form-group">
+              <div><%= f.submit 'Registrate', class: 'btn btn-success pull-right ' %></div>
+            </div>
+
           <% end %>
+          <br>
+          <br>
+        </div>
+        <div class="form">
+
         </div>
         <div class="cta"><a href="#">Olvidé mi contraseña</a></div>
       </div>
     </div>
 
   </div>
-  <!-- //login -->
 </div>
 
 
 
 <div class="container fill registration">
-  <div class="row">
-	  <div class="col-md-6">
 
-	    <h1>Completa con tus datos y sé parte de la Misión</h1>
-
-	    <p>
-	      Una vez completado el formulario, un email te será enviado para confirmar tu casilla de correo. Sigue el link que aparece en el correo recibido para activar tu cuenta.
-	    </p>
-	    <p>
-	      Con tu cuenta activada estas a un paso de poder realizar tu pedido.
-	    </p>
-	    <p>
-	      Ingresa al sitio y consulta en MIS DATOS (opción del menu) tu numero de identificación. Comunicaselo al coordinador de tu círculo para que este te haga parte del mismo y puedas enviar tu pedido!
-	    </p>
-	  </div>
-
-		<%= form_for(resource, as: resource_name, url: registration_path(resource_name), role: 'form') do |f| %>
-		  <%= devise_error_messages! %>
-			<div class="col-md-6">
-
-		    <h3>Consumidor Colaborativo</h3>
-
-		    <p>Todos los campos son <strong>requeridos</strong></p>
-
-		    <div class="form-group">
-		      <label for="email1">Correo Electrónico: <span>[requerido]</span></label>
-		      <%= f.email_field :email, autofocus: true, class: 'form-control', :require => true%>
-		      <p class="help-block">ejemplo: tucorreo@gmail.com</p>
-		    </div>
-		    <div class="form-group">
-		      <label for="passOne">Contraseña: <span>[requerido]</span></label>
-		      <%= f.password_field :password, autocomplete: "off",  class: 'form-control' %>
-		      <p class="help-block">* 8 (ocho) caracteres como mínimo</p>
-		    </div>
-		    <div class="form-group">
-		      <label for="passTwo">Repetir Contraseña: <span>[requerido]</span></label>
-		      <%= f.password_field :password_confirmation, autocomplete: "off",  class: 'form-control' %>
-		    </div>
-		     <div class="form-group">
-		      <input type="checkbox" checked="" name="terminos" id="term">
-		      <label for="term" style="line-height: 26px; padding-top: 24px">
-		        Acepto los <a class="btn-link" data-toggle="modal" data-target="#terminos">términos y condiciones.</a>
-		      </label>
-		    </div>
-		    <div class="form-group">
-		      <div><%= f.submit 'Registrate', class: 'btn btn-success pull-right ' %></div>
-		    </div>
-		  </div>
-		<% end %>
-  </div>
 </div>
 
 <!--modal términos y condiciones-->
@@ -1034,16 +1005,3 @@
     </div>
   </div>
 </div>
-<script>
-    $('.toggle').click(function(){
-        // Switches the Icon
-        $(this).children('i').toggleClass('fa-pencil');
-        // Switches the forms
-        $('.form').animate({
-            height: "toggle",
-            'padding-top': 'toggle',
-            'padding-bottom': 'toggle',
-            opacity: "toggle"
-        }, "slow");
-    });
-</script>

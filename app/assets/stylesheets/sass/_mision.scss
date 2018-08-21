@@ -89,7 +89,7 @@ input[type="submit"],#PPMiniCart .minicart-submit,.w3ls_vegetables ul li a,input
   color: #fff;
   text-decoration: none;
   padding: .5em 3em;
-  background: #84C639;
+  background: #a30101;
   display:block;
 }
 .w3l_search{
@@ -132,7 +132,7 @@ input[type="submit"],#PPMiniCart .minicart-submit,.w3ls_vegetables ul li a,input
   font-size: .74em;
   color: #fff;
   padding: .5em 1.5em;
-  background: #FA1818;
+  background: #a30101;
   display: block;
   text-decoration:none;
 }
@@ -158,7 +158,7 @@ ul.dropdown-menu.drp-mnu li a i {
 }
 .w3ls_logo_products_left{
   float:left;
-  margin-right: 7em;
+  margin-right: 5em;
 }
 .w3ls_logo_products_left h1 a{
   font-size: 1.5em;
@@ -1206,7 +1206,7 @@ button.submit.check_out{
 /*-- products-breadcrumb --*/
 .products-breadcrumb{
   padding:1em 0;
-  background:#84C639;
+  background:#b82025;
 }
 .products-breadcrumb ul li{
   display:inline-block;
@@ -2727,44 +2727,7 @@ input.checkbox:checked:after {
 .w3_login_module{
   min-height: 475px;
 }
-.form-module .toggle {
-  cursor: pointer;
-  position: absolute;
-  top: -0;
-  right: -0;
-  background:#FA1818;
-  width: 30px;
-  height: 30px;
-  margin: -5px 0 0;
-  color: #ffffff;
-  font-size: 12px;
-  line-height: 30px;
-  text-align: center;
-}
-.form-module .toggle .tooltip {
-  position: absolute;
-  top: 5px;
-  right: -75px;
-  display: block;
-  background: rgba(0, 0, 0, 0.6);
-  width: auto;
-  padding: 5px;
-  font-size: 12px;
-  line-height: 1;
-  text-transform: uppercase;
-  opacity: 1;
-  font-family: 'Ubuntu', sans-serif !important;
-}
-.form-module .toggle .tooltip:before {
-  content: '';
-  position: absolute;
-  top: 5px;
-  left: -5px;
-  display: block;
-  border-top: 5px solid transparent;
-  border-bottom: 5px solid transparent;
-  border-right: 5px solid rgba(0, 0, 0, 0.6);
-}
+
 .form-module .form {
   display: none;
   padding: 40px;

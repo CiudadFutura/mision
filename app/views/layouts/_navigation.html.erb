@@ -1,0 +1,17 @@
+<div class="products-breadcrumb">
+  <div class="container">
+    <ul>
+      <% nav.each do |n| %>
+        <% unless n.equal? nav.last %>
+          <li>
+            <i class="fa fa-home" aria-hidden="true"></i>
+            <%= link_to n[:title], n[:url] %>
+            <span>|</span></li>
+          </li>
+        <% else %>
+          <li><%= n[:title] %></li>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+</div>
