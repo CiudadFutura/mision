@@ -13,7 +13,6 @@
 
         </div>
         <div class="form">
-          <h2>Crear mi cuenta</h2>
           <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 
             <fieldset class="form-group">
@@ -42,14 +41,14 @@
         <div class="form">
 
         </div>
-        <div class="cta"><a href="#">Olvidé mi contraseña</a></div>
+        <div class="cta">
+          <%= render "devise/shared/links" %>
+        </div>
       </div>
     </div>
 
   </div>
 </div>
-<%= render "devise/shared/links" %>
-
 
 <div class="container fill registration">
 

@@ -1225,11 +1225,18 @@ button.submit.check_out{
 }
 .products-breadcrumb ul li i {
   padding-right: 1em;
-  color:#FA1818;
+  color:#FFF;
 }
 /*-- //products-breadcrumb --*/
 /*-- products --*/
-.w3l_banner_nav_right_banner3,.w3l_banner_nav_right_banner4,.w3l_banner_nav_right_banner5,.w3l_banner_nav_right_banner6,.w3l_banner_nav_right_banner7,.w3l_banner_nav_right_banner8,.w3l_banner_nav_right_banner9,.w3l_banner_nav_right_banner10{
+.w3l_banner_nav_right_banner3,
+.w3l_banner_nav_right_banner4,
+.w3l_banner_nav_right_banner5,
+.w3l_banner_nav_right_banner6,
+.w3l_banner_nav_right_banner7,
+.w3l_banner_nav_right_banner8,
+.w3l_banner_nav_right_banner9,
+.w3l_banner_nav_right_banner10{
   min-height:300px;
   padding-top: 7em;
 }
@@ -2731,6 +2738,11 @@ input.checkbox:checked:after {
 .form-module .form {
   display: none;
   padding: 40px;
+  label{
+    span{
+      color: #FA1818;
+    }
+  }
 }
 .form-module .form:nth-child(2) {
   display: block;
