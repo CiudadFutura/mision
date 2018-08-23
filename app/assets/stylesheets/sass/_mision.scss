@@ -38,6 +38,13 @@ body a:hover{
 span.glyphicon.glyphicon-shopping-cart.my-cart-icon.my-cart-icon-affix {
   position: relative !important;
 }
+.error{
+  label {
+    color: #FA1818 ;
+    font-size: small;
+  }
+
+}
 .btn-danger {
   color: #fff;
   background-color: #FA1818;

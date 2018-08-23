@@ -1,3 +1,4 @@
+<%= javascript_include_tag 'sign_up' %>
 <% content_for :title, 'Registrarse' %>
 <% navigation_add 'Registrarse', '#' %>
 <div class="w3l_banner_nav_left">
@@ -18,18 +19,18 @@
 
             <div class="form-group">
               <label for="email">Correo Electrónico <span>*</span></label>
-              <%= f.email_field :email, autofocus: true, class: 'form-control',
+              <%= f.email_field :email, autofocus: true, class: 'form-control required',
                                 :require => true, placeholder: 'ejemplo: tucorreo@gmail.com'%>
             </div>
 
             <div class="form-group">
               <label for="passOne">Contraseña <span>*</span></label>
-              <%= f.password_field :password, autocomplete: "off",  class: 'form-control',
+              <%= f.password_field :password, autocomplete: 'off',  class: 'form-control required',
                                    :require => true, placeholder: '8 (ocho) caracteres como mínimo'%>
             </div>
             <div class="form-group">
               <label for="passTwo">Repetir Contraseña <span>*</span></label>
-              <%= f.password_field :password_confirmation, autocomplete: 'off',  class: 'form-control',
+              <%= f.password_field :password_confirmation, autocomplete: 'off',  class: 'form-control required',
                                    :require => true, placeholder: 'repita su password'%>
             </div>
             <div class="form-group">
@@ -1007,3 +1008,6 @@
     </div>
   </div>
 </div>
+<script>
+
+</script>

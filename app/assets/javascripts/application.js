@@ -24,7 +24,7 @@
 //= require jquery.validate.localization/messages_es
 //= require jquery-ui/widgets/autocomplete
 //= require Chart.min
-//= require_tree .
+//= require turbolinks
 
 
 $(document).ready(function () {
