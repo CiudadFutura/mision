@@ -44,7 +44,15 @@
   <body>
 	    <%= render 'layouts/header'%>
       <%= render_navigation %>
-	    <%= yield %>
+      <div class="banner">
+        <div class="w3l_banner_nav_left">
+          <%= render 'layouts/menu' %>
+        </div>
+        <div class="w3l_banner_nav_right">
+          <%= yield %>
+        </div>
+        <div class="clearfix"></div>
+      </div>
 	  <%= render 'layouts/footer' %>
   </body>
 </html>

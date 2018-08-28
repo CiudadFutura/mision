@@ -1,85 +1,86 @@
 <%= javascript_include_tag "productos", params[:controller] %>
+<% content_for :title, 'Productos' %>
+<% navigation_add 'Almacen', '#' %>
 <%- model_class = Producto -%>
-<div class="container fill">
-  <div class="row">
-    <div class="col-xs-12 col-md-3">
-      <%= render 'carts/menu' %>
+
+<%= render 'productos/banner' %>
+
+
+
+<div id="js-message-success" style="display: none;">
+  <div class="alert alert-success col-md-offset-3">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    Se agregó exitosamente el producto: <strong id="js-message-product"></strong>
+  </div>
+</div>
+<div id="js-message-delete" style="display: none;">
+  <div class="alert alert-danger col-md-offset-3">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    Se eliminó el producto del carrito</strong>
+  </div>
+</div>
+
+
+  <% if can? [:manage], Producto %>
+
+    <div class="col-md-6">
+      <div class="well">
+        <%= link_to "Exportar CSV", productos_path(format: "csv"), class: "btn btn-success" %>
+        <%= form_tag(upload_productos_path, multipart: true, class: 'form-inline') do %>
+          <div class="form-group">
+            <%= file_field_tag 'file' %>
+          </div>
+          <%= submit_tag 'Subir', class: "btn btn-success btn-xs" %>
+        <% end %>
+      </div>
     </div>
-		<div id="js-message-success" style="display: none;">
-			<div class="alert alert-success col-md-offset-3">
-				<button type="button" class="close" data-dismiss="alert">&times;</button>
-				Se agregó exitosamente el producto: <strong id="js-message-product"></strong>
-			</div>
-		</div>
-		<div id="js-message-delete" style="display: none;">
-			<div class="alert alert-danger col-md-offset-3">
-				<button type="button" class="close" data-dismiss="alert">&times;</button>
-				Se eliminó el producto del carrito</strong>
-			</div>
-		</div>
+    <div class="col-md-6 ">
+      <div class="well">
+        <%= form_for productos_path, method: 'get', class: 'form' do %>
 
-    <div class="col-xs-12 col-md-9">
-      <% if can? [:manage], Producto %>
+          <%= radio_button_tag :view_type, 'admin', @view_type.present? %>
+          <%= label :view_type_admin, 'Administrador' %>
+          <%= radio_button_tag :view_type, 'user', @view_type.nil? %>
+          <%= label :view_type_user, 'Consumidor' %>
+          <br>
+          <%= radio_button_tag :view_prod, 'todos', @view_prod.blank? %>
+          <%= label :view_prod, 'Todos' %>
+          <%= radio_button_tag :view_prod, 'ocultos', @view_prod == 'ocultos' %>
+          <%= label :view_prod, 'Ocultos' %>
+          <%= radio_button_tag :view_prod, 'visibles', @view_prod == 'visibles' %>
+          <%= label :view_prod, 'Visibles' %>
+          <p class="text-right">
+            <%= submit_tag 'Cambiar', class: "btn btn-success btn-xs" %>
+          </p>
+        <% end %>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 text-right">
+          <%= link_to t('.new', :default => t("helpers.links.new")),
+                      new_producto_path,
+                      :class => 'btn btn-primary' if can? :manage, Producto %>
+        </div>
+      </div>
+      <br>
+    </div>
+  <% end %>
+  <% if @freesale.present? && @ciclo_actual.present? %>
+    <% if @ciclo_actual.tipo == 'free' %>
+      <%= render 'products_freesale' %>
+    <% end %>
+  <% end %>
 
-				<div class="col-md-6">
-					<div class="well">
-						<%= link_to "Exportar CSV", productos_path(format: "csv"), class: "btn btn-success" %>
-						<%= form_tag(upload_productos_path, multipart: true, class: 'form-inline') do %>
-								<div class="form-group">
-									<%= file_field_tag 'file' %>
-								</div>
-								<%= submit_tag 'Subir', class: "btn btn-success btn-xs"%>
-						<% end %>
-					</div>
-				</div>
-				<div class="col-md-6 ">
-					<div class="well">
-						<%= form_for productos_path, method: 'get', class: 'form' do %>
-
-								<%= radio_button_tag :view_type, 'admin', @view_type.present? %>
-								<%= label :view_type_admin, 'Administrador' %>
-								<%= radio_button_tag :view_type, 'user', @view_type.nil? %>
-								<%= label :view_type_user, 'Consumidor' %>
-                <br>
-                <%= radio_button_tag :view_prod, 'todos', @view_prod.blank? %>
-                <%= label :view_prod, 'Todos' %>
-                <%= radio_button_tag :view_prod, 'ocultos', @view_prod == 'ocultos' %>
-                <%= label :view_prod, 'Ocultos' %>
-                <%= radio_button_tag :view_prod, 'visibles', @view_prod == 'visibles' %>
-                <%= label :view_prod, 'Visibles' %>
-								<p class="text-right">
-									<%= submit_tag 'Cambiar', class: "btn btn-success btn-xs"%>
-								</p>
-						<% end %>
-					</div>
-					<div class="row">
-						<div class="col-lg-12 text-right">
-							<%= link_to t('.new', :default => t("helpers.links.new")),
-													new_producto_path,
-													:class => 'btn btn-primary' if can? :manage, Producto %>
-						</div>
-					</div>
-					<br>
-				</div>
+    <% if usuario_signed_in? %>
+      <% if current_usuario.admin? && @view_type.present? %>
+        <%= render 'admin_product' %>
+      <% else %>
+        <%= render 'products' %>
       <% end %>
-			<% if @freesale.present? && @ciclo_actual.present? %>
-				<% if @ciclo_actual.tipo == 'free'%>
-					<%= render 'products_freesale' %>
-				<% end %>
-			<% end %>
-			<div id="product-list">
-				<% if usuario_signed_in? %>
-					<% if current_usuario.admin? && @view_type.present? %>
-						<%= render 'admin_product' %>
-					<% else %>
-						<%= render 'products' %>
-					<% end %>
-				<% else %>
-						<%= render 'products' %>
-				<% end %>
-			</div>
+    <% else %>
+      <%= render 'products' %>
+    <% end %>
 
-    </div> <!--col-xs-12 col-md-3-->
-  </div> <!--close row -->
-</div> <!--close containt fill-->
+
+
+
 
