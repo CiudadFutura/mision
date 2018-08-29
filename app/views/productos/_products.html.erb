@@ -6,8 +6,8 @@
   <div class="w3ls_w3l_banner_nav_right_grid1">
     <h6><%= Categoria.find(params[:subcategoria_id]).nombre if params[:subcategoria_id].present? %></h6>
     <% @productos.each do |producto|%>
-      <div class="col-md-3 w3ls_w3l_banner_left">
-        <div class="hover14 column">
+      <div class="col-md-3 thumbnails">
+        <div class="hover14 column ">
           <div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
             <div class="agile_top_brand_left_grid_pos">
               <%= image_tag('v2/offer.png', :class => 'img-responsive') %>
@@ -22,7 +22,7 @@
                       <%= image_tag('v2/no-disponible.png', :class => 'img-responsive') %>
                     <% else %>
                       <%= link_to producto_path(producto.id) do%>
-                        <%= image_tag(producto.imagen, :class => 'img-responsive') %>
+                        <%= image_tag(producto.imagen, :class => 'img-responsive', height: '140px') %>
                       <% end %>
                     <% end %>
 
