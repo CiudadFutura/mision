@@ -29,6 +29,13 @@
 
 $(document).ready(function () {
 
+    $('.flexslider').flexslider({
+        animation: "slide",
+        start: function(slider){
+            $('body').removeClass('loading');
+        }
+    });
+
     var navoffeset=$(".agileits_header").offset().top;
     $(window).scroll(function(){
         var scrollpos=$(window).scrollTop();
@@ -133,13 +140,4 @@ $(document).ready(function () {
             $(this).toggleClass('open');
         }
     );
-});
-
-$(window).load(function(){
-    $('.flexslider').flexslider({
-        animation: "slide",
-        start: function(slider){
-            $('body').removeClass('loading');
-        }
-    });
 });

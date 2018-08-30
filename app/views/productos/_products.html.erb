@@ -19,10 +19,10 @@
                   <div class="snipcart-thumb">
                     <% if producto.imagen.blank? %>
 
-                      <%= image_tag('v2/no-disponible.png', :class => 'img-responsive') %>
+                      <%= image_tag('v2/no-disponible.png', class: 'img-responsive', height: '140px') %>
                     <% else %>
                       <%= link_to producto_path(producto.id) do%>
-                        <%= image_tag(producto.imagen, :class => 'img-responsive', height: '140px') %>
+                        <%= image_tag(producto.imagen, class: 'img-responsive', height: '140px', width: '150px') %>
                       <% end %>
                     <% end %>
 
