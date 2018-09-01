@@ -502,6 +502,7 @@ ul.dropdown-menu.drp-mnu li a i {
   right: 10%;
 }
 .top-brands h3,
+.center-section h3,
 .orders h3,
 .account-data h3,
 .fresh-vegetables h3,
@@ -522,6 +523,7 @@ h3.title,
   font-size: 2.5em;
 }
 .top-brands h3:after,
+.center-section h3:after,
 .orders h3:after,
 .account-data h3:after,
 .fresh-vegetables h3:after,
@@ -1849,6 +1851,7 @@ h2.typoh2{
 .mail,
 .agileinfo_single,
 .w3_login,
+.center-section,
 .account-data,
 .orders{
   padding: 5em;
@@ -2784,6 +2787,7 @@ input.checkbox:checked:after {
   margin: 3em auto 0;
 }
 .w3_login_module,
+.center-section_module,
 .orders_module{
   min-height: 475px;
 }
@@ -2988,6 +2992,7 @@ input.checkbox:checked:after {
   }
   .typo,
   .orders,
+  .center-section,
   .account-data,
   .privacy,
   .faq,
@@ -3071,6 +3076,7 @@ input.checkbox:checked:after {
   }
   .top-brands h3,
   .orders h3,
+  .center-section h3,
   .account-data h3,
   .fresh-vegetables h3,
   .mail h3,
@@ -3155,6 +3161,7 @@ input.checkbox:checked:after {
   }
   .typo,
   .orders,
+  .center-section,
   .account-data,
   .privacy,
   .faq,
@@ -3229,6 +3236,7 @@ input.checkbox:checked:after {
   }
   .top-brands h3,
   .orders h3,
+  .center-section h3,
   .account-data h3,
   .fresh-vegetables h3,
   .mail h3,
@@ -3654,6 +3662,7 @@ input.checkbox:checked:after {
   }
   .typo,
   .orders,
+  .center-section,
   .account-data,
   .privacy,
   .faq,
@@ -4129,6 +4138,7 @@ input.checkbox:checked:after {
   }
   .top-brands h3,
   .orders h3,
+  .center-section h3,
   .account-data h3,
   .fresh-vegetables h3,
   .mail h3,
@@ -4247,6 +4257,7 @@ input.checkbox:checked:after {
   }
   .typo,
   .orders,
+  .center-section,
   .account-data,
   .privacy,
   .faq,
@@ -4343,7 +4354,8 @@ input.checkbox:checked:after {
   .form-module .toggle .tooltip {
     display: none;
   }
-  .w3_login {
+  .w3_login,
+  .center-section{
     padding-bottom: 0;
   }
   .agileinfo_mail_grid_right input[type="submit"], .agileinfo_mail_grid_right input[type="reset"] {
@@ -4499,6 +4511,7 @@ input.checkbox:checked:after {
     padding: 20px;
   }
   .w3_login_module,
+  .center-section_module,
   .account-data_module,
   .orders_module{
     min-height: 433px;
@@ -4618,6 +4631,7 @@ input.checkbox:checked:after {
     padding: 10px 10px 0px;
   }
   .top-brands h3,
+  .center-section h3,
   .orders h3,
   .fresh-vegetables h3,
   .mail h3,
@@ -4824,6 +4838,7 @@ input.checkbox:checked:after {
     padding-left: 15px;
   }
   .top-brands h3,
+  .center-section h3,
   .orders h3,
   .fresh-vegetables h3,
   .mail h3,
@@ -4957,6 +4972,7 @@ input.checkbox:checked:after {
     font-size: 13px;
   }
   .w3_login_module,
+  .center-section_module,
   .orders_module{
     min-height: 375px;
   }

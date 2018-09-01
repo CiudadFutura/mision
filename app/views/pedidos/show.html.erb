@@ -1,5 +1,6 @@
-<% content_for :title, 'Detalle de pedido' %>
-<% navigation_add 'Detalle de pedido', pedidos_path %>
+<% content_for :title, 'Detalle de pedido'   %>
+<% navigation_add 'Pedidos', pedidos_path() %>
+<% navigation_add 'Detalle de pedido', '#' %>
 <div class="account-data">
   <h3>Detalle de pedido # <%= @pedido.id %></h3>
   <div class="row">
@@ -13,20 +14,6 @@
     </div>
     <div class="col-md-4">
       <h2 class="text-right"><%= (@pedido.created_at).strftime('%d/%m/%Y')%></h2>
-    </div>
-  </div>
-  <div class="row">
-    <div class="breadcrumb col-md-12">
-       <%= link_to t('.back', :default => t("helpers.links.back")),
-                   pedidos_path %>
-      <% if can? [:manage], pedidos_path %>
-          <span> | </span>
-          <li>
-            <%= link_to(pedido_path(@pedido, format:'xls')) do %>
-                Exportar a Excel
-            <% end %>
-          </li>
-      <% end %>
     </div>
   </div>
   <div class="row">

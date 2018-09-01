@@ -1,11 +1,13 @@
-<div class="container fill">
+<% content_for :title, 'Mis datos' %>
+<% navigation_add 'Mis datos', '#' %>
+<div class="center-section">
 <div class="row">
-  <h2>Usuario: <%= @usuario.nombre %>  <%= @usuario.apellido %></h2>
-    <div class="breadcrumb">
-      <%= link_to 'Modificar', edit_usuario_path(@usuario), class: 'btn btn-primary' %>
+  <h3>Mis datos</h3>
+    <div class="row">
+
     </div>
-      <div class="col-md-4">
-        <h3>Tus datos:</h3>
+
+
 
         <p>
           <strong>Nombre:</strong>
@@ -72,7 +74,7 @@
             <%= link_to 'Login with Facebook', '/auth/facebook/' %>
           </p>
         <% end %>
-      </div>
+  <%= link_to 'Modificar', edit_usuario_path(@usuario), class: 'btn btn-primary' %>
       <div class="col-md-8">
         <% if @usuario.circulo.nil? %>
           <h3>No perteneces a ningun circulo.</h3>
