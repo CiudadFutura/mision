@@ -13,7 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap-sprockets
-//= require jquery.flexslider-min
 //= require gmaps/google
 //= require bootstrap-editable
 //= require bootstrap-editable-rails
@@ -25,15 +24,21 @@
 //= require jquery-ui/widgets/autocomplete
 //= require Chart.min
 //= require turbolinks
+//= require jquery.flexslider-min
 
 
-$(document).ready(function () {
+$(document).on('turbolinks:load', function() {
 
     $('.flexslider').flexslider({
         animation: "slide",
         start: function(slider){
             $('body').removeClass('loading');
         }
+    });
+
+    $(".scroll").click(function(event){
+        event.preventDefault();
+        $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
     });
 
     var navoffeset=$(".agileits_header").offset().top;

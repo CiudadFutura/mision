@@ -502,6 +502,8 @@ ul.dropdown-menu.drp-mnu li a i {
   right: 10%;
 }
 .top-brands h3,
+.orders h3,
+.account-data h3,
 .fresh-vegetables h3,
 .mail h3,
 .testimonials h3,
@@ -520,6 +522,8 @@ h3.title,
   font-size: 2.5em;
 }
 .top-brands h3:after,
+.orders h3:after,
+.account-data h3:after,
 .fresh-vegetables h3:after,
 .mail h3:after,
 .w3_login h3:after,
@@ -1837,7 +1841,16 @@ h2.typoh2{
     display: none;
   }
 }
-.typo,.privacy,.faq,.services,.events,.mail,.agileinfo_single,.w3_login{
+.typo,
+.privacy,
+.faq,
+.services,
+.events,
+.mail,
+.agileinfo_single,
+.w3_login,
+.account-data,
+.orders{
   padding: 5em;
 }
 /*--//Typography --*/
@@ -2770,7 +2783,8 @@ input.checkbox:checked:after {
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
   margin: 3em auto 0;
 }
-.w3_login_module{
+.w3_login_module,
+.orders_module{
   min-height: 475px;
 }
 
@@ -2972,7 +2986,16 @@ input.checkbox:checked:after {
   .snipcart-details {
     width: 88%;
   }
-  .typo, .privacy, .faq, .services, .events, .mail, .agileinfo_single, .w3_login {
+  .typo,
+  .orders,
+  .account-data,
+  .privacy,
+  .faq,
+  .services,
+  .events,
+  .mail,
+  .agileinfo_single,
+  .w3_login {
     padding: 5em 3em;
   }
   .events_bottom_left1_grid {
@@ -3047,6 +3070,8 @@ input.checkbox:checked:after {
     padding-left: 0;
   }
   .top-brands h3,
+  .orders h3,
+  .account-data h3,
   .fresh-vegetables h3,
   .mail h3,
   .testimonials h3,
@@ -3128,7 +3153,16 @@ input.checkbox:checked:after {
   .w3l_banner_nav_right_banner_pet {
     padding: 3em 0 0 3em !important;
   }
-  .typo, .privacy, .faq, .services, .events, .mail, .agileinfo_single, .w3_login {
+  .typo,
+  .orders,
+  .account-data,
+  .privacy,
+  .faq,
+  .services,
+  .events,
+  .mail,
+  .agileinfo_single,
+  .w3_login {
     padding: 4em 3em;
   }
   .w3agile_event_grid_right h4 {
@@ -3194,6 +3228,8 @@ input.checkbox:checked:after {
     font-size: 1.3em;
   }
   .top-brands h3,
+  .orders h3,
+  .account-data h3,
   .fresh-vegetables h3,
   .mail h3,
   .testimonials h3,
@@ -3616,7 +3652,16 @@ input.checkbox:checked:after {
   .w3l_banner_nav_right_banner7 {
     background-position: -140px 0px;
   }
-  .typo, .privacy, .faq, .services, .events, .mail, .agileinfo_single, .w3_login {
+  .typo,
+  .orders,
+  .account-data,
+  .privacy,
+  .faq,
+  .services,
+  .events,
+  .mail,
+  .agileinfo_single,
+  .w3_login {
     padding: 3em 2em;
   }
   .w3l_banner_nav_right_banner_pet a, .w3ls_service_grids1_right a {
@@ -4083,6 +4128,8 @@ input.checkbox:checked:after {
     width: 90%;
   }
   .top-brands h3,
+  .orders h3,
+  .account-data h3,
   .fresh-vegetables h3,
   .mail h3,
   .testimonials h3,
@@ -4198,7 +4245,16 @@ input.checkbox:checked:after {
   .w3ls_w3l_banner_nav_right_grid {
     padding: 0 1em 2em;
   }
-  .typo, .privacy, .faq, .services, .events, .mail, .agileinfo_single, .w3_login {
+  .typo,
+  .orders,
+  .account-data,
+  .privacy,
+  .faq,
+  .services,
+  .events,
+  .mail,
+  .agileinfo_single,
+  .w3_login {
     padding: 2em 1em;
   }
   .w3l_fruit {
@@ -4442,7 +4498,9 @@ input.checkbox:checked:after {
   .form-module .form {
     padding: 20px;
   }
-  .w3_login_module {
+  .w3_login_module,
+  .account-data_module,
+  .orders_module{
     min-height: 433px;
   }
   .agileinfo_mail_grid_right input[type="submit"], .agileinfo_mail_grid_right input[type="reset"] {
@@ -4560,6 +4618,7 @@ input.checkbox:checked:after {
     padding: 10px 10px 0px;
   }
   .top-brands h3,
+  .orders h3,
   .fresh-vegetables h3,
   .mail h3,
   .testimonials h3,
@@ -4765,6 +4824,7 @@ input.checkbox:checked:after {
     padding-left: 15px;
   }
   .top-brands h3,
+  .orders h3,
   .fresh-vegetables h3,
   .mail h3,
   .testimonials h3,
@@ -4896,7 +4956,8 @@ input.checkbox:checked:after {
     padding: 10px;
     font-size: 13px;
   }
-  .w3_login_module {
+  .w3_login_module,
+  .orders_module{
     min-height: 375px;
   }
   .form-module {

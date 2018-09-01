@@ -54,6 +54,9 @@ gem 'flexslider', '~> 2.2'
 # Font awesome
 gem 'font-awesome-rails', '~> 4.3'
 
+# gem pagination
+gem 'will_paginate', '~> 3.1', '>= 3.1.6'
+
 group :development do
   # Spring speeds up development by keeping your application running in the
   # background.

@@ -17,6 +17,7 @@ class PedidosController < ApplicationController
       end
     elsif current_usuario.coordinador? || current_usuario.usuario?
       @pedidos = Pedido.where(usuario_id: current_usuario.id)
+                   .paginate(:page => params[:page], :per_page => 10).order('id DESC')
     end
   end
 

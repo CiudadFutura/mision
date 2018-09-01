@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(document).on('turbolinks:load', function() {
     $('.thumbnails').find('.agile_top_brand_left_grid1').uniformHeight();
 });
 

@@ -1,34 +1,16 @@
 <%- model_class = Pedido -%>
-<div class="container fill">
+<% content_for :title, 'Mis pedidos' %>
+<% navigation_add 'Mis pedidos', '#' %>
+<div class="orders">
   <div class="row">
-      <h2>Pedidos realizados</h2>
-
-      <% if current_usuario && current_usuario.admin? %>
-        <%= link_to 'Exportar CSV', pedidos_path(format: 'csv', ciclo_id: @ciclo_id), class: 'btn btn-success btn-xs' %>
-        <%= form_tag pedidos_path, method: :get, class: 'form-inline' do %>
-          <h3>Filtros:</h3>
-          <div class="form-group">
-            <label for="ciclo_id">Ciclo:</label>
-            <%= select_tag 'ciclo_id',
-                  options_from_collection_for_select(@ciclos, 'id', 'nombre', @ciclo_id),
-                  include_blank: true, class: 'form-control input-sm' %>
-          </div>
-          <%= submit_tag 'Filtrar', class: 'btn btn-success btn-xs' %>
-        <% end %>
-      <% end %>
-
+      <h3>Mis pedidos</h3>
       <table class='table table-striped' data-search="true">
         <thead>
           <tr>
-	          <th>#</th>
             <th>Número de pedido</th>
             <th>Fecha</th>
             <th>Ciclo</th>
 						<th>Pertenece</th>
-            <th>Coordinador</th>
-            <th>Consumidor</th>
-            <th>Email</th>
-            <th>Celular</th>
             <th>Círculo N°</th>
 						<% if current_usuario && current_usuario.admin? %>
 							<th colspan="4"></th>
@@ -42,15 +24,10 @@
 		        <% @pedidos.each_with_index do |p, n| %>
 		          <% if p.present? %>
 			          <tr>
-				          <td><%= n + 1 %></td>
 			            <td><%= p.try('id') || 'Sin ID' %></td>
 			            <td><%= l (p.try('created_at')) || 'SIN FECHA' %></td>
 			            <td><%= p.ciclo.try('nombre') || 'SIN CICLO' %></td>
 									<td><%= p.circulo.try('warehouse_id') ? p.circulo.warehouse.name : '' %></td>
-			            <td><%= p.circulo.try('coordinador') ? (p.circulo.coordinador.nombre + ' ' + p.circulo.coordinador.apellido) : 'SIN COORDINADOR' %></td>
-			            <td><%= (p.usuario.try('nombre') ? (p.usuario.nombre) : '---' )+ ' ' + (p.usuario.try('apellido')? (p.usuario.apellido) : '---')  %></td>
-			            <td><%= (p.usuario.try('email') ? (p.usuario.email) : '---' ) %></td>
-			            <td><%= (p.usuario.try('cel1') ? (p.usuario.cel1) : '---' )%></td>
 			            <td><%= p.circulo.try('id') || 'SIN CIRCULO' %></td>
 			            <td>
 			              <%= link_to('Ver', pedido_path(p), class: 'btn btn-info btn-mini') %>
@@ -98,6 +75,9 @@
 	        <% end %>
         </tbody>
       </table>
+    <div class="row">
+      <%= will_paginate @pedidos %>
+    </div>
   </div>
 </div>
 
