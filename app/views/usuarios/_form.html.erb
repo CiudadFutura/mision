@@ -1,11 +1,11 @@
 <%= form_for(@usuario, as: :usuario, html: { class: 'form-horizontal'}) do |f| %>
   <div class="form-group row">
     <%= f.label :nombre, class: 'col-sm-2 control-label' %>
-    <div class="col-sm-10"><%= f.text_field :nombre, class: 'form-control', :required => true%></div>
+    <div class="col-sm-10"><%= f.text_field :nombre, class: 'form-control required'%></div>
   </div>
   <div class="form-group">
     <%= f.label :apellido, class: 'col-sm-2 control-label' %>
-    <div class="col-sm-10"><%= f.text_field :apellido, class: "form-control", :required => true  %></div>
+    <div class="col-sm-10"><%= f.text_field :apellido, class: 'form-control required' %></div>
   </div>
   <div class="form-group">
     <%= f.label :fecha_de_nacimiento, class: 'col-sm-2 control-label' %>
@@ -14,36 +14,36 @@
   </div>
   <div class="form-group">
     <%= f.label :email, class: 'col-sm-2 control-label' %>
-    <div class="col-sm-10"><%= f.text_field :email, class: "form-control", :required => true  %></div>
+    <div class="col-sm-10"><%= f.text_field :email, class: 'form-control' %></div>
   </div>
   <div class="form-group">
     <%= f.label :calle, class: 'col-sm-2 control-label' %>
-    <div class="col-sm-10"><%= f.text_field :calle, class: "form-control", :required => true  %></div>
+    <div class="col-sm-10"><%= f.text_field :calle, class: 'form-control required' %></div>
   </div>
   <div class="form-group">
     <%= f.label :codigo_postal, class: 'col-sm-2 control-label' %>
-    <div class="col-sm-10"><%= f.text_field :codigo_postal, class: "form-control", :required => true  %></div>
+    <div class="col-sm-10"><%= f.text_field :codigo_postal, class: 'form-control'  %></div>
   </div>
   <div class="form-group">
     <%= f.label :ciudad, class: 'col-sm-2 control-label' %>
-    <div class="col-sm-10"><%= f.text_field :ciudad, class: "form-control", :required => true  %></div>
+    <div class="col-sm-10"><%= f.text_field :ciudad, class: 'form-control' %></div>
   </div>
   <div class="form-group">
     <%= f.label :pais, class: 'col-sm-2 control-label' %>
-    <div class="col-sm-10"><%= f.text_field :pais, class: "form-control", :required => true  %></div>
+    <div class="col-sm-10"><%= f.text_field :pais, class: 'form-control'  %></div>
   </div>
   <div class="form-group">
     <%= f.label :tel1, class: 'col-sm-2 control-label' %>
-    <div class="col-sm-10"><%= f.text_field :tel1, class: "form-control", :required => true  %></div>
+    <div class="col-sm-10"><%= f.text_field :tel1, class: 'form-control'  %></div>
   </div>
   <div class="form-group">
     <%= f.label :cel1, class: 'col-sm-2 control-label' %>
-    <div class="col-sm-10"><%= f.text_field :cel1, class: "form-control", :required => true  %></div>
+    <div class="col-sm-10"><%= f.text_field :cel1, class: 'form-control'  %></div>
   </div>
   <% if current_usuario && current_usuario.admin? %>
     <div class="form-group">
       <%= f.label :circulo_id, class: 'col-sm-2 control-label' %>
-      <div class="col-sm-10"><%= f.select(:circulo_id, Circulo.all.map {|c| [ c.id, c.id ] }, class: "form-control", include_blank: true) %></div>
+      <div class="col-sm-10"><%= f.select(:circulo_id, Circulo.all.map {|c| [ c.id, c.id ] }, class: 'form-control', include_blank: true) %></div>
     </div>
   <% end %>
   <% if current_usuario && current_usuario.admin? %>

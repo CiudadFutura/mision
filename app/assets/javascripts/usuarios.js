@@ -1,9 +1,11 @@
-$(document).on('turbolinks:load', function () {
-    $('#edit_usuario').validate({
+var ready = function() {
+    $('#new_usuario').validate({
         errorPlacement: function (label, element) {
             label.addClass('error');
             label.insertBefore(element);
         },
         wrapper: 'div'
     });
-})
+};
+
+$(document).on('turbolinks:load', ready);

@@ -17,6 +17,11 @@
         <% end %>
       </li>
       <li>
+        <%= link_to(usuario_path(current_usuario)) do %>
+          Mi Círculo
+        <% end %>
+      </li>
+      <li>
         <%= link_to(destroy_usuario_session_path, method: 'delete') do %>
           Cerrar Sesión
         <% end %>

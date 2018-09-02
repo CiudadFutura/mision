@@ -1,4 +1,5 @@
-$(document).on('turbolinks:load', function () {
+
+ready = function() {
     $('#new_usuario').validate({
         errorPlacement: function (label, element) {
             label.addClass('error');
@@ -6,4 +7,7 @@ $(document).on('turbolinks:load', function () {
         },
         wrapper: 'div'
     });
-})
+};
+
+
+$(document).on('turbolinks:load', ready);
