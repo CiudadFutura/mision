@@ -2,11 +2,15 @@
 <% content_for :title, 'Registrarse' %>
 <% navigation_add 'Registrarse', '#' %>
   <div class="w3_login">
+    <% flash.each do |key, value| %>
+      <div class="<%= flash_class(key) %>">
+        <%= value %>
+      </div>
+    <% end %>
     <h3>Registrarse</h3>
     <div class="w3_login_module">
       <div class="module form-module">
         <div class="toggle">
-
         </div>
         <div class="form">
           <h2>Crear mi cuenta</h2>
@@ -33,6 +37,13 @@
               <label for="term" style="line-height: 26px; padding-top: 24px">
                 Acepto los <a class="btn-link" data-toggle="modal" data-target="#terminos">términos y condiciones.</a>
               </label>
+            </div>
+            <div class="form-group">
+              <% Role.all.each do |role| %>
+                <% if role.name == 'Usuario' %>
+                  <%= hidden_field_tag 'usuario[role_ids][]', role.id %>
+                <% end %>
+              <% end %>
             </div>
             <div class="form-group">
               <div><%= f.submit 'Registrate', class: 'btn btn-success pull-right ' %></div>

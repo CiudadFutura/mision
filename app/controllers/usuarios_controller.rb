@@ -5,7 +5,7 @@ class UsuariosController < ApplicationController
   # GET /usuarios
   # GET /usuarios.json
   def index
-    @usuarios = Usuario.usrs
+    @usuarios = Usuario.users
     authorize! :index, @usuarios
     respond_to do |format|
       format.html

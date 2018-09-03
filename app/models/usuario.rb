@@ -23,7 +23,7 @@ class Usuario < ActiveRecord::Base
 
   before_create :set_default_role
 
-  scope :usrs, -> {where('type != "Sistema"')}
+  scope :users, -> {where('type != "Sistema"')}
   scope :evo_usuarios, -> (date_param) {where('updated_at >= :today', today: date_param)}
 
 
@@ -155,7 +155,14 @@ class Usuario < ActiveRecord::Base
         ]
       end
     end
-	end
+  end
+
+  def completed?
+    self.attributes.all? do |k, v|
+      ['nombre', 'apellido', 'calle', 'ciudad', 'codigo_postal', 'ciudad', 'cel1'].include?(k) || v.nil? || v == [] || v == [""]
+    end
+
+  end
 
 	def confirmation_required?
 		!confirmed?

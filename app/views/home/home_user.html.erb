@@ -1,7 +1,13 @@
-<%= render 'home/banner' %>
-
-<div class="w3_login">
+<div class="center-section">
+  <% flash.each do |key, value| %>
+    <div class="<%= flash_class(key) %>">
+      <%= value %>
+    </div>
+  <% end %>
   <h3>Hola <%= current_usuario.nombre %></h3>
+  <% if !user_data_completed(current_usuario) %>
+    <p> </p>
+  <% end %>
   <p>Si estas acá, es porque sos coordinador de un círculo en la Misión Anti Inflación.<br/>
     Desde tu panel, ademas de hacer tu pedido, vas a poder administrar los integrantes<br/>
     de tu círculo y realizar el pago de la compra. Ante cualquier duda, consultanos vía mail

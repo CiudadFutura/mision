@@ -1,5 +1,4 @@
 class ComoComproController < ApplicationController
-  layout "home"
 
   def index
     render 'devise/como_compro/como_compro'
