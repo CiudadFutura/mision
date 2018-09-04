@@ -62,6 +62,7 @@ en:
       default: "%d-%m-%Y"
       short: "%b %d"
       long: "%B %d, %Y"
+      custom: "%b - %Y"
 
     day_names: [Domingo, Lunes, Martes, Miércoles, Jueves, Viernes, Sabado]
     abbr_day_names: [Dom, Lun, Mar, Mié, Jue, Vie, Sab]
@@ -80,6 +81,8 @@ en:
       default: "%a %d/%B/%Y %H:%M"
       short: "%d %b %H:%M"
       long: "%B %d, %Y %H:%M"
+      custom: "%b - %Y"
+      horita: "%H:%M"
     am: "am"
     pm: "pm"
 

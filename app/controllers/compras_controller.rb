@@ -5,7 +5,7 @@ class ComprasController < ApplicationController
   # GET /compras
   # GET /compras.json
   def index
-    @compras = Compra.all.order(fecha_inicio_compras: :desc)
+    @compras = Compra.paginate(page: params[:page], per_page: 10).order(fecha_inicio_compras: :desc)
   end
 
   # GET /compras/1

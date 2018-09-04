@@ -12,7 +12,9 @@ class Ability
       can [:manage, :add_usuario, :remove_usuario], Circulo
       can [:read, :create, :update], Usuario, { :id => user.id }
       can [:read], Account, { :usuario_id => user.id }
+      can [:read], Compra
     elsif user.usuario?
+      can [:read], Compra
       can [:read, :create, :update], Usuario, { :id => user.id }
       can [:read, :create, :update], Pedido, { :usuario_id => user.id }
       can [:abandonar_circulo], Usuario
@@ -20,6 +22,8 @@ class Ability
     elsif user.director?
       can [:read], Circulo, { :warehouse_id => user.usuario_roles.warehouse_id }
       can [:read, :create, :update], Pedido, { :warehouse_id => user.usuario_roles.warehouse_id }
+    else
+      can [:read], Compra
     end
     # elsif user.coordinador?
     #   can :read, :all
