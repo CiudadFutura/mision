@@ -1,7 +1,9 @@
 <%= javascript_include_tag 'admin', turbolinks: true  %>
 <div class="header-main">
   <div class="logo-w3-agile">
-    <h1><a href="index.html">Mision Admin</a></h1>
+    <h1>
+      <%= link_to 'Mision Admin', root_path %>
+    </h1>
   </div>
   <div class="w3layouts-left">
 
@@ -175,8 +177,8 @@
               <%= image_tag 'admin/in4.jpg', :class => 'img-responsive'%>
             </span>
             <div class="user-name">
-              <p>Malorum</p>
-              <span>Administrator</span>
+              <p><%= current_usuario.nombre %></p>
+              <span><%= current_usuario.roles.first.name %></span>
             </div>
             <i class="fa fa-angle-down"></i>
             <i class="fa fa-angle-up"></i>
@@ -185,8 +187,17 @@
         </a>
         <ul class="dropdown-menu drp-mnu">
           <li> <a href="#"><i class="fa fa-cog"></i> Settings</a> </li>
-          <li> <a href="#"><i class="fa fa-user"></i> Profile</a> </li>
-          <li> <a href="#"><i class="fa fa-sign-out"></i> Logout</a> </li>
+          <li>
+            <%= link_to(edit_usuario_path(current_usuario)) do %>
+              <i class="fa fa-user"></i>
+              Mis Datos
+            <% end %>
+          </li>
+          <li>
+            <%= link_to(destroy_usuario_session_path, method: 'delete') do %>
+              <i class="fa fa-sign-out"></i> Cerrar Sesión
+            <% end %>
+          </li>
         </ul>
       </li>
     </ul>
@@ -194,5 +205,10 @@
   <div class="clearfix"> </div>
 </div>
 <ol class="breadcrumb">
-  <li class="breadcrumb-item"><a href="index.html">Home</a> <i class="fa fa-angle-right"></i></li>
+  <li class="breadcrumb-item">
+    <%= link_to root_path do%>
+      Inicio
+      <i class="fa fa-angle-right"></i>
+    <% end  %>
+  </li>
 </ol>

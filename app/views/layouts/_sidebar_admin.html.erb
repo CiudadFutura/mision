@@ -6,8 +6,13 @@
   <div style="border-top:1px ridge rgba(255, 255, 255, 0.15)"></div>
   <div class="menu">
     <ul id="menu" >
-      <li><a href="index.html"><i class="fa fa-tachometer"></i> <span>Dashboard</span><div class="clearfix"></div></a></li>
-
+      <li>
+        <%= link_to root_path do %>
+          <i class="fa fa-tachometer"></i>
+          <span>Dashboard</span>
+          <div class="clearfix"></div>
+        <% end %>
+      </li>
 
       <li id="menu-academico" ><a href="inbox.html"><i class="fa fa-envelope nav_icon"></i><span>Inbox</span><div class="clearfix"></div></a></li>
       <li><a href="gallery.html"><i class="fa fa-picture-o" aria-hidden="true"></i><span>Gallery</span><div class="clearfix"></div></a></li>
