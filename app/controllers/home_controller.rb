@@ -18,7 +18,7 @@ class HomeController < ApplicationController
         @total_new_users_per_year = Usuario::users_totals_per_year
         @total_orders_year = Pedido::orders_qty_per_year
         @total_orders = Pedido::total_orders_month
-				page = 'home/home_admin'
+				page = 'home/admin_home'
 			when Usuario::COORDINADOR
 				if current_usuario.circulo_id.present?
 					circulo = Circulo.find(current_usuario.circulo_id)

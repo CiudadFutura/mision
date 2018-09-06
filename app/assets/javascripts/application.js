@@ -22,7 +22,6 @@
 //= require jquery.validate.additional-methods
 //= require jquery.validate.localization/messages_es
 //= require jquery-ui/widgets/autocomplete
-//= require Chart.min
 //= require turbolinks
 //= require jquery.flexslider-min
 

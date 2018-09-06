@@ -16,6 +16,10 @@ en:
   free: Libre
   circles: Círculos
   mini: Mini-Ciclo
+  will_paginate:
+    previous_label: "&#8592; Previo"
+    next_label: "Siguiente &#8594;"
+    page_gap: "&hellip;"
   activerecord:
     models:
       compra:

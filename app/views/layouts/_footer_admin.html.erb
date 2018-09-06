@@ -1,0 +1,24 @@
+<script>
+    $(document).ready(function() {
+        var navoffeset=$(".header-main").offset().top;
+        $(window).scroll(function(){
+            var scrollpos=$(window).scrollTop();
+            if(scrollpos >=navoffeset){
+                $(".header-main").addClass("fixed");
+            }else{
+                $(".header-main").removeClass("fixed");
+            }
+        });
+
+    });
+</script>
+<!-- /script-for sticky-nav -->
+<!--inner block start here-->
+<div class="inner-block">
+
+</div>
+<!--inner block end here-->
+<!--copy rights start here-->
+<div class="copyrights">
+  <p>© 2016 Pooled . All Rights Reserved | Design by  <a href="http://w3layouts.com/" target="_blank">W3layouts</a> </p>
+</div>

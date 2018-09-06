@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   before_filter :categorias_menu
   before_filter :configure_permitted_parameters, if: :devise_controller?
 
-  layout 'layout'
+  layout :choose_layout
 
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to root_url, :alert => exception.message
@@ -49,6 +49,18 @@ class ApplicationController < ActionController::Base
   end
 
   protected
+
+  def choose_layout
+    if signed_in?
+      if !current_usuario.admin?
+        'layout'
+      else
+        'admin_layout'
+      end
+    else
+      'layout'
+    end
+  end
 
 	def configure_permitted_parameters
     permitted_params = [:nombre, :apellido, :email, :'fecha_de_nacimiento(1i)',
