@@ -54,7 +54,7 @@ gem 'thin', '~> 1.7', '>= 1.7.2'
 gem 'flexslider', '~> 2.2'
 
 # Font awesome
-gem 'font-awesome-rails', '~> 4.3'
+gem 'font-awesome-sass', '~> 4.6', '>= 4.6.2'
 
 # gem pagination
 gem 'will_paginate', '~> 3.1', '>= 3.1.6'

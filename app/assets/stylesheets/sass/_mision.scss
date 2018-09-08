@@ -78,7 +78,22 @@ i.badge.badge-notify.my-cart-badge {
   color: #fff;
   top: 1em;
 }
-input[type="submit"],#PPMiniCart .minicart-submit,.w3ls_vegetables ul li a,input[type="reset"],.agileinfo_mail_grid_left ul li a,.events_bottom_left2 ul li a,.w3ls_service_grids1_right a,ul.agileits_social_icons li a,.w3l_banner_nav_right_banner_pet a,.w3ls_w3l_banner_nav_right_grid_head_grid ul li a,.products-breadcrumb ul li a,.w3_footer_grid ul li a,.w3l_fresh_vegetables_grid ul li a,.wthree_footer_copy p a,.agile_top_brand_left_grid1 .button,.w3ls_logo_products_left1 ul.special_items li a,.w3ls_logo_products_left1 ul.phone_email li a{
+input[type="submit"],
+#PPMiniCart .minicart-submit,
+.w3ls_vegetables ul li a,input[type="reset"],
+.agileinfo_mail_grid_left ul li a,
+.events_bottom_left2 ul li a,
+.w3ls_service_grids1_right a,
+ul.agileits_social_icons li a,
+.w3l_banner_nav_right_banner_pet a,
+.w3ls_w3l_banner_nav_right_grid_head_grid ul li a,
+.products-breadcrumb ul li a,
+.w3_footer_grid ul li a,
+.w3l_fresh_vegetables_grid ul li a,
+.wthree_footer_copy p a,
+.agile_top_brand_left_grid1 .button,
+.w3ls_logo_products_left1 ul.special_items li a,
+.w3ls_logo_products_left1 ul.phone_email li a{
   transition: .5s ease-in;
   -webkit-transition: .5s ease-in;
   -moz-transition: .5s ease-in;
@@ -1854,7 +1869,7 @@ h2.typoh2{
 .center-section,
 .account-data,
 .orders{
-  padding: 5em;
+  padding: 1em 5em;
 }
 /*--//Typography --*/
 /*-- pet-food --*/
@@ -1885,8 +1900,9 @@ h2.typoh2{
 }
 /*-- //pet-food --*/
 /*-- privacy --*/
-.privacy1-grid,.privacy2-grid{
-  margin:3em 0 0;
+.privacy1-grid,
+.privacy2-grid{
+  margin:1em 0 0;
 }
 .privacy1-grid ul{
   margin-bottom:2em;
@@ -1897,6 +1913,54 @@ h2.typoh2{
   color: #212121;
   margin-bottom: 1em;
 }
+.circle-members i{
+  color:#84C639;
+  top: 0em !important;
+}
+
+.privacy1-grid {
+  .circle-members-data{
+    padding: 0;
+    border-bottom: none;
+    margin: 0px;
+    li {
+      margin-bottom: 2px;
+      font-size: 15px;
+      color: #999;
+    }
+  }
+  .customer-orders{
+    table{
+      font-size: medium;
+      tbody{
+        .current-order{
+          background-color: #DCDCDC ;
+        }
+        tr {
+          td{
+            padding: 10px !important;
+          }
+        }
+      }
+
+    }
+    h4{
+      font-size: .8em;
+      color: #84C639;
+      margin: 0 0 1em;
+      line-height: 1.5em;
+      text-transform: capitalize;
+      font-weight: 300;
+    }
+  }
+}
+
+.circle-members-data i{
+  top: 0.2em !important;
+  margin-right: 0.5em;
+  color: #a30101 !important;
+}
+
 .privacy1-grid ul li i{
   color:#84C639;
   top: -.5em;
@@ -1917,11 +1981,7 @@ h2.typoh2{
 .privacy1-grid ul li:nth-child(1) {
   margin-right: 2em;
 }
-.privacy1-grid ul:nth-child(4){
-  padding-bottom:0;
-  border-bottom:none;
-  margin-bottom:0;
-}
+
 .privacy1:nth-child(2){
   margin:3em 0 0;
 }
@@ -3001,7 +3061,7 @@ input.checkbox:checked:after {
   .mail,
   .agileinfo_single,
   .w3_login {
-    padding: 5em 3em;
+    padding: 2em 5em;
   }
   .events_bottom_left1_grid {
     width: 110px;
@@ -4325,7 +4385,7 @@ input.checkbox:checked:after {
     width: 100%;
   }
   .privacy1-grid, .privacy2-grid {
-    margin: 2em 0 0;
+    margin: 1em 0 0;
   }
   .panel-title > a {
     line-height: 1.8em;
