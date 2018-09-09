@@ -1,63 +1,61 @@
 <%= javascript_include_tag 'suppliers' %>
 <div class="row">
   <div class="suppliers">
-    <div class="thumbnail">
-      <% @suppliers.each do |supplier| %>
-        <li class="col-lg-6">
-          <div class="col-sm-4 col-lg-4">
-            <% if supplier.logo.blank? %>
-                <%= image_tag('image-not-found.png', :height => '100%', :width => '100%') %>
-            <% else %>
-                <%= image_tag(supplier.logo, :height => '100%', :width => '100%', class: 'img-rounded img-responsive') %>
+    <% @suppliers.each do |supplier| %>
+      <div class="col-lg-6 supplier">
+        <div class="col-sm-4 col-lg-4">
+          <% if supplier.logo.blank? %>
+              <%= image_tag('image-not-found.png', :height => '100%', :width => '100%') %>
+          <% else %>
+              <%= image_tag(supplier.logo, :height => '100%', :width => '100%', class: 'img-rounded img-responsive') %>
+          <% end %>
+        </div>
+        <div class="col-sm-8 col-md-8">
+          <blockquote>
+            <% if supplier.name? %>
+              <p><b><%= supplier.name %></b></p>
             <% end %>
-          </div>
-          <div class="col-sm-8 col-md-8">
-            <blockquote>
-              <% if supplier.name? %>
-                <p><b><%= supplier.name %></b></p>
-              <% end %>
-              <% if supplier.description? %>
-                <p><small><%= supplier.description %></small></p>
-              <% end %>
-              <% if supplier.calle? %>
-                <small>
-                  <i><%= supplier.calle %>, <%= supplier.ciudad %></i>
-                  <i class="glyphicon glyphicon-map-marker"></i>
-                </small>
-              <% end %>
-            </blockquote>
-            <p>
-              <% if supplier.email? %>
-                <i class="glyphicon glyphicon-envelope"></i> <%= supplier.email %>
-              <% end %>
-              <% if supplier.web.present? %>
-                <br/>
-                  <i class="glyphicon glyphicon-globe"></i>
-                  <%= link_to 'Visitar sitio web', supplier.web, target: '_blank' %>
-              <% end %>
-              <% if supplier.nombre_contacto? %>
-              <br/> <i class="glyphicon glyphicon-user"></i> <%= supplier.nombre_contacto %>
-              <% end %>
-              <% if supplier.telefono? %>
-                <br/> <i class="glyphicon glyphicon-earphone"></i> <%= supplier.telefono %>
-              <% end %>
-            </p>
-            <p>
-              <%= link_to 'Ver sus productos', productos_path(:supplier_id => supplier.id) %>
-            </p>
-            <% if supplier.video.present? %>
-              <p>
-                <button class="btn btn-default video"
-                  data-video="https://www.youtube.com/embed/<%= supplier.video %>" data-toggle="modal"
-                  data-target="#videoModal">Ver video
-                </button>
-              </p>
+            <% if supplier.description? %>
+              <p><small><%= supplier.description %></small></p>
             <% end %>
-            <hr class="separator">
-          </div>
-        </li>
-      <% end %>
-    </div>
+            <% if supplier.calle? %>
+              <small>
+                <i><%= supplier.calle %>, <%= supplier.ciudad %></i>
+                <i class="glyphicon glyphicon-map-marker"></i>
+              </small>
+            <% end %>
+          </blockquote>
+          <p>
+            <% if supplier.email? %>
+              <i class="glyphicon glyphicon-envelope"></i> <%= supplier.email %>
+            <% end %>
+            <% if supplier.web.present? %>
+              <br/>
+                <i class="glyphicon glyphicon-globe"></i>
+                <%= link_to 'Visitar sitio web', supplier.web, target: '_blank' %>
+            <% end %>
+            <% if supplier.nombre_contacto? %>
+            <br/> <i class="glyphicon glyphicon-user"></i> <%= supplier.nombre_contacto %>
+            <% end %>
+            <% if supplier.telefono? %>
+              <br/> <i class="glyphicon glyphicon-earphone"></i> <%= supplier.telefono %>
+            <% end %>
+          </p>
+          <p>
+            <%= link_to 'Ver sus productos', productos_path(:supplier_id => supplier.id) %>
+          </p>
+          <% if supplier.video.present? %>
+            <p>
+              <button class="btn btn-default video"
+                data-video="https://www.youtube.com/embed/<%= supplier.video %>" data-toggle="modal"
+                data-target="#videoModal">Ver video
+              </button>
+            </p>
+          <% end %>
+          <hr class="separator">
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>
 

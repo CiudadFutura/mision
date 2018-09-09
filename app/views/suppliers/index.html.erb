@@ -1,17 +1,16 @@
-<div class="container fill">
-  <div class="row">
-
-    <% if usuario_signed_in? && current_usuario.admin? %>
-        <h2>Lista de Proveedores</h2>
-    <% else %>
-        <h2>Nuestros productores</h2>
-    <% end %>
-	  <div class="navbar navs-fixed">
-	    <%= link_to t('Crear Proveedor', :default => t('helpers.links.new')),
-	                new_supplier_path,
-	                :class => 'btn btn-primary' if can? [:manage], Supplier
-	    %>
-	  </div>
+<% content_for :title, 'Productores' %>
+<% navigation_add 'Productores', '#' %>
+<div class="center-section">
+  <% if usuario_signed_in? && current_usuario.admin? %>
+      <h2>Lista de Proveedores</h2>
+  <% else %>
+      <h3>Nuestros productores</h3>
+  <% end %>
+  <div class="navbar navs-fixed">
+    <%= link_to t('Crear Proveedor', :default => t('helpers.links.new')),
+                new_supplier_path,
+                :class => 'btn btn-primary' if can? [:manage], Supplier
+    %>
   </div>
 
   <% if usuario_signed_in? && current_usuario.admin? %>

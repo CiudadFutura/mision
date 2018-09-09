@@ -1,3 +1,5 @@
+<% content_for :title, 'Como comprar' %>
+<% navigation_add 'Como comprar', '#' %>
 <div class="center-section">
   <h3>Como comprar</h3>
 </div>
@@ -23,19 +25,21 @@
         </div>
         <div class="privacy2-grid1-sub">
           <h4>Comprá en 3 simples pasos</h4>
-          <p>Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.</p>
         </div>
         <div class="privacy2-grid1-sub">
-          <h5>Hacés tu pedido</h5>
-          <div class="col-sm-7">
-            <p><b>Una vez cada 4 semanas</b> vas a tener 4 días (de jueves a domingo), para entrar a nuestra tienda y hacer
-              tu pedido. <b>¡Tenemos más de 350 productos!</b>.
-            </p>
+          <div class="col-sm-8">
+            <h5>Hacés tu pedido</h5>
+            <div class="col-sm-7">
+              <p><b>Una vez cada 4 semanas</b> vas a tener 4 días (de jueves a domingo), para entrar a nuestra tienda y hacer
+                tu pedido. <b>¡Tenemos más de 350 productos!</b>.
+              </p>
+            </div>
           </div>
-          <br>
+          <div class="col-sm-4">
+            <%= image_tag 'v2/clic-comprar.png' %>
+          </div>
           <div class="row">
-            <div class="col-sm-6 col-sm-offset-1">
+            <div class="col-sm-8">
               <ul>
                 <li><small><i>Te vamos a avisar con anticipación por mail y whatsapp así no te olvidás.</i></small></li>
                 <li><small><i>No hay límite máximo ni mínimo para pedir.</i></small></li>
@@ -44,54 +48,67 @@
             </div>
           </div>
 
-          </p>
+          <div class="row">
+            <%= image_tag 'v2/lineRtoL-comprar.png' %>
+          </div>
+
         </div>
         <div class="privacy2-grid1-sub">
-          <h5>Pagás</h5>
           <div class="col-sm-4">
-            <%= image_tag 'v2/19.jpg' %>
+            <%= image_tag 'v2/pagas-comprar.png' %>
           </div>
-          <div class="col-sm-7">
-            <p>Dos días después de cerrarse la tienda te vamos a informar por mail y whatsapp cuánto tienen que
-              pagar por la compra y las formas para hacerlo.</b>.
-            </p>
-          </div>
-          <br>
-          <div class="row">
-            <div class="col-sm-6 col-sm-offset-1">
+          <div class="col-sm-8">
+            <h5>Pagás</h5>
+            <div class="col-sm-12">
+              <p>Dos días después de cerrarse la tienda te vamos a informar por mail y whatsapp cuánto tienen que
+                pagar por la compra y las formas para hacerlo.</b>
+              </p>
+            </div>
+            <div class="row">
+              <br>
+            </div>
+
+            <div class="col-sm-12">
               <ul>
                 <li><small><i>Cada círculo paga además del pedido una cuota mensual que se divide entre lxs integrantes.
                   ¡Mientras más sean menos van a pagar! ¿Por qué pagar una cuota mensual?</i></small></li>
                 <li><small><i>Las formas de pago son depósito bancario y/o transferencia. Próximamente tendremos más opciones</i></small></li>
               </ul>
             </div>
-          </div>
 
-          </p>
+          </div>
+        </div>
+        <div class="row">
+          <%= image_tag 'v2/lineLtoR-comprar.png' %>
         </div>
         <div class="privacy2-grid1-sub">
-          <h5>Retirás</h5>
-          <div class="col-sm-7">
-            <p>Siete días después de hacer tu pedido pasás a retirarlo por el
-              <%= link_to 'punto de retiro', warehouse_path %> que eligió tu grupo.
-              El día de retiro es siempre un sábado. Para que no te olvides también te vamos a avisar con anticipación por whatsapp.
-            </p>
-          </div>
-          <br>
-          <div class="row">
-            <div class="col-sm-6 col-sm-offset-1">
-              <ul>
-                <li><small><i>Se retira el pedido de todo el círculo. Es suficiente con que vaya un solo
-                  integrante a retirarlo.</i></small></li>
-              </ul>
+          <div class="col-sm-8">
+            <h5>Retirás</h5>
+            <div class="col-sm-12">
+              <p>Siete días después de hacer tu pedido pasás a retirarlo por el
+                <%= link_to 'punto de retiro', warehouse_path %> que eligió tu grupo.
+                El día de retiro es siempre un sábado. Para que no te olvides también te vamos a avisar con anticipación por whatsapp.
+              </p>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <ul>
+                  <li><small><i>Se retira el pedido de todo el círculo. Es suficiente con que vaya un solo
+                    integrante a retirarlo.</i></small></li>
+                </ul>
+              </div>
             </div>
           </div>
-
-          </p>
+          <br>
+          <div class="col-sm-4">
+            <%= image_tag 'v2/retiras-comprar.png' %>
+          </div>
         </div>
       </div>
     </div>
   </div>
+  <div class="row"></div>
+  <div class="clearfix"></div>
   <div class="privacy1">
     <h3>Círculos</h3>
     <h4></h4>
@@ -99,7 +116,7 @@
       <ul>
         <li>
           <div class="col-sm-1">
-            <i class="glyphicon glyphicon-user" aria-hidden="true"></i>
+            <i class="fa fa-circle-o" aria-hidden="true"></i>
           </div>
           <div class="col-sm-10">
             ¿Qué es un círculo?
@@ -114,7 +131,7 @@
       <ul>
         <li>
           <div class="col-sm-1">
-            <i class="glyphicon glyphicon-search" aria-hidden="true"></i>
+            <i class="fa fa-cog" aria-hidden="true"></i>
           </div>
           <div class="col-sm-10">
             ¿Cómo se crea un círculo?
@@ -134,7 +151,7 @@
       <ul>
         <li>
           <div class="col-sm-1">
-            <i class="glyphicon glyphicon-qrcode" aria-hidden="true"></i>
+            <i class="fa fa-question-circle" aria-hidden="true"></i>
           </div>
           <div class="col-sm-10">
             ¿Por qué hay que formar parte de un
@@ -152,5 +169,4 @@
   </div>
 </div>
 <!-- //privacy -->
-</div>
 <div class="clearfix"></div>
