@@ -29,16 +29,11 @@
         <div class="privacy2-grid1-sub">
           <div class="col-sm-8">
             <h5>Hacés tu pedido</h5>
-            <div class="col-sm-7">
+            <div class="col-sm-12">
               <p><b>Una vez cada 4 semanas</b> vas a tener 4 días (de jueves a domingo), para entrar a nuestra tienda y hacer
                 tu pedido. <b>¡Tenemos más de 350 productos!</b>.
               </p>
             </div>
-          </div>
-          <div class="col-sm-4">
-            <%= image_tag 'v2/clic-comprar.png' %>
-          </div>
-          <div class="row">
             <div class="col-sm-8">
               <ul>
                 <li><small><i>Te vamos a avisar con anticipación por mail y whatsapp así no te olvidás.</i></small></li>
@@ -47,15 +42,17 @@
               </ul>
             </div>
           </div>
-
+          <div class="col-sm-4">
+            <%= image_tag 'v2/clic-comprar.png', class: 'img-responsive' %>
+          </div>
           <div class="row">
-            <%= image_tag 'v2/lineRtoL-comprar.png' %>
+            <%= image_tag 'v2/lineRtoL-comprar.png', class: 'img-responsive' %>
           </div>
 
         </div>
         <div class="privacy2-grid1-sub">
           <div class="col-sm-4">
-            <%= image_tag 'v2/pagas-comprar.png' %>
+            <%= image_tag 'v2/pagas-comprar.png', class: 'img-responsive' %>
           </div>
           <div class="col-sm-8">
             <h5>Pagás</h5>
@@ -64,10 +61,8 @@
                 pagar por la compra y las formas para hacerlo.</b>
               </p>
             </div>
-            <div class="row">
-              <br>
-            </div>
-
+          </div>
+          <div class="row">
             <div class="col-sm-12">
               <ul>
                 <li><small><i>Cada círculo paga además del pedido una cuota mensual que se divide entre lxs integrantes.
@@ -75,11 +70,10 @@
                 <li><small><i>Las formas de pago son depósito bancario y/o transferencia. Próximamente tendremos más opciones</i></small></li>
               </ul>
             </div>
-
           </div>
         </div>
         <div class="row">
-          <%= image_tag 'v2/lineLtoR-comprar.png' %>
+          <%= image_tag 'v2/lineLtoR-comprar.png', class: 'img-responsive' %>
         </div>
         <div class="privacy2-grid1-sub">
           <div class="col-sm-8">
@@ -101,7 +95,7 @@
           </div>
           <br>
           <div class="col-sm-4">
-            <%= image_tag 'v2/retiras-comprar.png' %>
+            <%= image_tag 'v2/retiras-comprar.png', class: 'img-responsive' %>
           </div>
         </div>
       </div>
@@ -109,6 +103,9 @@
   </div>
   <div class="row"></div>
   <div class="clearfix"></div>
+  <br>
+  <br>
+
   <div class="privacy1">
     <h3>Círculos</h3>
     <h4></h4>
