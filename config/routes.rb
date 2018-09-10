@@ -39,7 +39,7 @@ Rails.application.routes.draw do
 	end
 	get 'circulos/remito_circulo/:circulo_id/compra=:compra_id', to: 'circulos#remito_circulo', as: :remito_circulo
 
-  devise_for :usuarios, :controllers => {:registrations => "user/registrations"}
+  devise_for :usuarios, :controllers => {:registrations => 'user/registrations'}
   resources :usuarios do
     collection {
       post 'sign_up', to: 'usuarios#create'

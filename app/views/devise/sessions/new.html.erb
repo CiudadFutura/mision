@@ -1,51 +1,52 @@
 <%= javascript_include_tag 'usuarios' %>
 <% content_for :title, 'Iniciar sesión' %>
 <% navigation_add 'Iniciar sesión', '#' %>
-  <div class="w3_login">
-    <h3>Iniciar sesión</h3>
-    <div class="w3_login_module">
-      <div class="module form-module">
-        <div class="toggle">
+<div class="w3_login">
+  <% flash.each do |key, value| %>
+    <div class="<%= flash_class(key) %>">
+      <%= value %>
+    </div>
+  <% end %>
+  <h3>Iniciar sesión</h3>
+  <div class="w3_login_module">
+    <div class="module form-module">
+      <div class="toggle">
 
-        </div>
-        <div class="form">
-          <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      </div>
+      <div class="form">
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 
-            <fieldset class="form-group">
-              <%= f.label :email %><br />
-              <%= f.email_field :email, class:'form-control required',  autofocus: true %>
-            </fieldset>
+          <fieldset class="form-group">
+            <%= f.label :email %><br />
+            <%= f.email_field :email, class:'form-control required',  autofocus: true %>
+          </fieldset>
 
-            <fieldset class="form-group">
-              <%= f.label :password, 'Contraseña' %><br>
-              <%= f.password_field :password, class:'form-control required', autocomplete: 'off' %>
-            </fieldset>
+          <fieldset class="form-group">
+            <%= f.label :password, 'Contraseña' %><br>
+            <%= f.password_field :password, class:'form-control required', autocomplete: 'off' %>
+          </fieldset>
 
-            <% if devise_mapping.rememberable? -%>
-              <div class="checkbox">
-                <label>
-                  <%= f.check_box :remember_me %> Recordarme
-                </label>
-              </div>
-            <% end -%>
+          <% if devise_mapping.rememberable? -%>
+            <div class="checkbox">
+              <label>
+                <%= f.check_box :remember_me %> Recordarme
+              </label>
+            </div>
+          <% end -%>
 
-            <%= f.submit 'Ingresar', class:'btn btn-primary' %>
-          <% end %>
-          <br>
-          <br>
-        </div>
-        <div class="form">
+          <%= f.submit 'Ingresar', class:'btn btn-primary' %>
+        <% end %>
+        <br>
+        <br>
+      </div>
+      <div class="form">
 
-        </div>
-        <div class="cta">
-          <%= render 'devise/shared/links' %>
-        </div>
+      </div>
+      <div class="cta">
+        <%= render 'devise/shared/links' %>
       </div>
     </div>
-
   </div>
-</div>
-
-<div class="container fill registration">
 
 </div>
+

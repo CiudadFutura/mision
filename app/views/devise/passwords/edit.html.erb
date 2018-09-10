@@ -1,18 +1,42 @@
-<div class="container fill">
-	<h2>Cambiar mi clave</h2>
+<%= javascript_include_tag 'usuarios' %>
+<% content_for :title, 'Cambiar mi clave' %>
+<% navigation_add 'Cambiar mi clave', '#' %>
+<div class="w3_login">
+  <% flash.each do |key, value| %>
+    <div class="<%= flash_class(key) %>">
+      <%= value %>
+    </div>
+  <% end %>
+  <h3>Cambiar mi clave</h3>
+  <div class="w3_login_module">
+    <div class="module form-module">
+      <div class="toggle">
 
-	<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-	  <%= devise_error_messages! %>
-	  <%= f.hidden_field :reset_password_token %>
+      </div>
+      <div class="form">
+        <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+          <%= devise_error_messages! %>
+          <%= f.hidden_field :reset_password_token %>
 
-	  <div><%= f.label :password, "Nueva Clave" %><br />
-	    <%= f.password_field :password, autofocus: true, autocomplete: "off" %></div>
+          <div><%= f.label :password, 'Nueva Clave' %><br />
+            <%= f.password_field :password, autofocus: true, autocomplete: "off" %></div>
 
-	  <div><%= f.label :password_confirmation, "Confirmar clave" %><br />
-	    <%= f.password_field :password_confirmation, autocomplete: "off" %></div>
+          <div><%= f.label :password_confirmation, 'Confirmar clave' %><br />
+            <%= f.password_field :password_confirmation, autocomplete: "off" %></div>
 
-	  <div><%= f.submit "Cambiar mi clave" %></div>
-	<% end %>
+          <div><%= f.submit 'Cambiar mi clave' %></div>
+        <% end %>
+        <br>
+        <br>
+      </div>
+      <div class="form">
 
-	<%= render "devise/shared/links" %>
+      </div>
+      <div class="cta">
+        <%= render 'devise/shared/links' %>
+      </div>
+    </div>
+  </div>
+
 </div>
+

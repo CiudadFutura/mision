@@ -16,7 +16,7 @@ en:
     failure:
       already_authenticated: ""
       inactive: "Tu cuenta aún no está activada."
-      invalid: "Inválide"
+      invalid: "Ups, halgo está mal. Usuario y/o password incorrectos!!"
       locked: "Tu cuenta está bloqueada."
       last_attempt: "You have one more attempt before your account will be locked."
       not_found_in_database: "Invalid email or password."
@@ -34,7 +34,7 @@ en:
       failure: "Could not authenticate you from %{kind} because \"%{reason}\"."
       success: "Successfully authenticated from %{kind} account."
     passwords:
-      no_token: "You can't access this page without coming from a password reset email. If you do come from a password reset email, please make sure you used the full URL provided."
+      no_token: "Tienes que acceder a esta página desde el link recibido a tu email de cambiar password."
       send_instructions: "En los próximos minutos recibiras un email con instrucciones para recuperar tu contraseña."
       send_paranoid_instructions: "If your email address exists in our database, you will receive a password recovery link at your email address in a few minutes."
       updated: "Tu contraseña ha sido cambiada exitosamente. Estas logueado al sitio."
@@ -47,7 +47,7 @@ en:
       signed_up_but_unconfirmed: "Gracias por registrarte! Un email ha sido enviado a tu casilla para confirmar tu
       cuenta. Por favor haz click en el link que se encuntra en dicho email para activar tu cuenta."
       update_needs_confirmation: "You updated your account successfully, but we need to verify your new email address. Please check your email and click on the confirm link to finalize confirming your new email address."
-      updated: "You updated your account successfully."
+      updated: "Se ha actualizado tu cuenta exitosamente."
     sessions:
       signed_in: ""
       signed_out: ""

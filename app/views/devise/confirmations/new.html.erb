@@ -1,18 +1,43 @@
-<div class="container fill">
-  <h2>Re envío de confirmación</h2>
+<%= javascript_include_tag 'usuarios' %>
+<% content_for :title, 'Re envío de confirmación' %>
+<% navigation_add 'Re envío de confirmación', '#' %>
+<div class="w3_login">
+  <% flash.each do |key, value| %>
+    <div class="<%= flash_class(key) %>">
+      <%= value %>
+    </div>
+  <% end %>
+  <h3>Re envío de confirmación</h3>
+  <div class="w3_login_module">
+    <div class="module form-module">
+      <div class="toggle">
 
-	<%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
-	  <%= devise_error_messages! %>
+      </div>
+      <div class="form">
+        <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
+          <%= devise_error_messages! %>
 
-	  <fieldset class="form-group">
-      <%= f.label :email %><br />
-      <%= f.email_field :email, class:'form-control', autofocus: true %>
-    </fieldset>
+          <fieldset class="form-group">
+            <%= f.label :email %><br />
+            <%= f.email_field :email, class:'form-control required', autofocus: true %>
+          </fieldset>
 
-	  <fieldset class='form-group',>
-      <%= f.submit "enviar", class:'btn btn-primary' %>
-    </fieldset>
-	<% end %>
+          <fieldset class='form-group',>
+            <%= f.submit 'enviar', class:'btn btn-primary' %>
+          </fieldset>
+        <% end %>
+        <br>
+        <br>
+      </div>
+      <div class="form">
 
-	<%= render "devise/shared/links" %>
+      </div>
+      <div class="cta">
+        <%= render 'devise/shared/links' %>
+      </div>
+    </div>
+  </div>
+
 </div>
+
+
