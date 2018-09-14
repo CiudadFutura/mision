@@ -1,9 +1,9 @@
 <%= javascript_include_tag 'admin', turbolinks: true  %>
 <div class="header-main">
   <div class="logo-w3-agile">
-    <h1>
-      <%= link_to 'Mision Admin', root_path %>
-    </h1>
+    <h1><%= link_to root_path do%>
+        <%= image_tag('v2/logoMai.png', class: 'img-responsive', width: '200px') %>
+      <% end %></h1>
   </div>
   <div class="w3layouts-left">
 

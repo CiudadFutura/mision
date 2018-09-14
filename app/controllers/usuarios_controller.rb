@@ -5,7 +5,8 @@ class UsuariosController < ApplicationController
   # GET /usuarios
   # GET /usuarios.json
   def index
-    @usuarios = Usuario.users
+    @usuarios = Usuario.by_roles(params[:role]).paginate(:page => params[:page], :per_page => 50)
+
     authorize! :index, @usuarios
     respond_to do |format|
       format.html
@@ -23,7 +24,6 @@ class UsuariosController < ApplicationController
 
   # GET /usuarios/new
   def new
-    puts 'entro'
     @usuario = Usuario.new
   end
 

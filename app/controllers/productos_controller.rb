@@ -23,7 +23,7 @@ class ProductosController < ApplicationController
     @view_prod = session[:view_prod]
     @ciclo_actual = Compra::ciclo_actual
 
-		@productos = Producto.all.order(:orden, :nombre)
+		@productos = Producto.all.order(:orden, :nombre).paginate(:page => params[:page], :per_page => 50)
     @todos = @productos
     @productos = @productos.stock if current_usuario.nil? || current_usuario.present? && !current_usuario.admin?
     @productos = @productos.disponibles.order(:orden, :nombre) if current_usuario.nil? || !current_usuario.admin?

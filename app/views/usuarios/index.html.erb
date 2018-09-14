@@ -1,4 +1,4 @@
-	<div class="container fill">
+<div class="center-section">
 	<div class="row">
 	  <h2>Usuarios</h2>
     <div class="navbar navs-fixed">
@@ -32,4 +32,7 @@
       </tbody>
     </table>
 	</div>
+  <div class="row">
+    <%= will_paginate @usuarios, :previous_label => 'Previo', :next_label => 'Siguiente' %>
+  </div>
 </div>

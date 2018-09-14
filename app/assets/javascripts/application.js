@@ -24,6 +24,7 @@
 //= require jquery-ui/widgets/autocomplete
 //= require turbolinks
 //= require jquery.flexslider-min
+//= require Chart
 
 
 $(document).on('turbolinks:load', function() {

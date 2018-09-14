@@ -1,9 +1,12 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap-sprockets
+//= require bootstrap-editable
+//= require bootstrap-editable-rails
 //= require raphael
 //= require morris
 //= require jquery.nicescroll
+//= require products_admin
 
 
 $(document).ready(function() {

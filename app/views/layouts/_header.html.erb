@@ -1,7 +1,7 @@
 <!-- header -->
 <div class="agileits_header">
   <div class="w3l_offers">
-    <a href="products.html">Ciudad Futura</a>
+    <%= link_to 'Ciudad Futura', 'http://ciudadfutura.com.ar/', :target => '_blank' %>
   </div>
   <div class="w3l_search">
     <form action="#" method="post">
@@ -27,7 +27,9 @@
 <div class="logo_products">
   <div class="container">
     <div class="w3ls_logo_products_left">
-      <h1><a href="/">Misión <span>antiinflación</span></a></h1>
+      <h1><%= link_to root_path do%>
+        <%= image_tag('v2/logoMai.png', class: 'img-responsive', width: '200px') %>
+        <% end %></h1>
     </div>
     <div class="w3ls_logo_products_left1">
       <ul class="special_items">
@@ -52,7 +54,7 @@
     <div class="w3ls_logo_products_left1">
       <ul class="phone_email">
         <li><i class="fa fa-phone" aria-hidden="true"></i>(341) 555 567</li>
-        <li><i class="fa fa-envelope-o" aria-hidden="true"></i><a href="mailto:victoriacolectiva@gmail.com">victoria@gmai.com</a></li>
+        <li><i class="fa fa-envelope-o" aria-hidden="true"></i><a href="mailto:victoriacolectiva@gmail.com">victoria@gmail.com</a></li>
       </ul>
     </div>
     <div class="clearfix"> </div>

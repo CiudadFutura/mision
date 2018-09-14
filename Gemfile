@@ -47,6 +47,7 @@ gem 'figaro'
 gem 'morrisjs-rails', '~> 0.5.1.2'
 gem 'raphael-rails', '~> 2.1', '>= 2.1.2'
 gem 'nicescroll-rails', '~> 3.5', '>= 3.5.4.1'
+gem 'chart-js-rails', '~> 0.0.9'
 
 gem 'thin', '~> 1.7', '>= 1.7.2'
 

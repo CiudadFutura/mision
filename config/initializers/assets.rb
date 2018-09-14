@@ -9,9 +9,10 @@ Rails.application.config.assets.version = '1.0'
 Rails.application.config.assets.precompile += %w(sign_up.js)
 Rails.application.config.assets.precompile += %w(productos.js)
 Rails.application.config.assets.precompile += %w(usuarios.js)
+Rails.application.config.assets.precompile += %w(suppliers.js)
 Rails.application.config.assets.precompile += %w(admin.css)
 Rails.application.config.assets.precompile += %w(admin.js)
-Rails.application.config.assets.precompile += %w(suppliers.js)
+Rails.application.config.assets.precompile += %w(admin-home.js)
 
 %w( controller_one controller_two controller_three ).each do |controller|
   Rails.application.config.assets.precompile += ["*.js", "*.scss"]

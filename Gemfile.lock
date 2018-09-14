@@ -93,6 +93,8 @@ GEM
       activemodel (>= 4.0.0)
       activesupport (>= 4.0.0)
       mime-types (>= 1.16)
+    chart-js-rails (0.0.9)
+      railties (> 3.1)
     code_analyzer (0.4.8)
       sexp_processor
     coderay (1.1.2)
@@ -435,6 +437,7 @@ DEPENDENCIES
   capistrano-rvm!
   capybara
   carrierwave
+  chart-js-rails (~> 0.0.9)
   coffee-rails
   database_cleaner
   devise (= 3.5.6)

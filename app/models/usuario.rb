@@ -25,6 +25,7 @@ class Usuario < ActiveRecord::Base
 
   scope :users, -> {where('type != "Sistema"')}
   scope :evo_usuarios, -> (date_param) {where('updated_at >= :today', today: date_param)}
+  scope :by_roles, lambda { |role| joins(:roles).where('roles.name = :name', name: role)}
 
 
   ADMIN = 'Admin'
@@ -126,6 +127,10 @@ class Usuario < ActiveRecord::Base
       YEAR(usuarios.created_at) as year')
       .group('year')
       .order('year').last(2)
+  end
+
+  def self.active_users
+    Usuario.where("last_sign_in_at like '%#{Time.current.year}%'" ).count
   end
 
 

@@ -58,6 +58,14 @@ class Pedido < ActiveRecord::Base
     return pedidos_por_ciclos
   end
 
+  def self.orders_per_cycles
+    Pedido.select('compras.nombre as name, count(pedidos.id) AS cycles,
+              YEAR(compras.fecha_inicio_compras) as year,
+              MONTH(compras.fecha_inicio_compras) as month')
+    .joins(:ciclo)
+    .group('year, month')
+  end
+
   def self.orders_qty_per_year
     count_orders = {}
     last_label = ''
@@ -94,6 +102,10 @@ class Pedido < ActiveRecord::Base
 
     return orders_by_cycles
 
+  end
+
+  def self.total_orders_circle
+    (Pedido.group(:compra_id).count).to_a.last
   end
 
   def self.total_orders_month
