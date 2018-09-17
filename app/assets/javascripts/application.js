@@ -70,6 +70,8 @@ $(document).on('turbolinks:load', function() {
     var old_class = '';
     var message_box = '';
 
+    var qty = $('#qty-selected-'+productId).val()
+
     if (action === 'add') {
       //Add a new item to cart
       new_action = 'remove';
@@ -87,7 +89,7 @@ $(document).on('turbolinks:load', function() {
 
     $.ajax({
       url: url,
-      data: { cantidad: that.prev('select.cantidad').val() },
+      data: { cantidad: qty },
       type: 'put'
     }).done(function (data) {
       //Update menu

@@ -1,0 +1,16 @@
+<% if @carrito.cantidad > 0 %>
+  <div class="row summary-cart">
+    <div class="col-md-3">
+      <h4>Datos de tu compra</h4>
+    </div>
+    <div class="col-md-3">
+      <h4>Ahorro: <span class="cart-ahorro"><%= number_to_percentage(@carrito.ahorro) %></span></h4>
+    </div>
+    <div class="col-md-3">
+      <h4>
+        <span class="cart-total"><%= number_to_currency(@carrito.total) %></span><br>
+        <span class="cart-cantidad"><%= pluralize(@carrito.cantidad, ' producto', ' productos') %></span>
+      </h4>
+    </div>
+  </div>
+<% end %>

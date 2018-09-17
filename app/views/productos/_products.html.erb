@@ -6,51 +6,7 @@
   <div class="w3ls_w3l_banner_nav_right_grid1">
     <h6><%= Categoria.find(params[:subcategoria_id]).nombre if params[:subcategoria_id].present? %></h6>
     <% @productos.each do |producto|%>
-      <div class="col-md-3 thumbnails">
-        <div class="hover14 column ">
-          <div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
-            <div class="agile_top_brand_left_grid_pos">
-              <%= image_tag('v2/offer.png', :class => 'img-responsive') %>
-
-            </div>
-            <div class="agile_top_brand_left_grid1">
-              <figure>
-                <div class="snipcart-item block">
-                  <div class="snipcart-thumb">
-                    <% if producto.imagen.blank? %>
-
-                      <%= image_tag('v2/no-disponible.png', class: 'img-responsive', height: '140px') %>
-                    <% else %>
-                      <%= link_to producto_path(producto.id) do%>
-                        <%= image_tag(producto.imagen, class: 'img-responsive', height: '140px', width: '150px') %>
-                      <% end %>
-                    <% end %>
-
-                    <p><%= producto.nombre %></p>
-                    <h4><%= number_to_currency(producto.precio) %> <span><%=  number_to_currency(producto.precio_super)%></span></h4>
-                  </div>
-                  <div class="snipcart-details">
-                    <form action="#" method="post">
-                      <fieldset>
-                        <input type="hidden" name="cmd" value="_cart" />
-                        <input type="hidden" name="add" value="1" />
-                        <input type="hidden" name="business" value=" " />
-                        <input type="hidden" name="item_name" value="dishwash gel, lemon" />
-                        <input type="hidden" name="amount" value="8.00" />
-                        <input type="hidden" name="discount_amount" value="1.00" />
-                        <input type="hidden" name="currency_code" value="USD" />
-                        <input type="hidden" name="return" value=" " />
-                        <input type="hidden" name="cancel_return" value=" " />
-                        <input type="submit" name="submit" value="Agregar al carro" class="button" />
-                      </fieldset>
-                    </form>
-                  </div>
-                </div>
-              </figure>
-            </div>
-          </div>
-        </div>
-      </div>
+      <%= render 'productos/item', producto: producto %>
     <% end %>
   </div>
 </div>

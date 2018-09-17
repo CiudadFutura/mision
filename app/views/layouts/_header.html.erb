@@ -10,13 +10,9 @@
     </form>
   </div>
   <div class="product_list_header">
-    <form action="#" method="post" class="last">
-      <fieldset>
-        <input type="hidden" name="cmd" value="_cart" />
-        <input type="hidden" name="display" value="1" />
-        <input type="submit" name="submit" value="Ver mi carrito" class="button" />
-      </fieldset>
-    </form>
+    <%= link_to(cart_path, class: 'prod-list') do %>
+      <i class="icon-lmcart"></i>Ver Mi Compra
+    <% end %>
   </div>
   <%= render 'layouts/user_menu' %>
   <div class="w3l_header_right1">
