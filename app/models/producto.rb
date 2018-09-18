@@ -12,7 +12,7 @@ class Producto < ActiveRecord::Base
   has_paper_trail
 
   scope :disponibles, -> { where(oculto: false) }
-	scope :destacados, -> {where(highlight: true)}
+	scope :destacados, -> {where(highlight: true, oculto: false)}
   scope :ocultos, -> {where(oculto: true)}
   scope :stock, -> {where('stock != 0 OR stock IS NULL')}
   scope :freesale, -> {where('sale_type = :free and oculto = :oculto' , free: 1, oculto: false)}

@@ -1,6 +1,6 @@
 <%= javascript_include_tag 'productos', params[:controller] %>
 <% content_for :title, 'Productos' %>
-<% navigation_add Categoria.find(params[:categoria_id]).nombre, '#' %>
+<% navigation_add Categoria.find(params[:categoria_id]).nombre, '#' if params[:categoria_id].present? %>
 
 <%= render 'carts/cart_summary' %>
 
