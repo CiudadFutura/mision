@@ -1,5 +1,6 @@
 class ProductosController < ApplicationController
   before_action :set_producto, only: [:show, :edit, :update, :destroy]
+  autocomplete :producto, :nombre, :extra_data =>[:cantidad_permitida, :precio, :precio_super, :descripcion]
 
   # GET /productos
   # GET /productos.json
@@ -116,6 +117,19 @@ class ProductosController < ApplicationController
     end
   end
 
+  def search
+    @productos = Producto.search(params[:term])
+    render 'search.json'
+  end
+  def bundle_item
+    @items= Producto.find(params[:id])
+    render 'bundle_item.json'
+  end
+  def add_bundle_product
+    @producto = Producto.build
+    render 'add_bundle_product', layout: false
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_producto
@@ -130,6 +144,7 @@ class ProductosController < ApplicationController
                                        :pack, :faltante,:cantidad_permitida, :imagen, :stock,
                                        :orden_remito, :view_type,
 																			 :sale_type,
+                                       bundle_products_attributes: [:id, :item_id, :qty, :description],
                                        categoria_ids: [])
     end
 end

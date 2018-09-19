@@ -89,6 +89,9 @@ gem 'bootstrap-editable-rails'
 gem 'jquery-validation-rails'
 gem 'jquery-ui-rails'
 
+# JQuery Autocomplete
+gem 'rails-jquery-autocomplete', '~> 1.0', '>= 1.0.3'
+
 # full calendar
 gem 'fullcalendar-rails'
 gem 'momentjs-rails'

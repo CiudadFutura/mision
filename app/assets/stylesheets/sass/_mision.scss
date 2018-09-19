@@ -61,8 +61,140 @@ span.glyphicon.glyphicon-shopping-cart.my-cart-icon.my-cart-icon-affix {
     color: #FA1818 ;
     font-size: small;
   }
-
 }
+
+.products-search input {
+  outline: none;
+  padding: 10px;
+  color: #212121;
+  font-size: 14px;
+  width: 85%;
+  background: #fff;
+  border: 1px solid #999;
+  float: left;
+}
+
+.products-search input:focus, .ui-autocomplete-input:focus {
+  outline: none;
+}
+.products-search .results .ui-widget-content {
+  background: #fff;
+  font-size: .9em;
+  padding: .5em 0;
+  border-color: #ddd;
+  box-shadow: 0 .1em .2em rgba(187, 187, 187, 0.64);
+  line-height: 1.2;
+  max-height: 20em;
+  overflow: hidden;
+  overflow-y: auto;
+}
+
+.products-search .results .ui-menu-item {
+  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  padding: .4em .6em .4em 6.2em;
+  position: relative;
+  border: 0;
+  border-left: 5px solid transparent;
+  position: relative;
+  height: 6.5em;
+}
+.products-search .results .ui-state-focus {
+  background: #fff;
+  border-left-color: #08c;
+  font-weight: 300;
+}
+.products-search .results .ui-menu-item .img {
+  position: absolute;
+  width: 5em;
+  height: 6em;
+  top: .4em;
+  left: .6em;
+  overflow: hidden;
+}
+
+.products-search .results .ui-menu-item .img img {
+  max-width: 100%;
+}
+
+.products-search .results .ui-menu-item .title {
+  display: block;
+  color: #555;
+}
+
+.products-search .results .ui-menu-item .author {
+  display: block;
+  font-size: .8em;
+  text-transform: uppercase;
+  color: #aaa;
+  margin-top: .6em;
+  letter-spacing: 1px;
+}
+
+.products-search .results .ui-menu-item .price {
+  display: block;
+  font-size: .8em;
+  color: #aaa;
+  margin-top: .5em;
+}
+
+.products-search .results .ui-state-focus .price,
+.products-search .results .ui-state-focus .author,
+.products-search .results .ui-state-focus .title {
+  color: #08c;
+}
+
+.ui-autocomplete {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  float: left;
+  display: none;
+  min-width: 160px;
+  _width: 160px;
+  padding: 4px 0;
+  margin: 2px 0 0 0;
+  list-style: none;
+  background-color: #ffffff;
+  border-color: #ccc;
+  border-color: rgba(0, 0, 0, 0.2);
+  border-style: solid;
+  border-width: 1px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  -webkit-background-clip: padding-box;
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+  *border-right-width: 2px;
+  *border-bottom-width: 2px;
+
+  .ui-menu-item > a.ui-corner-all {
+    display: block;
+    padding: 3px 15px;
+    clear: both;
+    font-weight: normal;
+    line-height: 18px;
+    color: #555555;
+    white-space: nowrap;
+
+
+
+  }
+}
+.ui-widget-content .ui-state-focus {
+  color: #ffffff;
+  text-decoration: none;
+  background-color: #0088cc;
+  border-radius: 0px;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  background-image: none;
+}
+
 .btn-danger {
   color: #fff;
   background-color: #FA1818;
@@ -518,6 +650,9 @@ ul.dropdown-menu.drp-mnu li a i {
 }
 .wthree_banner_bottom_left {
   padding-left: 0;
+  padding-bottom: 1em;
+  margin-bottom: 1.5em;
+  min-height: 210px;
 }
 .wthree_banner_bottom_left_grid{
   position:relative;
@@ -3507,14 +3642,15 @@ input.checkbox:checked:after {
   .more {
     margin-left: 39em;
   }
-  .wthree_banner_bottom_left_grid_sub,.wthree_banner_bottom_left_grid_sub1 {
+  .wthree_banner_bottom_left_grid_sub,
+  .wthree_banner_bottom_left_grid_sub1 {
     float: none;
     width: 100%;
   }
   .wthree_banner_bottom_left {
     padding: 0 1em;
-    float: left;
-    width: 33.33%;
+    min-height: 170px;
+    margin-bottom: 1em;
   }
   .top_brand_left {
     padding: 0 1em;
@@ -3944,9 +4080,7 @@ input.checkbox:checked:after {
     width: 30%;
   }
   .wthree_banner_bottom_left {
-    float: none;
-    width: 60%;
-    margin: 0 auto;
+    margin-bottom: 1em;
   }
   .wthree_banner_bottom_left:nth-child(2) {
     margin: 2em auto;

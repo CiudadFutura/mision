@@ -4,10 +4,14 @@
     <%= link_to 'Ciudad Futura', 'http://ciudadfutura.com.ar/', :target => '_blank' %>
   </div>
   <div class="w3l_search">
-    <form action="#" method="post">
-      <input type="text" name="Product" value="Buscar producto..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search a product...';}" required="">
-      <input type="submit" value=" ">
-    </form>
+    <div class="products-search">
+      <form action="#" method="post">
+        <%= hidden_field_tag :producto_id, '', id: 'my_producto_id' %>
+        <%= autocomplete_field_tag 'search', '',autocomplete_producto_nombre_productos_path, :id_element => '#my_producto_id', 'data-auto-focus' => true %>
+        <div class="results" id="products-search-results"></div>
+        <input type="submit" value=" ">
+      </form>
+    </div>
   </div>
   <div class="product_list_header">
     <%= link_to(cart_path, class: 'prod-list') do %>

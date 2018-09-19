@@ -293,6 +293,8 @@ GEM
       rails-deprecated_sanitizer (>= 1.0.1)
     rails-html-sanitizer (1.0.4)
       loofah (~> 2.2, >= 2.2.2)
+    rails-jquery-autocomplete (1.0.4)
+      rails (>= 3.2)
     rails_best_practices (1.19.3)
       activesupport
       code_analyzer (>= 0.4.8)
@@ -472,6 +474,7 @@ DEPENDENCIES
   pry-remote
   pry-stack_explorer
   rails (= 4.2.10)
+  rails-jquery-autocomplete (~> 1.0, >= 1.0.3)
   rails_best_practices
   raphael-rails (~> 2.1, >= 2.1.2)
   rspec-rails (~> 3.4.2)
