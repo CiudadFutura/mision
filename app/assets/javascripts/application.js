@@ -66,7 +66,7 @@ $(document).on('turbolinks:load', function() {
     var new_title, new_action;
     var action = that.data('action');
     var productId = that.data('productid');
-    var url = 'cart/' + action + '/' + productId;
+    var url = '/cart/' + action + '/' + productId;
     var new_class = '';
     var old_class = '';
     var message_box = '';

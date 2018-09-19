@@ -1,36 +1,85 @@
 <%- model_class = Producto -%>
-<div class="container fill">
-	<div class="row">
-    <h2><%=t '.title', :default => model_class.model_name.human.titleize %></h2>
-	  <dl class="dl-horizontal">
-	    <dt><strong><%= model_class.human_attribute_name(:precio) %>:</strong></dt>
-	    <dd><%= @producto.precio %></dd>
-	    <dt><strong><%= model_class.human_attribute_name(:nombre) %>:</strong></dt>
-	    <dd><%= @producto.nombre %></dd>
-	    <dt><strong><%= model_class.human_attribute_name(:descripcion) %>:</strong></dt>
-	    <dd><%= @producto.descripcion %></dd>
-	    <dt><strong><%= model_class.human_attribute_name(:precio_super) %>:</strong></dt>
-	    <dd></dd>
-	    <dt><strong><%= model_class.human_attribute_name(:cantidad_permitida) %>:</strong></dt>
-	    <dd><%= @producto.cantidad_permitida %></dd>
-	  </dl>
-	  <%=link_to "", class: "btn btn-default", data: {
-			               target: @cart_action,
-			               addUrl: add_to_cart_path(@producto),
-			               removeUrl: remove_from_cart_path(@producto)} do %>
-	    <span><%=@cart_action%></span> Cart
-	  <%end%>
 
-	  <%= link_to t('.back', :default => t("helpers.links.back")),
-	              productos_path, :class => 'btn btn-default'  %>
-	  <%= link_to t('.edit', :default => t("helpers.links.edit")),
-	              edit_producto_path(@producto), :class => 'btn btn-default' %>
-	  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-	              producto_path(@producto),
-	              :method => 'delete',
-	              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-	              :class => 'btn btn-danger' %>
-	</div>
+<div class="agileinfo_single">
+  <h5><%= @producto.nombre %></h5>
+  <div class="col-md-4 agileinfo_single_left">
+    <% if @producto.imagen.blank? %>
+      <%= image_tag('v2/no-disponible.png', class: 'img-responsive') %>
+    <% else %>
+      <%= image_tag(@producto.imagen, class: 'img-responsive') %>
+    <% end %>
+  </div>
+  <div class="col-md-8 agileinfo_single_right">
+    <div class="rating1">
+						<span class="starRating">
+							<input id="rating5" type="radio" name="rating" value="5">
+							<label for="rating5">5</label>
+							<input id="rating4" type="radio" name="rating" value="4">
+							<label for="rating4">4</label>
+							<input id="rating3" type="radio" name="rating" value="3" checked>
+							<label for="rating3">3</label>
+							<input id="rating2" type="radio" name="rating" value="2">
+							<label for="rating2">2</label>
+							<input id="rating1" type="radio" name="rating" value="1">
+							<label for="rating1">1</label>
+						</span>
+    </div>
+    <div class="w3agile_description">
+      <h4>Descripción :</h4>
+      <p><%= @producto.descripcion %></p>
+    </div>
+    <div class="snipcart-item block">
+      <div class="snipcart-thumb agileinfo_single_right_snipcart">
+        <h4><%= @producto.precio %> <span>Ahorro <%= number_to_percentage(@producto.ahorro) %></span></h4>
+      </div>
+      <div class="snipcart-details agileinfo_single_right_details">
+        <div class="col-sm-8 col-sm-4-offset">
+          <% if @producto.stock.present? and @producto.cantidad_permitida > @producto.stock
+               cantidad = @producto.stock
+             else
+               cantidad =  @producto.cantidad_permitida
+             end %>
+          <div class="col-sm-3">
+            <select id="qty-selected-<%= @producto.id %>" class="cantidad form-control">
+              <% for i in 1..cantidad %>
+                <% if @carrito.producto?(@producto.id) %>
+                  <option value="<%= i%>" <%= (i == @carrito.cantidad_prod(@producto.id)) ?'selected':''%>><%= i %></option>
+                <% else %>
+                  <option value="<%= i %>"><%= i %></option>
+                <% end %>
+              <% end %>
+            </select>
+          </div>
+          <div class="col-sm-6">
+            <% if @carrito.producto?(@producto.id) %>
+
+              <%= button_tag(type: 'button',
+                             class: 'btn btn-sm btn-danger',
+                             data: {
+                               action: 'remove',
+                               productId: @producto.id
+                             }) do %>
+                <span class="fa fa-remove"></span> <span class="cart-action">Eliminar del</span> carro
+              <% end %>
+            <% else %>
+              <%= button_tag(type: 'button',
+                             class: 'btn btn-sm btn-success',
+                             data: {
+                               productId: @producto.id,
+                               orden_remito: @producto.orden_remito,
+                               action: 'add'
+                             }) do %>
+                <span class="fa fa-shopping-cart"></span> <span class="cart-action">Agregar al</span> carro
+              <% end %>
+            <% end %>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="clearfix"> </div>
 </div>
-
+<div class="clearfix"> </div>
 
