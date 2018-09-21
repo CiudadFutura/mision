@@ -49,6 +49,9 @@ class ProductosController < ApplicationController
   def show
     # todo: Se sigue usando???
     # @cart_action = @producto.cart_action(session)
+    cat = @producto.categorias.first.id
+    @related_products = @producto.get_related_products(cat)
+
   end
 
   # GET /productos/new

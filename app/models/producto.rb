@@ -4,7 +4,12 @@ class Producto < ActiveRecord::Base
   belongs_to :supplier
   has_many :transaction_details
   has_many :bundle_products
+  has_many :roles, :through => :usuario_roles
+  has_and_belongs_to_many :categorias
+
+
   accepts_nested_attributes_for :bundle_products
+
 
   validates :codigo, uniqueness: true
   #validates :supplier, presence: true
@@ -69,6 +74,12 @@ class Producto < ActiveRecord::Base
     else
       0.0
     end
+  end
+
+  def get_related_products(categoria)
+    #get random products
+    Producto.joins(:categorias).where('categorias.id = :id OR categorias.parent_id = :id',
+                             id: categoria).order("RAND()").limit(3) if categoria
   end
 
   def self.search(term)
