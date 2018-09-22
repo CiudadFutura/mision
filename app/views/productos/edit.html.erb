@@ -1,7 +1,9 @@
 <%- model_class = Producto -%>
-<div class="container fill">
-  <div class="row">
-	  <h2><%=t '.title', :default => [:'helpers.titles.edit', 'Edit %{model}'], :model => model_class.model_name.human.titleize %></h2>
-		<%= render 'form' %>
+<div class="agile3-grids">
+  <div class="gallery-grids">
+    <div class="col-md-6 gallery-grids-left">
+	    <h2><%=t '.title', :default => [:'helpers.titles.edit', 'Edit %{model}'], :model => model_class.model_name.human.titleize %></h2>
+		  <%= render 'form' %>
+	  </div>
 	</div>
 </div>

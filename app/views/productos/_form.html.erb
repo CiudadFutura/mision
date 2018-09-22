@@ -22,7 +22,6 @@
           <div class="controls">
             <%= f.text_field :nombre, :class => 'form-control' %>
           </div>
-          <%= error_span(@producto[:nombre]) %>
         </div>
 
       </div>
@@ -33,7 +32,6 @@
           <div class="controls">
             <%= f.text_field :marca, :class => 'form-control' %>
           </div>
-          <%= error_span(@producto[:marca]) %>
         </div>
       </div>
 
@@ -43,7 +41,6 @@
           <div class="controls">
             <%= f.text_field :codigo, :class => 'form-control' %>
           </div>
-          <%= error_span(@producto[:codigo]) %>
         </div>
       </div>
       <div class="col-sm-6">
@@ -53,7 +50,6 @@
             <div class="controls">
               <%= f.text_field :precio, :class => 'form-control' %>
             </div>
-            <%= error_span(@producto[:precio]) %>
           </div>
         </div>
         <div class="col-sm-6">
@@ -62,7 +58,6 @@
             <div class="controls">
               <%= f.text_field :precio_super, :class => 'form-control' %>
             </div>
-            <%= error_span(@producto[:precio_super]) %>
           </div>
         </div>
       </div>
@@ -73,7 +68,6 @@
             <div class="controls">
               <%= f.text_field :cantidad_permitida, :class => 'form-control' %>
             </div>
-            <%= error_span(@producto[:cantidad_permitida]) %>
           </div>
         </div>
         <div class="col-sm-4">
@@ -82,7 +76,6 @@
             <div class="controls">
               <%= f.text_field :stock, :class => 'form-control' %>
             </div>
-            <%= error_span(@producto[:stock]) %>
           </div>
         </div>
         <div class="col-sm-4">
@@ -92,7 +85,6 @@
               <%= f.select(:pack, options_for_select(Producto.packs.map{|x,y| [t(x), x]}, selected: @producto.pack),
                           {:include_blank => 'Seleccione...'}, class:'form-control', id:'pack') %>
             </div>
-            <%= error_span(@producto[:pack]) %>
           </div>
         </div>
       </div>
@@ -103,7 +95,6 @@
             <div class="controls">
               <%= f.text_field :orden, :class => 'form-control' %>
             </div>
-            <%= error_span(@producto[:orden]) %>
           </div>
         </div>
         <div class="col-sm-4">
@@ -112,7 +103,6 @@
             <div class="controls">
               <%= f.text_field :orden_remito, :class => 'form-control' %>
             </div>
-            <%= error_span(@producto[:orden_remito]) %>
           </div>
         </div>
         <div class="col-sm-4">
@@ -121,7 +111,6 @@
             <div class="controls">
               <%= f.check_box :sale_type, :class => 'form-control' %>
             </div>
-            <%= error_span(@producto[:sale_type]) %>
           </div>
         </div>
       </div>
@@ -133,7 +122,6 @@
             <div class="controls">
               <%= f.check_box :oculto, :class => 'form-control' %>
             </div>
-            <%= error_span(@producto[:oculto]) %>
           </div>
         </div>
         <div class="col-sm-4">
@@ -142,7 +130,6 @@
             <div class="controls">
               <%= f.check_box :highlight, :class => 'form-control' %>
             </div>
-            <%= error_span(@producto[:highlight]) %>
           </div>
         </div>
         <div class="col-sm-4">
@@ -154,7 +141,6 @@
                       { include_blank: 'Elija proveedor'},
                       class: 'form-control') %>
             </div>
-            <%= error_span(@producto[:supplier]) %>
           </div>
         </div>
       </div>
@@ -174,7 +160,6 @@
           <div class="controls">
             <%= f.file_field :imagen %>
           </div>
-          <%= error_span(@producto[:imagen]) %>
         </div>
       </div>
       <div class="col-sm-6">
@@ -190,7 +175,6 @@
         <div class="controls">
           <%= f.text_area :descripcion, :class => 'form-control', :rows => "4" %>
         </div>
-        <%= error_span(@producto[:descripcion]) %>
       </div>
     </div>
   </div>
@@ -209,7 +193,7 @@
 
   </fieldset>
   <fieldset class="form-group">
-    <div class="col-sm-12">
+    <div class="col-md-12">
       <div class="form-group">
         <%= f.radio_button :product_type, 0, :checked => @producto.product_type.blank? %>
         <%= f.label :product_type, 'Común'%>
