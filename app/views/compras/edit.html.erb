@@ -1,14 +1,8 @@
-<%= javascript_include_tag "compras", params[:controller] %>
-<div class="container fill">
-  <h3>Editar Ciclo de Compra</h3>
-  <div class="breadcrumb">
-    <%= link_to 'Mostrar', @compra %>
-    <%= link_to 'Atras', compras_path %>
-  </div>
-	<div class="row">
-		<%= render 'form_send_mail' %>
-	</div>
-	<div class="row">
+<div class="validation-system">
+  <div class="validation-form">
+    <div class="col-md-12">
+		  <%= render 'form_send_mail' %>
+    </div>
     <%= render 'form' %>
 	</div>
 </div>

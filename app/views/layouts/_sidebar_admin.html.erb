@@ -39,13 +39,6 @@
         </li>
       <% end %>
       <li id="menu-academico" >
-        <a href="charts.html">
-          <i class="fa fa-bar-chart"></i>
-          <span>Charts</span>
-          <div class="clearfix"></div>
-        </a>
-      </li>
-      <li id="menu-academico" >
         <a href="#">
           <i class="fa fa-shopping-cart" aria-hidden="true"></i>
           <span> Productos</span>
@@ -69,6 +62,38 @@
             <% end %>
           </li>
         </ul>
+      </li>
+      <li id="menu-academico" >
+        <a href="#">
+          <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+          <span> Ciclos</span>
+          <span class="fa fa-angle-right" style="float: right"></span>
+          <div class="clearfix"></div>
+        </a>
+        <ul id="menu-academico-sub" >
+          <li id="menu-academico-avaliacoes" >
+            <%= link_to productos_path(view_prod: 'ocultos') do %>
+              Ocultos
+            <% end %>
+          </li>
+          <li id="menu-academico-avaliacoes" >
+            <%= link_to productos_path(view_prod: 'visibles') do %>
+              Visibles
+            <% end %>
+          </li>
+          <li id="menu-academico-avaliacoes" >
+            <%= link_to productos_path() do %>
+              Todos
+            <% end %>
+          </li>
+        </ul>
+      </li>
+      <li id="menu-academico" >
+        <a href="charts.html">
+          <i class="fa fa-bar-chart"></i>
+          <span>Charts</span>
+          <div class="clearfix"></div>
+        </a>
       </li>
       <li id="menu-academico" ><a href="errorpage.html"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i><span>Error Page</span><div class="clearfix"></div></a></li>
       <li id="menu-academico" ><a href="#"><i class="fa fa-cogs" aria-hidden="true"></i><span> UI Components</span> <span class="fa fa-angle-right" style="float: right"></span><div class="clearfix"></div></a>

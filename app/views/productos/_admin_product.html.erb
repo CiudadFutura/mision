@@ -11,10 +11,7 @@
         <th>Precio Super</th>
         <th>Cantidad Permitida</th>
         <th>Stock</th>
-        <th>Faltante</th>
         <th>Rubro</th>
-        <th>Orden Remito</th>
-        <th></th>
         <th></th>
       </tr>
       <tbody>
@@ -118,20 +115,6 @@
             </td>
             <td>
               <%= link_to '#',
-                          class: 'editable faltante',
-                          data: { pk: producto.id,
-                                  type: 'select',
-                                  title: 'Faltante',
-                                  url: producto_path(producto.id),
-                                  name: 'faltante',
-                                  value: producto.faltante,
-                                  resource: 'producto',
-                                  turbolinks:'false'
-                          } do %><%= producto.faltante? ? 'Si' : 'No'  %>
-              <% end %>
-            </td>
-            <td>
-              <%= link_to '#',
                           class: 'editable pack',
                           data: { pk: producto.id,
                                   type: 'select',
@@ -142,20 +125,6 @@
                                   resource: 'producto',
                                   turbolinks:'false'
                           } do %><%= I18n.t(producto.pack, :default => '')%>
-              <% end %>
-            </td>
-            <td>
-              <%= link_to '#',
-                          class: 'editable orden-remito',
-                          data: { pk: producto.id,
-                                  type: 'text',
-                                  title: 'Orden Remito',
-                                  url: producto_path(producto.id),
-                                  name: 'orden_remito',
-                                  value: producto.orden_remito,
-                                  resource: 'producto',
-                                  turbolinks:'false'
-                          } do %><%= producto.try('orden_remito')  %>
               <% end %>
             </td>
             <td>
