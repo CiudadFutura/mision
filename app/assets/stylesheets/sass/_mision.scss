@@ -8,6 +8,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 // Actual CSS:
 
 $color-red: #aa0000;
+$color-light-blue: #22beef;
+$color-violet: #8e44ad;
 $color-red-text: #ffffff;
 $color-green: #007200;
 $color-green-text: #ffffff;
@@ -185,6 +187,41 @@ span.glyphicon.glyphicon-shopping-cart.my-cart-icon.my-cart-icon-affix {
 
   }
 }
+
+.four-grid {
+  text-align: center;
+  margin-bottom: 3em;
+  .users{
+    padding-top: 1.5em;
+    background: $color-red;
+    height: 10em;
+  }
+  .circles{
+    padding-top: 1.5em;
+    background: $color-light-blue;
+    height: 10em;
+  }
+  .products{
+    padding-top: 1.5em;
+    background: $color-violet;
+    height: 10em;
+  }
+  i {
+    color: #fff;
+    font-size: 32px;
+  }
+  h3{
+    font-size: 20px;
+    color: #fff;
+    margin: 14px 0;
+  }
+  h4 {
+    font-size: 30px;
+    color: #fff;
+    margin: 0;
+  }
+}
+
 .ui-widget-content .ui-state-focus {
   color: #ffffff;
   text-decoration: none;
