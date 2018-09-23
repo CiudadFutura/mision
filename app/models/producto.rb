@@ -20,6 +20,7 @@ class Producto < ActiveRecord::Base
 
   scope :disponibles, -> { where(oculto: false) }
 	scope :destacados, -> {where(highlight: true, oculto: false)}
+	scope :offers, -> {joins(:suppliers).where(highlight: true, oculto: false, nature: 1).order("RAND()").limit(3)}
   scope :ocultos, -> {where(oculto: true)}
   scope :stock, -> {where('stock != 0 OR stock IS NULL')}
   scope :freesale, -> {where('sale_type = :free and oculto = :oculto' , free: 1, oculto: false)}
@@ -80,6 +81,12 @@ class Producto < ActiveRecord::Base
     #get random products
     Producto.joins(:categorias).where('categorias.id = :id OR categorias.parent_id = :id',
                              id: categoria).order("RAND()").limit(3) if categoria
+  end
+
+  def self.get_offers_products
+    #get random products
+    Producto.joins(:supplier).where('suppliers.nature = :id',
+                                      id: 1).order("RAND()").limit(4)
   end
 
   def self.search(term)
