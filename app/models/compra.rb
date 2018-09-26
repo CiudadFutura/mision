@@ -2,7 +2,7 @@ class Compra < ActiveRecord::Base
   #has_and_belongs_to_many :circulos
   has_many :deliveries
   has_many :circulos, :through => :deliveries
-  has_many :pedidos
+  has_many :pedidos, :dependent => :restrict_with_error
 
 	enum tipo: [:circles, :free, :mini]
 
@@ -21,6 +21,7 @@ class Compra < ActiveRecord::Base
   def self.next_cycles
     Compra.where('compras.fecha_inicio_compras >= ?', Date.today).order('compras.fecha_inicio_compras')
   end
+
 
   def self.get_last_status(sectors, delivery_id)
     last_status = 0

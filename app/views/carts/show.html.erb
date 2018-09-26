@@ -1,37 +1,114 @@
 <%= javascript_include_tag "cart" %>
-<div class="container fill">
+
+<div class="privacy about">
+  <h3>Mi compra</h3>
+
   <div class="row">
     <% flash.each do |key, value| %>
-        <%= content_tag :div, value, class: "flash #{key}" %>
+      <%= content_tag :div, value, class: "flash #{key}" %>
     <% end %>
     <% if @missing.present? %>
       <div class="alert alert-danger">
         <p>No hay cantidad suficiente para los siguientes productos</p>
         <ul>
           <% @missing.each do |k, miss| %>
-                <li><%= miss.nombre%>. Cantidad sugerida: <%= miss.stock%></li>
+            <li><%= miss.nombre%>. Cantidad sugerida: <%= miss.stock%></li>
           <% end %>
         </ul>
       </div>
     <% end %>
   </div>
-	<% if @ciclo_actual.present? %>
-			<% if current_usuario && @ciclo_actual.tipo != 'free' || @ciclo_actual.tipo == 'mini' %>
-					<% if @ciclo_actual.circulos.include?(current_usuario.circulo) || @ciclo_actual.tipo == 'mini'  %>
-							<% if !current_usuario.pedido?(@ciclo_actual) %>
-									<%= render 'carts/cart' %>
-							<% else %>
-									<p class="explicacion"><span class="label label-warning">Disculpa. Ya haz realizado tu pedido. Por el momento la misión solo admite un pedido por usuario por ciclo.</span></p>
-							<% end %>
-					<% else %>
-							<p class="explicacion"><span class="label label-warning">Tú Círculo no está habilitado para realizar la compra en este ciclo.</span></p>
-					<% end %>
-			<% elsif @ciclo_actual.tipo == 'free'%>
-					<%= render 'carts/cart_free' %>
-			<% else %>
-					<p class="explicacion"><span class="label label-warning">No perteneces a ningun circulo. Comunicate con un coordinador. Recuerda que tu numero de usuario es <b><%= current_usuario.id %></b></span></p>
-			<% end %>
-	<% else %>
-			<p class="explicacion"><span class="label label-warning">No hay un ciclo de compras activo, en estos momentos no se puede relizar el pedido.</span></p>
-	<% end %>
+
+  <div class="checkout-right">
+    <h4>Tu carrito contiene: <span><%= pluralize(@carrito.cantidad, ' producto', ' productos') %></span></h4>
+    <% if @ciclo_actual.circulos.include?(current_usuario.circulo) || @ciclo_actual.tipo == 'mini'  %>
+      <% if !current_usuario.pedido?(@ciclo_actual) %>
+        <%= render 'carts/cart' %>
+      <% else %>
+        <p class="explicacion"><span class="label label-warning">Disculpa. Ya haz realizado tu pedido. Por el momento la misión solo admite un pedido por usuario por ciclo.</span></p>
+      <% end %>
+    <% else %>
+      <p class="explicacion"><span class="label label-warning">Tú Círculo no está habilitado para realizar la compra en este ciclo.</span></p>
+    <% end %>
+  </div>
+  <div class="row">
+    <div class="col-sm-4 col-sm-offset-8 checkout-left-basket">
+      <h4>Resúmen de mi compra</h4>
+
+      <% if @transactions.present? %>
+        <strong>NOTA DE CRÉDITO</strong>
+        <ul>
+          <% @transactions.each do |transaction| %>
+            <li>
+              #<%= transaction.id %> <i>-</i> <span><%= number_to_currency(transaction.amount) %></span>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+
+      <ul>
+        <li>Total de Ahorro <i>-</i> <span><%= number_to_percentage(@carrito.ahorro) %></span></li>
+        <li>Total <i>-</i> <span><%= number_to_currency(@carrito.total) %></span></li>
+      </ul>
+
+    </div>
+  </div>
+  <div class="checkout-left">
+    <div class="col-md-8 address_form_agile">
+      <h4>Add a new Details</h4>
+      <form action="payment.html" method="post" class="creditly-card-form agileinfo_form">
+        <section class="creditly-wrapper wthree, w3_agileits_wrapper">
+          <div class="information-wrapper">
+            <div class="first-row form-group">
+              <div class="controls">
+                <label class="control-label">Full name: </label>
+                <input class="billing-address-name form-control" type="text" name="name" placeholder="Full name">
+              </div>
+              <div class="w3_agileits_card_number_grids">
+                <div class="w3_agileits_card_number_grid_left">
+                  <div class="controls">
+                    <label class="control-label">Mobile number:</label>
+                    <input class="form-control" type="text" placeholder="Mobile number">
+                  </div>
+                </div>
+                <div class="w3_agileits_card_number_grid_right">
+                  <div class="controls">
+                    <label class="control-label">Landmark: </label>
+                    <input class="form-control" type="text" placeholder="Landmark">
+                  </div>
+                </div>
+                <div class="clear"> </div>
+              </div>
+              <div class="controls">
+                <label class="control-label">Town/City: </label>
+                <input class="form-control" type="text" placeholder="Town/City">
+              </div>
+              <div class="controls">
+                <label class="control-label">Address type: </label>
+                <select class="form-control option-w3ls">
+                  <option>Office</option>
+                  <option>Home</option>
+                  <option>Commercial</option>
+
+                </select>
+              </div>
+            </div>
+            <button class="submit check_out">Delivery to this Address</button>
+          </div>
+        </section>
+      </form>
+
+      <% if @ciclo_actual && current_usuario && !current_usuario.pedido?(Compra:@ciclo_actual) %>
+        <div class="checkout-right-basket">
+          <%= link_to create_pedido_path, class: "btn btn-success #{'disabled' if @missing.present?}",
+                      id: 'finalizar' do %>
+            Finalizar pedido  <span class="fa fa-chevron-right" aria-hidden="true"></span>
+
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="clearfix"> </div>
+  </div>
 </div>

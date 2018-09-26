@@ -64,7 +64,6 @@ class ComprasController < ApplicationController
   # PATCH/PUT /compras/1
   # PATCH/PUT /compras/1.json
   def update
-
     respond_to do |format|
       if @compra.update(compra_params)
         format.html { redirect_to @compra, notice: 'Ciclo modificado exitosamente..' }
@@ -79,7 +78,6 @@ class ComprasController < ApplicationController
   # DELETE /compras/1
   # DELETE /compras/1.json
   def destroy
-    @compra.destroy
     respond_to do |format|
       format.html { redirect_to compras_url, notice: 'Ciclo eliminado exitosamente.' }
       format.json { head :no_content }

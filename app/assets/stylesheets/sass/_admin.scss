@@ -1013,6 +1013,36 @@ img.lg-item-img {
 header.widget-header h4 {
   font-size: 24px;
 }
+
+.cycles-table{
+  tbody{
+    .tr-details{
+      padding: 0px !important;
+      td{
+        padding: 0px !important;
+        .cycle-detail{
+          padding: 10px 5px 10px 5px;
+          margin-bottom: 10px;
+          background: #f3faff;
+          span{
+            color: #1b93e1;
+            font-size: 14px;
+          }
+          p{
+            font-size: 0.9em;
+            color: #999;
+            padding: 1em 0;
+            line-height: 2em;
+          }
+          table{
+            margin-bottom: 10px;
+          }
+        }
+      }
+    }
+  }
+}
+
 .table {
   margin-bottom: 0;
 }

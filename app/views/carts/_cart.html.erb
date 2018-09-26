@@ -1,5 +1,4 @@
 <div class="row">
-	<h3 class="titulo">Revisa tu pedido y confirmalo.</h3>
 
 	<p class="explicacion">
 		<b>Ciclo Actual: Desde el <%= l @ciclo_actual.fecha_inicio_compras %> hasta el <%= l @ciclo_actual.fecha_fin_compras %></b><br/>
@@ -13,78 +12,67 @@
 	<br>
 </div>
 <% unless @carrito.empty? %>
-		<div class="table-responsive">
+  <div class="table-responsive">
 
-			<table class="table">
-				<thead>
-				<tr>
-					<th>&nbsp;</th>
-					<th>Producto</th>
-					<th>Código</th>
-					<th>Precio Unit.</th>
-					<th>Precio Total</th>
-					<th>Ahorro Total</th>
-					<th>Acción</th>
-				</tr>
-				</thead>
-				<tbody>
-				<% @missing.each do |k, v| %>
-						<tr>
-							<td><%= v.id %></td>
-						</tr>
-				<% end %>
-				<% @carrito.items.each do |_producto_id, item| %>
-						<%
-							mclass ||=  'missing' if @missing.key?(item.producto.id.to_s) %>
-						<tr class="cart-item <%="#{mclass} "%>">
-							<td><%= item.cantidad.to_i %> x</td>
-							<td><%= item.producto.nombre %></td>
-							<td><%= item.producto.codigo %></td>
-							<td><%= number_to_currency(item.producto.precio) %></td>
-							<td><%= number_to_currency(item.total) %></td>
-							<td><%= number_to_percentage(item.ahorro) %></td>
-							<td>
-								<%= button_tag(type: 'button', class: 'btn btn btn-danger btn-xs',
-															 data: {
-																	 action: 'remove',
-																	 productId: item.producto.id
-															 }) do %>
-										<i class="">Borrar</i>
-								<% end %>
-							</td>
-						</tr>
-				<%end%>
-				<% if @transactions.present? %>
-						<% @transactions.each do |transaction| %>
-								<tr class="nota-credito">
-									<td>&nbsp;</td>
-									<td>&nbsp;</td>
-									<td>&nbsp;</td>
-									<td><strong>NOTA DE CRÉDITO:</strong></td>
-									<td>#<%= transaction.id %></td>
-									<td><%= number_to_currency(transaction.amount) %></td>
-									<td></td>
-								</tr>
-						<% end %>
-				<% end %>
-				<tr class="checkout-totales">
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td><strong>TOTAL:</strong></td>
-					<td><span class="cart-total"><%= number_to_currency(@carrito.total) %></span></td>
-					<td><span class="cart-ahorro"><%= number_to_percentage(@carrito.ahorro) %></span></td>
-					<td>&nbsp;</td>
-				</tr>
-				</tbody>
-			</table>
-		</div>
-		<% if @ciclo_actual && current_usuario && !current_usuario.pedido?(Compra:@ciclo_actual) %>
-				<div class="row text-right">
-					<%= link_to('Finalizar Compra', create_pedido_path, method: :get, class: "btn btn-success #{'disabled' if @missing.present?}",
-											id: 'finalizar') %>
-				</div>
-		<% end %>
+    <table class="table">
+      <thead>
+      <tr>
+        <th>&nbsp;</th>
+        <th>Producto</th>
+        <th>Código</th>
+        <th>Precio Unit.</th>
+        <th>Precio Total</th>
+        <th>Ahorro Total</th>
+        <th>&nbsp;</th>
+      </tr>
+      </thead>
+      <tbody>
+        <% @missing.each do |k, v| %>
+            <tr>
+              <td><%= v.id %></td>
+            </tr>
+        <% end %>
+        <% @carrito.items.each do |_producto_id, item| %>
+          <%  mclass ||=  'missing' if @missing.key?(item.producto.id.to_s) %>
+          <tr class="cart-item <%="#{mclass} "%>">
+            <td>
+              <div class="product-thumbnail">
+                <div class="product-thumbnail-wrapper">
+                  <% if item.producto.imagen.blank? %>
+                    <%= link_to producto_path(_producto_id) do%>
+                      <%= image_tag('v2/no-disponible.png', class: 'img-responsive') %>
+                    <% end %>
+                  <% else %>
+                    <%= link_to producto_path(_producto_id) do%>
+                      <%= image_tag(item.producto.imagen, class: 'img-responsive') %>
+                    <% end %>
+                  <% end %>
+                </div>
+                <span class="product-thumbnail-quantity" aria-hidden="true"><%= item.cantidad.to_i %></span>
+
+
+              </div>
+
+            </td>
+            <td><%= item.producto.nombre %></td>
+            <td><%= item.producto.codigo %></td>
+            <td><%= number_to_currency(item.producto.precio) %></td>
+            <td><%= number_to_currency(item.total) %></td>
+            <td><%= number_to_percentage(item.ahorro) %></td>
+            <td>
+              <%= button_tag(type: 'button', class: 'btn btn-danger btn-xs',
+                             data: {
+                                 action: 'remove',
+                                 productId: item.producto.id
+                             }) do %>
+                  <i class="fa fa-remove"></i>
+              <% end %>
+            </td>
+          </tr>
+        <%end%>
+      </tbody>
+    </table>
+  </div>
 <% else %>
 		<h3>No tiene productos agregado a su pedido</h3>
 <% end %>

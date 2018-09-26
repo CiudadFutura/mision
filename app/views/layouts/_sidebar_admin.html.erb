@@ -72,17 +72,22 @@
         </a>
         <ul id="menu-academico-sub" >
           <li id="menu-academico-avaliacoes" >
-            <%= link_to productos_path(view_prod: 'ocultos') do %>
-              Ocultos
+            <%= link_to compras_path(cycle_type: 'circles') do %>
+              Circulos
             <% end %>
           </li>
           <li id="menu-academico-avaliacoes" >
-            <%= link_to productos_path(view_prod: 'visibles') do %>
-              Visibles
+            <%= link_to compras_path(cycle_type: 'free') do %>
+              Libres
             <% end %>
           </li>
           <li id="menu-academico-avaliacoes" >
-            <%= link_to productos_path() do %>
+            <%= link_to compras_path(cycle_type:'mini') do %>
+              Mini ciclos
+            <% end %>
+          </li>
+          <li id="menu-academico-avaliacoes" >
+            <%= link_to compras_path do %>
               Todos
             <% end %>
           </li>
