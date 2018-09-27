@@ -9,8 +9,8 @@
   </div>
   <div class="form-group">
     <%= f.label :fecha_de_nacimiento, class: 'col-sm-2 control-label' %>
-    <div class="col-sm-10"><%= f.date_select :fecha_de_nacimiento, start_year: 1900, end_year: Date.today.year,
-                                             :required => true %></div>
+    <div class="col-sm-10 required"><%= f.date_select :fecha_de_nacimiento, start_year: 1940,
+                                                      end_year: Date.today.year %></div>
   </div>
   <div class="form-group">
     <%= f.label :email, class: 'col-sm-2 control-label' %>
@@ -26,15 +26,15 @@
   </div>
   <div class="form-group">
     <%= f.label :codigo_postal, class: 'col-sm-2 control-label' %>
-    <div class="col-sm-10"><%= f.text_field :codigo_postal, class: 'form-control'  %></div>
+    <div class="col-sm-10"><%= f.text_field :codigo_postal, class: 'form-control required'  %></div>
   </div>
   <div class="form-group">
     <%= f.label :ciudad, class: 'col-sm-2 control-label' %>
-    <div class="col-sm-10"><%= f.text_field :ciudad, class: 'form-control' %></div>
+    <div class="col-sm-10"><%= f.text_field :ciudad, class: 'form-control required' %></div>
   </div>
   <div class="form-group">
     <%= f.label :pais, class: 'col-sm-2 control-label' %>
-    <div class="col-sm-10"><%= f.text_field :pais, class: 'form-control'  %></div>
+    <div class="col-sm-10"><%= f.text_field :pais, class: 'form-control', value: 'Argentina'  %></div>
   </div>
   <div class="form-group">
     <%= f.label :tel1, class: 'col-sm-2 control-label' %>
@@ -42,7 +42,7 @@
   </div>
   <div class="form-group">
     <%= f.label :cel1, class: 'col-sm-2 control-label' %>
-    <div class="col-sm-10"><%= f.text_field :cel1, class: 'form-control'  %></div>
+    <div class="col-sm-10"><%= f.text_field :cel1, class: 'form-control required'  %></div>
   </div>
   <% if current_usuario && current_usuario.admin? %>
     <div class="form-group">

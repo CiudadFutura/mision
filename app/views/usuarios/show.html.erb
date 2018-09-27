@@ -40,73 +40,75 @@
         <br>
         <br>
         <div class="banner-bottom-grid1 privacy1-grid">
-          <% @usuario.circulo.usuarios.each do |u| %>
-            <ul>
-              <li>
-                <div class="col-sm-2 circle-members">
-                  <div class="col-sm-12 text-center">
-                    <i class="glyphicon glyphicon-user" aria-hidden="true"></i>
+          <% if @usuario.circulo.present? %>
+            <% @usuario.circulo.usuarios.each do |u| %>
+              <ul>
+                <li>
+                  <div class="col-sm-2 circle-members">
+                    <div class="col-sm-12 text-center">
+                      <i class="glyphicon glyphicon-user" aria-hidden="true"></i>
+                    </div>
+                    <div class="col-sm-12 text-center">
+                      <span><b><%= u.id %></b></span>
+                    </div>
                   </div>
-                  <div class="col-sm-12 text-center">
-                    <span><b><%= u.id %></b></span>
-                  </div>
-                </div>
-                <div class="col-sm-9 circle-members-data">
-                  <div class="col-sm-6">
-                    <%= u.nombre_completo %>
-                  </div>
-                  <div class="col-sm-6 text-right">
-                    <% if can?(:remove_usuario , @usuario.circulo) && !u.coordinador?%>
-                        <%= link_to 'Eliminar', circulo_remove_usuario_path(circulo_id: @usuario.circulo.id, usuario_id: u.id),
-                                    method: :delete, data: { confirm: 'Esta seguro?' },
-                                    class: 'btn btn-danger btn-xs' + (u.pedido?(Compra::ciclo_actual) ? ' disabled' : '') %>
-                    <% end %>
-                  </div>
-                  <ul class="circle-members-data">
-                    <li><i class="glyphicon glyphicon-envelope"></i></i><small><%= u.email if u.email.present? %></small></li>
-                    <li><i class="glyphicon glyphicon-phone"></i></i>
-                      <small><%= u.cel1 if u.cel1.present? || u.tel1 if u.tel1.present? || 'sin telénofo'%></small>
-                    </li>
-                  </ul>
+                  <div class="col-sm-9 circle-members-data">
+                    <div class="col-sm-6">
+                      <%= u.nombre_completo %>
+                    </div>
+                    <div class="col-sm-6 text-right">
+                      <% if can?(:remove_usuario , @usuario.circulo) && !u.coordinador?%>
+                          <%= link_to 'Eliminar', circulo_remove_usuario_path(circulo_id: @usuario.circulo.id, usuario_id: u.id),
+                                      method: :delete, data: { confirm: 'Esta seguro?' },
+                                      class: 'btn btn-danger btn-xs' + (u.pedido?(Compra::ciclo_actual) ? ' disabled' : '') %>
+                      <% end %>
+                    </div>
+                    <ul class="circle-members-data">
+                      <li><i class="glyphicon glyphicon-envelope"></i></i><small><%= u.email if u.email.present? %></small></li>
+                      <li><i class="glyphicon glyphicon-phone"></i></i>
+                        <small><%= u.cel1 if u.cel1.present? || u.tel1 if u.tel1.present? || 'sin telénofo'%></small>
+                      </li>
+                    </ul>
 
 
-                  <span>Excepteur sint occaecat cupidatat non proident, sunt in
-                  culpa qui officia deserunt mollit anim id est laborum.</span>
-                  <br>
-                  <div class="col-sm-12 customer-orders">
-                    <h4>Últimos pedidos realizado</h4>
-                    <table class="table">
-                      <thead>
-                        <tr>
-                          <th>#</th>
-                          <th>Importe</th>
-                          <th>Factura</th>
-                          <th>Ciclo</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <% u.pedidos.last(2).reverse.each do |p| %>
-                          <tr <%=  u.pedido?(Compra::ciclo_actual_completo) ? 'class=current-order': ''%>>
-                            <td><%= p.id %></td>
-                            <td><%= number_to_currency(p.total) %></td>
-                            <% if File.exists?("#{Rails.public_path}/facturas/FAC_#{p.id}.pdf") %>
-                             <td> <%= link_to('Factura',
-                                             pedido_download_pdf_path(p.id),
-                                             class: 'btn btn-link') %></td>
-                            <% else %>
-                            <td></td>
-                            <% end %>
-                            <td>
-                              <%= p.ciclo.nombre %>
-                            </td>
+                    <span>Excepteur sint occaecat cupidatat non proident, sunt in
+                    culpa qui officia deserunt mollit anim id est laborum.</span>
+                    <br>
+                    <div class="col-sm-12 customer-orders">
+                      <h4>Últimos pedidos realizado</h4>
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th>#</th>
+                            <th>Importe</th>
+                            <th>Factura</th>
+                            <th>Ciclo</th>
                           </tr>
-                        <% end %>
-                      </tbody>
-                    </table>
+                        </thead>
+                        <tbody>
+                          <% u.pedidos.last(2).reverse.each do |p| %>
+                            <tr <%=  u.pedido?(Compra::ciclo_actual_completo) ? 'class=current-order': ''%>>
+                              <td><%= p.id %></td>
+                              <td><%= number_to_currency(p.total) %></td>
+                              <% if File.exists?("#{Rails.public_path}/facturas/FAC_#{p.id}.pdf") %>
+                               <td> <%= link_to('Factura',
+                                               pedido_download_pdf_path(p.id),
+                                               class: 'btn btn-link') %></td>
+                              <% else %>
+                              <td></td>
+                              <% end %>
+                              <td>
+                                <%= p.ciclo.nombre %>
+                              </td>
+                            </tr>
+                          <% end %>
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
-                </div>
-              </li>
-            </ul>
+                </li>
+              </ul>
+            <% end %>
           <% end %>
           <div class="text-right csocial"><span>Cuota Social:</span> $<%=Producto.find_by_codigo('CSOCIAL').precio %></div>
         </div>
@@ -116,32 +118,37 @@
 
   <div class="privacy1">
     <div class="banner-bottom-grid1 privacy2-grid">
-      <div class="privacy2-grid1">
+      <p class="privacy2-grid1">
         <h3>Gestión del círculo</h3>
 
-        <br/><br/>
+        <% if current_usuario.circulo.present? %>
 
-        <% if !current_usuario.coordinador? %>
-          <%= link_to 'Abandonar circulo', circulo_abandonar_path(@usuario.circulo), method: :post, data: { confirm: 'Seguro de abandonar el circulo?' }, class: "btn btn-danger btn-xs" %>
           <br/><br/>
-        <% end %>
 
-
-
-        <% if can?(:manage , @usuario.circulo) && !@usuario.circulo.completo? %>
-          <%= form_tag(circulo_add_usuario_path(@usuario.circulo), method: "post") do %>
-            Agregar usuario nro: <input type="text" value="" name="usuario_id" />
-            <button type="submit">Agregar</button>
+          <% if !current_usuario.coordinador? %>
+            <%= link_to 'Abandonar circulo', circulo_abandonar_path(@usuario.circulo), method: :post, data: { confirm: 'Seguro de abandonar el circulo?' }, class: "btn btn-danger btn-xs" %>
+            <br/><br/>
           <% end %>
-        <% end %>
 
-        <% if @usuario.circulo.completo? %>
-          <h4>Su circulo esta completo.</h4>
-        <% end %>
 
-        <% if can?(:remove_usuario , @usuario.circulo) %>
-          <i>* Solo podras eliminar usuarios sin pedidos realizados.</i><br/>
-          <i>** Para abandonar el circulo, comunicate con la mision.</i>
+
+          <% if can?(:manage , @usuario.circulo) && !@usuario.circulo.completo? %>
+            <%= form_tag(circulo_add_usuario_path(@usuario.circulo), method: "post") do %>
+              Agregar usuario nro: <input type="text" value="" name="usuario_id" />
+              <button type="submit">Agregar</button>
+            <% end %>
+          <% end %>
+
+          <% if @usuario.circulo.completo? %>
+            <h4>Su circulo esta completo.</h4>
+          <% end %>
+
+          <% if can?(:remove_usuario , @usuario.circulo) %>
+            <i>* Solo podras eliminar usuarios sin pedidos realizados.</i><br/>
+            <i>** Para abandonar el circulo, comunicate con la mision.</i>
+          <% end %>
+        <% else %>
+          <p> no tiene circullo, se tiene que poner algo </p>
         <% end %>
 
       </div>
