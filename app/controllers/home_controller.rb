@@ -48,9 +48,11 @@ end
 private
 # Use callbacks to share common setup or constraints between actions.
 def create_current_account
-  account = Account.new
-  account.usuario_id = current_usuario.id
-  account.status = true
-  account.balance = 0
-  account.save
+  if current_usuario.present?
+    account = Account.new
+    account.usuario_id = current_usuario.id
+    account.status = true
+    account.balance = 0
+    account.save
+  end
 end

@@ -4,15 +4,37 @@
       <%= value %>
     </div>
   <% end %>
-  <h3>Hola <%= current_usuario.nombre %></h3>
+  <div class="row">
+    <h3>Hola <%= current_usuario.nombre %></h3>
+  </div>
+  <br>
+  <br>
   <% if !user_data_completed(current_usuario) %>
-    <p>si no tiene, completar </p>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="alert alert-info">
+          <h4>
+            Tienes datos incompletos, para poder realizar la compra, debes completarlos en
+            <span><%= link_to(edit_usuario_path(current_usuario)) do %>
+              Mis Datos
+              <% end %>
+            </span>
+          </h4>
+        </div>
+      </div>
+    </div>
   <% end %>
-  <p>Si estas acá, es porque sos coordinador de un círculo en la Misión Anti Inflación.<br/>
-    Desde tu panel, ademas de hacer tu pedido, vas a poder administrar los integrantes<br/>
-    de tu círculo y realizar el pago de la compra. Ante cualquier duda, consultanos vía mail
-    a <b>victoriacolectiva@gmail.com</b>
-  </p>
+  <br>
+  <div class="row">
+    <div class="col-sm-12">
+      <p>Si estas acá, es porque sos coordinador de un círculo en la Misión Anti Inflación.<br/>
+        Desde tu panel, ademas de hacer tu pedido, vas a poder administrar los integrantes<br/>
+        de tu círculo y realizar el pago de la compra. Ante cualquier duda, consultanos vía mail
+        a <b>victoriacolectiva@gmail.com</b>
+      </p>
+    </div>
+  </div>
+
 </div>
 <div class="row">
   <% if @compra.present? %>

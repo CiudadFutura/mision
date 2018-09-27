@@ -12,6 +12,7 @@
 	<br>
 </div>
 <% unless @carrito.empty? %>
+  <h4>Tu carrito contiene: <span><%= pluralize(@carrito.cantidad, ' producto', ' productos') %></span></h4>
   <div class="table-responsive">
 
     <table class="table">
@@ -73,6 +74,29 @@
       </tbody>
     </table>
   </div>
+  <div class="row">
+    <div class="col-sm-4 col-sm-offset-8 checkout-left-basket">
+      <h4>Resúmen de mi compra</h4>
+
+      <% if @transactions.present? %>
+        <strong>NOTA DE CRÉDITO</strong>
+        <ul>
+          <% @transactions.each do |transaction| %>
+            <li>
+              #<%= transaction.id %> <i>-</i> <span><%= number_to_currency(transaction.amount) %></span>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+
+      <ul>
+        <li>Total de Ahorro <i>-</i> <span><%= number_to_percentage(@carrito.ahorro) %></span></li>
+        <li>Total <i>-</i> <span><%= number_to_currency(@carrito.total) %></span></li>
+      </ul>
+
+    </div>
+  </div>
+  <%= render 'carts/user_data'%>
 <% else %>
-		<h3>No tiene productos agregado a su pedido</h3>
+		<h4>No tiene productos agregado a su pedido</h4>
 <% end %>

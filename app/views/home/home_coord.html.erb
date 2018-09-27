@@ -1,5 +1,13 @@
 <div class="center-section">
   <h3>Hola <%= current_usuario.nombre %></h3>
+
+  <% if !user_data_completed(current_usuario) %>
+    <div class="col-sm-12">
+      <div class="alert-info">
+        <p><h4>si no tiene, completar</h4></p>
+      </div>
+    </div>
+  <% end %>
   <br>
   <br>
   <div class="row">

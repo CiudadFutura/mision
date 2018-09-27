@@ -79,6 +79,10 @@ class Usuario < ActiveRecord::Base
     ciclo_de_compra && self.pedidos.try(:last).try(:ciclo) == ciclo_de_compra
   end
 
+  def usuario_completed?
+    Usuario.where(nombre: [nil,''], apellido: [nil, ''], dni: [nil, ''], calle: [nil, ''], cel1: [nil, ''])
+  end
+
   def pedido_del_ciclo(ciclo_de_compra)
     return nil if ciclo_de_compra.nil?
     pedido = self.pedidos.where(compra_id: ciclo_de_compra.id).first
@@ -164,7 +168,7 @@ class Usuario < ActiveRecord::Base
 
   def completed?
     self.attributes.all? do |k, v|
-      ['nombre', 'apellido', 'calle', 'ciudad', 'codigo_postal', 'ciudad', 'cel1'].include?(k) || v.nil? || v == [] || v == [""]
+      ['nombre', 'apellido', 'calle', 'ciudad', 'codigo_postal', 'ciudad', 'cel1', 'dni'].include?(k) || v.nil? || v == [] || v == [""]
     end
 
   end
