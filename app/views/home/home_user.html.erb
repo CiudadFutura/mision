@@ -24,6 +24,23 @@
       </div>
     </div>
   <% end %>
+
+  <% if current_usuario.circulo.blank? %>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="alert alert-info">
+          <h4>
+            No perteneces a un círculo, tiene que ser miembro o coordinar uno.
+            <span>
+              <%= link_to(usuario_path(current_usuario)) do %>
+                Mi Círculo
+              <% end %>
+            </span>
+          </h4>
+        </div>
+      </div>
+    </div>
+  <% end %>
   <br>
   <div class="row">
     <div class="col-sm-12">
@@ -35,17 +52,34 @@
     </div>
   </div>
 
-</div>
-<div class="row">
-  <% if @compra.present? %>
-    <div id="ciclos" data-start-date="<%= @compra.first.fecha_inicio_compras %>"></div>
-    <div class="row calendar text-center">
-      <div class="col-md-6 col-md-offset-3">
-        <h1>Próximo Ciclo de compras de tú círculo</h1>
-        <div id="calendar"></div>
+  <% if @ciclo_actual_completo.present? %>
+    <% if @ciclo_actual_completo.circulos.include?(current_usuario.circulo) %>
+      <div class="row">
+        <h4>Ciclo actual</h4>
+        <div class="col-sm-12">
+          <p class="text-center">Ciclo Actual: <%= @ciclo_actual_completo.nombre %></p>
+          <p>Desde el <strong><%= l @ciclo_actual_completo.fecha_inicio_compras %></strong></p>
+          <p>hasta el <strong><%= l @ciclo_actual_completo.fecha_fin_compras %></strong></p>
+          <p>Ultimo día para realizar el pago <strong><%= l @ciclo_actual_completo.fecha_fin_pagos %></strong></p>
+        </div>
       </div>
-    </div>
+    <% end %>
+  <% else %>
+    <div class="error text-center">No hay Ciclo Activo</div>
   <% end %>
+  <div class="row">
+    <% if @compra.present? %>
+      <div id="ciclos" data-start-date="<%= @compra.first.fecha_inicio_compras %>"></div>
+      <div class="row calendar text-center">
+        <div class="col-md-6 col-md-offset-3">
+          <h1>Próximo Ciclo de compras de tú círculo</h1>
+          <div id="calendar"></div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+
 </div>
 
 

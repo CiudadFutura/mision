@@ -102,6 +102,10 @@ class CirculosController < ApplicationController
     redirect_to usuario_path(current_usuario), message
   end
 
+  def add_myself
+    #TODO - function when the user need to be aggregated self to a cycle exist
+  end
+
   def remove_usuario
     circulo = Circulo.find(params[:circulo_id])
     authorize! :remove_usuario, circulo
