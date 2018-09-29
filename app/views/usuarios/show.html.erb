@@ -3,8 +3,12 @@
 <div class="center-section">
   <h3>Mi Círculo</h3>
 </div>
-
 <div class="privacy">
+  <% flash.each do |key, value| %>
+    <div class="<%= flash_class(key) %>">
+      <%= value %>
+    </div>
+  <% end %>
   <% if @usuario.circulo.present? %>
     <div class="privacy1">
       <div class="banner-bottom-grid1 privacy2-grid">
@@ -143,14 +147,18 @@
               <br>
               <br>
               <%= render 'circulos/form' %>
+
             </div>
             <div class="col-sm-6">
-              <h4>Ser parte de un círculo</h4>
+              <h4>Quiero ser parte de un círculo</h4>
               <br>
               <br>
-              <%= form_tag(circulo_add_usuario_path(1), method: "post") do %>
-                Agregar usuario nro: <input type="text" value="" name="usuario_id" />
-                <button type="submit">Agregar</button>
+              <%= form_tag(usuario_add_myself_cycle_path(current_usuario), method: "post") do %>
+                <div class="form-group">
+                  <label for="circulo_id">Agregarme al círculo</label>
+                  <input type="text" class="form-control" id="circulo_id" name="circulo_id" placeholder="Ingrese el número de círculo">
+                </div>
+                <button type="submit" class="btn btn-primary">Agregarme</button>
               <% end %>
             </div>
           </div>

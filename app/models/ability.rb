@@ -18,6 +18,7 @@ class Ability
       can [:read, :create, :update], Usuario, { :id => user.id }
       can [:read, :create, :update], Pedido, { :usuario_id => user.id }
       can [:abandonar_circulo], Usuario
+      can [:add_myself_cycle], Usuario
       can [:read], Account, { :usuario_id => user.id }
     elsif user.director?
       can [:read], Circulo, { :warehouse_id => user.usuario_roles.warehouse_id }

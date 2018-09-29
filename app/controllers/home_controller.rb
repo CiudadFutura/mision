@@ -4,7 +4,6 @@ class HomeController < ApplicationController
     user_type = current_usuario.nil? ? 'Guess' : current_usuario.type
 		@ciclo_actual = Compra.ciclo_actual
 		@ciclo_actual_completo = Compra.ciclo_actual_completo
-    puts @ciclo_actual_completo.to_yaml
     @featured = Producto.destacados.limit(9)
     @cycles = Compra.next_cycles
     @offers = Producto.get_offers_products

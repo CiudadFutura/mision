@@ -99,11 +99,8 @@ class CirculosController < ApplicationController
     else
         message = { alert: "Error: Debe ingresar el numero de usuario." }
     end
-    redirect_to usuario_path(current_usuario), message
-  end
 
-  def add_myself
-    #TODO - function when the user need to be aggregated self to a cycle exist
+    redirect_to usuario_path(current_usuario), message
   end
 
   def remove_usuario

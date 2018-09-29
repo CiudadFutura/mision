@@ -9,7 +9,7 @@
   </div>
   <br>
   <br>
-  <% if !user_data_completed(current_usuario) %>
+  <% if  ! current_usuario.completed? %>
     <div class="row">
       <div class="col-sm-12">
         <div class="alert alert-info">

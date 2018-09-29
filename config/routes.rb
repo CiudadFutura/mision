@@ -31,7 +31,6 @@ Rails.application.routes.draw do
 
   resources :circulos do
     post 'add_usuario', to: 'circulos#add_usuario', as: :add_usuario
-    post 'add_myself', to: 'circulos#add_myself', as: :add_myself
     delete 'remove_usuario/:usuario_id', to: 'circulos#remove_usuario', as: :remove_usuario
     post 'abandonar', to: 'circulos#abandonar', as: :abandonar
     collection do
@@ -42,6 +41,7 @@ Rails.application.routes.draw do
 
   devise_for :usuarios, :controllers => {:registrations => 'user/registrations'}
   resources :usuarios do
+    post 'add_myself_cycle', to: 'usuarios#add_myself_cycle', as: :add_myself_cycle
     collection {
       post 'sign_up', to: 'usuarios#create'
     }
