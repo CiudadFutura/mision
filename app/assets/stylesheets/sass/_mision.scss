@@ -2735,6 +2735,22 @@ ul.wmuSliderPagination {
 }
 /*-- //events --*/
 /*-- mail --*/
+.agileinfo_mail_grid_left{
+  .warehouse{
+    ul{
+      margin: 5px 0px;
+    }
+    h4{
+      font-size: 2em;
+      color: $color-red;
+    }
+    p{
+      padding: 10px 0px;
+    }
+    padding: 20px;
+  }
+}
+
 .agileinfo_mail_grid_left ul li{
   display:inline-block;
   font-size:1em;
@@ -2754,6 +2770,7 @@ ul.wmuSliderPagination {
 }
 .agileinfo_mail_grid_left ul li:first-child{
   padding-right:1.5em;
+  width: 40px;
 }
 .agileinfo_mail_grid_left ul li:last-child{
   padding-left:1.5em;

@@ -26,6 +26,7 @@ class Ability
       can [:read, :create, :update], Pedido, { :warehouse_id => user.usuario_roles.warehouse_id }
     else
       can [:read], Compra
+      can [:read], Warehouse
     end
     # elsif user.coordinador?
     #   can :read, :all
