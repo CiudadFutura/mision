@@ -86,7 +86,7 @@ class Producto < ActiveRecord::Base
   def self.get_offers_products
     #get random products
     Producto.joins(:supplier).where('suppliers.nature = :id',
-                                      id: 1).order("RAND()").limit(4)
+                                      id: 1).order("RAND()").limit(8)
   end
 
   def self.search(term)

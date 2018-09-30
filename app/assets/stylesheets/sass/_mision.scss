@@ -524,8 +524,8 @@ ul.dropdown-menu.drp-mnu li a i {
 .w3l_banner_nav_right_banner,
 .w3l_banner_nav_right_banner2{
   min-height:500px;
-  text-align: right;
-  padding:30em 0 0 0;
+  text-align: center;
+  padding: 0;
   margin-bottom: 5em;
 }
 .w3l_banner_nav_right_banner{
@@ -559,7 +559,7 @@ ul.dropdown-menu.drp-mnu li a i {
   color: #fff;
   font-weight: 300;
   text-transform: uppercase;
-  margin-bottom: 1em;
+  margin: 2em 0;
 }
 .w3l_banner_nav_right_banner h3 span,
 .w3l_banner_nav_right_banner1 h3 span{
@@ -586,9 +586,8 @@ ul.dropdown-menu.drp-mnu li a i {
   display:block;
 }
 .more {
-  width: 20%;
   text-align: center;
-  margin-left:80em;
+  margin-top: 15%;
 }
 /* Saqui */
 .button--saqui {
@@ -3259,13 +3258,13 @@ input.checkbox:checked:after {
 @media (max-width:1680px){
 
   .more {
-    margin-left: 63em;
+
   }
 }
 @media (max-width:1600px){
 
   .more {
-    margin-left: 59em;
+
   }
 }
 @media (max-width:1440px){
@@ -3285,7 +3284,7 @@ input.checkbox:checked:after {
   .w3l_banner_nav_right_banner1,
   .w3l_banner_nav_right_banner,
   .w3l_banner_nav_right_banner2 {
-    padding: 20em 0 0 0;
+    padding: 0px;
   }
 
   .view h4 {
@@ -3317,11 +3316,11 @@ input.checkbox:checked:after {
   .w3l_banner_nav_right_banner1,
   .w3l_banner_nav_right_banner,
   .w3l_banner_nav_right_banner2 {
-    padding: 22em 0 0 0;
+    padding: 0px;
     min-height: 375px;
   }
   .more {
-    margin-left: 53em;
+
   }
   .view p {
     padding: 10px 35px 0px;
@@ -3351,7 +3350,7 @@ input.checkbox:checked:after {
 }
 @media (max-width: 1280px){
   .more {
-    margin-left: 54em;
+
   }
   .product_list_header {
     padding-top: 10px;
@@ -3470,13 +3469,12 @@ input.checkbox:checked:after {
     margin-left: 4em;
   }
   .more {
-    margin-left: 42em;
-    width: 25%;
+
   }
   .w3l_banner_nav_right_banner1,
   .w3l_banner_nav_right_banner,
   .w3l_banner_nav_right_banner2 {
-    padding: 7em 4em 0 0;
+    padding: 0px;
   }
   .wthree_banner_btm_pos h3 span {
     padding-left: 4em;
@@ -3647,7 +3645,7 @@ input.checkbox:checked:after {
     padding-left: 2em;
   }
   .more {
-    margin-left: 40em;
+
   }
   .navbar-nav > li > a {
     padding: 10px 0px 10px 25px;
@@ -3732,7 +3730,7 @@ input.checkbox:checked:after {
     background-position:-70px 0px;
   }
   .more {
-    margin-left: 39em;
+
   }
   .wthree_banner_bottom_left_grid_sub,
   .wthree_banner_bottom_left_grid_sub1 {
@@ -4040,10 +4038,10 @@ input.checkbox:checked:after {
   .w3l_banner_nav_right_banner,
   .w3l_banner_nav_right_banner2 {
     min-height: 315px;
-    padding: 5em 4em 0 0;
+    padding: 0px;
   }
   .more {
-    margin-left: 30.5em;
+
   }
   .more a {
     padding: 7px 30px;
@@ -4162,7 +4160,7 @@ input.checkbox:checked:after {
     top: 130%;
   }
   .more {
-    margin-left: 26.5em;
+
     width: 30%;
   }
   .wthree_banner_bottom_left {
@@ -4247,7 +4245,7 @@ input.checkbox:checked:after {
     background-position: 0px 0px;
   }
   .more {
-    margin-left: 34.5em;
+
   }
 }
 @media (max-width: 736px){
@@ -4272,7 +4270,7 @@ input.checkbox:checked:after {
     margin: 130px auto 30px;
   }
   .more {
-    margin-left: 33.5em;
+
   }
   .w3agile_newsletter_right {
     width: 80%;
@@ -4290,7 +4288,7 @@ input.checkbox:checked:after {
     margin: .1em 0 1em 5.8em;
   }
   .more {
-    margin-left: 29.5em;
+
   }
   .footer {
     padding: 3em 0;
@@ -4326,7 +4324,7 @@ input.checkbox:checked:after {
     top: 100%;
   }
   .more {
-    margin-left: 28em;
+
   }
   .wthree_banner_bottom_left {
     width: 75%;
@@ -4438,7 +4436,7 @@ input.checkbox:checked:after {
     width: 535px;
   }
   .more {
-    margin-left: 26em;
+
   }
   .wthree_banner_bottom_left {
     width: 82%;
@@ -4464,7 +4462,7 @@ input.checkbox:checked:after {
     margin: .1em 0 1em 2.9em;
   }
   .more {
-    margin-left: 24.5em;
+
   }
   .snipcart-details {
     width: 100%;
@@ -4551,11 +4549,11 @@ input.checkbox:checked:after {
   .w3l_banner_nav_right_banner,
   .w3l_banner_nav_right_banner2 {
     min-height: 240px;
-    padding: 2.5em 3em 0 0;
-    margin-bottom: 3em;
+    padding: 0px;
+    margin-bottom: 0px;
   }
   .more {
-    margin-left: 18em;
+
     width: 40%;
   }
   .banner_bottom,
@@ -4859,7 +4857,7 @@ input.checkbox:checked:after {
     font-size: 13px;
   }
   .more {
-    margin-left: 15em;
+
   }
   .w3l_banner_nav_right_banner2 {
     background-position: -145px 0px;
@@ -5009,7 +5007,7 @@ input.checkbox:checked:after {
     padding: 8px 0 8.9px;
   }
   .more {
-    margin-left: 13em;
+
     width: 42%;
   }
   .wthree_banner_btm_pos h3 span {
@@ -5172,10 +5170,10 @@ input.checkbox:checked:after {
   .w3l_banner_nav_right_banner,
   .w3l_banner_nav_right_banner2 {
     min-height: 190px;
-    padding: 2em 3em 0 0;
+    padding: 0px;
   }
   .more {
-    margin-left: 10em;
+
     width: 50%;
   }
   .wthree_banner_bottom_left {
