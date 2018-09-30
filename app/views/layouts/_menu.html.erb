@@ -25,6 +25,7 @@
                     <li>
                       <%= link_to sm[:nombre],
                                   productos_path(categoria_id: c[:id], subcategoria_id: sm[:id]),
+                                  data:{turbolink: false},
                                   :class => ('active' if params[:subcategoria_id].to_i == sm[:id])
                       %>
                     </li>
@@ -36,7 +37,7 @@
 
         <% else %>
           <li>
-            <%= link_to productos_path(categoria_id: c[:id]) do %>
+            <%= link_to productos_path(categoria_id: c[:id]), data:{ turbolink: false} do %>
               <%= c[:nombre] %>
             <% end %>
           </li>

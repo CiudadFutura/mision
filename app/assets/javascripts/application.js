@@ -22,13 +22,12 @@
 //= require jquery.validate.additional-methods
 //= require jquery.validate.localization/messages_es
 //= require jquery-ui/widgets/autocomplete
-//= require turbolinks
 //= require jquery.flexslider-min
 //= require Chart
 //= require autocomplete-rails
 
 
-$(document).on('turbolinks:load', function() {
+$(document).ready(function() {
 
     $('.flexslider').flexslider({
         animation: "slide",

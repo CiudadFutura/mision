@@ -33,7 +33,7 @@ class CirculosController < ApplicationController
     @circulo = Circulo.new(circulo_params)
     respond_to do |format|
       if @circulo.save
-        if ! current_usuario.coordinador? and !current_usuario.admin?
+        if !current_usuario.coordinador? and !current_usuario.admin?
           usuario_role = UsuarioRole.new(usuario_id: current_usuario.id,
                                          role_id: Role.find_by_name(Usuario::COORDINADOR).id,
                                          created_at: Time.now,
@@ -42,8 +42,6 @@ class CirculosController < ApplicationController
         end
         @circulo.coordinador.circulo = @circulo
         @circulo.coordinador.save!
-
-
 
         format.html { redirect_to @circulo, notice: 'Circulo creado exitosamente.' }
         format.json { render :show, status: :created, location: @circulo }

@@ -1,6 +1,6 @@
 
 
-ready = function() {
+window.onload = (function() {
 
     $('.thumbnails').find('.agile_top_brand_left_grid1').uniformHeight();
 
@@ -41,7 +41,7 @@ ready = function() {
         });
     });
 
-};
+});
 
 (function($) {
     $.fn.uniformHeight = function() {
@@ -54,7 +54,6 @@ ready = function() {
     }
 })(jQuery);
 
-document.addEventListener("turbolinks:load", ready);
 
 $(document).on( "click", "#remove_bundle_product", function(e){
     e.preventDefault();
