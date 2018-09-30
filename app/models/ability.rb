@@ -15,6 +15,7 @@ class Ability
       can [:read], Compra
     elsif user.usuario?
       can [:read], Compra
+      can [:create], Circulo
       can [:read, :create, :update], Usuario, { :id => user.id }
       can [:read, :create, :update], Pedido, { :usuario_id => user.id }
       can [:abandonar_circulo], Usuario

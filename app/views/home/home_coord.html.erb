@@ -1,14 +1,37 @@
 <div class="center-section">
   <h3>Hola <%= current_usuario.nombre %></h3>
 
-  <% if !user_data_completed(current_usuario) %>
-    <div class="col-sm-12">
-      <div class="alert-info">
-        <p><h4>si no tiene, completar</h4></p>
+  <% if  ! current_usuario.completed? %>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="alert alert-info">
+          <h4>
+            Tienes datos incompletos, para poder realizar la compra, debes completarlos en
+            <span><%= link_to(edit_usuario_path(current_usuario)) do %>
+              Mis Datos
+              <% end %>
+            </span>
+          </h4>
+        </div>
       </div>
     </div>
   <% end %>
-  <br>
+  <% if current_usuario.circulo.blank? %>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="alert alert-info">
+          <h4>
+            No perteneces a un círculo, tiene que ser miembro o coordinar uno.
+            <span>
+              <%= link_to(usuario_path(current_usuario)) do %>
+                Mi Círculo
+              <% end %>
+            </span>
+          </h4>
+        </div>
+      </div>
+    </div>
+  <% end %>
   <br>
   <div class="row">
     <p>Si estas acá, es porque sos coordinador de un círculo en la Misión Anti Inflación.<br/>

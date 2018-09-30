@@ -43,17 +43,18 @@
     <meta name="turbolinks-cache-control" content="no-cache">
   </head>
   <body>
-	    <%= render 'layouts/header'%>
-      <%= render_navigation if request.path != root_path%>
-      <div class="banner">
-        <div class="w3l_banner_nav_left">
-          <%= render 'layouts/menu' %>
-        </div>
-        <div class="w3l_banner_nav_right">
-          <%= yield %>
-        </div>
-        <div class="clearfix"></div>
+    <%= render 'layouts/header'%>
+    <%= render_navigation if request.path != root_path%>
+    <div class="banner">
+      <div class="col-sm-3 w3l_banner_nav_left">
+        <%= render 'layouts/menu' %>
       </div>
+      <div class="col-sm-9 w3l_banner_nav_right">
+        <%= yield %>
+      </div>
+      <div class="clearfix"></div>
+    </div>
 	  <%= render 'layouts/footer' %>
+
   </body>
 </html>

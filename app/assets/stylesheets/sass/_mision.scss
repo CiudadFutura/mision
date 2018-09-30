@@ -459,7 +459,6 @@ ul.dropdown-menu.drp-mnu li a i {
 .w3l_banner_nav_left{
   float: left;
   /*-- agileits --*/
-  width: 20%;
   background: #f5f5f5;
 }
 .wthree_banner_bottom_left_grid_sub{
@@ -472,8 +471,9 @@ ul.dropdown-menu.drp-mnu li a i {
   margin-left: 10%;
 }
 .w3l_banner_nav_right{
-  float:right;
-  width:80%;
+  margin: 0px;
+  padding: 0px;
+
 }
 .navbar-nav > li {
   float: none;
@@ -3715,9 +3715,7 @@ input.checkbox:checked:after {
   .w3ls_logo_products_left1 ul.special_items li i {
     padding: 0 .7em;
   }
-  .container {
-    width: 815px;
-  }
+
   .w3ls_logo_products_left1:nth-child(3) {
     margin-left: 1em;
   }
@@ -4067,9 +4065,6 @@ input.checkbox:checked:after {
     float: none;
     margin: 0 auto;
   }
-  .container {
-    width: 765px;
-  }
   .modal-dialog {
     width: 710px;
   }
@@ -4142,9 +4137,6 @@ input.checkbox:checked:after {
   }
   #PPMiniCart {
     left: 39% !important;
-  }
-  .container {
-    width: 750px;
   }
   .w3ls_logo_products_left1:nth-child(3) {
     margin-left: 1em;
@@ -4232,8 +4224,8 @@ input.checkbox:checked:after {
     border: 1px solid #212121;
   }
   .w3l_banner_nav_right {
-    float: none;
-    width: 100%;
+
+
   }
   .navbar-nav {
     border-top: none;
@@ -4272,9 +4264,6 @@ input.checkbox:checked:after {
   .logo_products {
     padding: 1em 0 1em;
   }
-  .container {
-    width: 710px;
-  }
   .modal-dialog {
     width: 650px;
     margin: 130px auto 30px;
@@ -4296,9 +4285,6 @@ input.checkbox:checked:after {
   .w3l_search {
     width: 55%;
     margin: .1em 0 1em 5.8em;
-  }
-  .container {
-    width: auto;
   }
   .more {
     margin-left: 29.5em;
