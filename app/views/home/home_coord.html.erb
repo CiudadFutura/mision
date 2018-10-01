@@ -1,33 +1,37 @@
 <div class="center-section">
   <h3>Hola <%= current_usuario.nombre %></h3>
 
-  <% if  ! current_usuario.completed? %>
+  <% if !current_usuario.completed? or current_usuario.circulo.blank? %>
     <div class="row">
       <div class="col-sm-12">
         <div class="alert alert-info">
-          <h4>
-            Tienes datos incompletos, para poder realizar la compra, debes completarlos en
-            <span><%= link_to(edit_usuario_path(current_usuario)) do %>
-              Mis Datos
+          <h4>Para poder realizar tus pedidos debés</h4>
+          <ul>
+            <% if !current_usuario.completed? %>
+              <li>Completar tus datos personales haciendo clic en
+                <span>
+                    <%= link_to(edit_usuario_path(current_usuario)) do %>
+                      Mis Datos
+                    <% end %>
+                  </span>
+              </li>
+            <% end %>
+            <% if current_usuario.circulo.blank? %>
+              <li>Pertenecer a un círculo de asociades,
+                <span>
+                    <%= link_to(usuario_path(current_usuario)) do %>
+                      Mi Círculo
+                    <% end %>
+                  </span>
+              </li>
+            <% end %>
+            <li>
+              Para más información sobre como realizar un pedido
+              <%= link_to(como_compro_path(1)) do %>
+                Como comprar
               <% end %>
-            </span>
-          </h4>
-        </div>
-      </div>
-    </div>
-  <% end %>
-  <% if current_usuario.circulo.blank? %>
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="alert alert-info">
-          <h4>
-            No perteneces a un círculo, tiene que ser miembro o coordinar uno.
-            <span>
-              <%= link_to(usuario_path(current_usuario)) do %>
-                Mi Círculo
-              <% end %>
-            </span>
-          </h4>
+            </li>
+          </ul>
         </div>
       </div>
     </div>

@@ -2075,6 +2075,12 @@ section#tables  p {
   margin-bottom: 3em;
 }
 .alert {
+  ul{
+    padding: 3px 0px;
+    li{
+      list-style: none;
+    }
+  }
   font-size: 0.85em;
 }
 h1.t-button,h2.t-button,h3.t-button,h4.t-button,h5.t-button {
@@ -2336,6 +2342,20 @@ h2.typoh2{
 }
 .privacy2-grid1-sub:nth-child(2){
   margin:2em 0;
+}
+.privacy{
+  .without-cycle{
+    ul{
+      margin: 20px;
+      padding-left: 20px;
+    }
+    p{
+      span{
+        font-weight: bold;
+        font-size: 2em;
+      }
+    }
+  }
 }
 .privacy1 {
   .steps{

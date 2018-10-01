@@ -10,7 +10,7 @@
     </div>
   <% end %>
   <% if @usuario.circulo.present? %>
-    <div class="privacy1">
+    <div class="privacy1 cycle-data">
       <div class="banner-bottom-grid1 privacy2-grid">
         <div class="privacy2-grid1">
           <h4>Perteneces al Círculo N°: <%=@usuario.circulo_id %> </h4>
@@ -101,17 +101,41 @@
       </div>
     </div>
   <% else %>
-    <h3>No perteneces a ningún círculo.</h3>
-    <p>
-      Comunicate con un coordinador de círculo para que te agregue.
-    </p>
-    <p>Recuerda que tú código de
-      usuario es el: <b><%= @usuario.id%></b>
-    </p>
-    <br>
-    <br>
+    <div class="without-cycle">
+      <h4>No perteneces a ningún círculo.</h4>
+      <p>Recordá que para participar debés formar parte de un círculo.</p>
+      <p>Podés:</p>
+      <ul>
+        <li>
+          Crear uno nuevo ahora mismo.
+        </li>
+        <li>
+          Sumarte a uno existente (si no sabés el número de círculo pedile al coordinador/a que te lo pase o
+          suministrale tu número de usuario para que te agregue).
+        </li>
+        <li>
+          Si no sabés de ningún círculo para participar escribinos al whatsapp del distrito que te quede más cercano
+          <%= link_to(warehouses_path) do %>
+            Puntos de Retiro
+          <% end %>
+          o a victoriacolectiva@gmail.com y trataremos de sumarte a alguno existente.
+        </li>
+      </ul>
+      <p>
+        Comunicate con un coordinador de círculo para que te agregue.
+      </p>
+      <p>Recuerda que tú código de usuario es el: <span><%= @usuario.id%></span>
+      </p>
+      <small>
+        Ver más en
+        <%= link_to(como_compro_path(1)) do %>
+          Como comprar
+        <% end %>
+      </small>
+      <br>
+      <br>
+    </div>
   <% end %>
-
   <div class="privacy1">
     <div class="banner-bottom-grid1 privacy2-grid">
       <p class="privacy2-grid1">
