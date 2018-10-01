@@ -13,7 +13,7 @@
           </div>
         </div>
         <div class="col-md-8 events_bottom_left2">
-          <%= image_tag 'v2/15.jpg', :class => 'img-responsive'%>
+          <%= image_tag get_cycle_image(compra.nombre), :class => 'img-responsive'%>
           <h4><%= compra.nombre %></h4>
           <ul>
             <li><i class="fa fa-clock-o" aria-hidden="true"></i><%= l compra.fecha_inicio_compras, format: :horita %></li>

@@ -529,7 +529,7 @@ ul.dropdown-menu.drp-mnu li a i {
   margin-bottom: 5em;
 }
 .w3l_banner_nav_right_banner{
-  background:url(v2/Slides-1.png) no-repeat 0px 0px;
+  background:url(v2/Slides-01.png) no-repeat 0px 0px;
   background-size:cover;
   -webkit-background-size:cover;
   -moz-background-size:cover;
@@ -537,7 +537,7 @@ ul.dropdown-menu.drp-mnu li a i {
   -ms-background-size:cover;
 }
 .w3l_banner_nav_right_banner1{
-  background:url(v2/Slides-2.png) no-repeat 0px 0px;
+  background:url(v2/Slides-02.png) no-repeat 0px 0px;
   background-size:cover;
   -webkit-background-size:cover;
   -moz-background-size:cover;
@@ -545,7 +545,7 @@ ul.dropdown-menu.drp-mnu li a i {
   -ms-background-size:cover;
 }
 .w3l_banner_nav_right_banner2{
-  background:url(v2/Slides-3.png) no-repeat 0px 0px;
+  background:url(v2/Slides-03.png) no-repeat 0px 0px;
   background-size:cover;
   -webkit-background-size:cover;
   -moz-background-size:cover;
@@ -1348,14 +1348,10 @@ button.submit.check_out{
   padding:3em 0;
   background:#FA1818;
 }
-.w3agile_newsletter_left{
-  float: left;
-  width: 35%;
-  text-align: right;
-}
+
 .w3agile_newsletter_left h3{
   text-transform: capitalize;
-  font-size: 1.2em;
+  font-size: 2em;
   color: #fff;
   margin: .5em 0 0;
 }
@@ -3800,8 +3796,7 @@ input.checkbox:checked:after {
     margin: 0 auto;
   }
   .w3agile_newsletter_left {
-    width: 32%;
-    text-align: left;
+
   }
   .w3agile_newsletter_right {
     width: 63%;
@@ -4488,7 +4483,7 @@ input.checkbox:checked:after {
     font-size: 1.1em;
   }
   .w3agile_newsletter_left h3 {
-    margin: 0;
+
   }
   .newsletter {
     padding: 2em 0;
