@@ -1,6 +1,6 @@
-<div class="container fill">
-  <div class="row home">
-    <h1><%= @pedido.usuario.nombre %> <small>has realizado tu pedido de manera correcta, muchas gracias</small></h1>
+<div class="privacy about">
+  <div class="row">
+    <h3>Pedido #<%= @pedido.id.to_s.rjust(8, '0') %> </h3>
   </div>
   <% if @next_cycle.present? %>
     <div class="row">
@@ -10,7 +10,7 @@
             <div class="icon">
               <div class="image"><i class="glyphicon glyphicon-time"></i></div>
               <div class="info">
-                <h3 class="title">Próximo Ciclo para comprar</h3>
+                <h4 class="title">Próximo Ciclo para comprar</h4>
                 <!--<p>-->
                 <ul class="list-unstyled">
                   <li>Inicio de Compras: <%= l @next_cycle.fecha_inicio_compras %></li>
@@ -26,8 +26,9 @@
       </div>
     </div>
   <% end %>
+  <br>
   <div class="row">
-    <h3>Pedido #<%= @pedido.id.to_s.rjust(8, '0') %> </h3>
+    <h4><%= @pedido.usuario.nombre %> <small>has realizado tu pedido de manera correcta, muchas gracias</small></h4>
   </div>
 	<div class="row">
 		<% unless @pedido.blank? %>
