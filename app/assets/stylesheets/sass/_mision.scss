@@ -2297,7 +2297,7 @@ h2.typoh2{
 }
 
 .privacy1-grid ul li i{
-  color:#84C639;
+  color:$color-gray;
   top: -.5em;
 }
 .privacy1-grid ul li span,.privacy2-grid1 p{
@@ -2322,7 +2322,7 @@ h2.typoh2{
 }
 .privacy2-grid1 h4{
   font-size: 1.5em;
-  color: #84C639;
+  color: $color-gray;
   margin: 0 0 1em;
   line-height: 1.5em;
   text-transform: capitalize;
@@ -2337,6 +2337,36 @@ h2.typoh2{
 .privacy2-grid1-sub:nth-child(2){
   margin:2em 0;
 }
+.privacy1 {
+  .steps{
+    i{
+      font-size: 40px;
+      color: #FA1818;
+    }
+    span{
+      margin-top: 10px;
+      font-size: 10px;
+      b{
+        color: $color-gray;
+      }
+    }
+    margin-top: 20px;
+    .numberCircle {
+      font-family: Ubuntu;
+      border-radius: 50%;
+      width: 70px;
+      height: 70px;
+      padding: 5px;
+      background: #fff;
+      border: 3px solid #FA1818;
+      color: #FA1818;
+      text-align: center;
+      font-size: 38px;
+    }
+  }
+
+}
+
 .privacy1 h3 {
   font-size: 1.5em;
   color: #FA1818;
