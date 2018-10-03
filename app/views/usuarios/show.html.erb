@@ -1,3 +1,4 @@
+<%= javascript_include_tag 'usuarios' %>
 <% content_for :title, 'Mi Círculo' %>
 <% navigation_add 'Mi círculo', '#' %>
 <div class="center-section">
@@ -166,24 +167,32 @@
           <% end %>
         <% else %>
           <div class="row">
-            <div class="col-sm-6">
-              <h4>Crear un círculo</h4>
-              <br>
-              <br>
-              <%= render 'circulos/form' %>
-
+            <div class="col-md-6">
+              <div class="new-cycle">
+                <h4>Crear un círculo</h4>
+                <br>
+                <br>
+                <%= render 'circulos/form' %>
+              </div>
             </div>
             <div class="col-sm-6">
-              <h4>Quiero ser parte de un círculo</h4>
-              <br>
-              <br>
-              <%= form_tag(usuario_add_myself_cycle_path(current_usuario), method: "post") do %>
-                <div class="form-group">
-                  <label for="circulo_id">Agregarme al círculo</label>
-                  <input type="text" class="form-control" id="circulo_id" name="circulo_id" placeholder="Ingrese el número de círculo">
-                </div>
-                <button type="submit" class="btn btn-primary">Agregarme</button>
-              <% end %>
+              <div class="merged_cycle">
+                <h4>Quiero ser parte de un círculo</h4>
+                <br>
+                <br>
+                <%= form_tag(usuario_add_myself_cycle_path(current_usuario), id: 'add-myself', method: "post") do %>
+                  <div class="form-group">
+                    <label for="circulo_id">Agregarme al círculo</label>
+                    <input type="text" class="form-control required" id="circulo_id" name="circulo_id" placeholder="Ingrese el número de círculo">
+                  </div>
+                  <div class="control-group">
+                    <div class="col-md-12 text-right">
+                      <button type="submit" class="btn btn-primary">Agregarme</button>
+                    </div>
+                  </div>
+
+                <% end %>
+              </div>
             </div>
           </div>
         <% end %>

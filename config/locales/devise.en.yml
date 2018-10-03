@@ -16,7 +16,7 @@ en:
     failure:
       already_authenticated: ""
       inactive: "Tu cuenta aún no está activada."
-      invalid: "Ups, halgo está mal. Usuario y/o password incorrectos!!"
+      invalid: "Ups, algo está mal. Usuario y/o password incorrectos!!"
       locked: "Tu cuenta está bloqueada."
       last_attempt: "You have one more attempt before your account will be locked."
       not_found_in_database: "Invalid email or password."

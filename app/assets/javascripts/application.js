@@ -117,34 +117,14 @@ $(document).ready(function() {
     });
   });
 
-  $('[id*="usuario_role_ids_"]').on('click', function(){
-
-    var label=$(this).prop("labels");
-    var text = $(label).text();
-
-    if ( text.trim() == 'Coordinador' ){
-
-      $('#emails-invitados').show();
-    }else{
-
-      $('#emails-invitados').hide();
-    }
-
-  });
-
-  $('#emails-invitados').hide();
-    $('#finalizar').on('click',function() {
-        $(this).attr("disabled", "disabled"); }
-    );
-
-    $(".dropdown").hover(
-        function() {
-            $('.dropdown-menu', this).stop( true, true ).slideDown("fast");
-            $(this).toggleClass('open');
-        },
-        function() {
-            $('.dropdown-menu', this).stop( true, true ).slideUp("fast");
-            $(this).toggleClass('open');
-        }
-    );
+  $(".dropdown").hover(
+      function() {
+          $('.dropdown-menu', this).stop( true, true ).slideDown("fast");
+          $(this).toggleClass('open');
+      },
+      function() {
+          $('.dropdown-menu', this).stop( true, true ).slideUp("fast");
+          $(this).toggleClass('open');
+      }
+  );
 });

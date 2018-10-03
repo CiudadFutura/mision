@@ -23,14 +23,20 @@ en:
   activerecord:
     models:
       compra:
-        warehouse: Distritos
+        warehouse: Distrito
+        warehouses: Distritos
       account:
         attributes:
           status: Estado
       supplier: Proveedor
+      usuario:
+        calle: Dirección
+        warehouse: Distrito
+        warehouses: Distritos
     attributes:
       usuario:
         calle: Dirección
+        warehouse: Distrito
       supplier:
         name: Nombre
         address: Dirección
