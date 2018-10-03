@@ -43,6 +43,11 @@ class CirculosController < ApplicationController
         @circulo.coordinador.circulo = @circulo
         @circulo.coordinador.save!
 
+        InvitationMailer.send_invitations(params[:email_invitado_1], current_usuario).deliver unless params[:email_invitado_1].blank?
+        InvitationMailer.send_invitations(params[:email_invitado_2], current_usuario).deliver unless params[:email_invitado_2].blank?
+        InvitationMailer.send_invitations(params[:email_invitado_3], current_usuario).deliver unless params[:email_invitado_3].blank?
+        InvitationMailer.send_invitations(params[:email_invitado_4], current_usuario).deliver unless params[:email_invitado_4].blank?
+
         format.html { redirect_to @circulo, notice: 'Circulo creado exitosamente.' }
         format.json { render :show, status: :created, location: @circulo }
       else
