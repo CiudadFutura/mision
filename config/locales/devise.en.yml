@@ -45,7 +45,7 @@ en:
       signed_up_but_inactive: "You have signed up successfully. However, we could not sign you in because your account is not yet activated."
       signed_up_but_locked: "You have signed up successfully. However, we could not sign you in because your account is locked."
       signed_up_but_unconfirmed: "Gracias por registrarte! Un email ha sido enviado a tu casilla para confirmar tu
-      cuenta. Por favor haz click en el link que se encuntra en dicho email para activar tu cuenta."
+      cuenta. Por favor haz click en el link que se encuentra en dicho email para activar tu cuenta."
       update_needs_confirmation: "You updated your account successfully, but we need to verify your new email address. Please check your email and click on the confirm link to finalize confirming your new email address."
       updated: "Se ha actualizado tu cuenta exitosamente."
     sessions:

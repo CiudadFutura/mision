@@ -50,8 +50,6 @@ class User::RegistrationsController < Devise::RegistrationsController
       usuario.save!
 		else
 			usuario = resource
-			usuario.skip_confirmation!
-			usuario.confirm!
 			usuario.save!
     end
     super

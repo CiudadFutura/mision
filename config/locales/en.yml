@@ -23,20 +23,25 @@ en:
   activerecord:
     models:
       compra:
-        warehouse: Distrito
-        warehouses: Distritos
+        warehouse: Distritos
       account:
         attributes:
           status: Estado
       supplier: Proveedor
-      usuario:
-        calle: Dirección
+    attributes:
+      compra:
         warehouse: Distrito
         warehouses: Distritos
-    attributes:
+      circulo:
+        warehouse: Distrito
+        warehouses: Distritos
       usuario:
         calle: Dirección
-        warehouse: Distrito
+        codigo_postal: Código Postal
+        dni: DNI
+        cel1: Celular
+        tel1: Teléfono
+        pais: País
       supplier:
         name: Nombre
         address: Dirección
@@ -82,9 +87,9 @@ en:
     abbr_month_names: [~, Ene, Feb, Mar, Abr, May, Jun, Jul, Ago, Sep, Oct, Nov, Dic]
     # Used in date_select and datetime_select.
     order:
-      - day
-      - month
-      - year
+    - day
+    - month
+    - year
 
   time:
     formats:
@@ -96,7 +101,7 @@ en:
     am: "am"
     pm: "pm"
 
-# Used in array.to_sentence.
+  # Used in array.to_sentence.
   support:
     array:
       words_connector: ", "

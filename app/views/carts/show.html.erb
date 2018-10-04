@@ -20,14 +20,18 @@
   </div>
 
   <div class="checkout-right">
-    <% if @ciclo_actual.circulos.include?(current_usuario.circulo) || @ciclo_actual.tipo == 'mini'  %>
-      <% if !current_usuario.pedido?(@ciclo_actual) %>
-        <%= render 'carts/cart' %>
+    <% if @ciclo_actual.present? %>
+      <% if @ciclo_actual.circulos.include?(current_usuario.circulo) || @ciclo_actual.tipo == 'mini'  %>
+        <% if !current_usuario.pedido?(@ciclo_actual) %>
+          <%= render 'carts/cart' %>
+        <% else %>
+          <p class="explicacion"><span class="label label-warning">Disculpa. Ya haz realizado tu pedido. Por el momento la misión solo admite un pedido por usuario por ciclo.</span></p>
+        <% end %>
       <% else %>
-        <p class="explicacion"><span class="label label-warning">Disculpa. Ya haz realizado tu pedido. Por el momento la misión solo admite un pedido por usuario por ciclo.</span></p>
+        <p class="explicacion"><span class="label label-warning">Tú Círculo no está habilitado para realizar la compra en este ciclo.</span></p>
       <% end %>
     <% else %>
-      <p class="explicacion"><span class="label label-warning">Tú Círculo no está habilitado para realizar la compra en este ciclo.</span></p>
+      <h4><span class="label label-warning">No hay un ciclo de compras activo, en estos momentos no se puede relizar el pedido.</span></h4>
     <% end %>
   </div>
 </div>

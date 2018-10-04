@@ -1,5 +1,18 @@
 window.onload = (function() {
+
+
     $('#new_usuario').validate({
+        rules: {
+            'usuario[dni]': {
+                number: true
+            },
+            'usuario[cel1]': {
+                number: true
+            },
+            'usuario[tel1]': {
+                number: true
+            }
+        },
         errorPlacement: function (label, element) {
             label.addClass('error');
             label.insertBefore(element);
@@ -8,6 +21,17 @@ window.onload = (function() {
     });
 
     $('#edit_usuario').validate({
+        rules: {
+            'usuario[dni]': {
+                number: true
+            },
+            'usuario[cel1]': {
+                number: true
+            },
+            'usuario[tel1]': {
+                number: true
+            }
+        },
         errorPlacement: function (label, element) {
             label.addClass('error');
             label.insertBefore(element);
