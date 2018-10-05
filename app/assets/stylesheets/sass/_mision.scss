@@ -306,7 +306,6 @@ ul.agileits_social_icons li a,
   background:#212121;
 }
 .w3l_offers{
-  float:left;
 }
 .w3l_offers a{
   font-size: 1.2em;
@@ -343,7 +342,6 @@ ul.agileits_social_icons li a,
   background: url(v2/img-sp.png) no-repeat 14px 5px #84C639;
 }
 .w3l_header_right{
-  float: left;
   padding-left: 10em;
 }
 .w3l_header_right ul li {
@@ -405,7 +403,6 @@ ul.dropdown-menu.drp-mnu li a i {
   color: #FA1818;
 }
 .w3ls_logo_products_left1{
-  float: left;
   margin-top: 2.3em;
 }
 .w3ls_logo_products_left1 ul.phone_email li{
@@ -507,10 +504,9 @@ ul.dropdown-menu.drp-mnu li a i {
 }
 .w3ls_vegetables ul li {
   list-style-type: none;
-}
-.w3ls_vegetables ul li:first-child {
   margin-bottom:.5em;
 }
+
 .w3ls_vegetables ul li a {
   color: #212121;
   /*-- w3layouts --*/
@@ -873,7 +869,6 @@ h3.title:after,
 /*-- cart --*/
 .product_list_header {
   padding-top: 11px;
-  float: left;
   margin-left: 7em;
 }
 .snipcart-details {
@@ -4299,10 +4294,6 @@ input.checkbox:checked:after {
   .navbar-toggle .icon-bar {
     border: 1px solid #212121;
   }
-  .w3l_banner_nav_right {
-
-
-  }
   .navbar-nav {
     border-top: none;
   }
@@ -4318,9 +4309,6 @@ input.checkbox:checked:after {
   }
   .w3l_banner_nav_right_banner2 {
     background-position: 0px 0px;
-  }
-  .more {
-
   }
 }
 @media (max-width: 736px){
@@ -4344,9 +4332,6 @@ input.checkbox:checked:after {
     width: 650px;
     margin: 130px auto 30px;
   }
-  .more {
-
-  }
   .w3agile_newsletter_right {
     width: 80%;
   }
@@ -4361,9 +4346,6 @@ input.checkbox:checked:after {
   .w3l_search {
     width: 55%;
     margin: .1em 0 1em 5.8em;
-  }
-  .more {
-
   }
   .footer {
     padding: 3em 0;

@@ -1,29 +1,26 @@
 <!-- header -->
-<div class="agileits_header">
-  <div class="w3l_offers">
-    <%= link_to 'Ciudad Futura', 'http://ciudadfutura.com.ar/', :target => '_blank' %>
-  </div>
-  <div class="w3l_search">
-    <div class="products-search">
-      <form action="#" method="post">
-        <%= hidden_field_tag :producto_id, '', id: 'my_producto_id' %>
-        <%= autocomplete_field_tag 'search', '',autocomplete_producto_nombre_productos_path, :id_element => '#my_producto_id', 'data-auto-focus' => true %>
-        <div class="results" id="products-search-results"></div>
-        <input type="submit" value=" ">
-      </form>
+<div class="row agileits_header">
+  <div class="col-md-3">
+    <div class="w3l_offers">
+      <%= link_to 'Ciudad Futura', 'http://ciudadfutura.com.ar/', :target => '_blank' %>
     </div>
   </div>
-  <div class="product_list_header">
-    <%= link_to(cart_path, class: 'prod-list') do %>
-      <i class="icon-lmcart"></i>Ver Mi Compra
-    <% end %>
-  </div>
-  <%= render 'layouts/user_menu' %>
-  <div class="w3l_header_right1">
-    <h2><a href="mail.html">Contacto</a></h2>
+  <div class="col-md-9">
+    <div class="col-md-9 text-right">
+      <div class="product_list_header">
+        <%= link_to(cart_path, class: 'prod-list') do %>
+          <i class="icon-lmcart"></i>Ver Mi Compra
+        <% end %>
+      </div>
+    </div>
+    <div class="col-md-3 text-center">
+      <%= render 'layouts/user_menu' %>
+    </div>
+
   </div>
   <div class="clearfix"> </div>
 </div>
+
 <div class="logo_products">
   <div class="container">
     <div class="w3ls_logo_products_left">
