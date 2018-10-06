@@ -1,74 +1,88 @@
-<div class="container fill">
-  <h3>Círculo N°: <%= @circulo.id %></h3>
-  <div class="breadcrumb">
-    <%= link_to 'Editar', edit_circulo_path(@circulo) %> |
-    <%= link_to 'Atrás', circulos_path %>
+<div class="agile-grids">
+  <div class="agile-tables">
+    <div class="navbar navs-fixed">
+
+      <%= link_to 'Editar', edit_circulo_path(@circulo) %> |
+      <%= link_to 'Atrás', circulos_path %>
+    </div>
+    <div class="w3l-table-info">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="col-md-10">
+            <h3>Círculo N°: <%= @circulo.id %></h3>
+          </div>
+          <div class="col-md-2 text-center">
+            <h4>Cantidad de Pedidos realizados</h4>
+            <h2><%= @circulo.pedidos.count%></h2>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <caption><h4>Consumidores del Círculo</h4></caption>
+              <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Celular</th>
+                <th>Teléfono</th>
+                <th>Rol</th>
+                <th></th>
+              </tr>
+              </thead>
+              <tbody>
+              <% @circulo.usuarios.each do |u| %>
+                <tr>
+                  <td><%= u.try('nombre_completo') || 'Sin Nommbre' %></td>
+                  <td><%= u.try('email') || 'Sin email' %></td>
+                  <td><%= u.try('cel1') || 'Sin celular' %></td>
+                  <td><%= u.try('tel1') || 'Sin telefono' %></td>
+                  <td><%= u.try('type') || 'Sin Rol' %></td>
+                  <td><%= link_to 'Mostrar', usuario_path(u.id), class: "btn btn-default btn-xs" %></td>
+                </tr>
+              <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <br>
+      <% if !@circulo.pedidos.blank? %>
+        <div class="row">
+          <div class="table-responsive">
+            <table class="table">
+              <caption><h4>Ultimos pedidos del Círculo</h4></caption>
+              <thead>
+              <tr>
+                <th>Pedido#</th>
+                <th>Consumidor</th>
+                <th>Ciclo</th>
+                <th>Fecha</th>
+                <th></th>
+              </tr>
+              </thead>
+              <tbody>
+              <% @circulo.usuarios.each do |u| %>
+                <% p = u.ultimos_pedidos(u) %>
+                <% if p.present? %>
+                  <tr>
+                    <td><%= p.try('id') || 'Sin ID' %></td>
+                    <td><%= u.nombre_completo %></td>
+                    <td><%= p.ciclo.try('nombre') || 'SIN CICLO'%></td>
+                    <td><%= l p.try('created_at') || ' SIN FECHA '%></td>
+                    <td><%= link_to 'Crear Transacción', new_transaction_path(pedido_id:p.id), class: "btn btn-default btn-xs" %></td>
+                    <td><%= link_to 'Mostrar', usuario_path(u.id), class: "btn btn-default btn-xs" %></td>
+                  </tr>
+                <% end %>
+              <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      <% end %>
+    </div>
   </div>
-
-	<div class="col-md-12">
-	  <div class="col-md-2 col-md-offset-10 text-center">
-	  <h4>Cantidad de Pedidos realizados</h4>
-	    <h2><%= @circulo.pedidos.count%></h2>
-	  </div>
-	</div>
-
-  <div class="table-responsive">
-    <table class="table table-striped">
-      <caption><h4>Consumidores del Círculo</h4></caption>
-      <thead>
-      <tr>
-        <th>Nombre</th>
-        <th>Email</th>
-        <th>Celular</th>
-        <th>Teléfono</th>
-        <th>Rol</th>
-        <th></th>
-      </tr>
-      </thead>
-      <tbody>
-      <% @circulo.usuarios.each do |u| %>
-	      <tr>
-	        <td><%= u.try('nombre_completo') || 'Sin Nommbre' %></td>
-	        <td><%= u.try('email') || 'Sin email' %></td>
-	        <td><%= u.try('cel1') || 'Sin celular' %></td>
-	        <td><%= u.try('tel1') || 'Sin telefono' %></td>
-	        <td><%= u.try('type') || 'Sin Rol' %></td>
-	        <td><%= link_to 'Mostrar', usuario_path(u.id), class: "btn btn-default btn-xs" %></td>
-	      </tr>
-	    <% end %>
-      </tbody>
-    </table>
-  </div>
-  <% if !@circulo.pedidos.blank? %>
-
-	  <div class="table-responsive">
-	    <table class="table table-striped">
-	      <caption><h4>Ultimos pedidos del Círculo</h4></caption>
-	      <thead>
-	      <tr>
-	        <th>Pedido#</th>
-	        <th>Consumidor</th>
-	        <th>Ciclo</th>
-	        <th>Fecha</th>
-	        <th></th>
-	      </tr>
-	      </thead>
-	      <tbody>
-	      <% @circulo.usuarios.each do |u| %>
-	        <% p = u.ultimos_pedidos(u) %>
-	        <% if p.present? %>
-		        <tr>
-		          <td><%= p.try('id') || 'Sin ID' %></td>
-		          <td><%= u.nombre_completo %></td>
-		          <td><%= p.ciclo.try('nombre') || 'SIN CICLO'%></td>
-		          <td><%= l p.try('created_at') || ' SIN FECHA '%></td>
-		          <td><%= link_to 'Crear Transacción', new_transaction_path(pedido_id:p.id), class: "btn btn-default btn-xs" %></td>
-		          <td><%= link_to 'Mostrar', usuario_path(u.id), class: "btn btn-default btn-xs" %></td>
-		        </tr>
-		      <% end %>
-	      <% end %>
-	      </tbody>
-	    </table>
-	  </div>
-  <% end %>
 </div>

@@ -5,12 +5,18 @@ class CirculosController < ApplicationController
   # GET /circulos
   # GET /circulos.json
   def index
-    @circulos = Circulo.all
 
-    respond_to do |format|
-      format.html
-      format.csv { render csv: @circulos.to_csv, filename: "#{Time.now.to_i}_circulos" }
+    if current_usuario && current_usuario.admin?
+      @circulos = Circulo.paginate(page: params[:page], per_page: 10)
+      respond_to do |format|
+        format.html {render 'circulos/index_admin'}
+        format.csv { render csv: @circulos.to_csv, filename: "#{Time.now.to_i}_circulos" }
+      end
+    else
+      @circulos = Circulo.paginate(page: params[:page], per_page: 10)
     end
+
+
   end
 
   # GET /circulos/1
