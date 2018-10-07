@@ -75,13 +75,13 @@ $(document).ready(function() {
     if (action === 'add') {
       //Add a new item to cart
       new_action = 'remove';
-      new_title = "Eliminar del ";
+      new_title = "Eliminar ";
 	    new_class = 'btn-danger';
 	    old_class = 'btn-success';
     } else if (action === 'remove') {
       //Remove item from cart
       new_action = 'add';
-      new_title = "Agregar al ";
+      new_title = "Agregar";
       that.parents("tr.cart-item").remove();
 	    new_class = 'btn-success';
 	    old_class = 'btn-danger';

@@ -22,6 +22,15 @@ class CirculosController < ApplicationController
   # GET /circulos/1
   # GET /circulos/1.json
   def show
+    if current_usuario && current_usuario.admin?
+
+      respond_to do |format|
+        format.html
+        format.csv { render csv: @circulo.to_csv, filename: "#{Time.now.to_i}_circulos" }
+      end
+    else
+      redirect_to action: 'show', controller: :usuarios, id: current_usuario
+    end
   end
 
   # GET /circulos/new
