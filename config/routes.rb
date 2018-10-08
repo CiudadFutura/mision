@@ -73,7 +73,9 @@ Rails.application.routes.draw do
   resources :home
   resources :steps
   resources :dossiers
-  resources :faqs
+  resources :faqs do
+    get 'download_instructivo', to: 'faqs#download_instructivo'
+  end
   resources :como_compro
   resources :about_us
   resources :geo_reports

@@ -32,7 +32,11 @@
     <div class="col-md-3 w3_footer_grid">
       <h3>términos y<br>condiciones</h3>
       <ul class="w3_footer_grid_list">
-        <li><a href="faqs.html">Preguntas Frecuentes</a></li>
+        <li>
+          <%= link_to(faqs_path) do %>
+          Preguntas frecuentes
+          <% end %>
+        </li>
         <li><a href="privacy.html">términos y condiciones</a></li>
       </ul>
     </div>
