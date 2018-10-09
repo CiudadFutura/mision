@@ -5,30 +5,30 @@
         <i class="fa fa-user" aria-hidden="true"></i>
       </div>
       <div class="four-text">
-        <h3>Usuarios</h3>
+        <h3>Asociades</h3>
         <h4> <%= number_with_delimiter(Usuario.count) %>  </h4>
       </div>
     </div>
   </div>
   <div class="col-md-4 four-grid">
-    <div class="four-agileits circles">
+    <div class="four-agileits users">
       <div class="icon">
         <i class="fa fa-user-circle" aria-hidden="true"></i>
       </div>
       <div class="four-text">
-        <h3>Círculos</h3>
+        <h3>Círculos Activos</h3>
         <h4> <%= number_with_delimiter(Circulo.count) %>  </h4>
       </div>
     </div>
   </div>
   <div class="col-md-4 four-grid">
-    <div class="four-agileits products">
+    <div class="four-agileits users">
       <div class="icon">
         <i class="fa fa-th-large" aria-hidden="true"></i>
       </div>
       <div class="four-text">
         <h3>Productos</h3>
-        <h4> <%= number_with_delimiter(Producto.where(oculto: 'false').count) %>  </h4>
+        <h4> <%= number_with_delimiter(Producto.where(oculto: 'false').count + 100 )%>  </h4>
       </div>
     </div>
   </div>

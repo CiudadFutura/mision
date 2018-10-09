@@ -31,20 +31,20 @@
     <div class="w3ls_logo_products_left1">
       <ul class="special_items">
         <li>
-          <%= link_to(compras_path) do %>
-            Ciclos <i>/</i>
-          <% end %>
-        </li>
-        <li>
           <%= link_to(como_compro_path(1)) do %>
             Cómo comprar <i>/</i>
           <% end %>
         </li>
         <li>
-          <%= link_to(suppliers_path()) do %>
-            Productores
+          <%= link_to warehouses_path do %>
+            Puntos de retiro <i>/</i>
           <% end %>
-          <i>/</i></li>
+        </li>
+        <li>
+          <%= link_to(compras_path) do %>
+            Próximos Ciclos <i>/</i>
+          <% end %>
+        </li>
         <li>
           <%= link_to(about_us_path) do %>
             Quienes somos

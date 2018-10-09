@@ -27,6 +27,11 @@
           <% end %>
         </li>
         <li>
+          <%= link_to(suppliers_path()) do %>
+            Productores
+          <% end %>
+        </li>
+        <li>
           <%= link_to(como_compro_path(1)) do %>
             ¿Cómo comprar?
           <% end %>
@@ -51,7 +56,9 @@
     <div class="col-md-3 w3_footer_grid">
       <h3>Contactos por <br>estos medios</h3>
       <ul class="w3_footer_grid_list1">
-        <li><i class="fa fa-envelope-o" aria-hidden="true"></i> Email</a>
+        <li>
+          <i class="fa fa-envelope-o" aria-hidden="true"></i>
+          <a href="mailto:victoriacolectiva@gmail.com?subject=Consulta">Email</a>
         </li>
         <li>
           <i class="fa fa-commenting-o" aria-hidden="true"></i>
