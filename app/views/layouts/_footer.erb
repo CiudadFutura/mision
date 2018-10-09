@@ -22,11 +22,20 @@
       </h3>
       <ul class="w3_footer_grid_list">
         <li>
-          <a href="events.html">Quienes somos</a>
+          <%= link_to(about_us_path) do %>
+            Quienes somos
+          <% end %>
         </li>
-        <li><a href="about.html">Qué es la Misión</a></li>
-        <li><a href="products.html">¿Cómo compro?</a></li>
-        <li><a href="services.html">Puntos de retiro</a></li>
+        <li>
+          <%= link_to(como_compro_path(1)) do %>
+            ¿Cómo comprar?
+          <% end %>
+        </li>
+        <li>
+          <%= link_to warehouses_path do %>
+            Puntos de retiro
+          <% end %>
+        </li>
       </ul>
     </div>
     <div class="col-md-3 w3_footer_grid">
@@ -37,7 +46,6 @@
           Preguntas frecuentes
           <% end %>
         </li>
-        <li><a href="privacy.html">términos y condiciones</a></li>
       </ul>
     </div>
     <div class="col-md-3 w3_footer_grid">

@@ -22,7 +22,7 @@ class ProductosController < ApplicationController
     end
     @view_type = session[:view_type]
     @view_prod = session[:view_prod]
-    @ciclo_actual = Compra::ciclo_actual
+    @ciclo_actual = Compra.ciclo_actual
 
 		@productos = Producto.all.order(:orden, :nombre).paginate(:page => params[:page], :per_page => 50)
     @todos = @productos
@@ -49,6 +49,7 @@ class ProductosController < ApplicationController
   def show
     # todo: Se sigue usando???
     # @cart_action = @producto.cart_action(session)
+    @ciclo_actual = Compra.ciclo_actual
     cat = @producto.categorias.first.id
     @related_products = @producto.get_related_products(cat)
 

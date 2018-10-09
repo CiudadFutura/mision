@@ -21,7 +21,7 @@
 
   <div class="checkout-right">
     <% if @ciclo_actual.present? %>
-      <% if @ciclo_actual.circulos.include?(current_usuario.circulo) || @ciclo_actual.tipo == 'mini'  %>
+      <% if @ciclo_actual.circulos.include?(current_usuario.circulo) %>
         <% if !current_usuario.pedido?(@ciclo_actual) %>
           <%= render 'carts/cart' %>
         <% else %>

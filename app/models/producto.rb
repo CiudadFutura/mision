@@ -79,7 +79,7 @@ class Producto < ActiveRecord::Base
 
   def get_related_products(categoria)
     #get random products
-    Producto.joins(:categorias).where('categorias.id = :id OR categorias.parent_id = :id',
+    Producto.joins(:categorias).where('categorias.id = :id OR categorias.parent_id = :id AND oculto = false',
                              id: categoria).order("RAND()").limit(3) if categoria
   end
 

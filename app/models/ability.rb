@@ -13,6 +13,7 @@ class Ability
       can [:read, :create, :update], Usuario, { :id => user.id }
       can [:read], Account, { :usuario_id => user.id }
       can [:read], Compra
+      can [:read], Warehouse
     elsif user.usuario?
       can [:read], Compra
       can [:create], Circulo
@@ -21,9 +22,11 @@ class Ability
       can [:abandonar_circulo], Usuario
       can [:add_myself_cycle], Usuario
       can [:read], Account, { :usuario_id => user.id }
+      can [:read], Warehouse
     elsif user.director?
       can [:read], Circulo, { :warehouse_id => user.usuario_roles.warehouse_id }
       can [:read, :create, :update], Pedido, { :warehouse_id => user.usuario_roles.warehouse_id }
+      can [:read], Warehouse
     else
       can [:read], Compra
       can [:read], Warehouse

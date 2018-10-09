@@ -6,6 +6,7 @@ class CartsController < ApplicationController
 
   def show
     @ciclo_actual = Compra.ciclo_actual
+    @category = Categoria.order("RAND()").limit(1)
     @missing = @carrito.check_item_stock
     if usuario_signed_in?
         @transactions = Transaction.where(["account_id = :id and pedido_id is null", {id: current_usuario.account.id }])

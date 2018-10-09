@@ -6,10 +6,10 @@ class ComprasController < ApplicationController
   # GET /compras.json
   def index
     if current_usuario && current_usuario.admin?
-      @compras = Compra.paginate(page: params[:page], per_page: 10).order(fecha_inicio_compras: :desc)
+      @compras = Compra.paginate(page: params[:page], per_page: 10).order(fecha_inicio_compras: :desc).limit(6)
       render 'compras/index_admin'
     else
-      @compras = Compra.paginate(page: params[:page], per_page: 10).order(fecha_inicio_compras: :desc)
+      @compras = Compra.order(fecha_inicio_compras: :desc).limit(6)
     end
   end
 

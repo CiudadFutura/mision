@@ -10,18 +10,17 @@
       <div class="privacy2-grid1">
         <p>Para poder comprar <b>tenés que estar registrado/a y pertenecer a un círculo de asociados/as</b>.
           Un círculo es un grupo de dos -2- personas o más que están registradas en nuestra página.
-          A cada una de esas personas se las denomina “asociado/a”. Click aquí para más información</p>
+          A cada una de esas personas se las denomina “asociado/a”.</p>
         <div class="privacy2-grid1-sub">
-          <p>
-            - Clic
-            <%= link_to sign_up_usuarios_path do %>
-              aquí
-            <% end %>
-            para registrarse -.
-          </p>
-          <p>
-            - Ya estoy registrado/a pero no tengo círculo. ¿Cómo hago? -.
-          </p>
+          <% if current_usuario.blank? %>
+            <p>
+              - Clic
+              <%= link_to sign_up_usuarios_path do %>
+                aquí
+              <% end %>
+              para registrarse -.
+            </p>
+          <% end %>
         </div>
         <div class="privacy2-grid1-sub">
           <h4>Comprá en 3 simples pasos</h4>
@@ -82,7 +81,9 @@
             <h5>Retirás</h5>
             <div class="col-sm-12">
               <p>Siete días después de hacer tu pedido pasás a retirarlo por el
-                <%= link_to 'punto de retiro', warehouse_path %> que eligió tu grupo.
+                <%= link_to warehouses_path do %>
+                  Punto de retiro
+                <% end %> que eligió tu grupo.
                 El día de retiro es siempre un sábado. Para que no te olvides también te vamos a avisar con anticipación por whatsapp.
               </p>
             </div>

@@ -16,10 +16,10 @@ en:
     failure:
       already_authenticated: ""
       inactive: "Tu cuenta aún no está activada."
-      invalid: "Ups, algo está mal. Usuario y/o password incorrectos!!"
+      invalid: "Ups, algo está mal. Usuario y/o contraseña incorrectos!!"
       locked: "Tu cuenta está bloqueada."
       last_attempt: "You have one more attempt before your account will be locked."
-      not_found_in_database: "Invalid email or password."
+      not_found_in_database: "El email o la contraseña que ingresaste pueden ser inválidos."
       timeout: "Tu sesión expiró. Ingrese nuevamente al sitio."
       unauthenticated: "Debes ingresar con tu cuenta o registrarte para ingresar al sitio."
       unconfirmed: "Por favor confirma tu cuenta antes de continuar."
@@ -40,7 +40,7 @@ en:
       updated: "Tu contraseña ha sido cambiada exitosamente. Estas logueado al sitio."
       updated_not_active: "Tu contraseña ha sido cambiada exitosamente."
     registrations:
-      destroyed: "Bye! Your account was successfully cancelled. We hope to see you again soon."
+      destroyed: "Chau! Tu cuenta ha sido cancelada de manera exitosa. Esperamos verte pronto."
       signed_up: "Bienvenido! Te has registrado de manera correcta."
       signed_up_but_inactive: "You have signed up successfully. However, we could not sign you in because your account is not yet activated."
       signed_up_but_locked: "You have signed up successfully. However, we could not sign you in because your account is locked."

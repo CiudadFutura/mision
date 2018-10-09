@@ -8,7 +8,7 @@
 
 </div>
 <div class="row">
-	<div class="text-right"><%= link_to('Seguir comprando', productos_path, class: 'btn btn-info') %></div>
+	<div class="text-right"><%= link_to('Seguir comprando', productos_path(categoria_id: @category.first.id), class: 'btn btn-info') %></div>
 	<br>
 </div>
 <% unless @carrito.empty? %>
@@ -90,13 +90,19 @@
       <% end %>
 
       <ul>
-        <li>Total de Ahorro <i>-</i> <span><%= number_to_percentage(@carrito.ahorro) %></span></li>
-        <li>Total <i>-</i> <span><%= number_to_currency(@carrito.total) %></span></li>
+        <li>Total de Ahorro <i>:</i> <span><%= number_to_percentage(@carrito.ahorro) %></span></li>
+        <li>Total <i>:</i> <span><%= number_to_currency(@carrito.total) %></span></li>
       </ul>
 
     </div>
   </div>
   <% render 'carts/user_data'%>
+  <% if @ciclo_actual && current_usuario && !current_usuario.pedido?(Compra:@ciclo_actual) %>
+    <div class="row text-right">
+      <%= link_to('Finalizar Compra', create_pedido_path, method: :get, class: "btn btn-success #{'disabled' if @missing.present?}",
+                  id: 'finalizar') %>
+    </div>
+  <% end %>
 <% else %>
 		<h4>No tiene productos agregado a su pedido</h4>
 <% end %>
