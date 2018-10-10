@@ -77,6 +77,7 @@ Rails.application.routes.draw do
     get 'download_instructivo', to: 'faqs#download_instructivo'
   end
   resources :como_compro
+  resources :terms_conditions
   resources :about_us
   resources :geo_reports
   resources :dashboards

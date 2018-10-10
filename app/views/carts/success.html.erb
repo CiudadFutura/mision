@@ -29,8 +29,9 @@
   <br>
   <div class="row">
     <h4><%= @pedido.usuario.nombre %> <small> has realizado tu pedido de manera correcta, muchas gracias.
-      Recordá que antes de pasar a retirarlo tenés que descargar tu factura en la sección “Mis pedidos”,
-      la misma estará disponible una vez cerrado el ciclo de compra.</small></h4>
+      Una vez cerrado el ciclo de compras nos pondremos en contacto con el círculo para informar día y
+      horario de retiro, así como el monto total  a pagar por la compra. También van a poder descargar la
+      factura de su pedido desde la sección “Mis pedidos”</small></h4>
   </div>
 	<div class="row">
 		<% unless @pedido.blank? %>
