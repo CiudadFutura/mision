@@ -7,6 +7,19 @@
   <div class="row">
     <h3>Hola <%= current_usuario.nombre %></h3>
   </div>
+
+  <br>
+  <h4>¡Bienvenide a la Misión Anti Inflación!</h4>
+  <br>
+  <p>Muchas gracias por asociarte y formar junto con nosotres un mercado alternativo.</p>
+  <br>
+  <p>Desde esta sección vas a poder:</p>
+  <br>
+  <ul>
+    <li>Modificar tus datos personales</li>
+    <li>Gestionar tu círculo</li>
+    <li>Ver tus pedidos y descargar tus facturas</li>
+  </ul>
   <br>
   <br>
   <% if !current_usuario.completed? or current_usuario.circulo.blank? %>
@@ -54,33 +67,111 @@
       </p>
     </div>
   </div>
-
+  <br>
+  <br>
   <% if @ciclo_actual_completo.present? %>
     <% if @ciclo_actual_completo.circulos.include?(current_usuario.circulo) %>
       <div class="row">
-        <h4>Ciclo actual</h4>
+        <h4>Ciclo para hacer la compra <%= @ciclo_actual_completo.nombre %></h4>
         <div class="col-sm-12">
-          <p class="text-center">Ciclo Actual: <%= @ciclo_actual_completo.nombre %></p>
-          <p>Desde el <strong><%= l @ciclo_actual_completo.fecha_inicio_compras %></strong></p>
-          <p>hasta el <strong><%= l @ciclo_actual_completo.fecha_fin_compras %></strong></p>
-          <p>Ultimo día para realizar el pago <strong><%= l @ciclo_actual_completo.fecha_fin_pagos %></strong></p>
+          <div class="Timeline">
+
+            <svg height="5" width="150">
+              <line x1="0" y1="0" x2="150" y2="0" style="stroke:#004165;stroke-width:5" />
+              No puedes ver la line porque tu navedador no soporta HMTL5
+            </svg>
+
+            <div class="event1">
+              <div class="event1Bubble">
+                <div class="eventTime">
+                  <div class="DayDigit"><%= @ciclo_actual_completo.fecha_inicio_compras.strftime('%e') %></div>
+                  <h4></h4>
+                  <div class="Day">
+                    <%= l @ciclo_actual_completo.fecha_inicio_compras, format: :day %>
+                    <div class="MonthYear"><%= l @ciclo_actual_completo.fecha_inicio_compras, format: :custom %></div>
+                  </div>
+                </div>
+                <div class="eventTitle">Inicio</div>
+              </div>
+              <svg height="20" width="20">
+                <circle cx="10" cy="11" r="5" fill="#004165" />
+              </svg>
+              <div class="time"><%= l @ciclo_actual_completo.fecha_inicio_compras, format: :horita %></div>
+            </div>
+
+            <svg height="5" width="180">
+              <line x1="0" y1="0" x2="180" y2="0" style="stroke:#004165;stroke-width:5" />
+              No puedes ver la line porque tu navedador no soporta HMTL5
+            </svg>
+
+            <div class="event2">
+              <div class="event2Bubble">
+                <div class="eventTime">
+                  <div class="DayDigit"><%= @ciclo_actual_completo.fecha_fin_compras.strftime('%e') %></div>
+                  <div class="Day">
+                    <%= l @ciclo_actual_completo.fecha_fin_compras, format: :day %>
+                    <div class="MonthYear"><%= l @ciclo_actual_completo.fecha_fin_compras, format: :custom %></div>
+                  </div>
+                </div>
+                <div class="eventTitle">Fin</div>
+              </div>
+              <svg height="20" width="20">
+                <circle cx="10" cy="11" r="5" fill="#004165" />
+              </svg>
+              <div class="time2"><%= l @ciclo_actual_completo.fecha_fin_compras, format: :horita %></div>
+            </div>
+
+            <svg height="5" width="150">
+              <line x1="0" y1="0" x2="150" y2="0" style="stroke:#004165;stroke-width:5" />
+              No puedes ver la line porque tu navedador no soporta HMTL5
+            </svg>
+
+            <div class="event3">
+              <div class="event1Bubble">
+                <div class="eventTime">
+                  <div class="DayDigit"><%= @ciclo_actual_completo.fecha_entrega_compras.strftime('%e') %></div>
+                  <div class="Day">
+                    <%= l @ciclo_actual_completo.fecha_entrega_compras, format: :day %>
+                    <div class="MonthYear"><%= l @ciclo_actual_completo.fecha_entrega_compras, format: :custom %></div>
+                  </div>
+                </div>
+                <div class="eventTitle">Retiro</div>
+              </div>
+              <svg height="20" width="20">
+                <circle cx="10" cy="11" r="5" fill="#004165" />
+              </svg>
+              <div class="time"><%= l @ciclo_actual_completo.fecha_entrega_compras, format: :horita %></div>
+            </div>
+            <svg height="5" width="50">
+              <line x1="0" y1="0" x2="50" y2="0" style="stroke:#004165;stroke-width:5" />
+            </svg>
+            <svg height="20" width="42">
+              <line x1="1" y1="0" x2="1" y2="20" style="stroke:#004165;stroke-width:2" />
+              <circle cx="11" cy="10" r="3" fill="#004165" />
+              <circle cx="21" cy="10" r="3" fill="#004165" />
+              <circle cx="31" cy="10" r="3" fill="#004165" />
+              <line x1="41" y1="0" x2="41" y2="20" style="stroke:#004165;stroke-width:2" />
+            </svg>
+
+          </div>
+
+
         </div>
       </div>
     <% end %>
   <% else %>
     <div class="error text-center">No hay Ciclo Activo</div>
   <% end %>
-  <div class="row">
-    <% if @compra.present? %>
+  <% if @compra.present? %>
+    <div class="row">
       <div id="ciclos" data-start-date="<%= @compra.first.fecha_inicio_compras %>"></div>
-      <div class="row calendar text-center">
-        <div class="col-md-6 col-md-offset-3">
-          <h1>Próximo Ciclo de compras de tú círculo</h1>
-          <div id="calendar"></div>
+        <div class="row calendar text-center">
+          <div class="col-md-6 col-md-offset-3">
+            <h1>Próximo Ciclo de compras de tú círculo</h1>
         </div>
       </div>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
 
 
 </div>

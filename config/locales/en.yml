@@ -79,7 +79,7 @@ en:
       long: "%B %d, %Y"
       custom: "%b - %Y"
 
-    day_names: [Domingo, Lunes, Martes, Miércoles, Jueves, Viernes, Sabado]
+    day_names: [Domingo, Lunes, Martes, Miércoles, Jueves, Viernes, Sábado]
     abbr_day_names: [Dom, Lun, Mar, Mié, Jue, Vie, Sab]
 
     # Don't forget the nil at the beginning; there's no such thing as a 0th month
@@ -98,6 +98,7 @@ en:
       long: "%B %d, %Y %H:%M"
       custom: "%b - %Y"
       horita: "%H:%M"
+      day: "%A"
     am: "am"
     pm: "pm"
 

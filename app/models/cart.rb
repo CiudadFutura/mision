@@ -81,7 +81,7 @@ class Cart
   def ahorro
     total_mision = total_ahorro = 0
     @items.each do |_k, v|
-      next if v.total == 0 || v.total_super == 0
+      next if v.total == 0 || v.total_super == 0 || (v.total_super < v.producto.precio)
       total_mision += v.total
       total_ahorro += v.total_super
     end

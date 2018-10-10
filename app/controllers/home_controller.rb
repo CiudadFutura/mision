@@ -7,6 +7,7 @@ class HomeController < ApplicationController
     @featured = Producto.destacados.limit(9)
     @cycles = Compra.next_cycles
     @offers = Producto.get_offers_products
+    @category = Categoria.order("RAND()").limit(1)
     if current_usuario.present? and !current_usuario.admin? and current_usuario.account.blank?
       create_current_account
     end

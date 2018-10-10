@@ -20,45 +20,51 @@
       </div>
       <div class="snipcart-details agileinfo_single_right_details">
         <div class="col-sm-12 col-sm-4-offset">
-          <% if @producto.stock.present? and @producto.cantidad_permitida > @producto.stock
-               cantidad = @producto.stock
-             else
-               cantidad =  @producto.cantidad_permitida
-             end %>
-          <div class="col-sm-3">
-            <select id="qty-selected-<%= @producto.id %>" class="cantidad form-control">
-              <% for i in 1..cantidad %>
-                <% if @carrito.producto?(@producto.id) %>
-                  <option value="<%= i%>" <%= (i == @carrito.cantidad_prod(@producto.id)) ?'selected':''%>><%= i %></option>
-                <% else %>
-                  <option value="<%= i %>"><%= i %></option>
+          <% if @ciclo_actual.present? and
+            current_usuario.present? and
+            current_usuario.circulo.present? and
+            @ciclo_actual.circulos.include?(current_usuario.circulo) and
+            usuario_signed_in? %>
+            <% if @producto.stock.present? and @producto.cantidad_permitida > @producto.stock
+                 cantidad = @producto.stock
+               else
+                 cantidad =  @producto.cantidad_permitida
+               end %>
+            <div class="col-sm-3">
+              <select id="qty-selected-<%= @producto.id %>" class="cantidad form-control">
+                <% for i in 1..cantidad %>
+                  <% if @carrito.producto?(@producto.id) %>
+                    <option value="<%= i%>" <%= (i == @carrito.cantidad_prod(@producto.id)) ?'selected':''%>><%= i %></option>
+                  <% else %>
+                    <option value="<%= i %>"><%= i %></option>
+                  <% end %>
+                <% end %>
+              </select>
+            </div>
+            <div class="col-sm-6">
+              <% if @carrito.producto?(@producto.id) %>
+
+                <%= button_tag(type: 'button',
+                               class: 'btn btn-sm btn-danger',
+                               data: {
+                                 action: 'remove',
+                                 productId: @producto.id
+                               }) do %>
+                  <span class="fa fa-remove"></span> <span class="cart-action">Eliminar del</span> carro
+                <% end %>
+              <% else %>
+                <%= button_tag(type: 'button',
+                               class: 'btn btn-sm btn-success',
+                               data: {
+                                 productId: @producto.id,
+                                 orden_remito: @producto.orden_remito,
+                                 action: 'add'
+                               }) do %>
+                  <span class="fa fa-shopping-cart"></span> <span class="cart-action">Agregar al</span> carro
                 <% end %>
               <% end %>
-            </select>
-          </div>
-          <div class="col-sm-6">
-            <% if @carrito.producto?(@producto.id) %>
-
-              <%= button_tag(type: 'button',
-                             class: 'btn btn-sm btn-danger',
-                             data: {
-                               action: 'remove',
-                               productId: @producto.id
-                             }) do %>
-                <span class="fa fa-remove"></span> <span class="cart-action">Eliminar del</span> carro
-              <% end %>
-            <% else %>
-              <%= button_tag(type: 'button',
-                             class: 'btn btn-sm btn-success',
-                             data: {
-                               productId: @producto.id,
-                               orden_remito: @producto.orden_remito,
-                               action: 'add'
-                             }) do %>
-                <span class="fa fa-shopping-cart"></span> <span class="cart-action">Agregar al</span> carro
-              <% end %>
-            <% end %>
-          </div>
+            </div>
+          <% end %>
         </div>
       </div>
     </div>

@@ -141,9 +141,11 @@
               Luego puede agregar al resto de los integrantes.
             </span>
             <p>
-              <small>
-                <i><%= link_to 'Registrarse', sign_up_usuarios_path %></i>
-              </small>
+              <% if current_usuario.blank? %>
+                <small>
+                  <i><%= link_to 'Registrarse', sign_up_usuarios_path %></i>
+                </small>
+              <% end %>
             </p>
           </div>
           <br>
