@@ -1,33 +1,22 @@
-<div class="container fill">
+<% content_for :title, 'Detalle de pedido'   %>
+<% navigation_add 'Pedidos', pedidos_path() %>
+<% navigation_add 'Detalle de pedido', '#' %>
+<div class="account-data">
+  <h3>Detalle de pedido # <%= @pedido.id %></h3>
   <div class="row">
     <div class="col-md-8">
-      <h2>Detalle de Pedido</h2>
       <h4><%= @pedido.usuario.nombre %> <%= @pedido.usuario.apellido %></h4>
-			<% if @pedido.ciclo.tipo == 'free' or @pedido.ciclo.tipo == 'mini'  %>
-					<p>Ciclo Libre de compra: <b><%= @pedido.ciclo.nombre%></b></p>
-			<% else %>
-				<p>Círculo N°: <%= @pedido.circulo.id if @pedido.circulo.present? %></p>
-			<% end %>
-    </div>
-    <div class="col-md-4">
-      <h3 class="text-right"><%= (@pedido.created_at).strftime('%d/%m/%Y')%></h3>
-    </div>
-	</div>
-	<div class="row">
-    <div class="breadcrumb col-md-12">
-       <%= link_to t('.back', :default => t("helpers.links.back")),
-                   pedidos_path %>
-      <% if can? [:manage], pedidos_path %>
-          <span> | </span>
-          <li>
-            <%= link_to(pedido_path(@pedido, format:'xls')) do %>
-                Exportar a Excel
-            <% end %>
-          </li>
+      <% if @pedido.ciclo.tipo == 'free' or @pedido.ciclo.tipo == 'mini'  %>
+          <p>Ciclo Libre de compra: <b><%= @pedido.ciclo.nombre%></b></p>
+      <% else %>
+        <p>Círculo N°: <%= @pedido.circulo.id if @pedido.circulo.present? %></p>
       <% end %>
     </div>
-	</div>
-	<div class="row">
+    <div class="col-md-4">
+      <h2 class="text-right"><%= (@pedido.created_at).strftime('%d/%m/%Y')%></h2>
+    </div>
+  </div>
+  <div class="row">
     <div class="table-responsive">
       <table class='table table-striped' id="table-pedido">
         <thead>
@@ -54,17 +43,17 @@
         </tbody>
         <tfoot>
           <%if !@transactions.blank?%>
-	          <tr class="info">
-	            <td class="text-right">SubTotal</td>
-	            <td class="text-right"><%= qty %></td>
-	            <td class="text-right"><%= number_to_currency(total) %></td>
-	          </tr>
+            <tr class="info">
+              <td class="text-right">SubTotal</td>
+              <td class="text-right"><%= qty %></td>
+              <td class="text-right"><%= number_to_currency(total) %></td>
+            </tr>
             <% @transactions.each do |transaction| %>
               <tr class="info">
-	              <td class="text-right"><%= transaction.transaction_type == 0 ? 'Nota de Crédito' : 'Nota de Débito'%></td>
-	              <td class="text-right">#<%= transaction.id%></td>
-	              <td class="text-right"><%= number_to_currency(transaction.amount * -1) %></td>
-	              <% total -= transaction.amount %>
+                <td class="text-right"><%= transaction.transaction_type == 0 ? 'Nota de Crédito' : 'Nota de Débito'%></td>
+                <td class="text-right">#<%= transaction.id%></td>
+                <td class="text-right"><%= number_to_currency(transaction.amount * -1) %></td>
+                <% total -= transaction.amount %>
               </tr>
             <%end%>
           <%end%>

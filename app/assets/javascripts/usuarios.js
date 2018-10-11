@@ -1,17 +1,58 @@
-$(document).ready(function() {
-    var role = 'Director';
+window.onload = (function() {
 
-    $(":checkbox").change(function() {
-        $('#textbox1').val($(this).is(':checked'));
-        $('#role_warehouse').toggle($(this).is(':checked'));
+
+    $('#new_usuario').validate({
+        rules: {
+            'usuario[dni]': {
+                number: true
+            },
+            'usuario[cel1]': {
+                number: true
+            },
+            'usuario[tel1]': {
+                number: true
+            }
+        },
+        errorPlacement: function (label, element) {
+            label.addClass('error');
+            label.insertBefore(element);
+        },
+        wrapper: 'div'
     });
 
-    $(":checkbox").mousedown(function() {
-        var current_label = $(this).prev().text();
-        if (!$(this).is(':checked')) {
-          if ($.trim(current_label) == role ) {
-              $(this).trigger("change");
-          }
-        }
+    $('#edit_usuario').validate({
+        rules: {
+            'usuario[dni]': {
+                number: true
+            },
+            'usuario[cel1]': {
+                number: true
+            },
+            'usuario[tel1]': {
+                number: true
+            }
+        },
+        errorPlacement: function (label, element) {
+            label.addClass('error');
+            label.insertBefore(element);
+        },
+        wrapper: 'div'
+    });
+
+    $('#new_circulo').validate({
+        errorPlacement: function (label, element) {
+            label.addClass('error');
+            label.insertBefore(element);
+        },
+        wrapper: 'div'
+    });
+
+    $('#add-myself').validate({
+        errorPlacement: function (label, element) {
+            label.addClass('error');
+            label.insertBefore(element);
+        },
+        wrapper: 'div'
     });
 });
+

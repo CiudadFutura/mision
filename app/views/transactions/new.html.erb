@@ -1,12 +1,12 @@
 <%= javascript_include_tag "transactions", params[:controller] %>
-<div class="container fill">
-  <div class="row">
+<div class="validation-system">
+  <div class="validation-form">
     <h2>Nueva transacción</h2>
     <div class="breadcrumb">
       <%= link_to 'Atras', transactions_path %>
     </div>
 
-		<%= render 'form' %>
+    <%= render 'form' %>
 
 	</div>
 </div>

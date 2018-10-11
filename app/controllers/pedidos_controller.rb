@@ -17,10 +17,12 @@ class PedidosController < ApplicationController
       end
     elsif current_usuario.coordinador? || current_usuario.usuario?
       @pedidos = Pedido.where(usuario_id: current_usuario.id)
+                   .paginate(:page => params[:page], :per_page => 10).order('id DESC')
     end
   end
 
   def show
+    @category = Categoria.order("RAND()").limit(1)
     @transactions = Transaction.where(pedido_id: params[:id])
     if current_usuario.admin?
       @pedidos = Pedido.all
@@ -34,6 +36,7 @@ class PedidosController < ApplicationController
   end
 
   def edit
+    category = Categoria.order("RAND()").limit(1)
     transaction = Transaction.find_by_pedido_id(@pedido.id)
     JSON.parse(@pedido.items).map do |item|
 			producto = Producto.find(item['producto_id'])
@@ -53,7 +56,7 @@ class PedidosController < ApplicationController
       transaction.save
 		end
     @pedido.destroy
-    redirect_to productos_path
+    redirect_to productos_path(categoria_id: category.first.id)
   end
 
 

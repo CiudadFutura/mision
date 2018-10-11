@@ -11,28 +11,24 @@
     </div>
   <% end %>
 
-	<% if @pedido %>
-		<%= f.label :account_id, 'Cuenta N°' %>
-    <%= f.text_field :account_id, value: @usuario.account.id, readonly: true, class:'form-control' %>
-  <% else %>
-    <div class="field form-group">
+  <div class="form-group">
+	  <% if @pedido %>
+      <%= f.label :account_id, 'Cuenta N°' %>
+      <%= f.text_field :account_id, value: @usuario.account.id, readonly: true, class:'form-control' %>
+    <% else %>
       <%= f.label :account_id, 'Cuenta N°' %><br>
       <%= f.number_field :account_id, readonly: true, class:'form-control' %>
-    </div>
-  <% end %>
-
-    <% if @pedido %>
-        <div class="field form-group">
-          <%= f.label :pedido_id, 'Pedido N°' %><br>
-          <%= f.text_field :pedido_id, value: @pedido.id, readonly: true, class:'form-control' %>
-        </div>
-    <% else %>
-        <div class="field form-group">
-          <%= f.label :pedido_id %><br>
-          <%= f.number_field :pedido_id, readonly: true, class:'form-control' %>
-        </div>
     <% end %>
-
+  </div>
+  <div class="field form-group">
+    <% if @pedido %>
+      <%= f.label :pedido_id, 'Pedido N°' %><br>
+      <%= f.text_field :pedido_id, value: @pedido.id, readonly: true, class:'form-control' %>
+    <% else %>
+      <%= f.label :pedido_id %><br>
+      <%= f.number_field :pedido_id, readonly: true, class:'form-control' %>
+    <% end %>
+  </div>
 
   <fieldset class="form-group">
     <%= f.label :transaction_type, 'Tipo de transacción', for:'transaction_type' %>
@@ -63,20 +59,26 @@
     </div>
   <% end %>
   <% if @pedido.present? %>
-		<div class="row">
+		<div class="form-group row">
 			<div class="col-md-12 text-right">
 		    <div class="btn btn-default" id="additem">Agregar item manualmente</div>
-			</div>
-			<div class="col-md-12" id="form-add-item">
-				<%= label_tag "prodnombre-label", "Nombre"%>
-				<%= text_field_tag "prod-nombre", nil, class:"form-control" %>
+		  </div>
+    </div>
+    <div class="form-group">
+			<div id="form-add-item">
+        <div class="form-group">
+          <%= label_tag "prodnombre-label", "Nombre"%>
+          <%= text_field_tag "prod-nombre", nil, class:'form-control' %>
+        </div>
 
-			  <label for="prod-precio">Precio</label>
-			  <%= number_field_tag "prod-precio", nil, class:"form-control" %>
-
-			  <label for="prod-cantidad">Cantidad</label>
-			  <%= number_field_tag "prod-cantidad", nil, class:"form-control" %>
-
+        <div class="form-group">
+          <label for="prod-precio">Precio</label>
+          <%= number_field_tag "prod-precio", nil, class:"form-control" %>
+        </div>
+			  <div class="form-group">
+          <label for="prod-cantidad">Cantidad</label>
+          <%= number_field_tag "prod-cantidad", nil, class:"form-control" %>
+        </div>
 			  <div class="btn btn-success" id="agregar">Agregar</div>
 			</div>
 		</div>
@@ -116,8 +118,14 @@
 			</div>
 		</div>
 	<% end %>
+  <br>
+  <br>
 
-  <div class="actions form-group">
-    <%= f.submit class: 'btn btn-success' %>
+  <div class="form-group row">
+    <div class="text-right">
+      <%= f.button type: :submit, class: 'btn btn-success' %>
+    </div>
   </div>
+
+
 <% end %>

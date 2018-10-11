@@ -1,7 +1,7 @@
 <%- model_class = Producto -%>
-<div class="container fill">
-  <div class="row">
-	  <h2><%=t '.title', :default => [:'helpers.titles.edit', 'Edit %{model}'], :model => model_class.model_name.human.titleize %></h2>
-		<%= render 'form' %>
+<div class="validation-system">
+  <div class="validation-form">
+	    <h2><%=t '.title', :default => [:'helpers.titles.edit', 'Edit %{model}'], :model => model_class.model_name.human.titleize %></h2>
+		  <%= render 'form' %>
 	</div>
 </div>

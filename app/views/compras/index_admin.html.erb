@@ -1,0 +1,95 @@
+<div class="agile-grids">
+  <div class="agile-tables">
+    <div class="w3l-table-info">
+      <div class="navbar navs-fixed">
+        <%= link_to t('.new', :default => t("helpers.links.new")),
+                    new_compra_path,
+                    :class => 'btn btn-primary' if can? [:manage], Compra %>
+      </div>
+
+        <table class="table cycles-table">
+          <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Inicio pedidos</th>
+            <th>Fin pedidos</th>
+            <th>Entrega&nbsp;</th>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <% @compras.each do |compra| %>
+            <tr>
+              <td><%= compra.nombre %></td>
+              <td><%= l compra.fecha_inicio_compras %></td>
+              <td><%= l compra.fecha_fin_compras %></td>
+              <td><%= l compra.fecha_entrega_compras %></td>
+              <td>
+                <button class="btn btn-default btn-xs" data-toggle="collapse" data-target="#row<%= compra.id %>">
+                  ver
+                </button>
+              </td>
+              <td>
+                <%= link_to 'Modificar', edit_compra_path(compra), class: 'btn btn-default btn-xs' %>
+              </td>
+              <td>
+                <%= link_to 'Eliminar', compra, method: :delete,
+                              data: { confirm: 'Esta seguro que quiere eliminar?' }, class: 'btn btn-danger btn-xs' %>
+              </td>
+            </tr>
+            <tr class="tr-details">
+              <td colspan="9">
+                <div id="row<%= compra.id %>" class="collapse">
+                  <div class="row">
+                    <div class="cycle-detail col-sm-10 col-sm-offset-2">
+                      <div class="col-sm-12">
+                        <table class="table table-hover">
+                          <thead>
+                          <tr>
+                            <th>fin de compras</th>
+                            <th>pagos</th>
+                            <th>fin de pagos</th>
+                            <th>armado</th>
+                            <th>fin armado</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          <tr>
+                            <td><%= l compra.fecha_fin_compras if compra.fecha_fin_compras %></td>
+                            <td><%= l compra.fecha_inicio_pagos if compra.fecha_inicio_pagos %></td>
+                            <td><%= l compra.fecha_fin_pagos if compra.fecha_fin_pagos %></td>
+                            <td><%= l compra.fecha_inicio_armado if compra.fecha_inicio_armado %></td>
+                            <td><%= l compra.fecha_fin_armado if compra.fecha_fin_armado %></td>
+                          </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="col-sm-12">
+                        <div class="col-sm-6">
+                          <span>Descripción</span>
+                          <p><%= compra.descripcion %></p>
+                        </div>
+                        <div class="col-sm-6">
+                          <div class="text-right">
+                            <%= link_to 'Clonar', clone_path(compra.id), class: 'btn btn-warning btn-xs' %>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+
+    </div>
+    <div class="row">
+      <%= will_paginate @compras %>
+    </div>
+  </div>
+</div>

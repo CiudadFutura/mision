@@ -16,6 +16,10 @@ en:
   free: Libre
   circles: Círculos
   mini: Mini-Ciclo
+  will_paginate:
+    previous_label: "&#8592; Previo"
+    next_label: "Siguiente &#8594;"
+    page_gap: "&hellip;"
   activerecord:
     models:
       compra:
@@ -25,8 +29,19 @@ en:
           status: Estado
       supplier: Proveedor
     attributes:
+      compra:
+        warehouse: Distrito
+        warehouses: Distritos
+      circulo:
+        warehouse: Distrito
+        warehouses: Distritos
       usuario:
         calle: Dirección
+        codigo_postal: Código Postal
+        dni: DNI
+        cel1: Celular
+        tel1: Teléfono
+        pais: País
       supplier:
         name: Nombre
         address: Dirección
@@ -62,8 +77,9 @@ en:
       default: "%d-%m-%Y"
       short: "%b %d"
       long: "%B %d, %Y"
+      custom: "%b - %Y"
 
-    day_names: [Domingo, Lunes, Martes, Miércoles, Jueves, Viernes, Sabado]
+    day_names: [Domingo, Lunes, Martes, Miércoles, Jueves, Viernes, Sábado]
     abbr_day_names: [Dom, Lun, Mar, Mié, Jue, Vie, Sab]
 
     # Don't forget the nil at the beginning; there's no such thing as a 0th month
@@ -71,19 +87,22 @@ en:
     abbr_month_names: [~, Ene, Feb, Mar, Abr, May, Jun, Jul, Ago, Sep, Oct, Nov, Dic]
     # Used in date_select and datetime_select.
     order:
-      - day
-      - month
-      - year
+    - day
+    - month
+    - year
 
   time:
     formats:
       default: "%a %d/%B/%Y %H:%M"
       short: "%d %b %H:%M"
       long: "%B %d, %Y %H:%M"
+      custom: "%b - %Y"
+      horita: "%H:%M"
+      day: "%A"
     am: "am"
     pm: "pm"
 
-# Used in array.to_sentence.
+  # Used in array.to_sentence.
   support:
     array:
       words_connector: ", "

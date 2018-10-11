@@ -1,0 +1,26 @@
+<div class="banner_bottom">
+  <div class="wthree_banner_bottom_left_grid_sub1">
+    <% if @featured.present? %>
+      <% @featured.each do |producto|%>
+      <div class="col-md-4 wthree_banner_bottom_left">
+        <div class="wthree_banner_bottom_left_grid">
+          <% if producto.imagen.blank? %>
+            <%= link_to producto_path(producto.id) do%>
+              <%= image_tag('v2/no-disponible.png', class: 'img-responsive') %>
+            <% end %>
+          <% else %>
+            <%= link_to producto_path(producto.id) do%>
+              <%= image_tag(producto.imagen, class: 'img-responsive') %>
+            <% end %>
+          <% end %>
+          <div class="wthree_banner_bottom_left_grid_pos">
+            <h4><%= producto.nombre %> <span><%= number_to_currency(producto.precio) %></span></h4>
+          </div>
+        </div>
+      </div>
+      <% end %>
+    <div class="clearfix"> </div>
+    <% end %>
+  </div>
+  <div class="clearfix"> </div>
+</div>

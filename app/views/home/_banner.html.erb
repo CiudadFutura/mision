@@ -1,0 +1,69 @@
+<section class="slider">
+  <div class="flexslider">
+    <div class="row">
+      <ul class="slides">
+        <li>
+          <div class="w3l_banner_nav_right_banner">
+            <div class="col-md-12">
+              <div class="col-md-4 col-md-offset-8">
+                <h3><%= Producto.disponibles.count + 100 if Producto.disponibles.count > 10 || '300'  %> productos<span>30%</span> de ahorro respecto al súper</h3>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="col-md-4 col-md-offset-8">
+                <div class="more">
+                  <%= link_to productos_path(categoria_id: @category.first.id),
+                              :class => 'button--saqui button--round-l button--text-thick',
+                      :data => { 'text' => 'Ver los productos' } do %>
+                    Ver los productos
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="w3l_banner_nav_right_banner1">
+            <div class="col-md-12">
+              <div class="col-md-4 col-md-offset-8">
+                <h3>Estamos en todo Rosario
+                  <br>6 puntos de retiro</h3>
+              </div>
+              <div class="col-md-12">
+                <div class="col-md-4 col-md-offset-8">
+                  <div class="more">
+                    <%= link_to warehouses_path,
+                                :class => 'button--saqui button--round-l button--text-thick',
+                                :data => { 'text' => 'Puntos de retiro' } do %>
+                      Puntos de retiro
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="w3l_banner_nav_right_banner2">
+            <div class="col-md-12">
+              <div class="col-md-4 col-md-offset-8">
+                <h3>¿No sabés como participar?<i>¡Es muy fácil!</i></h3>
+              </div>
+              <div class="col-md-12">
+                <div class="col-md-4 col-md-offset-8">
+                  <div class="more">
+                    <%= link_to como_compro_path(1),
+                                :class => 'button--saqui button--round-l button--text-thick',
+                                :data => { 'text' => 'Como comprar' } do %>
+                      Como comprar
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>

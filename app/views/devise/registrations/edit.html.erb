@@ -1,29 +1,52 @@
-<h2>Editar <%= resource_name.to_s.humanize %></h2>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
-
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email, autofocus: true %></div>
-
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+<%= javascript_include_tag 'usuarios' %>
+<% content_for :title, 'Editar mi usuario y clave' %>
+<% navigation_add 'Editar mi usuario y clave', '#' %>
+<div class="w3_login">
+  <% flash.each do |key, value| %>
+    <div class="<%= flash_class(key) %>">
+      <%= value %>
+    </div>
   <% end %>
+  <h3>Editar mi clave</h3>
+  <div class="w3_login_module">
+    <div class="module form-module">
+      <div class="toggle">
 
-  <div><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "off" %></div>
+      </div>
+      <div class="form">
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+          <%= devise_error_messages! %>
 
-  <div><%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %></div>
+          <div><%= f.label :email %><br />
+            <%= f.email_field :email, autofocus: true %></div>
 
-  <div><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "off" %></div>
+          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+            <div>Actualmente estamos esperando la confirmación para: <%= resource.unconfirmed_email %></div>
+          <% end %>
 
-  <div><%= f.submit "Actualizar" %></div>
-<% end %>
+          <div><%= f.label :password %> <i>(deje en blanco si no quiere cambiar)</i><br />
+            <%= f.password_field :password, autocomplete: "off" %></div>
 
-<h3>Cancelar mi cuenta</h3>
+          <div><%= f.label :password_confirmation %><br />
+            <%= f.password_field :password_confirmation, autocomplete: "off" %></div>
 
-<p>Decepcionado? <%= button_to "Cancelar mi cuenta", registration_path(resource_name), data: { confirm: "Está seguro?" }, method: :delete %></p>
+          <div><%= f.label :current_password %> <i>(ingrese su clave actual para confirmar los cambios)</i><br />
+            <%= f.password_field :current_password, autocomplete: "off" %></div>
 
-<%= link_to "Volver", :back %>
+          <div><%= f.submit 'Actualizar' %></div>
+        <% end %>
+        <br>
+        <br>
+      </div>
+      <div class="form">
+
+      </div>
+      <div class="cta">
+        <p>Decepcionado? <%= button_to 'Cancelar mi cuenta', registration_path(resource_name), data: { confirm: 'Realmente quiere cancelar su cuenta?' }, method: :delete %></p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+

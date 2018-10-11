@@ -4,6 +4,7 @@ class Categoria < ActiveRecord::Base
                            foreign_key: "parent_id"
  
   belongs_to :parent, class_name: "Categoria"
+  has_and_belongs_to_many :productos
 
 	TODAS = 'Todas'
 end

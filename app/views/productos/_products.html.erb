@@ -1,105 +1,12 @@
 <% if @destacados %>
 	<h2 class="col-xs-12">Destacados</h2>
 <% end %>
-<!--<div class="col-md-4 block">
-	<div class="circle">
-		<p>Some Text here Some text here</p>
-	</div>
-</div>-->
-<% @productos.each do |producto|%>
-		<div class="col-xs-6 col-md-4 thumbnails">
-			<div class="thumbnail text-center">
-				<% if producto.supplier.present? %>
-          <% if producto.supplier.nature == 'producer' %>
-              <div class="ribbon"><span><%= I18n.t(producto.supplier.nature, :default => '') %></span></div>
-          <% end %>
-        <% end %>
-				<% if producto.oculto? %>
-						<div class="oculto-prod">
-							<span>Oculto</span>
-						</div>
-				<% end   %>
-				<a href="" onclick="return false;" data-toggle="popover" data-container="body" data-content="<%= producto.descripcion %>" >
-					<% if producto.imagen.blank? %>
-						<%= image_tag('image-not-found.png', :height => '60%', :width => '90%') %>
-					<% else %>
-							<%= image_tag(producto.imagen, :height => '60%', :width => '90%') %>
-					<% end %>
-				</a>
-				<div class="caption">
-					<h4><%= producto.nombre %></h4>
-					<h5><%= producto.marca %></h5>
-
-						<p class="precio_mision">Precio misión <%= number_to_currency(producto.precio) %></p>
-
-						<% if producto.precio_super.present?
-								 if producto.precio > producto.precio_super
-									 precio_super = 0.0
-								 else
-									 precio_super = producto.precio_super
-								 end
-							 else
-								 precio_super = 0.0
-						end%>
-
-						<p>Precio hiper <%= number_to_currency(precio_super) %></p>
-						<p>Ahorro <%= number_to_percentage(producto.ahorro) %></p>
-						<% if @ciclo_actual and usuario_signed_in? %>
-              <% if @ciclo_actual.circulos.include?(current_usuario.circulo) or @ciclo_actual.tipo == 'mini'%>
-                  <%
-                    if producto.stock.present? and producto.cantidad_permitida > producto.stock
-                      cantidad = producto.stock
-                    else
-                      cantidad =  producto.cantidad_permitida
-                    end
-                  %>
-                  <select class="cantidad">
-                    <% for i in 1..cantidad %>
-                        <% if @carrito.producto?(producto.id) %>
-                            <option value="<%= i%>" <%= (i == @carrito.cantidad_prod(producto.id)) ?'selected':''%>><%= i %></option>
-                        <% else %>
-                            <option value="<%= i %>"><%= i %></option>
-                        <% end %>
-                    <% end %>
-                  </select>
-                  <% if @carrito.producto?(producto.id) %>
-
-                      <%= button_tag(type: 'button',
-                                     class: 'btn btn-sm btn-danger',
-                                     data: {
-                                         action: 'remove',
-                                         productId: producto.id
-                                     }) do %>
-                          <span class="icon-tienda glyphicon-align-left"></span> <span class="cart-action">Eliminar del</span> carro
-                      <% end %>
-                  <% else %>
-                      <%= button_tag(type: 'button',
-                                     class: 'btn btn-sm btn-success',
-                                     data: {
-                                         productId: producto.id,
-                                         orden_remito: producto.orden_remito,
-                                         action: 'add'
-                                     }) do %>
-                          <span class="icon-tienda glyphicon-align-left"></span> <span class="cart-action">Agregar al</span> carro
-                      <% end %>
-                  <% end %>
-              <% end %>
-          <% end %>
-					<% if can? [:update, :detele], producto %>
-							<div class="btn-group btn-group-justified" role="group" aria-label="modificar">
-								<div class="btn-group" role="group">
-									<%= button_to t('.edit', :default => t("helpers.links.edit")),
-																edit_producto_path(producto),
-																:method => :get,
-																:class => 'btn btn-primary'  %>
-								</div>
-							</div>
-							<p>Rubro: <%= I18n.t(producto.pack, :default => '')%></p>
-					<% end %>
-					<% if producto.stock.present? %>
-							<p><i>Stock disponible: <%= producto.stock %></i></p>
-					<% end %>
-				</div>
-			</div>
-		</div>
-<% end %>
+<div class="w3ls_w3l_banner_nav_right_grid w3ls_w3l_banner_nav_right_grid_sub">
+  <h3><%= Categoria.find(params[:categoria_id]).nombre if params[:categoria_id] %></h3>
+  <div class="w3ls_w3l_banner_nav_right_grid1">
+    <h6><%= Categoria.find(params[:subcategoria_id]).nombre if params[:subcategoria_id].present? %></h6>
+    <% @productos.each do |producto|%>
+      <%= render 'productos/item', producto: producto %>
+    <% end %>
+  </div>
+</div>

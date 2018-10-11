@@ -1,40 +1,31 @@
-<div class="container fill">
-  <h3>Listado de Ciclos de compras</h3>
-  <div class="navbar navs-fixed">
-    <%= link_to t('.new', :default => t("helpers.links.new")),
-                new_compra_path,
-                :class => 'btn btn-primary' if can? [:manage], Compra %>
-  </div>
-  <table class="table table-striped">
-    <thead>
-    <tr>
-      <th>Nombre</th>
-      <th>Tipo</th>
-      <th>Fecha inicio pedidos</th>
-      <th>Fecha fin pedidos</th>
-      <th>Fecha fin pagos</th>
-      <th>Fecha entrega</th>
-      <th>&nbsp;</th>
-      <th>&nbsp;</th>
-      <th>&nbsp;</th>
-    </tr>
-    </thead>
+<% content_for :title, 'Ciclos de compras' %>
+<% navigation_add 'Ciclos de compras', '#' %>
+<div class="events">
+  <h3>Ciclos de compras</h3>
 
-    <tbody>
+  <div class="events-bottom">
     <% @compras.each do |compra| %>
-        <tr>
-          <td><%= compra.nombre %></td>
-					<td><%= compra.tipo.present? ? t(compra.tipo) : 'Círculos'%></td>
-          <td><%= l compra.fecha_inicio_compras %></td>
-          <td><%= l compra.fecha_fin_compras %></td>
-          <td><%= l compra.fecha_fin_pagos %></td>
-          <td><%= l compra.fecha_entrega_compras %></td>
-          <td><%= link_to 'Modificar', edit_compra_path(compra), class: "btn btn-default btn-xs" %></td>
-          <td><%= link_to 'Entrega', compra_path(compra.id), class: "btn btn-default btn-xs" %></td>
-          <td><%= link_to 'Clonar', clone_path(compra.id), class: "btn btn-warning btn-xs" %></td>
-        </tr>
+      <div class="col-md-6 events_bottom_left">
+        <div class="col-md-4 events_bottom_left1">
+          <div class="events_bottom_left1_grid">
+            <h4><%= compra.fecha_inicio_compras.strftime('%e') %></h4>
+            <p><%= l compra.fecha_inicio_compras, format: :custom %></p>
+          </div>
+        </div>
+        <div class="col-md-8 events_bottom_left2">
+          <%= image_tag get_cycle_image(compra.nombre), :class => 'img-responsive'%>
+          <h4><%= compra.nombre %></h4>
+          <ul>
+            <li><i class="fa fa-clock-o" aria-hidden="true"></i><%= l compra.fecha_inicio_compras, format: :horita %></li>
+            <li><i class="fa fa-user" aria-hidden="true"></i><a href="#">Admin</a></li>
+          </ul>
+          <p><%= compra.descripcion %></p>
+        </div>
+        <div class="clearfix"> </div>
+      </div>
     <% end %>
-    </tbody>
-  </table>
+  </div>
+  <div class="row">
 
+  </div>
 </div>

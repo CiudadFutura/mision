@@ -12,8 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require twitter/bootstrap
-//= require undercore
+//= require bootstrap-sprockets
 //= require gmaps/google
 //= require bootstrap-editable
 //= require bootstrap-editable-rails
@@ -21,16 +20,41 @@
 //= require fullcalendar
 //= require jquery.validate
 //= require jquery.validate.additional-methods
+//= require jquery.validate.localization/messages_es
 //= require jquery-ui/widgets/autocomplete
-//= require Chart.min
+//= require jquery.flexslider-min
+//= require Chart
+//= require autocomplete-rails
 
 
-		$(document).ready(function () {
+$(document).ready(function() {
+
+    $('.flexslider').flexslider({
+        animation: "slide",
+        start: function(slider){
+            $('body').removeClass('loading');
+        }
+    });
+
+    $(".scroll").click(function(event){
+        event.preventDefault();
+        $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+    });
+
+    var navoffeset=$(".agileits_header").offset().top;
+    $(window).scroll(function(){
+        var scrollpos=$(window).scrollTop();
+        if(scrollpos >=navoffeset){
+            $(".agileits_header").addClass("fixed");
+        }else{
+            $(".agileits_header").removeClass("fixed");
+        }
+    });
 
   $('button[data-action]').click(function (event) {
     event.preventDefault();
 
-	  var addToCartTimeout;
+    var addToCartTimeout;
 
     var that = $(this);
 
@@ -41,21 +65,23 @@
     var new_title, new_action;
     var action = that.data('action');
     var productId = that.data('productid');
-    var url = 'cart/' + action + '/' + productId;
-	  var new_class = '';
-	  var old_class = '';
-	  var message_box = '';
+    var url = '/cart/' + action + '/' + productId;
+    var new_class = '';
+    var old_class = '';
+    var message_box = '';
+
+    var qty = $('#qty-selected-'+productId).val()
 
     if (action === 'add') {
       //Add a new item to cart
       new_action = 'remove';
-      new_title = "Eliminar del ";
+      new_title = "Eliminar ";
 	    new_class = 'btn-danger';
 	    old_class = 'btn-success';
     } else if (action === 'remove') {
       //Remove item from cart
       new_action = 'add';
-      new_title = "Agregar al ";
+      new_title = "Agregar";
       that.parents("tr.cart-item").remove();
 	    new_class = 'btn-success';
 	    old_class = 'btn-danger';
@@ -63,7 +89,7 @@
 
     $.ajax({
       url: url,
-      data: { cantidad: that.prev('select.cantidad').val() },
+      data: { cantidad: qty },
       type: 'put'
     }).done(function (data) {
       //Update menu
@@ -75,11 +101,11 @@
       that.data('action', new_action);
 	    that.removeClass(old_class);
 	    that.addClass(new_class);
-			if (action ==='add'){
-				$('#js-message-success').show().find('#js-message-product').html(that.prev('select.cantidad').val());
-			}else{
-				$('#js-message-delete').show();
-			}
+            if (action ==='add'){
+                $('#js-message-success').show().find('#js-message-product').html(that.prev('select.cantidad').val());
+            }else{
+                $('#js-message-delete').show();
+            }
 
 	    addToCartTimeout = setTimeout(function () {
 		    if (action ==='add'){
@@ -91,26 +117,14 @@
     });
   });
 
-    $('[id*="usuario_role_ids_"]').on('click', function(){
-
-        var label=$(this).prop("labels");
-        var text = $(label).text();
-
-        if ( text.trim() == 'Coordinador' ){
-
-            $('#emails-invitados').show();
-        }else{
-
-            $('#emails-invitados').hide();
-        }
-
-    });
-
-
-  $('#emails-invitados').hide();
-
-
-    $('#finalizar').on('click',function() {
-        $(this).attr("disabled", "disabled"); }
-    );
+  $(".dropdown").hover(
+      function() {
+          $('.dropdown-menu', this).stop( true, true ).slideDown("fast");
+          $(this).toggleClass('open');
+      },
+      function() {
+          $('.dropdown-menu', this).stop( true, true ).slideUp("fast");
+          $(this).toggleClass('open');
+      }
+  );
 });

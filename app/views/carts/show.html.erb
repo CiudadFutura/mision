@@ -1,37 +1,48 @@
-<%= javascript_include_tag "cart" %>
-<div class="container fill">
+<%= javascript_include_tag 'cart' %>
+
+<div class="privacy about">
+  <h3>Mi compra</h3>
+
   <div class="row">
     <% flash.each do |key, value| %>
-        <%= content_tag :div, value, class: "flash #{key}" %>
+      <%= content_tag :div, value, class: "flash #{key}" %>
     <% end %>
     <% if @missing.present? %>
       <div class="alert alert-danger">
         <p>No hay cantidad suficiente para los siguientes productos</p>
         <ul>
           <% @missing.each do |k, miss| %>
-                <li><%= miss.nombre%>. Cantidad sugerida: <%= miss.stock%></li>
+            <li><%= miss.nombre%>. Cantidad sugerida: <%= miss.stock%></li>
           <% end %>
         </ul>
       </div>
     <% end %>
   </div>
-	<% if @ciclo_actual.present? %>
-			<% if current_usuario && @ciclo_actual.tipo != 'free' || @ciclo_actual.tipo == 'mini' %>
-					<% if @ciclo_actual.circulos.include?(current_usuario.circulo) || @ciclo_actual.tipo == 'mini'  %>
-							<% if !current_usuario.pedido?(@ciclo_actual) %>
-									<%= render 'carts/cart' %>
-							<% else %>
-									<p class="explicacion"><span class="label label-warning">Disculpa. Ya haz realizado tu pedido. Por el momento la misión solo admite un pedido por usuario por ciclo.</span></p>
-							<% end %>
-					<% else %>
-							<p class="explicacion"><span class="label label-warning">Tú Círculo no está habilitado para realizar la compra en este ciclo.</span></p>
-					<% end %>
-			<% elsif @ciclo_actual.tipo == 'free'%>
-					<%= render 'carts/cart_free' %>
-			<% else %>
-					<p class="explicacion"><span class="label label-warning">No perteneces a ningun circulo. Comunicate con un coordinador. Recuerda que tu numero de usuario es <b><%= current_usuario.id %></b></span></p>
-			<% end %>
-	<% else %>
-			<p class="explicacion"><span class="label label-warning">No hay un ciclo de compras activo, en estos momentos no se puede relizar el pedido.</span></p>
-	<% end %>
+
+  <div class="checkout-right">
+
+      <% if @ciclo_actual.present? and current_usuario.present? %>
+        <% if @ciclo_actual.circulos.include?(current_usuario.circulo) %>
+          <% if !current_usuario.pedido?(@ciclo_actual) %>
+            <%= render 'carts/cart' %>
+          <% else %>
+            <div class="col-md-12 text-center">
+              <p class="explicacion">
+                <span class="label label-warning">
+                  Disculpa. Ya haz realizado tu pedido. Por el momento la misión solo admite un pedido por usuario por ciclo.
+                </span>
+              </p>
+            </div>
+          <% end %>
+        <% else %>
+          <div class="col-md-12 text-center">
+            <p class="explicacion"><span class="label label-warning">Tú Círculo no está habilitado para realizar la compra en este ciclo.</span></p>
+          </div>
+        <% end %>
+      <% else %>
+        <div class="col-md-12 text-center">
+          <h4><span class="label label-warning">No hay un ciclo de compras activo, en estos momentos no se puede relizar el pedido.</span></h4>
+        </div>
+      <% end %>
+  </div>
 </div>

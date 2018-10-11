@@ -1,5 +1,5 @@
-<%= form_for @circulo, :html => { :class => 'form-horizontal circulo' }  do |f| %>
-  <% if @circulo.errors.any? %>
+<%= form_for @circulo do |f| %>
+  <% if @circulo.errors.present? %>
     <div id="error_explanation">
       <h2><%= pluralize(@circulo.errors.count, "error") %> El Círculo no pudo ser guardado:</h2>
 
@@ -11,27 +11,36 @@
     </div>
   <% end %>
 
-  <div class="control-group row">
+  <div class="form-group">
     <%= f.label :coordinador_id, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.number_field :coordinador_id, class: 'form-control' %>
-    </div>
+    <%= f.number_field :coordinador_id,
+                       value: params[:id].present? ? params[:id]  : '' ,
+                       readonly: params[:id].present? ? true  : false,
+                       class: 'form-control required' %>
   </div>
-  <div class="control-group row">
+  <div class="form-group">
     <%= f.label :warehouse, for:'warehouse', :class => 'control-label'  %>
-    <div class="controls">
-      <%= f.select(:warehouse_id,
-                   options_for_select(Warehouse.all.map{|s| [s.name + " (#{s.address})",s.id]},@circulo[:warehouse_id]),
-                   { include_blank: 'Elija Distrito a retirar'},
-                   class: 'form-control') %>
-    </div>
-    <%= error_span(@circulo[:warehouse_id]) %>
+    <%= f.select(:warehouse_id,
+                 options_for_select(Warehouse.all.map{|s| [s.name + " (#{s.address})",s.id]},@circulo[:warehouse_id]),
+                 { include_blank: 'Elija Distrito a retirar'},
+                 class: 'form-control required') %>
   </div>
+
+  <% if current_usuario.present? and !current_usuario.admin? %>
+    <label>Enviar invitaciones</label>
+      <input id="email_invitado_1" name="email_invitado_1" type="email" class="form-control" placeholder="Email invitado 1" />
+      <input id="email_invitado_2" name="email_invitado_2" type="email" class="form-control" placeholder="Email invitado 2" />
+      <input id="email_invitado_3" name="email_invitado_3" type="email" class="form-control" placeholder="Email invitado 3" />
+      <input id="email_invitado_4" name="email_invitado_4" type="email" class="form-control" placeholder="Email invitado 4" />
+  </div>
+  <% end %>
   <br>
   <br>
-  <div class="control-group row">
-    <div class="offset-sm-2 col-sm-10">
-      <%= f.submit class: 'btn btn-success' %>
+  <div class="control-group">
+    <div class="col-md-12 text-right">
+      <%= f.button :submit, class: 'btn btn-primary' do %>
+        Crear
+      <% end %>
     </div>
   </div>
 <% end %>

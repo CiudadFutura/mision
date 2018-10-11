@@ -1,12 +1,13 @@
-<%= javascript_include_tag "usuarios", params[:controller] %>
-<div class="container fill">
+<%= javascript_include_tag 'usuarios' %>
+<% content_for :title, 'Mis datos' %>
+<% navigation_add 'Mis datos', '#' %>
+<div class="center-section">
 	<div class="row">
-	  <h2>Modificar usuario</h2>
-	  <div class="breadcrumb">
-	    <%= link_to 'Mostrar', @usuario %> |
-	    <%= link_to 'Volver', usuario_path(current_usuario) %>
-	  </div>
-	  <%= render 'form' %>
-
+	  <h3>Mis datos</h3>
+    <br>
+    <br>
+    <div class="center-section_module">
+      <%= render 'form' %>
+    </div>
 	</div>
 </div>

@@ -39,8 +39,9 @@ Rails.application.routes.draw do
 	end
 	get 'circulos/remito_circulo/:circulo_id/compra=:compra_id', to: 'circulos#remito_circulo', as: :remito_circulo
 
-  devise_for :usuarios, :controllers => {:registrations => "user/registrations"}
+  devise_for :usuarios, :controllers => {:registrations => 'user/registrations'}
   resources :usuarios do
+    post 'add_myself_cycle', to: 'usuarios#add_myself_cycle', as: :add_myself_cycle
     collection {
       post 'sign_up', to: 'usuarios#create'
     }
@@ -58,6 +59,9 @@ Rails.application.routes.draw do
     collection { post 'upload' }
     collection { put 'edit_multiple' }
 		delete 'delete/:id', to: 'productos#delete', as: :delete
+    collection { get :bundle }
+    collection { get :bundle_item }
+    get :autocomplete_producto_nombre, :on => :collection
   end
 
   get '/auth/:provider/callback', to: 'sessions#create', as: :social_session
@@ -69,8 +73,12 @@ Rails.application.routes.draw do
   resources :home
   resources :steps
   resources :dossiers
-  resources :faqs
+  resources :faqs do
+    get 'download_instructivo', to: 'faqs#download_instructivo'
+  end
   resources :como_compro
+  resources :terms_conditions
+  resources :about_us
   resources :geo_reports
   resources :dashboards
   resources :reports do

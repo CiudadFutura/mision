@@ -1,41 +1,4 @@
-<%= javascript_include_tag 'home' %>
-<div class="container fill">
-  <% if @cycles.present? %>
-    <div class="row">
-      <h2>Próximos Ciclos de Compras</h2>
-      <br>
-    </div>
-    <div class="row">
-      <div class="timeline-content">
-        <ul class="timeline timeline-horizontal">
-          <% @cycles.each do |cicle| %>
-            <li class="timeline-item">
-              <div class="timeline-badge success"><i class="glyphicon glyphicon-check"></i></div>
-              <div class="timeline-panel">
-                <div class="timeline-heading">
-                  <h4 class="timeline-title"><%= cicle.nombre%></h4>
-                  <p><span class="text-muted">Inicio de compras: </span><small>
-                    <i class="glyphicon glyphicon-time"></i> <%= l cicle.fecha_inicio_compras %></small></p>
-                  <p><span class="text-muted">Fin de compras:</span><small>
-                    <i class="glyphicon glyphicon-time"></i> <%= l cicle.fecha_fin_compras %></small></p>
-                  <p><span class="text-muted">Retiro de pedidos: </span><small>
-                    <i class="glyphicon glyphicon-time"></i> <%= l cicle.fecha_entrega_compras %></small></p>
-                </div>
-                <div class="timeline-body">
-                  <p><%= cicle.descripcion %></p>
-                </div>
-              </div>
-            </li>
-          <% end %>
-        </ul>
-      </div>
-    </div>
-  <% end %>
-	<div class="row">
-		<div class="col-xs-12 col-md-12 text-center">
-			<div class="col-xs-12 col-md-12">
-				<%= image_tag 'pieza.png', class: 'img-responsive center-block'%>
-			</div>
-		</div>
-	</div>
-</div>
+<%= render 'home/banner' %>
+<%= render 'home/stats' %>
+<%=render 'home/offers' %>
+

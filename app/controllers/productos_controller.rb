@@ -1,5 +1,6 @@
 class ProductosController < ApplicationController
   before_action :set_producto, only: [:show, :edit, :update, :destroy]
+  autocomplete :producto, :nombre, :extra_data =>[:cantidad_permitida, :precio, :precio_super, :descripcion]
 
   # GET /productos
   # GET /productos.json
@@ -21,9 +22,9 @@ class ProductosController < ApplicationController
     end
     @view_type = session[:view_type]
     @view_prod = session[:view_prod]
-    @ciclo_actual = Compra::ciclo_actual
+    @ciclo_actual = Compra.ciclo_actual
 
-		@productos = Producto.all.order(:orden, :nombre)
+		@productos = Producto.all.order(:orden, :nombre).paginate(:page => params[:page], :per_page => 50)
     @todos = @productos
     @productos = @productos.stock if current_usuario.nil? || current_usuario.present? && !current_usuario.admin?
     @productos = @productos.disponibles.order(:orden, :nombre) if current_usuario.nil? || !current_usuario.admin?
@@ -48,6 +49,10 @@ class ProductosController < ApplicationController
   def show
     # todo: Se sigue usando???
     # @cart_action = @producto.cart_action(session)
+    @ciclo_actual = Compra.ciclo_actual
+    cat = @producto.categorias.first.id
+    @related_products = @producto.get_related_products(cat)
+
   end
 
   # GET /productos/new
@@ -116,6 +121,19 @@ class ProductosController < ApplicationController
     end
   end
 
+  def search
+    @productos = Producto.search(params[:term])
+    render 'search.json'
+  end
+  def bundle_item
+    @items= Producto.find(params[:id])
+    render 'bundle_item.json'
+  end
+  def add_bundle_product
+    @producto = Producto.build
+    render 'add_bundle_product', layout: false
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_producto
@@ -130,6 +148,7 @@ class ProductosController < ApplicationController
                                        :pack, :faltante,:cantidad_permitida, :imagen, :stock,
                                        :orden_remito, :view_type,
 																			 :sale_type,
+                                       bundle_products_attributes: [:id, :item_id, :qty, :description],
                                        categoria_ids: [])
     end
 end

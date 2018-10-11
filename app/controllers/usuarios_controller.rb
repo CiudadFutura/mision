@@ -5,7 +5,8 @@ class UsuariosController < ApplicationController
   # GET /usuarios
   # GET /usuarios.json
   def index
-    @usuarios = Usuario.usrs
+    @usuarios = Usuario.by_roles(params[:role]).paginate(:page => params[:page], :per_page => 50)
+
     authorize! :index, @usuarios
     respond_to do |format|
       format.html
@@ -16,8 +17,9 @@ class UsuariosController < ApplicationController
   # GET /usuarios/1
   # GET /usuarios/1.json
   def show
-    @ciclo_actual = Compra::ciclo_actual
-    @ciclo_actual_completo = Compra::ciclo_actual_completo
+    @ciclo_actual = Compra.ciclo_actual
+    @ciclo_actual_completo = Compra.ciclo_actual_completo
+    @circulo = Circulo.new if current_usuario.circulo.blank?
   end
 
 
@@ -88,6 +90,38 @@ class UsuariosController < ApplicationController
     end
   end
 
+  def add_myself_cycle
+
+    unless(params[:circulo_id].empty?)
+      begin
+        circulo = Circulo.find(params[:circulo_id])
+      rescue ActiveRecord::RecordNotFound => e
+        circulo = nil
+      end
+
+      if circulo.present?
+        authorize! :add_myself_cycle, current_usuario
+
+        if !circulo.completo?
+          current_usuario.circulo = circulo
+          current_usuario.save!
+          message = { notice: 'El usuario a sido agregado a tu circulo.' }
+        elsif !current_usuario.circulo.nil?
+          message = { alert: 'El usuario ya pertenece a un circulo.' }
+        elsif circulo.completo?
+          message = { alert: 'El círculo esta completo.' }
+        end
+      else
+        message = { alert: '¿Está seguro que es el número de círculo?.' }
+      end
+    else
+      message = { alert: 'Tiene que ingresar el número de círculo' }
+    end
+
+    redirect_to usuario_path(current_usuario), message
+
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_usuario
@@ -100,9 +134,10 @@ class UsuariosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def usuario_params
-      valid_params = [ :nombre, :apellido, :email, :calle, :codigo_postal,:ciudad, :pais, :tel1, :cel1,
+      valid_params = [ :nombre, :apellido, :email, :calle, :codigo_postal,:ciudad, :pais, :tel1, :cel1, :dni,
                        :type,  :"fecha_de_nacimiento(1i)", :usuario_roles,
         :"fecha_de_nacimiento(2i)", :"fecha_de_nacimiento(3i)", :password, :password_confirmation, role_ids:[],
+                       circulo_attributes:[:coordinador_id, :warehouse_id],
                        usuario_roles_attributes:[:usuario_id, :role_id, :warehouse_id]]
       valid_params << :circulo_id if current_usuario && current_usuario.admin?
       filtered_params = params.require(:usuario).permit(valid_params)

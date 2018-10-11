@@ -8,7 +8,11 @@ class ApplicationController < ActionController::Base
   before_filter :categorias_menu
   before_filter :configure_permitted_parameters, if: :devise_controller?
 
-  layout 'layout'
+  layout :choose_layout
+
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to root_url, :alert => exception.message
+  end
 
   def current_ability
     @current_ability ||= Ability.new(current_usuario)
@@ -46,11 +50,25 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  def choose_layout
+    if signed_in?
+      if !current_usuario.admin?
+        'layout'
+      else
+        'admin_layout'
+      end
+    else
+      'layout'
+    end
+  end
+
 	def configure_permitted_parameters
     permitted_params = [:nombre, :apellido, :email, :'fecha_de_nacimiento(1i)',
       :'fecha_de_nacimiento(2i)', :'fecha_de_nacimiento(3i)', :dni, :calle, :role_ids,
       :ciudad, :codigo_postal, :tel1, :cel1, :type,  :password, :password_confirmation,
-      :terminos, :email_invitado_1, :email_invitado_2, :email_invitado_3, :email_invitado_4, role_ids:[]]
+                        :current_password,:terminos, :email_invitado_1,
+                        :email_invitado_2, :email_invitado_3, :email_invitado_4, role_ids:[],
+                        circulo_attributes:[:coordinador_id, :warehouse_id]]
     devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(permitted_params) }
     devise_parameter_sanitizer.for(:account_update) { |u| u.permit(permitted_params) }
   end
@@ -69,6 +87,9 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+
+
   # Overwriting the sign_out redirect path method
   def after_sign_out_path_for(resource_or_scope)
     root_path

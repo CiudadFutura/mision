@@ -1,70 +1,108 @@
-<div class="container menuxs">
-	<div class="visible-xs col-xs-12 ">
-	  <div class="col-xs-12 col-md-4">
-	    <%= link_to(dossiers_url) do %>
-	      <%= image_tag("queeslamisionfooter.png", :class => 'img-responsive center-block') %>
-	    <% end %>
-	  </div>
-	  <div class="col-xs-12 col-md-4">
-	    <%= link_to(faqs_path) do %>
-	      <%= image_tag("preguntasfrecuentesfooter.png", :class => 'img-responsive center-block') %>
-	    <% end %>
-	  </div>
-	  <div class="col-xs-12 col-md-4">
-	    <%= link_to(new_usuario_registration_path) do %>
-	      <%= image_tag("comomesumofooter.png", :class => 'img-responsive center-block') %>
-	    <% end %>
-	  </div>
-	</div>
-</div>
-<div class="panel-footer">
-  <nav class="navbar navbar-default">
-    <div class="container">
-      <ul class="nav navbar-nav navbar-left hidden-xs">
-	      <li>
-	        <%= link_to(dossiers_url) do %>
-	          <%= image_tag("queeslamisionfooter.png", :class => 'img-responsive center-block') %>
-	        <% end %>
-	      </li>
-	      <li>
-	        <%= link_to(faqs_path) do %>
-	          <%= image_tag("preguntasfrecuentesfooter.png", :class => 'img-responsive center-block') %>
-	        <% end %>
-	      </li>
-	      <li>
-	        <%= link_to(new_usuario_registration_path) do %>
-	          <%= image_tag("comomesumofooter.png", :class => 'img-responsive center-block') %>
-	        <% end %>
-	      </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-	      <li>
-	        <%= link_to(root_path) do %>
-	          <span class="icon-house"></span>INICIO
-	        <% end %>
-	      </li>
-	      <li>
-	        <a href="http://misionantiinflacion.com.ar/contacto" title="Contacto"><span class="icon-location"></span>Contacto</a>
-	      </li>
-	      <li>
-	        <a href="https://www.facebook.com/misionantiinflacion" target="_blank" class="lm-facebook"><span class="icon-facebook2"></span>Facebook</a>
-	      </li>
-      </ul>
-	  </div>
-  </nav>
-
-  <div id="footer-info-home" class="full">
-    <div class="container">
+<!-- newsletter -->
+<div class="newsletter">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 w3agile_newsletter_left">
+        <div class="text-center">
+          <h3>Otro mercado es posible</h3>
+        </div>
+      </div>
     </div>
+    <div class="clearfix"> </div>
   </div>
 </div>
-<script>
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+<!-- //newsletter -->
+<!-- footer -->
+<div class="footer">
+  <div class="container">
+    <div class="col-md-3 w3_footer_grid">
+      <h3>
+        información <br>
+        importante
+      </h3>
+      <ul class="w3_footer_grid_list">
+        <li>
+          <%= link_to(about_us_path) do %>
+            Quienes somos
+          <% end %>
+        </li>
+        <li>
+          <%= link_to(suppliers_path()) do %>
+            Productores
+          <% end %>
+        </li>
+        <li>
+          <%= link_to(como_compro_path(1)) do %>
+            ¿Cómo comprar?
+          <% end %>
+        </li>
+        <li>
+          <%= link_to warehouses_path do %>
+            Puntos de retiro
+          <% end %>
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-3 w3_footer_grid">
+      <h3>términos y<br>condiciones</h3>
+      <ul class="w3_footer_grid_list">
+        <li>
+          <%= link_to(faqs_path) do %>
+          Preguntas frecuentes
+          <% end %>
+        </li>
+        <li>
+          <%= link_to(terms_conditions_path) do %>
+            Términos y Condiciones
+          <% end %>
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-3 w3_footer_grid">
+      <h3>Contactos por <br>estos medios</h3>
+      <ul class="w3_footer_grid_list1">
+        <li>
+          <i class="fa fa-envelope-o" aria-hidden="true"></i>
+          <a href="mailto:victoriacolectiva@gmail.com?subject=Consulta">Email</a>
+        </li>
+        <li>
+          <i class="fa fa-commenting-o" aria-hidden="true"></i>
+          <a href="https://m.me/misionantiinflacion" target="_blank">Mensaje en Facebook</a>
+        </li>
+        <% Warehouse.all.each do |warehouse| %>
+          <li>
+            <i class="fa fa-whatsapp" aria-hidden="true"></i>
+            <b><%= warehouse.name %></b><br>
+            <span><%= warehouse.description %></span>
+            <a href="https://wa.me/549<%= warehouse.telephone%>" target="_blank">
+              <span><%=warehouse.telephone %></span>
+            </a>
 
-	ga('create', 'UA-67606700-1', 'auto');
-	ga('send', 'pageview');
-
-</script>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="col-md-3 w3_footer_grid">
+      <h3>Estamos en las redes</h3>
+      <ul class="agileits_social_icons">
+        <li>
+          <a href="https://www.facebook.com/misionantiinflacion/" target="_blank" class="facebook">
+            <i class="fa fa-facebook" aria-hidden="true"></i>
+          </a>
+        </li>
+        <li>
+          <a href="https://twitter.com/MisionCF" target="_blank" class="twitter">
+            <i class="fa fa-twitter" aria-hidden="true"></i>
+          </a>
+        </li>
+        <li>
+          <a href="https://www.instagram.com/misionantiinflacion" target="_blank" class="instagram">
+            <i class="fa fa-instagram" aria-hidden="true"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="clearfix"> </div>
+  </div>
+</div>
+<!-- //footer -->

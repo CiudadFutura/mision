@@ -1,251 +1,211 @@
-<div class="container fill">
-  <div class="row">
-    <div class="col-md-6">
-      <h1>¿Cómo puedo comprar?</h1>
-      <p>Hoy en día la Misión cuenta con dos modalidades de compra: los <strong>Ciclos Tradicionales</strong> y
-        los <strong>Mini-Ciclos</strong>.</p>
-    </div>
-    <div class="col-md-6">
-      <div id="accordion" class="panel-group">
-        <h4>Ciclos Tradicionales</h4>
-        <div class="panel panel-default card">
-          <div class="panel-heading card-header">
-            <h4 class="panel-title">
-              <a class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
-                 aria-controls="collapseOne">¿Qué puedo comprar?</a>
-            </h4>
-          </div>
-          <div id="collapseOne" class="panel-collapse collapse">
-            <div class="panel-body">
-              <p>A través de los ciclos tradicionales se pueden adquirir <b>MAS DE 400 PRODUCTOS</b> que abarcan toda la
-                canasta básica familiar. <b>Frutas, verduras, lácteos, bebidas, panificados, galletitas, enlatados,
-                condimentos, carnes y un gran etc</b>.
+<% content_for :title, 'Como comprar' %>
+<% navigation_add 'Como comprar', '#' %>
+<div class="center-section">
+  <h3>Como comprar</h3>
+</div>
+<div class="privacy">
+  <div class="privacy1">
+    <h3>Recordá que...</h3>
+    <div class="banner-bottom-grid1 privacy2-grid">
+      <div class="privacy2-grid1">
+        <p>Para poder comprar <b>tenés que estar registrado/a y pertenecer a un círculo de asociados/as</b>.
+          Un círculo es un grupo de dos -2- personas o más que están registradas en nuestra página.
+          A cada una de esas personas se las denomina “asociado/a”.</p>
+        <div class="privacy2-grid1-sub">
+          <% if current_usuario.blank? %>
+            <p>
+              - Clic
+              <%= link_to sign_up_usuarios_path do %>
+                aquí
+              <% end %>
+              para registrarse -.
+            </p>
+          <% end %>
+        </div>
+        <div class="privacy2-grid1-sub">
+          <h4>Comprá en 3 simples pasos</h4>
+        </div>
+        <div class="privacy2-grid1-sub">
+          <div class="col-sm-8">
+            <h5>Hacés tu pedido</h5>
+            <div class="col-sm-12">
+              <p><b>Una vez cada 4 semanas</b> vas a tener 4 días (de jueves a domingo), para entrar a nuestra tienda y hacer
+                tu pedido. <b>¡Tenemos más de 350 productos!</b>.
               </p>
             </div>
-          </div>
-          <div class="panel-heading">
-            <h4 class="panel-title">
-              <a class="btn btn-link" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">¿Qué frecuencia tienen?</a>
-            </h4>
-          </div>
-          <div id="collapseTwo" class="panel-collapse collapse">
-            <div class="panel-body">
-              <p>Los ciclos de compra tradicionales son <b>una vez al mes</b>. Siempre son dos semanas previas
-                al Mini-Ciclo de compra.
-              </p>
+            <div class="col-sm-8">
+              <ul>
+                <li><small><i>Te vamos a avisar con anticipación por mail y whatsapp así no te olvidás.</i></small></li>
+                <li><small><i>No hay límite máximo ni mínimo para pedir.</i></small></li>
+                <li><small><i>Cada integrante del círculo hace su propio pedido.</i></small></li>
+              </ul>
             </div>
           </div>
-          <div class="panel-heading">
-            <h4 class="panel-title">
-              <a class="btn btn-link" data-toggle="collapse" data-parent="#accordion"
-                 href="#collapseThree">¿Cuáles son los requisitos para participar?</a>
-            </h4>
+          <div class="col-sm-4">
+            <%= image_tag 'v2/clic-comprar.png', class: 'img-responsive' %>
           </div>
-          <div id="collapseThree" class="panel-collapse collapse">
-            <div class="panel-body">
-              <h4>Ser parte de un círculo</h4>
-              <p>Puede participar cualquier hogar (no importa su barrio, la cantidad de personas que lo
-                integran, etc.). En primer lugar debe organizarse con 2, 3 o 4 hogares más que quieran ser parte.
-                De esta manera podrá conformar su círculo de consumidores de confianza.
-              </p><br>
-              <h4>Designar un coordinar o coordinadora</h4>
-              <p>Un/a integrante del círculo debe elegir el rol de coordinador/a. Esta persona será el vínculo de
-                comunicación más directo entre el círculo y el equipo de la Misión. Tendrá las siguientes funciones:
-                inscribir el círculo; notificar la apertura del período de compra al resto; garantizar que algún
-                miembro se encargue de efectuar el pago por el monto total de todas las compras del círculo, incluida
-                la cuota mensual; enviar el comprobante de pago vía mail, y notificar el miembro y el horario en que
-                retirará los pedidos de todo el círculo.
-              </p><br>
-              <h4>Garantizar la búsqueda de los pedidos del círculo</h4>
-              <p>Es importante que entre los miembros del círculo haya algún tipo de movilidad que permita realizar el
-                retiro de la mercadería en el centro de distribución (<b>Constitución 2298</b>), de las compras de <b>todos los
-                hogares</b> que conforman el círculo, o que algún miembro se ofrezca a retirarla a través de algún medio de
-                transporte público o privado.
-              </p><br>
-              <h4>Abonar la cuota social mensual del círculo</h4>
-              <p>Cada círculo (sin importar si está compuesto por 3, 4 o 5 hogares), para obtener los beneficios
-                de participar en la Misión y poder realizar sus compras a través de este mecanismo, debe abonar una
-                <b>cuota social mensual de $200,00</b> (doscientos pesos argentinos). La misma se utilizará para el
-                crecimiento, desarrollo y expansión del proyecto.
-              </p>
+          <div class="row">
+            <div class="col-sm-10 col-sm-offset-2">
+              <%= image_tag 'v2/lineRtoL-comprar.png', class: 'img-responsive' %>
             </div>
           </div>
-          <div class="panel-heading">
-            <h4 class="panel-title">
-              <a class="btn btn-link" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven">¿Cómo inscribo mi círculo?</a>
-            </h4>
-          </div>
-          <div id="collapseSeven" class="panel-collapse collapse">
-            <div class="panel-body">
-              <p>Para inscribir su círculo lo primero que tiene que definir es la persona que lo coordinará.
-                Esa persona, ingresa al sitio web <b>www.misionantiinflacion.com.ar</b> y se dirige a la sección <b>Registrarse</b>.
-                Allí completará un formulario con sus datos personales, y eligirá la opción <b>Coordinador</b>.
-                Luego podrá cargar los nombres y mails del resto de los integrantes. La web enviará a esos mails un
-                formulario similar, para que los consumidores colaborativos de su círculo completen sus
-                datos personales y acepten conformar su círculo de confianza. De esta manera se crea el usuario
-                del resto de los integrantes. Una vez que, al menos, 3 hogares se inscribieron, se da de alta el
-                círculo, y <b>cada hogar poseerá una cuenta de usuario individual</b>, desde la cual realizará sus pedidos.
-              </p>
-            </div>
-          </div>
-          <div class="panel-heading">
-            <h4 class="panel-title">
-              <a class="btn btn-link" data-toggle="collapse" data-parent="#accordion" href="#collapseEight">¿Cuál es el mecanismo para comprar?</a>
-            </h4>
-          </div>
-          <div id="collapseEight" class="panel-collapse collapse">
-            <div class="panel-body">
-              <ol>
-                <li><b>Una vez al mes</b>, de viernes a lunes, se habilita durante cuatro (4) días el ciclo de compras para
-                  que todos los integrantes del círculo puedan hacer su pedido <b>desde el carrito de la web</b>.
-                </li>
-                <li>El <b>miércoles</b> de esa misma semana se enviará al coordinador/a un mail con detalle de <b>cuánto y
-                  cómo deben pagar</b> por la totalidad de las compras del círculo.  </li>
-                <li>El <b>jueves/viernes</b> le enviaremos otro mail indicando horario sugerido para retirar la compra.
-                  De no poder en dicho horario, debe responder avisando con anticipación.
-                </li>
-                <li>El <b>sábado</b> (una semana después de hacer el pedido), al menos un miembro debe retirar todos los
-                  pedidos del círculo por nuestro centro de distribución (<b>Constitución 2298</b>), en el horario sugerido.</li>
-              </ol>
-              <p><i>Las fechas siempre son comunicadas con tiempo vía mail y redes sociales.</i></p>
-            </ol>
-            </div>
-          </div>
-          <div class="panel-heading">
-            <h4 class="panel-title">
-              <a class="btn btn-link" data-toggle="collapse" data-parent="#accordion" href="#collapseNine">¿Con cuántas familias debo conformar mi círculo?</a>
-            </h4>
-          </div>
-          <div id="collapseNine" class="panel-collapse collapse">
-            <div class="panel-body">
-              <p>Cada círculo tiene que estar compuesto con 3 a 5 hogares. La conformación de los círculos es
-                totalmente voluntaria, y decidida por quienes conforman el círculo.</p>
-            </div>
-          </div>
-          <div class="panel-heading">
-            <h4 class="panel-title">
-              <a class="btn btn-link" data-toggle="collapse" data-parent="#accordion" href="#collapseTen">¿Puedo cambiar los miembros de mi círculo?</a>
-            </h4>
-          </div>
-          <div id="collapseTen" class="panel-collapse collapse">
-            <div class="panel-body">
-              <p>Sí. Siempre y cuando el círculo quede integrado por al menos 3 hogares, se pueden modificar los
-                integrantes. Igualmente desde la Misión, recomendamos mantener cierta estabilidad en los miembros
-                del círculo para garantizar las distintas tareas del mismo. Lo importante es que quien se inscriba
-                como coordinador, pueda garantizar su continuidad ya que su rol es relevante para garantizar la
-                participación en la misión.
-              </p>
-            </div>
-          </div>
-          <div class="panel-heading">
-            <h4 class="panel-title">
-              <a class="btn btn-link" data-toggle="collapse" data-parent="#accordion" href="#collapseEleven">¿Puede cambiar el coordinador de mi círculo?</a>
-            </h4>
-          </div>
-          <div id="collapseEleven" class="panel-collapse collapse">
-            <div class="panel-body">
-              <p>Sí. Pero ese cambio lo debe hacer el equipo de la Misión. Para ello el actual coordinador debe
-                mandar un mail a red@misionantiinflacion.com.ar indicando quién será la persona que asumirá ese rol.
-              </p>
-            </div>
-          </div>
-          <div class="panel-heading">
-            <h4 class="panel-title">
-              <a class="btn btn-link" data-toggle="collapse" data-parent="#accordion" href="#collapseTwelve">¿Es necesario que mi círculo lo conforme con gente conocida?</a>
-            </h4>
-          </div>
-          <div id="collapseTwelve" class="panel-collapse collapse">
-            <div class="panel-body">
-              <p>Desde la Misión Anti Inflación recomendamos que a la hora de conformar un círculo, el puedan hacerlo
-                con vecinos, amigos, familiares, compañeros de trabajo, etc., ya que lo importante es organizarnos
-                con personas de confianza con los cuales se puedan coordinar las distintas tareas (pago de los
-                pedidos, retiro de la compra, etc.). No obstante la conformación de cada círculo de consumidores,
-                es totalmente voluntaria y autónoma.
-              </p>
-            </div>
-          </div><br>
-          <h4>Mini Ciclos</h4>
-          <div class="panel-heading">
-            <h4 class="panel-title">
-              <a class="btn btn-link" data-toggle="collapse" data-parent="#accordion" href="#collapseThirteen">¿Qué puedo comprar?</a>
-            </h4>
-          </div>
-          <div id="collapseThirteen" class="panel-collapse collapse">
-            <div class="panel-body">
-              <p>A través de los Mini-Ciclos podés adquirir <b>MAS DE 100 PRODUCTOS</b> de los rubros
-                <b>lácteos, frutas, verduras y panificados</b>.
-              </p>
-            </div>
-          </div>
-          <div class="panel-heading">
-            <h4 class="panel-title">
-              <a class="btn btn-link" data-toggle="collapse" data-parent="#accordion" href="#collapseFourteen">¿Qué frecuencia tienen?</a>
-            </h4>
-          </div>
-          <div id="collapseFourteen" class="panel-collapse collapse">
-            <div class="panel-body">
-              <p>Los Mini-Ciclos de compra se dan <b>una vez al mes</b>. Siempre son dos semanas después del ciclo tradicional.
-              </p>
-            </div>
-          </div>
-          <div class="panel-heading">
-            <h4 class="panel-title">
-              <a class="btn btn-link" data-toggle="collapse" data-parent="#accordion" href="#collapseFifteen">¿Cuáles son los requisitos para participar?
-              </a>
-            </h4>
-          </div>
-          <div id="collapseFifteen" class="panel-collapse collapse">
-            <div class="panel-body">
-              <h4>No es necesario ser parte de un círculo</h4>
-              <p>
-                Puede participar cualquier hogar (no importa su barrio, la cantidad de personas que lo integran, etc.),
-                que esté inscripto en la Misión. Ya sea que forme parte o no de un círculo de compras.</p>
-              <br>
-              <h4>Garantizar la búsqueda del pedido</h4>
-              <p>
-                Es importante que puedan retirar sus pedidos por el centro de distribución de <b>Constitución 2298</b> a
-                través de algún medio de transporte público o privado.</p><br>
 
-              <h4>Abonar la cuota</h4>
-              <p>
-                Cada vez que se hace una compra, se abona además del monto del pedido, una <b>cuota por usuario de $50</b>.
-                En el caso de aquellos consumidores que participan de un círculo que ya pagó la cuota de $200 en el
-                ciclo tradicional, solamente pagarán por su pedido. Lo recaudado a través de la cuota se utiliza
-                para el crecimiento, desarrollo y expansión del proyecto.
+        </div>
+        <div class="privacy2-grid1-sub">
+          <div class="col-sm-4">
+            <%= image_tag 'v2/pagas-comprar.png', class: 'img-responsive' %>
+          </div>
+          <div class="col-sm-8">
+            <h5>Pagás</h5>
+            <div class="col-sm-12">
+              <p>Dos días después de cerrarse la tienda te vamos a informar por mail y whatsapp cuánto tienen que
+                pagar por la compra y las formas para hacerlo.</b>
               </p>
             </div>
+            <div class="col-sm-12">
+              <ul>
+                <li><small><i>Cada círculo paga además del pedido una cuota mensual que se divide entre lxs integrantes.
+                  ¡Mientras más sean menos van a pagar! ¿Por qué pagar una cuota mensual?</i></small></li>
+                <li><small><i>Las formas de pago son depósito bancario y/o transferencia. Próximamente tendremos más opciones</i></small></li>
+              </ul>
+            </div>
           </div>
-          <div class="panel-heading">
-            <h4 class="panel-title">
-              <a class="btn btn-link" data-toggle="collapse" data-parent="#accordion" href="#collapseSixteen">¿Cómo me inscribo?</a>
-            </h4>
+        </div>
+        <div class="row">
+          <div class="col-sm-10 col-sm-offset-2">
+            <%= image_tag 'v2/lineLtoR-comprar.png', class: 'img-responsive' %>
           </div>
-          <div id="collapseSixteen" class="panel-collapse collapse">
-            <div class="panel-body">
-              <p>Para inscribirse, debe ingresar al sitio web <b>www.misionantiinflacion.com.ar</b> y dirigirse a la sección
-                <b>Registrarse</b>. Allí completará un formulario con sus datos personales, y elegirá la opción <b>Usuario</b>
-                para participar de forma individual.
+        </div>
+        <div class="privacy2-grid1-sub">
+          <div class="col-sm-8">
+            <h5>Retirás</h5>
+            <div class="col-sm-12">
+              <p>Siete días después de hacer tu pedido pasás a retirarlo por el
+                <%= link_to warehouses_path do %>
+                  Punto de retiro
+                <% end %> que eligió tu grupo.
+                El día de retiro es siempre un sábado. Para que no te olvides también te vamos a avisar con anticipación por whatsapp.
               </p>
             </div>
-          </div>
-          <div class="panel-heading">
-            <h4 class="panel-title">
-              <a class="btn btn-link" data-toggle="collapse" data-parent="#accordion" href="#collapseSeventeen">¿Cuál es el mecanismo para comprar?</a>
-            </h4>
-          </div>
-          <div id="collapseSeventeen" class="panel-collapse collapse">
-            <div class="panel-body">
-              <ol>
-                <li><b>Una vez al mes</b>*, de <b>viernes a lunes</b>, se habilita durante cuatro (4) días el ciclo de compras para hacer el pedido desde el <b>carrito de la web</b>.</li>
-                <li>El <b>miércoles</b> de esa misma semana se enviará un mail al usuario con detalle de <b>cuánto y cómo debe pagar</b> por la totalidad de las compras del círculo.</li>
-                <li>El <b>viernes</b> (una semana después de hacer el pedido), retirará su compra por nuestro centro de distribución (Constitución 2298), de 10hs a 18hs.</li>
-              </ol>
-              <p><i>*Las fechas siempre son comunicadas con anticipación vía mail y redes sociales.</i></p>
+            <div class="row">
+              <div class="col-sm-12">
+                <ul>
+                  <li><small><i>Se retira el pedido de todo el círculo. Es suficiente con que vaya un solo
+                    integrante a retirarlo.</i></small></li>
+                </ul>
+              </div>
             </div>
+          </div>
+          <br>
+          <div class="col-sm-4">
+            <%= image_tag 'v2/retiras-comprar.png', class: 'img-responsive' %>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+  <div class="row"></div>
+  <div class="clearfix"></div>
+  <br>
+  <br>
 
+  <div class="privacy1">
+    <h3>Círculos</h3>
+    <h4></h4>
+    <div class="banner-bottom-grid1 privacy1-grid">
+      <ul>
+        <li>
+          <div class="col-sm-1">
+            <i class="fa fa-circle-o" aria-hidden="true"></i>
+          </div>
+          <div class="col-sm-10">
+            ¿Qué es un círculo?
+            <span>
+              Es un grupo de dos -2- personas o más que están registra- das en la
+              web (el máximo de integrantes es cinco -5-). A cada una de esas personas se las denomina “asociado/a”.
+              Puede crearse entre familiares, amigues, compañerxs de trabajo, etc.
+            </span>
+          </div>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <div class="col-sm-1">
+            <i class="fa fa-cog" aria-hidden="true"></i>
+          </div>
+          <div class="col-sm-10">
+            ¿Cómo se crea un círculo?
+            <span>
+              Una de las personas debe crearlo y asumirá el rol de <b>coordinador/a de círculo</b>
+              (fundamentalmente cumple la función de ser el nexo entre la Misión y el resto del grupo).
+              Luego puede agregar al resto de los integrantes.
+            </span>
+            <p>
+              <% if current_usuario.blank? %>
+                <small>
+                  <i><%= link_to 'Registrarse', sign_up_usuarios_path %></i>
+                </small>
+              <% end %>
+            </p>
+          </div>
+          <br>
+          <br>
+          <div class="col-md-12 steps">
+            <div class="col-md-3">
+              <div class="numberCircle">1</div>
+              <span><b>Luego de registrarse</b>, la persona que vaya a coordinar debe crear el círculo desde la
+              sección “Mi círculo”</span>
+            </div>
+            <div class="col-md-1">
+
+                <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+
+            </div>
+            <div class="col-md-3">
+              <div class="col-md-12">
+                <div class="numberCircle">2</div>
+              </div>
+              <div class="col-md-12">
+                <span><b>Para agregar un asociade a su círculo</b> el coordinador/a debe ingresar su número de
+                  usuario en la sección “Mi círculo”</span>
+              </div>
+            </div>
+            <div class="col-md-1">
+
+                <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+
+            </div>
+            <div class="col-md-3">
+              <div class="col-md-12">
+                <div class="numberCircle">3</div>
+              </div>
+              <div class="col-md-12">
+                <span><b>Para sumarse a un círculo existente</b> el asociade puede solicitar el ingreso desde
+                  la sección “Mi círculo”</span>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <div class="col-sm-1">
+            <i class="fa fa-question-circle" aria-hidden="true"></i>
+          </div>
+          <div class="col-sm-10">
+            ¿Por qué hay que formar parte de un
+            círculo para comprar?
+            <span>
+              Porque creemos que para hacerle frente a problemas concretos como
+              la inflación, es mejor hacerlo organizado y junto con otres. Es salir del consumo individual al que
+              estamos acostumbrades e ingresar en el <b>consumo colaborativo</b>, es decir, un consumo basado en los lazos y
+              la solidaridad entre pares.
+            </span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<!-- //privacy -->
+<div class="clearfix"></div>

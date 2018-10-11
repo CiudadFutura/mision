@@ -6,11 +6,11 @@ gem 'rails', '4.2.10'
 gem 'mysql2', '~> 0.4.10'
 
 gem 'therubyracer',  platforms: :ruby
-# Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
-gem 'sprockets', '2.11.3'
-gem 'less-rails', '~> 2.5.0'
-# https://github.com/seyhunak/twitter-bootstrap-rails
-gem 'twitter-bootstrap-rails', '3.2.0'
+
+# Rails Sass gem
+gem 'bootstrap-sass', '~> 3.3.7'
+gem 'sass-rails', '>= 3.2'
+
 # https://github.com/carrierwaveuploader/carrierwave
 gem 'carrierwave'
 gem 'mini_magick'
@@ -22,8 +22,7 @@ gem 'uglifier', '>= 1.3.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
-# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
+
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
@@ -44,9 +43,21 @@ gem 'writeexcel'
 # Enable reading settings from yml file
 gem 'figaro'
 # Charts js
-gem 'chart-js-rails', '~> 0.1.4'
+gem 'morrisjs-rails', '~> 0.5.1.2'
+gem 'raphael-rails', '~> 2.1', '>= 2.1.2'
+gem 'nicescroll-rails', '~> 3.5', '>= 3.5.4.1'
+gem 'chart-js-rails', '~> 0.0.9'
 
 gem 'thin', '~> 1.7', '>= 1.7.2'
+
+# Flex slider
+gem 'flexslider', '~> 2.2'
+
+# Font awesome
+gem 'font-awesome-sass', '~> 4.6', '>= 4.6.2'
+
+# gem pagination
+gem 'will_paginate', '~> 3.1', '>= 3.1.6'
 
 group :development do
   # Spring speeds up development by keeping your application running in the
@@ -76,6 +87,9 @@ gem 'bootstrap-editable-rails'
 # JQuery validate
 gem 'jquery-validation-rails'
 gem 'jquery-ui-rails'
+
+# JQuery Autocomplete
+gem 'rails-jquery-autocomplete', '~> 1.0', '>= 1.0.3'
 
 # full calendar
 gem 'fullcalendar-rails'

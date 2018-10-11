@@ -1,0 +1,129 @@
+<!--/sidebar-menu-->
+<div class="sidebar-menu">
+  <header class="logo1">
+    <a href="#" class="sidebar-icon"> <span class="fa fa-bars"></span> </a>
+  </header>
+  <div style="border-top:1px ridge rgba(255, 255, 255, 0.15)"></div>
+  <div class="menu">
+    <ul id="menu" >
+      <li>
+        <%= link_to root_path do %>
+          <i class="fa fa-tachometer"></i>
+          <span>Dashboard</span>
+          <div class="clearfix"></div>
+        <% end %>
+      </li>
+      <% if can? [:manage], usuarios_path %>
+        <li id="menu-academico" >
+          <a href="#">
+            <i class="fa fa-user nav_icon"></i>
+            <span>Ciudadanos</span>
+            <span class="fa fa-angle-right" style="float: right"></span>
+            <div class="clearfix"></div>
+          </a>
+          <ul id="menu-academico-sub" >
+            <li id="menu-academico-avaliacoes" >
+              <%= link_to usuarios_path(:role => Usuario::USUARIO) do %>
+                <span class="icon-key2"></span>Consumidores
+              <% end %>
+            </li>
+            <li id="menu-academico-avaliacoes" >
+              <%= link_to(suppliers_path) do %>
+                <span class="icon-key2"></span>Proveedores
+              <% end %>
+            </li>
+            <li id="menu-academico-avaliacoes" >
+              <a href="faq.html">Directores</a>
+            </li>
+          </ul>
+        </li>
+      <% end %>
+      <li id="menu-academico" >
+        <a href="#">
+          <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+          <span> Productos</span>
+          <span class="fa fa-angle-right" style="float: right"></span>
+          <div class="clearfix"></div>
+        </a>
+        <ul id="menu-academico-sub" >
+          <li id="menu-academico-avaliacoes" >
+            <%= link_to productos_path(view_prod: 'ocultos') do %>
+              Ocultos
+            <% end %>
+          </li>
+          <li id="menu-academico-avaliacoes" >
+            <%= link_to productos_path(view_prod: 'visibles') do %>
+              Visibles
+            <% end %>
+          </li>
+          <li id="menu-academico-avaliacoes" >
+            <%= link_to productos_path() do %>
+              Todos
+            <% end %>
+          </li>
+        </ul>
+      </li>
+      <li id="menu-academico" >
+        <a href="#">
+          <i class="fa fa-circle-o-notch" aria-hidden="true"></i>
+          <span> Ciclos</span>
+          <span class="fa fa-angle-right" style="float: right"></span>
+          <div class="clearfix"></div>
+        </a>
+        <ul id="menu-academico-sub" >
+          <li id="menu-academico-avaliacoes" >
+            <%= link_to compras_path(cycle_type: 'circles') do %>
+              Circulos
+            <% end %>
+          </li>
+          <li id="menu-academico-avaliacoes" >
+            <%= link_to compras_path(cycle_type: 'free') do %>
+              Libres
+            <% end %>
+          </li>
+          <li id="menu-academico-avaliacoes" >
+            <%= link_to compras_path(cycle_type:'mini') do %>
+              Mini ciclos
+            <% end %>
+          </li>
+          <li id="menu-academico-avaliacoes" >
+            <%= link_to compras_path do %>
+              Todos
+            <% end %>
+          </li>
+        </ul>
+      </li>
+      <li id="menu-academico" >
+        <%= link_to(circulos_path) do %>
+          <i class="fa fa-group" aria-hidden="true"></i>
+          <span>Círculos</span>
+          <div class="clearfix"></div>
+        <% end %>
+      </li>
+      <li id="menu-academico" ><a href="errorpage.html"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i><span>Error Page</span><div class="clearfix"></div></a></li>
+      <li id="menu-academico" ><a href="#"><i class="fa fa-cogs" aria-hidden="true"></i><span> UI Components</span> <span class="fa fa-angle-right" style="float: right"></span><div class="clearfix"></div></a>
+        <ul id="menu-academico-sub" >
+          <li id="menu-academico-avaliacoes" ><a href="button.html">Buttons</a></li>
+          <li id="menu-academico-avaliacoes" ><a href="grid.html">Grids</a></li>
+        </ul>
+      </li>
+      <li><a href="tabels.html"><i class="fa fa-table"></i>  <span>Tables</span><div class="clearfix"></div></a></li>
+      <li><a href="maps.html"><i class="fa fa-map-marker" aria-hidden="true"></i>  <span>Maps</span><div class="clearfix"></div></a></li>
+      <li id="menu-academico" ><a href="#"><i class="fa fa-file-text-o"></i>  <span>Pages</span> <span class="fa fa-angle-right" style="float: right"></span><div class="clearfix"></div></a>
+        <ul id="menu-academico-sub" >
+          <li id="menu-academico-boletim" ><a href="calendar.html">Calendar</a></li>
+          <li id="menu-academico-avaliacoes" ><a href="signin.html">Sign In</a></li>
+          <li id="menu-academico-avaliacoes" ><a href="signup.html">Sign Up</a></li>
+
+
+        </ul>
+      </li>
+      <li><a href="#"><i class="fa fa-check-square-o nav_icon"></i><span>Forms</span> <span class="fa fa-angle-right" style="float: right"></span><div class="clearfix"></div></a>
+        <ul>
+          <li><a href="input.html"> Input</a></li>
+          <li><a href="validation.html">Validation</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>

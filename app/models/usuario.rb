@@ -5,6 +5,9 @@ class Usuario < ActiveRecord::Base
   devise :confirmable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  validates_format_of :email,:with => Devise.email_regexp
+  validates_uniqueness_of :email
+
   belongs_to :circulo
   has_many :pedidos
   has_one :account
@@ -14,13 +17,15 @@ class Usuario < ActiveRecord::Base
   has_many :usuario_roles
   has_many :roles, :through => :usuario_roles
   accepts_nested_attributes_for :usuario_roles
+  accepts_nested_attributes_for :circulo
 
   has_paper_trail
 
   before_create :set_default_role
 
-  scope :usrs, -> {where('type != "Sistema"')}
+  scope :users, -> {where('type != "Sistema"')}
   scope :evo_usuarios, -> (date_param) {where('updated_at >= :today', today: date_param)}
+  scope :by_roles, lambda { |role| joins(:roles).where('roles.name = :name', name: role)}
 
 
   ADMIN = 'Admin'
@@ -74,6 +79,10 @@ class Usuario < ActiveRecord::Base
     ciclo_de_compra && self.pedidos.try(:last).try(:ciclo) == ciclo_de_compra
   end
 
+  def usuario_completed?
+    Usuario.where(nombre: [nil,''], apellido: [nil, ''], dni: [nil, ''], calle: [nil, ''], cel1: [nil, ''])
+  end
+
   def pedido_del_ciclo(ciclo_de_compra)
     return nil if ciclo_de_compra.nil?
     pedido = self.pedidos.where(compra_id: ciclo_de_compra.id).first
@@ -124,6 +133,10 @@ class Usuario < ActiveRecord::Base
       .order('year').last(2)
   end
 
+  def self.active_users
+    Usuario.where("last_sign_in_at like '%#{Time.current.year}%'" ).count
+  end
+
 
   def self.nuevos_coordinadores()
     coordinadores = Usuario.where("type=? AND circulo_id IS NULL OR circulo_id = ?","Coordinador", '')
@@ -151,7 +164,17 @@ class Usuario < ActiveRecord::Base
         ]
       end
     end
-	end
+  end
+
+  def completed?
+    nombre.present? &&
+      apellido.present? &&
+      dni.present? &&
+      cel1.present? &&
+      ciudad.present? &&
+      calle.present? &&
+      codigo_postal.present?
+  end
 
 	def confirmation_required?
 		!confirmed?

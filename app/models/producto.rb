@@ -3,6 +3,13 @@ class Producto < ActiveRecord::Base
   has_and_belongs_to_many :categorias
   belongs_to :supplier
   has_many :transaction_details
+  has_many :bundle_products
+  has_many :roles, :through => :usuario_roles
+  has_and_belongs_to_many :categorias
+
+
+  accepts_nested_attributes_for :bundle_products
+
 
   validates :codigo, uniqueness: true
   #validates :supplier, presence: true
@@ -12,7 +19,8 @@ class Producto < ActiveRecord::Base
   has_paper_trail
 
   scope :disponibles, -> { where(oculto: false) }
-	scope :destacados, -> {where(highlight: true)}
+	scope :destacados, -> {where(highlight: true, oculto: false)}
+	scope :offers, -> {joins(:suppliers).where(highlight: true, oculto: false, nature: 1).order("RAND()").limit(3)}
   scope :ocultos, -> {where(oculto: true)}
   scope :stock, -> {where('stock != 0 OR stock IS NULL')}
   scope :freesale, -> {where('sale_type = :free and oculto = :oculto' , free: 1, oculto: false)}
@@ -29,6 +37,12 @@ class Producto < ActiveRecord::Base
 
   def default_cantidad_permitida
     self.cantidad_permitida ||= 10
+  end
+
+  def self.build
+    producto = self.new
+    producto.bundle_products.build
+    producto
   end
 
   def cart_action(session)
@@ -63,6 +77,25 @@ class Producto < ActiveRecord::Base
     end
   end
 
+  def get_related_products(categoria)
+    #get random products
+    Producto.joins(:categorias).where('categorias.id = :id OR categorias.parent_id = :id AND oculto = false',
+                             id: categoria).order("RAND()").limit(3) if categoria
+  end
+
+  def self.get_offers_products
+    #get random products
+    Producto.joins(:supplier).where('suppliers.nature = :id',
+                                      id: 1).order("RAND()").limit(8)
+  end
+
+  def self.search(term)
+    where('LOWER(nombre) LIKE :term OR LOWER(descripcion) LIKE :term', term: "%#{term.downcase}%")
+  end
+  def bundle_products_for_form
+    collection = bundle_products.where(item_id: id)
+    collection.any? ? collection : bundle_products.build
+  end
 
   def self.import(file)
     all.each do |prod|
