@@ -1349,8 +1349,11 @@ button.submit.check_out{
 /*-- //top-products --*/
 /*-- newsletter --*/
 .newsletter{
+  .img-responsive{
+    margin: 0 auto;
+  }
   padding:3em 0;
-  background:#FA1818;
+  background: $color-bordeaux;
 }
 
 .w3agile_newsletter_left h3{
