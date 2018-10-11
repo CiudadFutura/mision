@@ -308,6 +308,9 @@ ul.agileits_social_icons li a,
   background: $color-bordeaux;
 }
 .w3l_offers{
+  img{
+    height: 25px;
+  }
 }
 .w3l_offers a{
   font-size: 1.2em;
@@ -1712,6 +1715,7 @@ button.submit.check_out{
   color: #212121;
   font-size: 1.5em;
   margin-bottom: 1.5em;
+  padding-left: 20px;
 }
 .checkout-right h4,.address_form_agile h4{
   text-transform: uppercase;
