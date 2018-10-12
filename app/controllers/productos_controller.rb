@@ -25,7 +25,6 @@ class ProductosController < ApplicationController
     @ciclo_actual = Compra.ciclo_actual
 
 		@productos = Producto.all.order(:orden, :nombre).paginate(:page => params[:page], :per_page => 50)
-    @todos = @productos
     @productos = @productos.stock if current_usuario.nil? || current_usuario.present? && !current_usuario.admin?
     @productos = @productos.disponibles.order(:orden, :nombre) if current_usuario.nil? || !current_usuario.admin?
     @productos = @productos.destacados if params[:featured].present?
@@ -37,6 +36,7 @@ class ProductosController < ApplicationController
     @freesale = Producto.freesale
 
     if current_usuario && current_usuario.admin?
+      @todos = Producto.all
       respond_to do |format|
         format.html
         format.csv { render csv: @todos.to_csv, type: 'text/csv; charset=UTF-8; header=present', filename: "#{Time.now.to_i}_productos" }

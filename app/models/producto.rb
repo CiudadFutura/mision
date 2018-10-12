@@ -85,7 +85,7 @@ class Producto < ActiveRecord::Base
 
   def self.get_offers_products
     #get random products
-    Producto.joins(:supplier).where('suppliers.nature = :id',
+    Producto.joins(:supplier).where('suppliers.nature = :id AND oculto = false',
                                       id: 1).order("RAND()").limit(8)
   end
 
