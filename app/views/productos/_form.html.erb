@@ -192,59 +192,7 @@
     <% end %>
 
   </fieldset>
-  <fieldset class="form-group">
-    <div class="col-md-12">
-      <div class="form-group">
-        <%= f.radio_button :product_type, 0, :checked => @producto.product_type.blank? %>
-        <%= f.label :product_type, 'Común'%>
-        <%= f.radio_button :product_type, 1,
-                           :checked => @producto.product_type == 1
-        %>
-        <%= f.label :product_type, 'Canasta'%>
-      </div>
-      <div id="bundle" style="<%= 'display:none' if @producto.product_type != 1 %>">
-        <div class="row">
-          <div class="products-search">
-            <%= hidden_field_tag :producto_id, '', id: 'my_producto_id' %>
-            <%= autocomplete_field_tag 'search', '',autocomplete_producto_nombre_productos_path, :id_element => '#my_producto_id', 'data-auto-focus' => true %>
-            <%= link_to '#', :class => 'btn btn-primary', :disabled =>'disabled', :id => 'addItem', :remote => true  do %>
-        <span id="span">
-          <i class="glyphicon glyphicon-plus"></i>
-          Agregar producto
-        </span>
-            <% end %>
-          </div>
-        </div>
-        <table class="table table-striped" id="bundleItems">
-          <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Producto</th>
-            <th scope="col">Codigo</th>
-            <th scope="col">Precio</th>
-            <th scope="col">Cantidad</th>
-            <th scope="col"></th>
-          </tr>
-          </thead>
-          <tbody>
-          <% if @producto.id.present? and @producto.bundle_products.present?  %>
-            <% @producto.bundle_products.each do |bundle| %>
-              <% prod = Producto.find(bundle.item_id) %>
-              <tr id="<%=bundle.id%>">
-                <td><%= prod.id %></td>
-                <td><%= prod.nombre %></td>
-                <td><%= prod.codigo %></td>
-                <td>$<%= prod.precio %></td>
-                <td><%= bundle.qty %></td>
-                <td><%= link_to 'Borrar', "#", id: :remove_bundle_product, data: { i: bundle.id} %></td>
-              </tr>
-            <%end%>
-          <%end%>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </fieldset>
+
   <%= f.submit nil, :class => 'btn btn-primary' %>
   <%= link_to t('.cancel', :default => t('helpers.links.cancel')),
             productos_path, :class => 'btn btn-default' %>
