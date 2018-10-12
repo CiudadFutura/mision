@@ -7,12 +7,14 @@ class PedidosController < ApplicationController
       @ciclo_id = nil
       if(params[:ciclo_id])
         @ciclo_id = params[:ciclo_id]
-        @pedidos = Pedido.where(compra_id: params[:ciclo_id]).order(:updated_at)
+        @pedidos = Pedido.where(compra_id: params[:ciclo_id])
+                     .paginate(:page => params[:page], :per_page => 10)
+                     .order(:updated_at)
       end
       @ciclos = Compra.all.order('fecha_fin_compras DESC')
       @suppliers = Supplier.all
       respond_to do |format|
-        format.html
+        format.html { render 'pedidos/index_admin' }
         format.csv { render csv: @pedidos.to_csv, filename: "#{Time.now.to_i}_pedidos" }
       end
     elsif current_usuario.coordinador? || current_usuario.usuario?
