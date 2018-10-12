@@ -227,7 +227,7 @@
           </tr>
           </thead>
           <tbody>
-          <% if @producto.id.present? %>
+          <% if @producto.id.present? and @producto.bundle_products.present?  %>
             <% @producto.bundle_products.each do |bundle| %>
               <% prod = Producto.find(bundle.item_id) %>
               <tr id="<%=bundle.id%>">
