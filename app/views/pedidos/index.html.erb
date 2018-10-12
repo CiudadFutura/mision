@@ -75,9 +75,11 @@
 	        <% end %>
         </tbody>
       </table>
+    <% if @pedidos.present? %>
     <div class="row">
       <%= will_paginate @pedidos, :previous_label => 'Previo', :next_label => 'Siguiente' %>
     </div>
+   <% end %>
   </div>
 </div>
 
