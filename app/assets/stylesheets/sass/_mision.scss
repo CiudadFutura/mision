@@ -2262,9 +2262,15 @@ h2.typoh2{
   color: #212121;
   margin-bottom: 1em;
 }
-.circle-members i{
-  color:#84C639;
-  top: 0em !important;
+.circle-members{
+  .fa-heart{
+    color: $color-bordeaux;
+  };
+  i{
+    color:#84C639;
+    top: 0em !important;
+  }
+
 }
 
 .privacy1-grid {

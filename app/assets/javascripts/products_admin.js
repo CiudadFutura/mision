@@ -1,4 +1,4 @@
-window.onload = (function() {
+$(document).ready(function() {
 
     $.fn.editable.defaults.ajaxOptions = {type: "PUT"};
 
