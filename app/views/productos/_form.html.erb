@@ -20,7 +20,7 @@
         <div class="control-group">
           <%= f.label :nombre, :class => 'control-label' %>
           <div class="controls">
-            <%= f.text_field :nombre, :class => 'form-control' %>
+            <%= f.text_field :nombre, :class => 'form-control required' %>
           </div>
         </div>
 
@@ -30,7 +30,7 @@
         <div class="control-group">
           <%= f.label :marca, :class => 'control-label' %>
           <div class="controls">
-            <%= f.text_field :marca, :class => 'form-control' %>
+            <%= f.text_field :marca, :class => 'form-control required' %>
           </div>
         </div>
       </div>
@@ -39,7 +39,7 @@
         <div class="control-group">
           <%= f.label :codigo, :class => 'control-label' %>
           <div class="controls">
-            <%= f.text_field :codigo, :class => 'form-control' %>
+            <%= f.text_field :codigo, :class => 'form-control required' %>
           </div>
         </div>
       </div>
@@ -48,7 +48,7 @@
           <div class="control-group">
             <%= f.label :precio, :class => 'control-label' %>
             <div class="controls">
-              <%= f.text_field :precio, :class => 'form-control' %>
+              <%= f.text_field :precio, :class => 'form-control required' %>
             </div>
           </div>
         </div>
@@ -139,7 +139,7 @@
               <%= f.select(:supplier_id, 
                       options_for_select(Supplier.all.map{|s| [s.name,s.id]},@producto[:supplier_id]),
                       { include_blank: 'Elija proveedor'},
-                      class: 'form-control') %>
+                      class: 'form-control required') %>
             </div>
           </div>
         </div>

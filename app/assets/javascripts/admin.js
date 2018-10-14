@@ -3,6 +3,9 @@
 //= require bootstrap-sprockets
 //= require bootstrap-editable
 //= require bootstrap-editable-rails
+//= require jquery.validate
+//= require jquery.validate.additional-methods
+//= require jquery.validate.localization/messages_es
 //= require raphael
 //= require morris
 //= require jquery.nicescroll
