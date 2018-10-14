@@ -14,6 +14,7 @@ class Ability
       can [:read], Account, { :usuario_id => user.id }
       can [:read], Compra
       can [:read], Warehouse
+      can [:read, :create, :update], Pedido, { :usuario_id => user.id }
     elsif user.usuario?
       can [:read], Compra
       can [:create], Circulo
