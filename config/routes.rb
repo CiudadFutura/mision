@@ -69,6 +69,7 @@ Rails.application.routes.draw do
   resources :categorias
   resources :pedidos, only: [:index, :show, :edit, :destroy] do
     get 'download_pdf', to: 'pedidos#download_pdf'
+    get 'search'
   end
   resources :home
   resources :steps

@@ -92,6 +92,7 @@ class Producto < ActiveRecord::Base
   def self.search(term)
     where('LOWER(nombre) LIKE :term OR LOWER(descripcion) LIKE :term', term: "%#{term.downcase}%")
   end
+
   def bundle_products_for_form
     collection = bundle_products.where(item_id: id)
     collection.any? ? collection : bundle_products.build

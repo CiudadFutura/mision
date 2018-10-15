@@ -21,7 +21,11 @@ class Pedido < ActiveRecord::Base
       end
     end
     total.to_f
-	end
+  end
+
+  def self.search(term)
+    where('id LIKE :term', term: "%#{term.downcase}%")
+  end
 
 	def ahorro
 		total_mision = total_ahorro = 0

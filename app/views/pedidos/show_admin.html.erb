@@ -1,0 +1,69 @@
+<% content_for :title, 'Detalle de pedido'   %>
+<% navigation_add 'Pedidos', pedidos_path() %>
+<% navigation_add 'Detalle de pedido', '#' %>
+<div class="account-data">
+  <h3>Detalle de pedido # <%= @pedido.id %></h3>
+  <div class="row">
+    <div class="col-md-8">
+      <h4><%= @pedido.usuario.nombre %> <%= @pedido.usuario.apellido %></h4>
+      <% if @pedido.ciclo.tipo == 'free' or @pedido.ciclo.tipo == 'mini'  %>
+        <p>Ciclo Libre de compra: <b><%= @pedido.ciclo.nombre%></b></p>
+      <% else %>
+        <p>Círculo N°: <%= @pedido.circulo.id if @pedido.circulo.present? %></p>
+      <% end %>
+    </div>
+    <div class="col-md-4">
+      <h2 class="text-right"><%= (@pedido.created_at).strftime('%d/%m/%Y')%></h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="table-responsive">
+      <table class='table table-striped' id="table-pedido">
+        <thead>
+        <tr>
+          <th>Producto</th>
+          <th class="text-right">Cantidad</th>
+          <th class="text-right">Importe Total</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% total = 0
+           qty = 0
+        %>
+        <% JSON.parse(@pedido.items).each do |i| %>
+          <% product = Producto.find(i['producto_id']) rescue nil %>
+          <tr>
+            <td><%= product.present? ? product.nombre : ' Sin nombre' %></td>
+            <td class="text-right"><%= i['cantidad'].to_i %></td>
+            <td class="text-right"><%= number_to_currency(i['total']) %></td>
+          </tr>
+          <% total = total+i['total']
+             qty = qty +i['cantidad'].to_i %>
+        <% end %>
+        </tbody>
+        <tfoot>
+        <%if !@transactions.blank?%>
+          <tr class="info">
+            <td class="text-right">SubTotal</td>
+            <td class="text-right"><%= qty %></td>
+            <td class="text-right"><%= number_to_currency(total) %></td>
+          </tr>
+          <% @transactions.each do |transaction| %>
+            <tr class="info">
+              <td class="text-right"><%= transaction.transaction_type == 0 ? 'Nota de Crédito' : 'Nota de Débito'%></td>
+              <td class="text-right">#<%= transaction.id%></td>
+              <td class="text-right"><%= number_to_currency(transaction.amount * -1) %></td>
+              <% total -= transaction.amount %>
+            </tr>
+          <%end%>
+        <%end%>
+        <tr class="info">
+          <td class="text-right">Total</td>
+          <td class="text-right"><%= qty %></td>
+          <td class="text-right"><%= number_to_currency(total) %></td>
+        </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>

@@ -88,7 +88,7 @@
               <% end %>
             </tbody>
           </table>
-        <% if @pedidos.present? %>
+        <% if @pedidos.present? and @pedidos.count > 50 %>
         <div class="row">
           <%= will_paginate @pedidos, :previous_label => 'Previo', :next_label => 'Siguiente' %>
         </div>

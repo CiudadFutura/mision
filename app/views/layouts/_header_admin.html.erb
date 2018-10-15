@@ -9,10 +9,11 @@
 
     <!--search-box-->
     <div class="w3-search-box">
-      <form action="#" method="post">
-        <input type="text" placeholder="Search..." required="">
+      <%= form_tag "#{controller_name}", method: 'get' do %>
+        <%= text_field_tag 'text_search', nil, placeholder: 'Buscar...', required: true %>
+
         <input type="submit" value="">
-      </form>
+      <% end %>
     </div><!--//end-search-box-->
     <div class="clearfix"> </div>
   </div>

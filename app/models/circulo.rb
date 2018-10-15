@@ -22,7 +22,11 @@ class Circulo < ActiveRecord::Base
 	def next_delivery
 		self.compras
 				.where('compras.fecha_inicio_compras >= ?', Date.today).order('compras.fecha_inicio_compras')
-	end
+  end
+
+  def self.with_warehouses
+    Circulo.where('warehouse_id is not null').count
+  end
 
 
   def self.to_csv
