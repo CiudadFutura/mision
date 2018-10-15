@@ -37,6 +37,9 @@ class ProductosController < ApplicationController
     @freesale = Producto.freesale
 
     if current_usuario && current_usuario.admin?
+      if params[:text_search].present?
+        @productos = @productos.search(params[:text_search])
+      end
       respond_to do |format|
         format.html { render 'productos/index_admin'}
         format.csv { render csv: @todos.to_csv, type: 'text/csv; charset=UTF-8; header=present', filename: "#{Time.now.to_i}_productos" }

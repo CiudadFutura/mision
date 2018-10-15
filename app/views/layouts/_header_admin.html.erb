@@ -10,7 +10,7 @@
     <!--search-box-->
     <div class="w3-search-box">
       <%= form_tag "#{controller_name}", method: 'get' do %>
-        <%= text_field_tag 'text_search', nil, placeholder: 'Buscar...', required: true %>
+        <%= text_field_tag 'text_search', nil, placeholder: 'Buscar...', required: true, value: params[:text_search] %>
 
         <input type="submit" value="">
       <% end %>

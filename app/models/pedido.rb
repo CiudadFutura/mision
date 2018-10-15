@@ -24,7 +24,15 @@ class Pedido < ActiveRecord::Base
   end
 
   def self.search(term)
-    where('id LIKE :term', term: "%#{term.downcase}%")
+    if term.is_a? Numeric
+      Pedido
+        .joins(:usuario)
+        .where('id LIKE :term, LOWER(`usuarios`.nombre) LIKE :term OR LOWER(`usuarios`.apellido) LIKE :term OR LOWER(`usuarios`.email) LIKE :term', term: "%#{term.downcase}%")
+    else
+      Pedido
+        .joins(:usuario)
+        .where('LOWER(`usuarios`.nombre) LIKE :term OR LOWER(`usuarios`.apellido) LIKE :term OR LOWER(`usuarios`.email) LIKE :term', term: "%#{term.downcase}%")
+    end
   end
 
 	def ahorro

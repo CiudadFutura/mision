@@ -28,6 +28,13 @@ class Circulo < ActiveRecord::Base
     Circulo.where('warehouse_id is not null').count
   end
 
+  def self.search(term)
+    Circulo
+      .joins(:usuarios, :warehouse)
+      .where('LOWER(`usuarios`.nombre) LIKE :term OR LOWER(`usuarios`.apellido) LIKE :term OR LOWER(`usuarios`.email) LIKE :term OR  (`circulos`.id) LIKE :term OR LOWER(`warehouses`.name) LIKE :term',
+          term: "%#{term.downcase}%")
+  end
+
 
   def self.to_csv
     CSV.generate do |csv|

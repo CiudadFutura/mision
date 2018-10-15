@@ -7,10 +7,15 @@ class CirculosController < ApplicationController
   def index
 
     if current_usuario && current_usuario.admin?
-      @circulos = Circulo.paginate(page: params[:page], per_page: 10)
+      @todos = Circulo.all
+      if params[:text_search].present?
+        @circulos = @todos.search(params[:text_search])
+      else
+        @circulos = @todos.paginate(page: params[:page], per_page: 50)
+      end
       respond_to do |format|
         format.html {render 'circulos/index_admin'}
-        format.csv { render csv: @circulos.to_csv, filename: "#{Time.now.to_i}_circulos" }
+        format.csv { render csv: @todos.to_csv, filename: "#{Time.now.to_i}_circulos" }
       end
     else
       @circulos = Circulo.paginate(page: params[:page], per_page: 10)
