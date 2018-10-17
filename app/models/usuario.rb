@@ -234,6 +234,12 @@ class Usuario < ActiveRecord::Base
     end
   end
 
+  def self.search(term)
+    Usuario
+      .where('LOWER(`usuarios`.nombre) LIKE :term OR LOWER(`usuarios`.apellido) LIKE :term OR LOWER(`usuarios`.email) LIKE :term',
+             term: "%#{term.downcase}%")
+  end
+
 	private
   def set_default_role
     self.type ||= Usuario::USUARIO

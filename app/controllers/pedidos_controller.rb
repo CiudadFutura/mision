@@ -8,7 +8,7 @@ class PedidosController < ApplicationController
       if(params[:ciclo_id])
         @ciclo_id = params[:ciclo_id]
         @exportCSV = Pedido.where(compra_id: params[:ciclo_id]).order(:updated_at)
-        @pedidos = @exportCSV.paginate(:page => params[:page], :per_page => 10)
+        @pedidos = @exportCSV.paginate(:page => params[:page], :per_page => 50)
 
       end
       if (params[:text_search])

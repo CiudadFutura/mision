@@ -4508,6 +4508,13 @@ label.control-label {
   background: #fff;
   padding: 2em;
   margin: 2em 0;
+  .orders-table {
+    td,
+    tbody>tr>td,
+    tbody>tr>th{
+      padding: 5px !important;
+    }
+  }
 }
 .w3l-calendar-left {
   background: #fff;

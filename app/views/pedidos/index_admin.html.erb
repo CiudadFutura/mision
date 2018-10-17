@@ -1,6 +1,6 @@
 <div class="agile-grids">
   <div class="agile-tables">
-    <div class="w3l-table-info">
+    <div class="w3l-table-info orders-table">
       <div class="navbar navs-fixed">
         <h2>Pedidos realizados</h2>
 
@@ -17,14 +17,16 @@
             <%= submit_tag 'Filtrar', class: 'btn btn-success btn-xs' %>
           <% end %>
         <% end %>
+        <div class="orders-table">
           <table class='table table-striped' data-search="true">
             <thead>
               <tr>
-                <th>Número de pedido</th>
+                <th>#</th>
                 <th>Fecha</th>
+                <th>Asociade</th>
                 <th>Ciclo</th>
-                <th>Pertenece</th>
-                <th>Círculo N°</th>
+                <th>Distrito</th>
+                <th>Círculo</th>
                 <% if current_usuario && current_usuario.admin? %>
                   <th colspan="4"></th>
                 <% else %>
@@ -38,36 +40,35 @@
                   <% if p.present? %>
                     <tr>
                       <td><%= p.try('id') || 'Sin ID' %></td>
-                      <td><%= l (p.try('created_at')) || 'SIN FECHA' %></td>
+                      <td><%= p.created_at.present? ?  l(p.created_at, format: :short) : 'SIN FECHA' %></td>
+                      <td><%= p.usuario.present? ? p.usuario.nombre_completo : 'Es solo' %></td>
                       <td><%= p.ciclo.try('nombre') || 'SIN CICLO' %></td>
                       <td><%= p.circulo.try('warehouse_id') ? p.circulo.warehouse.name : '' %></td>
                       <td><%= p.circulo.try('id') || 'SIN CIRCULO' %></td>
                       <td>
-                        <%= link_to('Ver', pedido_path(p), class: 'btn btn-info btn-mini') %>
+                        <%= link_to('Ver', pedido_path(p), class: 'btn btn-link') %>
                       </td>
+                      <% if current_usuario && current_usuario.admin? %>
+                        <td>
+                          <%= link_to new_transaction_path(pedido_id:p.id), title: 'Nota de Crédito' do %>
+                            <span class="fa fa-sticky-note"></span>
+                          <% end %>
+                        </td>
+                      <% end %>
                       <% if File.exists?("#{Rails.public_path}/facturas/FAC_#{p.id}.pdf") %>
                         <td>
-                          <%= link_to('Factura', pedido_download_pdf_path(p.id), class: 'btn btn-info btn-mini') %>
+                          <%= link_to pedido_download_pdf_path(p.id), title: 'Factura' do  %>
+                          <span class="fa fa-file-pdf-o"></span>
+                          <% end  %>
                         </td>
                       <% else %>
                         <td></td>
                       <% end %>
-                      <% if(p.ciclo.id && Compra::ciclo_actual.try(:id) == p.ciclo.id)%>
-                        <td>
-                          <%= link_to('Modificar',
-                                edit_pedido_path(p),
-                                data: { confirm: 'Luego de modificar el pedido recuerda volver a confirmarlo.' },
-                                class: 'btn btn-warning btn-mini') %>
-                        </td>
-                      <% end %>
                       <% if current_usuario && current_usuario.admin? %>
                         <td>
-                            <%= link_to 'Eliminar', p, method: :delete, data: { confirm: 'Esta seguro?' }, class: 'btn btn-danger btn-xs' %>
-                        </td>
-                      <% end %>
-                      <% if current_usuario && current_usuario.admin? %>
-                        <td>
-                          <%= link_to 'Crear Transacción', new_transaction_path(pedido_id:p.id), class: "btn btn-default btn-xs" %>
+                          <%= link_to  p, method: :delete, data: { confirm: 'Esta seguro?' }, title: 'Eliminar' do %>
+                          <span class="fa fa-trash"></span>
+                          <% end %>
                         </td>
                       <% end %>
                     </tr>
@@ -88,6 +89,7 @@
               <% end %>
             </tbody>
           </table>
+        </div>
         <% if @pedidos.present? and @pedidos.count > 50 %>
         <div class="row">
           <%= will_paginate @pedidos, :previous_label => 'Previo', :next_label => 'Siguiente' %>

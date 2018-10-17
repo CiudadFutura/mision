@@ -36,9 +36,11 @@
           </tbody>
         </table>
       </div>
-      <div class="row">
-        <%= will_paginate @usuarios, :previous_label => 'Previo', :next_label => 'Siguiente' %>
-      </div>
+      <% if @usuarios.present? && @usuarios.count > 50 %>
+        <div class="row">
+          <%= will_paginate @usuarios, :previous_label => 'Previo', :next_label => 'Siguiente' %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
