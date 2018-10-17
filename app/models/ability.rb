@@ -15,6 +15,7 @@ class Ability
       can [:read], Compra
       can [:read], Warehouse
       can [:read, :create, :update], Pedido, { :usuario_id => user.id }
+      can [:download_pdf], Pedido
     elsif user.usuario?
       can [:read], Compra
       can [:create], Circulo
@@ -24,10 +25,12 @@ class Ability
       can [:add_myself_cycle], Usuario
       can [:read], Account, { :usuario_id => user.id }
       can [:read], Warehouse
+      can [:download_pdf], Pedido
     elsif user.director?
       can [:read], Circulo, { :warehouse_id => user.usuario_roles.warehouse_id }
       can [:read, :create, :update], Pedido, { :warehouse_id => user.usuario_roles.warehouse_id }
       can [:read], Warehouse
+      can [:download_pdf], Pedido
     else
       can [:read], Compra
       can [:read], Warehouse
