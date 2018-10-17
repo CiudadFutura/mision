@@ -13,7 +13,8 @@ Rails.application.config.assets.precompile += %w(suppliers.js)
 Rails.application.config.assets.precompile += %w(admin.css)
 Rails.application.config.assets.precompile += %w(admin.js)
 Rails.application.config.assets.precompile += %w(admin-home.js)
-Rails.application.config.assets.precompile += %w(admin-products.js)
+Rails.application.config.assets.precompile += %w(transactions_admin.js)
+Rails.application.config.assets.precompile += %w(products_admin.js)
 Rails.application.config.assets.precompile += %w(cart.js)
 
 %w( controller_one controller_two controller_three ).each do |controller|
