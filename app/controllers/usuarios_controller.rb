@@ -6,11 +6,12 @@ class UsuariosController < ApplicationController
   # GET /usuarios.json
   def index
     @usuarios = Usuario.by_roles(params[:role]).paginate(:page => params[:page], :per_page => 50)
+    @users = Usuario.all
 
     authorize! :index, @usuarios
     respond_to do |format|
       format.html
-      format.csv { render csv: @usuarios.to_csv, filename: "#{Time.now.to_i}_usuarios" }
+      format.csv { render csv: @users.to_csv, filename: "#{Time.now.to_i}_usuarios" }
     end
   end
 

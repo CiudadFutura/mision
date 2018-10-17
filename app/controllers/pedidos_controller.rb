@@ -1,15 +1,15 @@
 class PedidosController < ApplicationController
   before_action :set_pedido, only: [:show, :edit, :destroy]
   protect_from_forgery with: :exception
+  authorize_resource
 
   def index
     if current_usuario.admin?
-      @ciclo_id = nil
       if(params[:ciclo_id])
         @ciclo_id = params[:ciclo_id]
-        @pedidos = Pedido.where(compra_id: params[:ciclo_id])
-                     .paginate(:page => params[:page], :per_page => 10)
-                     .order(:updated_at)
+        @exportCSV = Pedido.where(compra_id: params[:ciclo_id]).order(:updated_at)
+        @pedidos = @exportCSV.paginate(:page => params[:page], :per_page => 10)
+
       end
       if (params[:text_search])
         @pedidos = Pedido.search(params[:text_search])
@@ -18,7 +18,7 @@ class PedidosController < ApplicationController
       @suppliers = Supplier.all
       respond_to do |format|
         format.html { render 'pedidos/index_admin' }
-        format.csv { render csv: @pedidos.to_csv, filename: "#{Time.now.to_i}_pedidos" }
+        format.csv { render csv: @exportCSV.to_csv, filename: "#{Time.now.to_i}_pedidos" }
       end
     elsif current_usuario.coordinador? || current_usuario.usuario?
       @pedidos = Pedido.where(usuario_id: current_usuario.id)
