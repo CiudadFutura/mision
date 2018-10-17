@@ -1,42 +1,41 @@
-<%= javascript_include_tag "productos", params[:controller] %>
+<%= javascript_include_tag "products_admin" %>
 <%- model_class = Producto -%>
-<div class="container fill">
-	<div class="row">
-		<div class="col-xs-12 col-md-3">
-			<%= render 'carts/menu' %>
-		</div>
-		<div class="col-xs-12 col-md-9">
-			<% if can? [:manage], Producto %>
-					<div class="navbar navs-fixed">
-						<div class="col-md-6">
-							<%= link_to "Exportar CSV", productos_path(format: "csv"), class: "btn btn-success" %>
-							<%= form_tag(upload_productos_path, multipart: true, class: 'form-inline') do %>
-									<div class="form-group">
-										<%= file_field_tag 'file' %>
-									</div>
-									<%= submit_tag 'Subir', class: "btn btn-success btn-xs"%>
-							<% end %>
-						</div>
-						<div class="col-md-6 ">
-							<%= link_to t('.new', :default => t("helpers.links.new")),
-													new_producto_path,
-													:class => 'btn btn-primary' if can? :manage, Producto %>
-						</div>
-					</div>
-			<% end %>
-			<div id="js-message-success" style="display: none;">
-				<div class="alert alert-success">
-					<button type="button" class="close" data-dismiss="alert">&times;</button>
-					Se agregó exitosamente el producto: <strong id="js-message-product"></strong>
-				</div>
-			</div>
-			<div id="js-message-delete" style="display: none;">
-				<div class="alert alert-danger">
-					<button type="button" class="close" data-dismiss="alert">&times;</button>
-					Se eliminó el producto del carrito</strong>
-				</div>
-			</div>
+<div class="agile-grids">
+  <div class="agile-tables">
+    <div class="w3l-table-info">
+      <div class="navbar navs-fixed">
+        <h2>Listado de productos</h2>
 
-		</div> <!--col-xs-12 col-md-3-->
-	</div> <!--close row -->
+        <div class="row">
+          <div class="navbar navs-fixed">
+            <div class="col-xs-12 col-md-9">
+              <% if can? [:manage], Producto %>
+                  <div class="navbar navs-fixed">
+                    <div class="col-md-6">
+                      <%= link_to "Exportar CSV", productos_path(format: "csv"), class: "btn btn-success" %>
+                      <%= form_tag(upload_productos_path, multipart: true, class: 'form-inline') do %>
+                          <div class="form-group">
+                            <%= file_field_tag 'file' %>
+                          </div>
+                          <%= submit_tag 'Subir', class: "btn btn-success btn-xs"%>
+                      <% end %>
+                    </div>
+                    <div class="col-md-6 text-right ">
+                      <%= link_to t('.new', :default => t("helpers.links.new")),
+                                  new_producto_path,
+                                  :class => 'btn btn-primary' if can? :manage, Producto %>
+                    </div>
+                  </div>
+              <% end %>
+
+            </div> <!--col-xs-12 col-md-3-->
+          </div> <!--col-xs-12 col-md-3-->
+        </div> <!--col-xs-12 col-md-3-->
+        <div class="row">
+          <%= render 'admin_product' %>
+        </div>
+
+      </div> <!--close containt fill-->
+    </div> <!--close containt fill-->
+  </div> <!--close containt fill-->
 </div> <!--close containt fill-->

@@ -24,7 +24,8 @@ class ProductosController < ApplicationController
     @view_prod = session[:view_prod]
     @ciclo_actual = Compra.ciclo_actual
 
-		@productos = Producto.all.order(:orden, :nombre).paginate(:page => params[:page], :per_page => 50)
+    @todos = Producto.all
+		@productos = @todos.order(:orden, :nombre).paginate(:page => params[:page], :per_page => 50)
     @productos = @productos.stock if current_usuario.nil? || current_usuario.present? && !current_usuario.admin?
     @productos = @productos.disponibles.order(:orden, :nombre) if current_usuario.nil? || !current_usuario.admin?
     @productos = @productos.destacados if params[:featured].present?
@@ -36,9 +37,11 @@ class ProductosController < ApplicationController
     @freesale = Producto.freesale
 
     if current_usuario && current_usuario.admin?
-      @todos = Producto.all
+      if params[:text_search].present?
+        @productos = @productos.search(params[:text_search])
+      end
       respond_to do |format|
-        format.html
+        format.html { render 'productos/index_admin'}
         format.csv { render csv: @todos.to_csv, type: 'text/csv; charset=UTF-8; header=present', filename: "#{Time.now.to_i}_productos" }
       end
     end
@@ -47,8 +50,6 @@ class ProductosController < ApplicationController
   # GET /productos/1
   # GET /productos/1.json
   def show
-    # todo: Se sigue usando???
-    # @cart_action = @producto.cart_action(session)
     @ciclo_actual = Compra.ciclo_actual
     cat = @producto.categorias.first.id
     @related_products = @producto.get_related_products(cat)

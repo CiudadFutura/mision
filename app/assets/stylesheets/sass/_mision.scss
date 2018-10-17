@@ -20,6 +20,7 @@ $color-gray-text: #ffffff;
 $color-white: #ffffff;
 $color-white-text: #000000;
 $color-bordeaux: #a30101;
+$color-yellow-cf: #F8AD00;
 
 .red{
   color: $color-red;
@@ -66,7 +67,7 @@ span.glyphicon.glyphicon-shopping-cart.my-cart-icon.my-cart-icon-affix {
 
 .error{
   label {
-    color: #FA1818 ;
+    color: $color-bordeaux ;
     font-size: small;
   }
 }
@@ -485,13 +486,13 @@ ul.dropdown-menu.drp-mnu li a i {
   float: none;
 }
 .nav > li > a:hover, .nav > li > a:focus {
-  background-color: #84C639;
+  background-color: $color-yellow-cf;
   color: #fff;
 }
 .navbar-nav {
   float: none;
   margin: 0;
-  border-top: 1px solid #B58F62;
+  border-top: 1px solid $color-yellow-cf;
 }
 .navbar-nav > li > a {
   color: #212121;
@@ -499,7 +500,7 @@ ul.dropdown-menu.drp-mnu li a i {
   border-bottom: 1px dotted #CDCDCD;
 }
 .nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
-  background-color: #84C639;
+  background-color: $color-yellow-cf;
   border: none;
 }
 .w3ls_vegetables_menu {
@@ -530,7 +531,7 @@ ul.dropdown-menu.drp-mnu li a i {
   margin-bottom: 5em;
 }
 .w3l_banner_nav_right_banner{
-  background:url(v2/Slides-01.png) no-repeat 0px 0px;
+  background:url(v2/Productos.png) no-repeat 0px 0px;
   background-size:cover;
   -webkit-background-size:cover;
   -moz-background-size:cover;
@@ -546,7 +547,7 @@ ul.dropdown-menu.drp-mnu li a i {
   -ms-background-size:cover;
 }
 .w3l_banner_nav_right_banner2{
-  background:url(v2/Slides-03.png) no-repeat 0px 0px;
+  background:url(v2/ComoComprar.png) no-repeat 0px 0px;
   background-size:cover;
   -webkit-background-size:cover;
   -moz-background-size:cover;
@@ -577,7 +578,7 @@ ul.dropdown-menu.drp-mnu li a i {
 }
 .more a{
   padding:10px 30px;
-  background:#84C639;
+  background:$color-yellow-cf;
   font-size:14px;
   text-transform:uppercase;
   font-weight:600;
@@ -866,7 +867,6 @@ h3.title:after,
 .agile_top_brand_left_grid1 h4 span,
 .agileinfo_single_right_snipcart h4 span{
   font-weight:300;
-  text-decoration:line-through;
   font-size: 0.7em;
   padding-left:1em;
   color: $color-green;
@@ -2262,9 +2262,15 @@ h2.typoh2{
   color: #212121;
   margin-bottom: 1em;
 }
-.circle-members i{
-  color:#84C639;
-  top: 0em !important;
+.circle-members{
+  .fa-heart{
+    color: $color-bordeaux;
+  };
+  i{
+    color:#84C639;
+    top: 0em !important;
+  }
+
 }
 
 .privacy1-grid {

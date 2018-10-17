@@ -34,8 +34,10 @@
         </table>
       </div>
     </div>
-    <div class="row">
-      <%= will_paginate @compras %>
-    </div>
+    <% if @circulos.present? && @circulos.count > 50 %>
+      <div class="row">
+        <%= will_paginate @circulos %>
+      </div>
+    <% end %>
   </div>
 </div>

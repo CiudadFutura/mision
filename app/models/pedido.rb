@@ -21,7 +21,19 @@ class Pedido < ActiveRecord::Base
       end
     end
     total.to_f
-	end
+  end
+
+  def self.search(term)
+    if term.is_a? Numeric
+      Pedido
+        .joins(:usuario)
+        .where('id LIKE :term, LOWER(`usuarios`.nombre) LIKE :term OR LOWER(`usuarios`.apellido) LIKE :term OR LOWER(`usuarios`.email) LIKE :term', term: "%#{term.downcase}%")
+    else
+      Pedido
+        .joins(:usuario)
+        .where('LOWER(`usuarios`.nombre) LIKE :term OR LOWER(`usuarios`.apellido) LIKE :term OR LOWER(`usuarios`.email) LIKE :term', term: "%#{term.downcase}%")
+    end
+  end
 
 	def ahorro
 		total_mision = total_ahorro = 0

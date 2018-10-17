@@ -22,7 +22,7 @@
     <div class="privacy1">
       <div class="banner-bottom-grid1 privacy2-grid">
         <div class="privacy2-grid1">
-          <h3>Consumidores</h3>
+          <h3>Asociades</h3>
           <br>
           <br>
           <div class="banner-bottom-grid1 privacy1-grid">
@@ -32,6 +32,9 @@
                   <li>
                     <div class="col-sm-2 circle-members">
                       <div class="col-sm-12 text-center">
+                        <% if u.coordinador? %>
+                          <span class="fa fa-heart"></span>
+                        <% end %>
                         <i class="glyphicon glyphicon-user" aria-hidden="true"></i>
                       </div>
                       <div class="col-sm-12 text-center">
@@ -59,7 +62,7 @@
                       <span></span>
                       <br>
                       <div class="col-sm-12 customer-orders">
-                        <h4>Últimos pedidos realizado</h4>
+                        <h4>Últimos pedidos realizados</h4>
                         <table class="table">
                           <thead>
                             <tr>
@@ -70,7 +73,7 @@
                             </tr>
                           </thead>
                           <tbody>
-                            <% u.pedidos.last(2).reverse.each do |p| %>
+                            <% u.pedidos.last(3).reverse.each do |p| %>
                               <tr <%=  u.pedido?(Compra::ciclo_actual_completo) ? 'class=current-order': ''%>>
                                 <td><%= p.id %></td>
                                 <td><%= number_to_currency(p.total) %></td>
@@ -128,7 +131,7 @@
       <small>
         Ver más en
         <%= link_to(como_compro_path(1)) do %>
-          Como comprar
+          Cómo comprar
         <% end %>
       </small>
       <br>

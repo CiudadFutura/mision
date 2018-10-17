@@ -4,6 +4,8 @@ Author URL: http://w3layouts.com
 License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 */
+$color-bordeaux: #a30101;
+
 html, body{
   font-family: 'Roboto', sans-serif;
   font-size: 100%;
@@ -286,6 +288,13 @@ li#menu-academico{
     vertical-align: middle;
     -webkit-filter: drop-shadow(0px 0px 10px rgba(0,0,0,0.5));
 }*/
+
+.error{
+  label {
+    color: $color-bordeaux ;
+    font-size: small;
+  }
+}
 
 .fa-html5 {
   color: #fff;
@@ -1040,6 +1049,12 @@ header.widget-header h4 {
         }
       }
     }
+  }
+}
+
+.new_transaction{
+  .form-add-item{
+    display: none;
   }
 }
 

@@ -34,11 +34,11 @@
               <tbody>
               <% @circulo.usuarios.each do |u| %>
                 <tr>
-                  <td><%= u.try('nombre_completo') || 'Sin Nommbre' %></td>
+                  <td><span class="<%= u.coordinador? ? 'fa fa-heart' : ''%>"></span><%= u.try('nombre_completo') || 'Sin Nommbre' %></td>
                   <td><%= u.try('email') || 'Sin email' %></td>
                   <td><%= u.try('cel1') || 'Sin celular' %></td>
                   <td><%= u.try('tel1') || 'Sin telefono' %></td>
-                  <td><%= u.try('type') || 'Sin Rol' %></td>
+                  <td><%= u.coordinador? ? 'Coordinador' : 'Usuario' %></td>
                   <td><%= link_to 'Mostrar', usuario_path(u.id), class: "btn btn-default btn-xs" %></td>
                 </tr>
               <% end %>

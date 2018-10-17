@@ -22,7 +22,18 @@ class Circulo < ActiveRecord::Base
 	def next_delivery
 		self.compras
 				.where('compras.fecha_inicio_compras >= ?', Date.today).order('compras.fecha_inicio_compras')
-	end
+  end
+
+  def self.with_warehouses
+    Circulo.where('warehouse_id is not null').count
+  end
+
+  def self.search(term)
+    Circulo
+      .joins(:usuarios, :warehouse)
+      .where('LOWER(`usuarios`.nombre) LIKE :term OR LOWER(`usuarios`.apellido) LIKE :term OR LOWER(`usuarios`.email) LIKE :term OR  (`circulos`.id) LIKE :term OR LOWER(`warehouses`.name) LIKE :term',
+          term: "%#{term.downcase}%")
+  end
 
 
   def self.to_csv

@@ -1,4 +1,4 @@
-window.onload = (function() {
+$(document).ready(function() {
 
     $.fn.editable.defaults.ajaxOptions = {type: "PUT"};
 
@@ -40,5 +40,24 @@ window.onload = (function() {
             {value: 'cleaning', text: 'Limpieza'}
         ]
     })
+
+
+    $('#new_producto').validate({
+        errorPlacement: function (label, element) {
+            label.addClass('error');
+            label.insertBefore(element);
+        },
+        wrapper: 'div'
+
+    });
+
+    $('#edit_producto').validate({
+        errorPlacement: function (label, element) {
+            label.addClass('error');
+            label.insertBefore(element);
+        },
+        wrapper: 'div'
+
+    });
 
 });

@@ -79,19 +79,20 @@ class Producto < ActiveRecord::Base
 
   def get_related_products(categoria)
     #get random products
-    Producto.joins(:categorias).where('categorias.id = :id OR categorias.parent_id = :id AND oculto = false',
+    Producto.joins(:categorias).where('productos.oculto = false AND categorias.id = :id OR categorias.parent_id = :id ',
                              id: categoria).order("RAND()").limit(3) if categoria
   end
 
   def self.get_offers_products
     #get random products
-    Producto.joins(:supplier).where('suppliers.nature = :id AND oculto = false',
+    Producto.joins(:supplier).where('productos.oculto = false AND suppliers.nature = :id',
                                       id: 1).order("RAND()").limit(8)
   end
 
   def self.search(term)
-    where('LOWER(nombre) LIKE :term OR LOWER(descripcion) LIKE :term', term: "%#{term.downcase}%")
+    where('LOWER(nombre) LIKE :term OR LOWER(descripcion) LIKE :term OR  LOWER(codigo) LIKE :term', term: "%#{term.downcase}%")
   end
+
   def bundle_products_for_form
     collection = bundle_products.where(item_id: id)
     collection.any? ? collection : bundle_products.build

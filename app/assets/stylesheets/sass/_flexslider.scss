@@ -8,6 +8,9 @@
  *
  * Contributing author: Tyler Smith (@mbmufffin)
  */
+
+$color-yellow-cf: #F8AD00;
+
 /* Browser Resets */
 .flex-container a:active,
 .flexslider a:active,
@@ -95,13 +98,13 @@ html[xmlns] .slides {display: block;}
   background: none;
   cursor: pointer;
   text-indent: -9999px;
-  border:2px solid #84C639;
+  border:2px solid $color-yellow-cf;
   border-radius:20px;
 }
 .flex-control-paging li a.flex-active {
-  background: #84C639;
+  background: $color-yellow-cf;
   cursor: default;
-  border: 2px solid #84C639;
+  border: 2px solid $color-yellow-cf;
 }
 .flex-control-thumbs {margin: 5px 0 0; position: static; overflow: hidden;}
 .flex-control-thumbs li {width: 25%; float: left; margin: 0;}

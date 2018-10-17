@@ -11,6 +11,9 @@ class PedidosController < ApplicationController
         @pedidos = @exportCSV.paginate(:page => params[:page], :per_page => 10)
 
       end
+      if (params[:text_search])
+        @pedidos = Pedido.search(params[:text_search])
+      end
       @ciclos = Compra.all.order('fecha_fin_compras DESC')
       @suppliers = Supplier.all
       respond_to do |format|
