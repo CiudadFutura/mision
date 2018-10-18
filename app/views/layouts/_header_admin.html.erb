@@ -175,7 +175,7 @@
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
           <div class="profile_img">
             <span class="prfil-img">
-              <%= image_tag 'admin/in4.jpg', :class => 'img-responsive'%>
+              <%= image_tag 'v2/avatar_user.png', :class => 'img-responsive'%>
             </span>
             <div class="user-name">
               <p><%= current_usuario.nombre %></p>
@@ -187,7 +187,7 @@
           </div>
         </a>
         <ul class="dropdown-menu drp-mnu">
-          <li> <a href="#"><i class="fa fa-cog"></i> Settings</a> </li>
+          <li> <a href="#"><i class="fa fa-cog"></i> Configuración</a> </li>
           <li>
             <%= link_to(edit_usuario_path(current_usuario)) do %>
               <i class="fa fa-user"></i>

@@ -33,7 +33,9 @@
               <% end %>
             </li>
             <li id="menu-academico-avaliacoes" >
-              <a href="faq.html">Directores</a>
+              <%= link_to usuarios_path(:role => Usuario::DIRECTOR) do %>
+                <span class="icon-key2"></span>Directores
+              <% end %>
             </li>
           </ul>
         </li>

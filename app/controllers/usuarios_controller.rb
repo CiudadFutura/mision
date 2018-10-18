@@ -36,6 +36,13 @@ class UsuariosController < ApplicationController
 
   # GET /usuarios/1/edit
   def edit
+    respond_to do |format|
+      if current_usuario.present? and current_usuario.admin?
+        format.html { render 'usuarios/admin_edit' }
+      else
+        format.html 
+      end
+    end
   end
 
   # POST /usuarios
