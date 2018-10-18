@@ -6,6 +6,9 @@ class UsuariosController < ApplicationController
   # GET /usuarios.json
   def index
     @users = Usuario.all
+    if params[:role].blank?
+      params[:role] = Usuario::USUARIO
+    end
     @usuarios = @users.by_roles(params[:role]).paginate(:page => params[:page], :per_page => 50)
     if params[:text_search].present?
       @usuarios = @users.search(params[:text_search])
@@ -40,7 +43,7 @@ class UsuariosController < ApplicationController
       if current_usuario.present? and current_usuario.admin?
         format.html { render 'usuarios/admin_edit' }
       else
-        format.html 
+        format.html
       end
     end
   end
