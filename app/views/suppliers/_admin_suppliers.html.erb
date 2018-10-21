@@ -24,3 +24,8 @@
   <% end %>
   </tbody>
 </table>
+<% if @suppliers.present? && @suppliers.count > 20 %>
+  <div class="row">
+    <%= will_paginate @suppliers %>
+  </div>
+<% end %>

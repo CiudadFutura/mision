@@ -3,8 +3,9 @@ class Compra < ActiveRecord::Base
   has_many :deliveries
   has_many :circulos, :through => :deliveries
   has_many :pedidos, :dependent => :restrict_with_error
+  validate :cycles_dates
 
-	enum tipo: [:circles, :free, :mini]
+	enum tipo: [:circles, :free, :mini, :distrito]
 
 	validates :nombre, :descripcion, :fecha_inicio_compras, :fecha_fin_compras,
             :fecha_fin_pagos, :fecha_entrega_compras, presence: true
@@ -152,6 +153,13 @@ class Compra < ActiveRecord::Base
 
 
   private
+
+  def cycles_dates
+    puts 'entro'
+    unless fecha_fin_compras > fecha_inicio_compras && fecha_inicio_compras < fecha_entrega_compras
+      errors.add(:fecha_fin_compras, 'date must be within the allowed range')
+    end
+  end
 
   def self.colors
      {

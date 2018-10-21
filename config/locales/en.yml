@@ -22,13 +22,13 @@ en:
     page_gap: "&hellip;"
   activerecord:
     models:
-      compra:
-        warehouse: Distritos
       account:
         attributes:
           status: Estado
       supplier: Proveedor
     attributes:
+      productos:
+        supplier: Proveedor
       compra:
         warehouse: Distrito
         warehouses: Distritos

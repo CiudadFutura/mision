@@ -19,27 +19,6 @@
     <%= f.label :nombre %><br>
     <%= f.text_field :nombre, :class => 'form-control' %>
   </div>
-	<div class="form-group">
-		<%= f.label :tipo %>
-		<div class="radio">
-			<label>
-        <%= f.radio_button :tipo, 'circles', checked: (@compra.tipo == 'circles' || @compra.tipo.nil?) ? true : false%>
-				Círculos
-			</label>
-		</div>
-		<div class="radio">
-			<label>
-				<%= f.radio_button :tipo, 'free' , checked: (@compra.tipo == 'free') ? true : false  %>
-				Libre
-			</label>
-		</div>
-    <div class="radio">
-      <label>
-        <%= f.radio_button :tipo, 'mini' , checked: (@compra.tipo == 'mini') ? true : false  %>
-        Mini Ciclo
-      </label>
-    </div>
-	</div>
   <div class="form-group">
     <%= f.label :descripcion %><br>
     <%= f.text_area :descripcion, :class => 'form-control' %>
@@ -59,6 +38,16 @@
   <div class="form-group">
     <%= f.label :fecha_entrega_compras %><br>
     <%= select_datetime @compra.fecha_entrega_compras, prefix: 'compra[fecha_entrega_compras]', :class => 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <div class="form-check">
+      <% Compra.tipos.each do |k, v|%>
+        <%= @compra.tipo %>
+        <%= f.radio_button :tipo, 'circles', checked: (@compra.tipo == "#{k}"), class: 'form-check-input required'%>
+        <%= f.label  I18n.t k %>&nbsp;&nbsp;
+      <% end %>
+    </div>
   </div>
 
 	<%= render 'compras/form_circulos' %>
