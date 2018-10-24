@@ -1,0 +1,22 @@
+<div id="content-warehouses" class="<%= 'hide' if @compra.tipo != 'distrito' %> ">
+  <h2 class="panel-title">Distritos</h2>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>Distrito</th>
+        <th colspan="3"></th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% Warehouse.all.each do |warehouse| %>
+        <tr>
+          <td><%= warehouse.try('name') || 'Sin nombre' %></td>
+          <td><%= check_box_tag "compra[warehouse_ids][]", warehouse.id, @compra.warehouses.include?(warehouse) %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

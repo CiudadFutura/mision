@@ -3,12 +3,17 @@ class Compra < ActiveRecord::Base
   has_many :deliveries
   has_many :circulos, :through => :deliveries
   has_many :pedidos, :dependent => :restrict_with_error
+  has_many :warehouses_compras
+  has_many :warehouses, :through => :warehouses_compras
+
   validate :cycles_dates
 
 	enum tipo: [:circles, :free, :mini, :distrito]
 
 	validates :nombre, :descripcion, :fecha_inicio_compras, :fecha_fin_compras,
             :fecha_fin_pagos, :fecha_entrega_compras, presence: true
+
+  after_initialize :init
 
 
   def self.ciclo_actual
@@ -155,7 +160,6 @@ class Compra < ActiveRecord::Base
   private
 
   def cycles_dates
-    puts 'entro'
     unless fecha_fin_compras > fecha_inicio_compras && fecha_inicio_compras < fecha_entrega_compras
       errors.add(:fecha_fin_compras, 'date must be within the allowed range')
     end
@@ -191,5 +195,11 @@ class Compra < ActiveRecord::Base
 
     return sorted
 
+  end
+  def init
+    self.fecha_inicio_compras ||= Time.current
+    self.fecha_fin_compras ||= Time.current
+    self.fecha_fin_pagos ||= Time.current
+    self.fecha_entrega_compras ||= Time.current
   end
 end

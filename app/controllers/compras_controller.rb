@@ -18,7 +18,6 @@ class ComprasController < ApplicationController
   def show
     @circulos = @compra.get_deliveries
 		@statuses = @compra.get_statuses
-
   end
 
   # GET /compras/new
@@ -143,11 +142,12 @@ class ComprasController < ApplicationController
         :fecha_fin_compras => [:year, :month, :day, :hour, :minute],
         :fecha_fin_pagos => [:year, :month, :day, :hour, :minute],
         :fecha_entrega_compras => [:year, :month, :day, :hour, :minute],
-        circulo_ids:[])
+        circulo_ids:[], warehouse_ids:[])
       { nombre: filtered_params[:nombre],
         descripcion: filtered_params[:descripcion],
 				tipo: filtered_params[:tipo],
         circulo_ids: filtered_params["circulo_ids"],
+        warehouse_ids: filtered_params["warehouse_ids"],
         fecha_inicio_compras: Time.zone.local(
           filtered_params[:fecha_inicio_compras][:year],
           filtered_params[:fecha_inicio_compras][:month],

@@ -25,9 +25,8 @@ en:
       account:
         attributes:
           status: Estado
-      supplier: Proveedor
     attributes:
-      productos:
+      producto:
         supplier: Proveedor
       compra:
         warehouse: Distrito
