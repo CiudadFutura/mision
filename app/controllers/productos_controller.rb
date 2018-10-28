@@ -22,7 +22,6 @@ class ProductosController < ApplicationController
     end
     @view_type = session[:view_type]
     @view_prod = session[:view_prod]
-    @ciclo_actual = Compra.ciclo_actual
 
     @todos = Producto.all
 		@productos = @todos.order(:orden, :nombre).paginate(:page => params[:page], :per_page => 50)

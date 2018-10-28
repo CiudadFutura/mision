@@ -8,7 +8,7 @@ class Compra < ActiveRecord::Base
 
   validate :cycles_dates
 
-	enum tipo: [:circles, :free, :mini, :distrito]
+	enum tipo: [:circles, :free, :distrito]
 
 	validates :nombre, :descripcion, :fecha_inicio_compras, :fecha_fin_compras,
             :fecha_fin_pagos, :fecha_entrega_compras, presence: true
@@ -17,11 +17,11 @@ class Compra < ActiveRecord::Base
 
 
   def self.ciclo_actual
-    Compra.where('fecha_inicio_compras <= :today AND fecha_fin_compras >= :today', today: Time.current).first
+    Compra.where('fecha_inicio_compras <= :today AND fecha_fin_compras >= :today', today: Time.current)
   end
 
   def self.ciclo_actual_completo
-    Compra.where('fecha_inicio_compras <= :today AND fecha_entrega_compras >= :today', today: Time.current).first
+    Compra.where('fecha_inicio_compras <= :today AND fecha_entrega_compras >= :today', today: Time.current)
   end
 
   def self.next_cycles
@@ -161,7 +161,7 @@ class Compra < ActiveRecord::Base
 
   def cycles_dates
     unless fecha_fin_compras > fecha_inicio_compras && fecha_inicio_compras < fecha_entrega_compras
-      errors.add(:fecha_fin_compras, 'date must be within the allowed range')
+      errors.add(:fecha_fin_compras, 'La fecha de Fin no puede ser menor al Inicio')
     end
   end
 

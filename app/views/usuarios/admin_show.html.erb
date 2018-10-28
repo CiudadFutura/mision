@@ -78,15 +78,7 @@
           asociade es el: <b><%= @usuario.id%></b> </p>
       <% else %>
         <h3>Pertenece al Círculo N°: <%=@usuario.circulo_id %> </h3>
-        <% if @usuario.coordinador? and current_usuario.admin? %>
-          <p><%= link_to get_by_cycle_circle_path(@ciclo_actual.id, @usuario.circulo.id),
-                         data: {toggle: "modal", target:"#ajax-modal"},
-                         id: 'user-remito',
-                         class: 'btn btn-primary btn-xs',
-                         remote: true do %> ver remito de la compra
-            <% end %>
-          </p>
-        <% end %>
+
 
         <h3>Usuarios en tu circulo:</h3>
         <table class="table table-bordered">
@@ -99,7 +91,6 @@
             <th>Pedido</th>
             <th>Importe</th>
             <th>Factura</th>
-            <% if can?(:remove_usuario , @usuario.circulo) %><th>Eliminar del circulo</th><% end %>
           </tr>
           </thead>
           <tbody>
@@ -122,40 +113,12 @@
                 <td></td>
               <% end %>
 
-              <% if can?(:remove_usuario , @usuario.circulo) && !u.coordinador?%>
-                <td>
-                  <%= link_to 'Eliminar', circulo_remove_usuario_path(circulo_id: @usuario.circulo.id, usuario_id: u.id), method: :delete, data: { confirm: 'Esta seguro?' }, class: 'btn btn-danger btn-xs' + (u.pedido?(Compra::ciclo_actual) ? ' disabled' : '') %>
-                </td>
-              <% end %>
             </tr>
           <% end %>
           </tbody>
         </table>
-        <div class="text-right csocial"><span>Cuota Social:</span> $<%=Producto.find_by_codigo('CSOCIAL').precio %></div>
-        <% if can?(:remove_usuario , @usuario.circulo) %>
-          <i>* Solo podras eliminar usuarios sin pedidos realizados.</i><br/>
-          <i>** Para abandonar el circulo, comunicate con la mision.</i>
-        <% end %>
-
-        <br/><br/>
-
-        <% if !current_usuario.coordinador? %>
-          <%= link_to 'Abandonar circulo', circulo_abandonar_path(@usuario.circulo), method: :post, data: { confirm: 'Seguro de abandonar el circulo?' }, class: "btn btn-danger btn-xs" %>
-          <br/><br/>
-        <% end %>
 
 
-
-        <% if can?(:manage , @usuario.circulo) && !@usuario.circulo.completo? %>
-          <%= form_tag(circulo_add_usuario_path(@usuario.circulo), method: "post") do %>
-            Agregar usuario nro: <input type="text" value="" name="usuario_id" />
-            <button type="submit">Agregar</button>
-          <% end %>
-        <% end %>
-
-        <% if @usuario.circulo.completo? %>
-          <h4>Su circulo esta completo.</h4>
-        <% end %>
 
       <% end %>
     </div>

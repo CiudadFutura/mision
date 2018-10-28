@@ -39,7 +39,7 @@
                   <td><%= u.try('cel1') || 'Sin celular' %></td>
                   <td><%= u.try('tel1') || 'Sin telefono' %></td>
                   <td><%= u.coordinador? ? 'Coordinador' : 'Usuario' %></td>
-                  <td><%= link_to 'Mostrar', usuario_path(u.id), class: "btn btn-default btn-xs" %></td>
+                  <td><%= link_to 'Mostrar', edit_usuario_path(u.id), class: "btn btn-default btn-xs" %></td>
                 </tr>
               <% end %>
               </tbody>
@@ -59,7 +59,7 @@
                 <th>Consumidor</th>
                 <th>Ciclo</th>
                 <th>Fecha</th>
-                <th></th>
+                <th colspan="2"></th>
               </tr>
               </thead>
               <tbody>
@@ -72,7 +72,7 @@
                     <td><%= p.ciclo.try('nombre') || 'SIN CICLO'%></td>
                     <td><%= l p.try('created_at') || ' SIN FECHA '%></td>
                     <td><%= link_to 'Crear Transacción', new_transaction_path(pedido_id:p.id), class: "btn btn-default btn-xs" %></td>
-                    <td><%= link_to 'Mostrar', usuario_path(u.id), class: "btn btn-default btn-xs" %></td>
+                    <td><%= link_to 'Detalle', pedido_path(p.id), class: "btn btn-default btn-xs" %></td>
                   </tr>
                 <% end %>
               <% end %>

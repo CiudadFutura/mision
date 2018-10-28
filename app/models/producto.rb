@@ -1,5 +1,5 @@
 class Producto < ActiveRecord::Base
-  enum pack: [:wholesaler, :freshes, :vegetables, :fragile, :cleaning]
+  enum pack: [:wholesaler, :freshes, :vegetables, :fragile, :cleaning, :warehouse]
   has_and_belongs_to_many :categorias
   belongs_to :supplier
   has_many :transaction_details

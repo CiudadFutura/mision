@@ -33,7 +33,7 @@ $(document).ready(function() {
     $('.pack').editable({
         source:[
             {value: '', text: 'Sin Rubro'},
-            {value: 'warehouse', text: 'Almacén'},
+            {value: 'wholesaler', text: 'Almacén'},
             {value: 'freshes', text: 'Frescos'},
             {value: 'vegetables', text: 'Verduras'},
             {value: 'fragile', text: 'Frágil'},
