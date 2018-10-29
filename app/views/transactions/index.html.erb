@@ -3,43 +3,45 @@
     <div class="w3l-table-info">
       <div class="navbar navs-fixed">
         <h2>Lista de transacciones</h2>
-        <div class="navbar navs-fixed">
-          <%= link_to t('Crear Transacción', :default => t("helpers.links.new")),
-                      new_transaction_path,
-                      :class => 'btn btn-primary' if can? [:manage], Transaction
-          %>
-        </div>
-
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>Consumidor</th>
-              <th>Pedido</th>
-              <th>Tipo de transacción</th>
-              <th>Monto</th>
-              <th>Descripción</th>
-              <th colspan="3"></th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <% @transactions.each do |transaction| %>
+        <br>
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
               <tr>
-                <td><%= transaction.account.usuario.present? ? transaction.account.usuario.nombre_completo : 'sin usuario' %></td>
-                <td><%= transaction.pedido_id %></td>
-                <td><%= transaction.transaction_type == 0 ? 'Nota de Crédito' : 'Nota de Débito'%></td>
-                <td><%= number_to_currency(transaction.amount) %></td>
-                <td><%= simple_format(transaction.description) %></td>
-                <td><%= link_to 'Ver', transaction, class: 'btn btn-default btn-xs' if can? [:manage], Transaction %></td>
-                <td><%= link_to 'Editar', edit_transaction_path(transaction), class: 'btn btn-default btn-xs' if can? [:manage], Transaction %></td>
-                <td><%= link_to 'Borrar', transaction, method: :delete, data: { confirm: 'Está seguro?' }, class: 'btn btn-default btn-xs' if can? [:manage], Transaction %></td>
+                <th>#</th>
+                <th>Consumidor</th>
+                <th>Pedido</th>
+                <th>Tipo de transacción</th>
+                <th>Monto</th>
+                <th>Descripción</th>
+                <th colspan="3"></th>
               </tr>
-            <% end %>
-          </tbody>
-        </table>
+            </thead>
 
-		    <br>
+            <tbody>
+              <% @transactions.each do |transaction| %>
+                <tr>
+                  <td><%= transaction.id %></td>
+                  <td><%= transaction.account.usuario.present? ? transaction.account.usuario.nombre_completo : 'sin usuario' %></td>
+                  <td><%= transaction.pedido_id %></td>
+                  <td><%= transaction.transaction_type == 0 ? 'Nota de Crédito' : 'Nota de Débito'%></td>
+                  <td><%= number_to_currency(transaction.amount) %></td>
+                  <td><%= simple_format(transaction.description) %></td>
+                  <td><%= link_to 'Ver', transaction, class: 'btn btn-default btn-xs' if can? [:manage], Transaction %></td>
+                  <td><%= link_to 'Editar', edit_transaction_path(transaction), class: 'btn btn-default btn-xs' if can? [:manage], Transaction %></td>
+                  <td><%= link_to 'Borrar', transaction, method: :delete, data: { confirm: 'Está seguro?' }, class: 'btn btn-default btn-xs' if can? [:manage], Transaction %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
 
+		      <br>
+	      </div>
+        <% if @transactions.present? && @transactions.count > 50 %>
+          <div class="row">
+            <%= will_paginate @transactions, :previous_label => 'Previo', :next_label => 'Siguiente' %>
+          </div>
+        <% end %>
 	    </div>
 	  </div>
 	</div>
