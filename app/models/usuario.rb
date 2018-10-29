@@ -98,16 +98,10 @@ class Usuario < ActiveRecord::Base
   end
 
   def purchase_enabled?(cycles)
-    puts 'entro'
     warehouse = Warehouse.find(self.circulo.warehouse_id) if self.circulo.present? and self.circulo.warehouse_id.present?
     circle = Circulo.find(self.circulo.id) if self.circulo.present?
     enabled = false
     cycles.each do |cycle|
-      puts cycle.id
-      puts cycle.nombre
-      puts cycle.tipo
-
-      puts 'aca'
       enabled = cycle.warehouses.include?(warehouse) if enabled == false and cycle.tipo == 'distrito'
       enabled = cycle.circulos.include?(circle) if enabled == false and cycle.tipo == 'circles'
       enabled = true if enabled == false and cycle.tipo == 'free'

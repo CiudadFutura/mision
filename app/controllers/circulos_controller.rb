@@ -45,6 +45,13 @@ class CirculosController < ApplicationController
 
   # GET /circulos/1/edit
   def edit
+    respond_to do |format|
+      if current_usuario.present? and current_usuario.admin?
+        format.html { render 'circulos/admin_edit' }
+      else
+        format.html
+      end
+    end
   end
 
   # POST /circulos

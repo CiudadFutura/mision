@@ -53,8 +53,8 @@ class ApplicationController < ActionController::Base
     @current_cycle_complete = Compra.ciclo_actual_completo
     @current_cycle = Compra.ciclo_actual
     @consumer_enabled_purchase = current_usuario.purchase_enabled?(@current_cycle_complete) if current_usuario.present? and @current_cycle_complete.present?
-    @current_cycle_complete = @current_cycle_complete.first if @current_cycle_complete.count > 1
-    @current_cycle = @current_cycle.first if @current_cycle.count > 1
+    @current_cycle_complete = @current_cycle_complete.first if @current_cycle_complete.present?
+    @current_cycle = @current_cycle.first if @current_cycle.present?
   end
 
   protected
