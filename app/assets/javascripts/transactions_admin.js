@@ -72,4 +72,13 @@ $(document).ready(function () {
 
     });
 
+    $('#edit_transaction').validate({
+        errorPlacement: function (label, element) {
+            label.addClass('error');
+            label.insertBefore(element);
+        },
+        wrapper: 'div'
+
+    });
+
 });

@@ -14,7 +14,7 @@
                 <th>Tipo de transacción</th>
                 <th>Monto</th>
                 <th>Descripción</th>
-                <th colspan="3"></th>
+                <th colspan="2"></th>
               </tr>
             </thead>
 
@@ -27,7 +27,6 @@
                   <td><%= transaction.transaction_type == 0 ? 'Nota de Crédito' : 'Nota de Débito'%></td>
                   <td><%= number_to_currency(transaction.amount) %></td>
                   <td><%= simple_format(transaction.description) %></td>
-                  <td><%= link_to 'Ver', transaction, class: 'btn btn-default btn-xs' if can? [:manage], Transaction %></td>
                   <td><%= link_to 'Editar', edit_transaction_path(transaction), class: 'btn btn-default btn-xs' if can? [:manage], Transaction %></td>
                   <td><%= link_to 'Borrar', transaction, method: :delete, data: { confirm: 'Está seguro?' }, class: 'btn btn-default btn-xs' if can? [:manage], Transaction %></td>
                 </tr>
