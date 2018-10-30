@@ -25,7 +25,7 @@ class CartsController < ApplicationController
   def create_pedido
 
     pedido = Pedido.new
-    ciclo = Compra.ciclo_actual
+    ciclo = @current_cycle
     pedido.items = @carrito.items.map { |_k,item| item.purchase_data }.to_json
 
 		if current_usuario.present?
