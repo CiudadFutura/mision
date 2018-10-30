@@ -21,9 +21,9 @@
 
   <div class="checkout-right">
 
-      <% if @ciclo_actual.present? and current_usuario.present? %>
-        <% if @ciclo_actual.circulos.include?(current_usuario.circulo) %>
-          <% if !current_usuario.pedido?(@ciclo_actual) %>
+      <% if @current_cycle.present? and current_usuario.present? %>
+        <% if @consumer_enabled_purchase.present? %>
+          <% if !current_usuario.pedido?(@current_cycle) %>
             <%= render 'carts/cart' %>
           <% else %>
             <div class="col-md-12 text-center">

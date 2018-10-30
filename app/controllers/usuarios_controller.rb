@@ -23,8 +23,6 @@ class UsuariosController < ApplicationController
   # GET /usuarios/1
   # GET /usuarios/1.json
   def show
-    @ciclo_actual = Compra.ciclo_actual
-    @ciclo_actual_completo = Compra.ciclo_actual_completo
     @circulo = Circulo.new if current_usuario.circulo.blank?
     if current_usuario.present? && current_usuario.admin?
       render 'usuarios/admin_show'

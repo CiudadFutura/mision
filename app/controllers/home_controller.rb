@@ -2,8 +2,6 @@ class HomeController < ApplicationController
 
   def index
     user_type = current_usuario.nil? ? 'Guess' : current_usuario.type
-		@ciclo_actual = Compra.ciclo_actual
-		@ciclo_actual_completo = Compra.ciclo_actual_completo
     @featured = Producto.destacados.limit(9)
     @cycles = Compra.next_cycles
     @offers = Producto.get_offers_products

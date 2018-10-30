@@ -46,7 +46,7 @@
                   <p>Precio hiper <%= number_to_currency(precio_super) %></p>
                   <p>Ahorro <%= number_to_percentage(producto.ahorro) %></p>
 
-									<% if @ciclo_actual  %>
+									<% if @current_cycle.present?  %>
 										<% cantidad = producto.stock.present? ? producto.stock : producto.cantidad_permitida %>
 										<select class="cantidad">
 											<% for i in 1..cantidad %>

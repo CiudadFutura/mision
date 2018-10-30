@@ -5,7 +5,6 @@ class CartsController < ApplicationController
   # before_action :set_carrito, only: [:show, :add, :remove]
 
   def show
-    @ciclo_actual = Compra.ciclo_actual
     @category = Categoria.order("RAND()").limit(1)
     @missing = @carrito.check_item_stock
     if usuario_signed_in?

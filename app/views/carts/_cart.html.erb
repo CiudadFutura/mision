@@ -1,8 +1,8 @@
 <div class="row">
 
 	<p class="explicacion">
-		<b>Ciclo Actual: Desde el <%= l @ciclo_actual.fecha_inicio_compras %> hasta el <%= l @ciclo_actual.fecha_fin_compras %></b><br/>
-		<b>Ultimo dia para pago:</b> <%= l @ciclo_actual.fecha_fin_pagos %><br/><br/>
+		<b>Ciclo Actual: Desde el <%= l @current_cycle.fecha_inicio_compras %> hasta el <%= l @current_cycle.fecha_fin_compras %></b><br/>
+		<b>Ultimo dia para pago:</b> <%= l @current_cycle.fecha_fin_pagos %><br/><br/>
 		A continuación, un listado con tu pedido. Revisalo, y si está todo bien,<br />
 		confirmalo haciendo click en el boton "Finalizar compra".</p>
 
@@ -97,7 +97,7 @@
     </div>
   </div>
   <% render 'carts/user_data'%>
-  <% if @ciclo_actual && current_usuario && !current_usuario.pedido?(Compra:@ciclo_actual) %>
+  <% if @current_cycle && current_usuario && !current_usuario.pedido?(Compra:@current_cycle) %>
     <div class="row text-right">
       <%= link_to('Finalizar Compra', create_pedido_path, method: :get, class: "btn btn-success #{'disabled' if @missing.present?}",
                   id: 'finalizar') %>

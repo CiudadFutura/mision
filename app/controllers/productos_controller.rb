@@ -49,7 +49,6 @@ class ProductosController < ApplicationController
   # GET /productos/1
   # GET /productos/1.json
   def show
-    @ciclo_actual = Compra.ciclo_actual
     cat = @producto.categorias.first.id
     @related_products = @producto.get_related_products(cat)
 

@@ -30,7 +30,7 @@
 
 							<h3>Consumidor Colaborativo</h3>
 							<%= f.hidden_field :guest, value: 1 %>
-							<%= f.hidden_field :ciclo_actual, value: "#{@ciclo_actual.id}" %>
+							<%= f.hidden_field :ciclo_actual, value: "#{@current_cycle.id}" %>
 							<%= f.hidden_field :password, value: "#{DateTime.now}" %>
 							<div id="errorMessages" class="alert alert-danger hide">
 								<span></span>

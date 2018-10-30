@@ -49,7 +49,7 @@
                         <% if can?(:remove_usuario , @usuario.circulo) && !u.coordinador? %>
                             <%= link_to 'Eliminar', circulo_remove_usuario_path(circulo_id: @usuario.circulo.id, usuario_id: u.id),
                                         method: :delete, data: { confirm: 'Esta seguro?' },
-                                        class: 'btn btn-danger btn-xs' + (u.pedido?(Compra::ciclo_actual) ? ' disabled' : '') %>
+                                        class: 'btn btn-danger btn-xs' + (u.pedido?(@current_cycle) ? ' disabled' : '') %>
                         <% end %>
                       </div>
                       <ul class="circle-members-data">
