@@ -9,7 +9,8 @@
 //= require raphael
 //= require morris
 //= require jquery.nicescroll
-//= require products_admin
+//= require jquery-ui/widgets/autocomplete
+//= require autocomplete-rails
 
 
 $(document).ready(function() {

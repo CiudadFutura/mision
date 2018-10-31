@@ -3,11 +3,9 @@ class Producto < ActiveRecord::Base
   has_and_belongs_to_many :categorias
   belongs_to :supplier
   has_many :transaction_details
-  has_many :bundle_products
   has_many :roles, :through => :usuario_roles
   has_and_belongs_to_many :categorias
-
-
+  has_many :bundle_products
   accepts_nested_attributes_for :bundle_products
 
 
