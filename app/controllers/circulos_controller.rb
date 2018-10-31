@@ -113,12 +113,6 @@ class CirculosController < ApplicationController
     end
   end
 
-  def search
-    @circulos = Circulo.where("warehouse_id = ?", params[:warehouse_id])
-
-     render :partial => 'compras/show_circles'
-
-  end
 
   def add_usuario
     unless(params[:usuario_id].empty?)
