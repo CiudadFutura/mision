@@ -131,8 +131,11 @@ class CirculosController < ApplicationController
     else
         message = { alert: "Error: Debe ingresar el numero de usuario." }
     end
-
-    redirect_to usuario_path(current_usuario), message
+    if current_usuario.admin?
+      redirect_to circulo_path(circulo), message
+    else
+      redirect_to usuario_path(current_usuario), message
+    end
   end
 
   def remove_usuario
@@ -141,7 +144,11 @@ class CirculosController < ApplicationController
     usuario = Usuario.find(params[:usuario_id])
     usuario.circulo = nil
     usuario.save!
-    redirect_to usuario_path(current_usuario), notice: "El usuario a sido eliminado del circulo."
+    if current_usuario.admin?
+      redirect_to circulo_path(circulo), notice: 'El usuario a sido eliminado del circulo.'
+    else
+      redirect_to usuario_path(current_usuario), notice: 'El usuario a sido eliminado del circulo.'
+    end
   end
 
   def abandonar
