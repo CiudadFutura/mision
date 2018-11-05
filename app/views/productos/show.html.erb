@@ -2,6 +2,7 @@
 
 <div class="agileinfo_single">
   <h5><%= @producto.nombre %></h5>
+  <%= @carrito.items.to_json %>
   <div class="col-md-4 agileinfo_single_left">
     <% if @producto.imagen.blank? %>
       <%= image_tag('v2/no-disponible.png', class: 'img-responsive') %>
@@ -11,9 +12,31 @@
   </div>
   <div class="col-md-8 agileinfo_single_right">
     <div class="w3agile_description">
-      <h4>Descripción :</h4>
+      <h3>Descripción :</h3>
       <p><%= @producto.descripcion %></p>
     </div>
+    <% if @producto.product_type == Producto::BUNDLE %>
+      <div class="row bundle-description">
+        <div class="col-md-12">
+          <h5>Contenido</h5>
+          <br>
+          <ul>
+            <% @producto.bundle_products.each do |bundle| %>
+              <li>
+                <div class="col-md-6">
+                  <%= Producto.find(bundle.item_id).nombre %>
+                </div>
+                <div class="col-md-6">
+                  Cantidad: <%= bundle.qty %>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+      <br>
+    <% end %>
+
     <div class="snipcart-item block">
       <div class="snipcart-thumb agileinfo_single_right_snipcart">
         <h4><%= @producto.precio %> <span>Ahorro <%= number_to_percentage(@producto.ahorro) %></span></h4>

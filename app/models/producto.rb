@@ -8,6 +8,9 @@ class Producto < ActiveRecord::Base
   has_many :bundle_products
   accepts_nested_attributes_for :bundle_products
 
+  BUNDLE = 1
+  SIMPLE = 0
+
 
   validates :codigo, uniqueness: true
   #validates :supplier, presence: true

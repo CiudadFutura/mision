@@ -106,6 +106,9 @@ gem 'instagram'
 gem 'omniauth-google-oauth2'
 gem 'google-api-client', '~> 0.7.1'
 
+# Factura electronica
+gem 'bravo'
+
 group :development, :test do
   gem 'sqlite3'
   gem 'pry', '~> 0.11.3'
