@@ -7,7 +7,11 @@ class SuppliersController < ApplicationController
   def index
     @suppliers = Supplier.all
     if current_usuario.present? && current_usuario.admin?
-      @suppliers = @suppliers.paginate(:page => params[:page], :per_page => 20)
+      if (params[:text_search])
+        @suppliers = @suppliers.search(params[:text_search]).paginate(:page => params[:page], :per_page => 20)
+      else
+        @suppliers = @suppliers.paginate(:page => params[:page], :per_page => 20)
+      end
     else
       @suppliers = @suppliers.publicos
     end

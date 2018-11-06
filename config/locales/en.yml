@@ -22,18 +22,21 @@ en:
     page_gap: "&hellip;"
   activerecord:
     models:
+      transaction: Transacción
       account:
         attributes:
           status: Estado
     attributes:
       producto:
-        supplier: Proveedor
+        supplier_id: Proveedor
       compra:
         warehouse: Distrito
         warehouses: Distritos
       circulo:
         warehouse: Distrito
         warehouses: Distritos
+      categoria:
+        parent: Padre
       usuario:
         calle: Dirección
         codigo_postal: Código Postal

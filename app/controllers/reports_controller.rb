@@ -7,8 +7,8 @@ class ReportsController < ApplicationController
       ciclo_id = nil
       @reporte = nil
       @ciclos = Compra.all.order('fecha_fin_compras DESC')
-      if params[:ciclo_id].present? || Compra.ciclo_actual_completo.present?
-        ciclo_id = params[:ciclo_id] || Compra.ciclo_actual_completo.id
+      if params[:ciclo_id].present? || @current_cycle_complete.present?
+        ciclo_id = params[:ciclo_id] || @current_cycle_complete.id
         p ciclo_id
         p '-----------------------'
         pedidos = Pedido.where(compra_id: ciclo_id)

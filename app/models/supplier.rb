@@ -74,4 +74,16 @@ class Supplier < ActiveRecord::Base
     self.pais = ca.pais
   end
 
+  def self.search(term)
+    s = term.to_f
+    if s.is_a? Numeric
+      Supplier
+        .where('suppliers.id = :id OR LOWER(`suppliers`.name) LIKE :term OR LOWER(`suppliers`.razon_social) LIKE :term OR LOWER(`suppliers`.email) LIKE :term',
+               term: "%#{term.downcase}%", id: term)
+    else
+      Supplier
+        .where('LOWER(`suppliers`.name) LIKE :term OR LOWER(`suppliers`.razon_social) LIKE :term OR LOWER(`suppliers`.email) LIKE :term', term: "%#{term.downcase}%")
+    end
+  end
+
 end

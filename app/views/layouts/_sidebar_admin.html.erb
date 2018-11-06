@@ -13,6 +13,21 @@
           <div class="clearfix"></div>
         <% end %>
       </li>
+      <li id="menu-academico" >
+        <a href="#">
+          <i class="fa fa-bar-chart nav_icon"></i>
+          <span>Reportes</span>
+          <span class="fa fa-angle-right" style="float: right"></span>
+          <div class="clearfix"></div>
+        </a>
+        <ul id="menu-academico-sub" >
+          <li id="menu-academico-avaliacoes" >
+            <%= link_to reports_path do %>
+              <span class="icon-key2"></span>Productos Pedidos
+            <% end %>
+          </li>
+        </ul>
+      </li>
       <% if can? [:manage], usuarios_path %>
         <li id="menu-academico" >
           <a href="#">
