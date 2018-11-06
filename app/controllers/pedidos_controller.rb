@@ -12,7 +12,7 @@ class PedidosController < ApplicationController
 
       end
       if (params[:text_search])
-        @pedidos = Pedido.search(params[:text_search])
+        @pedidos = Pedido.search(params[:text_search]).paginate(:page => params[:page], :per_page => 50)
       end
       @ciclos = Compra.all.order('fecha_fin_compras DESC')
       @suppliers = Supplier.all

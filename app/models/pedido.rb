@@ -24,10 +24,12 @@ class Pedido < ActiveRecord::Base
   end
 
   def self.search(term)
-    if term.is_a? Numeric
+    s = term.to_f
+    if s.is_a? Numeric
       Pedido
         .joins(:usuario)
-        .where('id LIKE :term, LOWER(`usuarios`.nombre) LIKE :term OR LOWER(`usuarios`.apellido) LIKE :term OR LOWER(`usuarios`.email) LIKE :term', term: "%#{term.downcase}%")
+        .where('pedidos.id = :id OR LOWER(`usuarios`.nombre) LIKE :term OR LOWER(`usuarios`.apellido) LIKE :term OR LOWER(`usuarios`.email) LIKE :term',
+               term: "%#{term.downcase}%", id: term)
     else
       Pedido
         .joins(:usuario)

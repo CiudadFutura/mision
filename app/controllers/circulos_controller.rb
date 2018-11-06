@@ -9,7 +9,7 @@ class CirculosController < ApplicationController
     if current_usuario && current_usuario.admin?
       @todos = Circulo.all
       if params[:text_search].present?
-        @circulos = @todos.search(params[:text_search])
+        @circulos = @todos.search(params[:text_search]).paginate(page: params[:page], per_page: 50)
       else
         @circulos = @todos.paginate(page: params[:page], per_page: 50)
       end
