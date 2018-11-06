@@ -18,12 +18,12 @@ class Transaction < ActiveRecord::Base
     s = term.to_f
     if s.is_a? Numeric
       Transaction
-      .joins(:pedido, account: :usuario)
+      .joins('LEFT JOIN pedidos ON transactions.pedido_id = pedidos.id', account: :usuario)
         .where('transactions.id = :id OR (`pedidos`.id) = :id OR LOWER(`usuarios`.apellido) LIKE :term OR LOWER(`usuarios`.email) LIKE :term',
                term: "%#{term.downcase}%", id: term)
     else
       Transaction
-        .joins(:pedido, account: :usuarios)
+        .joins('LEFT JOIN pedidos ON transactions.pedido_id = pedidos.id', account: :usuario)
         .where('LOWER(`usuarios`.nombre) LIKE :term OR LOWER(`usuarios`.apellido) LIKE :term OR LOWER(`usuarios`.email) LIKE :term',
                term: "%#{term.downcase}%")
     end

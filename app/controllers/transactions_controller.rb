@@ -6,7 +6,7 @@ class TransactionsController < ApplicationController
 
   def index
     if (params[:text_search])
-      @transactions = Transaction.search(params[:text_search])
+      @transactions = Transaction.search(params[:text_search]).paginate(:page => params[:page], :per_page => 50).order('id DESC')
     else
       @transactions = Transaction.paginate(:page => params[:page], :per_page => 50).order('id DESC')
     end
