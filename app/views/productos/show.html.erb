@@ -2,7 +2,6 @@
 
 <div class="agileinfo_single">
   <h5><%= @producto.nombre %></h5>
-  <%= @carrito.items.to_json %>
   <div class="col-md-4 agileinfo_single_left">
     <% if @producto.imagen.blank? %>
       <%= image_tag('v2/no-disponible.png', class: 'img-responsive') %>
