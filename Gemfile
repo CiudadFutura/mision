@@ -109,8 +109,6 @@ gem 'google-api-client', '~> 0.7.1'
 # Factura electronica
 gem 'bravo'
 
-gem 'loofah', '~> 2.2.3'
-
 group :development, :test do
   gem 'sqlite3'
   gem 'pry', '~> 0.11.3'
