@@ -21,6 +21,7 @@ Rails.application.configure do
   # config.action_dispatch.rack_cache = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this).
+  #config.serve_static_assets = true
   config.serve_static_files = true
 
   # Compress JavaScripts and CSS.
@@ -86,13 +87,13 @@ Rails.application.configure do
   # SMTP settings for gmail
 
   config.action_mailer.smtp_settings = {
-      address: 'smtp.gmail.com',
-      port: 587,
-      domain:'gmail.com',
-      user_name: ENV['GMAIL_USERNAME'],
-      password: ENV['GMAIL_PASSWORD'],
-      authentication: :plain,
-      enable_starttls_auto: true,
+    address: 'smtp.gmail.com',
+    port: 587,
+    domain:'gmail.com',
+    user_name: ENV['GMAIL_USERNAME'],
+    password: ENV['GMAIL_PASSWORD'],
+    authentication: :plain,
+    enable_starttls_auto: true,
   }
 
 end
