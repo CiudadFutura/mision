@@ -68,7 +68,7 @@ group :development do
   gem 'binding_of_caller'
   gem 'rails_best_practices'
   # Use Capistrano for deployment
-  gem 'capistrano', '~> 3.4.1'
+  gem 'capistrano', '~> 3.11'
   gem 'capistrano-bundler', '~> 1.1.2'
   gem 'capistrano-rails', '~> 1.1.1'
   gem 'capistrano-rvm', github: "capistrano/rvm"
