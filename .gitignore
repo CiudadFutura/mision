@@ -23,6 +23,7 @@ uploads
 /config/application.yml
 /config/local_env.yml
 /config/secrets.yml
+/config/database.yml
 .DS_Store
 .idea/.generators
 .idea/.rakeTasks
