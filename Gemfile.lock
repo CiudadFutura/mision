@@ -350,7 +350,7 @@ GEM
     rspec-support (3.4.1)
     ruby-progressbar (1.10.0)
     safe_yaml (1.0.4)
-    sass (3.7.0)
+    sass (3.7.1)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
       rb-fsevent (~> 0.9, >= 0.9.4)
@@ -440,7 +440,7 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bootstrap-editable-rails
-  bootstrap-sass (~> 3.3.7)
+  bootstrap-sass (~> 3.3, >= 3.3.7)
   bravo
   byebug (~> 4.0, >= 4.0.5)
   cancan

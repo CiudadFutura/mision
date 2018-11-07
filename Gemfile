@@ -8,7 +8,7 @@ gem 'mysql2', '~> 0.4.10'
 gem 'therubyracer',  platforms: :ruby
 
 # Rails Sass gem
-gem 'bootstrap-sass', '~> 3.3.7'
+gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
 gem 'sass-rails', '>= 3.2'
 
 # https://github.com/carrierwaveuploader/carrierwave
