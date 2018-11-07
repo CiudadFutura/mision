@@ -9,7 +9,7 @@ class CirculosController < ApplicationController
     if current_usuario && current_usuario.admin?
       @todos = Circulo.all
       if params[:text_search].present?
-        @circulos = @todos.search(params[:text_search])
+        @circulos = @todos.search(params[:text_search]).paginate(page: params[:page], per_page: 50)
       else
         @circulos = @todos.paginate(page: params[:page], per_page: 50)
       end
@@ -45,6 +45,13 @@ class CirculosController < ApplicationController
 
   # GET /circulos/1/edit
   def edit
+    respond_to do |format|
+      if current_usuario.present? and current_usuario.admin?
+        format.html { render 'circulos/admin_edit' }
+      else
+        format.html
+      end
+    end
   end
 
   # POST /circulos
@@ -106,12 +113,6 @@ class CirculosController < ApplicationController
     end
   end
 
-  def search
-    @circulos = Circulo.where("warehouse_id = ?", params[:warehouse_id])
-
-     render :partial => 'compras/show_circles'
-
-  end
 
   def add_usuario
     unless(params[:usuario_id].empty?)
@@ -130,8 +131,11 @@ class CirculosController < ApplicationController
     else
         message = { alert: "Error: Debe ingresar el numero de usuario." }
     end
-
-    redirect_to usuario_path(current_usuario), message
+    if current_usuario.admin?
+      redirect_to circulo_path(circulo), message
+    else
+      redirect_to usuario_path(current_usuario), message
+    end
   end
 
   def remove_usuario
@@ -140,7 +144,11 @@ class CirculosController < ApplicationController
     usuario = Usuario.find(params[:usuario_id])
     usuario.circulo = nil
     usuario.save!
-    redirect_to usuario_path(current_usuario), notice: "El usuario a sido eliminado del circulo."
+    if current_usuario.admin?
+      redirect_to circulo_path(circulo), notice: 'El usuario a sido eliminado del circulo.'
+    else
+      redirect_to usuario_path(current_usuario), notice: 'El usuario a sido eliminado del circulo.'
+    end
   end
 
   def abandonar

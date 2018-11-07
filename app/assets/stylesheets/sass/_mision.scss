@@ -877,6 +877,9 @@ h3.title:after,
   margin-left: 7em;
 }
 .snipcart-details {
+  .cantidad{
+    padding: 0px;
+  }
   .select-qty{
     padding: 0px;
     margin: 0px;
@@ -1742,48 +1745,60 @@ button.submit.check_out{
 }
 .checkout-right {
   margin-top: 3em;
-  .product-thumbnail{
-    width: 4.6em;
-    height: 4.6em;
-    border-radius: 8px;
-    background: #fff;
-    position: relative;
-    img{
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      max-width: 100%;
-      max-height: 100%;
-      margin: auto;
+  .cart-item{
+    .bundle-item{
+      li{
+        div{
+          padding: 0px;
+        }
+        list-style-type: none;
+        margin: 0px;
+        font-size: 0.7em;
+      }
     }
-    .product-thumbnail-wrapper{
-      width: 100%;
-      height: 100%;
-      position: relative;
-      overflow: hidden;
+    .product-thumbnail{
+      width: 4.6em;
+      height: 4.6em;
       border-radius: 8px;
-      z-index: 1;
-    }
-    .product-thumbnail-quantity{
-      font-size: 0.85714em;
-      font-weight: 600;
-      line-height: 1.75em;
-      white-space: nowrap;
-      text-align: center;
-      border-radius: 1.75em;
-      background-color: rgba(114,114,114,0.9);
-      color: #fff;
-      -webkit-box-sizing: border-box;
-      box-sizing: border-box;
-      min-width: 1.75em;
-      height: 1.75em;
-      padding: 0 0.58333em;
-      position: absolute;
-      right: -0.75em;
-      top: 0.25em;
-      z-index: 3;
+      background: #fff;
+      position: relative;
+      img{
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        max-width: 100%;
+        max-height: 100%;
+        margin: auto;
+      }
+      .product-thumbnail-wrapper{
+        width: 100%;
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+        border-radius: 8px;
+        z-index: 1;
+      }
+      .product-thumbnail-quantity{
+        font-size: 0.85714em;
+        font-weight: 600;
+        line-height: 1.75em;
+        white-space: nowrap;
+        text-align: center;
+        border-radius: 1.75em;
+        background-color: rgba(114,114,114,0.9);
+        color: #fff;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        min-width: 1.75em;
+        height: 1.75em;
+        padding: 0 0.58333em;
+        position: absolute;
+        right: -0.75em;
+        top: 0.25em;
+        z-index: 3;
+      }
     }
   }
 }
@@ -2953,6 +2968,24 @@ ul.wmuSliderPagination {
 /*-- //Ratings --*/
 .agileinfo_single_right {
   padding-left: 5em;
+  .bundle-description{
+    margin-bottom: 20px;
+    h5{
+      font-family: 'Ubuntu', sans-serif !important;
+      margin: 0;
+      color: $color-bordeaux;
+      font-size: 1em;
+    }
+    ul{
+      li{
+        list-style-type: none;
+        font-size: 14px;
+        color: #999;
+        line-height: 2em;
+        margin: .5em 0 0;
+      }
+    }
+  }
 }
 .agileinfo_single_right_snipcart{
   margin:0 0 2em;

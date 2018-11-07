@@ -13,10 +13,15 @@
 
   <div class="form-group">
     <%= f.label :coordinador_id, :class => 'control-label' %>
-    <%= f.number_field :coordinador_id,
-                       value: params[:id].present? ? params[:id]  : '' ,
-                       readonly: params[:id].present? ? true  : false,
-                       class: 'form-control required' %>
+    <% if current_usuario.admin? %>
+      <%= f.number_field :coordinador_id,
+                         class: 'form-control required' %>
+    <% else %>
+      <%= f.number_field :coordinador_id,
+                         value: params[:id].present? ? params[:id]  : '' ,
+                         readonly: (params[:id].present? or !current_usuario.admin?)  ? true  : false,
+                         class: 'form-control required' %>
+    <% end %>
   </div>
   <div class="form-group">
     <%= f.label :warehouse, for:'warehouse', :class => 'control-label'  %>
@@ -25,22 +30,23 @@
                  { include_blank: 'Elija Distrito a retirar'},
                  class: 'form-control required') %>
   </div>
-
-  <% if current_usuario.present? and !current_usuario.admin? %>
-    <label>Enviar invitaciones</label>
+  <div class="form-group">
+    <% if current_usuario.present? and !current_usuario.admin? %>
+      <label>Enviar invitaciones</label>
       <input id="email_invitado_1" name="email_invitado_1" type="email" class="form-control" placeholder="Email invitado 1" />
       <input id="email_invitado_2" name="email_invitado_2" type="email" class="form-control" placeholder="Email invitado 2" />
       <input id="email_invitado_3" name="email_invitado_3" type="email" class="form-control" placeholder="Email invitado 3" />
       <input id="email_invitado_4" name="email_invitado_4" type="email" class="form-control" placeholder="Email invitado 4" />
+    <% end %>
   </div>
-  <% end %>
   <br>
   <br>
-  <div class="control-group">
-    <div class="col-md-12 text-right">
-      <%= f.button :submit, class: 'btn btn-primary' do %>
-        Crear
-      <% end %>
+  <div class="row">
+    <div class="control-group">
+      <div class="col-md-12 text-right">
+        <%= f.submit class: 'btn btn-success' %>
+      </div>
     </div>
   </div>
+
 <% end %>

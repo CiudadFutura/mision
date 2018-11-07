@@ -1,20 +1,21 @@
-<div class="container fill">
-	<div class="row">
-	  <div class="reporte">
-	    <h2>Reporte cantidad de productos por proveedor por ciclos</h2>
-
-			<% if current_usuario && current_usuario.admin? %>
-			  <%= form_tag reports_path, method: :get, class: 'form-inline' do %>
-			    <h3>Filtros:</h3>
-			    <div class="form-group">
-			      <label for="ciclo_id">Ciclo:</label>
-			      <%= select_tag "ciclo_id",
-			                     options_from_collection_for_select(@ciclos, "id", "nombre", @ciclo ? @ciclo.id : ''),
-			                     include_blank: true, class: 'form-control input-sm' %>
-			    </div>
-			    <%= submit_tag 'Filtrar', class: "btn btn-success btn-xs" %>
-			  <% end %>
-			<% end %>
+<div class="agile-grids">
+  <div class="agile-tables">
+    <div class="w3l-table-info">
+      <div class="navbar navs-fixed">
+	      <h2>Reporte cantidad de productos por proveedor por ciclos</h2>
+        <% if current_usuario && current_usuario.admin? %>
+          <%= form_tag reports_path, method: :get, class: 'form-inline' do %>
+            <h4>Filtros:</h4>
+            <div class="form-group">
+              <label for="ciclo_id">Ciclo:</label>
+              <%= select_tag "ciclo_id",
+                             options_from_collection_for_select(@ciclos, "id", "nombre", @ciclo ? @ciclo.id : ''),
+                             include_blank: true, class: 'form-control input-sm' %>
+            </div>
+            <%= submit_tag 'Filtrar', class: "btn btn-success btn-xs" %>
+          <% end %>
+        <% end %>
+      </div>
 			<% if @reporte.present? %>
 				<% @reporte.each do |supplier_id, supplier| %>
 				  <table class="table">

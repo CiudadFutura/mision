@@ -13,9 +13,9 @@
 						<th>Pertenece</th>
             <th>Círculo N°</th>
 						<% if current_usuario && current_usuario.admin? %>
-							<th colspan="4"></th>
+							<th colspan="5"></th>
             <% else %>
-							<th colspan="2"></th>
+							<th colspan="3"></th>
             <% end %>
           </tr>
         </thead>
@@ -39,7 +39,7 @@
                   <% else %>
                     <td></td>
                   <% end %>
-                  <% if(p.ciclo.id && Compra::ciclo_actual.try(:id) == p.ciclo.id)%>
+                  <% if ((p.ciclo.id) && (@current_cycle.try(:id) == p.ciclo.id))%>
                     <td>
                       <%= link_to('Modificar',
                             edit_pedido_path(p),

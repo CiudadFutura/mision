@@ -5,9 +5,14 @@ class UsuariosController < ApplicationController
   # GET /usuarios
   # GET /usuarios.json
   def index
-    @usuarios = Usuario.by_roles(params[:role]).paginate(:page => params[:page], :per_page => 50)
     @users = Usuario.all
-
+    if params[:role].blank?
+      params[:role] = Usuario::USUARIO
+    end
+    @usuarios = @users.by_roles(params[:role]).paginate(:page => params[:page], :per_page => 50)
+    if params[:text_search].present?
+      @usuarios = @users.search(params[:text_search])
+    end
     authorize! :index, @usuarios
     respond_to do |format|
       format.html
@@ -18,9 +23,10 @@ class UsuariosController < ApplicationController
   # GET /usuarios/1
   # GET /usuarios/1.json
   def show
-    @ciclo_actual = Compra.ciclo_actual
-    @ciclo_actual_completo = Compra.ciclo_actual_completo
     @circulo = Circulo.new if current_usuario.circulo.blank?
+    if current_usuario.present? && current_usuario.admin?
+      render 'usuarios/admin_show'
+    end
   end
 
 
@@ -31,6 +37,13 @@ class UsuariosController < ApplicationController
 
   # GET /usuarios/1/edit
   def edit
+    respond_to do |format|
+      if current_usuario.present? and current_usuario.admin?
+        format.html { render 'usuarios/admin_edit' }
+      else
+        format.html
+      end
+    end
   end
 
   # POST /usuarios

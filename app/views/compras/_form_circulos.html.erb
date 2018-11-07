@@ -1,36 +1,31 @@
-<div id="content-circulos" class="<%= 'hide' if @compra.tipo == 'free' or @compra.tipo == 'mini' %> ">
-  <div class="panel panel-default">
-		<div class="panel-heading">
-			<h3 class="panel-title">Círculos</h3>
-		</div>
-		<div class="panel-body">
+<div id="content-circulos" class="<%= 'hide' if @compra.tipo != 'circles' %> ">
+  <h2 class="panel-title">Círculos</h2>
+  <div class="table-responsive">
 
-			<table class="table table-striped">
-				<thead>
-				<tr>
-					<th>Nro Circulo</th>
-					<th>Coordinador</th>
-					<th>Distrito</th>
-					<th colspan="3"></th>
-				</tr>
-				</thead>
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>Nro Circulo</th>
+        <th>Coordinador</th>
+        <th>Distrito</th>
+        <th colspan="3"></th>
+      </tr>
+      </thead>
 
-        <tbody>
-          <% Circulo.all.each do |circulo| %>
-            <tr>
-              <td><%= circulo.id %></td>
-              <td><%= circulo.try('coordinador').try('nombre_completo') || 'Sin Coordinador' %></td>
-              <td><%= circulo.warehouse.present? ? circulo.warehouse.name : '--'%></td>
-              <% if @circulos.present? %>
-                <td><%= check_box_tag "compra[circulo_ids][]", circulo.id, @circulos.has_key?(circulo.id) %></td>
-              <% else %>
-                <td><%= check_box_tag "compra[circulo_ids][]", circulo.id, @compra.circulos.include?(circulo) %></td>
-              <% end %>
-            </tr>
-          <% end %>
-        </tbody>
-			</table>
-		</div>
-		<div class="panel-footer"></div>
+      <tbody>
+        <% Circulo.all.each do |circulo| %>
+          <tr>
+            <td><%= circulo.id %></td>
+            <td><%= circulo.try('coordinador').try('nombre_completo') || 'Sin Coordinador' %></td>
+            <td><%= circulo.warehouse.present? ? circulo.warehouse.name : '--'%></td>
+            <% if @circulos.present? %>
+              <td><%= check_box_tag "compra[circulo_ids][]", circulo.id, @circulos.has_key?(circulo.id) %></td>
+            <% else %>
+              <td><%= check_box_tag "compra[circulo_ids][]", circulo.id, @compra.circulos.include?(circulo) %></td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
 	</div>
 </div>

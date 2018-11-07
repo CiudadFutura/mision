@@ -29,10 +29,19 @@ class Circulo < ActiveRecord::Base
   end
 
   def self.search(term)
-    Circulo
-      .joins(:usuarios, :warehouse)
-      .where('LOWER(`usuarios`.nombre) LIKE :term OR LOWER(`usuarios`.apellido) LIKE :term OR LOWER(`usuarios`.email) LIKE :term OR  (`circulos`.id) LIKE :term OR LOWER(`warehouses`.name) LIKE :term',
-          term: "%#{term.downcase}%")
+    s = term.to_f
+    role = Role.find_by_name(Usuario::COORDINADOR)
+    if s.is_a? Numeric
+      Circulo
+        .joins(:warehouse, usuarios: :roles)
+        .where('circulos.id = :id OR LOWER(`usuarios`.nombre) LIKE :term OR LOWER(`usuarios`.apellido) LIKE :term OR LOWER(`usuarios`.email) LIKE :term OR  (`circulos`.id) LIKE :term OR LOWER(`warehouses`.name) LIKE :term AND usuario_roles.role_id = :role ',
+               term: "%#{term.downcase}%", id: term, role: role.id)
+    else
+      Circulo
+        .joins(:warehouse, usuarios: :roles)
+        .where('LOWER(`usuarios`.nombre) LIKE :term OR LOWER(`usuarios`.apellido) LIKE :term OR LOWER(`usuarios`.email) LIKE :term OR  (`circulos`.id) LIKE :term OR LOWER(`warehouses`.name) LIKE :term AND usuario_roles.roles_id = :role',
+               term: "%#{term.downcase}%", role: role.id)
+    end
   end
 
 

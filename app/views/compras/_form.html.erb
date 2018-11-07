@@ -12,58 +12,47 @@
   <% end %>
 
 	<div class="actions">
-		<%= f.submit "Crear Ciclo", class: 'btn btn-success' %>
+    <%= f.submit value: "#{f.object.new_record? ? 'Crear Ciclo' : 'Editar Ciclo'}", class: 'btn btn-success' %>
 	</div>
 
   <div class="form-group">
     <%= f.label :nombre %><br>
-    <%= f.text_field :nombre, :class => 'form-control' %>
+    <%= f.text_field :nombre, :class => 'form-control required' %>
   </div>
-	<div class="form-group">
-		<%= f.label :tipo %>
-		<div class="radio">
-			<label>
-        <%= f.radio_button :tipo, 'circles', checked: (@compra.tipo == 'circles' || @compra.tipo.nil?) ? true : false%>
-				Círculos
-			</label>
-		</div>
-		<div class="radio">
-			<label>
-				<%= f.radio_button :tipo, 'free' , checked: (@compra.tipo == 'free') ? true : false  %>
-				Libre
-			</label>
-		</div>
-    <div class="radio">
-      <label>
-        <%= f.radio_button :tipo, 'mini' , checked: (@compra.tipo == 'mini') ? true : false  %>
-        Mini Ciclo
-      </label>
-    </div>
-	</div>
   <div class="form-group">
     <%= f.label :descripcion %><br>
-    <%= f.text_area :descripcion, :class => 'form-control' %>
+    <%= f.text_area :descripcion, :class => 'form-control required' %>
   </div>
   <div class="form-group">
     <%= f.label :fecha_inicio_compras %><br>
-    <%= select_datetime @compra.fecha_inicio_compras, prefix: 'compra[fecha_inicio_compras]', :class => 'form-control' %>
+    <%= select_datetime @compra.fecha_inicio_compras, prefix: 'compra[fecha_inicio_compras]', :class => 'form-control required' %>
   </div>
   <div class="form-group">
     <%= f.label :fecha_fin_compras %><br>
-    <%= select_datetime @compra.fecha_fin_compras, prefix: 'compra[fecha_fin_compras]', :class => 'form-control' %>
+    <%= select_datetime @compra.fecha_fin_compras, prefix: 'compra[fecha_fin_compras]', :class => 'form-control required' %>
   </div>
   <div class="form-groupm">
     <%= f.label :fecha_fin_pagos %><br>
-    <%= select_datetime @compra.fecha_fin_pagos, prefix: 'compra[fecha_fin_pagos]', :class => 'form-control' %>
+    <%= select_datetime @compra.fecha_fin_pagos, prefix: 'compra[fecha_fin_pagos]', :class => 'form-control required' %>
   </div>
   <div class="form-group">
     <%= f.label :fecha_entrega_compras %><br>
-    <%= select_datetime @compra.fecha_entrega_compras, prefix: 'compra[fecha_entrega_compras]', :class => 'form-control' %>
+    <%= select_datetime @compra.fecha_entrega_compras, prefix: 'compra[fecha_entrega_compras]', :class => 'form-control required' %>
+  </div>
+
+  <div class="form-group">
+    <div class="form-check">
+      <% Compra.tipos.each do |k, v|%>
+        <%= f.radio_button :tipo, k , checked: (@compra.tipo == "#{k}"), class: 'form-check-input required'%>
+        <%= f.label  I18n.t k %>&nbsp;&nbsp;
+      <% end %>
+    </div>
   </div>
 
 	<%= render 'compras/form_circulos' %>
+	<%= render 'compras/form_warehouses' %>
 
   <div class="actions">
-    <%= f.submit "Crear Ciclo", class: 'btn btn-success' %>
+    <%= f.submit value: "#{f.object.new_record? ? 'Crear Ciclo' : 'Editar Ciclo'}", class: 'btn btn-success' %>
   </div>
 <% end %>

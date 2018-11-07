@@ -18,6 +18,16 @@
       </div>
       <div class="row">
         <div class="col-md-12">
+          <% if can?(:manage , current_usuario) && !@circulo.completo? %>
+            <%= form_tag(circulo_add_usuario_path(params[:id]), method: "post") do %>
+              Agregar usuario nro: <input type="text" value="" name="usuario_id" />
+              <button type="submit">Agregar</button>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
           <div class="table-responsive">
             <table class="table table-striped">
               <caption><h4>Consumidores del Círculo</h4></caption>
@@ -29,6 +39,7 @@
                 <th>Teléfono</th>
                 <th>Rol</th>
                 <th></th>
+                <th></th>
               </tr>
               </thead>
               <tbody>
@@ -39,7 +50,14 @@
                   <td><%= u.try('cel1') || 'Sin celular' %></td>
                   <td><%= u.try('tel1') || 'Sin telefono' %></td>
                   <td><%= u.coordinador? ? 'Coordinador' : 'Usuario' %></td>
-                  <td><%= link_to 'Mostrar', usuario_path(u.id), class: "btn btn-default btn-xs" %></td>
+                  <td><%= link_to 'Mostrar', edit_usuario_path(u.id), class: "btn btn-default btn-xs" %></td>
+                  <td>
+                    <% if can?(:remove_usuario , current_usuario) && current_usuario.admin? %>
+                      <%= link_to 'Eliminar', circulo_remove_usuario_path(circulo_id: @circulo.id, usuario_id: u.id),
+                                  method: :delete, data: { confirm: 'Esta seguro?' },
+                                  class: 'btn btn-danger btn-xs' + (u.pedido?(@current_cycle) ? ' disabled' : '') %>
+                    <% end %>
+                  </td>
                 </tr>
               <% end %>
               </tbody>
@@ -59,7 +77,7 @@
                 <th>Consumidor</th>
                 <th>Ciclo</th>
                 <th>Fecha</th>
-                <th></th>
+                <th colspan="2"></th>
               </tr>
               </thead>
               <tbody>
@@ -72,7 +90,7 @@
                     <td><%= p.ciclo.try('nombre') || 'SIN CICLO'%></td>
                     <td><%= l p.try('created_at') || ' SIN FECHA '%></td>
                     <td><%= link_to 'Crear Transacción', new_transaction_path(pedido_id:p.id), class: "btn btn-default btn-xs" %></td>
-                    <td><%= link_to 'Mostrar', usuario_path(u.id), class: "btn btn-default btn-xs" %></td>
+                    <td><%= link_to 'Detalle', pedido_path(p.id), class: "btn btn-default btn-xs" %></td>
                   </tr>
                 <% end %>
               <% end %>

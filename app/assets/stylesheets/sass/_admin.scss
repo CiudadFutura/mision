@@ -35,6 +35,9 @@ body p{
 h1, h2, h3, h4, h5 {
   font-family: 'Montserrat', sans-serif;
 }
+.red {
+  color: $color-bordeaux;
+}
 a {
   color: #008DE7;
   font-weight:400;
@@ -164,6 +167,12 @@ label.col-sm-2.control-label {
   font-size: 16px;
   margin-top: 0px;
 }
+
+label.control-label[required='required']:before {
+  content: "* ";
+  color: red;
+}
+
 #menu {
   list-style: none;
   margin: 0;
@@ -4508,6 +4517,13 @@ label.control-label {
   background: #fff;
   padding: 2em;
   margin: 2em 0;
+  .orders-table {
+    td,
+    tbody>tr>td,
+    tbody>tr>th{
+      padding: 5px !important;
+    }
+  }
 }
 .w3l-calendar-left {
   background: #fff;

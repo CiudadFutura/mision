@@ -4,17 +4,6 @@ window.onload = (function() {
 
     $('.thumbnails').find('.agile_top_brand_left_grid1').uniformHeight();
 
-    $("#producto_product_type_0").on('click', function(){
-        $('#bundle').hide('slow');
-    });
-
-    $("#producto_product_type_1").on('click', function(){
-        $('#bundle').show('slow');
-    });
-
-    $('#search').bind('autocompleteselect', function() {
-        $('#addItem').removeAttr('disabled');
-    });
 
     $('#addItem').on('click', function () {
         $.ajax({
@@ -55,9 +44,5 @@ window.onload = (function() {
 })(jQuery);
 
 
-$(document).on( "click", "#remove_bundle_product", function(e){
-    e.preventDefault();
-    var id = $(this).data("i");
-    $("tr#" + id).remove();
-});
+
 

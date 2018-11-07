@@ -85,7 +85,7 @@ class Usuario < ActiveRecord::Base
 
   def pedido_del_ciclo(ciclo_de_compra)
     return nil if ciclo_de_compra.nil?
-    pedido = self.pedidos.where(compra_id: ciclo_de_compra.id).first
+    pedido = self.pedidos.where(compra_id: ciclo_de_compra.first.id).first
     return pedido if pedido
     nil
   end
@@ -95,6 +95,18 @@ class Usuario < ActiveRecord::Base
     pedido = self.pedidos.where(usuario_id: usuario.id).last
     return pedido if pedido
     nil
+  end
+
+  def purchase_enabled?(cycles)
+    warehouse = Warehouse.find(self.circulo.warehouse_id) if self.circulo.present? and self.circulo.warehouse_id.present?
+    circle = Circulo.find(self.circulo.id) if self.circulo.present?
+    enabled = false
+    cycles.each do |cycle|
+      enabled = cycle.warehouses.include?(warehouse) if enabled == false and cycle.tipo == 'distrito'
+      enabled = cycle.circulos.include?(circle) if enabled == false and cycle.tipo == 'circles'
+      enabled = true if enabled == false and cycle.tipo == 'free'
+    end
+    return enabled
   end
 
   def self.new_users_per_month
@@ -231,6 +243,19 @@ class Usuario < ActiveRecord::Base
       end
     else
       return false
+    end
+  end
+
+  def self.search(term)
+    s = term.to_f
+    if s.is_a? Numeric
+      Usuario
+        .where('usuarios.id = :id OR LOWER(`usuarios`.nombre) LIKE :term OR LOWER(`usuarios`.apellido) LIKE :term OR LOWER(`usuarios`.email) LIKE :term',
+               term: "%#{term.downcase}%", id: term)
+    else
+      Usuario
+        .where('LOWER(`usuarios`.nombre) LIKE :term OR LOWER(`usuarios`.apellido) LIKE :term OR LOWER(`usuarios`.email) LIKE :term',
+               term: "%#{term.downcase}%")
     end
   end
 

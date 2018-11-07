@@ -1,14 +1,15 @@
 class Producto < ActiveRecord::Base
-  enum pack: [:wholesaler, :freshes, :vegetables, :fragile, :cleaning]
+  enum pack: [:wholesaler, :freshes, :vegetables, :fragile, :cleaning, :warehouse]
   has_and_belongs_to_many :categorias
   belongs_to :supplier
   has_many :transaction_details
-  has_many :bundle_products
   has_many :roles, :through => :usuario_roles
   has_and_belongs_to_many :categorias
-
-
+  has_many :bundle_products
   accepts_nested_attributes_for :bundle_products
+
+  BUNDLE = 1
+  SIMPLE = 0
 
 
   validates :codigo, uniqueness: true

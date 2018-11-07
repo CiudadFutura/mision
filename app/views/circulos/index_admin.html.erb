@@ -34,7 +34,7 @@
         </table>
       </div>
     </div>
-    <% if @circulos.present? && @circulos.count > 50 %>
+    <% unless @circulos.empty? %>
       <div class="row">
         <%= will_paginate @circulos %>
       </div>

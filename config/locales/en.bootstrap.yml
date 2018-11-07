@@ -6,9 +6,9 @@ en:
     application:
       root: "Inicio"
     pages:
-      pages: "Paginas"
+      pages: "Páginas"
   helpers:
-    actions: "Actiones"
+    actions: "Acciones"
     links:
       back: "Atras"
       cancel: "Cancelar"
@@ -23,4 +23,4 @@ en:
       delete: "Eliminar %{model}"
     submit:
       create: "Crear un %{model}"
-      update: "Guardar cambios al %{model} creado"
+      update: "Guardar"

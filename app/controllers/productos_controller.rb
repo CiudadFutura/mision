@@ -22,7 +22,6 @@ class ProductosController < ApplicationController
     end
     @view_type = session[:view_type]
     @view_prod = session[:view_prod]
-    @ciclo_actual = Compra.ciclo_actual
 
     @todos = Producto.all
 		@productos = @todos.order(:orden, :nombre).paginate(:page => params[:page], :per_page => 50)
@@ -50,7 +49,6 @@ class ProductosController < ApplicationController
   # GET /productos/1
   # GET /productos/1.json
   def show
-    @ciclo_actual = Compra.ciclo_actual
     cat = @producto.categorias.first.id
     @related_products = @producto.get_related_products(cat)
 
@@ -122,18 +120,12 @@ class ProductosController < ApplicationController
     end
   end
 
-  def search
-    @productos = Producto.search(params[:term])
-    render 'search.json'
-  end
   def bundle_item
     @items= Producto.find(params[:id])
-    render 'bundle_item.json'
+    render 'productos/bundle_item.json'
   end
-  def add_bundle_product
-    @producto = Producto.build
-    render 'add_bundle_product', layout: false
-  end
+
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -147,7 +139,7 @@ class ProductosController < ApplicationController
       params.require(:producto).permit(:precio, :nombre, :codigo, :descripcion, :orden,
                                        :precio_super, :highlight, :oculto, :marca, :supplier_id,
                                        :pack, :faltante,:cantidad_permitida, :imagen, :stock,
-                                       :orden_remito, :view_type,
+                                       :orden_remito, :view_type, :product_type,
 																			 :sale_type,
                                        bundle_products_attributes: [:id, :item_id, :qty, :description],
                                        categoria_ids: [])

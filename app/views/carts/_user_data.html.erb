@@ -43,7 +43,7 @@
       </section>
     </form>
 
-    <% if @ciclo_actual && current_usuario && !current_usuario.pedido?(Compra:@ciclo_actual) %>
+    <% if @current_cycle.present? && current_usuario.present? && !current_usuario.pedido?(@current_cycle) %>
       <div class="checkout-right-basket">
         <%= link_to create_pedido_path, class: "btn btn-success #{'disabled' if @missing.present?}",
                     id: 'finalizar' do %>

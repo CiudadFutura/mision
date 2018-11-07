@@ -63,12 +63,6 @@
   </div>
 
 <% end %>
-<% if @freesale.present? && @ciclo_actual.present? %>
-  <% if @ciclo_actual.tipo == 'free' %>
-    <%= render 'products_freesale' %>
-  <% end %>
-<% end %>
-
 <% if usuario_signed_in? %>
   <% if current_usuario.admin? %>
     <%= render 'admin_product' %>

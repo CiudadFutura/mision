@@ -2,8 +2,6 @@ class HomeController < ApplicationController
 
   def index
     user_type = current_usuario.nil? ? 'Guess' : current_usuario.type
-		@ciclo_actual = Compra.ciclo_actual
-		@ciclo_actual_completo = Compra.ciclo_actual_completo
     @featured = Producto.destacados.limit(9)
     @cycles = Compra.next_cycles
     @offers = Producto.get_offers_products
@@ -17,8 +15,8 @@ class HomeController < ApplicationController
         @pedidosCiclos = Pedido.pedidos_ciclos
         @usuarios = Usuario.all
         @coordinadoresNuevos = Usuario.nuevos_coordinadores
-        @countProductsByCycle = Compra.products_by_cycles
-        @total_sales_per_year = Compra.sales_totals_per_year
+        #@countProductsByCycle = Compra.products_by_cycles
+        #@total_sales_per_year = Compra.sales_totals_per_year
         @total_users = Usuario::new_users_per_month
         @total_new_users_per_year = Usuario.users_totals_per_year
         @total_orders_year = Pedido.orders_qty_per_year

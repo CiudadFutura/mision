@@ -2,6 +2,7 @@
 
 <div class="agileinfo_single">
   <h5><%= @producto.nombre %></h5>
+  <%= @carrito.items.to_json %>
   <div class="col-md-4 agileinfo_single_left">
     <% if @producto.imagen.blank? %>
       <%= image_tag('v2/no-disponible.png', class: 'img-responsive') %>
@@ -11,19 +12,42 @@
   </div>
   <div class="col-md-8 agileinfo_single_right">
     <div class="w3agile_description">
-      <h4>Descripción :</h4>
+      <h3>Descripción :</h3>
       <p><%= @producto.descripcion %></p>
     </div>
+    <% if @producto.product_type == Producto::BUNDLE %>
+      <div class="row bundle-description">
+        <div class="col-md-12">
+          <h5>Contenido</h5>
+          <br>
+          <ul>
+            <% @producto.bundle_products.each do |bundle| %>
+              <li>
+                <div class="col-md-6">
+                  <%= Producto.find(bundle.item_id).nombre %>
+                </div>
+                <div class="col-md-6">
+                  Cantidad: <%= bundle.qty %>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+      <br>
+    <% end %>
+
     <div class="snipcart-item block">
       <div class="snipcart-thumb agileinfo_single_right_snipcart">
         <h4><%= @producto.precio %> <span>Ahorro <%= number_to_percentage(@producto.ahorro) %></span></h4>
       </div>
+      <br>
       <div class="snipcart-details agileinfo_single_right_details">
         <div class="col-sm-12 col-sm-4-offset">
-          <% if @ciclo_actual.present? and
+          <% if @current_cycle.present? and
             current_usuario.present? and
             current_usuario.circulo.present? and
-            @ciclo_actual.circulos.include?(current_usuario.circulo) and
+            @consumer_enabled_purchase.present? and
             usuario_signed_in? %>
             <% if @producto.stock.present? and @producto.cantidad_permitida > @producto.stock
                  cantidad = @producto.stock
@@ -34,7 +58,7 @@
               <select id="qty-selected-<%= @producto.id %>" class="cantidad form-control">
                 <% for i in 1..cantidad %>
                   <% if @carrito.producto?(@producto.id) %>
-                    <option value="<%= i%>" <%= (i == @carrito.cantidad_prod(@producto.id)) ?'selected':''%>><%= i %></option>
+                    <option value="<%= i %>" <%= (i == @carrito.cantidad_prod(@producto.id)) ?'selected':''%>><%= i %></option>
                   <% else %>
                     <option value="<%= i %>"><%= i %></option>
                   <% end %>

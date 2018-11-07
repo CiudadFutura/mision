@@ -34,11 +34,7 @@
               </div>
             </div>
             <div class="snipcart-details">
-              <% if @ciclo_actual.present? and
-                current_usuario.present? and
-                current_usuario.circulo.present? and
-                @ciclo_actual.circulos.include?(current_usuario.circulo) and
-                usuario_signed_in? %>
+              <% if @consumer_enabled_purchase %>
                 <% if producto.stock.present? and producto.cantidad_permitida > producto.stock
                      cantidad = producto.stock
                    else

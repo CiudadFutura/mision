@@ -3,19 +3,25 @@ class Compra < ActiveRecord::Base
   has_many :deliveries
   has_many :circulos, :through => :deliveries
   has_many :pedidos, :dependent => :restrict_with_error
+  has_many :warehouses_compras
+  has_many :warehouses, :through => :warehouses_compras
 
-	enum tipo: [:circles, :free, :mini]
+  validate :cycles_dates
+
+	enum tipo: [:circles, :free, :distrito]
 
 	validates :nombre, :descripcion, :fecha_inicio_compras, :fecha_fin_compras,
             :fecha_fin_pagos, :fecha_entrega_compras, presence: true
 
+  after_initialize :init
+
 
   def self.ciclo_actual
-    Compra.where('fecha_inicio_compras <= :today AND fecha_fin_compras >= :today', today: Time.current).first
+    Compra.where('fecha_inicio_compras <= :today AND fecha_fin_compras >= :today', today: Time.current)
   end
 
   def self.ciclo_actual_completo
-    Compra.where('fecha_inicio_compras <= :today AND fecha_entrega_compras >= :today', today: Time.current).first
+    Compra.where('fecha_inicio_compras <= :today AND fecha_entrega_compras >= :today', today: Time.current)
   end
 
   def self.next_cycles
@@ -153,6 +159,12 @@ class Compra < ActiveRecord::Base
 
   private
 
+  def cycles_dates
+    unless fecha_fin_compras > fecha_inicio_compras && fecha_inicio_compras < fecha_entrega_compras
+      errors.add(:fecha_fin_compras, 'La fecha de Fin no puede ser menor al Inicio')
+    end
+  end
+
   def self.colors
      {
       '2015' => 'rgba(155, 89, 182, 0.6)',
@@ -183,5 +195,11 @@ class Compra < ActiveRecord::Base
 
     return sorted
 
+  end
+  def init
+    self.fecha_inicio_compras ||= Time.current
+    self.fecha_fin_compras ||= Time.current
+    self.fecha_fin_pagos ||= Time.current
+    self.fecha_entrega_compras ||= Time.current
   end
 end

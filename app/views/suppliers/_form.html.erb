@@ -12,12 +12,12 @@
   <% end %>
 
   <fieldset class="form-group">
-    <%= f.label :name, for:'name' %>
-    <%= f.text_field :name, type:'text', id:'name', class:'form-control', :required => true %>
+    <%= f.label :name, for:'name' %><span class="red">*</span>
+    <%= f.text_field :name, type:'text', id:'name', class:'form-control required', :required => true %>
   </fieldset>
   <fieldset class="form-group">
-    <%= f.label :razon_social, for:'razon_social' %>
-    <%= f.text_field :razon_social, type:'text', id:'razon_social', class:'form-control' %>
+    <%= f.label :razon_social, for:'razon_social' %><span class="red">*</span>
+    <%= f.text_field :razon_social, type:'text', id:'razon_social required', class:'form-control' %>
   </fieldset>
 
   <fieldset class="form-group">
@@ -28,18 +28,22 @@
   </fieldset>
 
   <fieldset class="form-group">
-    <%= f.label :nature, for:'nature' %>
+    <%= f.label :nature, for:'nature' %><span class="red">*</span>
     <%= f.select(:nature, options_for_select(Supplier.natures.map{|x,y| [t(x), x]},@supplier.nature),
-                 class:'form-control', id:'nature', include_blank: 'Tipo de proveedor') %>
+                 class:'form-control required', id:'nature', include_blank: 'Tipo de proveedor') %>
   </fieldset>
 
   <fieldset class="form-group">
-    <%= f.label :calle, for:'calle' %>
-    <%= f.text_field :calle, type:'text', id:'calle', class:'form-control', :required => true %>
+    <%= f.label :calle, for:'calle' %><span class="red">*</span>
+    <%= f.text_field :calle, type:'text', id:'calle', class:'form-control required', :required => true %>
   </fieldset>
   <fieldset class="form-group">
-    <%= f.label :ciudad, for:'ciudad' %>
-    <%= f.text_field :ciudad, type:'text', id:'ciudad', class:'form-control', :required => true %>
+    <%= f.label :ciudad, for:'ciudad' %><span class="red">*</span>
+    <%= f.text_field :ciudad, type:'text', id:'ciudad', class:'form-control required', :required => true %>
+  </fieldset>
+  <fieldset class="form-group">
+    <%= f.label :codigo_postal %><span class="red">*</span>
+    <%= f.text_field :codigo_postal, class:'form-control required', :required => true %>
   </fieldset>
 
   <div class="form-group">
