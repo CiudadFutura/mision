@@ -12,7 +12,7 @@ class Producto < ActiveRecord::Base
   SIMPLE = 0
 
 
-  validates :codigo, uniqueness: true
+  validates_uniqueness_of :codigo, :message => '%{value} ya está en uso'
   #validates :supplier, presence: true
 
   mount_uploader :imagen, ImagenUploader

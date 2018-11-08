@@ -43,6 +43,48 @@ $(document).ready(function() {
 
 
     $('#new_producto').validate({
+        rules: {
+            'producto[nombre]': {
+                required: true,
+                maxLength: 150
+            },
+            'producto[marca]': {
+                required: true,
+                maxLength: 150
+            },
+            'producto[stock]': {
+                number: true,
+                min: 0
+            },
+            'producto[cantidad_permitida]': {
+                required: true,
+                number: true,
+                min: 0
+            },
+            'producto[orden]': {
+                required: true,
+                number: true,
+                min: 0
+            },
+            'producto[precio]': {
+                required: true,
+                digits: true,
+                min: 0
+            },
+            'producto[precio_super]': {
+                required: true,
+                digits: true,
+                min: 0
+            },
+            'producto[precio_super]': {
+                required: true,
+                digits: true,
+                min: 0
+            },
+            'producto[product_type]':{
+                required: true
+            }
+        },
         errorPlacement: function (label, element) {
             label.addClass('error');
             label.insertBefore(element);
@@ -52,6 +94,48 @@ $(document).ready(function() {
     });
 
     $('#edit_producto').validate({
+        rules: {
+            'producto[nombre]': {
+                required: true,
+                maxLength: 150
+            },
+            'producto[marca]': {
+                required: true,
+                maxLength: 150
+            },
+            'producto[stock]': {
+                number: true,
+                min: 0
+            },
+            'producto[cantidad_permitida]': {
+                required: true,
+                number: true,
+                min: 0
+            },
+            'producto[orden]': {
+                required: true,
+                number: true,
+                min: 0
+            },
+            'producto[precio]': {
+                required: true,
+                digits: true,
+                min: 0
+            },
+            'producto[precio_super]': {
+                required: true,
+                digits: true,
+                min: 0
+            },
+            'producto[precio_super]': {
+                required: true,
+                digits: true,
+                min: 0
+            },
+            'producto[product_type]':{
+                required: true
+            }
+        },
         errorPlacement: function (label, element) {
             label.addClass('error');
             label.insertBefore(element);

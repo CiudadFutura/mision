@@ -56,6 +56,10 @@ en:
         inscription_number: Número de Ingresos Brutos
     errors:
       models:
+        producto:
+          attributes:
+            codigo:
+              unique_code: "El código ya está en uso"
         usuario:
           attributes:
             email:
