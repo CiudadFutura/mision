@@ -9,6 +9,9 @@
         <div class="col-md-12">
           <div class="col-md-10">
             <h3>Círculo N°: <%= @circulo.id %></h3>
+            <% if @circulo.special_type == true %>
+              <span class="red"> Círculo Especial</span>
+            <% end %>
           </div>
           <div class="col-md-2 text-center">
             <h4>Cantidad de Pedidos realizados</h4>
@@ -18,7 +21,7 @@
       </div>
       <div class="row">
         <div class="col-md-12">
-          <% if can?(:manage , current_usuario) && !@circulo.completo? %>
+          <% if can?(:manage , current_usuario) && !@circulo.completo? or @circulo.special_type.present? %>
             <%= form_tag(circulo_add_usuario_path(params[:id]), method: "post") do %>
               Agregar usuario nro: <input type="text" value="" name="usuario_id" />
               <button type="submit">Agregar</button>

@@ -180,12 +180,12 @@ class Usuario < ActiveRecord::Base
 
   def completed?
     nombre.present? &&
-      apellido.present? &&
-      dni.present? &&
-      cel1.present? &&
-      ciudad.present? &&
-      calle.present? &&
-      codigo_postal.present?
+    apellido.present? &&
+    dni.present? &&
+    cel1.present? &&
+    ciudad.present? &&
+    calle.present? &&
+    codigo_postal.present?
   end
 
 	def confirmation_required?

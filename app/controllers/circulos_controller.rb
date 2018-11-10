@@ -119,7 +119,7 @@ class CirculosController < ApplicationController
       circulo = Circulo.find(params[:circulo_id])
       authorize! :add_usuario, circulo
       usuario = Usuario.find(params[:usuario_id])
-      if usuario.circulo.nil? && !circulo.completo?
+      if usuario.circulo.nil? && !circulo.completo? or circulo.special_type.present?
         usuario.circulo = circulo
         usuario.save!
         message = { notice: "El usuario a sido agregado a tu circulo." }
@@ -167,6 +167,6 @@ class CirculosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def circulo_params
-      params.require(:circulo).permit(:coordinador_id, :warehouse_id)
+      params.require(:circulo).permit(:coordinador_id, :warehouse_id, :special_type)
     end
 end

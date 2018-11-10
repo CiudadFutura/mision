@@ -11,6 +11,16 @@
     </div>
   <% end %>
 
+  <% if current_usuario.admin? %>
+    <div class="form-group">
+      <p>Tipo de círculo</p>
+      <%= f.radio_button :special_type, 0, :checked => @circulo.special_type == false %>
+      <%= f.label :special_type, 'Común'%>
+      <%= f.radio_button :special_type, 1,
+                         :checked => @circulo.special_type == true %>
+      <%= f.label :special_type, 'Circulo especial'%>
+    </div>
+  <% end %>
   <div class="form-group">
     <%= f.label :coordinador_id, :class => 'control-label' %>
     <% if current_usuario.admin? %>

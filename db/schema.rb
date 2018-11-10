@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181022025523) do
+ActiveRecord::Schema.define(version: 20181110163322) do
 
   create_table "accounts", force: :cascade do |t|
     t.integer  "usuario_id", limit: 4
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 20181022025523) do
 
   create_table "circulos", force: :cascade do |t|
     t.integer  "coordinador_id", limit: 4
+    t.boolean  "special_type",             default: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "warehouse_id",   limit: 4
