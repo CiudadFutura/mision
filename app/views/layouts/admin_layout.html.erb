@@ -30,15 +30,19 @@
 </head>
 <body>
 </body>
-<div class="page-container">
-  <div class="left-content">
-    <div class="mother-grid-inner">
-      <%= render 'layouts/header_admin' %>
-      <%= yield %>
-      <%= render 'layouts/footer_admin' %>
+<div class="container-fluid">
+  <div class="row">
+    <div class="page-container">
+      <div class="left-content">
+        <div class="mother-grid-inner">
+          <%= render 'layouts/header_admin' %>
+          <%= yield %>
+          <%= render 'layouts/footer_admin' %>
+        </div>
+      </div>
+      <%= render 'layouts/sidebar_admin' %>
+      <div class="clearfix"></div>
     </div>
   </div>
-  <%= render 'layouts/sidebar_admin' %>
-  <div class="clearfix"></div>
 </div>
 </html>
