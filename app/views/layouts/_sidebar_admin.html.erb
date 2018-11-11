@@ -125,11 +125,24 @@
         <% end %>
       </li>
       <li id="menu-academico" >
-        <%= link_to(transactions_path) do %>
-          <i class="fa fa-superpowers" aria-hidden="true"></i>
-          <span>Transacciones</span>
+        <a href="#">
+          <i class="fa fa-bank" aria-hidden="true"></i>
+          <span> Cuentas Corrientes</span>
+          <span class="fa fa-angle-right" style="float: right"></span>
           <div class="clearfix"></div>
-        <% end %>
+        </a>
+        <ul id="menu-academico-sub" >
+          <li id="menu-academico-avaliacoes" >
+            <%= link_to accounts_path do %>
+              Cuentas
+            <% end %>
+          </li>
+          <li id="menu-academico-avaliacoes" >
+            <%= link_to(transactions_path) do %>
+              Transacciones
+            <% end %>
+          </li>
+        </ul>
       </li>
       <li id="menu-academico" >
         <%= link_to(categorias_path) do %>

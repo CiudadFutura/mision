@@ -1,36 +1,39 @@
-<div class="container fill">
+<% content_for :title, 'Mi cuenta corriente'   %>
+<% navigation_add 'Mi cuenta correinte', '#' %>
+<div class="account-data">
   <div class="row">
 	  <% if current_usuario.admin? %>
-	    <h2>Cuenta corriente: <%= @account.usuario.nombre_completo %></h2>
+	    <h3>Cuenta corriente: <%= @account.usuario.nombre_completo %></h3>
       <div class="breadcrumb">
         <% if current_usuario.admin? %>
           <%= link_to 'Modificar', edit_account_path(@account) %> |
         <% end %>
         <%= link_to 'Atras', accounts_path %>
       </div>
+      <div class="row">
+        <div class="col-md-4">
+          <strong>Estado:</strong>
+          <%= @account.status ? 'Activa' : 'Inactiva' %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2 col-md-offset-10 text-center">
+          <h4>Balance:</h4>
+          <h2><%= number_to_currency(@account.total) %></h2>
+        </div>
+      </div>
     <% else %>
-      <h2>Mi Cuenta Corriente</h2>
+      <h3>Mi Cuenta Corriente</h3>
     <% end %>
 	</div>
 	<div class="row">
 		<p id="notice"><%= notice %></p>
 	</div>
-
-  <div class="row">
-    <div class="col-md-4">
-      <strong>Estado:</strong>
-	    <%= @account.status ? 'Activa' : 'Inactiva' %>
-	  </div>
-  </div>
-	<div class="row">
-		<div class="col-md-2 col-md-offset-10 text-center">
-	    <h4>Balance:</h4>
-	    <h2><%= number_to_currency(@account.total) %></h2>
-		</div>
-	</div>
+  <br>
+  <br>
 	<% if @account.transactions.present? %>
 		<div class="row">
-			<h4>Transacciones realizadas</h4>
+			<h4>Notas de Crédito</h4>
 		  <div class="table-responsive">
 		    <table class="table table-striped">
 		      <thead>
@@ -46,7 +49,7 @@
 		      </thead>
 
 		      <tbody>
-		      <% @account.transactions.each do |transaction| %>
+		      <% @account.transactions.order(id: :desc).each do |transaction| %>
 		        <tr>
 		          <td><%= transaction.pedido_id %></td>
 		          <td><%= transaction.transaction_type == 0 ? 'Nota de Crédito' : 'Nota de Débito'%></td>

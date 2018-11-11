@@ -30,10 +30,7 @@ class Pedido < ActiveRecord::Base
         .joins(:usuario)
         .where('pedidos.id = :id OR LOWER(`usuarios`.nombre) LIKE :term OR LOWER(`usuarios`.apellido) LIKE :term OR LOWER(`usuarios`.email) LIKE :term',
                term: "%#{term.downcase}%", id: term)
-    else
-      Pedido
-        .joins(:usuario)
-        .where('LOWER(`usuarios`.nombre) LIKE :term OR LOWER(`usuarios`.apellido) LIKE :term OR LOWER(`usuarios`.email) LIKE :term', term: "%#{term.downcase}%")
+        .order('pedidos.id Desc')
     end
   end
 

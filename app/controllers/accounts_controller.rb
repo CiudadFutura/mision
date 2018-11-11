@@ -6,8 +6,11 @@ class AccountsController < ApplicationController
 
   def index
     if current_usuario.admin?
-      @accounts = Account.all
-      create_all_current_account
+      @accounts = Account.all.paginate(page: params[:page], per_page: 50)
+      if params[:text_search].present?
+        @accounts = Account.search(params[:text_search]).paginate(page: params[:page], per_page: 50)
+      end
+      #create_all_current_account
     elsif current_usuario.usuario?
       @accounts = Account.where(usuario_id: current_usuario.id)
     end
