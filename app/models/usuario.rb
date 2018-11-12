@@ -84,8 +84,9 @@ class Usuario < ActiveRecord::Base
   end
 
   def pedido_del_ciclo(ciclo_de_compra)
-    return nil if ciclo_de_compra.nil?
-    pedido = self.pedidos.where(compra_id: ciclo_de_compra.first.id).first
+    puts ciclo_de_compra
+    return nil if ciclo_de_compra.blank?
+    pedido = self.pedidos.where(compra_id: ciclo_de_compra.id)
     return pedido if pedido
     nil
   end

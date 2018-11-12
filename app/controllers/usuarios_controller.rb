@@ -11,7 +11,7 @@ class UsuariosController < ApplicationController
     end
     @usuarios = @users.by_roles(params[:role]).paginate(:page => params[:page], :per_page => 50)
     if params[:text_search].present?
-      @usuarios = @users.search(params[:text_search])
+      @usuarios = @users.search(params[:text_search]).paginate(:page => params[:page], :per_page => 50)
     end
     authorize! :index, @usuarios
     respond_to do |format|

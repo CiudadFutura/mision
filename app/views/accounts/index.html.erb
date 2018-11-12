@@ -1,14 +1,7 @@
 <div class="agile-grids">
   <div class="agile-tables">
     <div class="w3l-table-info">
-      <div class="navbar navs-fixed">
-        <%= link_to t('Crear Cuenta', :default => t("helpers.links.new")),
-                    new_account_path,
-                    :class => 'btn btn-primary' if can? [:manage], Account
-        %>
-      </div>
       <div class="table-responsive">
-
         <table class="table table-striped">
           <thead>
             <tr>

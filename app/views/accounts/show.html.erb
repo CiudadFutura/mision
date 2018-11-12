@@ -1,5 +1,5 @@
 <% content_for :title, 'Mi cuenta corriente'   %>
-<% navigation_add 'Mi cuenta correinte', '#' %>
+<% navigation_add 'Mi cuenta corriente', '#' %>
 <div class="account-data">
   <div class="row">
 	  <% if current_usuario.admin? %>
@@ -38,6 +38,7 @@
 		    <table class="table table-striped">
 		      <thead>
 		      <tr>
+		        <th>#</th>
 		        <th>Pedido#</th>
 		        <th>Tipo de transacción</th>
 		        <th>Monto</th>
@@ -51,6 +52,7 @@
 		      <tbody>
 		      <% @account.transactions.order(id: :desc).each do |transaction| %>
 		        <tr>
+		          <td><%= transaction.id %></td>
 		          <td><%= transaction.pedido_id %></td>
 		          <td><%= transaction.transaction_type == 0 ? 'Nota de Crédito' : 'Nota de Débito'%></td>
 		          <td><%= number_to_currency(transaction.amount) %></td>
