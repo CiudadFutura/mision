@@ -24,7 +24,11 @@ class ProductosController < ApplicationController
     @view_prod = session[:view_prod]
 
     @todos = Producto.all
-		@productos = @todos.order(:orden, :nombre).paginate(:page => params[:page], :per_page => 50)
+    if params[:categoria_id].blank?
+      @productos = @todos.order(:orden, :nombre)
+    else
+		  @productos = @todos.order(:orden, :nombre).paginate(:page => params[:page], :per_page => 50)
+    end
     @productos = @productos.stock if current_usuario.nil? || current_usuario.present? && !current_usuario.admin?
     @productos = @productos.disponibles.order(:orden, :nombre) if current_usuario.nil? || !current_usuario.admin?
     @productos = @productos.destacados if params[:featured].present?
@@ -38,6 +42,8 @@ class ProductosController < ApplicationController
     if current_usuario && current_usuario.admin?
       if params[:text_search].present?
         @productos = @productos.search(params[:text_search]).paginate(:page => params[:page], :per_page => 50)
+      else
+        @productos = @productos.paginate(:page => params[:page], :per_page => 50)
       end
       respond_to do |format|
         format.html { render 'productos/index_admin'}
