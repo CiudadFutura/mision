@@ -33,6 +33,7 @@ class TransactionsController < ApplicationController
     @transaction.transaction_type = transaction_params['transaction_type']
     @transaction.amount = transaction_params['amount']
     @transaction.description = transaction_params['description']
+    @transaction.parent_id = transaction_params['pedido_id']
     @transaction.save
     if params['producto_ids']
       pedido = Pedido.find(transaction_params['pedido_id'])

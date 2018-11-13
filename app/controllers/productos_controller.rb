@@ -37,7 +37,7 @@ class ProductosController < ApplicationController
 
     if current_usuario && current_usuario.admin?
       if params[:text_search].present?
-        @productos = @productos.search(params[:text_search].paginate(:page => params[:page], :per_page => 50))
+        @productos = @productos.search(params[:text_search]).paginate(:page => params[:page], :per_page => 50)
       end
       respond_to do |format|
         format.html { render 'productos/index_admin'}

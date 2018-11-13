@@ -91,7 +91,7 @@ class Producto < ActiveRecord::Base
   end
 
   def self.search(term)
-    where('LOWER(nombre) LIKE :term OR LOWER(descripcion) LIKE :term OR  LOWER(codigo) LIKE :term', term: "%#{term.downcase}%")
+    Producto.where('LOWER(nombre) LIKE :term OR LOWER(descripcion) LIKE :term OR  LOWER(codigo) LIKE :term', term: "%#{term.downcase}%")
   end
 
   def bundle_products_for_form

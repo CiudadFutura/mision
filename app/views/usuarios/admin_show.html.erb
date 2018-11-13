@@ -96,7 +96,7 @@
           <tbody>
           <% @usuario.circulo.usuarios.each do |u| %>
             <tr <%= (u == current_usuario) ? 'class=strong' : '' %> >
-              <td><%= u.type %></td>
+              <td><%= u.coordinador? ? 'Coordinador' : 'Usuario' %></td>
               <td><%= u.nombre %></td>
               <td><%= u.apellido %></td>
               <td><%= u.id %></td>

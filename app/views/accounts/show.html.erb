@@ -39,7 +39,8 @@
 		      <thead>
 		      <tr>
 		        <th>#</th>
-		        <th>Pedido#</th>
+            <th>#Pedido desde</th>
+		        <th>Usada en</th>
 		        <th>Tipo de transacción</th>
 		        <th>Monto</th>
 		        <th>Descripción</th>
@@ -51,8 +52,10 @@
 
 		      <tbody>
 		      <% @account.transactions.order(id: :desc).each do |transaction| %>
+            <% str = '' %>
 		        <tr>
 		          <td><%= transaction.id %></td>
+		          <td><%= transaction.parent_id.present? ? transaction.parent_id : (transaction.description.split("\r").first).gsub('Transacción por el pedido N° ', str) %></td>
 		          <td><%= transaction.pedido_id %></td>
 		          <td><%= transaction.transaction_type == 0 ? 'Nota de Crédito' : 'Nota de Débito'%></td>
 		          <td><%= number_to_currency(transaction.amount) %></td>
