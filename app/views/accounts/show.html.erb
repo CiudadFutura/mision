@@ -55,8 +55,9 @@
             <% str = '' %>
 		        <tr>
 		          <td><%= transaction.id %></td>
-		          <td><%= transaction.parent_id.present? ? transaction.parent_id : (transaction.description.split("\r").first).gsub('Transacción por el pedido N° ', str) %></td>
-		          <td><%= transaction.pedido_id %></td>
+		          <td><%= transaction.parent_id.present? ? (link_to transaction.parent_id, pedido_path(transaction.parent_id), class: 'btn btn-link')
+                        : (link_to (transaction.description.split("\r").first).gsub('Transacción por el pedido N° ', str), pedido_path((transaction.description.split("\r").first).gsub('Transacción por el pedido N° ', str)), class: 'btn btn-link') %></td>
+		          <td><%= transaction.pedido_id.present? ? (link_to transaction.pedido_id, pedido_path(transaction.pedido_id), class: 'btn btn-link') : '' %></td>
 		          <td><%= transaction.transaction_type == 0 ? 'Nota de Crédito' : 'Nota de Débito'%></td>
 		          <td><%= number_to_currency(transaction.amount) %></td>
 		          <td><%= simple_format(transaction.description) %></td>
