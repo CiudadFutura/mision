@@ -19,7 +19,7 @@
       <% @categorias_menu.each do |c| %>
         <% if c[:subcategorias].present? %>
 
-          <li class="dropdown mega-dropdown active">
+          <li class="dropdown mega-dropdown">
             <%= link_to '#', class: 'dropdown-toggle', title: '', data: { toggle: 'dropdown'} do %>
               <%= c[:nombre] %><span class="caret"></span>
             <% end %>
@@ -29,8 +29,7 @@
                   <% c[:subcategorias].each do |sm| %>
                     <li>
                       <%= link_to sm[:nombre],
-                                  productos_path(categoria_id: c[:id], subcategoria_id: sm[:id]),
-                                  :class => ('active' if params[:subcategoria_id].to_i == sm[:id])
+                                  productos_path(categoria_id: c[:id], subcategoria_id: sm[:id])
                       %>
                     </li>
                   <% end %>
@@ -41,7 +40,7 @@
 
         <% else %>
           <li>
-            <%= link_to productos_path(categoria_id: c[:id]), data:{ turbolink: false} do %>
+            <%= link_to productos_path(categoria_id: c[:id]) do %>
               <%= c[:nombre] %>
             <% end %>
           </li>

@@ -116,7 +116,7 @@ class UsuariosController < ApplicationController
       if circulo.present?
         authorize! :add_myself_cycle, current_usuario
 
-        if !circulo.completo?
+        if !circulo.completo? || circulo.special_type.present?
           current_usuario.circulo = circulo
           current_usuario.save!
           message = { notice: 'El usuario a sido agregado a tu circulo.' }
