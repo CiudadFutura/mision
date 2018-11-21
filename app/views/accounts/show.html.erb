@@ -39,9 +39,9 @@
 		      <thead>
 		      <tr>
 		        <th>#</th>
-            <th>#Pedido desde</th>
-		        <th>Usada en</th>
-		        <th>Tipo de transacción</th>
+            <th>Creada en</th>
+		        <th>Aplicada en</th>
+		        <th>Ciclo</th>
 		        <th>Monto</th>
 		        <th>Descripción</th>
 			      <% if can? [:manage], Transaction %>
@@ -55,10 +55,16 @@
             <% str = '' %>
 		        <tr>
 		          <td><%= transaction.id %></td>
-		          <td><%= transaction.parent_id.present? ? (link_to transaction.parent_id, pedido_path(transaction.parent_id), class: 'btn btn-link')
-                        : (link_to (transaction.description.split("\r").first).gsub('Transacción por el pedido N° ', str), pedido_path((transaction.description.split("\r").first).gsub('Transacción por el pedido N° ', str)), class: 'btn btn-link') %></td>
-		          <td><%= transaction.pedido_id.present? ? (link_to transaction.pedido_id, pedido_path(transaction.pedido_id), class: 'btn btn-link') : '' %></td>
-		          <td><%= transaction.transaction_type == 0 ? 'Nota de Crédito' : 'Nota de Débito'%></td>
+		          <td>Pedido #<%= transaction.parent_id.present? ? (link_to transaction.parent_id, pedido_path(transaction.parent_id), class: 'btn btn-link')
+                        : (link_to (transaction.description.split("\r").first).gsub('Transacción por el pedido N° ', str), pedido_path((transaction.description.split("\r").first).gsub('Transacción por el pedido N° ', str)), class: 'btn btn-link') %>
+              </td>
+		          <td>Pedido #<%= transaction.pedido_id.present? ? (link_to transaction.pedido_id, pedido_path(transaction.pedido_id), class: 'btn btn-link') : '' %></td>
+		          <td>
+                <%= transaction.pedido.ciclo.nombre %><br>
+                <span>
+                  <small><i><%= l transaction.pedido.ciclo.fecha_inicio_compras, format: :custom %></i></small>
+                </span>
+              </td>
 		          <td><%= number_to_currency(transaction.amount) %></td>
 		          <td><%= simple_format(transaction.description) %></td>
 		          <% if can? [:manage], Transaction %>
