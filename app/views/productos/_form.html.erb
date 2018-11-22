@@ -168,6 +168,20 @@
           <%= f.check_box :faltante, :class => 'form-control' %>
         </div>
       </div>
+      <div class="col-sm-12">
+        <div class="col-sm-12">
+          <h3>Solo para venta de distrito</h3>
+        </div>
+        <div class="col-sm-12">
+          <% Warehouse.all.each do |warehouse| %>
+            <div class="col-md-4">
+              <label><%= warehouse.name -%>
+                <%= check_box_tag 'producto[warehouse_ids][]', warehouse.id, @producto.warehouses.include?(warehouse) %>
+              </label>
+            </div>
+          <% end %>
+        </div>
+      </div>
     </div>
     <div class="col-sm-12">
       <div class="control-group">

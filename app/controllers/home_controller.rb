@@ -10,8 +10,7 @@ class HomeController < ApplicationController
       create_current_account
     end
     @token = current_usuario.identities.exists?(provider: 'facebook') if current_usuario.present?
-    case user_type
-      when Usuario::ADMIN
+    if current_usuario.present? and current_usuario.admin?
         @pedidosCiclos = Pedido.pedidos_ciclos
         @usuarios = Usuario.all
         @coordinadoresNuevos = Usuario.nuevos_coordinadores
@@ -23,13 +22,16 @@ class HomeController < ApplicationController
         @total_orders = Pedido.total_orders_month
         @test = Pedido.orders_per_cycles
         page = 'home/admin_home'
-      when Usuario::COORDINADOR
+    end
+    if current_usuario.present? and current_usuario.coordinador?
+
         if current_usuario.circulo_id.present?
           circulo = Circulo.find(current_usuario.circulo_id)
           @compra = circulo.next_delivery
         end
         page = 'home/home_coord'
-      when Usuario::USUARIO
+    end
+    if current_usuario.present? and current_usuario.usuario?
         if current_usuario.circulo_id.present?
           circulo = Circulo.find(current_usuario.circulo_id)
           @compra = circulo.next_delivery

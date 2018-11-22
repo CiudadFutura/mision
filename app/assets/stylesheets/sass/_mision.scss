@@ -493,6 +493,11 @@ ul.dropdown-menu.drp-mnu li a i {
   float: none;
   margin: 0;
   border-top: 1px solid $color-yellow-cf;
+  .active{
+    background-color: $color-yellow-cf;
+    color: #fff;
+    border-top: 1px solid $color-yellow-cf;
+  }
 }
 .navbar-nav > li > a {
   color: #212121;

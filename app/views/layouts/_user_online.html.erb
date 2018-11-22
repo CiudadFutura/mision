@@ -22,6 +22,11 @@
         <% end %>
       </li>
       <li>
+        <%= link_to(account_path(current_usuario.account.id)) do %>
+          Mi Cta Cte
+        <% end %>
+      </li>
+      <li>
         <%= link_to(destroy_usuario_session_path, method: 'delete') do %>
           Cerrar Sesión
         <% end %>

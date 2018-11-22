@@ -2,7 +2,11 @@
 	<h2 class="col-xs-12">Destacados</h2>
 <% end %>
 <div class="w3ls_w3l_banner_nav_right_grid w3ls_w3l_banner_nav_right_grid_sub">
-  <h3><%= Categoria.find(params[:categoria_id]).nombre if params[:categoria_id] %></h3>
+  <% if params[:categoria_id].blank? %>
+    <h3> Todos</h3>
+  <% else %>
+    <h3><%= Categoria.find(params[:categoria_id]).nombre if params[:categoria_id] %></h3>
+  <% end %>
   <div class="w3ls_w3l_banner_nav_right_grid1">
     <h6><%= Categoria.find(params[:subcategoria_id]).nombre if params[:subcategoria_id].present? %></h6>
     <% @productos.each do |producto|%>

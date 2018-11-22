@@ -96,17 +96,17 @@
           <tbody>
           <% @usuario.circulo.usuarios.each do |u| %>
             <tr <%= (u == current_usuario) ? 'class=strong' : '' %> >
-              <td><%= u.type %></td>
+              <td><%= u.coordinador? ? 'Coordinador' : 'Usuario' %></td>
               <td><%= u.nombre %></td>
               <td><%= u.apellido %></td>
               <td><%= u.id %></td>
-              <td><%= u.pedido?(Compra::ciclo_actual_completo) ? '<i class="glyphicon glyphicon-ok-circle" title="Realizado"></i>'.html_safe : '<i class="glyphicon glyphicon-remove-circle" title="Pendiente"></i>'.html_safe %></td>
-              <td><%= number_to_currency(u.pedido_del_ciclo(Compra::ciclo_actual_completo).try('total')) %></td>
-              <% if u.pedido?(Compra::ciclo_actual_completo) &&
-                File.exists?("#{Rails.public_path}/facturas/FAC_#{u.pedidos.find_by_compra_id(Compra::ciclo_actual_completo).id}.pdf") %>
+              <td><%= u.pedido?(@current_cycle_complete) ? '<i class="glyphicon glyphicon-ok-circle" title="Realizado"></i>'.html_safe : '<i class="glyphicon glyphicon-remove-circle" title="Pendiente"></i>'.html_safe %></td>
+              <td><%= number_to_currency(u.pedido_del_ciclo(@current_cycle_complete).try('total')) %></td>
+              <% if u.pedido?(@current_cycle_complete) &&
+                File.exists?("#{Rails.public_path}/facturas/FAC_#{u.pedidos.find_by_compra_id(@current_cycle_complete).id}.pdf") %>
                 <td>
                   <%= link_to('Factura',
-                              pedido_download_pdf_path(u.pedidos.find_by_compra_id(Compra::ciclo_actual_completo).id),
+                              pedido_download_pdf_path(u.pedidos.find_by_compra_id(@current_cycle_complete).id),
                               class: 'btn btn-link') %>
                 </td>
               <% else %>
