@@ -148,6 +148,6 @@ class ProductosController < ApplicationController
                                        :orden_remito, :view_type, :product_type,
 																			 :sale_type,
                                        bundle_products_attributes: [:id, :item_id, :qty, :description],
-                                       categoria_ids: [])
+                                       categoria_ids: [], warehouse_ids: [],)
     end
 end

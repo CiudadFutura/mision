@@ -6,6 +6,7 @@ class Producto < ActiveRecord::Base
   has_many :roles, :through => :usuario_roles
   has_and_belongs_to_many :categorias
   has_many :bundle_products
+  has_and_belongs_to_many :warehouses
   accepts_nested_attributes_for :bundle_products
 
   BUNDLE = 1

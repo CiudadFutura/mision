@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181110163322) do
+ActiveRecord::Schema.define(version: 20181121013849) do
 
   create_table "accounts", force: :cascade do |t|
     t.integer  "usuario_id", limit: 4
@@ -201,6 +201,11 @@ ActiveRecord::Schema.define(version: 20181110163322) do
   end
 
   add_index "productos", ["supplier_id"], name: "index_productos_on_supplier_id", using: :btree
+
+  create_table "productos_warehouses", force: :cascade do |t|
+    t.integer "producto_id",  limit: 4
+    t.integer "warehouse_id", limit: 4
+  end
 
   create_table "roles", force: :cascade do |t|
     t.string   "name",       limit: 255
