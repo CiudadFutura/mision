@@ -37,6 +37,8 @@ class ProductosController < ApplicationController
     @productos = @productos.disponibles if session['view_prod'] == 'visibles'
     @productos = @productos.ocultos if session['view_prod'] == 'ocultos'
     @productos = @productos.supplier(params[:supplier_id]) if params[:supplier_id]
+    @productos = @productos.not_selected(@current_warehouses_ids) if @current_warehouses_ids.present? and current_usuario.present?
+    @exclusives = Producto.warehouse_exclusive(@current_user_warehouse) if @current_user_warehouse.present? and current_usuario.present?
     @freesale = Producto.freesale
 
     if current_usuario && current_usuario.admin?

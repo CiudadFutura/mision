@@ -41,11 +41,12 @@ $(document).ready(function() {
         $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
     });
 
-    var navoffeset=$(".agileits_header").offset().top;
+    let navoffeset=$(".agileits_header").offset().top;
     $(window).scroll(function(){
-        var scrollpos=$(window).scrollTop();
+        let scrollpos=$(window).scrollTop();
         if(scrollpos >=navoffeset){
             $(".agileits_header").addClass("fixed");
+            $(".logo_products").css('padding-top', '3.5em')
         }else{
             $(".agileits_header").removeClass("fixed");
         }
@@ -54,23 +55,23 @@ $(document).ready(function() {
   $('button[data-action]').click(function (event) {
     event.preventDefault();
 
-    var addToCartTimeout;
+    let addToCartTimeout;
 
-    var that = $(this);
+    let that = $(this);
 
 	  if (addToCartTimeout) {
 		  clearTimeout(addToCartTimeout);
 	  }
 
-    var new_title, new_action;
-    var action = that.data('action');
-    var productId = that.data('productid');
-    var url = '/cart/' + action + '/' + productId;
-    var new_class = '';
-    var old_class = '';
-    var message_box = '';
+    let new_title, new_action;
+    let action = that.data('action');
+    let productId = that.data('productid');
+    let url = '/cart/' + action + '/' + productId;
+    let new_class = '';
+    let old_class = '';
+    let message_box = '';
 
-    var qty = $('#qty-selected-'+productId).val()
+    let qty = $('#qty-selected-'+productId).val()
 
     if (action === 'add') {
       //Add a new item to cart

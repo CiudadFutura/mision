@@ -7,6 +7,18 @@
   <% else %>
     <h3><%= Categoria.find(params[:categoria_id]).nombre if params[:categoria_id] %></h3>
   <% end %>
+  <% if @exclusives.present? %>
+    <div class="w3ls_w3l_banner_nav_right_grid1">
+      <div class="row">
+        <div class="col-md-12">
+          <h6>Exclusivos de tu Distrito</h6>
+          <% @exclusives.each do |producto|%>
+            <%= render 'productos/item', producto: producto %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
   <div class="w3ls_w3l_banner_nav_right_grid1">
     <h6><%= Categoria.find(params[:subcategoria_id]).nombre if params[:subcategoria_id].present? %></h6>
     <% @productos.each do |producto|%>

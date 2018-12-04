@@ -21,6 +21,9 @@ class Producto < ActiveRecord::Base
   has_paper_trail
 
   scope :disponibles, -> { where(oculto: false) }
+  scope :not_selected, -> (warehouse) do
+    joins("LEFT JOIN productos_warehouses pw ON productos.id = pw.producto_id AND pw.warehouse_id in (#{warehouse})").where(pw: {warehouse_id: nil})
+  end
 	scope :destacados, -> {where(highlight: true, oculto: false)}
 	scope :offers, -> {joins(:suppliers).where(highlight: true, oculto: false, nature: 1).order("RAND()").limit(3)}
   scope :ocultos, -> {where(oculto: true)}
@@ -33,6 +36,7 @@ class Producto < ActiveRecord::Base
 																															.order(:orden, :nombre) if categoria && subcategoria }
   scope :supplier, -> (supplier_id) {where('supplier_id = ?', supplier_id)}
   scope :evo_products, -> (date_param) {where('updated_at >= :today', today: date_param)}
+  scope :warehouse_exclusive, lambda { |warehouse| joins(:warehouses).where('warehouses.id = :id', id: warehouse).order(:nombre) if warehouse }
 
 
   after_initialize :default_cantidad_permitida
