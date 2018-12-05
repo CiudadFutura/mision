@@ -93,28 +93,31 @@
   </div>
   <div class="row">
     <div class="col-sm-4 col-sm-offset-8 checkout-left-basket">
-      <h4>Resúmen de mi compra</h4>
+      <% if !current_usuario.completed? %>
+        <%= render 'carts/user_data'%>
+      <% else %>
+        <h4>Resúmen de mi compra</h4>
 
-      <% if @transactions.present? %>
-        <strong>NOTA DE CRÉDITO</strong>
+        <% if @transactions.present? %>
+          <strong>NOTA DE CRÉDITO</strong>
+          <ul>
+            <% @transactions.each do |transaction| %>
+              <li>
+                #<%= transaction.id %> <i>-</i> <span><%= number_to_currency(transaction.amount) %></span>
+              </li>
+            <% end %>
+          </ul>
+        <% end %>
+
         <ul>
-          <% @transactions.each do |transaction| %>
-            <li>
-              #<%= transaction.id %> <i>-</i> <span><%= number_to_currency(transaction.amount) %></span>
-            </li>
-          <% end %>
+          <li>Total de Ahorro <i>:</i> <span><%= number_to_percentage(@carrito.ahorro) %></span></li>
+          <li>Total <i>:</i> <span><%= number_to_currency(@carrito.total) %></span></li>
         </ul>
       <% end %>
-
-      <ul>
-        <li>Total de Ahorro <i>:</i> <span><%= number_to_percentage(@carrito.ahorro) %></span></li>
-        <li>Total <i>:</i> <span><%= number_to_currency(@carrito.total) %></span></li>
-      </ul>
-
     </div>
   </div>
-  <% render 'carts/user_data'%>
-  <% if @current_cycle && current_usuario && !current_usuario.pedido?(Compra:@current_cycle) %>
+  <% if @current_cycle.present? && current_usuario.present? &&
+    !current_usuario.pedido?(Compra:@current_cycle) && current_usuario.completed? %>
     <div class="row text-right">
       <%= link_to('Finalizar Compra', create_pedido_path, method: :get, class: "btn btn-success #{'disabled' if @missing.present?}",
                   id: 'finalizar') %>
