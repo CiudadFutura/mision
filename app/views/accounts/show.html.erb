@@ -62,7 +62,11 @@
 		          <td>
                 <%= transaction.pedido.ciclo.present? ? transaction.pedido.ciclo.nombre : 'Sin ciclo' %><br>
                 <span>
+                  <% if transaction.pedido.ciclo.present? %>
                   <small><i><%= l transaction.pedido.ciclo.fecha_inicio_compras, format: :custom %></i></small>
+                  <% else %>
+                    <small><i>Sin fecha</i></small>
+                  <% end %>
                 </span>
               </td>
 		          <td><%= number_to_currency(transaction.amount) %></td>
