@@ -42,6 +42,7 @@ Rails.application.routes.draw do
   devise_for :usuarios, :controllers => {:registrations => 'user/registrations'}
   resources :usuarios do
     post 'add_myself_cycle', to: 'usuarios#add_myself_cycle', as: :add_myself_cycle
+    post 'circle_accepted_confirmation', to: 'usuarios#circle_accepted_confirmation', as: :circle_accepted_confirmation
     collection {
       post 'sign_up', to: 'usuarios#create'
     }

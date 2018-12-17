@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181121013849) do
+ActiveRecord::Schema.define(version: 20181208114433) do
 
   create_table "accounts", force: :cascade do |t|
     t.integer  "usuario_id", limit: 4
@@ -292,47 +292,52 @@ ActiveRecord::Schema.define(version: 20181121013849) do
   end
 
   create_table "usuarios", force: :cascade do |t|
-    t.string   "nombre",                 limit: 255
-    t.string   "apellido",               limit: 255
+    t.string   "nombre",                      limit: 255
+    t.string   "apellido",                    limit: 255
     t.date     "fecha_de_nacimiento"
-    t.string   "calle",                  limit: 255
-    t.string   "codigo_postal",          limit: 255
-    t.string   "ciudad",                 limit: 255
-    t.string   "pais",                   limit: 255
-    t.string   "tel1",                   limit: 255
-    t.string   "cel1",                   limit: 255
-    t.string   "type",                   limit: 255
+    t.string   "calle",                       limit: 255
+    t.string   "codigo_postal",               limit: 255
+    t.string   "ciudad",                      limit: 255
+    t.string   "pais",                        limit: 255
+    t.string   "tel1",                        limit: 255
+    t.string   "cel1",                        limit: 255
+    t.string   "type",                        limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "email",                  limit: 255,   default: "", null: false
-    t.string   "encrypted_password",     limit: 255,   default: "", null: false
-    t.string   "reset_password_token",   limit: 255
+    t.string   "email",                       limit: 255,   default: "", null: false
+    t.string   "encrypted_password",          limit: 255,   default: "", null: false
+    t.string   "reset_password_token",        limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          limit: 4,     default: 0,  null: false
+    t.integer  "sign_in_count",               limit: 4,     default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip",     limit: 255
-    t.string   "last_sign_in_ip",        limit: 255
-    t.integer  "circulo_id",             limit: 4
-    t.string   "dni",                    limit: 255
+    t.string   "current_sign_in_ip",          limit: 255
+    t.string   "last_sign_in_ip",             limit: 255
+    t.integer  "circulo_id",                  limit: 4
+    t.string   "dni",                         limit: 255
     t.datetime "confirmed_at"
-    t.string   "confirmation_token",     limit: 255
+    t.string   "confirmation_token",          limit: 255
     t.datetime "confirmation_sent_at"
-    t.string   "unconfirmed_email",      limit: 255
-    t.text     "nombre_iva",             limit: 65535
-    t.text     "zona",                   limit: 65535
-    t.text     "codigo_vendedor",        limit: 65535
-    t.text     "tipo_operacion",         limit: 65535
-    t.text     "inscripcion_iva",        limit: 65535
-    t.text     "tipo_identificacion",    limit: 65535
-    t.text     "numero_identificacion",  limit: 65535
-    t.text     "numero_ingresos_brutos", limit: 65535
-    t.text     "codigo_transporte",      limit: 65535
-    t.text     "codigo_clasificacion",   limit: 65535
+    t.string   "unconfirmed_email",           limit: 255
+    t.datetime "confirmed_circle_at"
+    t.string   "confirmation_token_circle",   limit: 255
+    t.datetime "confirmation_circle_sent_at"
+    t.string   "unconfirmed_circle",          limit: 255
+    t.text     "nombre_iva",                  limit: 65535
+    t.text     "zona",                        limit: 65535
+    t.text     "codigo_vendedor",             limit: 65535
+    t.text     "tipo_operacion",              limit: 65535
+    t.text     "inscripcion_iva",             limit: 65535
+    t.text     "tipo_identificacion",         limit: 65535
+    t.text     "numero_identificacion",       limit: 65535
+    t.text     "numero_ingresos_brutos",      limit: 65535
+    t.text     "codigo_transporte",           limit: 65535
+    t.text     "codigo_clasificacion",        limit: 65535
   end
 
   add_index "usuarios", ["confirmation_token"], name: "index_usuarios_on_confirmation_token", unique: true, using: :btree
+  add_index "usuarios", ["confirmation_token_circle"], name: "index_usuarios_on_confirmation_token_circle", unique: true, using: :btree
   add_index "usuarios", ["email"], name: "index_usuarios_on_email", unique: true, using: :btree
   add_index "usuarios", ["reset_password_token"], name: "index_usuarios_on_reset_password_token", unique: true, using: :btree
 
