@@ -39,9 +39,6 @@ Rails.application.configure do
   #Token for json in product view
   config.secret_mai_token = ENV["TOKEN_MAI_GET"].present?
 
-  config.action_mailer.default_charset = "iso-8859-15"
-
-
   config.action_mailer.delivery_method = :smtp
 	config.action_mailer.smtp_settings = { :address => "localhost", :port => 1025 }
 
