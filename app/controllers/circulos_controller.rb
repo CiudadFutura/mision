@@ -120,7 +120,6 @@ class CirculosController < ApplicationController
       authorize! :add_usuario, circulo
       usuario = Usuario.find(params[:usuario_id])
       InvitationMailer.send_confirmation_circle(usuario, current_usuario).deliver
-      puts 'despues'
       if usuario.circulo.nil? && !circulo.completo? or circulo.special_type.present?
         usuario.circulo = circulo
         token = Devise.friendly_token
