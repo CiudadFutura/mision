@@ -8,6 +8,8 @@ class Transaction < ActiveRecord::Base
 
   belongs_to :parent, class_name: 'SubTransactions'
 
+  scope :evo_transactions, -> (date_param) {where('updated_at >= :today', today: date_param)}
+
   def total
     total = 0.0
     self.transaction_details.all.each { |item| total += item.subtotal || 0.0 }
