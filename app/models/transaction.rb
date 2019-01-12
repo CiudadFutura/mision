@@ -8,12 +8,17 @@ class Transaction < ActiveRecord::Base
 
   belongs_to :parent, class_name: 'SubTransactions'
 
-  scope :evo_transactions, -> (date_param) {where('updated_at >= :today', today: date_param)}
+  #scope :evo_transactions, -> (date_param) {where('updated_at >= :today', today: date_param)}
+  scope :evo_transactions, -> {joins(:account => :usuario)}
 
   def total
     total = 0.0
     self.transaction_details.all.each { |item| total += item.subtotal || 0.0 }
     total.to_f
+  end
+
+  def name_user(user)
+    "#{user.nombre} ' ' #{user.apellido}"
   end
 
   def self.search(term)
