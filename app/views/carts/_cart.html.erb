@@ -78,12 +78,14 @@
             <td><%= number_to_currency(item.total) %></td>
             <td><%= number_to_percentage(item.ahorro) %></td>
             <td>
-              <%= button_tag(type: 'button', class: 'btn btn-danger btn-xs',
-                             data: {
-                                 action: 'remove',
-                                 productId: item.producto.id
-                             }) do %>
-                  <i class="fa fa-remove"></i>
+              <% if item.producto.id != 296 %>
+                <%= button_tag(type: 'button', class: 'btn btn-danger btn-xs',
+                               data: {
+                                   action: 'remove',
+                                   productId: item.producto.id
+                               }) do %>
+                    <i class="fa fa-remove"></i>
+                <% end %>
               <% end %>
             </td>
           </tr>
