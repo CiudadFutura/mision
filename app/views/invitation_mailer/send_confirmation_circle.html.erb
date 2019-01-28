@@ -1,0 +1,15 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <p>Pedido de confirmación para ser parte del círculo <%=h @coordinador.nombre_completo %></p>
+
+    <p><%=h @coordinador.nombre_completo %> te ha invitado a formar parte de la Gran Misión siendo parte del círculo. </p>
+
+    <p>Puedes confirmar tu ingreso al círculo en el siguiente link:</p>
+
+    <p><%=h link_to 'Confirmá Aquí!', usuario_circle_accepted_confirmation_path(@user.id) %></p>
+  </body>
+</html>

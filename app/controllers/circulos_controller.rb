@@ -119,9 +119,14 @@ class CirculosController < ApplicationController
       circulo = Circulo.find(params[:circulo_id])
       authorize! :add_usuario, circulo
       usuario = Usuario.find(params[:usuario_id])
+      InvitationMailer.send_confirmation_circle(usuario, current_usuario).deliver
       if usuario.circulo.nil? && !circulo.completo? or circulo.special_type.present?
         usuario.circulo = circulo
+        token = Devise.friendly_token
+        usuario.confirmation_circle_sent_at = DateTime.now
+        usuario.confirmation_token_circle = token
         usuario.save!
+        InvitationMailer.send_confirmation_circle(usuario, circulo)
         message = { notice: "El usuario a sido agregado a tu circulo." }
       elsif !usuario.circulo.nil?
         message = { alert: "Error: El usuario ya pertenece a un circulo." }
@@ -149,6 +154,10 @@ class CirculosController < ApplicationController
     else
       redirect_to usuario_path(current_usuario), notice: 'El usuario a sido eliminado del circulo.'
     end
+  end
+
+  def circle_accepted_confirmation
+
   end
 
   def abandonar

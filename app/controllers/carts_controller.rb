@@ -15,6 +15,9 @@ class CartsController < ApplicationController
   def add
     @carrito.add(params[:producto_id], params[:cantidad])
     render json: @carrito.to_json, status: 200
+    if current_usuario.coordinador? and !@carrito.producto?(296)
+      @carrito.add(296, 1)
+    end
   end
 
   def remove
