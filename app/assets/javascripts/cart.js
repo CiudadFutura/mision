@@ -62,4 +62,8 @@ $(document).ready(function() {
         }
 
     });
+
+    $('#finalizar').on('click', function(){
+        $('#finalizar').attr("disabled", true);
+    });
 })
