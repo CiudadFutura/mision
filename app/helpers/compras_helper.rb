@@ -1,16 +1,16 @@
 module ComprasHelper
   def get_cycle_image(text)
     img = ''
-    if text.include?('Distrito 3')
+    if text.include?('D3')
       img = 'v2/oeste.png'
     end
-    if text.include?('Distritos 1 y 4')
+    if text.include?('D1 y D4')
       img = 'v2/uno_cuatro.png'
     end
-    if text.include?('Distritos 2 y 5')
+    if text.include?('D2 y D5')
       img = 'v2/dos_cinco.png'
     end
-    if text.include?('Distrito 6')
+    if text.include?('D6')
       img = 'v2/centro.png'
     end
     if text.include?('Moreno')
