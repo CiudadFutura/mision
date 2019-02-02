@@ -9,7 +9,8 @@ class ComprasController < ApplicationController
       @compras = Compra.paginate(page: params[:page], per_page: 10).order(fecha_inicio_compras: :desc).limit(6)
       render 'compras/index_admin'
     else
-      @compras = Compra.order(fecha_inicio_compras: :desc).limit(6)
+      @compras = Compra.cycles_list.limit(6)
+      @compras = Compra.order(fecha_inicio_compras: :desc).limit(6) if @compras.blank?
     end
   end
 

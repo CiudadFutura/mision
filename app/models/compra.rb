@@ -15,6 +15,8 @@ class Compra < ActiveRecord::Base
 
   after_initialize :init
 
+  scope :cycles_list, -> { where('fecha_inicio_compras > :today', today: Time.current).order(:fecha_inicio_compras) }
+
 
   def self.ciclo_actual
     Compra.where('fecha_inicio_compras <= :today AND fecha_fin_compras >= :today', today: Time.current)
