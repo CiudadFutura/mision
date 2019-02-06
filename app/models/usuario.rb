@@ -84,7 +84,6 @@ class Usuario < ActiveRecord::Base
   end
 
   def pedido_del_ciclo(ciclo_de_compra)
-    puts ciclo_de_compra
     return nil if ciclo_de_compra.blank?
     pedido = self.pedidos.where(compra_id: ciclo_de_compra.id)
     return pedido if pedido
@@ -108,6 +107,12 @@ class Usuario < ActiveRecord::Base
       enabled = true if enabled == false and cycle.tipo == 'free'
     end
     return enabled
+  end
+
+  def self.get_coordinators_without_orders(cycle)
+    Usuario
+      .joins(:pedidos)
+      .where('pedidos.compra_id = :id', id: cycle)
   end
 
   def self.new_users_per_month

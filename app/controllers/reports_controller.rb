@@ -23,4 +23,11 @@ class ReportsController < ApplicationController
 
   end
 
+  def coordinators_without_orders
+    @ciclos = Compra.order(:fecha_inicio_compras).last(10)
+    if params[:ciclo_id].present?
+      @coordinators = Usuario.get_coordinators_without_orders(params[:ciclo_id])
+    end
+  end
+
 end

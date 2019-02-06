@@ -87,6 +87,9 @@ Rails.application.routes.draw do
     collection do
       get 'circles_list'
     end
+    collection do
+      get 'coordinators_without_orders'
+    end
   end
 
   resource :cart, only: [:show] do
