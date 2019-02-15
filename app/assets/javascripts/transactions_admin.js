@@ -14,7 +14,7 @@ $(document).ready(function () {
                     'Precio: '+ $(obj).find('[data-item-precio]').data('item-precio') +'\n';
             }
         });
-        amount.val(total);
+        amount.val(parseFloat(total).toFixed(2));
         description.val(detalle);
     });
 
