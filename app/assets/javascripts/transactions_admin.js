@@ -14,7 +14,7 @@ $(document).ready(function () {
                     'Precio: '+ $(obj).find('[data-item-precio]').data('item-precio') +'\n';
             }
         });
-        amount.val(total);
+        amount.val(parseFloat(total).toFixed(2));
         description.val(detalle);
     });
 
@@ -46,7 +46,7 @@ $(document).ready(function () {
             '<td data-item-cantidad="'+cantidad.val()+'" class="text-right"><input class="form-control" id="producto_cantidad" name="no_producto_cantidad_'+index+'" type="hidden" value="'+cantidad.val()+'">'+cantidad.val()+'</td>' +
             '<td class="text-right" data-item-total="'+subTotal+'"><input class="form-control" id="producto_total" name="no_producto_total_'+index+'" type="hidden" value="'+subTotal+'">$'+subTotal+'</td></tr>';
         $("#pord-pedidos").append(row);
-        $('#transaction_amount').val(total + subTotal);
+        $('#transaction_amount').val(parseFloat(total + subTotal).toFixed(2));
         $('#transaction_description').val(detalleadd);
         nombre.val('');
         precio.val('');
