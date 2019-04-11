@@ -122,7 +122,8 @@
     !current_usuario.pedido?(Compra:@current_cycle) && current_usuario.completed? %>
     <div class="row text-right">
       <%= link_to('Finalizar Compra', create_pedido_path, method: :get, class: "btn btn-success #{'disabled' if @missing.present?}",
-                  id: 'finalizar') %>
+                  id: 'finalizar',
+                  data: {disable_with: 'Espere...'}) %>
     </div>
   <% end %>
 <% else %>
