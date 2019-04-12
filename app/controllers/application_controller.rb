@@ -80,8 +80,8 @@ class ApplicationController < ActionController::Base
                         :current_password,:terminos, :email_invitado_1,
                         :email_invitado_2, :email_invitado_3, :email_invitado_4, role_ids:[],
                         circulo_attributes:[:coordinador_id, :warehouse_id]]
-    devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(permitted_params) }
-    devise_parameter_sanitizer.for(:account_update) { |u| u.permit(permitted_params) }
+    devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(permitted_params) }
+    devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(permitted_params) }
   end
 
   def authenticate
