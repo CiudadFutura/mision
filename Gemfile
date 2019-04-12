@@ -29,7 +29,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Authentication: https://github.com/plataformatec/devise
-gem 'devise', '3.5.6'
+gem 'devise', '~> 4.6'
 # Authorization: https://github.com/ryanb/cancan/wiki
 gem 'cancan'
 gem 'bcrypt-ruby'
