@@ -110,9 +110,10 @@ class Usuario < ActiveRecord::Base
   end
 
   def self.get_coordinators_without_orders(cycle)
+    role = Usuario::COORDINADOR
     Usuario
-      .joins(:pedidos)
-      .where('pedidos.compra_id = :id', id: cycle)
+      .joins(:pedidos, :roles)
+      .where('pedidos.compra_id = :id and roles.name = :role', id: cycle, role: role)
   end
 
   def self.new_users_per_month
