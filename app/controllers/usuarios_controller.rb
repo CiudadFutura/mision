@@ -119,7 +119,7 @@ class UsuariosController < ApplicationController
         if !circulo.completo? || circulo.special_type.present?
           current_usuario.circulo = circulo
           current_usuario.save!
-          message = { notice: 'El usuario a sido agregado a tu circulo.' }
+          message = { notice: 'El usuario ha sido agregado a tu circulo.' }
         elsif !current_usuario.circulo.nil?
           message = { alert: 'El usuario ya pertenece a un circulo.' }
         elsif circulo.completo?

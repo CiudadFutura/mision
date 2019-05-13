@@ -127,7 +127,7 @@ class CirculosController < ApplicationController
         usuario.confirmation_token_circle = token
         usuario.save!
         #InvitationMailer.send_confirmation_circle(usuario, circulo)
-        message = { notice: "El usuario a sido agregado a tu circulo." }
+        message = { notice: "El usuario ha sido agregado a tu circulo." }
       elsif !usuario.circulo.nil?
         message = { alert: "Error: El usuario ya pertenece a un circulo." }
       elsif circulo.completo?
@@ -150,9 +150,9 @@ class CirculosController < ApplicationController
     usuario.circulo = nil
     usuario.save!
     if current_usuario.admin?
-      redirect_to circulo_path(circulo), notice: 'El usuario a sido eliminado del circulo.'
+      redirect_to circulo_path(circulo), notice: 'El usuario ha sido eliminado del circulo.'
     else
-      redirect_to usuario_path(current_usuario), notice: 'El usuario a sido eliminado del circulo.'
+      redirect_to usuario_path(current_usuario), notice: 'El usuario ha sido eliminado del circulo.'
     end
   end
 
