@@ -903,18 +903,19 @@ h3.title:after,
 .snipcart-details input.button,
 .snipcart-details button{
   .btn-success{
+    background: #4cae4c;  
+  }
+  .btn-danger{
+    background: $color-bordeaux;  
+  }
+
   color: #fff;
-  background: #FA1818;
+  
   text-decoration: none;
   position: relative;
   border: none;
   border-radius: 0;
   outline: none;
-}
-.agile_top_brand_left_grid:hover
-.snipcart-details input.button,
-.snipcart-details input.button:hover{
-  background: #84C639;
 }
 .product_list_header input.button,
 .product_list_header a{
