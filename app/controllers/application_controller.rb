@@ -4,10 +4,10 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   rescue_from ActionController::RoutingError, :with => :render_404
 
-  before_filter :init_carrito
-  before_filter :categorias_menu
-  before_filter :configure_permitted_parameters, if: :devise_controller?
-  before_filter :get_current_cycle
+  before_action :init_carrito
+  before_action :categorias_menu
+  before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :get_current_cycle
 
   layout :choose_layout
 

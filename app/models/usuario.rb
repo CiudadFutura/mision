@@ -7,6 +7,7 @@ class Usuario < ActiveRecord::Base
 
   validates_format_of :email,:with => Devise.email_regexp
   validates_uniqueness_of :email
+  validates_format_of :cel1, :with => /\A(?:(?:00)?549?)?0?(?:11|[2368]\d)(?:(?=\d{0,2}15)\d{2})??\d{8}\z/, message: 'Ingrese un número de celular válido'
 
   belongs_to :circulo
   has_many :pedidos

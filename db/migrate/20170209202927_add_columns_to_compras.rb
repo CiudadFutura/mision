@@ -1,4 +1,4 @@
-class AddColumnsToCompras < ActiveRecord::Migration
+class AddColumnsToCompras < ActiveRecord::Migration[5.0]
   def change
 		add_column :compras, :fecha_inicio_pagos, :datetime, after: :fecha_fin_compras
 		add_column :compras, :fecha_inicio_armado, :datetime, after: :fecha_inicio_pagos

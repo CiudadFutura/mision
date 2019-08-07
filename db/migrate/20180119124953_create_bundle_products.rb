@@ -1,4 +1,4 @@
-class CreateBundleProducts < ActiveRecord::Migration
+class CreateBundleProducts < ActiveRecord::Migration[5.0]
   def change
     create_table :bundle_products do |t|
       t.integer :producto_id

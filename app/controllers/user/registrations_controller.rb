@@ -2,7 +2,7 @@ class User::RegistrationsController < Devise::RegistrationsController
   prepend_before_filter :require_no_authentication, only: [:new, :create, :cance, ]
   prepend_before_filter :authenticate_scope!, :only => [:edit, :update, :destroy]
 
-  before_filter :configure_permitted_parameters
+  before_action :configure_permitted_parameters
 
   prepend_view_path 'app/views/devise'
 

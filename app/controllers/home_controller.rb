@@ -29,6 +29,8 @@ class HomeController < ApplicationController
           circulo = Circulo.find(current_usuario.circulo_id)
           @compra = circulo.next_delivery
         end
+        @orders = current_usuario.pedidos
+        @details = @orders.includes(:pedidos_details).all
         page = 'home/home_coord'
     end
     if current_usuario.present? and current_usuario.usuario?

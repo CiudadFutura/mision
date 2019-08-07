@@ -1,4 +1,4 @@
-class AddCircleConfirmationFields < ActiveRecord::Migration
+class AddCircleConfirmationFields < ActiveRecord::Migration[5.0]
   def change
     add_column :usuarios, :confirmed_circle_at, :datetime, after: :unconfirmed_email
     add_column :usuarios, :confirmation_token_circle, :string, after: :confirmed_circle_at

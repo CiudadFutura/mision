@@ -23,8 +23,9 @@
 //= require jquery.validate.localization/messages_es
 //= require jquery-ui/widgets/autocomplete
 //= require jquery.flexslider-min
-//= require Chart
 //= require autocomplete-rails
+//= require Chart.bundle
+//= require chartkick
 
 
 $(document).ready(function() {

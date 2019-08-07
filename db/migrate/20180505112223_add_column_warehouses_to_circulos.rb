@@ -1,5 +1,5 @@
-class AddColumnWarehousesToCirculos < ActiveRecord::Migration
+class AddColumnWarehousesToCirculos < ActiveRecord::Migration[5.0]
   def change
-    add_column :circulos, :warehouse_id, :integer
+    #add_column :circulos, :warehouse_id, :integer
   end
 end

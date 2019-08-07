@@ -1,4 +1,4 @@
-class SuppliersNewColumnForEvo < ActiveRecord::Migration
+class SuppliersNewColumnForEvo < ActiveRecord::Migration[5.0]
   def change
     add_column :suppliers, :operation_type, :text
     add_column :suppliers, :iva_condition, :text

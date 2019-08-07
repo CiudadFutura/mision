@@ -86,13 +86,13 @@ class Producto < ActiveRecord::Base
   def get_related_products(categoria)
     #get random products
     Producto.joins(:categorias).where('productos.oculto = false AND categorias.id = :id OR categorias.parent_id = :id ',
-                             id: categoria).order("RAND()").limit(3) if categoria
+      id: categoria).order("RAND()").limit(3) if categoria
   end
 
   def self.get_offers_products
     #get random products
     Producto.joins(:supplier).where('productos.oculto = false AND suppliers.nature = :id',
-                                      id: 1).order("RAND()").limit(8)
+      id: 1).order("RAND()").limit(8)
   end
 
   def self.search(term)
@@ -102,6 +102,18 @@ class Producto < ActiveRecord::Base
   def bundle_products_for_form
     collection = bundle_products.where(item_id: id)
     collection.any? ? collection : bundle_products.build
+  end
+
+  def self.most_category_purchased
+    Producto.joins(:categorias_productos)
+      .joins(:pedidos_details)
+      .group('pedidos_categorias.categoria_id')
+      .pluck("product_name, sum(product_qty) as quantity_sum")
+  end
+
+  def variation_price
+
+
   end
 
   def self.import(file)

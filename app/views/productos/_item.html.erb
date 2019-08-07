@@ -16,7 +16,7 @@
                 <% end %>
               <% else %>
                 <%= link_to producto_path(producto.id) do%>
-                  <%= image_tag(producto.imagen, class: 'img-responsive', height: '140px', width: '150px') %>
+                  <%= image_tag(producto.imagen.url, class: 'img-responsive', height: '140px', width: '150px') %>
                 <% end %>
               <% end %>
               <div class="col-md-12">

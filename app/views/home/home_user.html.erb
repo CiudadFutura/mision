@@ -166,11 +166,141 @@
       </div>
     </div>
   <% end %>
+  <div class="row">
+    <div id="canvas-holder">
+      <canvas id="myChart"></canvas>
+    </div>
+  </div>
+  <% charts_get_years_path  %>
+  <%= @years.to_yaml  %>
+  <%= bar_chart current_usuario.pedidos.group_by_period(:year, :created_at).count %>
+  <%= pie_chart current_usuario.pedidos.last.most_purchased_by_categories, legend: "bottom"  %>
 
-
+  <%= line_chart current_usuario.pedidos.group_by_month(:created_at, last: 12).sum('pedidos.total / 100'),
+                 title: 'Monthly Spending For Last Year',
+                 colors: ['green'],
+                 library: {
+                   yAxis: {
+                     labels: {
+                       format: '${value}',
+                     }
+                   },
+                   animation: {
+                     animateScale: true,
+                     animateRotate: true
+                   },
+                   tooltips: {
+                     pointFormat: 'Total Spent: <b>{point.y}</b>',
+                     xDateFormat: '%B',
+                     valuePrefix: '$',
+                     displayColors:true,
+                     mode: 'nearest',
+                     intersect: true,
+                     xPadding: 25,
+                   }
+                 }, code:true
+  %>
 </div>
 
+<script>
+  let myChart = document.getElementById('myChart').getContext('2d');
 
+  let massOrdersChart = new Chart(myChart,{
+      type:'bar',
+      data:{
+          labels:['2015', '2016', '2017', '2018', '2019'],
+          datasets:[{
+              label: 'Pedidos',
+              data:[
+                  100,
+                  210,
+                  21,
+                  4,
+                  310
+              ]
+
+          }]
+      },
+      options: {
+          tooltips: {
+              // Disable the on-canvas tooltip
+              enabled: false,
+
+              custom: function(tooltipModel) {
+                  // Tooltip Element
+                  var tooltipEl = document.getElementById('chartjs-tooltip');
+                  var txtHTML = '';
+
+                  // Create element on first render
+                  if (!tooltipEl) {
+                      tooltipEl = document.createElement('div');
+                      tooltipEl.id = 'chartjs-tooltip';
+                      tooltipEl.innerHTML = '<table></table>';
+                      document.body.appendChild(tooltipEl);
+                  }
+
+                  // Hide if no tooltip
+                  if (tooltipModel.opacity === 0) {
+                      tooltipEl.style.opacity = 0;
+                      return;
+                  }
+
+                  // Set caret Position
+                  tooltipEl.classList.remove('above', 'below', 'no-transform');
+                  if (tooltipModel.yAlign) {
+                      tooltipEl.classList.add(tooltipModel.yAlign);
+                  } else {
+                      tooltipEl.classList.add('no-transform');
+                  }
+
+                  function getBody(bodyItem) {
+                      return bodyItem.lines;
+                  }
+
+                  // Set Text
+                  if (tooltipModel.body) {
+                      var titleLines = tooltipModel.title || [];
+                      var bodyLines = tooltipModel.body.map(getBody);
+
+                      txtHTML = '<thead>';
+
+                      titleLines.forEach(function(title) {
+                          txtHTML += '<tr><th>' + title + '</th></tr>';
+                      });
+                      txtHTML += '</thead><tbody>';
+
+                      bodyLines.forEach(function(body, i) {
+                          var colors = tooltipModel.labelColors[i];
+                          var style = 'background:' + colors.backgroundColor;
+                          style += '; border-color:' + colors.borderColor;
+                          style += '; border-width: 2px';
+                          var span = '<span style="' + style + '"></span>';
+                          txtHTML += '<tr><td>' + span + body + '</td></tr>';
+                      });
+                      txtHTML += '</tbody>';
+
+                      var tableRoot = tooltipEl.querySelector('table');
+                      tableRoot.innerHTML = txtHTML;
+                  }
+
+                  // `this` will be the overall tooltip
+                  var position = this._chart.canvas.getBoundingClientRect();
+
+                  // Display, position, and set styles for font
+                  tooltipEl.style.opacity = 1;
+                  tooltipEl.style.position = 'absolute';
+                  tooltipEl.style.left = position.left + window.pageXOffset + tooltipModel.caretX + 'px';
+                  tooltipEl.style.top = position.top + window.pageYOffset + tooltipModel.caretY + 'px';
+                  tooltipEl.style.fontFamily = tooltipModel._bodyFontFamily;
+                  tooltipEl.style.fontSize = tooltipModel.bodyFontSize + 'px';
+                  tooltipEl.style.fontStyle = tooltipModel._bodyFontStyle;
+                  tooltipEl.style.padding = tooltipModel.yPadding + 'px ' + tooltipModel.xPadding + 'px';
+                  tooltipEl.style.pointerEvents = 'none';
+              }
+          }
+      }
+  })
+</script>
 
 
 

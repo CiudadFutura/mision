@@ -1,4 +1,4 @@
-class AddStatusAndCheckpointToCirculosCompras < ActiveRecord::Migration
+class AddStatusAndCheckpointToCirculosCompras < ActiveRecord::Migration[5.0]
   def change
     add_column :circulos_compras, :checkpoint, :integer
     add_column :circulos_compras, :delivery_time, :datetime

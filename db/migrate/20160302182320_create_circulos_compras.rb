@@ -1,4 +1,4 @@
-class CreateCirculosCompras < ActiveRecord::Migration
+class CreateCirculosCompras < ActiveRecord::Migration[5.0]
   def change
     create_table :circulos_compras do |t|
       t.belongs_to :circulo

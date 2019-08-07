@@ -69,6 +69,47 @@ class Pedido < ActiveRecord::Base
     return pedidos_por_ciclos
   end
 
+  def most_purchased_by_categories
+    Pedido.joins(:pedidos_details)
+      .joins('INNER JOIN categorias_productos on categorias_productos.producto_id = pedidos_details.product_id')
+      .joins('INNER JOIN categorias on categorias_productos.categoria_id = categorias.id')
+      .where("categorias.parent_id = 0")
+      .group("categorias.nombre")
+      .order("quantity_sum desc")
+      .pluck("categorias.nombre, sum(pedidos_details.product_qty) as quantity_sum")
+  end
+
+  def self.most_purchased_by_year(user_id)
+    Pedido.joins(:pedidos_details)
+      .joins('INNER JOIN categorias_productos on categorias_productos.producto_id = pedidos_details.product_id')
+      .joins('INNER JOIN categorias on categorias_productos.categoria_id = categorias.id')
+      .where("categorias.parent_id = 0")
+      .group("year(pedidos.created_at), categorias.nombre")
+      .pluck("year(pedidos.created_at), categorias.nombre, sum(pedidos_details.product_qty) as quantity_sum")
+  end
+=begin
+SELECT year(pe.created_at) as year, month(pe.created_at) as month,c.nombre, sum(pd.product_qty)
+from pedidos_details pd
+    inner join pedidos pe on pe.id = pd.pedido_id
+    inner join productos p on p.id = pd.product_id
+    inner join categorias_productos cp on cp.producto_id = p.id
+    inner join categorias c on cp.categoria_id = c.id
+    inner join usuarios u on u.id = pe.usuario_id
+where u.id = 651 and c.parent_id = 0
+group by year(pe.created_at),month(pe.created_at), c.nombre
+=end
+
+  def self.get_orders_by_user(id)
+    Pedido.group('year(created_at)')
+    .order('qty_orders desc')
+    .where(usuario_id: id)
+    .pluck('year(created_at), count(id) as qty_orders ')
+  end
+
+  def by_year
+    render json: Pedido.group(:id).group_by_day(:completed_at).count.chart_json
+  end
+
   def self.orders_per_cycles
     Pedido.select('compras.nombre as name, count(pedidos.id) AS cycles,
               YEAR(compras.fecha_inicio_compras) as year,

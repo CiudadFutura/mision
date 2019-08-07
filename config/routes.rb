@@ -14,6 +14,12 @@ Rails.application.routes.draw do
 	end
 	resources :remitos_pedido
 	resources :warehouses
+  namespace :charts do
+    get 'users_new'
+    get 'orders_by_users'
+    get 'most_purchased_by_year'
+    get 'get_years'
+  end
 
 	get 'get_by_cycle_circle/:id/circulo=:circulo',
 			to: 'remitos_pedido#get_by_cycle_circle', as: :get_by_cycle_circle

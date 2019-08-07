@@ -1,4 +1,4 @@
-class CreateUsuarioRoles < ActiveRecord::Migration
+class CreateUsuarioRoles < ActiveRecord::Migration[5.0]
   def change
     create_table :usuario_roles do |t|
       t.integer :usuario_id

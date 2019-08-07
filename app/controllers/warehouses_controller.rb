@@ -1,11 +1,12 @@
 class WarehousesController < ApplicationController
 	before_action :set_warehouse, only: [:show, :edit, :update, :destroy]
-	authorize_resource
+  authorize_resource
 
 	# GET /warehouses
 	# GET /warehouses.json
 	def index
 		@warehouses = Warehouse.all
+
 	end
 
 	# GET /warehouses/1
