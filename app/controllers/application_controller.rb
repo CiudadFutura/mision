@@ -4,10 +4,10 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   rescue_from ActionController::RoutingError, :with => :render_404
 
-  before_filter :init_carrito
-  before_filter :categorias_menu
-  before_filter :configure_permitted_parameters, if: :devise_controller?
-  before_filter :get_current_cycle
+  before_action :init_carrito
+  before_action :categorias_menu
+  before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :get_current_cycle
 
   layout :choose_layout
 
@@ -77,7 +77,7 @@ class ApplicationController < ActionController::Base
     permitted_params = [:nombre, :apellido, :email, :'fecha_de_nacimiento(1i)',
       :'fecha_de_nacimiento(2i)', :'fecha_de_nacimiento(3i)', :dni, :calle, :role_ids,
       :ciudad, :codigo_postal, :tel1, :cel1, :type,  :password, :password_confirmation,
-                        :current_password,:terminos, :email_invitado_1,
+                        :current_password,:terminos, :email_invitado_1, :warehouse_id,
                         :email_invitado_2, :email_invitado_3, :email_invitado_4, role_ids:[],
                         circulo_attributes:[:coordinador_id, :warehouse_id]]
     devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(permitted_params) }

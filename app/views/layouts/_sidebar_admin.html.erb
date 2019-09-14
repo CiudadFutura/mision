@@ -74,6 +74,11 @@
             <% end %>
           </li>
           <li id="menu-academico-avaliacoes" >
+            <%= link_to productos_path(view_prod: 'wholesale') do %>
+              Mayoristas
+            <% end %>
+          </li>
+          <li id="menu-academico-avaliacoes" >
             <%= link_to productos_path() do %>
               Todos
             <% end %>
@@ -151,6 +156,23 @@
           <div class="clearfix"></div>
         <% end %>
       </li>
+      <% if 1==2 %>
+        <li id="menu-academico" >
+          <a href="#">
+            <i class="fa fa-file" aria-hidden="true"></i>
+            <span> Remitos</span>
+            <span class="fa fa-angle-right" style="float: right"></span>
+            <div class="clearfix"></div>
+          </a>
+          <ul id="menu-academico-sub" >
+            <li id="menu-academico-avaliacoes" >
+              <%= link_to remitos_pedido_index_path do %>
+                Remitos Pedidos
+              <% end %>
+            </li>
+          </ul>
+        </li>
+      <% end %>
     </ul>
   </div>
 </div>

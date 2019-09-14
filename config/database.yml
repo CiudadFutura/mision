@@ -12,12 +12,15 @@ default: &default
 development:
   <<: *default
   encoding: utf8
-  database: mision_prod
+  database: mision_dev
+  host: localhost
+  username: root
+  password: ''
 
 test:
   <<: *default
   encoding: utf8
-  database: mision_prod
+  database: mision_dev
 
 staging:
   <<: *default

@@ -7,7 +7,11 @@
   <div class="row">
     <h3>Hola <%= current_usuario.nombre %></h3>
   </div>
-
+  <% if !current_usuario.productor? %>
+    <div class="row">
+      <p> aca iría el cartelito de si queres ser</p>
+    </div>
+  <% end %>
   <br>
   <h4>¡Bienvenide a la Misión Anti Inflación!</h4>
   <br>

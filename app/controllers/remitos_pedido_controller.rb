@@ -2,7 +2,7 @@ class RemitosPedidoController < ApplicationController
 
   def index
     if current_usuario.admin?
-      @ciclos = Compra.all.order('fecha_fin_compras DESC')
+      @ciclos = Compra.all.order('fecha_fin_compras').last(10)
       if params[:ciclo_id]
         if params[:circulo_id].present?
           pedidos = Pedido.where(compra_id: params[:ciclo_id],circulo_id: params[:circulo_id])

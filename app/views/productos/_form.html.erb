@@ -143,6 +143,14 @@
             </div>
           </div>
         </div>
+        <div class="col-sm-12">
+          <div class="control-group">
+            <%= f.label :wholesale, :class => 'control-label' %>
+            <div class="controls">
+              <%= f.check_box :wholesale, :class => 'form-control' %>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -151,7 +159,7 @@
         <% if @producto.imagen.blank? %>
           <%= image_tag('image-not-found.png', :height => '60%', :width => '60%') %>
         <% else %>
-          <%= image_tag(@producto.imagen, :height => '60%', :width => '60%') %>
+          <%= image_tag(@producto.imagen.url, :height => '60%', :width => '60%') %>
         <% end %>
       </div>
       <div class="col-sm-6">  

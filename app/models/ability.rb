@@ -8,7 +8,7 @@ class Ability
 
     if user.admin?
       can :manage, :all
-    elsif user.coordinador?
+    elsif user.coordinador? || user.productor?
       can [:manage, :add_usuario, :remove_usuario], Circulo
       can [:read, :create, :update], Usuario, { :id => user.id }
       can [:read], Account, { :usuario_id => user.id }
@@ -16,7 +16,7 @@ class Ability
       can [:read], Warehouse
       can [:read, :create, :update], Pedido, { :usuario_id => user.id }
       can [:download_pdf], Pedido
-    elsif user.usuario?
+    elsif user.usuario? || user.productor?
       can [:read], Compra
       can [:create], Circulo
       can [:read, :create, :update], Usuario, { :id => user.id }

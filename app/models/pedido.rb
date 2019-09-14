@@ -133,6 +133,16 @@ class Pedido < ActiveRecord::Base
 
   end
 
+  def self.remittance_order
+    Pedido
+      .select('productos.id as product_id, pedidos.circulo_id, productos.pack, pedidos_details.product_name,
+        sum(pedidos_details.product_qty) as qty, usuarios.apellido as apellido')
+      .joins(:pedidos_details)
+      .joins(:usuario)
+      .joins('INNER JOIN productos ON productos.id = pedidos_details.product_id')
+      .group('productos.id,pedidos.circulo_id,productos.pack, pedidos.usuario_id, productos.orden_remito,pedidos_details.product_name, pedidos_details.product_qty ')
+      .order('productos.orden_remito')
+  end
 
   def has_missing?
     missing = false
