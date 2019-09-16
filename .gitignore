@@ -37,4 +37,3 @@ uploads
 .idea/workspace.xml
 *.patch
 
-/db/json/
