@@ -211,6 +211,49 @@ class Pedido < ActiveRecord::Base
     end
   end
 
+  def self.quotes(pedidos)
+    quote = {}
+
+    pedidos.each do |pedido|
+      pedido.pedidos_details.each do |detail|
+        product = Producto.find(detail.product_id) rescue nil
+        consumer = Usuario.find(pedido.usuario_id) rescue nil
+        circle_id = pedido.circulo_id
+        rubro = I18n.t(product.pack)
+
+        unless quote.has_key?(circle_id)
+          quote[circle_id] = {
+            rubros: {}
+          }
+        end
+
+        unless quote[circle_id][:rubros].has_key?(rubro)
+          quote[circle_id][:rubros][rubro] = {
+            products: {}
+          }
+        end
+
+        unless quote[circle_id][:rubros][rubro][:products].has_key?(product.nombre)
+          quote[circle_id][:rubros][rubro][:products][product.nombre] = {
+            consumers: {}
+          }
+        end
+
+        if quote[circle_id][:rubros][rubro][:products][product.nombre][:consumers].has_key?(consumer.id)
+          quote[circle_id][:rubros][rubro][:products][product.nombre][:consumers][consumer.id][:qty] += detail.product_qty
+        else
+          quote[circle_id][:rubros][rubro][:products][product.nombre][:consumers][consumer.id] = {}
+          quote[circle_id][:rubros][rubro][:products][product.nombre][:consumers][consumer.id][:name] = consumer.nombre + ' ' + consumer.apellido
+          quote[circle_id][:rubros][rubro][:products][product.nombre][:consumers][consumer.id][:qty] = detail.product_qty
+          quote[circle_id][:rubros][rubro][:products][product.nombre][:consumers][consumer.id][:orden_remito] = product.orden_remito || ''
+        end
+
+
+      end
+    end
+    quote
+  end
+
   def self.remitos(pedidos)
     reporte = {}
 
