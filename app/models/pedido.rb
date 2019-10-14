@@ -211,6 +211,28 @@ class Pedido < ActiveRecord::Base
     end
   end
 
+  def self.consumers(pedidos)
+    users = {}
+    pedidos.each do |circulo_id, rubros |
+      rubros[:rubros].each do |rubro, products|
+        products[:products].each do |product, consumers|
+          consumers[:consumers].each do |consumer|
+            currentConsumer = Usuario.find(consumer[0]) rescue nil
+            unless users.has_key?(currentConsumer.id)
+              users[currentConsumer.id] = {}
+            end
+            if users.has_key?(currentConsumer.id)
+              users[currentConsumer.id][:name] = currentConsumer.nombre + ' ' + currentConsumer.apellido
+              users[currentConsumer.id][:firstName] = currentConsumer.nombre
+              users[currentConsumer.id][:lastName] = currentConsumer.apellido
+            end
+          end
+        end
+      end
+    end
+    users
+  end
+
   def self.quotes(pedidos)
     quote = {}
 
@@ -245,10 +267,9 @@ class Pedido < ActiveRecord::Base
           quote[circle_id][:rubros][rubro][:products][product.nombre][:consumers][consumer.id] = {}
           quote[circle_id][:rubros][rubro][:products][product.nombre][:consumers][consumer.id][:name] = consumer.nombre + ' ' + consumer.apellido
           quote[circle_id][:rubros][rubro][:products][product.nombre][:consumers][consumer.id][:qty] = detail.product_qty
+          quote[circle_id][:rubros][rubro][:products][product.nombre][:consumers][consumer.id][:total_line] = detail.total_line
           quote[circle_id][:rubros][rubro][:products][product.nombre][:consumers][consumer.id][:orden_remito] = product.orden_remito || ''
         end
-
-
       end
     end
     quote

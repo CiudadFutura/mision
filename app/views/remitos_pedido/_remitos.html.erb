@@ -1,34 +1,56 @@
-<% @reporte.each do |circulo_id, circulo|  %>
-		<% circulo[:grupos].each do |grupo_id, grupo| %>
-				<table class='table table-bordered' data-search="true">
-					<thead>
-					<tr>
-						<td colspan="4">
-							<h3 class="text-center">Círculo N°: <%=circulo_id %></h3>
-						</td>
-					</tr>
-					<tr>
-						<td colspan="4">
-							<h4 class="text-center"><%= grupo_id %></h4>
-						</td>
-					</tr>
-					<tr>
-						<td>Cantidad</td>
-						<td>Item</td>
-						<td>Comp</td>
-						<td>Falta</td>
-					</tr>
-					</thead>
-					<tbody>
-					<% grupo[:productos].each do |product| %>
-							<tr>
-								<td><%= product[:qty] %></td>
-								<td class="<%= product[:faltante] ? 'faltante':''%>"><%= product[:name] %></td>
-								<td><%= !product[:faltante] ? image_tag("Check.png", class:'img-responsive', size:"25x25") : ''%></td>
-								<td><%= product[:faltante] ? image_tag("Delete.png", class:'img-responsive', size:"25x25") : ''%></td>
-							</tr>
-					<% end %>
-					</tbody>
-				</table>
-		<% end %>
-<% end %>
+<% colNumbers = @consumers.count + 2 %>
+<% done = false %>
+<div class="quote">
+  <table class='table table-bordered' data-search="true">
+    <% @remitos.each do |circulo_id, circulos|  %>
+      <thead>
+      <tr>
+        <th class="text-center" colspan="<%= colNumbers %>">
+          <h3>Círculo Nº:<%= circulo_id %></h3>
+        </th>
+      </tr>
+      <tr>
+        <th></th>
+        <%@consumers.each do |consumer_id, index|  %>
+          <th class="text-center"><b><%= index[:name] %></b></th>
+        <% end %>
+        <th class="text-center">Total</th>
+      </tr>
+      <% circulos[:rubros].each do |rubro, productos|  %>
+        <tr>
+          <td class="text-center" colspan="<%= colNumbers %>">
+            <h4><%= rubro %></h4>
+          </td>
+        </tr>
+        <% productos[:products].each do |product, consumers|  %>
+          <% qtyTotal = 0 %>
+          <tr>
+            <td>
+              <p><%= product %></p>
+            </td>
+            <% @consumers.each do |consumer_id, index|  %>
+              <% consumers[:consumers].each do |consumer, data|  %>
+                <% if consumer_id == consumer and !done   %>
+                  <td class="text-center">
+                    <p><%= data[:qty] %></p>
+                    <% qtyTotal = qtyTotal + data[:qty] %>
+                  </td>
+                  <% done = true %>
+                <% end %>
+              <% end %>
+              <% if done  %>
+                <% done = false %>
+                <% next %>
+              <% end %>
+              <td class="text-center">
+                <p>0</p>
+              </td>
+            <% end %>
+            <td class="text-center"><b><%= qtyTotal %></b></td>
+          </tr>
+        <% end %>
+      <% end %>
+      </thead>
+    <% end %>
+  </table>
+</div>

@@ -10,6 +10,8 @@ class RemitosPedidoController < ApplicationController
           pedidos = Pedido.where(compra_id: params[:ciclo_id])
         end
         @reporte = Pedido.remitos(pedidos)
+        @remitos = Pedido.quotes(pedidos)
+        @consumers = Pedido.consumers(@remitos)
       end
     end
   end
