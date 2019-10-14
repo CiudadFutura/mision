@@ -1,20 +1,74 @@
 <div class="center-section">
-  <h3>Hola <%= current_usuario.nombre %></h3>
+  <% flash.each do |key, value| %>
+    <div class="<%= flash_class(key) %>">
+      <%= value %>
+    </div>
+  <% end %>
+  <div class="row">
+    <h3>Hola <%= current_usuario.nombre %></h3>
+  </div>
   <br>
-  <h4>¡Bienvenide a la Misión Anti Inflación!</h4>
+  <div class="row">
+    <div class="col-md-12">
+      <h4>¡Bienvenide a la Misión Anti Inflación!</h4>
+    </div>
+  </div>
   <br>
-  <p>Muchas gracias por asociarte y formar junto con nosotres un mercado alternativo.</p>
+  <div class="row">
+    <div class="col-md-12">
+      <p>Muchas gracias por asociarte y formar junto con nosotres un mercado alternativo.</p>
+    </div>
+  </div>
   <br>
-  <p>Desde esta sección vas a poder:</p>
-  <br>
-  <ul>
-    <li>Modificar tus datos personales</li>
-    <li>Gestionar tu círculo</li>
-    <li>Ver tus pedidos y descargar tus facturas</li>
-  </ul>
-  <br>
-  <br>
+  <% if !current_usuario.productor? %>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="panel panel-danger">
+          <div class="panel-heading">
+            <div class="col-md-3">
+              <%= image_tag('v2/logoImpulsarHorizontal.png', class: 'img-responsive', width: '150px') %>
+            </div>
+            <div class="col-md-9">
+              <p>
+                Compras Asociativas Impulsar » dirigido a emprendedorxs de panificación y repostería
+              </p>
+            </div>
+            <br>
+          </div>
+          <div class="panel-body">
+            <p>Si sos parte de un círculo de compras asociativas de Impulsar vas a poder asignarte el rol productor/a
+              cuando completes tus datos en tu <%= link_to(edit_usuario_path(current_usuario)) do %>
+                perfil
+              <% end %>.
 
+            </p>
+            <p>
+              Este dispositivo de compras asociativas está destinado a emprendedorxs de panificación y repostería, y
+              busca resolver de manera colectiva la posibilidad de bajar los costos de producción, así como
+              planificarla a mediano plazo para todo aquel emprendimiento que lo necesite.
+            </p>
+          </div>
+          <div class="panel-footer">
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <br>
+  <div class="row">
+    <div class="col-md-12">
+      <p>Desde esta sección vas a poder:</p>
+    </div>
+    <div class="col-md-11 col-md-offset-1">
+      <ul>
+        <li>Modificar tus datos personales</li>
+        <li>Gestionar tu círculo</li>
+        <li>Ver tus pedidos y descargar tus facturas</li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
   <% if !current_usuario.completed? or current_usuario.circulo.blank? %>
     <div class="row">
       <div class="col-sm-12">
@@ -42,7 +96,7 @@
             <li>
               Para más información sobre como realizar un pedido
               <%= link_to(como_compro_path(1)) do %>
-                Cómo comprar
+                Como comprar
               <% end %>
             </li>
           </ul>
@@ -52,24 +106,24 @@
   <% end %>
   <br>
   <div class="row">
-    <p>
-      Ante cualquier duda, escribinos al whatsapp de tu distrito o vía mail a <b>victoriacolectiva@gmail.com</b>
-    </p>
+    <div class="col-md-12">
+      <p>
+        Ante cualquier duda, escribinos al whatsapp de tu distrito o vía mail a <b>victoriacolectiva@gmail.com</b>
+      </p>
+    </div>
   </div>
   <br>
-  <br>
   <% if @current_cycle_complete.present? and @consumer_enabled_purchase.present? %>
-
     <div class="row">
-      <h4>Ciclo para hacer la compra <%= @current_cycle_complete.nombre %></h4>
-      <div class="col-sm-12">
+      <div class="col-md-12">
+        <h4>Ciclo para hacer la compra <%= @current_cycle_complete.nombre %></h4>
+      </div>
+      <div class="col-md-12">
         <div class="Timeline">
-
           <svg height="5" width="150">
             <line x1="0" y1="0" x2="150" y2="0" style="stroke:#004165;stroke-width:5" />
             No puedes ver la line porque tu navedador no soporta HMTL5
           </svg>
-
           <div class="event1">
             <div class="event1Bubble">
               <div class="eventTime">
