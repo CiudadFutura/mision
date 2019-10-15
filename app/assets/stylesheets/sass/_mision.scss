@@ -1220,6 +1220,14 @@ button.submit.check_out{
   overflow: hidden;
   z-index: 0;
 }
+.impulsar{
+  .ribbon{
+    span{
+      background: $color-bordeaux;
+      background: linear-gradient($color-bordeaux 0%, $color-bordeaux);
+    }
+  }
+}
 .thumbnails{
   margin-bottom: 4em;
 }
