@@ -20,41 +20,6 @@
     </div>
   </div>
   <br>
-  <% if !current_usuario.productor? %>
-    <div class="row">
-      <div class="col-md-12">
-        <div class="panel panel-danger">
-          <div class="panel-heading">
-            <div class="col-md-3">
-              <%= image_tag('v2/logoImpulsarHorizontal.png', class: 'img-responsive', width: '150px') %>
-            </div>
-            <div class="col-md-9">
-              <p>
-                Compras Asociativas Impulsar » dirigido a emprendedorxs de panificación y repostería
-              </p>
-            </div>
-            <br>
-          </div>
-          <div class="panel-body">
-            <p>Si sos parte de un círculo de compras asociativas de Impulsar vas a poder asignarte el rol productor/a
-              cuando completes tus datos en tu <%= link_to(edit_usuario_path(current_usuario)) do %>
-                perfil
-              <% end %>.
-
-            </p>
-            <p>
-              Este dispositivo de compras asociativas está destinado a emprendedorxs de panificación y repostería, y
-              busca resolver de manera colectiva la posibilidad de bajar los costos de producción, así como
-              planificarla a mediano plazo para todo aquel emprendimiento que lo necesite.
-            </p>
-          </div>
-          <div class="panel-footer">
-          </div>
-        </div>
-      </div>
-    </div>
-  <% end %>
-  <br>
   <div class="row">
     <div class="col-md-12">
       <p>Desde esta sección vas a poder:</p>
@@ -67,7 +32,6 @@
       </ul>
     </div>
   </div>
-
   <br>
   <% if !current_usuario.completed? or current_usuario.circulo.blank? %>
     <div class="row">
@@ -100,6 +64,41 @@
               <% end %>
             </li>
           </ul>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <br>
+  <% if !current_usuario.productor? %>
+    <div class="row">
+      <div class="col-md-6 col-md-offset-2">
+        <div class="panel panel-danger">
+          <div class="panel-heading">
+            <div class="col-md-3">
+              <%= image_tag('v2/logoImpulsarHorizontal.png', class: 'img-responsive', width: '150px') %>
+            </div>
+            <div class="col-md-9">
+              <p>
+                Compras Asociativas Impulsar » dirigido a emprendedorxs de panificación y repostería
+              </p>
+            </div>
+            <br>
+          </div>
+          <div class="panel-body">
+            <p>Si sos parte de un círculo de compras asociativas de Impulsar vas a poder asignarte el rol productor/a
+              cuando completes tus datos en tu <%= link_to(edit_usuario_path(current_usuario)) do %>
+                perfil
+              <% end %>.
+
+            </p>
+            <p>
+              Este dispositivo de compras asociativas está destinado a emprendedorxs de panificación y repostería, y
+              busca resolver de manera colectiva la posibilidad de bajar los costos de producción, así como
+              planificarla a mediano plazo para todo aquel emprendimiento que lo necesite.
+            </p>
+          </div>
+          <div class="panel-footer">
+          </div>
         </div>
       </div>
     </div>
