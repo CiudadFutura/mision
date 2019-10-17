@@ -6,9 +6,6 @@
 //= require jquery.validate
 //= require jquery.validate.additional-methods
 //= require jquery.validate.localization/messages_es
-//= require raphael
-//= require morris
-//= require jquery.nicescroll
 //= require jquery-ui/widgets/autocomplete
 //= require autocomplete-rails
 

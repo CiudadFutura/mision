@@ -23,7 +23,7 @@ class HomeController < ApplicationController
         @test = Pedido.orders_per_cycles
         page = 'home/admin_home'
     end
-    if current_usuario.present? and current_usuario.coordinador?
+    if current_usuario.present? and (current_usuario.coordinador? or current_usuario.productor?)
 
         if current_usuario.circulo_id.present?
           circulo = Circulo.find(current_usuario.circulo_id)
@@ -31,7 +31,7 @@ class HomeController < ApplicationController
         end
         page = 'home/home_coord'
     end
-    if current_usuario.present? and current_usuario.usuario?
+    if current_usuario.present? and (current_usuario.usuario? or current_usuario.productor?)
         if current_usuario.circulo_id.present?
           circulo = Circulo.find(current_usuario.circulo_id)
           @compra = circulo.next_delivery

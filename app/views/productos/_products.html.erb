@@ -19,6 +19,29 @@
       </div>
     </div>
   <% end %>
+  <% if @impulsarProducts.present? %>
+    <br>
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <div class="panel panel-danger">
+          <div class="panel-heading">
+            <div class="col-md-2">
+              <%= image_tag('v2/logoImpulsarHorizontal.png', class: 'img-responsive', width: '130px') %>
+            </div>
+            <div class="col-md-10">
+              Productos exclusivos para panadería y repostería
+            </div>
+            <br>
+          </div>
+          <div class="panel-body">
+            <% @impulsarProducts.each do |producto|%>
+              <%= render 'productos/itemImpulsar', producto: producto %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end  %>
   <div class="w3ls_w3l_banner_nav_right_grid1">
     <h6><%= Categoria.find(params[:subcategoria_id]).nombre if params[:subcategoria_id].present? %></h6>
     <% @productos.each do |producto|%>

@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 4.2', '>= 4.2.11'
+gem 'rails', '~> 5.2', '>= 5.2.3'
 # Use mysql as the database for Active Record in production
 gem 'mysql2', '~> 0.4.10'
 
@@ -12,7 +12,7 @@ gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
 gem 'sass-rails', '>= 3.2'
 
 # https://github.com/carrierwaveuploader/carrierwave
-gem 'carrierwave'
+gem 'carrierwave', '~> 1.3', '>= 1.3.1'
 gem 'mini_magick'
 
 gem 'tilt'
@@ -29,26 +29,29 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Authentication: https://github.com/plataformatec/devise
-gem 'devise', '~> 4.6'
+gem 'devise', '~> 4.6', '>= 4.6.2'
 # Authorization: https://github.com/ryanb/cancan/wiki
-gem 'cancan'
+gem 'cancancan', '~> 3.0', '>= 3.0.1'
 gem 'bcrypt-ruby'
 
 # Seed Migration: https://github.com/harrystech/seed_migration
 gem 'seed_migration'
 # Versioning models: https://github.com/airblade/paper_trail
-gem 'paper_trail', '~> 4.0.0.rc'
+gem 'paper_trail', '~> 9.0'
+# Create PDF
+gem 'wicked_pdf', '~> 1.1'
 # Creates Excel files: https://github.com/cxn03651/writeexcel/
 gem 'writeexcel'
 # Enable reading settings from yml file
 gem 'figaro'
-# Charts js
-gem 'morrisjs-rails', '~> 0.5.1.2'
-gem 'raphael-rails', '~> 2.1', '>= 2.1.2'
-gem 'nicescroll-rails', '~> 3.5', '>= 3.5.4.1'
-gem 'chart-js-rails', '~> 0.0.9'
+
+# Chartkick js
+gem 'chartkick', '~> 3.2'
 
 gem 'thin', '~> 1.7', '>= 1.7.2'
+
+# Group Update queries
+gem 'groupdate', '~> 4.1', '>= 4.1.2'
 
 # Flex slider
 gem 'flexslider', '~> 2.2'
@@ -66,7 +69,7 @@ group :development do
   gem 'spring'
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'rails_best_practices'
+  gem 'rails_best_practices', '~> 1.19', '>= 1.19.4'
   # Use Capistrano for deployment
   gem 'capistrano', '~> 3.11'
   gem 'capistrano-bundler', '~> 1.1.2'
@@ -91,7 +94,7 @@ gem 'jquery-validation-rails'
 gem 'jquery-ui-rails'
 
 # JQuery Autocomplete
-gem 'rails-jquery-autocomplete', '~> 1.0', '>= 1.0.3'
+gem 'rails-jquery-autocomplete', '~> 1.0', '>= 1.0.5'
 
 # full calendar
 gem 'fullcalendar-rails'
@@ -119,9 +122,9 @@ group :development, :test do
   gem 'pry-stack_explorer'
   gem 'byebug', '~> 4.0', '>= 4.0.5'
   gem 'simplecov'
-  gem 'rspec-rails', '~> 3.4.2'
+  gem 'rspec-rails', '~> 3.8', '>= 3.8.2'
   gem 'capybara'
-  gem 'shoulda-matchers'
+  gem 'shoulda-matchers', '~> 4.0', '>= 4.0.1'
   gem 'database_cleaner'
   gem 'factory_bot'
 end

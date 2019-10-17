@@ -33,6 +33,7 @@ class Usuario < ActiveRecord::Base
   USUARIO = 'Usuario'
   SISTEMA = 'Sistema'
   DIRECTOR = 'Director'
+  PRODUCTOR = 'Productor'
 
   def nombre
     super.nil? ? '' : super
@@ -73,6 +74,10 @@ class Usuario < ActiveRecord::Base
   def sistema?
     #self.roles.where(name: SISTEMA).exists?
     type == SISTEMA
+  end
+
+  def productor?
+    self.roles.where(name: PRODUCTOR).exists?
   end
 
   def pedido?(ciclo_de_compra)

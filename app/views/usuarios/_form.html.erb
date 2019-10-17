@@ -54,6 +54,55 @@
       <div class="col-sm-10"><%= f.select(:circulo_id, Circulo.all.map {|c| [ c.id, c.id ] }, class: 'form-control', include_blank: true) %></div>
     </div>
   <% end %>
+  <% if current_usuario && !current_usuario.admin? && !current_usuario.productor? %>
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Rol</label>
+      <div class="col-sm-10">
+        <% Role.all.each do |role| %>
+          <% if role.name == 'Productor' %>
+            <label><%= role.name %>
+              <%= check_box_tag 'usuario[role_ids][]', role.id, @usuario.roles.include?(role) %>
+            </label>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <% if @usuario.circulo_id.blank?  %>
+      <div class="form-group">
+        <%= f.fields_for :usuario_roles, @usuario.usuario_roles.build do |r| %>
+          <%= r.label :warehouse_id, class: 'col-sm-2 control-label' %>
+          <div class="col-sm-10">
+            <%= r.select :warehouse_id, Warehouse.all.map{|s| [s.name,s.id]}, :prompt => "Distrito..." %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  <% elsif current_usuario.productor? %>
+    <div class="row">
+      <div class="col-md-10 col-md-offset-2">
+        <div class="panel panel-danger">
+          <div class="panel-heading">
+            <div class="col-md-3">
+              <%= image_tag('v2/logoImpulsarHorizontal.png', class: 'img-responsive', width: '150px') %>
+            </div>
+            <div class="col-md-9">
+              <p>
+                Gracias por ser parte
+              </p>
+            </div>
+            <br>
+          </div>
+          <div class="panel-body">
+            <p>
+              Ya podes comprar productos de panificación y repostería cuando esté habilitado el ciclo de compra
+            </p>
+          </div>
+          <div class="panel-footer">
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
   <% if current_usuario && current_usuario.admin? %>
     <fieldset class="form-group">
       <div class="col-md-12">

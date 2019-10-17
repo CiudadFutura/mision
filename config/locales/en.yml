@@ -29,6 +29,13 @@ en:
     attributes:
       producto:
         supplier_id: Proveedor
+        wholesale: Productor
+        wholesaler: Almacén
+        freshes: Fescos
+        vegetables: Frutas y verduras
+        fragile: Frágiles
+        cleaning: Limpieza
+        warehouse: Almacén
       compra:
         warehouse: Distrito
         warehouses: Distritos

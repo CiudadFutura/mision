@@ -8,6 +8,7 @@ class Producto < ActiveRecord::Base
   has_many :bundle_products
   has_and_belongs_to_many :warehouses
   accepts_nested_attributes_for :bundle_products
+  belongs_to :pedidos_detail
 
   BUNDLE = 1
   SIMPLE = 0
@@ -24,6 +25,8 @@ class Producto < ActiveRecord::Base
   scope :not_selected, -> (warehouse) do
     joins("LEFT JOIN productos_warehouses pw ON productos.id = pw.producto_id AND pw.warehouse_id in (#{warehouse})").where(pw: {warehouse_id: nil})
   end
+  scope :notWholesaleProducts, -> {where(wholesale: false)}
+  scope :wholesaleProducts, -> {where(wholesale: true)}
 	scope :destacados, -> {where(highlight: true, oculto: false)}
 	scope :offers, -> {joins(:suppliers).where(highlight: true, oculto: false, nature: 1).order("RAND()").limit(3)}
   scope :ocultos, -> {where(oculto: true)}

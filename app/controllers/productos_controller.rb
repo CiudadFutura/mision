@@ -17,11 +17,16 @@ class ProductosController < ApplicationController
     if params['view_prod'] == 'visibles'
       session[:view_prod] = 'visibles'
     end
+    if params['view_prod'] == 'wholesale'
+      session[:view_prod] = 'wholesale'
+    end
     if params['view_prod'] == 'todos'
       session.delete(:view_prod)
     end
+
     @view_type = session[:view_type]
     @view_prod = session[:view_prod]
+    puts session[:view_prod]
 
     @todos = Producto.all
     if params[:categoria_id].blank?
@@ -36,8 +41,10 @@ class ProductosController < ApplicationController
     @productos = @productos.subcategoria(params[:categoria_id], params[:subcategoria_id]) if params[:subcategoria_id].present?
     @productos = @productos.disponibles if session['view_prod'] == 'visibles'
     @productos = @productos.ocultos if session['view_prod'] == 'ocultos'
+    @productos = @productos.wholesaleProducts if session['view_prod'] == 'wholesale'
     @productos = @productos.supplier(params[:supplier_id]) if params[:supplier_id]
     @productos = @productos.not_selected(@current_warehouses_ids) if @current_warehouses_ids.present? and current_usuario.present?
+    @impulsarProducts = @productos.wholesaleProducts if current_usuario.present? && current_usuario.productor? && !current_usuario.admin?
     @exclusives = Producto.warehouse_exclusive(@current_user_warehouse) if @current_user_warehouse.present? and current_usuario.present?
     @freesale = Producto.freesale
 
@@ -148,7 +155,7 @@ class ProductosController < ApplicationController
                                        :precio_super, :highlight, :oculto, :marca, :supplier_id,
                                        :pack, :faltante,:cantidad_permitida, :imagen, :stock,
                                        :orden_remito, :view_type, :product_type,
-																			 :sale_type,
+																			 :sale_type, :wholesale,
                                        bundle_products_attributes: [:id, :item_id, :qty, :description],
                                        categoria_ids: [], warehouse_ids: [],)
     end

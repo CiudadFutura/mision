@@ -1,9 +1,9 @@
-<div class="col-md-3 thumbnails">
+<div class="col-md-4 thumbnails impulsar">
   <div class="hover14 column ">
     <div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
       <div class="agile_top_brand_left_grid_pos">
-        <% if producto.supplier.present? and producto.supplier.nature == 'producer' %>
-          <div class="ribbon ribbon-top-left"><span><%= I18n.t(producto.supplier.nature, :default => '') %></span></div>
+        <% if producto.wholesale? %>
+          <div class="ribbon ribbon-top-left"><span>Impulsar</span></div>
         <% end %>
       </div>
       <div class="agile_top_brand_left_grid1">

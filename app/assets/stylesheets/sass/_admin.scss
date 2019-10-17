@@ -1031,6 +1031,17 @@ img.lg-item-img {
 header.widget-header h4 {
   font-size: 24px;
 }
+.quotes{
+  table{
+    td{
+      text-align: center;
+    }
+    th.vertical-text{
+      transform: rotate(90deg);
+      transform-origin: left top 0;
+    }
+  }
+}
 
 .cycles-table{
   tbody{

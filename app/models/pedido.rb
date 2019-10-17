@@ -133,6 +133,16 @@ class Pedido < ActiveRecord::Base
 
   end
 
+  def self.remittance_order
+    Pedido
+      .select('productos.id as product_id, pedidos.circulo_id, productos.pack, pedidos_details.product_name,
+        sum(pedidos_details.product_qty) as qty, usuarios.apellido as apellido')
+      .joins(:pedidos_details)
+      .joins(:usuario)
+      .joins('INNER JOIN productos ON productos.id = pedidos_details.product_id')
+      .group('productos.id,pedidos.circulo_id,productos.pack, pedidos.usuario_id, productos.orden_remito,pedidos_details.product_name, pedidos_details.product_qty ')
+      .order('productos.orden_remito')
+  end
 
   def has_missing?
     missing = false
@@ -199,6 +209,70 @@ class Pedido < ActiveRecord::Base
         end
       end
     end
+  end
+
+  def self.consumers(pedidos)
+    users = {}
+    pedidos.each do |circulo_id, rubros |
+      rubros[:rubros].each do |rubro, products|
+        products[:products].each do |product, consumers|
+          consumers[:consumers].each do |consumer|
+            currentConsumer = Usuario.find(consumer[0]) rescue nil
+            unless users.has_key?(currentConsumer.id)
+              users[currentConsumer.id] = {}
+            end
+            if users.has_key?(currentConsumer.id)
+              users[currentConsumer.id][:name] = currentConsumer.nombre + ' ' + currentConsumer.apellido
+              users[currentConsumer.id][:firstName] = currentConsumer.nombre
+              users[currentConsumer.id][:lastName] = currentConsumer.apellido
+            end
+          end
+        end
+      end
+    end
+    users
+  end
+
+  def self.quotes(pedidos)
+    quote = {}
+
+    pedidos.each do |pedido|
+      pedido.pedidos_details.each do |detail|
+        product = Producto.find(detail.product_id) rescue nil
+        consumer = Usuario.find(pedido.usuario_id) rescue nil
+        circle_id = pedido.circulo_id
+        rubro = I18n.t(product.pack)
+
+        unless quote.has_key?(circle_id)
+          quote[circle_id] = {
+            rubros: {}
+          }
+        end
+
+        unless quote[circle_id][:rubros].has_key?(rubro)
+          quote[circle_id][:rubros][rubro] = {
+            products: {}
+          }
+        end
+
+        unless quote[circle_id][:rubros][rubro][:products].has_key?(product.nombre)
+          quote[circle_id][:rubros][rubro][:products][product.nombre] = {
+            consumers: {}
+          }
+        end
+
+        if quote[circle_id][:rubros][rubro][:products][product.nombre][:consumers].has_key?(consumer.id)
+          quote[circle_id][:rubros][rubro][:products][product.nombre][:consumers][consumer.id][:qty] += detail.product_qty
+        else
+          quote[circle_id][:rubros][rubro][:products][product.nombre][:consumers][consumer.id] = {}
+          quote[circle_id][:rubros][rubro][:products][product.nombre][:consumers][consumer.id][:name] = consumer.nombre + ' ' + consumer.apellido
+          quote[circle_id][:rubros][rubro][:products][product.nombre][:consumers][consumer.id][:qty] = detail.product_qty
+          quote[circle_id][:rubros][rubro][:products][product.nombre][:consumers][consumer.id][:total_line] = detail.total_line
+          quote[circle_id][:rubros][rubro][:products][product.nombre][:consumers][consumer.id][:orden_remito] = product.orden_remito || ''
+        end
+      end
+    end
+    quote
   end
 
   def self.remitos(pedidos)
