@@ -87,8 +87,8 @@ class CartsController < ApplicationController
 						next if item.blank?
 						producto = Producto.find(item.producto.id)
 						pedido_details = pedido.pedidos_details.build(
-																											 supplier_id: Supplier.find(producto.supplier).id,
-																											 supplier_name: Supplier.find(producto.supplier).name,
+																											 supplier_id: Supplier.find(producto.supplier_id).id,
+																											 supplier_name: Supplier.find(producto.supplier_id).name,
 																											 product_id: producto.id,
 																											 product_codigo: producto.codigo,
 																											 product_name: producto.nombre,
