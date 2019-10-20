@@ -25,7 +25,7 @@
 									<% if producto.imagen.blank? %>
 											<%= image_tag('image-not-found.png', :height => '90%', :width => '90%') %>
 									<% else %>
-											<%= image_tag(producto.imagen, :height => '80%', :width => '90%') %>
+											<%= image_tag(producto.imagen.url, :height => '80%', :width => '90%') %>
 									<% end %>
 								</a>
 								<div class="caption">

@@ -7,7 +7,7 @@
           <% if supplier.logo.blank? %>
               <%= image_tag('image-not-found.png', :height => '100%', :width => '100%') %>
           <% else %>
-              <%= image_tag(supplier.logo, :height => '100%', :width => '100%', class: 'img-rounded img-responsive') %>
+              <%= image_tag(supplier.logo.url, :height => '100%', :width => '100%', class: 'img-rounded img-responsive') %>
           <% end %>
         </div>
         <div class="col-sm-8 col-md-8">
