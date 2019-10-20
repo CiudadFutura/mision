@@ -44,7 +44,7 @@
                     <% end %>
                   <% else %>
                     <%= link_to producto_path(_producto_id) do%>
-                      <%= image_tag(item.producto.imagen, class: 'img-responsive') %>
+                      <%= image_tag(item.producto.imagen.url, class: 'img-responsive') %>
                     <% end %>
                   <% end %>
                 </div>
