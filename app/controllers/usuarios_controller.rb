@@ -16,7 +16,8 @@ class UsuariosController < ApplicationController
     authorize! :index, @usuarios
     respond_to do |format|
       format.html
-      format.csv { render csv: @users.to_csv, filename: "#{Time.now.to_i}_usuarios" }
+      format.csv { send_data @users.to_csv, filename: "#{Time.now.to_i}_usuarios"}
+      #format.csv { render csv: @users.to_csv, filename: "#{Time.now.to_i}_usuarios" }
     end
   end
 
