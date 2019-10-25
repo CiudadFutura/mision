@@ -63,6 +63,11 @@
             <label><%= role.name %>
               <%= check_box_tag 'usuario[role_ids][]', role.id, @usuario.roles.include?(role) %>
             </label>
+          <% elsif role.name == 'Coordinador' or role.name == 'Usuario' %>
+            <label class="hidden">
+              <%= role.name %>
+              <%= check_box_tag 'usuario[role_ids][]', role.id, @usuario.roles.include?(role) %>
+            </label>
           <% end %>
         <% end %>
       </div>
@@ -96,6 +101,18 @@
             <p>
               Ya podes comprar productos de panificación y repostería cuando esté habilitado el ciclo de compra
             </p>
+            <% Role.all.each do |role| %>
+              <% if role.name == 'Productor' %>
+                <label><%= role.name %>
+                  <%= check_box_tag 'usuario[role_ids][]', role.id, @usuario.roles.include?(role) %>
+                </label>
+              <% elsif role.name == 'Coordinador' or role.name == 'Usuario' %>
+                <label class="hidden">
+                  <%= role.name %>
+                  <%= check_box_tag 'usuario[role_ids][]', role.id, @usuario.roles.include?(role) %>
+                </label>
+              <% end %>
+            <% end %>
           </div>
           <div class="panel-footer">
           </div>
