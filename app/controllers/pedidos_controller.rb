@@ -18,7 +18,7 @@ class PedidosController < ApplicationController
       @suppliers = Supplier.all
       respond_to do |format|
         format.html { render 'pedidos/index_admin' }
-        format.csv { send_data @exportCSV.to_csv, filename: "#{Time.now.to_i}_pedidos"}
+        format.csv { send_data @exportCSV.to_csv, filename: "#{Time.now.to_i}_pedidos.csv"}
         #format.csv { render csv: @exportCSV, filename: "#{Time.now.to_i}_pedidos"}
       end
     elsif current_usuario.coordinador? || current_usuario.usuario?

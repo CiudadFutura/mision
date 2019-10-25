@@ -56,7 +56,7 @@ class ProductosController < ApplicationController
       end
       respond_to do |format|
         format.html { render 'productos/index_admin'}
-        format.csv { send_data @todos.to_csv,type: 'text/csv; charset=UTF-8; header=present', filename: "#{Time.now.to_i}_productos"}
+        format.csv { send_data @todos.to_csv,type: 'text/csv; charset=UTF-8; header=present', filename: "#{Time.now.to_i}_productos.csv"}
         #format.csv { render csv: @todos.to_csv, type: 'text/csv; charset=UTF-8; header=present', filename: "#{Time.now.to_i}_productos" }
       end
     end

@@ -15,7 +15,7 @@ class CirculosController < ApplicationController
       end
       respond_to do |format|
         format.html {render 'circulos/index_admin'}
-        format.csv { send_data @todos.to_csv, filename: "#{Time.now.to_i}_circulos"}
+        format.csv { send_data @todos.to_csv, filename: "#{Time.now.to_i}_circulos.csv"}
         #format.csv { render csv: @todos.to_csv, filename: "#{Time.now.to_i}_circulos" }
       end
     else
@@ -32,7 +32,7 @@ class CirculosController < ApplicationController
 
       respond_to do |format|
         format.html
-        format.csv { send_data @circulo.to_csv, filename: "#{Time.now.to_i}_circulos"}
+        format.csv { send_data @circulo.to_csv, filename: "#{Time.now.to_i}_circulos.csv"}
         #format.csv { render csv: @circulo.to_csv, filename: "#{Time.now.to_i}_circulos" }
       end
     else
