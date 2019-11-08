@@ -21,7 +21,7 @@ class Producto < ActiveRecord::Base
 
   has_paper_trail
 
-  scope :disponibles, -> { where(oculto: false) }
+  scope :disponibles, -> { where(oculto: false, wholesale: false) }
   scope :not_selected, -> (warehouse) do
     joins("LEFT JOIN productos_warehouses pw ON productos.id = pw.producto_id AND pw.warehouse_id in (#{warehouse})").where(pw: {warehouse_id: nil})
   end
