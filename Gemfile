@@ -39,7 +39,7 @@ gem 'seed_migration'
 # Versioning models: https://github.com/airblade/paper_trail
 gem 'paper_trail', '~> 9.0'
 # Create PDF
-gem 'wicked_pdf', '~> 1.1'
+gem 'prawn', '~> 2.2', '>= 2.2.2'
 # Creates Excel files: https://github.com/cxn03651/writeexcel/
 gem 'writeexcel'
 # Enable reading settings from yml file
@@ -101,7 +101,6 @@ gem 'fullcalendar-rails'
 gem 'momentjs-rails'
 
 # Social network
-gem 'omniauth', '~> 1.9'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'omniauth-instagram'
