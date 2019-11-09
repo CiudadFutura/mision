@@ -26,7 +26,7 @@ class Producto < ActiveRecord::Base
     joins("LEFT JOIN productos_warehouses pw ON productos.id = pw.producto_id AND pw.warehouse_id in (#{warehouse})").where(pw: {warehouse_id: nil})
   end
   scope :notWholesaleProducts, -> {where(wholesale: false)}
-  scope :wholesaleProducts, -> {where(wholesale: true)}
+  scope :wholesaleProducts, -> {where(wholesale: true, oculto: false)}
 	scope :destacados, -> {where(highlight: true, oculto: false)}
 	scope :offers, -> {joins(:suppliers).where(highlight: true, oculto: false, nature: 1).order("RAND()").limit(3)}
   scope :ocultos, -> {where(oculto: true)}

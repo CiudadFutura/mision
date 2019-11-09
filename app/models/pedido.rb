@@ -11,6 +11,12 @@ class Pedido < ActiveRecord::Base
 
   scope :evo_orders, -> (date_param) {where('updated_at >= :today', today: date_param)}
 
+  scope :remito_order, lambda { |cycle, circle|
+    joins('INNER JOIN pedidos_details ON pedidos_details.pedido_id = pedidos.id INNER JOIN productos ON pedidos_details.product_id = productos.id')
+    .where('pedidos.circulo_id = :circulo_id AND pedidos.compra_id = :id', id: cycle, circulo_id: circle)
+    .order('productos.orden_remito')  }
+
+
   def total
     total = 0.0
     JSON.parse(items).each { |item| total += item['total'] || 0 }
@@ -67,6 +73,10 @@ class Pedido < ActiveRecord::Base
                   .select('compras.*, max(pedidos.created_at) as most_recent, count(pedidos.id) as orders_count')
                   .group('pedidos.compra_id')
     return pedidos_por_ciclos
+  end
+
+  def self.sorted_by_orden_remito(cycle, circle)
+    Pedido.joins(:pedidos_details)
   end
 
   def self.orders_per_cycles
