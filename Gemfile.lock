@@ -491,6 +491,7 @@ DEPENDENCIES
   momentjs-rails
   mysql2 (~> 0.4.10)
   nokogiri (~> 1.8, >= 1.8.2)
+  omniauth (~> 1.9)
   omniauth-facebook
   omniauth-google-oauth2
   omniauth-instagram

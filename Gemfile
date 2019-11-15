@@ -101,6 +101,7 @@ gem 'fullcalendar-rails'
 gem 'momentjs-rails'
 
 # Social network
+gem 'omniauth', '~> 1.9'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'omniauth-instagram'

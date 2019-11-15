@@ -251,7 +251,11 @@ class Pedido < ActiveRecord::Base
         product = Producto.find(detail.product_id) rescue nil
         consumer = Usuario.find(pedido.usuario_id) rescue nil
         circle_id = pedido.circulo_id
-        rubro = I18n.t(product.pack)
+        if product.pack.present?
+          rubro = I18n.t(product.pack)
+        else
+          rubro = I18n.t(0)
+        end
 
         unless quote.has_key?(circle_id)
           quote[circle_id] = {

@@ -1,4 +1,4 @@
 set :stage, :test
-set :branch, 'wholesale_products'
+set :branch, 'master'
 
 server '159.203.95.5', user: 'deploy', roles: %w{web app db}

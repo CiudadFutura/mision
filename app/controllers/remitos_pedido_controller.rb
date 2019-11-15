@@ -6,12 +6,24 @@ class RemitosPedidoController < ApplicationController
       if params[:ciclo_id]
         if params[:circulo_id].present?
           pedidos = Pedido.where(compra_id: params[:ciclo_id],circulo_id: params[:circulo_id])
+          pedidos2 = Pedido.remito_order(params[:ciclo_id], params[:circulo_id])
+
         else
           pedidos = Pedido.where(compra_id: params[:ciclo_id])
         end
         #@reporte = Pedido.remitos(pedidos)
         @remitos = Pedido.quotes(pedidos)
         @consumers = Pedido.consumers(@remitos)
+      end
+    end
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = ExportPdf.new(@remitos, @consumers)
+        send_data pdf.render,
+                  filename: "export.pdf",
+                  type: 'application/pdf',
+                  disposition: 'inline'
       end
     end
   end

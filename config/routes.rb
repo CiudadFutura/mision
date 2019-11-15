@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :deliveries
   resources :transaction_details
   resources :transactions
+  resources :export
   resources :accounts
   resources :roles
   resources :compras do

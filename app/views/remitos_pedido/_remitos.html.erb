@@ -1,6 +1,13 @@
 <% colNumbers = @consumers.count + 2 %>
 <% done = false %>
 <div class="quote">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="col-md-6">
+        <%= link_to 'Export', export_index_path(@remitos) %>
+      </div>
+    </div>
+  </div>
   <table class='table table-bordered' data-search="true">
     <% @remitos.each do |circulo_id, circulos|  %>
       <thead>
