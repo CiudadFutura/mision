@@ -45,6 +45,7 @@ class ProductosController < ApplicationController
     @productos = @productos.supplier(params[:supplier_id]) if params[:supplier_id]
     @productos = @productos.not_selected(@current_warehouses_ids) if @current_warehouses_ids.present? and current_usuario.present?
     @impulsarProducts = Producto.wholesaleProducts if current_usuario.present? && current_usuario.productor? && !current_usuario.admin?
+    @impulsarProducts = @impulsarProducts.stock if @impulsarProducts.present?
     @exclusives = Producto.warehouse_exclusive(@current_user_warehouse) if @current_user_warehouse.present? and current_usuario.present?
     @freesale = Producto.freesale
 
