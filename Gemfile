@@ -84,7 +84,7 @@ end
 gem 'coffee-rails'
 gem 'gmaps4rails'
 gem 'geocoder'
-gem 'nokogiri', '~> 1.8', '>= 1.8.2'
+gem 'nokogiri', '~> 1.10'
 
 # X - Editable for Rails
 gem 'bootstrap-editable-rails'
