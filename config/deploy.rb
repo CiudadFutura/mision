@@ -1,5 +1,5 @@
 # config valid only for Capistrano 3.1
-lock '3.11.2'
+lock '3.14'
 
 set :application, 'mision'
 set :repo_url, 'git@github.com:CiudadFutura/mision.git'
