@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
   def categorias_menu
     @categorias_menu = Rails.cache.fetch('categorias_menu') do
       menu = []
-      Categoria.where(parent_id: 'NULL').each do |cat_parent|
+      Categoria.where(parent_id: 0).each do |cat_parent|
         cat = {
                 id: cat_parent.id,
                 nombre: cat_parent.nombre,
