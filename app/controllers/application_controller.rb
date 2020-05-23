@@ -118,7 +118,7 @@ class ApplicationController < ActionController::Base
     users.each do |user|
       next if user.account.present?
       account = Account.new
-      account.usuario_id = current_usuario.id
+      account.usuario_id = user.id
       account.status = true
       account.balance = 0
       account.save
