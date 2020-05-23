@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
   before_action :categorias_menu
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :get_current_cycle
+  before_action :create_accounts
 
   layout :choose_layout
 
@@ -111,5 +112,17 @@ class ApplicationController < ActionController::Base
 
     render :file => "#{Rails.root}/public/404.html", :status =>404, :layout => false
   end
+
+  def create_accounts
+    users = Usuario.all
+    users.each do |user|
+      next if user.account.present?
+      account = Account.new
+      account.usuario_id = current_usuario.id
+      account.status = true
+      account.balance = 0
+      account.save
+    end
+    end
 
 end
