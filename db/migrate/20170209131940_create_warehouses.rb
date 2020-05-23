@@ -1,4 +1,4 @@
-class CreateWarehouses < ActiveRecord::Migration
+class CreateWarehouses < ActiveRecord::Migration[4.2]
   def change
 		create_table :warehouses do |t|
 			t.string :name

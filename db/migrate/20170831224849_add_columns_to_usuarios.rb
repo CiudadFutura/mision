@@ -1,4 +1,4 @@
-class AddColumnsToUsuarios < ActiveRecord::Migration
+class AddColumnsToUsuarios < ActiveRecord::Migration[4.2]
   def change
     add_column :usuarios, :nombre_iva, :text
     add_column :usuarios, :zona, :text
