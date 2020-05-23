@@ -8,7 +8,6 @@ class ApplicationController < ActionController::Base
   before_action :categorias_menu
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :get_current_cycle
-  before_action :create_accounts
 
   layout :choose_layout
 
