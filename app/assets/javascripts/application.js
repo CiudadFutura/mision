@@ -71,10 +71,11 @@ $(document).ready(function() {
     var message_box = '';
 
     var qty = $('#qty-selected-'+productId).val()
-
     if (action === 'add') {
       //Add a new item to cart
       $('#qty-selected-'+productId).attr('disabled','disabled');
+      $(this).children().eq(0).removeClass('fa fa-shopping-cart');
+      $(this).children().eq(0).addClass('fa fa-remove');
       new_action = 'remove';
       new_title = "Eliminar ";
 	    new_class = 'btn-danger';
@@ -82,6 +83,8 @@ $(document).ready(function() {
     } else if (action === 'remove') {
       //Remove item from cart
       $('#qty-selected-'+productId).removeAttr('disabled');
+      $(this).children().eq(0).removeClass('fa fa-remove');
+      $(this).children().eq(0).addClass('fa fa-shopping-cart');
       new_action = 'add';
       new_title = "Agregar";
       that.parents("tr.cart-item").remove();
