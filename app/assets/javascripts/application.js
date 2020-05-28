@@ -74,12 +74,14 @@ $(document).ready(function() {
 
     if (action === 'add') {
       //Add a new item to cart
+      $('#qty-selected-'+productId).attr('disabled','disabled');
       new_action = 'remove';
       new_title = "Eliminar ";
 	    new_class = 'btn-danger';
 	    old_class = 'btn-success';
     } else if (action === 'remove') {
       //Remove item from cart
+      $('#qty-selected-'+productId).removeAttr('disabled');
       new_action = 'add';
       new_title = "Agregar";
       that.parents("tr.cart-item").remove();
