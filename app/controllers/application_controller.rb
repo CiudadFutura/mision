@@ -112,4 +112,16 @@ class ApplicationController < ActionController::Base
     render :file => "#{Rails.root}/public/404.html", :status =>404, :layout => false
   end
 
+  def create_accounts
+    users = Usuario.all
+    users.each do |user|
+      next if user.account.present?
+      account = Account.new
+      account.usuario_id = user.id
+      account.status = true
+      account.balance = 0
+      account.save
+    end
+    end
+
 end

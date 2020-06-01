@@ -41,18 +41,21 @@
                      cantidad =  producto.cantidad_permitida
                    end %>
                 <div class="col-sm-3 select-qty">
-                  <select id="qty-selected-<%= producto.id %>" class="cantidad form-control">
-                    <% for i in 1..cantidad %>
                       <% if @carrito.producto?(producto.id) %>
-                        <option value="<%= i%>" <%= (i == @carrito.cantidad_prod(producto.id)) ?'selected':''%>><%= i %></option>
+                        <select id="qty-selected-<%= producto.id %>" class="cantidad form-control" disabled>
+                        <% for i in 1..cantidad %>
+                          <option value="<%= i%>" <%= (i == @carrito.cantidad_prod(producto.id)) ?'selected':''%>><%= i %></option>
+                        <% end %>
                       <% else %>
-                        <option value="<%= i %>"><%= i %></option>
-                      <% end %>
+                        <select id="qty-selected-<%= producto.id %>" class="cantidad form-control">
+                        <% for i in 1..cantidad %>
+                          <option value="<%= i %>"><%= i %></option>
+                        <% end %>
                     <% end %>
                   </select>
                 </div>
                 <div class="col-sm-9 add-content">
-                  <% if @carrito.producto?(producto.id) %>
+                  <% if @carrito.producto?(producto.id) %>                      
                     <%= button_tag(type: 'button',
                                    class: 'btn btn-sm btn-danger',
                                    data: {

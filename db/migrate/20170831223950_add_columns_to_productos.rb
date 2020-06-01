@@ -1,4 +1,4 @@
-class AddColumnsToProductos < ActiveRecord::Migration
+class AddColumnsToProductos < ActiveRecord::Migration[4.2]
   def change
     add_column :productos, :costo, :text
     add_column :productos, :moneda, :text

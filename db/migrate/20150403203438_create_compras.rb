@@ -1,4 +1,4 @@
-class CreateCompras < ActiveRecord::Migration
+class CreateCompras < ActiveRecord::Migration[4.2]
   def change
     create_table :compras do |t|
       t.string :nombre

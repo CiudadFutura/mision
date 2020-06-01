@@ -70,16 +70,23 @@ $(document).ready(function() {
     var old_class = '';
     var message_box = '';
 
-    var qty = $('#qty-selected-'+productId).val()
-
+    var qtySelect = $('#qty-selected-'+productId);
+    var qty = qtySelect.val();
+    var buttonIcon = that.children().eq(0);
     if (action === 'add') {
       //Add a new item to cart
+      qtySelect.attr('disabled','disabled');
+      buttonIcon.removeClass('fa fa-shopping-cart');
+      buttonIcon.addClass('fa fa-remove');
       new_action = 'remove';
       new_title = "Eliminar ";
 	    new_class = 'btn-danger';
 	    old_class = 'btn-success';
     } else if (action === 'remove') {
       //Remove item from cart
+      qtySelect.removeAttr('disabled');
+      buttonIcon.removeClass('fa fa-remove');
+      buttonIcon.addClass('fa fa-shopping-cart');
       new_action = 'add';
       new_title = "Agregar";
       that.parents("tr.cart-item").remove();

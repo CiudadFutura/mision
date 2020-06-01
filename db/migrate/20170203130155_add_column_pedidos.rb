@@ -1,4 +1,4 @@
-class AddColumnPedidos < ActiveRecord::Migration
+class AddColumnPedidos < ActiveRecord::Migration[4.2]
   def change
 		add_column :pedidos, :total_discount, :float
 		add_column :pedidos, :total, :float

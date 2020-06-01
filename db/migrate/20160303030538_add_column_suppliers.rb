@@ -1,4 +1,4 @@
-class AddColumnSuppliers < ActiveRecord::Migration
+class AddColumnSuppliers < ActiveRecord::Migration[4.2]
   def change
     add_column :suppliers, :razon_social, :text
     add_column :suppliers, :calle, :text

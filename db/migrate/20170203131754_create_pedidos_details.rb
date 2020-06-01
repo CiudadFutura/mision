@@ -1,4 +1,4 @@
-class CreatePedidosDetails < ActiveRecord::Migration
+class CreatePedidosDetails < ActiveRecord::Migration[4.2]
   def change
     create_table :pedidos_details do |t|
 			t.integer :pedido_id
