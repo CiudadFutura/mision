@@ -117,6 +117,10 @@ gem 'google-api-client'
 # Factura electronica
 #gem 'bravo'
 
+# reCaptcha
+gem "recaptcha", require: "recaptcha/rails"
+
+
 group :development, :test do
   gem 'sqlite3'
   gem 'pry'
@@ -130,4 +134,5 @@ group :development, :test do
   gem 'shoulda-matchers'
   gem 'database_cleaner'
   gem 'factory_bot'
+  gem 'dotenv-rails'
 end
