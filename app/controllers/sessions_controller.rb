@@ -1,3 +1,4 @@
+=begin
 class SessionsController < ApplicationController
   def create
     if auth_hash
@@ -39,3 +40,4 @@ class SessionsController < ApplicationController
     end
   end
 end
+=end

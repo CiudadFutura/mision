@@ -40,7 +40,11 @@ Rails.application.routes.draw do
 	end
 	get 'circulos/remito_circulo/:circulo_id/compra=:compra_id', to: 'circulos#remito_circulo', as: :remito_circulo
 
-  devise_for :usuarios, :controllers => {:registrations => 'user/registrations'}
+  devise_for :usuarios,
+             :controllers => {
+                 :registrations => 'user/registrations',
+                 :sessions => 'user/sessions'
+             }
   resources :usuarios do
     post 'add_myself_cycle', to: 'usuarios#add_myself_cycle', as: :add_myself_cycle
     post 'circle_accepted_confirmation', to: 'usuarios#circle_accepted_confirmation', as: :circle_accepted_confirmation
@@ -66,7 +70,7 @@ Rails.application.routes.draw do
     get :autocomplete_producto_nombre, :on => :collection
   end
 
-  get '/auth/:provider/callback', to: 'sessions#create', as: :social_session
+  #get '/auth/:provider/callback', to: 'sessions#create', as: :social_session
 
   resources :categorias
   resources :pedidos, only: [:index, :show, :edit, :destroy] do
