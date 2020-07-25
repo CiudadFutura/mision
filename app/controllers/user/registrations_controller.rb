@@ -1,6 +1,7 @@
 class User::RegistrationsController < Devise::RegistrationsController
   prepend_before_action :require_no_authentication, only: [:new, :create, :cancel, ]
   prepend_before_action :authenticate_scope!, :only => [:edit, :update, :destroy]
+  prepend_before_action :check_captcha, only: [:create]
 
   before_action :configure_permitted_parameters
 
@@ -14,7 +15,6 @@ class User::RegistrationsController < Devise::RegistrationsController
 
   def create
     build_resource(sign_up_params)
-
     if resource.save
       if resource.active_for_authentication?
         set_flash_message :notice, :signed_up if is_navigational_format?
@@ -64,6 +64,16 @@ class User::RegistrationsController < Devise::RegistrationsController
   end
 
   private
+
+  def check_captcha
+    #return true if Rails.env.development?
+    unless verify_recaptcha
+      self.resource = resource_class.new sign_up_params
+      sign_out(self.resource)
+      resource.validate # Look for any other validation errors besides reCAPTCHA
+      redirect_to '/usuarios/sign_up'
+    end
+  end
 
   def response_to_sign_up_failure(resource)
     if resource.email == "" && resource.password == nil

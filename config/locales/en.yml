@@ -81,6 +81,10 @@ en:
               blank: "Debe ingresar la Calle"
             dni:
               blank: "Debe ingresar el DNI"
+  recaptcha:
+    errors:
+      verification_failed: 'El captcha fué incorrecto, por favor, intente de nuevo.'
+      recaptcha_unreachable: 'Error de verificación del servidor de CAPTCHA, intente de nuevo.'
 
   date:
     formats:

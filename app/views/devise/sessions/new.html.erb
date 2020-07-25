@@ -3,6 +3,7 @@
 <% navigation_add 'Iniciar sesión', '#' %>
 <div class="w3_login">
   <% flash.each do |key, value| %>
+    <% key = 'alert' if key == 'recaptcha_error' %>
     <div class="<%= flash_class(key) %>">
       <%= value %>
     </div>
@@ -33,7 +34,9 @@
               </label>
             </div>
           <% end -%>
-
+          <fieldset class="form-group">
+            <%= recaptcha_tags hl: 'es' %>
+          </fieldset>
           <%= f.submit 'Ingresar', class:'btn btn-primary' %>
         <% end %>
         <br>
