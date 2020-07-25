@@ -66,18 +66,12 @@ class User::RegistrationsController < Devise::RegistrationsController
   private
 
   def check_captcha
-    puts verify_recaptcha
     #return true if Rails.env.development?
     unless verify_recaptcha
-      puts 'voy a sign_up'
       self.resource = resource_class.new sign_up_params
+      sign_out(self.resource)
       resource.validate # Look for any other validation errors besides reCAPTCHA
-      set_minimum_password_length
-
-      '/usuarios/sign_up'
-    else
-      puts 'voy a /productos'
-      '/productos/'
+      redirect_to '/usuarios/sign_up'
     end
   end
 
