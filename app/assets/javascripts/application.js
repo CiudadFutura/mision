@@ -12,10 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require bootstrap-sprockets
+//= require bootstrap
+//= require bootstrap/bootstrap-rails-tooltip
+//= require bootstrap/bootstrap-rails-popover
 //= require gmaps/google
-//= require bootstrap-editable
-//= require bootstrap-editable-rails
 //= require moment
 //= require fullcalendar
 //= require jquery.validate

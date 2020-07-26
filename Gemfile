@@ -9,9 +9,9 @@ gem 'bigdecimal', '1.4.2'
 gem 'mini_racer', '~> 0.2.14'
 
 # Rails Sass gem
-gem 'bootstrap-sass', '~> 3.4', '>= 3.4.1'
+gem 'bootstrap', '~> 4.5'
 gem 'sass-rails', '~> 6.0'
-gem 'sprockets-rails', '2.3.3'
+gem 'sprockets-rails', '~> 3.2', '>= 3.2.1'
 
 # https://github.com/carrierwaveuploader/carrierwave
 gem 'carrierwave', '~> 2.1'
@@ -91,6 +91,7 @@ gem 'nokogiri', '~> 1.10', '>= 1.10.9'
 
 # X - Editable for Rails
 gem 'bootstrap-editable-rails'
+gem 'bootstrap-popover-rails'
 
 # JQuery validate
 gem 'jquery-validation-rails'
