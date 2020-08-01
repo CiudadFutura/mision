@@ -59,7 +59,7 @@ gem 'groupdate', '~> 5.0'
 gem 'flexslider', '~> 2.2'
 
 # Font awesome
-gem 'font-awesome-sass', '~> 4.6', '>= 4.6.2'
+gem 'font-awesome-sass', '~> 5.13'
 
 # gem pagination
 gem 'will_paginate', '~> 3.1', '>= 3.1.6'

@@ -27,7 +27,7 @@
 
 
 $(document).ready(function() {
-
+/*
     $('.flexslider').flexslider({
         animation: "slide",
         start: function(slider){
@@ -40,7 +40,7 @@ $(document).ready(function() {
         $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
     });
 
-
+*/
 
   $('button[data-action]').click(function (event) {
     event.preventDefault();
