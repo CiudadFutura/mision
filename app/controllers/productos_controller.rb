@@ -63,6 +63,9 @@ class ProductosController < ApplicationController
     end
   end
 
+  #implementar el search de productos
+  #https://stackoverflow.com/questions/23928225/ruby-on-rails-searching-through-ajax
+
   # GET /productos/1
   # GET /productos/1.json
   def show
