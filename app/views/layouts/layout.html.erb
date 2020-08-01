@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <title><%= content_for?(:title) ? yield(:title) : "Mision" %></title>
     <%= csrf_meta_tags %>
 
@@ -20,29 +21,30 @@
 
     <!-- For all other devices -->
     <!-- Size should be 32 x 32 pixels -->
-    <%= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon' %>
+    <%= favicon_link_tag asset_path('favicon.png'), :rel => 'shortcut icon' %>
 
     <script src="https://cdn.rawgit.com/googlemaps/js-marker-clusterer/gh-pages/src/markerclusterer.js"></script>
+    <script src="https://kit.fontawesome.com/f588ef660c.js" crossorigin="anonymous"></script>
     <%= javascript_include_tag 'application' %>
     <meta name="turbolinks-cache-control" content="no-cache">
   </head>
   <body>
-  <div class="container-fluid ">
     <%= render 'layouts/header'%>
     <%= render_navigation if request.path != root_path%>
     <div class="banner">
-      <div class="col-sm-3 w3l_banner_nav_left">
+      <div class="col-sm-3">
         <%= render 'layouts/menu' %>
       </div>
-      <div class="col-sm-9 w3l_banner_nav_right">
+      <div class="col-sm-9">
         <%= yield %>
       </div>
       <div class="clearfix"></div>
     </div>
-  </div>
-  <div class="container-fluid ">
-	  <%= render 'layouts/footer' %>
-  </div>
-
+    <div class="container-fluid ">
+      <%= render 'layouts/footer' %>
+    </div>
   </body>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 </html>
