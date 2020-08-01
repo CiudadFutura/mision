@@ -1,24 +1,23 @@
 <div class="products-breadcrumb">
-  <div class="container">
-    <ul>
-      <% nav.each.with_index do |n, i| %>
-        <% unless n.equal? nav.last %>
-          <% if i == 0 %>
-            <li>
-              <i class="fa fa-home" aria-hidden="true"></i>
-              <%= link_to n[:title], n[:url] %>
-              <span>|</span></li>
-            </li>
-          <% else %>
-            <li>
-              <%= link_to n[:title], n[:url] %>
-              <span>|</span></li>
-            </li>
-          <% end %>
+  <ul>
+    <% nav.each.with_index do |n, i| %>
+      <% unless n.equal? nav.last %>
+        <% if i == 0 %>
+          <li>
+            <i class="fa fa-home" aria-hidden="true"></i>
+            <%= link_to n[:title], n[:url] %>
+            <span>|</span></li>
+          </li>
         <% else %>
-          <li><%= n[:title] %></li>
+          <li>
+            <%= link_to n[:title], n[:url] %>
+            <span>|</span></li>
+          </li>
         <% end %>
+      <% else %>
+        <li><%= n[:title] %></li>
       <% end %>
-    </ul>
-  </div>
+    <% end %>
+  </ul>
+
 </div>

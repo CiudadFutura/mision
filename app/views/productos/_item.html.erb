@@ -1,63 +1,64 @@
-<div class="col-md-3 thumbnails">
-  <div class="hover14 column ">
-    <div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
+<div class="col-md-3 mb-4 ml-3">
+  <div class="card h-100" id="<%= producto.id %>">
       <div class="agile_top_brand_left_grid_pos">
         <% if producto.supplier.present? and producto.supplier.nature == 'producer' %>
           <div class="ribbon ribbon-top-left"><span><%= I18n.t(producto.supplier.nature, :default => '') %></span></div>
         <% end %>
       </div>
-      <div class="agile_top_brand_left_grid1">
-        <figure>
-          <div class="snipcart-item">
-            <div class="snipcart-thumb">
+
+
+            <div class="card-body">
+            <div class="card-img-top">
               <% if producto.imagen.blank? %>
                 <%= link_to producto_path(producto.id) do%>
-                  <%= image_tag('v2/no-disponible.png', class: 'img-responsive', height: '150px') %>
+                  <%= image_tag('v2/no-disponible.png', class: 'img-responsive rounded-lg', height: '150px') %>
                 <% end %>
               <% else %>
                 <%= link_to producto_path(producto.id) do%>
-                  <%= image_tag(producto.imagen.url, class: 'img-responsive', height: '140px', width: '150px') %>
+                  <%= image_tag(producto.imagen.url, class: 'img-responsive rounded-lg', height: '140px', width: '150px') %>
                 <% end %>
               <% end %>
-              <div class="col-md-12">
+              </div>
+              <div class="card-title">
                 <p><%= producto.nombre %></p>
               </div>
-              <div class="col-sm-12 text-center">
+              <div class="card-text">
                 <span class="red"><%= producto.marca %></span>
               </div>
-              <div class="row">
-                <div class="col-md-12">
-                  <h4><%= number_to_currency(producto.precio) %>
-                    <span> Ahorro <%= number_to_percentage(producto.ahorro) %></span>
-                  </h4>
-                </div>
+              <div class="card-text">
+                  <h4><%= number_to_currency(producto.precio) %></h4>
+              </div>
+              <div class="align-slef-items-center">
+                  <small class="text-success"> Ahorro <%= number_to_percentage(producto.ahorro) %></small>
               </div>
             </div>
-            <div class="snipcart-details">
+            <div class="card-footer mt-2 bg-transparent">
               <% if @consumer_enabled_purchase %>
                 <% if producto.stock.present? and producto.cantidad_permitida > producto.stock
                      cantidad = producto.stock
                    else
                      cantidad =  producto.cantidad_permitida
                    end %>
-                <div class="col-sm-3 select-qty">
+                <div class="row">
+                  <div class="col">
                       <% if @carrito.producto?(producto.id) %>
-                        <select id="qty-selected-<%= producto.id %>" class="cantidad form-control" disabled>
+                        <select id="qty-selected-<%= producto.id %>" class="form-control cantidad" disabled>
                         <% for i in 1..cantidad %>
                           <option value="<%= i%>" <%= (i == @carrito.cantidad_prod(producto.id)) ?'selected':''%>><%= i %></option>
                         <% end %>
+                        </select>
                       <% else %>
-                        <select id="qty-selected-<%= producto.id %>" class="cantidad form-control">
+                        <select id="qty-selected-<%= producto.id %>" class="form-control cantidad">
                         <% for i in 1..cantidad %>
                           <option value="<%= i %>"><%= i %></option>
                         <% end %>
+                        </select>
                     <% end %>
-                  </select>
-                </div>
-                <div class="col-sm-9 add-content">
+                  </div>
+                <div class="col add-content">
                   <% if @carrito.producto?(producto.id) %>                      
                     <%= button_tag(type: 'button',
-                                   class: 'btn btn-sm btn-danger',
+                                   class: 'btn btn-danger float-right',
                                    data: {
                                      action: 'remove',
                                      productId: producto.id
@@ -66,7 +67,7 @@
                     <% end %>
                   <% else %>
                     <%= button_tag(type: 'button',
-                                   class: 'btn btn-sm btn-success',
+                                   class: 'btn btn-success float-right',
                                    data: {
                                      productId: producto.id,
                                      orden_remito: producto.orden_remito,
@@ -76,15 +77,15 @@
                     <% end %>
                   <% end %>
                 </div>
+              </div>
               <% else %>
                 <div class="col-md-12 text-center">
                   <small class="red"> No hay ciclos activos</small>
                 </div>
               <% end %>
             </div>
-          </div>
-        </figure>
-      </div>
-    </div>
+
+
+
   </div>
 </div>

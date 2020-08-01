@@ -48,22 +48,8 @@ ul,label{
 body a:hover{
   text-decoration:none;
 }
-.container-fluid{
-  padding-left: 0px;
-  padding-right: 0px;
-}
+
   /*-- header --*/
-.fixed{
-  position: fixed;
-  top: 0;
-  width: 100%;
-  margin: 0 auto;
-  left:0;
-  z-index:9999;
-}
-span.glyphicon.glyphicon-shopping-cart.my-cart-icon.my-cart-icon-affix {
-  position: relative !important;
-}
 
 .error{
   label {
@@ -464,7 +450,6 @@ ul.dropdown-menu.drp-mnu li a i {
   border: none;
 }
 .w3l_banner_nav_left{
-  float: left;
   /*-- agileits --*/
   background: #f5f5f5;
 }
@@ -478,8 +463,6 @@ ul.dropdown-menu.drp-mnu li a i {
   margin-left: 10%;
 }
 .w3l_banner_nav_right{
-  margin: 0px;
-  padding: 0px;
 
 }
 .navbar-nav > li {
@@ -4354,10 +4337,7 @@ input.checkbox:checked:after {
 }
 @media (max-width: 767px){
   .w3l_banner_nav_left {
-    float: none;
-    width: 100%;
     background: #f5f5f5;
-    text-align: center;
   }
   .navbar-toggle {
     float: none;

@@ -27,7 +27,7 @@
 
 
 $(document).ready(function() {
-
+/*
     $('.flexslider').flexslider({
         animation: "slide",
         start: function(slider){
@@ -40,16 +40,7 @@ $(document).ready(function() {
         $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
     });
 
-    var navoffeset=$(".agileits_header").offset().top;
-    $(window).scroll(function(){
-        var scrollpos=$(window).scrollTop();
-        if(scrollpos >=navoffeset){
-            $(".agileits_header").addClass("fixed");
-            $(".logo_products").css('padding-top', '3.5em')
-        }else{
-            $(".agileits_header").removeClass("fixed");
-        }
-    });
+*/
 
   $('button[data-action]').click(function (event) {
     event.preventDefault();
@@ -134,4 +125,10 @@ $(document).ready(function() {
           $(this).toggleClass('open');
       }
   );
+  $(".card").hover(
+      function() {
+          var cardId = "#" + this.id; 
+          $(cardId).toggleClass("shadow");
+      }
+  )
 });
