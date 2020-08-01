@@ -1,58 +1,61 @@
 <!-- header -->
-<div class="col-md-12 agileits_header">
-  <div class="col-md-3">
-    <div class="w3l_offers">
-      <%= link_to image_tag('v2/logoCF.png', height: '25', alt: 'Ciudad Futura website', class: 'img-responsive'),
-                  'http://gentedistinta.com.ar/',
-                  :target => '_blank' %>
-    </div>
+<nav class="navbar navbar-expand-lg navbar-light bg-danger">
+  <div class="collapse navbar-collapse justify-content-center" id="navbarTogglerDemo01">
+  <%= link_to image_tag('v2/logoCF.png', height: '25', alt: 'Ciudad Futura website', class: 'image-responsive'),
+              'http://ciudadfutura.com.ar/',
+              :class => 'navbar-brand justify-content-center',
+              :target => '_blank' %>
   </div>
-  <div class="col-md-9">
-    <div class="col-md-9 text-right">
-      <div class="product_list_header">
-        <%= link_to(cart_path, class: 'prod-list') do %>
-          <i class="icon-lmcart"></i>Ver Mi Compra
-        <% end %>
-      </div>
+  <div class="clearfix"></div>
+</nav>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+  <button class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarTogglerDemo02"
+          aria-controls="navbarTogglerDemo02"
+          aria-expanded="false"
+          aria-label="Toggle navigation">
+    <span>
+      <i class="fas fa-chevron-down" id="togglerIcon"></i>
+    </span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+      <%= link_to root_path do%>
+        <%= image_tag('v2/misionNueva.svg', class: 'mx-auto d-block p-3', width: '300px') %>
+      <% end %>
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li class="nav-item">
+          <%= link_to(como_compro_path(1)) do %>
+            Cómo comprar
+          <% end %>
+        </li>
+        <li class="nav-item">
+          <%= link_to warehouses_path do %>
+            Puntos de retiro
+          <% end %>
+        </li>
+        <li class="nav-item">
+          <%= link_to(compras_path) do %>
+            Próximos Ciclos
+          <% end %>
+        </li>
+        <li class="nav-item">
+          <%= link_to(about_us_path) do %>
+            Quienes somos
+          <% end %>
+        </li>
+      </ul>
+    <div>
+      <%= link_to(cart_path, class: 'prod-list') do %>
+        <i class="icon-lmcart"></i>Ver Mi Compra
+      <% end %>
     </div>
     <div class="col-md-3 text-center">
       <%= render 'layouts/user_menu' %>
     </div>
-
+    <div class="clearfix"> </div>
   </div>
-  <div class="clearfix"> </div>
-</div>
-
-<div class="col-sm-12 logo_products">
-  <div class="w3ls_logo_products_left">
-    <h1><%= link_to root_path do%>
-      <%= image_tag('v2/logoMai.png', class: 'img-responsive', width: '200px') %>
-      <% end %></h1>
-  </div>
-  <div class="w3ls_logo_products_left1">
-    <ul class="special_items">
-      <li>
-        <%= link_to(como_compro_path(1)) do %>
-          Cómo comprar <i>/</i>
-        <% end %>
-      </li>
-      <li>
-        <%= link_to warehouses_path do %>
-          Puntos de retiro <i>/</i>
-        <% end %>
-      </li>
-      <li>
-        <%= link_to(compras_path) do %>
-          Próximos Ciclos <i>/</i>
-        <% end %>
-      </li>
-      <li>
-        <%= link_to(about_us_path) do %>
-          Quienes somos
-        <% end %>
-      </li>
-    </ul>
-  </div>
-  <div class="clearfix"> </div>
-</div>
+</nav>
 <!-- //header -->
