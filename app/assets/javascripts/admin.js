@@ -1,7 +1,5 @@
 //= require jquery3
-//= require popper
 //= require jquery_ujs
-//= require bootstrap
 //= require bootstrap-editable
 //= require bootstrap-editable-rails
 //= require jquery.validate

@@ -12,9 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require bootstrap
-//= require bootstrap/bootstrap-rails-tooltip
-//= require bootstrap/bootstrap-rails-popover
 //= require gmaps/google
 //= require moment
 //= require fullcalendar

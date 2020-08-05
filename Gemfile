@@ -7,9 +7,9 @@ gem 'mysql2', '~> 0.4.10'
 gem 'bigdecimal', '1.4.2'
 #gem 'therubyracer',  platforms: :ruby
 gem 'mini_racer', '~> 0.2.14'
+gem 'webpacker'
 
 # Rails Sass gem
-gem 'bootstrap', '~> 4.5'
 gem 'sass-rails', '~> 6.0'
 gem 'sprockets-rails', '~> 3.2', '>= 3.2.1'
 
@@ -59,7 +59,7 @@ gem 'groupdate', '~> 5.0'
 gem 'flexslider', '~> 2.2'
 
 # Font awesome
-gem 'font-awesome-sass', '~> 5.13'
+gem 'font_awesome5_rails'
 
 # gem pagination
 gem 'will_paginate', '~> 3.1', '>= 3.1.6'
@@ -91,7 +91,7 @@ gem 'nokogiri', '~> 1.10', '>= 1.10.9'
 
 # X - Editable for Rails
 gem 'bootstrap-editable-rails'
-gem 'bootstrap-popover-rails'
+
 
 # JQuery validate
 gem 'jquery-validation-rails'

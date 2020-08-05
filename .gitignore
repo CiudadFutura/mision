@@ -12,6 +12,7 @@
 /db/*.sqlite3-journal
 
 # Ignore all logfiles and tempfiles.
+images/olds
 *.log
 *.sql
 /tmp
@@ -37,3 +38,10 @@ uploads
 .idea/workspace.xml
 *.patch
 
+
+/public/packs
+/public/packs-test
+/node_modules
+/yarn-error.log
+yarn-debug.log*
+.yarn-integrity
