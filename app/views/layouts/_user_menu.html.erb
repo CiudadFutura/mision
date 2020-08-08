@@ -1,11 +1,5 @@
-<div class="w3l_header_right">
-  <ul>
-    <li class="dropdown profile_details_drop">
-      <% if usuario_signed_in? %>
-        <%= render 'layouts/user_online' %>
-      <% else %>
-        <%= render 'layouts/user_offline' %>
-      <% end %>
-    </li>
-  </ul>
-</div>
+<% if usuario_signed_in? %>
+  <%= render 'layouts/user_online' %>
+<% else %>
+  <%= render 'layouts/user_offline' %>
+<% end %>

@@ -6,7 +6,7 @@ gem 'rails', '~> 6.0', '>= 6.0.3.1'
 gem 'mysql2', '~> 0.4.10'
 gem 'bigdecimal', '1.4.2'
 #gem 'therubyracer',  platforms: :ruby
-gem 'mini_racer', '~> 0.2.14'
+gem 'mini_racer', platforms: :ruby
 gem 'webpacker'
 
 # Rails Sass gem
