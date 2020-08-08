@@ -10,6 +10,7 @@ gem 'mini_racer', '~> 0.2.14'
 gem 'webpacker'
 
 # Rails Sass gem
+gem 'bootstrap', '~> 4.5'
 gem 'sass-rails', '~> 6.0'
 gem 'sprockets-rails', '~> 3.2', '>= 3.2.1'
 
