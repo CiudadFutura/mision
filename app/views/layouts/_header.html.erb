@@ -1,15 +1,15 @@
 <!-- header -->
-<nav class="navbar navbar-expand-lg navbar-light bg-danger">
-  <div class="collapse navbar-collapse justify-content-center" id="navbarTogglerDemo01">
+<nav class="navbar navbar-expand-lg navbar-light bg-danger justify-content-center">
   <%= link_to image_tag('v2/logoCF.png', height: '25', alt: 'Ciudad Futura website', class: 'image-responsive'),
               'http://ciudadfutura.com.ar/',
-              :class => 'navbar-brand justify-content-center',
+              :class => 'navbar-brand',
               :target => '_blank' %>
-  </div>
-  <div class="clearfix"></div>
 </nav>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+  <%= link_to root_path do%>
+    <%= image_tag('v2/logoM.png', class: 'navbar-brand d-lg-none', width: '35px', id: 'brand') %>
+  <% end %>
   <button class="navbar-toggler"
           type="button"
           data-toggle="collapse"
@@ -17,38 +17,36 @@
           aria-controls="navbarTogglerDemo02"
           aria-expanded="false"
           aria-label="Toggle navigation">
-    <span>
-      <i class="fas fa-chevron-down" id="togglerIcon"></i>
-    </span>
+    <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse justify-content-around" id="navbarTogglerDemo02">
       <%= link_to root_path do%>
-        <%= image_tag('v2/misionNueva.svg', class: 'mx-auto d-block p-3', width: '250px') %>
+        <%= image_tag('v2/misionNueva.svg', class: 'p-3 d-none d-lg-block', width: '250px') %>
       <% end %>
       <ul class="navbar-nav">
         <li class="nav-item">
-          <%= link_to(como_compro_path(1), class: 'nav-link') do %>
+          <%= link_to(como_compro_path(1), class: 'nav-link mb-2 h5') do %>
             Cómo comprar
           <% end %>
         </li>
         <li class="nav-item">
-          <%= link_to(warehouses_path, class: 'nav-link') do %>
+          <%= link_to(warehouses_path, class: 'nav-link mb-2 h5') do %>
             Puntos de retiro
           <% end %>
         </li>
         <li class="nav-item">
-          <%= link_to(compras_path, class: 'nav-link') do %>
+          <%= link_to(compras_path, class: 'nav-link mb-2 h5') do %>
             Próximos Ciclos
           <% end %>
         </li>
         <li class="nav-item">
-          <%= link_to(about_us_path, class: 'nav-link') do %>
+          <%= link_to(about_us_path, class: 'nav-link mb-2 h5') do %>
             Quienes somos
           <% end %>
         </li>
       </ul>
     <div>
-      <%= link_to(cart_path, class: 'btn btn-success') do %>
+      <%= link_to(cart_path, class: 'btn btn-outline-success mb-2') do %>
         Ver Mi Compra <i class="fas fa-shopping-cart"></i>
       <% end %>
     </div>

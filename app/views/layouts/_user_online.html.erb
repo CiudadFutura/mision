@@ -3,7 +3,7 @@
     <%= " Hola " + current_usuario.nombre + " | "  if current_usuario.present? %>
     <i class="fa fa-user"></i>
   <a>
-  <div class="dropdown-menu" aria-labelledby="drop">
+  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="drop">
     <%= link_to(pedidos_path, class: 'dropdown-item text-secondary') do %>
       Mis Pedidos
     <% end %>

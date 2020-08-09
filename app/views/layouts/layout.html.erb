@@ -24,24 +24,28 @@
 
     <script src="https://cdn.rawgit.com/googlemaps/js-marker-clusterer/gh-pages/src/markerclusterer.js"></script>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="app/assets/javascripts/application.js"></script>
   </head>
   <body>
     <%= render 'layouts/header'%>
     <%= render_navigation if request.path != root_path%>
-    <div class="banner">
+    <div class="container-fluid">
       <div class="col-sm-3">
         <%= render 'layouts/menu' %>
       </div>
       <div class="col-sm-9">
         <%= yield %>
       </div>
-      <div class="clearfix"></div>
     </div>
     <div class="container-fluid ">
       <%= render 'layouts/footer' %>
     </div>
   </body>
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  <script>
+    $(document).ready(function(){
+      $(".dropdown").hover(function(){
+        console.log("hola");
+      })
+    })
+  </script>
 </html>
