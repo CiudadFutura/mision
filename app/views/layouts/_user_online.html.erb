@@ -1,33 +1,29 @@
-<a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:black;">
-  <%= " Hola " + current_usuario.nombre + " | "  if current_usuario.present? %>
-  <i class="fa fa-user" aria-hidden="true" style="color:black;"></i>
-</a>
 <div class="dropdown">
-  <ul class="dropdown-menu">
-    <li class="dropdown-item">
-      <%= link_to(pedidos_path) do %>
-        Mis Pedidos
-      <% end %>
-    </li>
-    <li class="dropdown-item">
-      <%= link_to(edit_usuario_path(current_usuario)) do %>
-        Mis Datos
-      <% end %>
-    </li>
-    <li class="dropdown-item">
-      <%= link_to(usuario_path(current_usuario)) do %>
-        Mi Círculo
-      <% end %>
-    </li>
-    <li class="dropdown-item">
-      <%= link_to(account_path(current_usuario.account.id)) do %>
-        Mi Cta Cte
-      <% end %>
-    </li>
-    <li class="dropdown-item">
-      <%= link_to(destroy_usuario_session_path, method: 'delete') do %>
-        Cerrar Sesión
-      <% end %>
-    </li>
-  </ul>
+  <a class="dropdown-toggle text-secondary" id="drop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <%= " Hola " + current_usuario.nombre + " | "  if current_usuario.present? %>
+    <i class="fa fa-user"></i>
+  <a>
+  <div class="dropdown-menu" aria-labelledby="drop">
+    <%= link_to(pedidos_path, class: 'dropdown-item text-secondary') do %>
+      Mis Pedidos
+    <% end %>
+
+    <%= link_to(edit_usuario_path(current_usuario), class: 'dropdown-item text-secondary') do %>
+      Mis Datos
+    <% end %>
+
+    <%= link_to(usuario_path(current_usuario), class: 'dropdown-item text-secondary') do %>
+      Mi Círculo
+    <% end %>
+
+    <%= link_to(account_path(current_usuario.account.id), class: 'dropdown-item text-secondary') do %>
+      Mi Cta Cte
+    <% end %>
+
+    <div class="dropdown-divider"></div>
+
+    <%= link_to(destroy_usuario_session_path, method: 'delete', class: 'dropdown-item text-secondary') do %>
+      Cerrar Sesión
+    <% end %>
+  </div>
 </div>
