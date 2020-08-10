@@ -7,4 +7,5 @@ import "../stylesheets/application";
 import "./custom";
 import "@fortawesome/fontawesome-free/js/all";
 
-require.context('images', true, /\.(svg|png|jpg)$/igm);
+require.context('../images', true);
+

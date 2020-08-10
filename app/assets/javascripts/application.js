@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // This is a manifest file that'll be compiled into application.js, which will include all the files
 // listed below.
 //
@@ -130,3 +131,5 @@ $(document).ready(function() {
       }
   )
 });
+=======
+>>>>>>> 4130a5f768f4277b2ff435d93d0e574d4508b407

@@ -4,7 +4,7 @@
   <h5><%= @producto.nombre %></h5>
   <div class="col-md-4 agileinfo_single_left">
     <% if @producto.imagen.blank? %>
-      <%= image_tag('v2/no-disponible.png', class: 'img-responsive') %>
+      <%= image_pack_tag('no-disponible.png', class: 'img-responsive') %>
     <% else %>
       <%= image_tag(@producto.imagen.url, class: 'img-responsive') %>
     <% end %>
