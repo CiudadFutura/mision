@@ -14,8 +14,8 @@ development:
   encoding: utf8
   database: mision_dev
   host: localhost
-  username: mision
-  password: 'mision'
+  username: root
+  password: '123456'
 
 test:
   <<: *default

@@ -11,7 +11,7 @@
             <div class="card-img-top">
               <% if producto.imagen.blank? %>
                 <%= link_to producto_path(producto.id) do%>
-                  <%= image_tag('v2/no-disponible.png', class: 'card-img-top') %>
+                  <%= image_pack_tag('no-disponible.png', class: 'card-img-top') %>
                 <% end %>
               <% else %>
                 <%= link_to producto_path(producto.id) do%>

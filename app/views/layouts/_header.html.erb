@@ -1,6 +1,6 @@
 <!-- header -->
 <nav class="navbar navbar-expand-lg navbar-light bg-danger justify-content-center d-none d-lg-block">
-  <%= link_to image_tag('v2/logoCF.png', height: '25', alt: 'Ciudad Futura website', class: 'image-responsive'),
+  <%= link_to image_pack_tag('logoCF.png', height: '25', alt: 'Ciudad Futura website', class: 'image-responsive'),
               'http://ciudadfutura.com.ar/',
               :class => 'navbar-brand',
               :target => '_blank' %>
@@ -8,7 +8,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
   <%= link_to root_path do%>
-    <%= image_tag('v2/logoM.png', class: 'navbar-brand d-lg-none', width: '35px', id: 'brand') %>
+    <%= image_pack_tag('logoM.png', class: 'navbar-brand d-lg-none', width: '35px', id: 'brand') %>
   <% end %>
   <button class="navbar-toggler"
           type="button"
@@ -21,7 +21,7 @@
   </button>
   <div class="collapse navbar-collapse justify-content-around" id="navbarTogglerDemo02">
       <%= link_to root_path do%>
-        <%= image_tag('v2/misionNueva.svg', class: 'p-3 d-none d-lg-block', width: '250px') %>
+        <%= image_pack_tag('misionNueva.svg', class: 'p-3 d-none d-lg-block', width: '250px') %>
       <% end %>
       <ul class="navbar-nav">
         <li class="nav-item">
