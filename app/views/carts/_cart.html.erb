@@ -40,7 +40,7 @@
                 <div class="product-thumbnail-wrapper">
                   <% if item.producto.imagen.blank? %>
                     <%= link_to producto_path(_producto_id) do%>
-                      <%= image_tag('v2/no-disponible.png', class: 'img-responsive') %>
+                      <%= image_pack_tag('no-disponible.png', class: 'img-responsive') %>
                     <% end %>
                   <% else %>
                     <%= link_to producto_path(_producto_id) do%>

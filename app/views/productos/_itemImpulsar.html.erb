@@ -12,7 +12,7 @@
             <div class="snipcart-thumb">
               <% if producto.imagen.blank? %>
                 <%= link_to producto_path(producto.id) do%>
-                  <%= image_tag('v2/no-disponible.png', class: 'img-responsive', height: '150px') %>
+                  <%= image_tag('no-disponible.png', class: 'img-responsive', height: '150px') %>
                 <% end %>
               <% else %>
                 <%= link_to producto_path(producto.id) do%>
