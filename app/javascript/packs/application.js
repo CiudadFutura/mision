@@ -8,3 +8,4 @@ import "./custom";
 import "@fortawesome/fontawesome-free/js/all";
 
 require.context('../images', true);
+
