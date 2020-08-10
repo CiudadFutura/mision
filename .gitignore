@@ -46,3 +46,4 @@ uploads
 yarn-debug.log*
 .yarn-integrity
 /node_modules/
+config/database.yml
