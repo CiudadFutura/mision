@@ -441,14 +441,14 @@ ul.dropdown-menu.drp-mnu li a i {
 }
 /*-- //header --*/
 /*-- banner --*/
-.navbar-collapse {
+/*.navbar-collapse {
   padding: 0;
   box-shadow: none;
 }
 .navbar {
   margin-bottom: 0;
   border: none;
-}
+}*/
 .w3l_banner_nav_left{
   /*-- agileits --*/
   background: #f5f5f5;
@@ -465,7 +465,7 @@ ul.dropdown-menu.drp-mnu li a i {
 .w3l_banner_nav_right{
 
 }
-.navbar-nav > li {
+/*.navbar-nav > li {
   float: none;
 }
 .nav > li > a:hover, .nav > li > a:focus {
@@ -490,7 +490,7 @@ ul.dropdown-menu.drp-mnu li a i {
 .nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
   background-color: $color-yellow-cf;
   border: none;
-}
+}*/
 .w3ls_vegetables_menu {
   left: 13%;
   border: none;
@@ -3774,9 +3774,9 @@ input.checkbox:checked:after {
   .more {
 
   }
-  .navbar-nav > li > a {
+  /*.navbar-nav > li > a {
     padding: 10px 0px 10px 25px;
-  }
+  }*/
   .w3l_banner_nav_right_banner3 h3,
   .w3l_banner_nav_right_banner4 h3,
   .w3l_banner_nav_right_banner5 h3,
@@ -4153,9 +4153,9 @@ input.checkbox:checked:after {
   .w3ls_logo_products_left1 {
     margin-top: 1.6em;
   }
-  .navbar-nav > li > a {
+  /*.navbar-nav > li > a {
     padding: 10px 0px 10px 15px;
-  }
+  }*/
   .w3ls_vegetables_menu {
     left: 10%;
     min-width: 135px;
@@ -4339,7 +4339,7 @@ input.checkbox:checked:after {
   .w3l_banner_nav_left {
     background: #f5f5f5;
   }
-  .navbar-toggle {
+  /*.navbar-toggle {
     float: none;
     margin: .55em 0 0;
     border: 1px solid #212121;
@@ -4353,7 +4353,7 @@ input.checkbox:checked:after {
   .navbar-nav .open .dropdown-menu {
     background-color: #fff;
     text-align: center;
-  }
+  }*/
   .w3ls_vegetables_menu {
     left: auto;
     float: none;
