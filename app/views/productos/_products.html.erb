@@ -1,11 +1,11 @@
 <% if @destacados %>
 	<h2 class="col-xs-12">Destacados</h2>
 <% end %>
-<div class="w3ls_w3l_banner_nav_right_grid w3ls_w3l_banner_nav_right_grid_sub">
+<div class="container-fluid">
   <% if params[:categoria_id].blank? %>
-    <h3> Todos</h3>
+    <h1 class="display-4 text-center p-5">Todos</h1>
   <% else %>
-    <h3><%= Categoria.find(params[:categoria_id]).nombre if params[:categoria_id] %></h3>
+    <h1 class="display-4 text-center p-5"><%= Categoria.find(params[:categoria_id]).nombre if params[:categoria_id] %></h1>
   <% end %>
   <% if @exclusives.present? %>
     <div class="w3ls_w3l_banner_nav_right_grid1">
@@ -42,12 +42,10 @@
       </div>
     </div>
   <% end  %>
-  <div class="w3ls_w3l_banner_nav_right_grid1">
-    <h6><%= Categoria.find(params[:subcategoria_id]).nombre if params[:subcategoria_id].present? %></h6>
-      <div class="row row-cols-1 row-cols-md-3">
-        <% @productos.each do |producto|%>
-          <%= render 'productos/item', producto: producto %>
-        <% end %>
-      </div>
-  </div>
+  <h1 class="p-2"><%= Categoria.find(params[:subcategoria_id]).nombre if params[:subcategoria_id].present? %></h6>
+    <div class="row row-cols-1 row-cols-md-4">
+      <% @productos.each do |producto|%>
+        <%= render 'productos/item', producto: producto %>
+      <% end %>
+    </div>
 </div>

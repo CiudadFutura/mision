@@ -1,23 +1,6 @@
-<div class="products-breadcrumb">
-  <ul>
-    <% nav.each.with_index do |n, i| %>
-      <% unless n.equal? nav.last %>
-        <% if i == 0 %>
-          <li>
-            <i class="fa fa-home" aria-hidden="true"></i>
-            <%= link_to n[:title], n[:url] %>
-            <span>|</span></li>
-          </li>
-        <% else %>
-          <li>
-            <%= link_to n[:title], n[:url] %>
-            <span>|</span></li>
-          </li>
-        <% end %>
-      <% else %>
-        <li><%= n[:title] %></li>
-      <% end %>
-    <% end %>
-  </ul>
-
-</div>
+<nav class="navbar navbar-expand-lg navbar-light bg-danger justify-content-center d-none d-lg-block">
+  <%= link_to image_tag('v2/logoCF.png', height: '25', alt: 'Ciudad Futura website', class: 'image-responsive'),
+              'http://ciudadfutura.com.ar/',
+              :class => 'navbar-brand',
+              :target => '_blank' %>
+</nav>

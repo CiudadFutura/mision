@@ -60,7 +60,7 @@ $(document).ready(function() {
 
     var qtySelect = $('#qty-selected-'+productId);
     var qty = qtySelect.val();
-    var buttonIcon = that.children().eq(0);
+    var buttonIcon = that.children().eq(0);text-center
     if (action === 'add') {
       //Add a new item to cart
       qtySelect.attr('disabled','disabled');
@@ -124,6 +124,7 @@ $(document).ready(function() {
   );
   $(".card").hover(
       function() {
+        console.log("hola");
           var cardId = "#" + this.id; 
           $(cardId).toggleClass("shadow");
       }
