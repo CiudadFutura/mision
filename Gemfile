@@ -48,7 +48,7 @@ gem 'writeexcel', '~> 1.0', '>= 1.0.5'
 gem 'figaro', '~> 1.2'
 
 # Chartkick js
-gem 'chartkick', '~> 3.3', '>= 3.3.1'
+gem 'chartkick', '~> 3.4'
 
 gem 'thin', '~> 1.7', '>= 1.7.2'
 
