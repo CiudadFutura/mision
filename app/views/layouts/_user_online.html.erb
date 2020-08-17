@@ -2,7 +2,7 @@
   <a class="dropdown-toggle text-secondary" id="drop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     <%= " Hola " + current_usuario.nombre + " | "  if current_usuario.present? %>
     <i class="fa fa-user"></i>
-  <a>
+  </a>
   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="drop">
     <%= link_to(pedidos_path, class: 'dropdown-item text-secondary') do %>
       Mis Pedidos
