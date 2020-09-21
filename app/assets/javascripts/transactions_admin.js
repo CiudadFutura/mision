@@ -24,14 +24,21 @@ $(document).ready(function () {
 
     $("#agregar").click(function(){
         var nombre = $("#prod-nombre");
-        var precio = $("#prod-precio");
+        var precio = parceFloat($("#prod-precio").toFixed(2));
         var cantidad = $("#prod-cantidad");
         var detalle = $('#transaction_description').val();
         var total = $('#transaction_amount').val();
         var subTotal = 0;
-        var detalleadd = $('#hidden-description').val() + detalle + 'Producto: '+ nombre.val() + '\t' +
+        var hidenDescription = $('#hiden-description').val();
+        if (length(hidenDescription)>0) {
+            var detalleadd = detalle + 'Producto: '+ nombre.val() + '\t' +
             'Cantidad: '+ cantidad.val() + '\t' +
             'Precio: $'+ precio.val();
+        } else {
+            var detalleadd = hidenDescription + detalle + 'Producto: '+ nombre.val() + '\t' +
+            'Cantidad: '+ cantidad.val() + '\t' +
+            'Precio: $'+ precio.val();
+        }
         subTotal = (cantidad.val())*(precio.val());
         var index = 0;
         if ($("#index").val() == undefined){
