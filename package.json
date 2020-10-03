@@ -1,11 +1,14 @@
 {
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.0",
+    "@rails/activestorage": "^6.0.3-3",
+    "@rails/ujs": "^6.0.3-3",
     "@rails/webpacker": "5.2.1",
     "bootstrap": "^4.5.2",
     "jquery": "^3.5.1",
     "jquery-validation": "^1.19.2",
-    "popper.js": "^1.16.1"
+    "popper.js": "^1.16.1",
+    "turbolinks": "^5.2.0"
   },
   "devDependencies": {
     "webpack-dev-server": "^3.11.0"
