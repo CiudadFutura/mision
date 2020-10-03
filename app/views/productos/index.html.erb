@@ -1,4 +1,4 @@
-<%= javascript_include_tag 'productos', params[:controller] %>
+<%= javascript_include_tag 'app/javascript/src/productos', params[:controller] %>
 <% content_for :title, 'Productos' %>
 <% navigation_add Categoria.find(params[:categoria_id]).nombre, '#' if params[:categoria_id].present? %>
 
