@@ -1,8 +1,18 @@
 .dockerignore
 Dockerfile
-tmp/*
-Docker/*
-node_modules/*
-log/*
-tmp/*
-.git/*
+
+tmp
+Docker
+node_modules
+log
+
+# ignore .git and .cache folders
+.git
+.cache
+
+# ignore all markdown files (md) beside all README*.md other than README-secret.md
+*.md
+!README*.md
+README-secret.md
+
+#*.patch
