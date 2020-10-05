@@ -60,6 +60,8 @@ COPY . .
 COPY docker-entrypoint.sh /usr/local/bin/
 ENTRYPOINT ["docker-entrypoint.sh"]
 
+VOLUME [ "/app/log" ]
+
 CMD ["rails", "server", "-b", "0.0.0.0"]
 
 

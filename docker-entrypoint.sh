@@ -1,6 +1,6 @@
 #!/bin/bash
-#set -eo pipefail
-#shopt -s nullglob
+set -eo pipefail
+shopt -s nullglob
 
 # logging functions
 mai_log() {

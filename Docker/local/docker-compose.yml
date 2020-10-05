@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 services:
   db:
     image: mysql
@@ -10,9 +10,15 @@ services:
       MYSQL_PASSWORD: pass
       MYSQL_RANDOM_ROOT_PASSWORD: '1'
     volumes:
-      - datadir:/var/lib/mysql
+#      - dbdata:/var/lib/mysql
+        # The mount type 
+      - type: bind
+        # the source of the mount, a path on the host for a bind mount, or the name of a volume defined in the top-level volumes key. Not applicable for a tmpfs mount.
+        source: ./dbdata
+        # the path in the container where the volume is mounted
+        target: /var/lib/mysql
   web:
-    image: 373c20b9254d
+    image: 2575b682f6ad
 #    build: .
 #    command: bundle exec rails s -p 3000 -b '0.0.0.0'
 #    volumes:
@@ -28,8 +34,17 @@ services:
         DB_PORT: 3306
         SECRET_KEY_BASE: 63177bcc5f4f637ded357ac7478f3d21e5f320545445f490eb3c210df83fbcb8a3e9f84595f4608fb6aea186f4117c17dd6d611f40395d30d5b7ed89cae545fc
         MAINURL: localhost
+    volumes:
+      #- logs:/app/log
+      # The mount type 
+      - type: bind
+        # the source of the mount, a path on the host for a bind mount, or the name of a volume defined in the top-level volumes key. Not applicable for a tmpfs mount.
+        source: ./logs
+        # the path in the container where the volume is mounted
+        target: /app/log
     depends_on:
       - db
 
-volumes:
-  datadir:
+#volumes:
+#  dbdata:
+#  logs:

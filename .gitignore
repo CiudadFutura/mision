@@ -333,3 +333,5 @@ fabric.properties
 node_modules/*
 log/*
 tmp/*
+Docker/local/dbdata/*
+Docker/local/logs/*
