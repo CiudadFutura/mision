@@ -15,17 +15,17 @@
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
-import 'core-js/stable'
-import 'regenerator-runtime/runtime'
-import 'bootstrap'
-import '../stylesheets/application.scss'
-import '@fortawesome/fontawesome-free/js/all'
-
 require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
+require('bootstrap')
 require('jquery-validation')
+require('flexslider/jquery.flexslider')
 
+import 'core-js/stable'
+import 'regenerator-runtime/runtime'
+import '../stylesheets/application.scss'
+import '@fortawesome/fontawesome-free/js/all'
 
 
 let webpackContext = require.context('../src', true, /\.js$/)
@@ -36,12 +36,12 @@ require.context('../images', true, /\.(?:png|jpg|gif|ico|svg)$/)
 
 $(document).ready(function() {
 
-    /*$('.flexslider').flexslider({
+    $('.flexslider').flexslider({
         animation: "slide",
         start: function(slider){
             $('body').removeClass('loading');
         }
-    });*/
+    });
 
     $(".scroll").click(function(event){
         event.preventDefault();

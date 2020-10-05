@@ -54,9 +54,6 @@ gem 'thin', '~> 1.7', '>= 1.7.2'
 # Group Update queries
 gem 'groupdate', '~> 5.0'
 
-# Flex slider
-gem 'flexslider', '~> 2.2'
-
 # Font awesome
 gem 'font-awesome-sass', '~> 4.6', '>= 4.6.2'
 

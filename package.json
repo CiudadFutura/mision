@@ -5,6 +5,7 @@
     "@rails/ujs": "^6.0.3-3",
     "@rails/webpacker": "5.2.1",
     "bootstrap": "^4.5.2",
+    "flexslider": "^2.7.2",
     "jquery": "^3.5.1",
     "jquery-validation": "^1.19.2",
     "popper.js": "^1.16.1",
