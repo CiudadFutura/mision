@@ -335,3 +335,5 @@ log/*
 tmp/*
 Docker/local/dbdata/*
 Docker/local/logs/*
+
+*.patch

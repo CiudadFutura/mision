@@ -1,6 +1,9 @@
 #!/bin/bash
 set -eo pipefail
 shopt -s nullglob
+# Make Entrypoint.log file.
+exec > >(tee -a Entrypoint.log)
+exec 2> >(tee -a Entrypoint.log >&2)
 
 # logging functions
 mai_log() {
@@ -69,6 +72,11 @@ _main() {
         fi
         sed -i "s/socket: \/var\/run\/mysqld\/mysqld.sock/#socket: \/var\/run\/mysqld\/mysqld.sock/g" config/database.yml
     fi
+
+    # Wait for DB
+    while ! timeout 1 bash -c 'cat < /dev/null > /dev/tcp/${DB_HOST}/${DB_PORT}' ; do
+        sleep 1
+    done
 
     #Si hay q crear la base
     bundle exec rake db:create || true

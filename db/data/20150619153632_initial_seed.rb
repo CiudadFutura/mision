@@ -39,8 +39,6 @@ class InitialSeed < SeedMigration::Migration
 
     proveedor = Supplier.create!(name: 'Generico', nature: :wholesaler)
     productos = []
-    img_dir = '/home/deploy/mision/shared/tmp/imagenes/'
-
 
     JSON.parse(open("db/json/products.json").read).each do |prod|
       JSON.parse(open("db/json/products_description.json").read).each do |prod_d|
@@ -55,9 +53,8 @@ class InitialSeed < SeedMigration::Migration
           product.precio_super = 0
 
           if Rails.env.production? && !prod['products_image'].nil? && !prod['products_image'].empty?
-            image = File.open("#{img_dir}img_no_disponible.png")
-
-            image_path = "#{img_dir}#{prod['products_image']}"
+            image = File.open(Rails.public_path.join('images/image-not-found.png'))
+            image_path = Rails.public_path.join("images/#{prod['products_image']}")
             if File.owned?(image_path)
               image = File.open(image_path)
             end

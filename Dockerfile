@@ -1,14 +1,12 @@
 FROM ubuntu:20.04 as Builder
 
-EXPOSE 3000
-
 ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ=America/Argentina/Buenos_Aires
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # RUN apk add 
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends pkg-config libxml2 libxml2-dev libui-gxmlcpp-dev build-essential patch ruby-dev zlib1g-dev liblzma-dev default-libmysqlclient-dev libreadline6-dev libreadline-dev npm \
+    apt-get install -y --no-install-recommends pkg-config libxml2 libxml2-dev libui-gxmlcpp-dev build-essential patch ruby-dev zlib1g-dev liblzma-dev default-libmysqlclient-dev libreadline6-dev libreadline-dev npm imagemagick \
     # Download
     curl ca-certificates  \
     # RVM deps
@@ -60,10 +58,12 @@ COPY . .
 COPY docker-entrypoint.sh /usr/local/bin/
 ENTRYPOINT ["docker-entrypoint.sh"]
 
+VOLUME [ "/app" ]
 VOLUME [ "/app/log" ]
-
+EXPOSE 3000
 CMD ["rails", "server", "-b", "0.0.0.0"]
 
+#imagemagick 
 
 # FROM ruby:2.7.2-alpine
 # RUN apk add 

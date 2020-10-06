@@ -17,8 +17,19 @@ services:
         source: ./dbdata
         # the path in the container where the volume is mounted
         target: /var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping --silent"]
+      # The health check will first run interval seconds after the container is started, and then again interval seconds after each previous check completes.
+      interval: 10s
+      # If a single run of the check takes longer than timeout seconds then the check is considered to have failed.
+      timeout: 5s
+      # It takes retries consecutive failures of the health check for the container to be considered unhealthy.
+      retries: 10
+      # start period provides initialization time for containers that need time to bootstrap. 
+      start_period: 10s
+  
   web:
-    image: 2575b682f6ad
+    image: e51dd700ec58
 #    build: .
 #    command: bundle exec rails s -p 3000 -b '0.0.0.0'
 #    volumes:
