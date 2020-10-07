@@ -29,7 +29,7 @@ services:
       start_period: 10s
   
   web:
-    image: a3927d3f466c
+    image: 2616c628d282
 #    build: .
 #    command: bundle exec rails s -p 3000 -b '0.0.0.0'
 #    volumes:
