@@ -29,7 +29,7 @@ services:
       start_period: 10s
   
   web:
-    image: e51dd700ec58
+    image: a3927d3f466c
 #    build: .
 #    command: bundle exec rails s -p 3000 -b '0.0.0.0'
 #    volumes:
@@ -52,7 +52,7 @@ services:
         # the source of the mount, a path on the host for a bind mount, or the name of a volume defined in the top-level volumes key. Not applicable for a tmpfs mount.
         source: ./logs
         # the path in the container where the volume is mounted
-        target: /app/log
+        target: /home/unprivilegedUser/app/log
     depends_on:
       - db
 

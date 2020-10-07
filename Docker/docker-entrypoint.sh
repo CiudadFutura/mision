@@ -75,16 +75,15 @@ _main() {
 
     # Wait for DB
     while ! timeout 1 bash -c 'cat < /dev/null > /dev/tcp/${DB_HOST}/${DB_PORT}' ; do
-        sleep 1
+        sleep 5
     done
 
+    #source ~/.rvm/scripts/rvm    
     #Si hay q crear la base
-    bundle exec rake db:create || true
-    
+    ~/.rvm/gems/ruby-2.7.1/wrappers/bundle exec rake db:create || true
     #migrar la db
-    bundle exec rake db:migrate || true
-    bundle exec rake seed:migrate || true
-
+    ~/.rvm/gems/ruby-2.7.1/wrappers/bundle exec rake db:migrate || true
+    ~/.rvm/gems/ruby-2.7.1/wrappers/bundle exec rake seed:migrate || true
     exec "$@"
 }
 
