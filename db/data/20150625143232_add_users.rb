@@ -16,12 +16,12 @@ class AddUsers < SeedMigration::Migration
         user.tel1     = u['tel1']
         user.cel1     = u['cel1']
         user.email    = u['email']
-        user.dni      = u['dni']
         if "Coordinador".casecmp u['type']
           user.type   = Usuario::COORDINADOR
         else
           user.type   = Usuario::USUARIO
-        end
+        end 
+        user.dni      = u['dni']
         user.skip_confirmation_notification!
         user.confirmed_at = Time.now 
         next if user.email.empty?

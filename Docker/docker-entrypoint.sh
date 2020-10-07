@@ -78,12 +78,14 @@ _main() {
         sleep 5
     done
 
-    #source ~/.rvm/scripts/rvm    
+    #source ~/.rvm/scripts/rvm
+    export PATH=~/.rvm/scripts/extras/rails:~/.rvm/gems/ruby-2.7.1/wrappers:$PATH
     #Si hay q crear la base
-    ~/.rvm/gems/ruby-2.7.1/wrappers/bundle exec rake db:create || true
+    bundle exec rake db:create || true
     #migrar la db
-    ~/.rvm/gems/ruby-2.7.1/wrappers/bundle exec rake db:migrate || true
-    ~/.rvm/gems/ruby-2.7.1/wrappers/bundle exec rake seed:migrate || true
+    bundle exec rake db:migrate || true
+    bundle exec rake seed:migrate || true
+    
     exec "$@"
 }
 
