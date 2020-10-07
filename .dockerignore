@@ -3,6 +3,7 @@ Dockerfile
 
 tmp
 Docker
+!Docker/docker-entrypoint.sh
 node_modules
 log
 
