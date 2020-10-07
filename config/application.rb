@@ -25,6 +25,8 @@ module Mision
     config.assets.enabled = false
     #config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
     #config.assets.precompile << %w( *.scss *.js )
+		config.action_controller.default_protect_from_forgery = true
+
 
 		config.before_configuration do
 			env_file = File.join(Rails.root, 'config', 'local_env.yml', 'application.yml', 'secrets.yml')

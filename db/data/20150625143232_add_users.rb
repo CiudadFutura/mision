@@ -36,7 +36,7 @@ class AddUsers < SeedMigration::Migration
           user.save!
           coordinador = Usuario.where(email: circ['email_coordinador']).first
           circulo.id = circ['numero']
-          circulo.coordinador = coordinador
+          circulo.coordinador = coordinador.id
         end
       end
 
