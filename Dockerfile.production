@@ -64,9 +64,9 @@ RUN npm install
 COPY --chown=unprivilegedUser:unprivilegedUser . .
 
 # Punto de montaje de los uploads
-VOLUME [ "/home/unprivilegedUser/app" ]
-# Punto de montaje de los logs
 VOLUME [ "/home/unprivilegedUser/app/public/uploads" ]
+# Punto de montaje de los logs
+VOLUME [ "/home/unprivilegedUser/app/log" ]
 
 CMD ["rails", "server", "-b", "0.0.0.0"]
 
