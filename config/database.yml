@@ -13,13 +13,14 @@ default: &default
   port: <%= ENV['DB_PORT'] %> 
   username: <%= ENV['DB_USER'] %>
   password: <%= ENV['DB_PASS'] %> 
+  database: <%= ENV['DB_NAME'] %> 
 
 development:
   <<: *default
   encoding: utf8
   database: mision_dev
   host: localhost
-  username: user
+  username: root
   password: '123456'
 
 test:
@@ -39,11 +40,16 @@ staging:
 production:
   adapter: mysql2
   encoding: utf8
-  database: mision
-  username: user
-  password: pass
-  host: db
-  port: 3306
+  host: <%= ENV['DB_HOST'] %
+  port: <%= ENV['DB_PORT'] %> 
+  username: <%= ENV['DB_USER'] %>
+  password: <%= ENV['DB_PASS'] %> 
+  database: <%= ENV['DB_NAME'] %> 
+  #database: my_db_name
+  #username: root
+  #password: my_password
+  #host: 127.0.0.1
+  #port: 3306
   secure_auth: false
   pool: 5
-  ###socket: /var/run/mysqld/mysqld.sock
+  #socket: /var/run/mysqld/mysqld.sock
