@@ -74,12 +74,17 @@ _main() {
     fi
 
     # Wait for DB
-    while ! timeout 1 bash -c 'cat < /dev/null > /dev/tcp/${DB_HOST}/${DB_PORT}' ; do
+    tries=50
+    mai_note "Wait for DB"
+    while ! timeout 1 bash -c 'cat < /dev/null > /dev/tcp/${DB_HOST}/${DB_PORT}' 2> /dev/null ; do
+        mai_note "DB not ready. $tries attempts remaining. Waiting..."
         sleep 5
+        tries=$((tries-1))
+        if [ $tries -le "0" ]; then
+            mai_error "DB not found"
+        fi
     done
 
-    #source ~/.rvm/scripts/rvm
-    export PATH=~/.rvm/scripts/extras/rails:~/.rvm/gems/ruby-2.7.1/wrappers:$PATH
     #Si hay q crear la base
     bundle exec rake db:create || true
     #migrar la db
