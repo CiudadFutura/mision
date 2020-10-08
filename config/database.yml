@@ -14,7 +14,7 @@ development:
   encoding: utf8
   database: mision_dev
   host: localhost
-  username: root
+  username: user
   password: '123456'
 
 test:
@@ -34,11 +34,11 @@ staging:
 production:
   adapter: mysql2
   encoding: utf8
-  database: my_db_name
-  username: root
-  password: my_password
-  host: 127.0.0.1
+  database: mision
+  username: user
+  password: pass
+  host: db
   port: 3306
   secure_auth: false
   pool: 5
-  socket: /var/run/mysqld/mysqld.sock
+  ###socket: /var/run/mysqld/mysqld.sock
