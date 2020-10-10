@@ -9,6 +9,8 @@ services:
       MYSQL_USER: user
       MYSQL_PASSWORD: pass
       MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    ports:
+      - "3307:3306"
     volumes:
 #      - dbdata:/var/lib/mysql
         # The mount type 
