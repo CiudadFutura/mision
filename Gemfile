@@ -32,7 +32,7 @@ gem 'jbuilder', '~> 2.10'
 gem 'sdoc', '~> 1.1', group: :doc
 
 # Authentication: https://github.com/plataformatec/devise
-gem 'devise', '~> 4.7', '>= 4.7.1'
+gem 'devise', '~> 4.7', '>= 4.7.3'
 # Authorization: https://github.com/ryanb/cancan/wiki
 gem 'cancancan', '~> 3.1'
 gem 'bcrypt-ruby', '~> 3.1', '>= 3.1.5'
@@ -104,6 +104,16 @@ gem 'rails-jquery-autocomplete'
 gem 'fullcalendar-rails'
 gem 'momentjs-rails'
 
+# Social network
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'omniauth-twitter'
+gem 'omniauth-instagram'
+gem 'koala'
+gem 'twitter'
+gem 'instagram'
+gem 'omniauth-google-oauth2'
+gem 'google-api-client'
 
 # Factura electronica
 #gem 'bravo'
