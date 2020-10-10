@@ -8,7 +8,6 @@ default: &default
   adapter: mysql2
   pool: 10
   timeout: 5000
-  default: &default
   host: <%= ENV['DB_HOST'] %>
   port: <%= ENV['DB_PORT'] %> 
   username: <%= ENV['DB_USER'] %>
@@ -40,7 +39,7 @@ staging:
 production:
   adapter: mysql2
   encoding: utf8
-  host: <%= ENV['DB_HOST'] %
+  host: <%= ENV['DB_HOST'] %>
   port: <%= ENV['DB_PORT'] %> 
   username: <%= ENV['DB_USER'] %>
   password: <%= ENV['DB_PASS'] %> 
