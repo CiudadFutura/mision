@@ -11,7 +11,8 @@ gem 'mini_racer', '~> 0.2.14'
 # Rails Sass gem
 gem 'bootstrap-sass', '~> 3.4', '>= 3.4.1'
 gem 'sass-rails', '~> 6.0'
-gem 'sprockets-rails', '2.3.3'
+gem 'sprockets-rails', '~> 3.2', '>= 3.2.2'
+
 
 # https://github.com/carrierwaveuploader/carrierwave
 gem 'carrierwave', '~> 2.1'
@@ -50,7 +51,7 @@ gem 'figaro', '~> 1.2'
 # Chartkick js
 gem 'chartkick', '~> 3.3', '>= 3.3.1'
 
-gem 'thin', '~> 1.7', '>= 1.7.2'
+gem 'thin'
 
 # Group Update queries
 gem 'groupdate', '~> 5.0'
@@ -103,16 +104,6 @@ gem 'rails-jquery-autocomplete'
 gem 'fullcalendar-rails'
 gem 'momentjs-rails'
 
-# Social network
-gem 'omniauth'
-gem 'omniauth-facebook'
-gem 'omniauth-twitter'
-gem 'omniauth-instagram'
-gem 'koala', '~> 2.0'
-gem 'twitter'
-gem 'instagram'
-gem 'omniauth-google-oauth2'
-gem 'google-api-client'
 
 # Factura electronica
 #gem 'bravo'
