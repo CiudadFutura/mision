@@ -337,3 +337,4 @@ Docker/local/dbdata/*
 Docker/local/logs/*
 
 *.patch
+/public/packs/
