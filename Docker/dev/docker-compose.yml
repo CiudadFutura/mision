@@ -1,0 +1,67 @@
+version: '3.4'
+services:
+  db:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_DATABASE: mision
+      MYSQL_USER: user
+      MYSQL_PASSWORD: pass
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    ports:
+      - "3307:3306"
+    volumes:
+#      - dbdata:/var/lib/mysql
+        # The mount type 
+      - type: bind
+        # the source of the mount, a path on the host for a bind mount, or the name of a volume defined in the top-level volumes key. Not applicable for a tmpfs mount.
+        source: ./dbdata
+        # the path in the container where the volume is mounted
+        target: /var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping --silent"]
+      # The health check will first run interval seconds after the container is started, and then again interval seconds after each previous check completes.
+      interval: 10s
+      # If a single run of the check takes longer than timeout seconds then the check is considered to have failed.
+      timeout: 5s
+      # It takes retries consecutive failures of the health check for the container to be considered unhealthy.
+      retries: 10
+      # start period provides initialization time for containers that need time to bootstrap. 
+      start_period: 10s
+  
+  web:
+#    image: 9c7897f27898
+    build: 
+      context: ../../
+      dockerfile: Docker/dev/Dockerfile
+#    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+#    volumes:
+#      - .:/usr/src/app
+    ports:
+      - "3000:3000"
+    environment:
+        RAILS_ENV: development
+        NODE_ENV: development
+        RACK_ENV: development
+        DB_NAME: mision
+        DB_USER: user
+        DB_PASS: pass
+        DB_HOST: db
+        DB_PORT: 3306
+        SECRET_KEY_BASE: 63177bcc5f4f637ded357ac7478f3d21e5f320545445f490eb3c210df83fbcb8a3e9f84595f4608fb6aea186f4117c17dd6d611f40395d30d5b7ed89cae545fc
+        MAINURL: localhost
+    volumes:
+      #- logs:/app/log
+      # The mount type 
+      - type: bind
+        # the source of the mount, a path on the host for a bind mount, or the name of a volume defined in the top-level volumes key. Not applicable for a tmpfs mount.
+        source: ../../
+        # the path in the container where the volume is mounted
+        target: /app
+    depends_on:
+      - db
+
+#volumes:
+#  dbdata:
+#  logs:
