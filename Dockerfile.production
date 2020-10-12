@@ -1,0 +1,64 @@
+FROM ruby:2.7-alpine as builder
+ENV BUNDLER_VERSION=2.1.4 RAILS_ENV=production RACK_ENV=production NODE_ENV=production
+RUN apk add --update --no-cache \
+      # Add CA for TLS
+      ca-certificates \
+      # image
+      imagemagick-dev \
+      #required for bundle install
+      git \
+      #required for nokogiri
+      build-base \ 
+      libxml2-dev \
+      libxslt-dev \
+      #required for mysql2
+      mariadb-dev \
+      # tzinfo-data
+      tzdata \
+      # Webpack
+      nodejs \
+      yarn
+
+RUN gem install bundler -v ${BUNDLER_VERSION}
+RUN gem install pkg-config -v "~> 1.1"
+WORKDIR /app
+COPY . .
+RUN bundle config set without 'development test'
+RUN bundle config build.nokogiri --use-system-libraries
+RUN bundle check || bundle install
+RUN yarn install --ignore-engines --check-files
+RUN rake assets:precompile
+RUN bin/webpack
+
+
+FROM ruby:2.7-alpine
+ENV BUNDLER_VERSION=2.1.4 RAILS_ENV=production RACK_ENV=production NODE_ENV=production
+RUN apk add --update --no-cache \
+      # Add CA for TLS
+      ca-certificates \
+      # image
+      imagemagick-dev \
+      #required for bundle install
+      git \
+      #required for nokogiri
+      build-base \ 
+      libxml2-dev \
+      libxslt-dev \
+      #required for mysql2
+      mariadb-dev \
+      # tzinfo-data
+      tzdata \
+      # Solo la usamos para esperar la DB
+      netcat-openbsd 
+
+WORKDIR /app
+RUN gem install bundler -v ${BUNDLER_VERSION}
+RUN gem install pkg-config -v "~> 1.1"
+COPY --from=builder /app /app
+RUN bundle config set without 'development test'
+RUN bundle config build.nokogiri --use-system-libraries
+RUN bundle check || bundle install
+
+COPY docker-entrypoint.sh /usr/local/bin/
+ENTRYPOINT ["docker-entrypoint.sh"]
+CMD ["rails", "server", "-b", "0.0.0.0","-e", "production"]
