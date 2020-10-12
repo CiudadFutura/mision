@@ -337,6 +337,6 @@ Docker/local/dbdata/*
 !Docker/local/dbdata/.keep
 Docker/dev/dbdata/*
 !Docker/dev/dbdata/.keep
-public/packs/*
-public/packs/manifest.json
 *.patch
+/public/packs/
+
