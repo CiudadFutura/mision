@@ -7,6 +7,7 @@ gem 'mysql2', '~> 0.4.10'
 gem 'bigdecimal', '1.4.2'
 #gem 'therubyracer',  platforms: :ruby
 #gem 'mini_racer', '~> 0.2.14'
+gem 'tzinfo-data'
 
 # Rails Sass gem
 gem 'webpacker', '~> 5.2', '>= 5.2.1'
