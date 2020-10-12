@@ -52,6 +52,13 @@ _main() {
     bundle exec rake db:migrate || true
     bundle exec rake seed:migrate || true
     
+    if [ "$RAILS_ENV" != 'production' ]; then
+        mai_note "Construimos los assets actuales"
+        # Al montar el directorio devemos asegurarnos de tener las dependencias.
+        yarn install --check-files
+        bin/webpack
+    fi
+
     exec "$@"
 }
 

@@ -31,9 +31,15 @@ _is_sourced() {
 
 _main() {
 
-    if [ "$RAILS_ENV" = '' ]; then
-        export RAILS_ENV='production'
+    if [ -f tmp/pids/server.pid ]; then
+        rm tmp/pids/server.pid
     fi
+
+    if [ "$RAILS_ENV" = '' ]; then
+        export RAILS_ENV='production'    
+    fi
+
+    
 
     # if [ "$RAILS_ENV" = 'production' ]; then
     #     if [ ! -z "${DB_NAME}" ]; then
@@ -91,6 +97,11 @@ _main() {
     bundle exec rake db:migrate || true
     bundle exec rake seed:migrate || true
     
+    if [ "$RAILS_ENV" != 'production' ]; then
+        mai_note "NO PRODUCTION"
+        #  || true
+    fi
+
     exec "$@"
 }
 

@@ -9,51 +9,44 @@ RUN apk add --update --no-cache \
       git \
       #required for nokogiri
       build-base \ 
-      #required for mysql2
-      mariadb-dev \
-      #required for libv8
-      python2 \
-      binutils-gold \
-      build-base \
-      curl \
-      file \
-      g++ \
-      gcc \
-      git \
-      less \
-      libstdc++ \
-      libffi-dev \
-      libc-dev \ 
-      linux-headers \
       libxml2-dev \
       libxslt-dev \
-      libgcrypt-dev \
-      make \
-      netcat-openbsd \
-      nodejs \
-      openssl \
-      pkgconfig \
+      #required for mysql2
+      mariadb-dev \
+      # tzinfo-data
       tzdata \
       #Borrame solo develop
       sqlite-dev \
-      yarn 
-      # Porque necesitasmos yarn y NPM??
-      #npm
+      # Webpack
+      nodejs \
+      yarn \
+      # Solo la usamos para esperar la DB
+      netcat-openbsd 
 
-RUN gem install bundler -v 2.1.4
+      # pkgconfig \
+      # binutils-gold \
+      # curl \
+      # file \
+      # g++ \
+      # gcc \
+      # git \
+      # less \
+      # libstdc++ \
+      # libffi-dev \
+      # libc-dev \ 
+      # linux-headers \
+      # libgcrypt-dev \
+      # make \
+      # openssl \
+
+RUN gem install bundler -v ${BUNDLER_VERSION}
+RUN gem install pkg-config -v "~> 1.1"
 WORKDIR /app
 COPY Gemfile Gemfile.lock ./
 RUN bundle config build.nokogiri --use-system-libraries
 RUN bundle check || bundle install
-#COPY package.json yarn.lock ./
-#RUN yarn install --check-files
-#RUN npm install
 VOLUME [ "/app" ]
 
-ENV APPVER=3
-COPY Docker/dev/entrypoints/docker-entrypoint.sh /usr/local/bin/
+COPY Docker/dev/docker-entrypoint.sh /usr/local/bin/
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["rails", "server", "-b", "0.0.0.0","-e", "development"]
-
-#RUN RAILS_ENV=production rake assets:precompile
-#RUN RAILS_ENV=production RACK_ENV=production NODE_ENV=production bin/webpack

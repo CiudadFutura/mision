@@ -9,28 +9,28 @@ default: &default
   pool: 10
   timeout: 5000
   host: <%= ENV['DB_HOST'] %>
-  port: <%= ENV['DB_PORT'] %> 
+  port: <%= ENV['DB_PORT'] %>
   username: <%= ENV['DB_USER'] %>
-  password: <%= ENV['DB_PASS'] %> 
-  database: <%= ENV['DB_NAME'] %> 
+  password: <%= ENV['DB_PASS'] %>
+  database: <%= ENV['DB_NAME'] %>
 
 development:
   <<: *default
   encoding: utf8
-  database: mision_dev
-  host: localhost
-  username: root
-  password: '123456'
+  database: <%= ENV['DB_NAME'] ||= mision_dev %>
+  host: <%= ENV['DB_HOST'] ||= localhost %>
+  username: <%= ENV['DB_USER'] ||= root %>
+  password: <%= ENV['DB_PASS'] ||= '123456' %>
 
 test:
   <<: *default
   encoding: utf8
-  database: mision_dev
+  database: <%= ENV['DB_NAME'] ||= mision_dev %>
 
 staging:
   <<: *default
   encoding: utf8
-  database: mision_prod
+  database: <%= ENV['DB_NAME'] ||= mision_prod %>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -39,16 +39,11 @@ staging:
 production:
   adapter: mysql2
   encoding: utf8
-  host: <%= ENV['DB_HOST'] %>
-  port: <%= ENV['DB_PORT'] %> 
-  username: <%= ENV['DB_USER'] %>
-  password: <%= ENV['DB_PASS'] %> 
-  database: <%= ENV['DB_NAME'] %> 
-  #database: my_db_name
-  #username: root
-  #password: my_password
-  #host: 127.0.0.1
-  #port: 3306
+  host: <%= ENV['DB_HOST'] ||= '127.0.0.1' %>
+  port: <%= ENV['DB_PORT'] ||= '3306' %>
+  username: <%= ENV['DB_USER'] ||= root %>
+  password: <%= ENV['DB_PASS'] ||= my_password %>
+  database: <%= ENV['DB_NAME'] ||= my_db_name %>
   secure_auth: false
   pool: 5
   #socket: /var/run/mysqld/mysqld.sock

@@ -9,9 +9,16 @@ EXPOSE 3000
 
 # RUN apk add 
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends pkg-config libxml2 libxml2-dev libui-gxmlcpp-dev build-essential patch ruby-dev zlib1g-dev liblzma-dev default-libmysqlclient-dev libreadline6-dev libreadline-dev \ 
+    apt-get install -y --no-install-recommends \
+    #
+    pkg-config libxml2 libxml2-dev libui-gxmlcpp-dev  libreadline6-dev libreadline-dev \ 
+    # Conector Mysql
+    default-libmysqlclient-dev \
+    # nokogiri
+    # https://nokogiri.org/tutorials/installing_nokogiri.html
+    build-essential patch ruby-dev zlib1g-dev liblzma-dev \
     # Webpack
-    npm \ 
+#    npm \ 
     # image handler
     imagemagick \
     # Download
@@ -25,12 +32,12 @@ RUN apt-get update && \
     gnupg2 \
     # Update All System
     && apt-get -o Dpkg::Options::="--force-confold" upgrade -q -y --force-yes \
-    && apt-get -o Dpkg::Options::="--force-confold" dist-upgrade -q -y --force-yes \
-    # Add Yarn Repo
-    && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
+    && apt-get -o Dpkg::Options::="--force-confold" dist-upgrade -q -y --force-yes 
+    # Add Yarn Repo (webpack) 
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
     && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
     && apt-get update \
-    && apt-get install -y --no-install-recommends yarn \
+    && apt-get install -y --no-install-recommends nodejs yarn \
     # Clean
     && rm -rf /var/lib/apt/lists/* \
     && apt-get clean
@@ -56,10 +63,11 @@ ENTRYPOINT ["docker-entrypoint.sh"]
 COPY --chown=unprivilegedUser:unprivilegedUser Gemfile Gemfile.lock yarn.lock package.json ./
 
 ENV PATH=~/.rvm/scripts/extras/rails:~/.rvm/gems/ruby-${RUBY_VER}/wrappers:$PATH
-RUN ~/.rvm/gems/ruby-${RUBY_VER}/wrappers/bundle install
+RUN ~/.rvm/gems/ruby-${RUBY_VER}/wrappers/bundle config build.nokogiri --use-system-libraries
+RUN ~/.rvm/gems/ruby-${RUBY_VER}/wrappers/bundle check || ~/.rvm/gems/ruby-${RUBY_VER}/wrappers/bundle install
 RUN yarn install
-RUN npm install
-#RUN rake assets:precompile
+#RUN npm install
+#RUN RAILS_ENV=production rake assets:precompile
 #RUN bin/webpack
 
 # Mount Dev Mai
