@@ -1,4 +1,9 @@
 {
+  "author": "Ciudad Futura",
+  "email": "sistemas@ciudadfutura.com.ar",
+  "license": "MIT",
+  "version": "0.0.1",
+  "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.0",
     "@rails/activestorage": "^6.0.3-3",
