@@ -115,7 +115,7 @@ gem 'google-api-client'
 #gem 'bravo'
 
 group :development, :test do
-  gem 'sqlite3'
+  #gem 'sqlite3'
   gem 'pry'
   gem 'pry-remote'
   gem 'pry-rails'

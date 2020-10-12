@@ -16,7 +16,7 @@ RUN apk add --update --no-cache \
       # tzinfo-data
       tzdata \
       #Borrame solo develop
-      sqlite-dev \
+      #sqlite-dev \
       # Webpack
       nodejs \
       yarn \
