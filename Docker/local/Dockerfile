@@ -59,8 +59,10 @@ ENV PATH=~/.rvm/scripts/extras/rails:~/.rvm/gems/ruby-${RUBY_VER}/wrappers:$PATH
 RUN ~/.rvm/gems/ruby-${RUBY_VER}/wrappers/bundle install
 RUN yarn install
 RUN npm install
+#RUN rake assets:precompile
+#RUN bin/webpack
 
 # Mount Dev Mai
 VOLUME [ "/home/unprivilegedUser/app" ]
 
-CMD ["rails", "server", "-b", "0.0.0.0"]
+CMD ["rails", "server", "-b", "0.0.0.0","-e", "development"]
