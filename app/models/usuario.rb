@@ -11,6 +11,7 @@ class Usuario < ActiveRecord::Base
   belongs_to :circulo
   has_many :pedidos
   has_one :account
+  has_one :warehouse
 	has_many :deliveries
 	has_many :compras, :through => :deliveries
   has_many :identities

@@ -22,6 +22,8 @@ en:
     page_gap: "&hellip;"
   activerecord:
     models:
+      usuario:
+        warehouse: Distrito
       transaction: Transacción
       account:
         attributes:
@@ -51,6 +53,7 @@ en:
         cel1: Celular
         tel1: Teléfono
         pais: País
+        warehouse: Distrito
       supplier:
         name: Nombre
         address: Dirección
