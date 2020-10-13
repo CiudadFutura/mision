@@ -74,14 +74,20 @@
     </div>
     <% if @usuario.circulo_id.blank?  %>
       <div class="form-group">
-        <%= f.label :warehouse, for:'warehouse', class: 'col-sm-2 control-label' %>
-        <div class="col-sm-10">
-          <%= f.select(:warehouse_id,
-                       options_for_select(Warehouse.all.map{|s| [s.name + " (#{s.address})",s.id]},
-                                          @usuario[:warehouse_id]),
-                     { include_blank: 'Elija Distrito a retirar'},
-                     class: 'form-control required') %>
-        </div>
+        <%= f.fields_for :usuario_roles, @usuario.usuario_roles.build do |r| %>
+          <%= r.label :warehouse_id, class: 'col-sm-2 control-label' %>
+          <div class="col-sm-10">
+            <ul class='list-gropu'>
+              <% Warehouse.all.each do |distrito|%>
+                <li class='list-group-item'>
+                  <h4 class="list-group-item-heading"><%= distrito.name %></h4>
+                  <p class="list-group-item-text"><%= distrito.address %></p>
+                  <input type="radio" id='<%= distrito.id %>' value='<%= distrito.id %>' name='distrito'>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
       </div>
     <% end %>
   <% elsif current_usuario.productor? %>

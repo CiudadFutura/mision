@@ -8,7 +8,7 @@
     <h3>Hola <%= current_usuario.nombre %></h3>
   </div>
   <br>
-  <div class="row">
+  <!--div class="row">
     <div class="col-md-12">
       <h4>¡Bienvenide a la Misión Anti Inflación!</h4>
     </div>
@@ -31,26 +31,17 @@
         <li>Ver tus pedidos y descargar tus facturas</li>
       </ul>
     </div>
-  </div>
+  </div-->
 
   <br>
-  <% if !current_usuario.completed? or current_usuario.circulo.blank? %>
+  <% if current_usuario.circulo.blank?%>
     <div class="row">
       <div class="col-sm-12">
         <div class="alert alert-info">
-          <h4>Para poder realizar tus pedidos debés</h4>
+          <h4>Listo! Ya podés comprar en el próximo mini ciclo!</h4>
           <ul>
-            <% if !current_usuario.completed? %>
-              <li>Completar tus datos personales haciendo clic en
-                <span>
-                    <%= link_to(edit_usuario_path(current_usuario)) do %>
-                      Mis Datos
-                    <% end %>
-                  </span>
-              </li>
-            <% end %>
             <% if current_usuario.circulo.blank? %>
-              <li>Pertenecer a un círculo de asociades,
+              <li>También podés crear o sumarte a un círculo para acceder al carrito con toda la canasta básica entrando a 
                 <span>
                     <%= link_to(usuario_path(current_usuario)) do %>
                       Mi Círculo
@@ -78,42 +69,7 @@
     </div>
   </div>
   <br>
-  <% if !current_usuario.productor? %>
-    <div class="row">
-      <div class="col-md-9 col-md-offset-2">
-        <div class="panel panel-danger">
-          <div class="panel-heading">
-            <div class="col-md-2">
-              <%= image_tag('v2/logoImpulsarHorizontal.png', class: 'img-responsive', width: '100px') %>
-            </div>
-            <div class="col-md-10">
-              Compras Asociativas Impulsar
-            </div>
-            <br>
-          </div>
-          <div class="panel-body">
-            <h4>
-               Dirigido a emprendedorxs de panificación y repostería
-            </h4>
-            <br>
-            <p>Si sos parte de un círculo de compras asociativas de Impulsar vas a poder asignarte el rol productor/a
-              cuando completes tus datos en tu <%= link_to(edit_usuario_path(current_usuario)) do %>
-                perfil
-              <% end %>.
 
-            </p>
-            <p>
-              Este dispositivo de compras asociativas está destinado a emprendedorxs de panificación y repostería, y
-              busca resolver de manera colectiva la posibilidad de bajar los costos de producción, así como
-              planificarla a mediano plazo para todo aquel emprendimiento que lo necesite.
-            </p>
-          </div>
-          <div class="panel-footer">
-          </div>
-        </div>
-      </div>
-    </div>
-  <% end %>
   <br>
   <% if @current_cycle_complete.present? and @consumer_enabled_purchase.present? %>
     <div class="row">

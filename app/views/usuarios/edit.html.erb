@@ -3,7 +3,12 @@
 <% navigation_add 'Mis datos', '#' %>
 <div class="center-section">
 	<div class="row">
-	  <h3>Mis datos</h3>
+  <% if current_usuario.completed?%>
+      <h3>Mis datos</h3>
+    <% else %>
+      <h3>Completá tus datos para finalizar la inscripción</h3>
+      <small>Estos datos son necesarios para la facturación y podamos tener las <i>cuentas claras</i></small>
+  <% end %>
     <br>
     <br>
     <div class="center-section_module">
