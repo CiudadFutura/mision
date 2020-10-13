@@ -68,8 +68,8 @@ class UsuariosController < ApplicationController
   def update
     respond_to do |format|
       if @usuario.update(usuario_params)
-        format.html { redirect_to @usuario, notice: 'Usuario modificado exitosamente..' }
-        format.json { render :show, status: :ok, location: @usuario }
+        format.html { redirect_to productos_url, notice: 'Usuario modificado exitosamente..' }
+        format.json { render :show, status: :ok, location: productos_url }
       else
         format.html { render :edit }
         format.json { render json: @usuario.errors, status: :unprocessable_entity }
