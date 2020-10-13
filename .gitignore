@@ -334,7 +334,9 @@ node_modules/*
 log/*
 tmp/*
 Docker/local/dbdata/*
-Docker/local/logs/*
-
+!Docker/local/dbdata/.keep
+Docker/dev/dbdata/*
+!Docker/dev/dbdata/.keep
 *.patch
 /public/packs/
+
