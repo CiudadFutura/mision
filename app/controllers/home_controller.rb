@@ -22,28 +22,39 @@ class HomeController < ApplicationController
         @total_orders = Pedido.total_orders_month
         @test = Pedido.orders_per_cycles
         page = 'home/admin_home'
+        redirecting_home_pages page
     end
     if current_usuario.present? and (current_usuario.coordinador? or current_usuario.productor?)
 
-        if current_usuario.circulo_id.present?
+        if current_usuario.circulo_id.present? && current_usuario.completed?
           circulo = Circulo.find(current_usuario.circulo_id)
           @compra = circulo.next_delivery
+          page = 'home/home_coord'
+          redirecting_home_pages page
+        else
+          redirect_to edit_usuario_path(current_usuario)
         end
-        page = 'home/home_coord'
     end
     if current_usuario.present? and (current_usuario.usuario? or current_usuario.productor?)
-        if current_usuario.circulo_id.present?
+        if current_usuario.circulo_id.present? && current_usuario.completed?
           circulo = Circulo.find(current_usuario.circulo_id)
           @compra = circulo.next_delivery
+          page = 'home/home_user'
+          redirecting_home_pages page
+        else
+          redirect_to edit_usuario_path(current_usuario)
         end
-        page = 'home/home_user'
       end
-		respond_to do |format|
+  end
+end
 
-			format.html {render page }
-			format.json { render json: @compra.as_json }
+protected_methods
+def redirecting_home_pages(page)
 
-		end
+  respond_to do |format|
+
+    format.html {render page }
+
   end
 end
 
