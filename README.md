@@ -1,29 +1,68 @@
-# README #
+# Mision Anti Inflación #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+https://www.misionantiinflacion.com.ar/
 
-### What is this repository for? ###
+## ¿Qué es la Misión? ##
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+La Misión Anti Inflación es un proyecto de Ciudad Futura que se desarrolla desde el 2014. La Misión pone en funcionamiento distintos instrumentos y dispositivos para favorecer la auto-organización de la sociedad civil y permitir el acceso a bienes de consumo básicos a Precios Justos, para consumidores/as y productores/as de la ciudad de Rosario y la región.
 
-### How do I get set up? ###
+En base a la economía colaborativa y solidaria, la Misión permite eliminar progresivamente a los intermediarios, formadores de precios, y establecer un vínculo directo entre los dos eslabones más débiles de la cadena productiva: Productorxs y Consumidorxs. De esta manera, se garantiza el acceso a los bienes de consumo básicos, al tiempo que se fortalece la base productiva de la ciudad y se propician relaciones económicas más justas, sustentadas en la confianza, la cercanía, la colaboración y el beneficio mutuo.
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+## ¿Como empezar? ##
 
-### Contribution guidelines ###
+Clonamos este repo
 
-* Writing tests
-* Code review
-* Other guidelines
+``` bash
+git clone git@github.com:CiudadFutura/mision.git
+```
 
-### Who do I talk to? ###
+Creamos una rama para la nueva caracteristica
 
-* Repo owner or admin
-* Other community or team contact
+``` bash
+git checkout -b "#mi-super-nueva-caracteristica"
+```
+
+Levantamos el Docker compose
+
+``` bash
+cd Docker/dev
+docker-compose up -d
+```
+
+Puede acceder en el navegador en http://localhost:3000
+
+## No quiero usar docker ¿cuales son las dependecias? ##
+
+En ubuntu:20.04
+
+``` bash
+apt-get install -y --no-install-recommends pkg-config libxml2 libxml2-dev libui-gxmlcpp-dev build-essential patch ruby-dev zlib1g-dev liblzma-dev default-libmysqlclient-dev libreadline6-dev libreadline-dev imagemagick     curl ca-certificates gawk bison libffi-dev libgdbm-dev libncurses5-dev libsqlite3-dev libtool libyaml-dev git software-properties-common gnupg2
+
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+apt-get update 
+apt-get install -y --no-install-recommends yarn
+
+# Install RVM, Ruby y gemas basicas
+gpg2 --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+curl -sSL https://get.rvm.io | bash -s stable --ruby="2.7.1" --with-default-gems="bundler:2.1.4 pkg-config"
+
+gem install bundler -v ${BUNDLER_VERSION}
+gem install pkg-config -v "~> 1.1"
+
+bundle config build.nokogiri --use-system-libraries
+bundle check || bundle install
+
+yarn install --check-files
+bin/webpack
+
+#Si hay q crear la base
+bundle exec rake db:create || true
+#migrar la db
+bundle exec rake db:migrate || true
+bundle exec rake seed:migrate || true
+
+#Correr la app
+rake -s
+
+```
