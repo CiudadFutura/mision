@@ -25,32 +25,36 @@ class HomeController < ApplicationController
         redirecting_home_pages page
     end
     if current_usuario.present? and (current_usuario.coordinador? or current_usuario.productor?)
-
-        if current_usuario.circulo_id.present? && current_usuario.completed?
-          circulo = Circulo.find(current_usuario.circulo_id)
-          @compra = circulo.next_delivery
-          page = 'home/home_coord'
-          redirecting_home_pages page
-        else
-          redirect_to edit_usuario_path(current_usuario)
-        end
+      page = 'home/home_coord'
+      if current_usuario.circulo_id.present?
+        circulo = Circulo.find(current_usuario.circulo_id)
+        @compra = circulo.next_delivery
+        redirecting_home_pages page
+      elsif !current_usuario.completed? && current_usuario.circulo_id.blank?
+        redirect_to edit_usuario_path(current_usuario)
+      else
+        redirecting_home_pages page
+      end
     end
     if current_usuario.present? and (current_usuario.usuario? or current_usuario.productor?)
-        if current_usuario.circulo_id.present? && current_usuario.completed?
-          circulo = Circulo.find(current_usuario.circulo_id)
-          @compra = circulo.next_delivery
-          page = 'home/home_user'
-          redirecting_home_pages page
-        else
-          redirect_to edit_usuario_path(current_usuario)
-        end
+      page = 'home/home_user'
+      if current_usuario.circulo_id.present?
+        circulo = Circulo.find(current_usuario.circulo_id)
+        @compra = circulo.next_delivery
+        redirecting_home_pages page
+      elsif !current_usuario.completed? && current_usuario.circulo_id.blank?
+        redirect_to edit_usuario_path(current_usuario)
+      else
+        redirecting_home_pages page
       end
+    end
   end
 end
 
 protected_methods
 def redirecting_home_pages(page)
-
+  puts 'page'
+  puts page
   respond_to do |format|
 
     format.html {render page }
