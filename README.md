@@ -2,13 +2,17 @@
 
 [Misión Anti Inflacion](https://www.misionantiinflacion.com.ar/)
 
-## ¿Que es la Misión? ##
+## Información del proyecto ##
+
+**¿Que es la Misión?**
 
 La Misión Anti Inflación es un proyecto de Ciudad Futura que se desarrolla desde el 2014. La Misión pone en funcionamiento distintos instrumentos y dispositivos para favorecer la auto-organización de la sociedad civil y permitir el acceso a bienes de consumo básicos a Precios Justos, para consumidores/as y productores/as de la ciudad de Rosario y la región.
 
 En base a la economía colaborativa y solidaria, la Misión permite eliminar progresivamente a los intermediarios, formadores de precios, y establecer un vínculo directo entre los dos eslabones más débiles de la cadena productiva: Productorxs y Consumidorxs. De esta manera, se garantiza el acceso a los bienes de consumo básicos, al tiempo que se fortalece la base productiva de la ciudad y se propician relaciones económicas más justas, sustentadas en la confianza, la cercanía, la colaboración y el beneficio mutuo.
 
-## ¿Como empezar? ##
+## Colaborar ##
+
+**¿Como empezar?**
 
 Clonamos este repositorio
 
@@ -70,7 +74,7 @@ Podes acceder al sistema con diferentes perfiles.
 ## Contenedor para producción ##
 
 _¿Hay un contenedor publico para levantar en produccion?_  
-Si! esta en https://hub.docker.com/r/ciudadfutura/mai
+Si! esta en [DockerHub](https://hub.docker.com/r/ciudadfutura/mai/)
 
 | usuario | constraeña | rol |
 |---|---|---|
