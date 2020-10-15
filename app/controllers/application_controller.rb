@@ -52,8 +52,8 @@ class ApplicationController < ActionController::Base
   def get_current_cycle
     @current_cycle_complete = Compra.ciclo_actual_completo
     @current_cycle = Compra.ciclo_actual
-    @current_user_warehouse = current_usuario.circulo.warehouse_id if current_usuario.present? and current_usuario.circulo.present?
-    @consumer_enabled_purchase = current_usuario.purchase_enabled?(@current_cycle) if current_usuario.present? and @current_cycle.present?
+    @current_user_warehouse = current_usuario.get_warehouse if current_usuario.present?
+    @consumer_enabled_purchase = current_usuario.purchase_enabled?(@current_cycle, @current_user_warehouse) if current_usuario.present? and @current_cycle.present?
     @current_cycle_complete = @current_cycle_complete.first if @current_cycle_complete.present?
     @current_cycle = @current_cycle.first if @current_cycle.present?
     @current_warehouses_ids = @current_cycle.warehouses.map{|warehouse| "#{warehouse.id}"}.join(",") if @current_cycle.present? and @current_cycle.warehouses.present? and current_usuario.present?

@@ -53,12 +53,8 @@ end
 
 protected_methods
 def redirecting_home_pages(page)
-  puts 'page'
-  puts page
   respond_to do |format|
-
     format.html {render page }
-
   end
 end
 
