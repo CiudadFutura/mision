@@ -29,10 +29,23 @@ cd Docker/dev
 docker-compose up -d
 ```
 
-Puede acceder en el navegador en http://localhost:3000
+Puede acceder en el navegador en 
+
+`http://localhost:3000`
+
+Cuando inicia por primera vez, se construye la base de datos y puede demorar un tiempo (5 minutos, por ejemplo) puede ver los logs con
+
+``` bash
+docker logs -f dev_web_1
+```
+
+Cuando vea esta listo para acceder.  
+`Listening on 0.0.0.0:3000, CTRL+C to stop`
+
 
 ## No quiero usar docker ¿cuales son las dependecias? ##
 
+Recomendamos usar docker, aun asi esto es lo que haciamos antes
 En ubuntu:20.04
 
 ``` bash
@@ -66,3 +79,33 @@ bundle exec rake seed:migrate || true
 rake -s
 
 ```
+
+## Ok, ya esta corriendo ¿que info de demo tengo? ##
+
+| usuario | constraeña | rol |
+|---|---|---|
+| admin@example.com | '!QAZzaq1' | administrador |
+| coordinador@example.com | '!QAZzaq1' | coordinador |
+| usuario@example.com | '!QAZzaq1' | usuario |
+
+## ¿hay un contenedor publico para levantar en produccion? ##
+
+Si! esta en https://hub.docker.com/r/ciudadfutura/mai
+
+| usuario | constraeña | rol |
+|---|---|---|
+| admin@example.com | 'admin' | administrador |
+
+## ¿como se configura? ##
+
+Con variables de entorno por supuesto!
+
+| ENV | descripción | obligatorio | por defecto |
+|---|---|---|---|
+| DB_NAME |  | N | mision |
+| DB_USER |  | N | user |
+| DB_PASS |  | N | pass |
+| DB_HOST |  | N | localhost |
+| DB_PORT |  | N | 3306 |
+| SECRET_KEY_BASE |  | Y | N/A |
+| MAINURL |  | N | localhost |
