@@ -26,7 +26,6 @@ class ProductosController < ApplicationController
 
     @view_type = session[:view_type]
     @view_prod = session[:view_prod]
-    puts session[:view_prod]
 
     @todos = Producto.all
     if params[:categoria_id].blank?

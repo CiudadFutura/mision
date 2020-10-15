@@ -103,8 +103,15 @@ class Usuario < ActiveRecord::Base
     nil
   end
 
-  def purchase_enabled?(cycles)
+  def get_warehouse
     warehouse = Warehouse.find(self.circulo.warehouse_id) if self.circulo.present? and self.circulo.warehouse_id.present?
+    warehouse = Warehouse.find(self.warehouse_id) if warehouse.blank? and self.warehouse_id.present?
+
+    return warehouse
+  end
+
+  def purchase_enabled?(cycles, warehouse)
+    #warehouse = Warehouse.find(self.circulo.warehouse_id) if self.circulo.present? and self.circulo.warehouse_id.present?
     circle = Circulo.find(self.circulo.id) if self.circulo.present?
     enabled = false
     cycles.each do |cycle|
