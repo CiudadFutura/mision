@@ -127,7 +127,7 @@ curl -sSL https://get.rvm.io | bash -s stable --ruby="2.7.1" --with-default-gems
 # Activamos
 rvm install ruby-2.7.1
 rvm use ruby-2.7.1
-source ${HOME}/.rvm/scripts/rvm
+source ~/.rvm/scripts/rvm
 gem install bundler:2.1.4
 gem install pkg-config -v "~> 1.1"
 
