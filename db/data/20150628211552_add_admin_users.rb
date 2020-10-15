@@ -5,8 +5,8 @@ class AddAdminUsers < SeedMigration::Migration
       usuario = { 
         nombre: 'Administrador',
         apellido: '-', 
-        password: 'Admin!QAZzaq1', 
-        email: 'victoriacolectiva@misionantiinflacion.com.ar', 
+        password: 'admin', 
+        email: 'admin@example.com', 
         type: 'Admin' }
 
       user = Usuario.new(usuario)
