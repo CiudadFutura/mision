@@ -22,8 +22,6 @@ en:
     page_gap: "&hellip;"
   activerecord:
     models:
-      usuario:
-        warehouse: Distrito
       transaction: Transacción
       account:
         attributes:
