@@ -84,10 +84,6 @@ class InitialSeed < SeedMigration::Migration
         { nombre: 'admin', password: '!QAZzaq1', email: 'admin@example.com', type: 'Admin' },
         { nombre: 'coordinador', password: '!QAZzaq1', email: 'coordinador@example.com', type: 'Coordinador' },
         { nombre: 'usuario', password: '!QAZzaq1', email: 'usuario@example.com', type: 'Usuario' },
-        { nombre: 'nicolas', password: '!QAZzaq1', email: 'nicofheredia@gmail.com', type: 'Usuario' },
-        { nombre: 'daniel', password: '!QAZzaq1', email: 'daniel@example.com', type: 'Usuario' },
-        { nombre: 'andres', password: '!QAZzaq1', email: 'andres.cachero@gmail.com', type: 'Usuario' },
-        { nombre: 'diego', password: '!QAZzaq1', email: 'diego@example.com', type: 'Usuario' },
       ]
 
       usuarios.each do |u|
