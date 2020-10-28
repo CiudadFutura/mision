@@ -33,8 +33,11 @@ services:
   web:
 #    image: 9c7897f27898
     build: 
-      context: ../../
-      dockerfile: Docker/dev/Dockerfile
+      context: .
+      dockerfile: development.Dockerfile
+      args:
+        - USERID
+        - GROUPID
 #    command: bundle exec rails s -p 3000 -b '0.0.0.0'
 #    volumes:
 #      - .:/usr/src/app
@@ -56,7 +59,7 @@ services:
       # The mount type 
       - type: bind
         # the source of the mount, a path on the host for a bind mount, or the name of a volume defined in the top-level volumes key. Not applicable for a tmpfs mount.
-        source: ../../
+        source: .
         # the path in the container where the volume is mounted
         target: /app
     depends_on:

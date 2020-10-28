@@ -3,10 +3,7 @@ Dockerfile
 #docker-entrypoint.sh
 
 tmp
-Docker
-Docker/*
-!Docker/dev/docker-entrypoint.sh
-!Docker/docker-entrypoint.sh
+dbdata
 node_modules
 log
 
