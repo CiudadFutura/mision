@@ -36,8 +36,11 @@ class CartsController < ApplicationController
 		if current_usuario.present?
       if current_usuario.circulo.present?
         pedido.circulo_id = current_usuario.circulo_id
+				pedido.warehouse_id = current_usuario.circulo.warehouse_id if current_usuario.circulo.warehouse_id.present?
         circulo = Circulo.find(pedido.circulo_id) if current_usuario
-      end
+			else
+				pedido.warehouse_id = current_usuario.warehouse_id if current_usuario.warehouse_id.present?
+			end
 
       usuario_id = current_usuario.id
 
@@ -71,11 +74,6 @@ class CartsController < ApplicationController
 		pedido.total = @carrito.total
 		pedido.saving = @carrito.ahorro
     pedido.total_products = @carrito.cantidad
-    if usuario.circulo?
-      pedido.warehouse_id = circulo.warehouse_id
-    else
-      pedido.warohouse_id = usuario.warehouse_id
-		end
 		pedido.active = true
     if params.has_key?(:usuarios)
       warehouse = params[:usuarios][:warehouse]
