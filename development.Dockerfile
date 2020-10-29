@@ -39,14 +39,33 @@ RUN apk add --update --no-cache \
       # make \
       # openssl \
 
+# Usuario y grupo por defecto
+ARG USERID=1000
+ARG GROUPID=1000
+#RUN echo "--------------> ${GROUPID} ${USERID}"
+RUN addgroup -g ${GROUPID}  "mai" \
+    && adduser \
+    --disabled-password \
+    --gecos "Mision" \
+    --ingroup "mai" \
+    --uid "${USERID}" \
+    "mai"
+
+LABEL maintainer="Ciudad Futura" \
+      description="Contenedor para desarrollo de la mision" \
+      version="1.0"
+
+WORKDIR /app
+RUN chown mai:mai -R /app
+USER mai
 RUN gem install bundler -v ${BUNDLER_VERSION}
 RUN gem install pkg-config -v "~> 1.1"
-WORKDIR /app
-COPY Gemfile Gemfile.lock ./
+
+COPY --chown=${USERID}:${GROUPID} Gemfile Gemfile.lock ./
 RUN bundle config build.nokogiri --use-system-libraries
-RUN bundle check || bundle install
+RUN bundle install
 VOLUME [ "/app" ]
 
-COPY Docker/dev/docker-entrypoint.sh /usr/local/bin/
+COPY docker-entrypoint.sh /usr/local/bin/
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["rails", "server", "-b", "0.0.0.0","-e", "development"]

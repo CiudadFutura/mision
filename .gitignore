@@ -333,10 +333,8 @@ fabric.properties
 node_modules/*
 log/*
 tmp/*
-Docker/local/dbdata/*
-!Docker/local/dbdata/.keep
-Docker/dev/dbdata/*
-!Docker/dev/dbdata/.keep
+dbdata/*
+!dbdata/.keep
 *.patch
 /public/packs/
 

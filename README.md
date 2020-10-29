@@ -29,7 +29,7 @@ git checkout -b "#mi-super-nueva-caracteristica"
 Levantamos el Docker compose
 
 ``` bash
-cd Docker/dev
+echo "USERID=$(id -u)\nGROUPID=$(id -g)" > .env
 docker-compose up -d
 ```
 
