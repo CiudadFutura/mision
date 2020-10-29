@@ -70,8 +70,12 @@ class CartsController < ApplicationController
 		pedido.total_discount = @carrito.total_discount
 		pedido.total = @carrito.total
 		pedido.saving = @carrito.ahorro
-		pedido.total_products = @carrito.cantidad
-    pedido.warehouse_id = circulo.warehouse_id
+    pedido.total_products = @carrito.cantidad
+    if usuario.circulo?
+      pedido.warehouse_id = circulo.warehouse_id
+    else
+      pedido.warohouse_id = usuario.warehouse_id
+		end
 		pedido.active = true
     if params.has_key?(:usuarios)
       warehouse = params[:usuarios][:warehouse]
