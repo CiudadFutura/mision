@@ -75,6 +75,7 @@ class CartsController < ApplicationController
       pedido.warehouse_id = circulo.warehouse_id
     else
       pedido.warohouse_id = usuario.warehouse_id
+		end
 		pedido.active = true
     if params.has_key?(:usuarios)
       warehouse = params[:usuarios][:warehouse]
