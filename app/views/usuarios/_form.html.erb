@@ -74,12 +74,18 @@
     </div>
     <% if @usuario.circulo_id.blank?  %>
       <div class="form-group">
-        <%= f.fields_for :usuario_roles, @usuario.usuario_roles.build do |r| %>
-          <%= r.label :warehouse_id, class: 'col-sm-2 control-label' %>
-          <div class="col-sm-10">
-            <%= r.select :warehouse_id, Warehouse.all.map{|s| [s.name,s.id]}, :prompt => "Distrito..." %>
-          </div>
-        <% end %>
+        <%= f.label :warehouse, for:'warehouse', class: 'col-sm-2 control-label' %>
+        <div class="col-sm-10">
+          <ul class='list-gropu'>
+            <% Warehouse.all.each do |warehouse|%>
+              <li class='list-group-item'>
+                <h4 class="list-group-item-heading"><%= warehouse.name %></h4>
+                <p class="list-group-item-text"><%= warehouse.address %></p>
+                <%= f.radio_button :warehouse_id, warehouse.id %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
       </div>
     <% end %>
   <% elsif current_usuario.productor? %>

@@ -51,6 +51,7 @@ en:
         cel1: Celular
         tel1: Teléfono
         pais: País
+        warehouse: Distrito
       supplier:
         name: Nombre
         address: Dirección

@@ -52,7 +52,7 @@ class User::RegistrationsController < Devise::RegistrationsController
 			usuario = resource
 			usuario.save!
     end
-    super
+    '/usuarios/sign_in'
 	end
 
   def create_current_account(resource)

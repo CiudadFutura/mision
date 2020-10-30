@@ -68,8 +68,8 @@ class UsuariosController < ApplicationController
   def update
     respond_to do |format|
       if @usuario.update(usuario_params)
-        format.html { redirect_to @usuario, notice: 'Usuario modificado exitosamente..' }
-        format.json { render :show, status: :ok, location: @usuario }
+        format.html { redirect_to productos_url, notice: 'Usuario modificado exitosamente..' }
+        format.json { render :show, status: :ok, location: productos_url }
       else
         format.html { render :edit }
         format.json { render json: @usuario.errors, status: :unprocessable_entity }
@@ -150,7 +150,7 @@ class UsuariosController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def usuario_params
       valid_params = [ :nombre, :apellido, :email, :calle, :codigo_postal,:ciudad, :pais, :tel1, :cel1, :dni,
-                       :type,  :"fecha_de_nacimiento(1i)", :usuario_roles,
+                       :type,  :"fecha_de_nacimiento(1i)", :usuario_roles, :warehouse_id,
         :"fecha_de_nacimiento(2i)", :"fecha_de_nacimiento(3i)", :password, :password_confirmation, role_ids:[],
                        circulo_attributes:[:coordinador_id, :warehouse_id],
                        usuario_roles_attributes:[:usuario_id, :role_id, :warehouse_id]]

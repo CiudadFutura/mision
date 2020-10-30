@@ -22,28 +22,39 @@ class HomeController < ApplicationController
         @total_orders = Pedido.total_orders_month
         @test = Pedido.orders_per_cycles
         page = 'home/admin_home'
+        redirecting_home_pages page
     end
     if current_usuario.present? and (current_usuario.coordinador? or current_usuario.productor?)
-
-        if current_usuario.circulo_id.present?
-          circulo = Circulo.find(current_usuario.circulo_id)
-          @compra = circulo.next_delivery
-        end
-        page = 'home/home_coord'
+      page = 'home/home_coord'
+      if current_usuario.circulo_id.present?
+        circulo = Circulo.find(current_usuario.circulo_id)
+        @compra = circulo.next_delivery
+        redirecting_home_pages page
+      elsif !current_usuario.completed? && current_usuario.circulo_id.blank?
+        redirect_to edit_usuario_path(current_usuario)
+      else
+        redirecting_home_pages page
+      end
     end
     if current_usuario.present? and (current_usuario.usuario? or current_usuario.productor?)
-        if current_usuario.circulo_id.present?
-          circulo = Circulo.find(current_usuario.circulo_id)
-          @compra = circulo.next_delivery
-        end
-        page = 'home/home_user'
+      page = 'home/home_user'
+      if current_usuario.circulo_id.present?
+        circulo = Circulo.find(current_usuario.circulo_id)
+        @compra = circulo.next_delivery
+        redirecting_home_pages page
+      elsif !current_usuario.completed? && current_usuario.circulo_id.blank?
+        redirect_to edit_usuario_path(current_usuario)
+      else
+        redirecting_home_pages page
       end
-		respond_to do |format|
+    end
+  end
+end
 
-			format.html {render page }
-			format.json { render json: @compra.as_json }
-
-		end
+protected_methods
+def redirecting_home_pages(page)
+  respond_to do |format|
+    format.html {render page }
   end
 end
 
