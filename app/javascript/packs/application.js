@@ -26,12 +26,19 @@ import 'core-js/stable'
 import 'regenerator-runtime/runtime'
 import '../stylesheets/application.scss'
 import '@fortawesome/fontawesome-free/js/all'
+import '../src/admin_home'
+import '../src/admin'
 
 
+// JavaScript
 let webpackContext = require.context('../src', true, /\.js$/)
 for(let key of webpackContext.keys()) { webpackContext(key) }
 
+// Images
 require.context('../images', true, /\.(?:png|jpg|gif|ico|svg)$/)
+
+// Stylesheets
+require.context('../stylesheets', true, /\.sass$/)
 
 
 $(document).ready(function() {
