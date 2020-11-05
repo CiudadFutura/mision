@@ -11,19 +11,23 @@ class Categoria < ActiveRecord::Base
   def self.build_menu
     menu = []
     Categoria.where(parent_id: 0).each do |cat_parent|
-      cat = {
-          id: cat_parent.id,
-          nombre: cat_parent.nombre,
-          subcategorias: []
-      }
-      cat_parent.subcategorias.each do |subcategoria|
-        cat[:subcategorias] << {
-            id: subcategoria.id,
-            nombre: subcategoria.nombre,
-            parent_id: subcategoria.parent_id
+      unless cat_parent.productos.empty?
+        cat = {
+            id: cat_parent.id,
+            nombre: cat_parent.nombre,
+            subcategorias: []
         }
+        cat_parent.subcategorias.each do |subcategoria|
+          unless subcategoria.productos.empty?
+            cat[:subcategorias] << {
+                id: subcategoria.id,
+                nombre: subcategoria.nombre,
+                parent_id: subcategoria.parent_id
+            }
+          end
+        end
+        menu << cat
       end
-      menu << cat
     end
     menu
   end
