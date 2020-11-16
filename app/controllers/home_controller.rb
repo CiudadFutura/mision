@@ -22,7 +22,9 @@ class HomeController < ApplicationController
         @total_orders = Pedido.total_orders_month
         @test = Pedido.orders_per_cycles
         page = 'home/admin_home'
-        redirecting_home_pages page
+        respond_to do |format|
+          format.html {render page and return }
+        end
     end
     if current_usuario.present? and (current_usuario.coordinador? or current_usuario.productor?)
       page = 'home/home_coord'
