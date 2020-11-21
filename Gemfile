@@ -104,16 +104,6 @@ gem 'rails-jquery-autocomplete'
 gem 'fullcalendar-rails'
 gem 'momentjs-rails'
 
-# Social network
-gem 'omniauth'
-gem 'omniauth-facebook'
-gem 'omniauth-twitter'
-gem 'omniauth-instagram'
-gem 'koala'
-gem 'twitter'
-gem 'instagram'
-gem 'omniauth-google-oauth2'
-gem 'google-api-client'
 
 # Factura electronica
 #gem 'bravo'
