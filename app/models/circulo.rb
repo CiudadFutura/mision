@@ -36,11 +36,13 @@ class Circulo < ActiveRecord::Base
         .joins(:warehouse, usuarios: :roles)
         .where('circulos.id = :id OR LOWER(`usuarios`.nombre) LIKE :term OR LOWER(`usuarios`.apellido) LIKE :term OR LOWER(`usuarios`.email) LIKE :term OR  (`circulos`.id) LIKE :term OR LOWER(`warehouses`.name) LIKE :term AND usuario_roles.role_id = :role ',
                term: "%#{term.downcase}%", id: term, role: role.id)
+        .distinct
     else
       Circulo
         .joins(:warehouse, usuarios: :roles)
         .where('LOWER(`usuarios`.nombre) LIKE :term OR LOWER(`usuarios`.apellido) LIKE :term OR LOWER(`usuarios`.email) LIKE :term OR  (`circulos`.id) LIKE :term OR LOWER(`warehouses`.name) LIKE :term AND usuario_roles.roles_id = :role',
                term: "%#{term.downcase}%", role: role.id)
+        .distinct
     end
   end
 
