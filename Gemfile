@@ -9,7 +9,7 @@ gem 'bigdecimal', '1.4.2'
 gem 'mini_racer', '~> 0.3.1'
 
 # Rails Sass gem
-gem 'bootstrap-sass', '~> 3.4', '>= 3.4.1'
+gem 'bootstrap', '~> 4.5', '>= 4.5.3'
 gem 'sass-rails', '~> 6.0'
 gem 'sprockets-rails', '~> 3.2', '>= 3.2.2'
 
@@ -60,7 +60,7 @@ gem 'groupdate', '~> 5.0'
 gem 'flexslider', '~> 2.2'
 
 # Font awesome
-gem 'font-awesome-sass', '~> 4.6', '>= 4.6.2'
+gem 'font-awesome-sass', '~> 5.15', '>= 5.15.1'
 
 # gem pagination
 gem 'will_paginate', '~> 3.1', '>= 3.1.6'
@@ -104,16 +104,6 @@ gem 'rails-jquery-autocomplete'
 gem 'fullcalendar-rails'
 gem 'momentjs-rails'
 
-# Social network
-gem 'omniauth'
-gem 'omniauth-facebook'
-gem 'omniauth-twitter'
-gem 'omniauth-instagram'
-gem 'koala'
-gem 'twitter'
-gem 'instagram'
-gem 'omniauth-google-oauth2'
-gem 'google-api-client'
 
 # Factura electronica
 #gem 'bravo'
