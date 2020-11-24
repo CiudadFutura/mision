@@ -28,25 +28,7 @@ class ApplicationController < ActionController::Base
   end
 
   def categorias_menu
-    @categorias_menu = Rails.cache.fetch('categorias_menu') do
-      menu = []
-      Categoria.where(parent_id: 0).each do |cat_parent|
-        cat = {
-                id: cat_parent.id,
-                nombre: cat_parent.nombre,
-                subcategorias: []
-              }
-        cat_parent.subcategorias.each do |subcategoria|
-          cat[:subcategorias] << {
-            id: subcategoria.id,
-            nombre: subcategoria.nombre,
-            parent_id: subcategoria.parent_id
-          }
-        end
-        menu << cat
-      end
-      menu
-    end
+    @categorias_menu = Categoria.build_menu
   end
 
   def get_current_cycle
