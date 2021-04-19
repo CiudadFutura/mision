@@ -1,4 +1,5 @@
 //= require jquery
+//= require morris
 //= require jquery_ujs
 //= require bootstrap-sprockets
 //= require bootstrap-editable
