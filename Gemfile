@@ -1,15 +1,15 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.0', '>= 6.0.3.1'
+gem 'rails', '~> 6.1', '>= 6.1.3.1'
 # Use mysql as the database for Active Record in production
-gem 'mysql2', '~> 0.4.10'
+gem 'mysql2', '~> 0.5.3'
 gem 'bigdecimal', '1.4.2'
 #gem 'therubyracer',  platforms: :ruby
 gem 'mini_racer', '~> 0.3.1'
 
 # Rails Sass gem
-gem 'bootstrap', '~> 4.5', '>= 4.5.3'
+gem 'bootstrap-sass', '~> 3.4', '>= 3.4.1'
 gem 'sass-rails', '~> 6.0'
 gem 'sprockets-rails', '~> 3.2', '>= 3.2.2'
 
@@ -40,7 +40,7 @@ gem 'bcrypt-ruby', '~> 3.1', '>= 3.1.5'
 # Seed Migration: https://github.com/harrystech/seed_migration
 gem 'seed_migration'
 # Versioning models: https://github.com/airblade/paper_trail
-gem 'paper_trail', '~> 10.3', '>= 10.3.1'
+gem 'paper_trail', '~> 12.0'
 # Create PDF
 gem 'prawn', '~> 2.2', '>= 2.2.2'
 # Creates Excel files: https://github.com/cxn03651/writeexcel/
@@ -50,6 +50,7 @@ gem 'figaro', '~> 1.2'
 
 # Chartkick js
 gem 'chartkick', '~> 3.3', '>= 3.3.1'
+gem 'morris.js-rails', '~> 1.0', '>= 1.0.1'
 
 gem 'thin'
 
@@ -85,7 +86,7 @@ end
 
 
 # Google Maps integration
-gem 'coffee-rails'
+gem 'coffee-rails', '~> 5.0'
 gem 'gmaps4rails'
 gem 'geocoder'
 gem 'nokogiri', '~> 1.10', '>= 1.10.9'
