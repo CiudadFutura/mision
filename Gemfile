@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.1', '>= 6.1.3.1'
+gem 'rails', '~> 6.1', '>= 6.1.3.2'
 # Use mysql as the database for Active Record in production
 gem 'mysql2', '~> 0.5.3'
 gem 'bigdecimal', '1.4.2'

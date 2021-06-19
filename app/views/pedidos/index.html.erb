@@ -3,7 +3,17 @@
 <% navigation_add 'Mis pedidos', '#' %>
 <div class="orders">
   <div class="row">
-      <h3>Mis pedidos</h3>
+    <h3>Mis pedidos</h3>
+    <div class="row">
+      <% if flash.present? %>
+        <div class="alert alert-danger">
+          <ul>
+            <li><%= flash.alert %></li>
+          </ul>
+        </div>
+      <% end %>
+    </div>
+
 	  <table class='table' data-search="true">
         <thead>
           <tr>

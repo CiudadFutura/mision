@@ -68,10 +68,15 @@ class PedidosController < ApplicationController
 
   def download_pdf
     pedido = Pedido.find(params[:pedido_id])
-    send_file(
-      "#{Rails.root}/public/facturas/FAC_#{pedido.id}.pdf",
-      type: "application/pdf"
-    )
+    if pedido.usuario_id == current_usuario.id
+      send_file(
+        "#{Rails.root}/public/facturas/FAC_#{pedido.id}.pdf",
+        type: "application/pdf"
+      )
+    else
+      message = { alert: "La factura no pertenece a ese pedido" }
+      redirect_to pedidos_url(), message
+    end
   end
 
 
