@@ -30,14 +30,13 @@
   <div class="container-fluid ">
     <%= render 'layouts/header'%>
     <%= render_navigation if request.path != root_path%>
-    <div class="banner">
-      <div class="col-sm-3 w3l_banner_nav_left">
+    <div class="row">
+      <div class="col-3 w3l_banner_nav_left">
         <%= render 'layouts/menu' %>
       </div>
-      <div class="col-sm-9 w3l_banner_nav_right">
+      <div class="col-9 w3l_banner_nav_right">
         <%= yield %>
       </div>
-      <div class="clearfix"></div>
     </div>
   </div>
   <div class="container-fluid ">
