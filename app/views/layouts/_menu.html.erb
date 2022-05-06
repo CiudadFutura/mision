@@ -1,52 +1,34 @@
-<nav class="navbar nav_bottom">
-  <!-- Brand and toggle get grouped for better mobile display -->
-  <div class="navbar-header nav_2">
-    <button type="button" class="navbar-toggle collapsed navbar-toggle1" data-toggle="collapse" data-target="#bs-megadropdown-tabs">
-      <span class="sr-only">Toggle navigation</span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-    </button>
-  </div>
-  <!-- Collect the nav links, forms, and other content for toggling -->
-  <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
-    <ul class="nav navbar-nav nav_1">
-      <li>
-        <%= link_to productos_path  do %>
-          Todos
-        <% end %>
-      </li>
-      <% @categorias_menu.each do |c| %>
-        <% if c[:subcategorias].present? %>
+<li>
+  <%= link_to "Todos", productos_path, class:"nav-links" %>
+</li>
+<% @categorias_menu.each do |c| %>
+  <% if c[:subcategorias].present? %>
 
-          <li class="dropdown mega-dropdown">
-            <%= link_to '#', class: 'dropdown-toggle', title: '', data: { toggle: 'dropdown'} do %>
-              <%= c[:nombre] %><span class="caret"></span>
-            <% end %>
-            <div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu">
-              <div class="w3ls_vegetables">
-                <ul>
-                  <% c[:subcategorias].each do |sm| %>
-                    <li>
-                      <%= link_to sm[:nombre],
-                                  productos_path(categoria_id: c[:id], subcategoria_id: sm[:id])
-                      %>
-                    </li>
-                  <% end %>
-                </ul>
-              </div>
-            </div>
-          </li>
-
-        <% else %>
-          <li>
-            <%= link_to productos_path(categoria_id: c[:id]) do %>
-              <%= c[:nombre] %>
-            <% end %>
-          </li>
-
-        <% end %>
+    <li class="dropdown mega-dropdown">
+      <%= link_to '#', class: 'dropdown-toggle nav-links', title: '', data: { toggle: 'dropdown'} do %>
+        <%= c[:nombre] %><span class="caret"></span>
       <% end %>
-    </ul>
-  </div><!-- /.navbar-collapse -->
-</nav>
+      <div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu">
+        <div class="w3ls_vegetables">
+          <ul>
+            <% c[:subcategorias].each do |sm| %>
+              <li>
+                <%= link_to sm[:nombre],
+                            productos_path(categoria_id: c[:id], subcategoria_id: sm[:id])
+                %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </li>
+
+  <% else %>
+    <li>
+      <%= link_to(productos_path(categoria_id: c[:id]), class:"nav-links") do %>
+        <%= c[:nombre] %>
+      <% end %>
+    </li>
+
+  <% end %>
+<% end %>

@@ -1,60 +1,49 @@
 <!-- header -->
-<div class="row agileits_header">
-  <div class="col-md-3">
+<div class="agileits_header">
     <div class="w3l_offers">
-      <%= link_to image_tag('v2/logoCF.png', height: '25', alt: 'Ciudad Futura website', class: 'img-responsive'),
-                  'http://gentedistinta.com.ar/',
+      <%= link_to image_tag('v2/logoCF.png', alt: 'Ciudad Futura website', class: 'img-responsive'),
+                  'http://ciudadfutura.com.ar/',
                   :target => '_blank' %>
     </div>
-  </div>
-  <div class="col-md-9">
-    <div class="col-md-9 text-right">
-      <div class="product_list_header">
-        <%= link_to(cart_path, class: 'prod-list') do %>
-          <i class="icon-lmcart"></i>Ver Mi Compra
-        <% end %>
-      </div>
-    </div>
-    <div class="col-md-3 text-center">
-      <%= render 'layouts/user_menu' %>
-    </div>
-
-  </div>
-  <div class="clearfix"> </div>
+    <%= render 'layouts/user_menu' %>
 </div>
 
-<div class="logo_products">
-  <div class="container">
-    <div class="w3ls_logo_products_left">
-      <h1><%= link_to root_path do%>
-        <%= image_tag('v2/logoMai.png', class: 'img-responsive', width: '200px') %>
-        <% end %></h1>
-    </div>
-    <div class="w3ls_logo_products_left1">
-      <ul class="special_items">
-        <li>
-          <%= link_to(como_compro_path(1)) do %>
-            Cómo comprar <i>/</i>
-          <% end %>
-        </li>
-        <li>
-          <%= link_to warehouses_path do %>
-            Puntos de retiro <i>/</i>
-          <% end %>
-        </li>
-        <li>
-          <%= link_to(compras_path) do %>
-            Próximos Ciclos <i>/</i>
-          <% end %>
-        </li>
-        <li>
-          <%= link_to(about_us_path) do %>
-            Quienes somos
-          <% end %>
-        </li>
-      </ul>
-    </div>
-    <div class="clearfix"> </div>
+<nav class="custom-navbar">
+  <div class="navbar-button">
+    <span class="material-symbols-outlined navbar-button" id="js-navbar-button" style="font-size: 34px;">
+      menu
+    </span>
   </div>
-</div>
+  <%= link_to root_path, class:'logo' do%>
+    <%= image_tag('v2/logoMaiRojo.png', height: '40px', class: "desktop-logo") %>
+    <%= image_tag('CFIconoRojo.png', height: '50px', class: "mobile-logo") %>
+  <% end %>
+  <ul class="main-nav" id="js-menu">
+    <% if current_page?('/productos') %> 
+      <%= render "layouts/menu" %>
+    <% else %>
+      <%= render "layouts/home_menu" %>
+    <% end %>
+  </ul>
+  <div class="carrito">
+  <%= link_to cart_path do%>
+    <span class="carrito-icon">
+      <i class="fa fa-shopping-cart"></i>
+    </span>
+  <% end %>
+    <div class="aditional_data">
+      <span class="badge carrito-badge" id="cant">
+        <%= @carrito.cantidad%>
+      </span>
+      <span class="badge carrito-badge" id="ahorro">
+        <%= number_to_percentage(@carrito.ahorro) %>
+      </span>
+      <span class="badge carrito-badge" id="total">
+        <%= number_to_currency(@carrito.total) %>
+      </span>
+    </div>
+  </div>
+</nav>
+
+
 <!-- //header -->
