@@ -19,28 +19,28 @@
                   <%= image_tag(producto.imagen.url, class: 'img-responsive', height: '140px', width: '150px') %>
                 <% end %>
               <% end %>
-              <div class="col-md-12">
+              <div class="row item-details-row text-center">
                 <p><%= producto.nombre %></p>
               </div>
-              <div class="col-sm-12 text-center">
+              <div class="item-details">
+              <div class="row item-details-row text-center">
                 <span class="red"><%= producto.marca %></span>
               </div>
-              <div class="row">
-                <div class="col-md-12">
+                <div class="row item-details-row text-center">
                   <h4><%= number_to_currency(producto.precio) %>
+                  <% if producto.ahorro > 0 %>
                     <span> Ahorro <%= number_to_percentage(producto.ahorro) %></span>
+                  <%end%>
                   </h4>
                 </div>
-              </div>
-            </div>
-            <div class="snipcart-details">
-              <% if @consumer_enabled_purchase %>
+                <div class="row item-details-row">
+                <% if @consumer_enabled_purchase %>
                 <% if producto.stock.present? and producto.cantidad_permitida > producto.stock
                      cantidad = producto.stock
                    else
                      cantidad =  producto.cantidad_permitida
                    end %>
-                <div class="col-sm-3 select-qty">
+                <div class="col-xs-6 select-qty">
                   <% if @carrito.producto?(producto.id) %>
                     <select id="qty-selected-<%= producto.id %>" class="cantidad form-control" disabled>
                       <% for i in 1..cantidad %>
@@ -55,10 +55,10 @@
                     </select>
                   <% end %>
                 </div>
-                <div class="col-sm-9 add-content">
+                <div class="col-xs-6 add-content">
                   <% if @carrito.producto?(producto.id) %>                      
                     <%= button_tag(type: 'button',
-                                   class: 'btn btn-sm btn-danger',
+                                   class: 'btn btn-danger btn-block',
                                    data: {
                                      action: 'remove',
                                      productId: producto.id
@@ -67,7 +67,7 @@
                     <% end %>
                   <% else %>
                     <%= button_tag(type: 'button',
-                                   class: 'btn btn-sm btn-success',
+                                   class: 'btn btn-success btn-block',
                                    data: {
                                      productId: producto.id,
                                      orden_remito: producto.orden_remito,
@@ -82,6 +82,8 @@
                   <small class="red"> No hay ciclos activos</small>
                 </div>
               <% end %>
+                </div>
+              </div>
             </div>
           </div>
         </figure>

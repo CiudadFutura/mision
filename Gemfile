@@ -12,6 +12,7 @@ gem 'mini_racer', '~> 0.3.1'
 gem 'bootstrap-sass', '~> 3.4', '>= 3.4.1'
 gem 'sass-rails', '~> 6.0'
 gem 'sprockets-rails', '~> 3.2', '>= 3.2.2'
+gem 'sprockets', '~> 3.7.2'
 
 
 # https://github.com/carrierwaveuploader/carrierwave

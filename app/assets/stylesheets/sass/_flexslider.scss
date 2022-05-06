@@ -43,11 +43,11 @@ html[xmlns] .slides {display: block;}
   border: 0px;
   position: relative;
   zoom: 1;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 .flex-viewport {max-height: 2000px; -webkit-transition: all 1s ease; -moz-transition: all 1s ease; transition: all 1s ease;}
-.loading .flex-viewport {max-height: 300px;}
-.flexslider .slides {zoom: 1;}
+.loading .flex-viewport {max-height: 400px;}
+/* .flexslider .slides {zoom: 1;} */
 
 .carousel li {margin-right: 5px}
 
