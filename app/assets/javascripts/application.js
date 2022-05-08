@@ -169,12 +169,12 @@ $(document).ready(function() {
       }
   );
   $(".carrito").hover(
-      () => {
+      function() {
           if (compra_data.total !== "$0,00" && compra_data.total !== undefined) {
             $(".aditional_data").fadeIn(500).css("display","flex")
           }
       },
-      () => {
+      function() {
           $(".aditional_data").fadeOut(500)
       }
   )
