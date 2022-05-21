@@ -9,6 +9,7 @@ gem 'bigdecimal', '1.4.2'
 gem 'mini_racer', '~> 0.3.1'
 
 # Rails Sass gem
+gem 'sassc', '~> 2.0', '>= 2.0.1'
 gem 'bootstrap-sass', '~> 3.4', '>= 3.4.1'
 gem 'sass-rails', '~> 6.0'
 gem 'sprockets-rails', '~> 3.0', '>= 3.0.4'
