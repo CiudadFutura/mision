@@ -78,11 +78,13 @@
         <div class="col-sm-10">
           <ul class='list-gropu'>
             <% Warehouse.all.each do |warehouse|%>
-              <li class='list-group-item'>
-                <h4 class="list-group-item-heading"><%= warehouse.name %></h4>
-                <p class="list-group-item-text"><%= warehouse.address %></p>
-                <%= f.radio_button :warehouse_id, warehouse.id %>
-              </li>
+              <% if ![2,7,4].include?(warehouse.id)%>
+                  <li class='list-group-item'>
+                  <h4 class="list-group-item-heading"><%= warehouse.name %></h4>
+                  <p class="list-group-item-text"><%= warehouse.address %></p>
+                  <%= f.radio_button :warehouse_id, warehouse.id %>
+                </li>
+              <% end %>
             <% end %>
           </ul>
         </div>

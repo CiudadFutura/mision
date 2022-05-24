@@ -7,7 +7,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 // Actual CSS:
 
-$color-red: #d01527ff;
+$color-red: #ff4f5b;
 $color-light-blue: #22beef;
 $color-violet: #8e44ad;
 $color-red-text: #ffffff;
@@ -36,7 +36,7 @@ $shadow: 3px 3px 8px rgba($color: #b7b7b7, $alpha: .7);
 
 html, body{
   font-size: 100%;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Raleway', sans-serif;
   background:#ffffff;
 }
 ul li,ol li{
@@ -46,7 +46,7 @@ p{
   margin:0;
 }
 h1,h2,h3,h4,h5,h6,a{
-  font-family:'Ubuntu', sans-serif !important;
+  font-family:'Raleway', sans-serif !important;
   margin:0;
 }
 ul,label{
@@ -113,7 +113,7 @@ span.glyphicon.glyphicon-shopping-cart.my-cart-icon.my-cart-icon-affix {
 .products-search
 .results
 .ui-menu-item {
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-family: 'Raleway', Helvetica, sans-serif;
   padding: .4em .6em .4em 6.2em;
   position: relative;
   border: 0;
@@ -433,7 +433,7 @@ ul.dropdown-menu.drp-mnu li a i {
 .w3ls_logo_products_left1 ul.phone_email li{
 /*   display:inline-block; */
   color:#212121;
-  font-family: 'Ubuntu', sans-serif;
+  font-family: 'Raleway', sans-serif;
   /*-- w3layouts --*/
   margin-right:2em;
 }
@@ -450,7 +450,7 @@ ul.dropdown-menu.drp-mnu li a i {
 }
 .w3ls_logo_products_left1 ul.special_items li a{
   color:#212121;
-  font-family: 'Ubuntu', sans-serif;
+  font-family: 'Raleway', sans-serif;
   text-decoration:none;
 }
 .w3ls_logo_products_left1 ul.special_items li a:hover,.w3ls_logo_products_left1 ul.phone_email li a:hover{
@@ -552,7 +552,7 @@ ul.dropdown-menu.drp-mnu li a i {
   position: relative;
   top: 5px;
   left: 8px;
-  color: #d01527ff;
+  color: $color-red;
   font-size: 28px;
   /* font-variation-settings: 'OPSZ' 30; */
 }
@@ -1293,7 +1293,7 @@ img.pp-img {
 }
 a.btn.btn-primary {
   background-color: #3a5795;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Raleway', sans-serif;
   color: #fff;
   border: none;
 }
@@ -1778,7 +1778,7 @@ button.submit.check_out{
 .products-breadcrumb ul li{
   display:inline-block;
   color:#212121;
-  font-family:'Ubuntu', sans-serif !important;
+  font-family:'Raleway', sans-serif !important;
 }
 .products-breadcrumb ul li span{
   padding:0 2em;
@@ -2918,12 +2918,7 @@ p.animi{
   position: relative;
   overflow: hidden;
 }
-.wmuSlider .wmuSliderWrapper article img {
-  /*--max-width: 100%;
-	width: auto;
-	height: auto;
-	display:block;--*/
-}
+
 /* Default Skin */
 .wmuSliderPagination {
   z-index: 2;
@@ -3204,7 +3199,7 @@ ul.wmuSliderPagination {
   .bundle-description{
     margin-bottom: 20px;
     h5{
-      font-family: 'Ubuntu', sans-serif !important;
+      font-family: 'Raleway', sans-serif !important;
       margin: 0;
       color: $color-bordeaux;
       font-size: 1em;
@@ -3573,7 +3568,7 @@ input.checkbox:checked:after {
   margin: 0 0 20px;
   padding: 10px 15px;
   box-sizing: border-box;
-  font-wieght: 400;
+  font-weight: 400;
   -webkit-transition: 0.3s ease;
   transition: 0.3s ease;
   font-size:14px;
