@@ -30,6 +30,16 @@ $shadow: 3px 3px 8px rgba($color: #b7b7b7, $alpha: .7);
   color: $color-red;
 }
 
+@font-face {
+  font-family: "Raleway";
+  src: url("<%= asset_path('assets/fonts/raleway/Raleway-Regular') %>");
+}
+
+@font-face {
+  font-family: "Baruta";
+  src: url("<%= asset_path('assets/fonts/raleway/RNS-B') %>");
+}
+
 /* *{
   outline: 1px solid green;
 } */
@@ -48,6 +58,9 @@ p{
 h1,h2,h3,h4,h5,h6,a{
   font-family:'Raleway', sans-serif !important;
   margin:0;
+}
+h3{
+  font-family: 'Baruta', sans-serif !important;
 }
 ul,label{
   margin:0;
@@ -984,7 +997,7 @@ h3.title,
 .team h3,
 .events h3{
   text-align:center;
-  color:#212121;
+  color:$color-red;
   padding-bottom:.5em;
   position:relative;
   font-size: 2.5em;

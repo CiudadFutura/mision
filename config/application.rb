@@ -24,7 +24,7 @@ module Mision
     # config.i18n.default_locale = :de
     config.assets.enabled = false
     config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
-    config.assets.precompile << %w( *.scss *.js )
+    config.assets.precompile << %w( *.scss *.js *.ttf)
 
 		config.before_configuration do
 			env_file = File.join(Rails.root, 'config', 'local_env.yml', 'application.yml', 'secrets.yml')
