@@ -3,6 +3,7 @@
   <div class="agileinfo_mail_grids">
     <div class="agileinfo_mail_grid_left">
     <% @warehouses.each do |warehouse| %>
+      <% if ![2,4,7].include?(warehouse.id)%>
       <div class="row">
         <div class="col-md-12 warehouse">
           <h4><%= warehouse.name %></h4>
@@ -33,6 +34,7 @@
           </ul>
         </div>
       </div>
+      <% end %>
     <% end %>
     </div>
     <div class="clearfix"> </div>

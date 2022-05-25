@@ -137,6 +137,7 @@ class Producto < ActiveRecord::Base
       prod.precio = row_hash['Precio final'].to_s.to_s.gsub(',', '.').to_f
       prod.precio_super = row_hash['Precio super'].to_s.gsub(',', '.').to_f
       prod.stock = row_hash['Stock']
+      prod.orden = row_hash['Orden']
       prod.save!
       data << [codigo = prod.codigo,
               nombre = prod.nombre,
