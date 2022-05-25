@@ -1,4 +1,4 @@
 set :stage, :staging
-set :branch, 'master'
+set :branch, 'staging'
 
-server '45.55.92.78', user: 'deploy', roles: %w{web app db}
+server '206.189.200.124', user: 'deploy', roles: %w{web app db}
