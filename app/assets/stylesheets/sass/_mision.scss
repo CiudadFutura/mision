@@ -32,12 +32,12 @@ $shadow: 3px 3px 8px rgba($color: #b7b7b7, $alpha: .7);
 
 @font-face {
   font-family: "Raleway";
-  src: url("<%= asset_path('assets/fonts/raleway/Raleway-Regular') %>");
+  src: url(font-path('raleway/Raleway-Regular.ttf'));
 }
 
 @font-face {
   font-family: "Baruta";
-  src: url("<%= asset_path('assets/fonts/raleway/RNS-B') %>");
+  src: url(font-path('baruta/RNS-B.ttf'));
 }
 
 /* *{
