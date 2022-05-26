@@ -723,34 +723,34 @@ ul.dropdown-menu.drp-mnu li a i {
 .w3l_banner_nav_right_banner1,
 .w3l_banner_nav_right_banner,
 .w3l_banner_nav_right_banner2{
-  /* min-height:500px; */
+/*   min-height:500px; */
   text-align: center;
   padding: 0;
-  margin-bottom: 5em;
+  /* margin-bottom: 5em; */
 }
 .w3l_banner_nav_right_banner{
-  background:url(v2/Productos.png) no-repeat 0px -20px;
-  background-size:cover;
-  -webkit-background-size:cover;
-  -moz-background-size:cover;
-  -o-background-size:cover;
-  -ms-background-size:cover;
+  /* background:url(v2/banners-mision1.png) no-repeat; */
+  background-size:contain;
+  -webkit-background-size:contain;
+  -moz-background-size:contain;
+  -o-background-size:contain;
+  -ms-background-size:contain;
 }
 .w3l_banner_nav_right_banner1{
-  background:url(v2/Slides-02.png) no-repeat 0px 0px;
-  background-size:cover;
-  -webkit-background-size:cover;
-  -moz-background-size:cover;
-  -o-background-size:cover;
-  -ms-background-size:cover;
+  /* background:url(v2/banners-mision2.png) no-repeat; */
+  background-size:contain;
+  -webkit-background-size:contain;
+  -moz-background-size:contain;
+  -o-background-size:contain;
+  -ms-background-size:contain;
 }
 .w3l_banner_nav_right_banner2{
-  background:url(v2/ComoComprar.png) no-repeat 0px 0px;
-  background-size:cover;
-  -webkit-background-size:cover;
-  -moz-background-size:cover;
-  -o-background-size:cover;
-  -ms-background-size:cover;
+  /* background:url(v2/banners-mision3.png) no-repeat; */
+  background-size:contain;
+  -webkit-background-size:contain;
+  -moz-background-size:contain;
+  -o-background-size:contain;
+  -ms-background-size:contain;
 }
 .w3l_banner_nav_right_banner h3,
 .w3l_banner_nav_right_banner1 h3,
@@ -5518,7 +5518,7 @@ input.checkbox:checked:after {
   .w3l_banner_nav_right_banner1,
   .w3l_banner_nav_right_banner,
   .w3l_banner_nav_right_banner2 {
-    min-height: 190px;
+    min-height: 125px;
     padding: 0px;
   }
   .more {
