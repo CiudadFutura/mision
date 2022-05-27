@@ -578,6 +578,25 @@ ul.dropdown-menu.drp-mnu li a i {
   top: 70px;
   z-index: 3;
 }
+.wp-button{
+  position: fixed;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  bottom: 25px;
+  right: 25px;
+  background-color: $color-green;
+}
+.wp-button:hover{
+  box-shadow: -3px -3px 8px rgba($color: $color-green, $alpha: 0.25);
+}
+.fa-whatsapp{
+  position: relative;
+  top: 12px;
+  left: 12px;
+  color: white;
+  font-size: 28px;
+}
 
 @media screen and (min-width: 768px) {
   .custom-navbar{
