@@ -22,3 +22,12 @@
     </div>
   </div>
 </section>
+<div class="wp-button">
+  <% Warehouse.all.each do |warehouse| %>
+    <%if warehouse.id == 6 %>
+        <a href="https://wa.me/549<%= warehouse.telephone%>">
+          <i class="fa fa-whatsapp"></i>
+        </a>
+    <%end%>
+  <%end%>
+</div>
