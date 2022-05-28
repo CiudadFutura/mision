@@ -4,21 +4,30 @@
       <ul class="slides">
         <li>
           <div class="w3l_banner_nav_right_banner">
-
+            <%= image_tag('v2/banners-mision1.png') %>
           </div>
         </li>
         <li>
           <div class="w3l_banner_nav_right_banner1">
-            <div class="col-md-12">
+            <%= image_tag('v2/banners-mision2.png') %>
               
           </div>
         </li>
         <li>
           <div class="w3l_banner_nav_right_banner2">
-           
+            <%= image_tag('v2/banners-mision3.png') %>
           </div>
         </li>
       </ul>
     </div>
   </div>
 </section>
+<div class="wp-button">
+  <% Warehouse.all.each do |warehouse| %>
+    <%if warehouse.id == 6 %>
+        <a href="https://wa.me/549<%= warehouse.telephone%>">
+          <i class="fa fa-whatsapp"></i>
+        </a>
+    <%end%>
+  <%end%>
+</div>
