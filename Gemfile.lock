@@ -98,7 +98,7 @@ GEM
       i18n
       rake (>= 10.0.0)
       sshkit (>= 1.9.0)
-    capistrano-bundler (1.6.0)
+    capistrano-bundler (2.1.0)
       capistrano (~> 3.1)
     capistrano-rails (1.6.2)
       capistrano (~> 3.1)
@@ -241,7 +241,7 @@ GEM
       stringio
     public_suffix (4.0.7)
     racc (1.6.0)
-    rack (2.2.3.1)
+    rack (2.2.3)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (6.1.6)
@@ -382,10 +382,10 @@ DEPENDENCIES
   bootstrap-sass (~> 3.4, >= 3.4.1)
   byebug
   cancancan (~> 3.1)
-  capistrano (~> 3.14)
-  capistrano-bundler (~> 1.6)
-  capistrano-rails (~> 1.5)
-  capistrano-rbenv (~> 2.1, >= 2.1.6)
+  capistrano (~> 3.17)
+  capistrano-bundler (~> 2.1)
+  capistrano-rails (~> 1.6, >= 1.6.2)
+  capistrano-rbenv (~> 2.2)
   capistrano-rvm!
   capybara
   carrierwave (~> 2.1)
