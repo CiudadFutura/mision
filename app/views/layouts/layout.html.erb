@@ -11,6 +11,13 @@
     <title><%= content_for?(:title) ? yield(:title) : "Mision" %></title>
     <%= csrf_meta_tags %>
 
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-N6W4FRF');</script>
+    <!-- End Google Tag Manager -->
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
     <!--[if lt IE 9]>
@@ -31,6 +38,10 @@
     <meta name="turbolinks-cache-control" content="no-cache">
   </head>
   <body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N6W4FRF"
+                    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
   <div class="container-fluid ">
     <%= render 'layouts/header'%>
     <%= render_navigation if request.path != root_path%>
