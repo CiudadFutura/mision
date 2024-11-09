@@ -33,8 +33,8 @@
                   <%end%>
                   </h4>
                 </div>
-                <div class="row item-details-row">
-                <% if @consumer_enabled_purchase %>
+              <div class="row item-details-row">
+              <% if @consumer_enabled_purchase %>
                 <% if producto.stock.present? and producto.cantidad_permitida > producto.stock
                      cantidad = producto.stock
                    else
@@ -78,9 +78,15 @@
                   <% end %>
                 </div>
               <% else %>
-                <div class="col-md-12 text-center">
-                  <small class="red"> No hay ciclos activos</small>
-                </div>
+                <% if @current_usuario %>
+                  <div class="col-md-12 text-center">
+                    <small class="red"> No hay ciclos activos</small>
+                  </div>
+                <% else %>
+                  <div class="col-md-12 text-center">
+                    <small class="red">Ingresá para armar tu carrito</small>
+                  </div>
+                <% end %>
               <% end %>
                 </div>
               </div>
