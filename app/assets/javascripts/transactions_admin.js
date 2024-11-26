@@ -24,12 +24,19 @@ $(document).ready(function () {
 
     $("#agregar").click(function(){
         var nombre = $("#prod-nombre");
-        var precio = $("#prod-precio");
+        var precio = parceFloat($("#prod-precio").val()).toFixed(2);
         var cantidad = $("#prod-cantidad");
         var detalle = $('#transaction_description').val();
         var total = $('#transaction_amount').val();
         var subTotal = 0;
-        var detalleadd = $('#hidden-description').val() + detalle + 'Producto: '+ nombre.val() + '\t' +
+        var hidenDescription = $('#hiden-description').val();
+        var detalleadd = "";
+        if (length(hidenDescription)>0) {
+            detalleadd = hidenDescription + " ";
+        }
+        detalleadd += 
+            detalle + " "  +
+            'Producto: '+ nombre.val() + '\t' +
             'Cantidad: '+ cantidad.val() + '\t' +
             'Precio: $'+ precio.val();
         subTotal = (cantidad.val())*(precio.val());
