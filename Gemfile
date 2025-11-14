@@ -37,8 +37,8 @@ gem 'devise', '~> 4.7', '>= 4.7.3'
 # Authorization: https://github.com/ryanb/cancan/wiki
 gem 'cancancan', '~> 3.1'
 gem 'bcrypt-ruby', '~> 3.1', '>= 3.1.5'
-gem 'ed25519', '>= 1.2', '< 2.0'
-gem 'bcrypt_pbkdf', '>= 1.0', '< 2.0'
+# gem 'ed25519', '>= 1.2', '< 2.0'
+# gem 'bcrypt_pbkdf', '>= 1.0', '< 2.0'
 
 # Seed Migration: https://github.com/harrystech/seed_migration
 gem 'seed_migration'
