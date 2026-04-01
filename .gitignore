@@ -25,6 +25,7 @@ uploads
 /config/secrets.yml
 /config/database.yml
 /config/*.yml
+
 .DS_Store
 .idea/.generators
 .idea/.rakeTasks
